@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="com.atollic.truestudio.exe.debug.4679665193.6505824800">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.atollic.truestudio.exe.debug.4679665193.6505824800" moduleId="org.eclipse.cdt.core.settings" name="bin">
+				<macros>
+					<stringMacro name="AM_SoftwareRoot" type="VALUE_TEXT" value="${ProjDirPath}/../../../../.."/>
+					<stringMacro name="AM_CFLAGS" type="VALUE_TEXT" value="-mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -ffunction-sections -fdata-sections -MMD -MP -O0 -Dgcc"/>
+					<stringMacro name="AM_LFLAGS" type="VALUE_TEXT" value="-T&quot;${ProjDirPath}/freertos_amdtpc.ld&quot; -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -nostartfiles -static -Wl,--gc-sections,--entry,am_reset_isr,-Map,${ProjDirPath}/bin/${ProjName}.map -Wl,--start-group -lm -lc -lgcc -Wl,--end-group"/>
+				</macros>
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="${cross_rm} -rf" description="" id="com.atollic.truestudio.exe.debug.4679665193.6505824800" name="bin" parent="com.atollic.truestudio.exe.debug" postannouncebuildStep="Create binary from elf." postbuildStep="arm-atollic-eabi-objcopy -Obinary ${ProjName}.elf ${ProjName}.bin">
+					<folderInfo id="com.atollic.truestudio.exe.debug.4679665193.6505824800." name="/" resourcePath="">
+						<toolChain id="com.atollic.truestudio.exe.debug.toolchain.4157391466" name="Atollic ARM Tools" superClass="com.atollic.truestudio.exe.debug.toolchain">
+							<option id="com.atollic.truestudio.toolchain_options.mcu.4811186610" name="Microcontroller" superClass="com.atollic.truestudio.toolchain_options.mcu" useByScannerDiscovery="false" value="Cortex-M4" valueType="string"/>
+							<option id="com.atollic.truestudio.toolchain_options.vendor.7393736208" name="Vendor name" superClass="com.atollic.truestudio.toolchain_options.vendor" useByScannerDiscovery="false" value="ARM" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.debug.toolchain.platform.934967157" isAbstract="false" name="Debug platform" osList="all" superClass="com.atollic.truestudio.exe.debug.toolchain.platform"/>
+							<builder buildPath="${workspace_loc:/freertos_amdtpc}/bin" customBuilderProperties="toolChainpathString=${TOOLCHAIN_PATH}/bin|toolChainpathType=1|com.atollic.truestudio.common_options.target.vendor=ARM|com.atollic.truestudio.common_options.target.mcu=Cortex-M4|" id="com.atollic.truestudio.mbs.builder1.7327063665" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.atollic.truestudio.mbs.builder1"/>
+							<tool id="com.atollic.truestudio.exe.debug.toolchain.as.2057898820" name="Assembler" superClass="com.atollic.truestudio.exe.debug.toolchain.as">
+								<option id="com.atollic.truestudio.common_options.target.mcpu.8907565669" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="Cortex-M4" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.endianess.5088188729" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.common_options.target.instr_set.1686611218" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpucore.311534191" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpu.729416449" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.common_options.target.interwork.5428137729" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork" useByScannerDiscovery="false"/>
+								<inputType id="com.atollic.truestudio.as.input.4099299050" name="Input" superClass="com.atollic.truestudio.as.input"/>
+							</tool>
+							<tool commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS} ${AM_CFLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT}" id="com.atollic.truestudio.exe.debug.toolchain.gcc.7755480980" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc">
+								<option id="com.atollic.truestudio.common_options.target.mcpu.6824353997" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="Cortex-M4" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.endianess.6177794771" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.common_options.target.instr_set.7819409784" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpucore.7905746907" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpu.4878009567" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.common_options.target.interwork.2129131130" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.gcc.directories.select.8718022140" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/boards/apollo2_blue_evb/bsp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/ambiq_ble/apps/amdtpc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/ambiq_ble/em9304&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/ambiq_ble/menu&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/ambiq_ble/profiles/amdtpc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/ambiq_ble/profiles/amdtpcommon&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/ambiq_ble/services&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/devices&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/mcu/apollo2&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/apollo-host/projects/common&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/apps/app&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/apps/app/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/hci/ambiq&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/hci/ambiq/em9304&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/hci/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/profiles/bas&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/profiles/gap&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/profiles/gatt&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/profiles/hid&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/profiles/uribeacon&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/sec/common&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/sec/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/services&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/stack/cfg&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/stack/hci&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/sw/stack/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/ws-core/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/ws-core/sw/util&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/ws-core/sw/wsf/ambiq&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/exactle/ws-core/sw/wsf/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/utils&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../src&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/FreeRTOS9/Source/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/FreeRTOS9/Source/portable/MemMang&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${AM_SoftwareRoot}/third_party/FreeRTOS9/Source/portable/GCC/AMapollo2&quot;"/>
+								</option>
+								<option id="com.atollic.truestudio.gcc.cstandard.3485386580" name="C standard" superClass="com.atollic.truestudio.gcc.cstandard" useByScannerDiscovery="false" value="com.atollic.truestudio.gcc.cstandard.c99" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.gcc.misc.stackusage.5228017332" name="Generate per function stack usage information" superClass="com.atollic.truestudio.gcc.misc.stackusage" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="com.atollic.truestudio.gcc.warnings.pedantic.8943973310" name="Issue all warnings demanded by strict ISO C and ISO C++" superClass="com.atollic.truestudio.gcc.warnings.pedantic" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="com.atollic.truestudio.gcc.symbols.defined.2368393710" name="Defined symbols" superClass="com.atollic.truestudio.gcc.symbols.defined" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="AM_PACKAGE_BGA"/>
+									<listOptionValue builtIn="false" value="WSF_TRACE_ENABLED"/>
+									<listOptionValue builtIn="false" value="AM_DEBUG_PRINTF"/>
+									<listOptionValue builtIn="false" value="BLE_MENU"/>
+									<listOptionValue builtIn="false" value="AM_PART_APOLLO2"/>
+									<listOptionValue builtIn="false" value="AM_FREERTOS"/>
+								</option>
+								<option id="com.atollic.truestudio.gcc.warnings.all.247603951" name="Enable all warnings about questionable constructions" superClass="com.atollic.truestudio.gcc.warnings.all" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="com.atollic.truestudio.gcc.input.3843114083" superClass="com.atollic.truestudio.gcc.input"/>
+							</tool>
+							<tool commandLinePattern="${COMMAND} ${OUTPUT_FLAG} ${OUTPUT} ${INPUTS} ${AM_LFLAGS}" id="com.atollic.truestudio.exe.debug.toolchain.ld.6947918941" name="C Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ld">
+								<option id="com.atollic.truestudio.common_options.target.mcpu.5042904275" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="Cortex-M4" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.endianess.2081037050" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.common_options.target.instr_set.9614637214" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpucore.4076434178" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpu.1747003416" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.common_options.target.interwork.507206544" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.ld.general.scriptfile.8126302479" name="Linker script" superClass="com.atollic.truestudio.ld.general.scriptfile" useByScannerDiscovery="false" value="${ProjDirPath}/freertos_amdtpc.ld" valueType="string"/>
+								<option id="com.atollic.truestudio.ld.libraries.list.3325326873" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.ld.libraries.searchpath.6044105915" name="Library search path" superClass="com.atollic.truestudio.ld.libraries.searchpath" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.ld.general.nostartfiles.882409395" name="Do not use standard start files" superClass="com.atollic.truestudio.ld.general.nostartfiles" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.ld.general.nodefaultlibs.8326794737" name="Do not use default libraries" superClass="com.atollic.truestudio.ld.general.nodefaultlibs" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.ld.general.nostdlib.7445429418" name="No startup or default libs" superClass="com.atollic.truestudio.ld.general.nostdlib" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.ld.misc.additional_objects.7684985129" name="Additional object files" superClass="com.atollic.truestudio.ld.misc.additional_objects" useByScannerDiscovery="false" valueType="userObjs">
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="&quot;${AM_SoftwareRoot}/boards/apollo2_blue_evb/bsp/atollic_gcc/bin/libam_bsp_gcc.a&quot;"/>
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="&quot;${AM_SoftwareRoot}/mcu/apollo2/hal/atollic_gcc/bin/libam_hal_gcc.a&quot;"/>
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="&quot;${AM_SoftwareRoot}/third_party/exactle/projects/generic/stacklib/gcc/bin-cortex-m4/libstacklib.a&quot;"/>
+								</option>
+								<option id="com.atollic.truestudio.ld.general.syscall_lib.4493006823" name="System calls" superClass="com.atollic.truestudio.ld.general.syscall_lib" useByScannerDiscovery="false" value="com.atollic.truestudio.ld.general.syscalls_lib.nothing" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.ld.misc.linkerflags.5108819676" name="Other options" superClass="com.atollic.truestudio.ld.misc.linkerflags" useByScannerDiscovery="false" value="" valueType="string"/>
+								<inputType id="com.atollic.truestudio.ld.input.468617444" name="Input" superClass="com.atollic.truestudio.ld.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="com.atollic.truestudio.exe.debug.toolchain.gpp.2697018894" name="C++ Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gpp">
+								<option id="com.atollic.truestudio.common_options.target.mcpu.9424847570" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="Cortex-M4" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.endianess.6216274727" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
+								<option id="com.atollic.truestudio.common_options.target.instr_set.7164323253" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpucore.5458589521" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" value="com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpu.1941366549" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu"/>
+								<option id="com.atollic.truestudio.common_options.target.interwork.3232563635" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork"/>
+							</tool>
+							<tool id="com.atollic.truestudio.exe.debug.toolchain.ldcc.9917007112" name="C++ Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ldcc">
+								<option id="com.atollic.truestudio.common_options.target.mcpu.4976938205" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="Cortex-M4" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.endianess.7552911123" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
+								<option id="com.atollic.truestudio.common_options.target.instr_set.4591523578" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpucore.1882900818" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" value="com.atollic.truestudio.common_options.target.fpucore.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.common_options.target.fpu.9035238944" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu"/>
+								<option id="com.atollic.truestudio.common_options.target.interwork.3913199080" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork"/>
+								<option id="com.atollic.truestudio.ldcc.general.scriptfile.4400135734" name="Linker script" superClass="com.atollic.truestudio.ldcc.general.scriptfile"/>
+							</tool>
+							<tool id="com.atollic.truestudio.ar.base.1248259985" name="Archiver" superClass="com.atollic.truestudio.ar.base"/>
+							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.1951599522" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput">
+								<option id="com.atollic.truestudio.secoutput.general.convert.3417240553" name="Convert build output" superClass="com.atollic.truestudio.secoutput.general.convert" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="p5qpcm_test.com.atollic.truestudio.exe.4716688228" name="Executable" projectType="com.atollic.truestudio.exe"/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="bin">
+			<resource resourceType="PROJECT" workspacePath="/freertos_amdtpc"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.atollic.truestudio.exe.debug.2609083901;com.atollic.truestudio.exe.debug.2609083901.;com.atollic.truestudio.exe.debug.toolchain.gcc.2609083901;com.atollic.truestudio.gcc.input.2609083901">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.atollic.truestudio.mbs.ARMToolsPerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.atollic.truestudio.exe.debug.8258630789;com.atollic.truestudio.exe.debug.8258630789.;com.atollic.truestudio.exe.debug.toolchain.gcc.8258630789;com.atollic.truestudio.gcc.input.8258630789">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.atollic.truestudio.mbs.ARMToolsPerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+</cproject>
+

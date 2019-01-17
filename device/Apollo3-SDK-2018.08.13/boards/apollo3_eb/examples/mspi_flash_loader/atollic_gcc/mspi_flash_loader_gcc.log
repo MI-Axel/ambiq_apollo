@@ -1,0 +1,29 @@
+Create.
+Opening 'mspi_flash_loader_gcc'.
+Refreshing '/mspi_flash_loader_gcc'.
+07:33:06 **** Clean-only build of configuration bin for project mspi_flash_loader_gcc ****
+"\\usr\\bin\\rm" -rf utils/am_util_stdio.o utils/am_util_delay.d startup_gcc.d utils/am_util_delay.o devices/am_devices_fireball.o mspi_flash_loader_gcc.elf startup_gcc.o utils/am_util_faultisr.o src/mspi_flash_loader.d devices/am_devices_mspi_flash.d mspi_flash_loader_gcc devices/am_devices_mspi_flash.o devices/am_devices_fireball.d utils/am_util_stdio.d src/mspi_flash_loader.o utils/am_util_faultisr.d 
+Cannot run program "\usr\bin\rm": Launching failed
+
+Error: Program "\usr\bin\rm" not found in PATH
+PATH=[C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\ARMTools\bin;C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\Tools;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 8.1.0/ide/jre/bin/client;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 8.1.0/ide/jre/bin;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 8.1.0/ide/jre/lib/i386;C:\cygwin64\bin;C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\ide;C:\Program Files (x86)\GNU Tools ARM Embedded\5.4 2016q3\bin;C:\Keil_v5\UV4;C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin;C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Users\jenkinsadmin\AppData\Local\Programs\Python\Python36-32p;C:\Program Files\Coverity\Coverity Static Analysis\bin;C:\Jenkins\workspace\AmbiqSuite\workspace\boards\apollo3_eb\examples\mspi_flash_loader\atollic_gcc]
+
+
+07:33:06 Build Finished (took 610ms)
+
+07:33:06 **** Clean-only build of configuration bin for project mspi_flash_loader_gcc ****
+
+07:33:06 Build Finished (took 0ms)
+
+07:33:06 **** Rebuild of configuration bin for project mspi_flash_loader_gcc ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\startup_gcc.c -mthumb -std=c99 -DAM_PACKAGE_BGA -DAM_UTIL_FAULTISR_PRINT -DFIREBALL_CARD -DAM_PART_APOLLO3 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../src -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../boards/apollo3_eb/bsp -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../.. -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../mcu/apollo3 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../CMSIS/ARM/Include -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../CMSIS/AmbiqMicro/Include -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../devices -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../utils -O0 -g -Wall -specs=nano.specs -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -ffunction-sections -fdata-sections -MMD -MP -O0 -specs=nano.specs -specs=nosys.specs -Dgcc -o startup_gcc.o 
+arm-atollic-eabi-gcc -c ..\..\..\..\..\..\devices\am_devices_fireball.c -mthumb -std=c99 -DAM_PACKAGE_BGA -DAM_UTIL_FAULTISR_PRINT -DFIREBALL_CARD -DAM_PART_APOLLO3 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../src -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../boards/apollo3_eb/bsp -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../.. -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../mcu/apollo3 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../CMSIS/ARM/Include -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../CMSIS/AmbiqMicro/Include -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../devices -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo3_eb/examples/mspi_flash_loader/atollic_gcc/../../../../../utils -O0 -g -Wall -specs=nano.specs -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -ffunction-sections -fdata-sections -MMD -MP -O0 -specs=nano.specs -specs=nosys.specs -Dgcc -o devices\am_devices_fireball.o 
+arm-atollic-eabi-gcc: fatal error: c:/program files (x86)/atollic/truestudio for arm 8.1.0/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/nano.specs: attempt to rename spec 'link' to already defined spec 'nano_link'
+compilation terminated.
+Info: Parallel threads used: 2
+
+07:33:07 Build Finished (took 437ms)
+
+arm-atollic-eabi-gcc: fatal error: c:/program files (x86)/atollic/truestudio for arm 8.1.0/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/nano.specs: attempt to rename spec 'link' to already defined spec 'nano_link'
+compilation terminated.

@@ -1,0 +1,5095 @@
+
+reset_states_gcc.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00001d9c  00000000  00000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stack        00001000  10000000  10000000  00030000  2**2
+                  ALLOC
+  2 .data         00000030  10001000  00001d9c  00021000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000114  10001030  00001dcc  00021030  2**2
+                  ALLOC
+  4 .ARM.attributes 00000037  00000000  00000000  00021030  2**0
+                  CONTENTS, READONLY
+  5 .debug_info   000058e6  00000000  00000000  00021067  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00001e37  00000000  00000000  0002694d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 000006d0  00000000  00000000  00028784  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_ranges 00000940  00000000  00000000  00028e54  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00003845  00000000  00000000  00029794  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00002074  00000000  00000000  0002cfd9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .comment      0000007c  00000000  00000000  0002f04d  2**0
+                  CONTENTS, READONLY
+ 12 .debug_frame  00001058  00000000  00000000  0002f0cc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_loc    0000103e  00000000  00000000  00030124  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <g_am_pfnVectors>:
+       0:	00 10 00 10 f1 07 00 00 59 08 00 00 99 08 00 00     ........Y.......
+      10:	99 08 00 00 99 08 00 00 99 08 00 00 00 00 00 00     ................
+	...
+      2c:	5f 08 00 00 5f 08 00 00 00 00 00 00 5f 08 00 00     _..._......._...
+      3c:	5f 08 00 00 5f 08 00 00 bd 05 00 00 5f 08 00 00     _..._......._...
+      4c:	5f 08 00 00 5f 08 00 00 5f 08 00 00 5f 08 00 00     _..._..._..._...
+      5c:	5f 08 00 00 5f 08 00 00 5f 08 00 00 5f 08 00 00     _..._..._..._...
+      6c:	5f 08 00 00 5f 08 00 00 5f 08 00 00 5f 08 00 00     _..._..._..._...
+      7c:	5f 08 00 00                                         _...
+
+00000080 <__aeabi_d2f>:
+      80:	ea4f 0241 	mov.w	r2, r1, lsl #1
+      84:	f1b2 43e0 	subs.w	r3, r2, #1879048192	; 0x70000000
+      88:	bf24      	itt	cs
+      8a:	f5b3 1c00 	subscs.w	ip, r3, #2097152	; 0x200000
+      8e:	f1dc 5cfe 	rsbscs	ip, ip, #532676608	; 0x1fc00000
+      92:	d90d      	bls.n	b0 <__aeabi_d2f+0x30>
+      94:	f001 4c00 	and.w	ip, r1, #2147483648	; 0x80000000
+      98:	ea4f 02c0 	mov.w	r2, r0, lsl #3
+      9c:	ea4c 7050 	orr.w	r0, ip, r0, lsr #29
+      a0:	f1b2 4f00 	cmp.w	r2, #2147483648	; 0x80000000
+      a4:	eb40 0083 	adc.w	r0, r0, r3, lsl #2
+      a8:	bf08      	it	eq
+      aa:	f020 0001 	biceq.w	r0, r0, #1
+      ae:	4770      	bx	lr
+      b0:	f011 4f80 	tst.w	r1, #1073741824	; 0x40000000
+      b4:	d121      	bne.n	fa <__aeabi_d2f+0x7a>
+      b6:	f113 7238 	adds.w	r2, r3, #48234496	; 0x2e00000
+      ba:	bfbc      	itt	lt
+      bc:	f001 4000 	andlt.w	r0, r1, #2147483648	; 0x80000000
+      c0:	4770      	bxlt	lr
+      c2:	f441 1180 	orr.w	r1, r1, #1048576	; 0x100000
+      c6:	ea4f 5252 	mov.w	r2, r2, lsr #21
+      ca:	f1c2 0218 	rsb	r2, r2, #24
+      ce:	f1c2 0c20 	rsb	ip, r2, #32
+      d2:	fa10 f30c 	lsls.w	r3, r0, ip
+      d6:	fa20 f002 	lsr.w	r0, r0, r2
+      da:	bf18      	it	ne
+      dc:	f040 0001 	orrne.w	r0, r0, #1
+      e0:	ea4f 23c1 	mov.w	r3, r1, lsl #11
+      e4:	ea4f 23d3 	mov.w	r3, r3, lsr #11
+      e8:	fa03 fc0c 	lsl.w	ip, r3, ip
+      ec:	ea40 000c 	orr.w	r0, r0, ip
+      f0:	fa23 f302 	lsr.w	r3, r3, r2
+      f4:	ea4f 0343 	mov.w	r3, r3, lsl #1
+      f8:	e7cc      	b.n	94 <__aeabi_d2f+0x14>
+      fa:	ea7f 5362 	mvns.w	r3, r2, asr #21
+      fe:	d107      	bne.n	110 <__aeabi_d2f+0x90>
+     100:	ea50 3301 	orrs.w	r3, r0, r1, lsl #12
+     104:	bf1e      	ittt	ne
+     106:	f04f 40fe 	movne.w	r0, #2130706432	; 0x7f000000
+     10a:	f440 0040 	orrne.w	r0, r0, #12582912	; 0xc00000
+     10e:	4770      	bxne	lr
+     110:	f001 4000 	and.w	r0, r1, #2147483648	; 0x80000000
+     114:	f040 40fe 	orr.w	r0, r0, #2130706432	; 0x7f000000
+     118:	f440 0000 	orr.w	r0, r0, #8388608	; 0x800000
+     11c:	4770      	bx	lr
+     11e:	bf00      	nop
+
+00000120 <am_devices_led_init>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_devices_led_init(am_devices_led_t *psLED)
+{
+     120:	b490      	push	{r4, r7}
+     122:	b082      	sub	sp, #8
+     124:	af00      	add	r7, sp, #0
+     126:	6078      	str	r0, [r7, #4]
+    if ( (psLED == NULL)    ||
+     128:	687b      	ldr	r3, [r7, #4]
+     12a:	2b00      	cmp	r3, #0
+     12c:	f000 8138 	beq.w	3a0 <am_devices_led_init+0x280>
+         (psLED->ui32GPIONumber >= AM_HAL_GPIO_MAX_PADS) )
+     130:	687b      	ldr	r3, [r7, #4]
+     132:	681b      	ldr	r3, [r3, #0]
+    if ( (psLED == NULL)    ||
+     134:	2b31      	cmp	r3, #49	; 0x31
+     136:	f200 8133 	bhi.w	3a0 <am_devices_led_init+0x280>
+    }
+#else
+    //
+    // Handle Direct Drive Versus 3-State (with pull-up or no buffer).
+    //
+    if ( AM_DEVICES_LED_POL_DIRECT_DRIVE_M & psLED->ui32Polarity )
+     13a:	687b      	ldr	r3, [r7, #4]
+     13c:	685b      	ldr	r3, [r3, #4]
+     13e:	f003 0302 	and.w	r3, r3, #2
+     142:	2b00      	cmp	r3, #0
+     144:	f000 8096 	beq.w	274 <am_devices_led_init+0x154>
+    {
+        //
+        // Configure the pin as a push-pull GPIO output.
+        //
+        am_hal_gpio_pin_config(psLED->ui32GPIONumber, AM_HAL_GPIO_OUTPUT);
+     148:	687b      	ldr	r3, [r7, #4]
+     14a:	681b      	ldr	r3, [r3, #0]
+     14c:	2b00      	cmp	r3, #0
+     14e:	db4e      	blt.n	1ee <am_devices_led_init+0xce>
+     150:	4b96      	ldr	r3, [pc, #600]	; (3ac <am_devices_led_init+0x28c>)
+     152:	2273      	movs	r2, #115	; 0x73
+     154:	601a      	str	r2, [r3, #0]
+     156:	687b      	ldr	r3, [r7, #4]
+     158:	681b      	ldr	r3, [r3, #0]
+     15a:	085b      	lsrs	r3, r3, #1
+     15c:	f003 027c 	and.w	r2, r3, #124	; 0x7c
+     160:	4b93      	ldr	r3, [pc, #588]	; (3b0 <am_devices_led_init+0x290>)
+     162:	4413      	add	r3, r2
+     164:	461c      	mov	r4, r3
+     166:	687b      	ldr	r3, [r7, #4]
+     168:	681b      	ldr	r3, [r3, #0]
+     16a:	009b      	lsls	r3, r3, #2
+     16c:	f003 031c 	and.w	r3, r3, #28
+     170:	2202      	movs	r2, #2
+     172:	409a      	lsls	r2, r3
+     174:	687b      	ldr	r3, [r7, #4]
+     176:	681b      	ldr	r3, [r3, #0]
+     178:	085b      	lsrs	r3, r3, #1
+     17a:	f003 017c 	and.w	r1, r3, #124	; 0x7c
+     17e:	4b8c      	ldr	r3, [pc, #560]	; (3b0 <am_devices_led_init+0x290>)
+     180:	440b      	add	r3, r1
+     182:	6819      	ldr	r1, [r3, #0]
+     184:	687b      	ldr	r3, [r7, #4]
+     186:	681b      	ldr	r3, [r3, #0]
+     188:	009b      	lsls	r3, r3, #2
+     18a:	f003 031c 	and.w	r3, r3, #28
+     18e:	2007      	movs	r0, #7
+     190:	fa00 f303 	lsl.w	r3, r0, r3
+     194:	43db      	mvns	r3, r3
+     196:	400b      	ands	r3, r1
+     198:	4313      	orrs	r3, r2
+     19a:	6023      	str	r3, [r4, #0]
+     19c:	687b      	ldr	r3, [r7, #4]
+     19e:	681b      	ldr	r3, [r3, #0]
+     1a0:	f003 03fc 	and.w	r3, r3, #252	; 0xfc
+     1a4:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+     1a8:	f503 3380 	add.w	r3, r3, #65536	; 0x10000
+     1ac:	461c      	mov	r4, r3
+     1ae:	687b      	ldr	r3, [r7, #4]
+     1b0:	681b      	ldr	r3, [r3, #0]
+     1b2:	00db      	lsls	r3, r3, #3
+     1b4:	f003 0318 	and.w	r3, r3, #24
+     1b8:	2218      	movs	r2, #24
+     1ba:	409a      	lsls	r2, r3
+     1bc:	687b      	ldr	r3, [r7, #4]
+     1be:	681b      	ldr	r3, [r3, #0]
+     1c0:	f003 03fc 	and.w	r3, r3, #252	; 0xfc
+     1c4:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+     1c8:	f503 3380 	add.w	r3, r3, #65536	; 0x10000
+     1cc:	6819      	ldr	r1, [r3, #0]
+     1ce:	687b      	ldr	r3, [r7, #4]
+     1d0:	681b      	ldr	r3, [r3, #0]
+     1d2:	00db      	lsls	r3, r3, #3
+     1d4:	f003 0318 	and.w	r3, r3, #24
+     1d8:	20ff      	movs	r0, #255	; 0xff
+     1da:	fa00 f303 	lsl.w	r3, r0, r3
+     1de:	43db      	mvns	r3, r3
+     1e0:	400b      	ands	r3, r1
+     1e2:	4313      	orrs	r3, r2
+     1e4:	6023      	str	r3, [r4, #0]
+     1e6:	4b71      	ldr	r3, [pc, #452]	; (3ac <am_devices_led_init+0x28c>)
+     1e8:	2200      	movs	r2, #0
+     1ea:	601a      	str	r2, [r3, #0]
+     1ec:	e000      	b.n	1f0 <am_devices_led_init+0xd0>
+     1ee:	bf00      	nop
+
+        //
+        // Disable the output driver, and set the output value to the LEDs "ON"
+        // state.
+        //
+        am_hal_gpio_out_enable_bit_clear(psLED->ui32GPIONumber);
+     1f0:	687b      	ldr	r3, [r7, #4]
+     1f2:	681b      	ldr	r3, [r3, #0]
+     1f4:	08db      	lsrs	r3, r3, #3
+     1f6:	f003 0204 	and.w	r2, r3, #4
+     1fa:	4b6e      	ldr	r3, [pc, #440]	; (3b4 <am_devices_led_init+0x294>)
+     1fc:	4413      	add	r3, r2
+     1fe:	4619      	mov	r1, r3
+     200:	687b      	ldr	r3, [r7, #4]
+     202:	681b      	ldr	r3, [r3, #0]
+     204:	f003 031f 	and.w	r3, r3, #31
+     208:	2201      	movs	r2, #1
+     20a:	fa02 f303 	lsl.w	r3, r2, r3
+     20e:	600b      	str	r3, [r1, #0]
+        am_hal_gpio_out_bit_replace(psLED->ui32GPIONumber,
+     210:	687b      	ldr	r3, [r7, #4]
+     212:	681b      	ldr	r3, [r3, #0]
+     214:	08db      	lsrs	r3, r3, #3
+     216:	f003 0204 	and.w	r2, r3, #4
+     21a:	4b67      	ldr	r3, [pc, #412]	; (3b8 <am_devices_led_init+0x298>)
+     21c:	4413      	add	r3, r2
+     21e:	4618      	mov	r0, r3
+     220:	687b      	ldr	r3, [r7, #4]
+     222:	685b      	ldr	r3, [r3, #4]
+     224:	f003 0301 	and.w	r3, r3, #1
+     228:	2b00      	cmp	r3, #0
+     22a:	d010      	beq.n	24e <am_devices_led_init+0x12e>
+     22c:	687b      	ldr	r3, [r7, #4]
+     22e:	681b      	ldr	r3, [r3, #0]
+     230:	08db      	lsrs	r3, r3, #3
+     232:	f003 0204 	and.w	r2, r3, #4
+     236:	4b60      	ldr	r3, [pc, #384]	; (3b8 <am_devices_led_init+0x298>)
+     238:	4413      	add	r3, r2
+     23a:	681a      	ldr	r2, [r3, #0]
+     23c:	687b      	ldr	r3, [r7, #4]
+     23e:	681b      	ldr	r3, [r3, #0]
+     240:	f003 031f 	and.w	r3, r3, #31
+     244:	2101      	movs	r1, #1
+     246:	fa01 f303 	lsl.w	r3, r1, r3
+     24a:	4313      	orrs	r3, r2
+     24c:	e010      	b.n	270 <am_devices_led_init+0x150>
+     24e:	687b      	ldr	r3, [r7, #4]
+     250:	681b      	ldr	r3, [r3, #0]
+     252:	08db      	lsrs	r3, r3, #3
+     254:	f003 0204 	and.w	r2, r3, #4
+     258:	4b57      	ldr	r3, [pc, #348]	; (3b8 <am_devices_led_init+0x298>)
+     25a:	4413      	add	r3, r2
+     25c:	681a      	ldr	r2, [r3, #0]
+     25e:	687b      	ldr	r3, [r7, #4]
+     260:	681b      	ldr	r3, [r3, #0]
+     262:	f003 031f 	and.w	r3, r3, #31
+     266:	2101      	movs	r1, #1
+     268:	fa01 f303 	lsl.w	r3, r1, r3
+     26c:	43db      	mvns	r3, r3
+     26e:	4013      	ands	r3, r2
+     270:	6003      	str	r3, [r0, #0]
+     272:	e096      	b.n	3a2 <am_devices_led_init+0x282>
+    else
+    {
+        //
+        // Configure the pin as a tri-state GPIO.
+        //
+        am_hal_gpio_pin_config(psLED->ui32GPIONumber, AM_HAL_GPIO_3STATE);
+     274:	687b      	ldr	r3, [r7, #4]
+     276:	681b      	ldr	r3, [r3, #0]
+     278:	2b00      	cmp	r3, #0
+     27a:	db4e      	blt.n	31a <am_devices_led_init+0x1fa>
+     27c:	4b4b      	ldr	r3, [pc, #300]	; (3ac <am_devices_led_init+0x28c>)
+     27e:	2273      	movs	r2, #115	; 0x73
+     280:	601a      	str	r2, [r3, #0]
+     282:	687b      	ldr	r3, [r7, #4]
+     284:	681b      	ldr	r3, [r3, #0]
+     286:	085b      	lsrs	r3, r3, #1
+     288:	f003 027c 	and.w	r2, r3, #124	; 0x7c
+     28c:	4b48      	ldr	r3, [pc, #288]	; (3b0 <am_devices_led_init+0x290>)
+     28e:	4413      	add	r3, r2
+     290:	461c      	mov	r4, r3
+     292:	687b      	ldr	r3, [r7, #4]
+     294:	681b      	ldr	r3, [r3, #0]
+     296:	009b      	lsls	r3, r3, #2
+     298:	f003 031c 	and.w	r3, r3, #28
+     29c:	2206      	movs	r2, #6
+     29e:	409a      	lsls	r2, r3
+     2a0:	687b      	ldr	r3, [r7, #4]
+     2a2:	681b      	ldr	r3, [r3, #0]
+     2a4:	085b      	lsrs	r3, r3, #1
+     2a6:	f003 017c 	and.w	r1, r3, #124	; 0x7c
+     2aa:	4b41      	ldr	r3, [pc, #260]	; (3b0 <am_devices_led_init+0x290>)
+     2ac:	440b      	add	r3, r1
+     2ae:	6819      	ldr	r1, [r3, #0]
+     2b0:	687b      	ldr	r3, [r7, #4]
+     2b2:	681b      	ldr	r3, [r3, #0]
+     2b4:	009b      	lsls	r3, r3, #2
+     2b6:	f003 031c 	and.w	r3, r3, #28
+     2ba:	2007      	movs	r0, #7
+     2bc:	fa00 f303 	lsl.w	r3, r0, r3
+     2c0:	43db      	mvns	r3, r3
+     2c2:	400b      	ands	r3, r1
+     2c4:	4313      	orrs	r3, r2
+     2c6:	6023      	str	r3, [r4, #0]
+     2c8:	687b      	ldr	r3, [r7, #4]
+     2ca:	681b      	ldr	r3, [r3, #0]
+     2cc:	f003 03fc 	and.w	r3, r3, #252	; 0xfc
+     2d0:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+     2d4:	f503 3380 	add.w	r3, r3, #65536	; 0x10000
+     2d8:	461c      	mov	r4, r3
+     2da:	687b      	ldr	r3, [r7, #4]
+     2dc:	681b      	ldr	r3, [r3, #0]
+     2de:	00db      	lsls	r3, r3, #3
+     2e0:	f003 0318 	and.w	r3, r3, #24
+     2e4:	2218      	movs	r2, #24
+     2e6:	409a      	lsls	r2, r3
+     2e8:	687b      	ldr	r3, [r7, #4]
+     2ea:	681b      	ldr	r3, [r3, #0]
+     2ec:	f003 03fc 	and.w	r3, r3, #252	; 0xfc
+     2f0:	f103 4380 	add.w	r3, r3, #1073741824	; 0x40000000
+     2f4:	f503 3380 	add.w	r3, r3, #65536	; 0x10000
+     2f8:	6819      	ldr	r1, [r3, #0]
+     2fa:	687b      	ldr	r3, [r7, #4]
+     2fc:	681b      	ldr	r3, [r3, #0]
+     2fe:	00db      	lsls	r3, r3, #3
+     300:	f003 0318 	and.w	r3, r3, #24
+     304:	20ff      	movs	r0, #255	; 0xff
+     306:	fa00 f303 	lsl.w	r3, r0, r3
+     30a:	43db      	mvns	r3, r3
+     30c:	400b      	ands	r3, r1
+     30e:	4313      	orrs	r3, r2
+     310:	6023      	str	r3, [r4, #0]
+     312:	4b26      	ldr	r3, [pc, #152]	; (3ac <am_devices_led_init+0x28c>)
+     314:	2200      	movs	r2, #0
+     316:	601a      	str	r2, [r3, #0]
+     318:	e000      	b.n	31c <am_devices_led_init+0x1fc>
+     31a:	bf00      	nop
+
+        //
+        // Disable the output driver, and set the output value to the LEDs "ON"
+        // state.
+        //
+        am_hal_gpio_out_enable_bit_clear(psLED->ui32GPIONumber);
+     31c:	687b      	ldr	r3, [r7, #4]
+     31e:	681b      	ldr	r3, [r3, #0]
+     320:	08db      	lsrs	r3, r3, #3
+     322:	f003 0204 	and.w	r2, r3, #4
+     326:	4b23      	ldr	r3, [pc, #140]	; (3b4 <am_devices_led_init+0x294>)
+     328:	4413      	add	r3, r2
+     32a:	4619      	mov	r1, r3
+     32c:	687b      	ldr	r3, [r7, #4]
+     32e:	681b      	ldr	r3, [r3, #0]
+     330:	f003 031f 	and.w	r3, r3, #31
+     334:	2201      	movs	r2, #1
+     336:	fa02 f303 	lsl.w	r3, r2, r3
+     33a:	600b      	str	r3, [r1, #0]
+        am_hal_gpio_out_bit_replace(psLED->ui32GPIONumber,
+     33c:	687b      	ldr	r3, [r7, #4]
+     33e:	681b      	ldr	r3, [r3, #0]
+     340:	08db      	lsrs	r3, r3, #3
+     342:	f003 0204 	and.w	r2, r3, #4
+     346:	4b1c      	ldr	r3, [pc, #112]	; (3b8 <am_devices_led_init+0x298>)
+     348:	4413      	add	r3, r2
+     34a:	4618      	mov	r0, r3
+     34c:	687b      	ldr	r3, [r7, #4]
+     34e:	685b      	ldr	r3, [r3, #4]
+     350:	f003 0301 	and.w	r3, r3, #1
+     354:	2b00      	cmp	r3, #0
+     356:	d010      	beq.n	37a <am_devices_led_init+0x25a>
+     358:	687b      	ldr	r3, [r7, #4]
+     35a:	681b      	ldr	r3, [r3, #0]
+     35c:	08db      	lsrs	r3, r3, #3
+     35e:	f003 0204 	and.w	r2, r3, #4
+     362:	4b15      	ldr	r3, [pc, #84]	; (3b8 <am_devices_led_init+0x298>)
+     364:	4413      	add	r3, r2
+     366:	681a      	ldr	r2, [r3, #0]
+     368:	687b      	ldr	r3, [r7, #4]
+     36a:	681b      	ldr	r3, [r3, #0]
+     36c:	f003 031f 	and.w	r3, r3, #31
+     370:	2101      	movs	r1, #1
+     372:	fa01 f303 	lsl.w	r3, r1, r3
+     376:	4313      	orrs	r3, r2
+     378:	e010      	b.n	39c <am_devices_led_init+0x27c>
+     37a:	687b      	ldr	r3, [r7, #4]
+     37c:	681b      	ldr	r3, [r3, #0]
+     37e:	08db      	lsrs	r3, r3, #3
+     380:	f003 0204 	and.w	r2, r3, #4
+     384:	4b0c      	ldr	r3, [pc, #48]	; (3b8 <am_devices_led_init+0x298>)
+     386:	4413      	add	r3, r2
+     388:	681a      	ldr	r2, [r3, #0]
+     38a:	687b      	ldr	r3, [r7, #4]
+     38c:	681b      	ldr	r3, [r3, #0]
+     38e:	f003 031f 	and.w	r3, r3, #31
+     392:	2101      	movs	r1, #1
+     394:	fa01 f303 	lsl.w	r3, r1, r3
+     398:	43db      	mvns	r3, r3
+     39a:	4013      	ands	r3, r2
+     39c:	6003      	str	r3, [r0, #0]
+     39e:	e000      	b.n	3a2 <am_devices_led_init+0x282>
+        return;
+     3a0:	bf00      	nop
+                                    psLED->ui32Polarity &
+                                    AM_DEVICES_LED_POL_POLARITY_M );
+    }
+#endif
+}
+     3a2:	3708      	adds	r7, #8
+     3a4:	46bd      	mov	sp, r7
+     3a6:	bc90      	pop	{r4, r7}
+     3a8:	4770      	bx	lr
+     3aa:	bf00      	nop
+     3ac:	40010060 	.word	0x40010060
+     3b0:	40010040 	.word	0x40010040
+     3b4:	400100b4 	.word	0x400100b4
+     3b8:	40010088 	.word	0x40010088
+
+000003bc <am_devices_led_on>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_devices_led_on(am_devices_led_t *psLEDs, uint32_t ui32LEDNum)
+{
+     3bc:	b480      	push	{r7}
+     3be:	b083      	sub	sp, #12
+     3c0:	af00      	add	r7, sp, #0
+     3c2:	6078      	str	r0, [r7, #4]
+     3c4:	6039      	str	r1, [r7, #0]
+    if ( (psLEDs == NULL)                       ||
+     3c6:	687b      	ldr	r3, [r7, #4]
+     3c8:	2b00      	cmp	r3, #0
+     3ca:	d06d      	beq.n	4a8 <am_devices_led_on+0xec>
+     3cc:	683b      	ldr	r3, [r7, #0]
+     3ce:	2b1e      	cmp	r3, #30
+     3d0:	d86a      	bhi.n	4a8 <am_devices_led_on+0xec>
+         (ui32LEDNum >= MAX_LEDS)               ||
+         (psLEDs[ui32LEDNum].ui32GPIONumber >= AM_HAL_GPIO_MAX_PADS) )
+     3d2:	683b      	ldr	r3, [r7, #0]
+     3d4:	00db      	lsls	r3, r3, #3
+     3d6:	687a      	ldr	r2, [r7, #4]
+     3d8:	4413      	add	r3, r2
+     3da:	681b      	ldr	r3, [r3, #0]
+         (ui32LEDNum >= MAX_LEDS)               ||
+     3dc:	2b31      	cmp	r3, #49	; 0x31
+     3de:	d863      	bhi.n	4a8 <am_devices_led_on+0xec>
+    }
+#else // AM_APOLLO3_GPIO
+    //
+    // Handle Direct Drive Versus 3-State (with pull-up or no buffer).
+    //
+    if ( AM_DEVICES_LED_POL_DIRECT_DRIVE_M & psLEDs[ui32LEDNum].ui32Polarity )
+     3e0:	683b      	ldr	r3, [r7, #0]
+     3e2:	00db      	lsls	r3, r3, #3
+     3e4:	687a      	ldr	r2, [r7, #4]
+     3e6:	4413      	add	r3, r2
+     3e8:	685b      	ldr	r3, [r3, #4]
+     3ea:	f003 0302 	and.w	r3, r3, #2
+     3ee:	2b00      	cmp	r3, #0
+     3f0:	d043      	beq.n	47a <am_devices_led_on+0xbe>
+    {
+        //
+        // Set the output to the correct state for the LED.
+        //
+        am_hal_gpio_out_bit_replace(psLEDs[ui32LEDNum].ui32GPIONumber,
+     3f2:	683b      	ldr	r3, [r7, #0]
+     3f4:	00db      	lsls	r3, r3, #3
+     3f6:	687a      	ldr	r2, [r7, #4]
+     3f8:	4413      	add	r3, r2
+     3fa:	681b      	ldr	r3, [r3, #0]
+     3fc:	08db      	lsrs	r3, r3, #3
+     3fe:	f003 0204 	and.w	r2, r3, #4
+     402:	4b2c      	ldr	r3, [pc, #176]	; (4b4 <am_devices_led_on+0xf8>)
+     404:	4413      	add	r3, r2
+     406:	4618      	mov	r0, r3
+     408:	683b      	ldr	r3, [r7, #0]
+     40a:	00db      	lsls	r3, r3, #3
+     40c:	687a      	ldr	r2, [r7, #4]
+     40e:	4413      	add	r3, r2
+     410:	685b      	ldr	r3, [r3, #4]
+     412:	f003 0301 	and.w	r3, r3, #1
+     416:	2b00      	cmp	r3, #0
+     418:	d016      	beq.n	448 <am_devices_led_on+0x8c>
+     41a:	683b      	ldr	r3, [r7, #0]
+     41c:	00db      	lsls	r3, r3, #3
+     41e:	687a      	ldr	r2, [r7, #4]
+     420:	4413      	add	r3, r2
+     422:	681b      	ldr	r3, [r3, #0]
+     424:	08db      	lsrs	r3, r3, #3
+     426:	f003 0204 	and.w	r2, r3, #4
+     42a:	4b22      	ldr	r3, [pc, #136]	; (4b4 <am_devices_led_on+0xf8>)
+     42c:	4413      	add	r3, r2
+     42e:	681a      	ldr	r2, [r3, #0]
+     430:	683b      	ldr	r3, [r7, #0]
+     432:	00db      	lsls	r3, r3, #3
+     434:	6879      	ldr	r1, [r7, #4]
+     436:	440b      	add	r3, r1
+     438:	681b      	ldr	r3, [r3, #0]
+     43a:	f003 031f 	and.w	r3, r3, #31
+     43e:	2101      	movs	r1, #1
+     440:	fa01 f303 	lsl.w	r3, r1, r3
+     444:	4313      	orrs	r3, r2
+     446:	e016      	b.n	476 <am_devices_led_on+0xba>
+     448:	683b      	ldr	r3, [r7, #0]
+     44a:	00db      	lsls	r3, r3, #3
+     44c:	687a      	ldr	r2, [r7, #4]
+     44e:	4413      	add	r3, r2
+     450:	681b      	ldr	r3, [r3, #0]
+     452:	08db      	lsrs	r3, r3, #3
+     454:	f003 0204 	and.w	r2, r3, #4
+     458:	4b16      	ldr	r3, [pc, #88]	; (4b4 <am_devices_led_on+0xf8>)
+     45a:	4413      	add	r3, r2
+     45c:	681a      	ldr	r2, [r3, #0]
+     45e:	683b      	ldr	r3, [r7, #0]
+     460:	00db      	lsls	r3, r3, #3
+     462:	6879      	ldr	r1, [r7, #4]
+     464:	440b      	add	r3, r1
+     466:	681b      	ldr	r3, [r3, #0]
+     468:	f003 031f 	and.w	r3, r3, #31
+     46c:	2101      	movs	r1, #1
+     46e:	fa01 f303 	lsl.w	r3, r1, r3
+     472:	43db      	mvns	r3, r3
+     474:	4013      	ands	r3, r2
+     476:	6003      	str	r3, [r0, #0]
+     478:	e017      	b.n	4aa <am_devices_led_on+0xee>
+    else
+    {
+        //
+        // Turn on the output driver for the LED.
+        //
+        am_hal_gpio_out_enable_bit_set(psLEDs[ui32LEDNum].ui32GPIONumber);
+     47a:	683b      	ldr	r3, [r7, #0]
+     47c:	00db      	lsls	r3, r3, #3
+     47e:	687a      	ldr	r2, [r7, #4]
+     480:	4413      	add	r3, r2
+     482:	681b      	ldr	r3, [r3, #0]
+     484:	08db      	lsrs	r3, r3, #3
+     486:	f003 0204 	and.w	r2, r3, #4
+     48a:	4b0b      	ldr	r3, [pc, #44]	; (4b8 <am_devices_led_on+0xfc>)
+     48c:	4413      	add	r3, r2
+     48e:	4619      	mov	r1, r3
+     490:	683b      	ldr	r3, [r7, #0]
+     492:	00db      	lsls	r3, r3, #3
+     494:	687a      	ldr	r2, [r7, #4]
+     496:	4413      	add	r3, r2
+     498:	681b      	ldr	r3, [r3, #0]
+     49a:	f003 031f 	and.w	r3, r3, #31
+     49e:	2201      	movs	r2, #1
+     4a0:	fa02 f303 	lsl.w	r3, r2, r3
+     4a4:	600b      	str	r3, [r1, #0]
+     4a6:	e000      	b.n	4aa <am_devices_led_on+0xee>
+        return;
+     4a8:	bf00      	nop
+    }
+#endif //AM_APOLLO3_GPIO
+}
+     4aa:	370c      	adds	r7, #12
+     4ac:	46bd      	mov	sp, r7
+     4ae:	f85d 7b04 	ldr.w	r7, [sp], #4
+     4b2:	4770      	bx	lr
+     4b4:	40010088 	.word	0x40010088
+     4b8:	400100a8 	.word	0x400100a8
+
+000004bc <am_devices_led_off>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_devices_led_off(am_devices_led_t *psLEDs, uint32_t ui32LEDNum)
+{
+     4bc:	b480      	push	{r7}
+     4be:	b083      	sub	sp, #12
+     4c0:	af00      	add	r7, sp, #0
+     4c2:	6078      	str	r0, [r7, #4]
+     4c4:	6039      	str	r1, [r7, #0]
+    if ( (psLEDs == NULL)                       ||
+     4c6:	687b      	ldr	r3, [r7, #4]
+     4c8:	2b00      	cmp	r3, #0
+     4ca:	d06d      	beq.n	5a8 <am_devices_led_off+0xec>
+     4cc:	683b      	ldr	r3, [r7, #0]
+     4ce:	2b1e      	cmp	r3, #30
+     4d0:	d86a      	bhi.n	5a8 <am_devices_led_off+0xec>
+         (ui32LEDNum >= MAX_LEDS)               ||
+         (psLEDs[ui32LEDNum].ui32GPIONumber >= AM_HAL_GPIO_MAX_PADS) )
+     4d2:	683b      	ldr	r3, [r7, #0]
+     4d4:	00db      	lsls	r3, r3, #3
+     4d6:	687a      	ldr	r2, [r7, #4]
+     4d8:	4413      	add	r3, r2
+     4da:	681b      	ldr	r3, [r3, #0]
+         (ui32LEDNum >= MAX_LEDS)               ||
+     4dc:	2b31      	cmp	r3, #49	; 0x31
+     4de:	d863      	bhi.n	5a8 <am_devices_led_off+0xec>
+    }
+#else
+    //
+    // Handle Direct Drive Versus 3-State (with pull-up or no buffer).
+    //
+    if ( AM_DEVICES_LED_POL_DIRECT_DRIVE_M & psLEDs[ui32LEDNum].ui32Polarity )
+     4e0:	683b      	ldr	r3, [r7, #0]
+     4e2:	00db      	lsls	r3, r3, #3
+     4e4:	687a      	ldr	r2, [r7, #4]
+     4e6:	4413      	add	r3, r2
+     4e8:	685b      	ldr	r3, [r3, #4]
+     4ea:	f003 0302 	and.w	r3, r3, #2
+     4ee:	2b00      	cmp	r3, #0
+     4f0:	d043      	beq.n	57a <am_devices_led_off+0xbe>
+    {
+        //
+        // Set the output to the correct state for the LED.
+        //
+        am_hal_gpio_out_bit_replace(psLEDs[ui32LEDNum].ui32GPIONumber,
+     4f2:	683b      	ldr	r3, [r7, #0]
+     4f4:	00db      	lsls	r3, r3, #3
+     4f6:	687a      	ldr	r2, [r7, #4]
+     4f8:	4413      	add	r3, r2
+     4fa:	681b      	ldr	r3, [r3, #0]
+     4fc:	08db      	lsrs	r3, r3, #3
+     4fe:	f003 0204 	and.w	r2, r3, #4
+     502:	4b2c      	ldr	r3, [pc, #176]	; (5b4 <am_devices_led_off+0xf8>)
+     504:	4413      	add	r3, r2
+     506:	4618      	mov	r0, r3
+     508:	683b      	ldr	r3, [r7, #0]
+     50a:	00db      	lsls	r3, r3, #3
+     50c:	687a      	ldr	r2, [r7, #4]
+     50e:	4413      	add	r3, r2
+     510:	685b      	ldr	r3, [r3, #4]
+     512:	f003 0301 	and.w	r3, r3, #1
+     516:	2b00      	cmp	r3, #0
+     518:	d116      	bne.n	548 <am_devices_led_off+0x8c>
+     51a:	683b      	ldr	r3, [r7, #0]
+     51c:	00db      	lsls	r3, r3, #3
+     51e:	687a      	ldr	r2, [r7, #4]
+     520:	4413      	add	r3, r2
+     522:	681b      	ldr	r3, [r3, #0]
+     524:	08db      	lsrs	r3, r3, #3
+     526:	f003 0204 	and.w	r2, r3, #4
+     52a:	4b22      	ldr	r3, [pc, #136]	; (5b4 <am_devices_led_off+0xf8>)
+     52c:	4413      	add	r3, r2
+     52e:	681a      	ldr	r2, [r3, #0]
+     530:	683b      	ldr	r3, [r7, #0]
+     532:	00db      	lsls	r3, r3, #3
+     534:	6879      	ldr	r1, [r7, #4]
+     536:	440b      	add	r3, r1
+     538:	681b      	ldr	r3, [r3, #0]
+     53a:	f003 031f 	and.w	r3, r3, #31
+     53e:	2101      	movs	r1, #1
+     540:	fa01 f303 	lsl.w	r3, r1, r3
+     544:	4313      	orrs	r3, r2
+     546:	e016      	b.n	576 <am_devices_led_off+0xba>
+     548:	683b      	ldr	r3, [r7, #0]
+     54a:	00db      	lsls	r3, r3, #3
+     54c:	687a      	ldr	r2, [r7, #4]
+     54e:	4413      	add	r3, r2
+     550:	681b      	ldr	r3, [r3, #0]
+     552:	08db      	lsrs	r3, r3, #3
+     554:	f003 0204 	and.w	r2, r3, #4
+     558:	4b16      	ldr	r3, [pc, #88]	; (5b4 <am_devices_led_off+0xf8>)
+     55a:	4413      	add	r3, r2
+     55c:	681a      	ldr	r2, [r3, #0]
+     55e:	683b      	ldr	r3, [r7, #0]
+     560:	00db      	lsls	r3, r3, #3
+     562:	6879      	ldr	r1, [r7, #4]
+     564:	440b      	add	r3, r1
+     566:	681b      	ldr	r3, [r3, #0]
+     568:	f003 031f 	and.w	r3, r3, #31
+     56c:	2101      	movs	r1, #1
+     56e:	fa01 f303 	lsl.w	r3, r1, r3
+     572:	43db      	mvns	r3, r3
+     574:	4013      	ands	r3, r2
+     576:	6003      	str	r3, [r0, #0]
+     578:	e017      	b.n	5aa <am_devices_led_off+0xee>
+    else
+    {
+        //
+        // Turn off the output driver for the LED.
+        //
+        am_hal_gpio_out_enable_bit_clear(psLEDs[ui32LEDNum].ui32GPIONumber);
+     57a:	683b      	ldr	r3, [r7, #0]
+     57c:	00db      	lsls	r3, r3, #3
+     57e:	687a      	ldr	r2, [r7, #4]
+     580:	4413      	add	r3, r2
+     582:	681b      	ldr	r3, [r3, #0]
+     584:	08db      	lsrs	r3, r3, #3
+     586:	f003 0204 	and.w	r2, r3, #4
+     58a:	4b0b      	ldr	r3, [pc, #44]	; (5b8 <am_devices_led_off+0xfc>)
+     58c:	4413      	add	r3, r2
+     58e:	4619      	mov	r1, r3
+     590:	683b      	ldr	r3, [r7, #0]
+     592:	00db      	lsls	r3, r3, #3
+     594:	687a      	ldr	r2, [r7, #4]
+     596:	4413      	add	r3, r2
+     598:	681b      	ldr	r3, [r3, #0]
+     59a:	f003 031f 	and.w	r3, r3, #31
+     59e:	2201      	movs	r2, #1
+     5a0:	fa02 f303 	lsl.w	r3, r2, r3
+     5a4:	600b      	str	r3, [r1, #0]
+     5a6:	e000      	b.n	5aa <am_devices_led_off+0xee>
+        return;
+     5a8:	bf00      	nop
+    }
+#endif
+}
+     5aa:	370c      	adds	r7, #12
+     5ac:	46bd      	mov	sp, r7
+     5ae:	f85d 7b04 	ldr.w	r7, [sp], #4
+     5b2:	4770      	bx	lr
+     5b4:	40010088 	.word	0x40010088
+     5b8:	400100b4 	.word	0x400100b4
+
+000005bc <am_watchdog_isr>:
+// Interrupt handler for the watchdog.
+//
+//*****************************************************************************
+void
+am_watchdog_isr(void)
+{
+     5bc:	b580      	push	{r7, lr}
+     5be:	af00      	add	r7, sp, #0
+    //
+    // Clear the watchdog interrupt.
+    //
+    am_hal_wdt_int_clear();
+     5c0:	f001 faf8 	bl	1bb4 <am_hal_wdt_int_clear>
+
+    //
+    // Catch the first four watchdog interrupts, but let the fifth through
+    // untouched.
+    //
+    if (g_ui8NumWatchdogInterrupts < 4)
+     5c4:	4b15      	ldr	r3, [pc, #84]	; (61c <am_watchdog_isr+0x60>)
+     5c6:	781b      	ldrb	r3, [r3, #0]
+     5c8:	2b03      	cmp	r3, #3
+     5ca:	d804      	bhi.n	5d6 <am_watchdog_isr+0x1a>
+    {
+        //
+        // Restart the watchdog.
+        //
+        am_hal_wdt_restart();
+     5cc:	4b14      	ldr	r3, [pc, #80]	; (620 <am_watchdog_isr+0x64>)
+     5ce:	22b2      	movs	r2, #178	; 0xb2
+     5d0:	601a      	str	r2, [r3, #0]
+     5d2:	4b13      	ldr	r3, [pc, #76]	; (620 <am_watchdog_isr+0x64>)
+     5d4:	681b      	ldr	r3, [r3, #0]
+    }
+
+    //
+    // Enable debug printf messages using ITM on SWO pin
+    //
+    am_bsp_debug_printf_enable();
+     5d6:	f001 f89d 	bl	1714 <am_bsp_debug_printf_enable>
+
+    //
+    // Send a status message and give it some time to print.
+    //
+    am_util_stdio_printf("Interrupt!!\n");
+     5da:	4812      	ldr	r0, [pc, #72]	; (624 <am_watchdog_isr+0x68>)
+     5dc:	f001 f860 	bl	16a0 <am_util_stdio_printf>
+    am_util_delay_ms(10);
+     5e0:	200a      	movs	r0, #10
+     5e2:	f000 f93f 	bl	864 <am_util_delay_ms>
+
+    //
+    // On the second interrupt do a different kind of reset
+    //
+    if (g_ui8NumWatchdogInterrupts == 2)
+     5e6:	4b0d      	ldr	r3, [pc, #52]	; (61c <am_watchdog_isr+0x60>)
+     5e8:	781b      	ldrb	r3, [r3, #0]
+     5ea:	2b02      	cmp	r3, #2
+     5ec:	d10e      	bne.n	60c <am_watchdog_isr+0x50>
+    {
+        //
+        //  If it's not a watch dog interrupt we will reset here.
+        //
+        if (g_eNextInterrupt != NEXT_WATCHDOG )
+     5ee:	4b0e      	ldr	r3, [pc, #56]	; (628 <am_watchdog_isr+0x6c>)
+     5f0:	781b      	ldrb	r3, [r3, #0]
+     5f2:	2b00      	cmp	r3, #0
+     5f4:	d00a      	beq.n	60c <am_watchdog_isr+0x50>
+        {
+            //
+            // Stop the watchdog.
+            //
+            am_hal_wdt_halt();
+     5f6:	f001 fad5 	bl	1ba4 <am_hal_wdt_halt>
+
+            //
+            // Check if we want to do a POR or POI.
+            //
+            if (g_eNextInterrupt == NEXT_SWPOR)
+     5fa:	4b0b      	ldr	r3, [pc, #44]	; (628 <am_watchdog_isr+0x6c>)
+     5fc:	781b      	ldrb	r3, [r3, #0]
+     5fe:	2b01      	cmp	r3, #1
+     600:	d102      	bne.n	608 <am_watchdog_isr+0x4c>
+            {
+                am_hal_reset_por();
+     602:	f001 f9df 	bl	19c4 <am_hal_reset_por>
+     606:	e001      	b.n	60c <am_watchdog_isr+0x50>
+            }
+            else
+            {
+                am_hal_reset_poi();
+     608:	f001 f9e2 	bl	19d0 <am_hal_reset_poi>
+    }
+
+    //
+    // Increment the number of watchdog interrupts.
+    //
+    g_ui8NumWatchdogInterrupts++;
+     60c:	4b03      	ldr	r3, [pc, #12]	; (61c <am_watchdog_isr+0x60>)
+     60e:	781b      	ldrb	r3, [r3, #0]
+     610:	3301      	adds	r3, #1
+     612:	b2da      	uxtb	r2, r3
+     614:	4b01      	ldr	r3, [pc, #4]	; (61c <am_watchdog_isr+0x60>)
+     616:	701a      	strb	r2, [r3, #0]
+}
+     618:	bf00      	nop
+     61a:	bd80      	pop	{r7, pc}
+     61c:	10001030 	.word	0x10001030
+     620:	40024004 	.word	0x40024004
+     624:	00001bc0 	.word	0x00001bc0
+     628:	10001031 	.word	0x10001031
+
+0000062c <reset_decode>:
+// Function to decode and print the reset cause.
+//
+//*****************************************************************************
+void
+reset_decode(void)
+{
+     62c:	b580      	push	{r7, lr}
+     62e:	b082      	sub	sp, #8
+     630:	af00      	add	r7, sp, #0
+    uint32_t ui32ResetStatus;
+
+    //
+    // Print out reset status register upon entry.
+    //
+    ui32ResetStatus = am_hal_reset_status_get();
+     632:	f001 f9d3 	bl	19dc <am_hal_reset_status_get>
+     636:	6078      	str	r0, [r7, #4]
+    am_util_stdio_printf("Reset Status Register = 0x%02x\n", ui32ResetStatus);
+     638:	6879      	ldr	r1, [r7, #4]
+     63a:	482f      	ldr	r0, [pc, #188]	; (6f8 <reset_decode+0xcc>)
+     63c:	f001 f830 	bl	16a0 <am_util_stdio_printf>
+
+    //
+    // POWER CYCLE.
+    //
+    if (ui32ResetStatus & AM_HAL_RESET_STAT_POWER_CYCLE)
+     640:	687b      	ldr	r3, [r7, #4]
+     642:	f003 0302 	and.w	r3, r3, #2
+     646:	2b00      	cmp	r3, #0
+     648:	d005      	beq.n	656 <reset_decode+0x2a>
+    {
+        am_util_stdio_printf("Power Cycled\n");
+     64a:	482c      	ldr	r0, [pc, #176]	; (6fc <reset_decode+0xd0>)
+     64c:	f001 f828 	bl	16a0 <am_util_stdio_printf>
+        g_eNextInterrupt = NEXT_WATCHDOG;
+     650:	4b2b      	ldr	r3, [pc, #172]	; (700 <reset_decode+0xd4>)
+     652:	2200      	movs	r2, #0
+     654:	701a      	strb	r2, [r3, #0]
+    }
+
+    //
+    // WATCHDOG.
+    //
+    if (ui32ResetStatus & AM_HAL_RESET_STAT_WDT)
+     656:	687b      	ldr	r3, [r7, #4]
+     658:	f003 0340 	and.w	r3, r3, #64	; 0x40
+     65c:	2b00      	cmp	r3, #0
+     65e:	d005      	beq.n	66c <reset_decode+0x40>
+    {
+        am_util_stdio_printf("Watchdog Reset\n");
+     660:	4828      	ldr	r0, [pc, #160]	; (704 <reset_decode+0xd8>)
+     662:	f001 f81d 	bl	16a0 <am_util_stdio_printf>
+        g_eNextInterrupt = NEXT_SWPOR;
+     666:	4b26      	ldr	r3, [pc, #152]	; (700 <reset_decode+0xd4>)
+     668:	2201      	movs	r2, #1
+     66a:	701a      	strb	r2, [r3, #0]
+    }
+
+    //
+    // DEBUGGER.
+    //
+    if (ui32ResetStatus & AM_HAL_RESET_STAT_DEBUG)
+     66c:	687b      	ldr	r3, [r7, #4]
+     66e:	f003 0320 	and.w	r3, r3, #32
+     672:	2b00      	cmp	r3, #0
+     674:	d005      	beq.n	682 <reset_decode+0x56>
+    {
+        am_util_stdio_printf("Debugger Initiated Reset\n");
+     676:	4824      	ldr	r0, [pc, #144]	; (708 <reset_decode+0xdc>)
+     678:	f001 f812 	bl	16a0 <am_util_stdio_printf>
+        g_eNextInterrupt = NEXT_WATCHDOG;
+     67c:	4b20      	ldr	r3, [pc, #128]	; (700 <reset_decode+0xd4>)
+     67e:	2200      	movs	r2, #0
+     680:	701a      	strb	r2, [r3, #0]
+    }
+
+    //
+    // SOFTWARE POI.
+    //
+    if (ui32ResetStatus & AM_HAL_RESET_STAT_POI)
+     682:	687b      	ldr	r3, [r7, #4]
+     684:	f003 0310 	and.w	r3, r3, #16
+     688:	2b00      	cmp	r3, #0
+     68a:	d005      	beq.n	698 <reset_decode+0x6c>
+    {
+        am_util_stdio_printf(
+     68c:	481f      	ldr	r0, [pc, #124]	; (70c <reset_decode+0xe0>)
+     68e:	f001 f807 	bl	16a0 <am_util_stdio_printf>
+                   "Software POI (power on reset internal state)\n");
+        g_eNextInterrupt = NEXT_WATCHDOG;
+     692:	4b1b      	ldr	r3, [pc, #108]	; (700 <reset_decode+0xd4>)
+     694:	2200      	movs	r2, #0
+     696:	701a      	strb	r2, [r3, #0]
+    }
+
+    //
+    // SOFTWARE POR.
+    //
+    if (ui32ResetStatus & AM_HAL_RESET_STAT_SOFTWARE)
+     698:	687b      	ldr	r3, [r7, #4]
+     69a:	f003 0308 	and.w	r3, r3, #8
+     69e:	2b00      	cmp	r3, #0
+     6a0:	d005      	beq.n	6ae <reset_decode+0x82>
+    {
+        am_util_stdio_printf("Software POR Initiated Reset\n");
+     6a2:	481b      	ldr	r0, [pc, #108]	; (710 <reset_decode+0xe4>)
+     6a4:	f000 fffc 	bl	16a0 <am_util_stdio_printf>
+        g_eNextInterrupt = NEXT_SWPOI;
+     6a8:	4b15      	ldr	r3, [pc, #84]	; (700 <reset_decode+0xd4>)
+     6aa:	2202      	movs	r2, #2
+     6ac:	701a      	strb	r2, [r3, #0]
+    }
+
+    //
+    // BROWNOUT DETECTOR.
+    //
+    if (ui32ResetStatus & AM_HAL_RESET_STAT_BOD)
+     6ae:	687b      	ldr	r3, [r7, #4]
+     6b0:	f003 0304 	and.w	r3, r3, #4
+     6b4:	2b00      	cmp	r3, #0
+     6b6:	d005      	beq.n	6c4 <reset_decode+0x98>
+    {
+        am_util_stdio_printf("Brownout Detector Initiated Reset\n");
+     6b8:	4816      	ldr	r0, [pc, #88]	; (714 <reset_decode+0xe8>)
+     6ba:	f000 fff1 	bl	16a0 <am_util_stdio_printf>
+        g_eNextInterrupt = NEXT_WATCHDOG;
+     6be:	4b10      	ldr	r3, [pc, #64]	; (700 <reset_decode+0xd4>)
+     6c0:	2200      	movs	r2, #0
+     6c2:	701a      	strb	r2, [r3, #0]
+    }
+
+    //
+    // EXTERNAL PIN
+    //
+    if (ui32ResetStatus & AM_HAL_RESET_STAT_EXTERNAL)
+     6c4:	687b      	ldr	r3, [r7, #4]
+     6c6:	f003 0301 	and.w	r3, r3, #1
+     6ca:	2b00      	cmp	r3, #0
+     6cc:	d005      	beq.n	6da <reset_decode+0xae>
+    {
+        am_util_stdio_printf("External Reset Pin Initiated This Reset\n");
+     6ce:	4812      	ldr	r0, [pc, #72]	; (718 <reset_decode+0xec>)
+     6d0:	f000 ffe6 	bl	16a0 <am_util_stdio_printf>
+        g_eNextInterrupt = NEXT_SWPOI;
+     6d4:	4b0a      	ldr	r3, [pc, #40]	; (700 <reset_decode+0xd4>)
+     6d6:	2202      	movs	r2, #2
+     6d8:	701a      	strb	r2, [r3, #0]
+    }
+
+    if ( g_eNextInterrupt == NEXT_WATCHDOG )
+     6da:	4b09      	ldr	r3, [pc, #36]	; (700 <reset_decode+0xd4>)
+     6dc:	781b      	ldrb	r3, [r3, #0]
+     6de:	2b00      	cmp	r3, #0
+     6e0:	d103      	bne.n	6ea <reset_decode+0xbe>
+    {
+        am_util_stdio_printf("  Next interrupt is WDT, so 5 interrupts should occur.\n");
+     6e2:	480e      	ldr	r0, [pc, #56]	; (71c <reset_decode+0xf0>)
+     6e4:	f000 ffdc 	bl	16a0 <am_util_stdio_printf>
+    }
+    else
+    {
+        am_util_stdio_printf("  Next interrupt is not WDT, so only 3 interrupts should occur.\n");
+    }
+}
+     6e8:	e002      	b.n	6f0 <reset_decode+0xc4>
+        am_util_stdio_printf("  Next interrupt is not WDT, so only 3 interrupts should occur.\n");
+     6ea:	480d      	ldr	r0, [pc, #52]	; (720 <reset_decode+0xf4>)
+     6ec:	f000 ffd8 	bl	16a0 <am_util_stdio_printf>
+}
+     6f0:	bf00      	nop
+     6f2:	3708      	adds	r7, #8
+     6f4:	46bd      	mov	sp, r7
+     6f6:	bd80      	pop	{r7, pc}
+     6f8:	00001bd0 	.word	0x00001bd0
+     6fc:	00001bf0 	.word	0x00001bf0
+     700:	10001031 	.word	0x10001031
+     704:	00001c00 	.word	0x00001c00
+     708:	00001c10 	.word	0x00001c10
+     70c:	00001c2c 	.word	0x00001c2c
+     710:	00001c5c 	.word	0x00001c5c
+     714:	00001c7c 	.word	0x00001c7c
+     718:	00001ca0 	.word	0x00001ca0
+     71c:	00001ccc 	.word	0x00001ccc
+     720:	00001d04 	.word	0x00001d04
+
+00000724 <main>:
+// Main function.
+//
+//*****************************************************************************
+int
+main(void)
+{
+     724:	b580      	push	{r7, lr}
+     726:	af00      	add	r7, sp, #0
+    //
+    // Set g_eNextInterrupt to a watchdog interrupt.
+    //
+    g_eNextInterrupt = NEXT_WATCHDOG;
+     728:	4b29      	ldr	r3, [pc, #164]	; (7d0 <main+0xac>)
+     72a:	2200      	movs	r2, #0
+     72c:	701a      	strb	r2, [r3, #0]
+
+    //
+    // Set system clock frequency.
+    //
+    am_hal_clkgen_sysclk_select(AM_HAL_CLKGEN_SYSCLK_MAX);
+     72e:	2000      	movs	r0, #0
+     730:	f001 f846 	bl	17c0 <am_hal_clkgen_sysclk_select>
+
+    //
+    // Stop the watch dog if we are coming in from a reset
+    // other than a power cycle
+    //
+    am_hal_wdt_halt();
+     734:	f001 fa36 	bl	1ba4 <am_hal_wdt_halt>
+    am_hal_cachectrl_enable(&am_hal_cachectrl_defaults);
+
+    //
+    // Configure the board for low power operation.
+    //
+    am_bsp_low_power_init();
+     738:	f000 ffda 	bl	16f0 <am_bsp_low_power_init>
+
+    //
+    // Initialize the LED
+    //
+    am_devices_led_init(am_bsp_psLEDs);
+     73c:	4825      	ldr	r0, [pc, #148]	; (7d4 <main+0xb0>)
+     73e:	f7ff fcef 	bl	120 <am_devices_led_init>
+
+    //
+    // Initialize the printf interface for ITM/SWO output.
+    //
+    am_util_stdio_printf_init((am_util_stdio_print_char_t) am_bsp_itm_string_print);
+     742:	4825      	ldr	r0, [pc, #148]	; (7d8 <main+0xb4>)
+     744:	f000 f928 	bl	998 <am_util_stdio_printf_init>
+
+    //
+    // Initialize the SWO GPIO pin
+    //
+    am_bsp_pin_enable(ITM_SWO);
+     748:	4b24      	ldr	r3, [pc, #144]	; (7dc <main+0xb8>)
+     74a:	2273      	movs	r2, #115	; 0x73
+     74c:	601a      	str	r2, [r3, #0]
+     74e:	4a24      	ldr	r2, [pc, #144]	; (7e0 <main+0xbc>)
+     750:	4b23      	ldr	r3, [pc, #140]	; (7e0 <main+0xbc>)
+     752:	681b      	ldr	r3, [r3, #0]
+     754:	f023 0370 	bic.w	r3, r3, #112	; 0x70
+     758:	6013      	str	r3, [r2, #0]
+     75a:	4a22      	ldr	r2, [pc, #136]	; (7e4 <main+0xc0>)
+     75c:	4b21      	ldr	r3, [pc, #132]	; (7e4 <main+0xc0>)
+     75e:	681b      	ldr	r3, [r3, #0]
+     760:	f423 437f 	bic.w	r3, r3, #65280	; 0xff00
+     764:	f443 5380 	orr.w	r3, r3, #4096	; 0x1000
+     768:	6013      	str	r3, [r2, #0]
+     76a:	4b1c      	ldr	r3, [pc, #112]	; (7dc <main+0xb8>)
+     76c:	2200      	movs	r2, #0
+     76e:	601a      	str	r2, [r3, #0]
+
+    //
+    // Enable the ITM.
+    //
+    am_hal_itm_enable();
+     770:	f001 f88a 	bl	1888 <am_hal_itm_enable>
+
+    //
+    // Enable debug printf messages using ITM on SWO pin
+    //
+    am_bsp_debug_printf_enable();
+     774:	f000 ffce 	bl	1714 <am_bsp_debug_printf_enable>
+
+    //
+    // Clear the terminal screen, and print a quick message to show that we're
+    // alive.
+    //
+    am_util_stdio_terminal_clear();
+     778:	f000 ffb0 	bl	16dc <am_util_stdio_terminal_clear>
+    am_util_stdio_printf("Reset State Tracking Example.\n");
+     77c:	481a      	ldr	r0, [pc, #104]	; (7e8 <main+0xc4>)
+     77e:	f000 ff8f 	bl	16a0 <am_util_stdio_printf>
+
+    //
+    // Decode and print the reset state that got us here.
+    //
+    reset_decode();
+     782:	f7ff ff53 	bl	62c <reset_decode>
+
+    //
+    // Give user a little time to read the type of reset.
+    //
+    am_util_delay_ms(1000);
+     786:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+     78a:	f000 f86b 	bl	864 <am_util_delay_ms>
+
+    //
+    // Clear reset status register for next time we reset.
+    //
+    am_hal_reset_status_clear();
+     78e:	f001 f92b 	bl	19e8 <am_hal_reset_status_clear>
+
+    //
+    // LFRC has to be turned on for this example because the watchdog only
+    // runs off of the LFRC.
+    //
+    am_hal_clkgen_osc_start(AM_HAL_CLKGEN_OSC_LFRC);
+     792:	2002      	movs	r0, #2
+     794:	f001 f830 	bl	17f8 <am_hal_clkgen_osc_start>
+
+    //
+    // Configure the watchdog.
+    //
+    am_hal_wdt_init(&g_sWatchdogConfig);
+     798:	4814      	ldr	r0, [pc, #80]	; (7ec <main+0xc8>)
+     79a:	f001 f9bf 	bl	1b1c <am_hal_wdt_init>
+
+    //
+    // Enable the interrupt for the watchdog in the NVIC.
+    //
+    am_hal_interrupt_enable(AM_HAL_INTERRUPT_WATCHDOG);
+     79e:	2011      	movs	r0, #17
+     7a0:	f001 f842 	bl	1828 <am_hal_interrupt_enable>
+    am_hal_interrupt_master_enable();
+     7a4:	f001 f868 	bl	1878 <am_hal_interrupt_master_enable>
+
+    //
+    // Enable the watchdog.
+    //
+    am_hal_wdt_start();
+     7a8:	f001 f9e8 	bl	1b7c <am_hal_wdt_start>
+    while (1)
+    {
+        //
+        // We are done printing. Disable debug printf messages on ITM.
+        //
+        am_bsp_debug_printf_disable();
+     7ac:	f000 ffde 	bl	176c <am_bsp_debug_printf_disable>
+
+        //
+        // Disable interrupts.
+        //
+        am_hal_interrupt_master_disable();
+     7b0:	f001 f866 	bl	1880 <am_hal_interrupt_master_disable>
+
+        //
+        // Turn OFF the indicator LED.
+        //
+        am_devices_led_off(am_bsp_psLEDs, 0);
+     7b4:	2100      	movs	r1, #0
+     7b6:	4807      	ldr	r0, [pc, #28]	; (7d4 <main+0xb0>)
+     7b8:	f7ff fe80 	bl	4bc <am_devices_led_off>
+
+        //
+        // Go to sleep.
+        //
+        am_hal_sysctrl_sleep(AM_HAL_SYSCTRL_SLEEP_DEEP);
+     7bc:	2001      	movs	r0, #1
+     7be:	f001 f92f 	bl	1a20 <am_hal_sysctrl_sleep>
+
+        //
+        // Turn ON the indicator LED.
+        //
+        am_devices_led_on(am_bsp_psLEDs, 0);
+     7c2:	2100      	movs	r1, #0
+     7c4:	4803      	ldr	r0, [pc, #12]	; (7d4 <main+0xb0>)
+     7c6:	f7ff fdf9 	bl	3bc <am_devices_led_on>
+
+        //
+        // An interrupt woke us up so now enable them and take it.
+        //
+        am_hal_interrupt_master_enable();
+     7ca:	f001 f855 	bl	1878 <am_hal_interrupt_master_enable>
+        am_bsp_debug_printf_disable();
+     7ce:	e7ed      	b.n	7ac <main+0x88>
+     7d0:	10001031 	.word	0x10001031
+     7d4:	10001008 	.word	0x10001008
+     7d8:	000017bd 	.word	0x000017bd
+     7dc:	40010060 	.word	0x40010060
+     7e0:	40010054 	.word	0x40010054
+     7e4:	40010028 	.word	0x40010028
+     7e8:	00001d48 	.word	0x00001d48
+     7ec:	10001000 	.word	0x10001000
+
+000007f0 <am_reset_isr>:
+am_reset_isr(void)
+{
+    //
+    // Set the vector table pointer.
+    //
+    __asm("    ldr    r0, =0xE000ED08\n"
+     7f0:	4811      	ldr	r0, [pc, #68]	; (838 <zero_loop+0x12>)
+     7f2:	4912      	ldr	r1, [pc, #72]	; (83c <zero_loop+0x16>)
+     7f4:	6001      	str	r1, [r0, #0]
+          "    str    r1, [r0]");
+
+    //
+    // Set the stack pointer.
+    //
+    __asm("    ldr    sp, [r1]");
+     7f6:	f8d1 d000 	ldr.w	sp, [r1]
+#ifndef NOFPU
+    //
+    // Enable the FPU.
+    //
+    __asm("ldr  r0, =0xE000ED88\n"
+     7fa:	4811      	ldr	r0, [pc, #68]	; (840 <zero_loop+0x1a>)
+     7fc:	6801      	ldr	r1, [r0, #0]
+     7fe:	f441 0170 	orr.w	r1, r1, #15728640	; 0xf00000
+     802:	6001      	str	r1, [r0, #0]
+     804:	f3bf 8f4f 	dsb	sy
+     808:	f3bf 8f6f 	isb	sy
+          "isb\n");
+#endif
+    //
+    // Copy the data segment initializers from flash to SRAM.
+    //
+    __asm("    ldr     r0, =_init_data\n"
+     80c:	480d      	ldr	r0, [pc, #52]	; (844 <zero_loop+0x1e>)
+     80e:	490e      	ldr	r1, [pc, #56]	; (848 <zero_loop+0x22>)
+     810:	4a0e      	ldr	r2, [pc, #56]	; (84c <zero_loop+0x26>)
+
+00000812 <copy_loop>:
+     812:	f850 3b04 	ldr.w	r3, [r0], #4
+     816:	f841 3b04 	str.w	r3, [r1], #4
+     81a:	4291      	cmp	r1, r2
+     81c:	dbf9      	blt.n	812 <copy_loop>
+          "        cmp     r1, r2\n"
+          "        blt     copy_loop\n");
+    //
+    // Zero fill the bss segment.
+    //
+    __asm("    ldr     r0, =_sbss\n"
+     81e:	480c      	ldr	r0, [pc, #48]	; (850 <zero_loop+0x2a>)
+     820:	490c      	ldr	r1, [pc, #48]	; (854 <zero_loop+0x2e>)
+     822:	f04f 0200 	mov.w	r2, #0
+
+00000826 <zero_loop>:
+     826:	4288      	cmp	r0, r1
+     828:	bfb8      	it	lt
+     82a:	f840 2b04 	strlt.w	r2, [r0], #4
+     82e:	dbfa      	blt.n	826 <zero_loop>
+          "        blt     zero_loop");
+
+    //
+    // Call the application's entry point.
+    //
+    main();
+     830:	f7ff ff78 	bl	724 <main>
+
+    //
+    // If main returns then execute a break point instruction
+    //
+    __asm("    bkpt     ");
+     834:	be00      	bkpt	0x0000
+}
+     836:	bf00      	nop
+     838:	e000ed08 	.word	0xe000ed08
+     83c:	00000000 	.word	0x00000000
+     840:	e000ed88 	.word	0xe000ed88
+     844:	00001d9c 	.word	0x00001d9c
+     848:	10001000 	.word	0x10001000
+     84c:	10001030 	.word	0x10001030
+     850:	10001030 	.word	0x10001030
+     854:	10001144 	.word	0x10001144
+
+00000858 <am_nmi_isr>:
+// by a debugger.
+//
+//*****************************************************************************
+void
+am_nmi_isr(void)
+{
+     858:	b480      	push	{r7}
+     85a:	af00      	add	r7, sp, #0
+    //
+    // Go into an infinite loop.
+    //
+    while(1)
+     85c:	e7fe      	b.n	85c <am_nmi_isr+0x4>
+
+0000085e <am_adc_isr>:
+// for examination by a debugger.
+//
+//*****************************************************************************
+void
+am_default_isr(void)
+{
+     85e:	b480      	push	{r7}
+     860:	af00      	add	r7, sp, #0
+    //
+    // Go into an infinite loop.
+    //
+    while(1)
+     862:	e7fe      	b.n	862 <am_adc_isr+0x4>
+
+00000864 <am_util_delay_ms>:
+//! @returns None
+//
+//*****************************************************************************
+void
+am_util_delay_ms(uint32_t ui32MilliSeconds)
+{
+     864:	b580      	push	{r7, lr}
+     866:	b084      	sub	sp, #16
+     868:	af00      	add	r7, sp, #0
+     86a:	6078      	str	r0, [r7, #4]
+#if AM_APOLLO3_CLKGEN
+    am_hal_clkgen_status_t sClkgenStatus;
+    am_hal_clkgen_status_get(&sClkgenStatus);
+    ui32HFRC = sClkgenStatus.ui32SysclkFreq;
+#else
+    ui32HFRC = am_hal_clkgen_sysclk_get();
+     86c:	f000 ffb8 	bl	17e0 <am_hal_clkgen_sysclk_get>
+     870:	60f8      	str	r0, [r7, #12]
+#endif
+    ui32Loops = ui32MilliSeconds * (ui32HFRC / 3000);
+     872:	68fb      	ldr	r3, [r7, #12]
+     874:	4a07      	ldr	r2, [pc, #28]	; (894 <am_util_delay_ms+0x30>)
+     876:	fba2 2303 	umull	r2, r3, r2, r3
+     87a:	099b      	lsrs	r3, r3, #6
+     87c:	687a      	ldr	r2, [r7, #4]
+     87e:	fb02 f303 	mul.w	r3, r2, r3
+     882:	60bb      	str	r3, [r7, #8]
+
+    //
+    // Call the BOOTROM cycle delay function
+    //
+    am_hal_flash_delay(ui32Loops);
+     884:	68b8      	ldr	r0, [r7, #8]
+     886:	f000 ffcb 	bl	1820 <am_hal_flash_delay>
+}
+     88a:	bf00      	nop
+     88c:	3710      	adds	r7, #16
+     88e:	46bd      	mov	sp, r7
+     890:	bd80      	pop	{r7, pc}
+     892:	bf00      	nop
+     894:	057619f1 	.word	0x057619f1
+
+00000898 <am_fault_isr>:
+}
+#elif defined(__GNUC_STDC_INLINE__)
+uint32_t __attribute__((naked))
+am_fault_isr(void)
+{
+    __asm("    push    {r7,lr}");
+     898:	b580      	push	{r7, lr}
+    __asm("    mov     r0, sp");
+     89a:	4668      	mov	r0, sp
+    __asm("    adds    r0, #(2*4)");
+     89c:	3008      	adds	r0, #8
+    __asm("    bl      am_util_faultisr_collect_data");
+     89e:	f000 f809 	bl	8b4 <am_util_faultisr_collect_data>
+    __asm("    pop     {r0,pc}");
+     8a2:	bd01      	pop	{r0, pc}
+}
+     8a4:	bf00      	nop
+     8a6:	4618      	mov	r0, r3
+
+000008a8 <getStackedReg>:
+
+uint32_t __attribute__((naked))
+getStackedReg(uint32_t regnum, uint32_t u32SP)
+{
+    __asm("    lsls    r0, r0, #2");
+     8a8:	0080      	lsls	r0, r0, #2
+    __asm("    adds    r0, r1");
+     8aa:	1840      	adds	r0, r0, r1
+    __asm("    ldr     r0, [r0]");
+     8ac:	6800      	ldr	r0, [r0, #0]
+    __asm("    bx      lr");
+     8ae:	4770      	bx	lr
+}
+     8b0:	bf00      	nop
+     8b2:	4618      	mov	r0, r3
+
+000008b4 <am_util_faultisr_collect_data>:
+// am_fault_isr() was called.
+//
+//*****************************************************************************
+void
+am_util_faultisr_collect_data(uint32_t u32IsrSP)
+{
+     8b4:	b580      	push	{r7, lr}
+     8b6:	b096      	sub	sp, #88	; 0x58
+     8b8:	af00      	add	r7, sp, #0
+     8ba:	6078      	str	r0, [r7, #4]
+    volatile am_fault_t sFaultData;
+    am_hal_mcuctrl_fault_t sHalFaultData = {0};
+     8bc:	f107 030c 	add.w	r3, r7, #12
+     8c0:	2200      	movs	r2, #0
+     8c2:	601a      	str	r2, [r3, #0]
+     8c4:	605a      	str	r2, [r3, #4]
+     8c6:	609a      	str	r2, [r3, #8]
+     8c8:	60da      	str	r2, [r3, #12]
+     8ca:	611a      	str	r2, [r3, #16]
+     8cc:	615a      	str	r2, [r3, #20]
+
+    uint32_t u32Mask = 0;
+     8ce:	2300      	movs	r3, #0
+     8d0:	657b      	str	r3, [r7, #84]	; 0x54
+    // u32Mask is used for 2 things: 1) in the print loop, 2) as a spot to set
+    // a breakpoint at the end of the routine.  If the printing is not used,
+    // we'll get a compiler warning; so to avoid that warning, we'll use it
+    // in a dummy assignment here.
+    //
+    sFaultData.u32CFSR = u32Mask;       // Avoid compiler warning
+     8d2:	6d7b      	ldr	r3, [r7, #84]	; 0x54
+     8d4:	64fb      	str	r3, [r7, #76]	; 0x4c
+    sFaultData.u32CFSR = AM_REGVAL(AM_REG_SYSCTRL_CFSR_O);
+     8d6:	4b2e      	ldr	r3, [pc, #184]	; (990 <am_util_faultisr_collect_data+0xdc>)
+     8d8:	681b      	ldr	r3, [r3, #0]
+     8da:	64fb      	str	r3, [r7, #76]	; 0x4c
+    sFaultData.u8MMSR  = (sFaultData.u32CFSR >> 0)  & 0xff;
+     8dc:	6cfb      	ldr	r3, [r7, #76]	; 0x4c
+     8de:	b2db      	uxtb	r3, r3
+     8e0:	f887 3050 	strb.w	r3, [r7, #80]	; 0x50
+    sFaultData.u8BFSR  = (sFaultData.u32CFSR >> 8)  & 0xff;
+     8e4:	6cfb      	ldr	r3, [r7, #76]	; 0x4c
+     8e6:	0a1b      	lsrs	r3, r3, #8
+     8e8:	b2db      	uxtb	r3, r3
+     8ea:	f887 3051 	strb.w	r3, [r7, #81]	; 0x51
+    sFaultData.u16UFSR = (sFaultData.u32CFSR >> 16) & 0xffff;
+     8ee:	6cfb      	ldr	r3, [r7, #76]	; 0x4c
+     8f0:	0c1b      	lsrs	r3, r3, #16
+     8f2:	b29b      	uxth	r3, r3
+     8f4:	f8a7 3052 	strh.w	r3, [r7, #82]	; 0x52
+
+    //
+    // The address of the location that caused the fault.  e.g. if accessing an
+    // invalid data location caused the fault, that address will appear here.
+    //
+    sFaultData.u32BFAR = AM_REGVAL(AM_REG_SYSCTRL_BFAR_O);
+     8f8:	4b26      	ldr	r3, [pc, #152]	; (994 <am_util_faultisr_collect_data+0xe0>)
+     8fa:	681b      	ldr	r3, [r3, #0]
+     8fc:	64bb      	str	r3, [r7, #72]	; 0x48
+
+    //
+    // The address of the instruction that caused the fault is the stacked PC
+    // if BFSR bit1 is set.
+    //
+    sFaultData.u32FaultAddr = (sFaultData.u8BFSR & 0x02) ? getStackedReg(6, u32IsrSP) : 0xffffffff;
+     8fe:	f897 3051 	ldrb.w	r3, [r7, #81]	; 0x51
+     902:	b2db      	uxtb	r3, r3
+     904:	f003 0302 	and.w	r3, r3, #2
+     908:	2b00      	cmp	r3, #0
+     90a:	d005      	beq.n	918 <am_util_faultisr_collect_data+0x64>
+     90c:	6879      	ldr	r1, [r7, #4]
+     90e:	2006      	movs	r0, #6
+     910:	f7ff ffca 	bl	8a8 <getStackedReg>
+     914:	4603      	mov	r3, r0
+     916:	e001      	b.n	91c <am_util_faultisr_collect_data+0x68>
+     918:	f04f 33ff 	mov.w	r3, #4294967295
+     91c:	647b      	str	r3, [r7, #68]	; 0x44
+
+    //
+    // Get the stacked registers.
+    // Note - the address of the instruction that caused the fault is u32PC.
+    //
+    sFaultData.u32R0  = getStackedReg(0, u32IsrSP);
+     91e:	6879      	ldr	r1, [r7, #4]
+     920:	2000      	movs	r0, #0
+     922:	f7ff ffc1 	bl	8a8 <getStackedReg>
+     926:	4603      	mov	r3, r0
+     928:	627b      	str	r3, [r7, #36]	; 0x24
+    sFaultData.u32R1  = getStackedReg(1, u32IsrSP);
+     92a:	6879      	ldr	r1, [r7, #4]
+     92c:	2001      	movs	r0, #1
+     92e:	f7ff ffbb 	bl	8a8 <getStackedReg>
+     932:	4603      	mov	r3, r0
+     934:	62bb      	str	r3, [r7, #40]	; 0x28
+    sFaultData.u32R2  = getStackedReg(2, u32IsrSP);
+     936:	6879      	ldr	r1, [r7, #4]
+     938:	2002      	movs	r0, #2
+     93a:	f7ff ffb5 	bl	8a8 <getStackedReg>
+     93e:	4603      	mov	r3, r0
+     940:	62fb      	str	r3, [r7, #44]	; 0x2c
+    sFaultData.u32R3  = getStackedReg(3, u32IsrSP);
+     942:	6879      	ldr	r1, [r7, #4]
+     944:	2003      	movs	r0, #3
+     946:	f7ff ffaf 	bl	8a8 <getStackedReg>
+     94a:	4603      	mov	r3, r0
+     94c:	633b      	str	r3, [r7, #48]	; 0x30
+    sFaultData.u32R12 = getStackedReg(4, u32IsrSP);
+     94e:	6879      	ldr	r1, [r7, #4]
+     950:	2004      	movs	r0, #4
+     952:	f7ff ffa9 	bl	8a8 <getStackedReg>
+     956:	4603      	mov	r3, r0
+     958:	637b      	str	r3, [r7, #52]	; 0x34
+    sFaultData.u32LR  = getStackedReg(5, u32IsrSP);
+     95a:	6879      	ldr	r1, [r7, #4]
+     95c:	2005      	movs	r0, #5
+     95e:	f7ff ffa3 	bl	8a8 <getStackedReg>
+     962:	4603      	mov	r3, r0
+     964:	63bb      	str	r3, [r7, #56]	; 0x38
+    sFaultData.u32PC  = getStackedReg(6, u32IsrSP);
+     966:	6879      	ldr	r1, [r7, #4]
+     968:	2006      	movs	r0, #6
+     96a:	f7ff ff9d 	bl	8a8 <getStackedReg>
+     96e:	4603      	mov	r3, r0
+     970:	63fb      	str	r3, [r7, #60]	; 0x3c
+    sFaultData.u32PSR = getStackedReg(7, u32IsrSP);
+     972:	6879      	ldr	r1, [r7, #4]
+     974:	2007      	movs	r0, #7
+     976:	f7ff ff97 	bl	8a8 <getStackedReg>
+     97a:	4603      	mov	r3, r0
+     97c:	643b      	str	r3, [r7, #64]	; 0x40
+    // Use the HAL MCUCTRL functions to read the fault data.
+    //
+#ifdef AM_APOLLO3_MCUCTRL
+    am_hal_mcuctrl_info_get(AM_HAL_MCUCTRL_INFO_FAULT_STATUS, &sHalFaultData);
+#else
+    am_hal_mcuctrl_fault_status(&sHalFaultData);
+     97e:	f107 030c 	add.w	r3, r7, #12
+     982:	4618      	mov	r0, r3
+     984:	f000 ffdc 	bl	1940 <am_hal_mcuctrl_fault_status>
+    }
+
+
+#endif
+
+    u32Mask = 0;
+     988:	2300      	movs	r3, #0
+     98a:	657b      	str	r3, [r7, #84]	; 0x54
+    //
+    // Spin in an infinite loop.
+    // We need to spin here inside the function so that we have access to
+    // local data, i.e. sFaultData.
+    //
+    while(1)
+     98c:	e7fe      	b.n	98c <am_util_faultisr_collect_data+0xd8>
+     98e:	bf00      	nop
+     990:	e000ed28 	.word	0xe000ed28
+     994:	e000ed38 	.word	0xe000ed38
+
+00000998 <am_util_stdio_printf_init>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_util_stdio_printf_init(am_util_stdio_print_char_t pfnCharPrint)
+{
+     998:	b480      	push	{r7}
+     99a:	b083      	sub	sp, #12
+     99c:	af00      	add	r7, sp, #0
+     99e:	6078      	str	r0, [r7, #4]
+    g_pfnCharPrint = pfnCharPrint;
+     9a0:	4a04      	ldr	r2, [pc, #16]	; (9b4 <am_util_stdio_printf_init+0x1c>)
+     9a2:	687b      	ldr	r3, [r7, #4]
+     9a4:	6013      	str	r3, [r2, #0]
+}
+     9a6:	bf00      	nop
+     9a8:	370c      	adds	r7, #12
+     9aa:	46bd      	mov	sp, r7
+     9ac:	f85d 7b04 	ldr.w	r7, [sp], #4
+     9b0:	4770      	bx	lr
+     9b2:	bf00      	nop
+     9b4:	10001140 	.word	0x10001140
+
+000009b8 <divu64_10>:
+//  Note: Adapted from Ch10 of Hackers Delight (hackersdelight.org).
+//
+//*****************************************************************************
+static uint64_t
+divu64_10(uint64_t ui64Val)
+{
+     9b8:	e92d 0ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp}
+     9bc:	b096      	sub	sp, #88	; 0x58
+     9be:	af00      	add	r7, sp, #0
+     9c0:	e9c7 010c 	strd	r0, r1, [r7, #48]	; 0x30
+    uint32_t q32, r32, ui32Val;
+
+    //
+    // If a 32-bit value, use the more optimal 32-bit routine.
+    //
+    if ( ui64Val >> 32 )
+     9c4:	e9d7 340c 	ldrd	r3, r4, [r7, #48]	; 0x30
+     9c8:	0025      	movs	r5, r4
+     9ca:	2600      	movs	r6, #0
+     9cc:	ea55 0306 	orrs.w	r3, r5, r6
+     9d0:	f000 80a0 	beq.w	b14 <divu64_10+0x15c>
+    {
+        q64 = (ui64Val>>1) + (ui64Val>>2);
+     9d4:	e9d7 340c 	ldrd	r3, r4, [r7, #48]	; 0x30
+     9d8:	0862      	lsrs	r2, r4, #1
+     9da:	ea4f 0133 	mov.w	r1, r3, rrx
+     9de:	e9d7 340c 	ldrd	r3, r4, [r7, #48]	; 0x30
+     9e2:	ea4f 0893 	mov.w	r8, r3, lsr #2
+     9e6:	ea48 7884 	orr.w	r8, r8, r4, lsl #30
+     9ea:	ea4f 0994 	mov.w	r9, r4, lsr #2
+     9ee:	eb11 0308 	adds.w	r3, r1, r8
+     9f2:	eb42 0409 	adc.w	r4, r2, r9
+     9f6:	e9c7 3414 	strd	r3, r4, [r7, #80]	; 0x50
+        q64 += (q64 >> 4);
+     9fa:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     9fe:	ea4f 1a13 	mov.w	sl, r3, lsr #4
+     a02:	ea4a 7a04 	orr.w	sl, sl, r4, lsl #28
+     a06:	ea4f 1b14 	mov.w	fp, r4, lsr #4
+     a0a:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a0e:	eb13 030a 	adds.w	r3, r3, sl
+     a12:	eb44 040b 	adc.w	r4, r4, fp
+     a16:	e9c7 3414 	strd	r3, r4, [r7, #80]	; 0x50
+        q64 += (q64 >> 8);
+     a1a:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a1e:	0a1a      	lsrs	r2, r3, #8
+     a20:	62ba      	str	r2, [r7, #40]	; 0x28
+     a22:	6aba      	ldr	r2, [r7, #40]	; 0x28
+     a24:	ea42 6204 	orr.w	r2, r2, r4, lsl #24
+     a28:	62ba      	str	r2, [r7, #40]	; 0x28
+     a2a:	0a23      	lsrs	r3, r4, #8
+     a2c:	62fb      	str	r3, [r7, #44]	; 0x2c
+     a2e:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a32:	e9d7 120a 	ldrd	r1, r2, [r7, #40]	; 0x28
+     a36:	18c9      	adds	r1, r1, r3
+     a38:	eb42 0204 	adc.w	r2, r2, r4
+     a3c:	460b      	mov	r3, r1
+     a3e:	4614      	mov	r4, r2
+     a40:	e9c7 3414 	strd	r3, r4, [r7, #80]	; 0x50
+        q64 += (q64 >> 16);
+     a44:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a48:	0c1a      	lsrs	r2, r3, #16
+     a4a:	623a      	str	r2, [r7, #32]
+     a4c:	6a3a      	ldr	r2, [r7, #32]
+     a4e:	ea42 4204 	orr.w	r2, r2, r4, lsl #16
+     a52:	623a      	str	r2, [r7, #32]
+     a54:	0c23      	lsrs	r3, r4, #16
+     a56:	627b      	str	r3, [r7, #36]	; 0x24
+     a58:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a5c:	e9d7 1208 	ldrd	r1, r2, [r7, #32]
+     a60:	18c9      	adds	r1, r1, r3
+     a62:	eb42 0204 	adc.w	r2, r2, r4
+     a66:	460b      	mov	r3, r1
+     a68:	4614      	mov	r4, r2
+     a6a:	e9c7 3414 	strd	r3, r4, [r7, #80]	; 0x50
+        q64 += (q64 >> 32);
+     a6e:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a72:	0023      	movs	r3, r4
+     a74:	603b      	str	r3, [r7, #0]
+     a76:	2300      	movs	r3, #0
+     a78:	607b      	str	r3, [r7, #4]
+     a7a:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a7e:	e897 0006 	ldmia.w	r7, {r1, r2}
+     a82:	18c9      	adds	r1, r1, r3
+     a84:	eb42 0204 	adc.w	r2, r2, r4
+     a88:	460b      	mov	r3, r1
+     a8a:	4614      	mov	r4, r2
+     a8c:	e9c7 3414 	strd	r3, r4, [r7, #80]	; 0x50
+        q64 >>= 3;
+     a90:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     a94:	08da      	lsrs	r2, r3, #3
+     a96:	613a      	str	r2, [r7, #16]
+     a98:	693a      	ldr	r2, [r7, #16]
+     a9a:	ea42 7244 	orr.w	r2, r2, r4, lsl #29
+     a9e:	613a      	str	r2, [r7, #16]
+     aa0:	08e3      	lsrs	r3, r4, #3
+     aa2:	617b      	str	r3, [r7, #20]
+     aa4:	e9d7 3404 	ldrd	r3, r4, [r7, #16]
+     aa8:	e9c7 3414 	strd	r3, r4, [r7, #80]	; 0x50
+        r64 = ui64Val - q64*10;
+     aac:	e9d7 1214 	ldrd	r1, r2, [r7, #80]	; 0x50
+     ab0:	460b      	mov	r3, r1
+     ab2:	4614      	mov	r4, r2
+     ab4:	00a0      	lsls	r0, r4, #2
+     ab6:	60f8      	str	r0, [r7, #12]
+     ab8:	68f8      	ldr	r0, [r7, #12]
+     aba:	ea40 7093 	orr.w	r0, r0, r3, lsr #30
+     abe:	60f8      	str	r0, [r7, #12]
+     ac0:	009b      	lsls	r3, r3, #2
+     ac2:	60bb      	str	r3, [r7, #8]
+     ac4:	e9d7 3402 	ldrd	r3, r4, [r7, #8]
+     ac8:	185b      	adds	r3, r3, r1
+     aca:	eb44 0402 	adc.w	r4, r4, r2
+     ace:	18db      	adds	r3, r3, r3
+     ad0:	eb44 0404 	adc.w	r4, r4, r4
+     ad4:	4619      	mov	r1, r3
+     ad6:	4622      	mov	r2, r4
+     ad8:	e9d7 340c 	ldrd	r3, r4, [r7, #48]	; 0x30
+     adc:	1a5b      	subs	r3, r3, r1
+     ade:	eb64 0402 	sbc.w	r4, r4, r2
+     ae2:	e9c7 3412 	strd	r3, r4, [r7, #72]	; 0x48
+        return q64 + ((r64 + 6) >> 4);
+     ae6:	e9d7 3412 	ldrd	r3, r4, [r7, #72]	; 0x48
+     aea:	3306      	adds	r3, #6
+     aec:	f144 0400 	adc.w	r4, r4, #0
+     af0:	091a      	lsrs	r2, r3, #4
+     af2:	61ba      	str	r2, [r7, #24]
+     af4:	69ba      	ldr	r2, [r7, #24]
+     af6:	ea42 7204 	orr.w	r2, r2, r4, lsl #28
+     afa:	61ba      	str	r2, [r7, #24]
+     afc:	0923      	lsrs	r3, r4, #4
+     afe:	61fb      	str	r3, [r7, #28]
+     b00:	e9d7 3414 	ldrd	r3, r4, [r7, #80]	; 0x50
+     b04:	e9d7 1206 	ldrd	r1, r2, [r7, #24]
+     b08:	18c9      	adds	r1, r1, r3
+     b0a:	eb42 0204 	adc.w	r2, r2, r4
+     b0e:	460b      	mov	r3, r1
+     b10:	4614      	mov	r4, r2
+     b12:	e029      	b.n	b68 <divu64_10+0x1b0>
+    }
+    else
+    {
+        ui32Val = (uint32_t)(ui64Val & 0xffffffff);
+     b14:	6b3b      	ldr	r3, [r7, #48]	; 0x30
+     b16:	647b      	str	r3, [r7, #68]	; 0x44
+        q32 = (ui32Val>>1) + (ui32Val>>2);
+     b18:	6c7b      	ldr	r3, [r7, #68]	; 0x44
+     b1a:	085a      	lsrs	r2, r3, #1
+     b1c:	6c7b      	ldr	r3, [r7, #68]	; 0x44
+     b1e:	089b      	lsrs	r3, r3, #2
+     b20:	4413      	add	r3, r2
+     b22:	643b      	str	r3, [r7, #64]	; 0x40
+        q32 += (q32 >> 4);
+     b24:	6c3b      	ldr	r3, [r7, #64]	; 0x40
+     b26:	091b      	lsrs	r3, r3, #4
+     b28:	6c3a      	ldr	r2, [r7, #64]	; 0x40
+     b2a:	4413      	add	r3, r2
+     b2c:	643b      	str	r3, [r7, #64]	; 0x40
+        q32 += (q32 >> 8);
+     b2e:	6c3b      	ldr	r3, [r7, #64]	; 0x40
+     b30:	0a1b      	lsrs	r3, r3, #8
+     b32:	6c3a      	ldr	r2, [r7, #64]	; 0x40
+     b34:	4413      	add	r3, r2
+     b36:	643b      	str	r3, [r7, #64]	; 0x40
+        q32 += (q32 >> 16);
+     b38:	6c3b      	ldr	r3, [r7, #64]	; 0x40
+     b3a:	0c1b      	lsrs	r3, r3, #16
+     b3c:	6c3a      	ldr	r2, [r7, #64]	; 0x40
+     b3e:	4413      	add	r3, r2
+     b40:	643b      	str	r3, [r7, #64]	; 0x40
+        q32 >>= 3;
+     b42:	6c3b      	ldr	r3, [r7, #64]	; 0x40
+     b44:	08db      	lsrs	r3, r3, #3
+     b46:	643b      	str	r3, [r7, #64]	; 0x40
+        r32 = ui32Val - q32*10;
+     b48:	6c3a      	ldr	r2, [r7, #64]	; 0x40
+     b4a:	4613      	mov	r3, r2
+     b4c:	009b      	lsls	r3, r3, #2
+     b4e:	4413      	add	r3, r2
+     b50:	005b      	lsls	r3, r3, #1
+     b52:	461a      	mov	r2, r3
+     b54:	6c7b      	ldr	r3, [r7, #68]	; 0x44
+     b56:	1a9b      	subs	r3, r3, r2
+     b58:	63fb      	str	r3, [r7, #60]	; 0x3c
+        return (uint64_t)(q32 + ((r32 + 6) >> 4));
+     b5a:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+     b5c:	3306      	adds	r3, #6
+     b5e:	091a      	lsrs	r2, r3, #4
+     b60:	6c3b      	ldr	r3, [r7, #64]	; 0x40
+     b62:	4413      	add	r3, r2
+     b64:	f04f 0400 	mov.w	r4, #0
+    }
+}
+     b68:	4618      	mov	r0, r3
+     b6a:	4621      	mov	r1, r4
+     b6c:	3758      	adds	r7, #88	; 0x58
+     b6e:	46bd      	mov	sp, r7
+     b70:	e8bd 0ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp}
+     b74:	4770      	bx	lr
+
+00000b76 <ndigits_in_u64>:
+// example: 10000 return 5, 123 returns 3.
+//
+//*****************************************************************************
+static int
+ndigits_in_u64(uint64_t ui64Val)
+{
+     b76:	b590      	push	{r4, r7, lr}
+     b78:	b085      	sub	sp, #20
+     b7a:	af00      	add	r7, sp, #0
+     b7c:	e9c7 0100 	strd	r0, r1, [r7]
+    int iNDigits = ui64Val ? 0 : 1;
+     b80:	683a      	ldr	r2, [r7, #0]
+     b82:	687b      	ldr	r3, [r7, #4]
+     b84:	4313      	orrs	r3, r2
+     b86:	2b00      	cmp	r3, #0
+     b88:	bf0c      	ite	eq
+     b8a:	2301      	moveq	r3, #1
+     b8c:	2300      	movne	r3, #0
+     b8e:	b2db      	uxtb	r3, r3
+     b90:	60fb      	str	r3, [r7, #12]
+
+    while ( ui64Val )
+     b92:	e008      	b.n	ba6 <ndigits_in_u64+0x30>
+    {
+        //
+        // ui32Val /= 10;
+        //
+        ui64Val = divu64_10(ui64Val);
+     b94:	e9d7 0100 	ldrd	r0, r1, [r7]
+     b98:	f7ff ff0e 	bl	9b8 <divu64_10>
+     b9c:	e9c7 0100 	strd	r0, r1, [r7]
+        ++iNDigits;
+     ba0:	68fb      	ldr	r3, [r7, #12]
+     ba2:	3301      	adds	r3, #1
+     ba4:	60fb      	str	r3, [r7, #12]
+    while ( ui64Val )
+     ba6:	e897 0018 	ldmia.w	r7, {r3, r4}
+     baa:	4323      	orrs	r3, r4
+     bac:	d1f2      	bne.n	b94 <ndigits_in_u64+0x1e>
+    }
+
+    return iNDigits;
+     bae:	68fb      	ldr	r3, [r7, #12]
+}
+     bb0:	4618      	mov	r0, r3
+     bb2:	3714      	adds	r7, #20
+     bb4:	46bd      	mov	sp, r7
+     bb6:	bd90      	pop	{r4, r7, pc}
+
+00000bb8 <ndigits_in_i64>:
+// example: -3 returns 1, 3 returns 1, 15 returns 2, -15 returns 2, ...
+//
+//*****************************************************************************
+static int
+ndigits_in_i64(int64_t i64Val)
+{
+     bb8:	b590      	push	{r4, r7, lr}
+     bba:	b083      	sub	sp, #12
+     bbc:	af00      	add	r7, sp, #0
+     bbe:	e9c7 0100 	strd	r0, r1, [r7]
+    if ( i64Val < 0 )
+     bc2:	e897 0018 	ldmia.w	r7, {r3, r4}
+     bc6:	2b00      	cmp	r3, #0
+     bc8:	f174 0300 	sbcs.w	r3, r4, #0
+     bcc:	da06      	bge.n	bdc <ndigits_in_i64+0x24>
+    {
+        //
+        // Get absolute value
+        //
+        i64Val = -i64Val;
+     bce:	e897 0018 	ldmia.w	r7, {r3, r4}
+     bd2:	425b      	negs	r3, r3
+     bd4:	eb64 0444 	sbc.w	r4, r4, r4, lsl #1
+     bd8:	e887 0018 	stmia.w	r7, {r3, r4}
+    }
+
+    return ndigits_in_u64((uint64_t) i64Val);
+     bdc:	e897 0018 	ldmia.w	r7, {r3, r4}
+     be0:	4618      	mov	r0, r3
+     be2:	4621      	mov	r1, r4
+     be4:	f7ff ffc7 	bl	b76 <ndigits_in_u64>
+     be8:	4603      	mov	r3, r0
+}
+     bea:	4618      	mov	r0, r3
+     bec:	370c      	adds	r7, #12
+     bee:	46bd      	mov	sp, r7
+     bf0:	bd90      	pop	{r4, r7, pc}
+
+00000bf2 <ndigits_in_hex>:
+// Return the number of hex digits in an uint64_t.
+//
+//*****************************************************************************
+static int
+ndigits_in_hex(uint64_t ui64Val)
+{
+     bf2:	b490      	push	{r4, r7}
+     bf4:	b084      	sub	sp, #16
+     bf6:	af00      	add	r7, sp, #0
+     bf8:	e9c7 0100 	strd	r0, r1, [r7]
+    int iDigits = ui64Val ? 0 : 1;
+     bfc:	6839      	ldr	r1, [r7, #0]
+     bfe:	687a      	ldr	r2, [r7, #4]
+     c00:	430a      	orrs	r2, r1
+     c02:	2a00      	cmp	r2, #0
+     c04:	bf0c      	ite	eq
+     c06:	2201      	moveq	r2, #1
+     c08:	2200      	movne	r2, #0
+     c0a:	b2d2      	uxtb	r2, r2
+     c0c:	60fa      	str	r2, [r7, #12]
+
+    while ( ui64Val )
+     c0e:	e00a      	b.n	c26 <ndigits_in_hex+0x34>
+    {
+        ui64Val >>= 4;
+     c10:	e897 0006 	ldmia.w	r7, {r1, r2}
+     c14:	090b      	lsrs	r3, r1, #4
+     c16:	ea43 7302 	orr.w	r3, r3, r2, lsl #28
+     c1a:	0914      	lsrs	r4, r2, #4
+     c1c:	e887 0018 	stmia.w	r7, {r3, r4}
+        ++iDigits;
+     c20:	68fa      	ldr	r2, [r7, #12]
+     c22:	3201      	adds	r2, #1
+     c24:	60fa      	str	r2, [r7, #12]
+    while ( ui64Val )
+     c26:	e897 0006 	ldmia.w	r7, {r1, r2}
+     c2a:	430a      	orrs	r2, r1
+     c2c:	d1f0      	bne.n	c10 <ndigits_in_hex+0x1e>
+    }
+
+    return iDigits;
+     c2e:	68fb      	ldr	r3, [r7, #12]
+}
+     c30:	4618      	mov	r0, r3
+     c32:	3710      	adds	r7, #16
+     c34:	46bd      	mov	sp, r7
+     c36:	bc90      	pop	{r4, r7}
+     c38:	4770      	bx	lr
+
+00000c3a <decstr_to_int>:
+// pui32CharCnt.
+//
+//*****************************************************************************
+static uint32_t
+decstr_to_int(const char *pcStr, uint32_t *pui32CharCnt)
+{
+     c3a:	b480      	push	{r7}
+     c3c:	b087      	sub	sp, #28
+     c3e:	af00      	add	r7, sp, #0
+     c40:	6078      	str	r0, [r7, #4]
+     c42:	6039      	str	r1, [r7, #0]
+    bool bNeg = false;
+     c44:	2300      	movs	r3, #0
+     c46:	75fb      	strb	r3, [r7, #23]
+    uint32_t ui32Val = 0, uCnt = 0;
+     c48:	2300      	movs	r3, #0
+     c4a:	613b      	str	r3, [r7, #16]
+     c4c:	2300      	movs	r3, #0
+     c4e:	60fb      	str	r3, [r7, #12]
+
+    if ( *pcStr == '-')
+     c50:	687b      	ldr	r3, [r7, #4]
+     c52:	781b      	ldrb	r3, [r3, #0]
+     c54:	2b2d      	cmp	r3, #45	; 0x2d
+     c56:	d11b      	bne.n	c90 <decstr_to_int+0x56>
+    {
+        bNeg = true;
+     c58:	2301      	movs	r3, #1
+     c5a:	75fb      	strb	r3, [r7, #23]
+        pcStr++;
+     c5c:	687b      	ldr	r3, [r7, #4]
+     c5e:	3301      	adds	r3, #1
+     c60:	607b      	str	r3, [r7, #4]
+        uCnt++;
+     c62:	68fb      	ldr	r3, [r7, #12]
+     c64:	3301      	adds	r3, #1
+     c66:	60fb      	str	r3, [r7, #12]
+    }
+
+    while ( *pcStr >= '0'  &&  *pcStr <= '9' )
+     c68:	e012      	b.n	c90 <decstr_to_int+0x56>
+    {
+        ++uCnt;
+     c6a:	68fb      	ldr	r3, [r7, #12]
+     c6c:	3301      	adds	r3, #1
+     c6e:	60fb      	str	r3, [r7, #12]
+
+        //
+        // Multiply accumulated value by 10.
+        //
+        ui32Val *= 10;
+     c70:	693a      	ldr	r2, [r7, #16]
+     c72:	4613      	mov	r3, r2
+     c74:	009b      	lsls	r3, r3, #2
+     c76:	4413      	add	r3, r2
+     c78:	005b      	lsls	r3, r3, #1
+     c7a:	613b      	str	r3, [r7, #16]
+
+        //
+        // Add in the new low digit.
+        //
+        ui32Val += (*pcStr - '0');
+     c7c:	687b      	ldr	r3, [r7, #4]
+     c7e:	781b      	ldrb	r3, [r3, #0]
+     c80:	461a      	mov	r2, r3
+     c82:	693b      	ldr	r3, [r7, #16]
+     c84:	4413      	add	r3, r2
+     c86:	3b30      	subs	r3, #48	; 0x30
+     c88:	613b      	str	r3, [r7, #16]
+        pcStr++;
+     c8a:	687b      	ldr	r3, [r7, #4]
+     c8c:	3301      	adds	r3, #1
+     c8e:	607b      	str	r3, [r7, #4]
+    while ( *pcStr >= '0'  &&  *pcStr <= '9' )
+     c90:	687b      	ldr	r3, [r7, #4]
+     c92:	781b      	ldrb	r3, [r3, #0]
+     c94:	2b2f      	cmp	r3, #47	; 0x2f
+     c96:	d903      	bls.n	ca0 <decstr_to_int+0x66>
+     c98:	687b      	ldr	r3, [r7, #4]
+     c9a:	781b      	ldrb	r3, [r3, #0]
+     c9c:	2b39      	cmp	r3, #57	; 0x39
+     c9e:	d9e4      	bls.n	c6a <decstr_to_int+0x30>
+    }
+
+    if ( pui32CharCnt )
+     ca0:	683b      	ldr	r3, [r7, #0]
+     ca2:	2b00      	cmp	r3, #0
+     ca4:	d002      	beq.n	cac <decstr_to_int+0x72>
+    {
+        *pui32CharCnt = uCnt;
+     ca6:	683b      	ldr	r3, [r7, #0]
+     ca8:	68fa      	ldr	r2, [r7, #12]
+     caa:	601a      	str	r2, [r3, #0]
+    }
+
+    return bNeg ? -ui32Val : ui32Val;
+     cac:	7dfb      	ldrb	r3, [r7, #23]
+     cae:	2b00      	cmp	r3, #0
+     cb0:	d002      	beq.n	cb8 <decstr_to_int+0x7e>
+     cb2:	693b      	ldr	r3, [r7, #16]
+     cb4:	425b      	negs	r3, r3
+     cb6:	e000      	b.n	cba <decstr_to_int+0x80>
+     cb8:	693b      	ldr	r3, [r7, #16]
+}
+     cba:	4618      	mov	r0, r3
+     cbc:	371c      	adds	r7, #28
+     cbe:	46bd      	mov	sp, r7
+     cc0:	f85d 7b04 	ldr.w	r7, [sp], #4
+     cc4:	4770      	bx	lr
+
+00000cc6 <uint64_to_str>:
+// written).
+//
+//*****************************************************************************
+static int
+uint64_to_str(uint64_t ui64Val, char *pcBuf)
+{
+     cc6:	b590      	push	{r4, r7, lr}
+     cc8:	b091      	sub	sp, #68	; 0x44
+     cca:	af00      	add	r7, sp, #0
+     ccc:	e9c7 0102 	strd	r0, r1, [r7, #8]
+     cd0:	607a      	str	r2, [r7, #4]
+    char tbuf[25];
+    int ix = 0, iNumDig = 0;
+     cd2:	2300      	movs	r3, #0
+     cd4:	63fb      	str	r3, [r7, #60]	; 0x3c
+     cd6:	2300      	movs	r3, #0
+     cd8:	63bb      	str	r3, [r7, #56]	; 0x38
+    do
+    {
+        //
+        // Divide by 10
+        //
+        u64Tmp = divu64_10(ui64Val);
+     cda:	e9d7 0102 	ldrd	r0, r1, [r7, #8]
+     cde:	f7ff fe6b 	bl	9b8 <divu64_10>
+     ce2:	e9c7 010c 	strd	r0, r1, [r7, #48]	; 0x30
+
+        //
+        // Get modulus
+        //
+        uMod = ui64Val - (u64Tmp * 10);
+     ce6:	68b9      	ldr	r1, [r7, #8]
+     ce8:	6b3a      	ldr	r2, [r7, #48]	; 0x30
+     cea:	4613      	mov	r3, r2
+     cec:	009b      	lsls	r3, r3, #2
+     cee:	4413      	add	r3, r2
+     cf0:	005b      	lsls	r3, r3, #1
+     cf2:	1acb      	subs	r3, r1, r3
+     cf4:	62fb      	str	r3, [r7, #44]	; 0x2c
+
+        tbuf[ix++] = uMod + '0';
+     cf6:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+     cf8:	1c5a      	adds	r2, r3, #1
+     cfa:	63fa      	str	r2, [r7, #60]	; 0x3c
+     cfc:	6afa      	ldr	r2, [r7, #44]	; 0x2c
+     cfe:	b2d2      	uxtb	r2, r2
+     d00:	3230      	adds	r2, #48	; 0x30
+     d02:	b2d2      	uxtb	r2, r2
+     d04:	f107 0140 	add.w	r1, r7, #64	; 0x40
+     d08:	440b      	add	r3, r1
+     d0a:	f803 2c30 	strb.w	r2, [r3, #-48]
+        ui64Val = u64Tmp;
+     d0e:	e9d7 340c 	ldrd	r3, r4, [r7, #48]	; 0x30
+     d12:	e9c7 3402 	strd	r3, r4, [r7, #8]
+    } while ( ui64Val );
+     d16:	e9d7 3402 	ldrd	r3, r4, [r7, #8]
+     d1a:	4323      	orrs	r3, r4
+     d1c:	d1dd      	bne.n	cda <uint64_to_str+0x14>
+
+    //
+    // Save the total number of digits
+    //
+    iNumDig = ix;
+     d1e:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+     d20:	63bb      	str	r3, [r7, #56]	; 0x38
+
+    //
+    // Now, reverse the buffer when saving to the caller's buffer.
+    //
+    if ( pcBuf )
+     d22:	687b      	ldr	r3, [r7, #4]
+     d24:	2b00      	cmp	r3, #0
+     d26:	d011      	beq.n	d4c <uint64_to_str+0x86>
+    {
+        while ( ix-- )
+     d28:	e008      	b.n	d3c <uint64_to_str+0x76>
+        {
+            *pcBuf++ = tbuf[ix];
+     d2a:	687b      	ldr	r3, [r7, #4]
+     d2c:	1c5a      	adds	r2, r3, #1
+     d2e:	607a      	str	r2, [r7, #4]
+     d30:	f107 0110 	add.w	r1, r7, #16
+     d34:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+     d36:	440a      	add	r2, r1
+     d38:	7812      	ldrb	r2, [r2, #0]
+     d3a:	701a      	strb	r2, [r3, #0]
+        while ( ix-- )
+     d3c:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+     d3e:	1e5a      	subs	r2, r3, #1
+     d40:	63fa      	str	r2, [r7, #60]	; 0x3c
+     d42:	2b00      	cmp	r3, #0
+     d44:	d1f1      	bne.n	d2a <uint64_to_str+0x64>
+        }
+
+        //
+        // Terminate the caller's buffer
+        //
+        *pcBuf = 0x00;
+     d46:	687b      	ldr	r3, [r7, #4]
+     d48:	2200      	movs	r2, #0
+     d4a:	701a      	strb	r2, [r3, #0]
+    }
+
+    return iNumDig;
+     d4c:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+}
+     d4e:	4618      	mov	r0, r3
+     d50:	3744      	adds	r7, #68	; 0x44
+     d52:	46bd      	mov	sp, r7
+     d54:	bd90      	pop	{r4, r7, pc}
+
+00000d56 <uint64_to_hexstr>:
+// written).
+//
+//*****************************************************************************
+static int
+uint64_to_hexstr(uint64_t ui64Val, char *pcBuf, bool bLower)
+{
+     d56:	b4b0      	push	{r4, r5, r7}
+     d58:	b08d      	sub	sp, #52	; 0x34
+     d5a:	af00      	add	r7, sp, #0
+     d5c:	e9c7 0102 	strd	r0, r1, [r7, #8]
+     d60:	607a      	str	r2, [r7, #4]
+     d62:	70fb      	strb	r3, [r7, #3]
+    int iNumDig, ix = 0;
+     d64:	2300      	movs	r3, #0
+     d66:	62fb      	str	r3, [r7, #44]	; 0x2c
+    char cCh, tbuf[20];
+
+    if ( ui64Val == 0 )
+     d68:	e9d7 2302 	ldrd	r2, r3, [r7, #8]
+     d6c:	4313      	orrs	r3, r2
+     d6e:	d131      	bne.n	dd4 <uint64_to_hexstr+0x7e>
+    {
+        tbuf[ix++] = '0';   // Print a '0'
+     d70:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+     d72:	1c5a      	adds	r2, r3, #1
+     d74:	62fa      	str	r2, [r7, #44]	; 0x2c
+     d76:	f107 0230 	add.w	r2, r7, #48	; 0x30
+     d7a:	4413      	add	r3, r2
+     d7c:	2230      	movs	r2, #48	; 0x30
+     d7e:	f803 2c20 	strb.w	r2, [r3, #-32]
+    }
+
+    while ( ui64Val )
+     d82:	e027      	b.n	dd4 <uint64_to_hexstr+0x7e>
+    {
+        cCh = ui64Val & 0xf;
+     d84:	7a3b      	ldrb	r3, [r7, #8]
+     d86:	f003 030f 	and.w	r3, r3, #15
+     d8a:	f887 302b 	strb.w	r3, [r7, #43]	; 0x2b
+
+        //
+        // Alpha character
+        //
+        if ( cCh > 9 )
+     d8e:	f897 302b 	ldrb.w	r3, [r7, #43]	; 0x2b
+     d92:	2b09      	cmp	r3, #9
+     d94:	d90a      	bls.n	dac <uint64_to_hexstr+0x56>
+        {
+            cCh += bLower ? 0x27 : 0x7;
+     d96:	78fb      	ldrb	r3, [r7, #3]
+     d98:	2b00      	cmp	r3, #0
+     d9a:	d001      	beq.n	da0 <uint64_to_hexstr+0x4a>
+     d9c:	2227      	movs	r2, #39	; 0x27
+     d9e:	e000      	b.n	da2 <uint64_to_hexstr+0x4c>
+     da0:	2207      	movs	r2, #7
+     da2:	f897 302b 	ldrb.w	r3, [r7, #43]	; 0x2b
+     da6:	4413      	add	r3, r2
+     da8:	f887 302b 	strb.w	r3, [r7, #43]	; 0x2b
+        }
+
+        tbuf[ix++] = cCh + '0';
+     dac:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+     dae:	1c5a      	adds	r2, r3, #1
+     db0:	62fa      	str	r2, [r7, #44]	; 0x2c
+     db2:	f897 202b 	ldrb.w	r2, [r7, #43]	; 0x2b
+     db6:	3230      	adds	r2, #48	; 0x30
+     db8:	b2d2      	uxtb	r2, r2
+     dba:	f107 0130 	add.w	r1, r7, #48	; 0x30
+     dbe:	440b      	add	r3, r1
+     dc0:	f803 2c20 	strb.w	r2, [r3, #-32]
+        ui64Val >>= 4;
+     dc4:	e9d7 2302 	ldrd	r2, r3, [r7, #8]
+     dc8:	0914      	lsrs	r4, r2, #4
+     dca:	ea44 7403 	orr.w	r4, r4, r3, lsl #28
+     dce:	091d      	lsrs	r5, r3, #4
+     dd0:	e9c7 4502 	strd	r4, r5, [r7, #8]
+    while ( ui64Val )
+     dd4:	e9d7 2302 	ldrd	r2, r3, [r7, #8]
+     dd8:	4313      	orrs	r3, r2
+     dda:	d1d3      	bne.n	d84 <uint64_to_hexstr+0x2e>
+    }
+
+    //
+    // Save the total number of digits
+    //
+    iNumDig = ix;
+     ddc:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+     dde:	627b      	str	r3, [r7, #36]	; 0x24
+
+    //
+    // Now, reverse the buffer when saving to the callers buffer.
+    //
+    if (pcBuf)
+     de0:	687b      	ldr	r3, [r7, #4]
+     de2:	2b00      	cmp	r3, #0
+     de4:	d011      	beq.n	e0a <uint64_to_hexstr+0xb4>
+    {
+        while (ix--)
+     de6:	e008      	b.n	dfa <uint64_to_hexstr+0xa4>
+        {
+            *pcBuf++ = tbuf[ix];
+     de8:	687b      	ldr	r3, [r7, #4]
+     dea:	1c5a      	adds	r2, r3, #1
+     dec:	607a      	str	r2, [r7, #4]
+     dee:	f107 0110 	add.w	r1, r7, #16
+     df2:	6afa      	ldr	r2, [r7, #44]	; 0x2c
+     df4:	440a      	add	r2, r1
+     df6:	7812      	ldrb	r2, [r2, #0]
+     df8:	701a      	strb	r2, [r3, #0]
+        while (ix--)
+     dfa:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+     dfc:	1e5a      	subs	r2, r3, #1
+     dfe:	62fa      	str	r2, [r7, #44]	; 0x2c
+     e00:	2b00      	cmp	r3, #0
+     e02:	d1f1      	bne.n	de8 <uint64_to_hexstr+0x92>
+        }
+
+        //
+        // Terminate the caller's buffer
+        //
+        *pcBuf = 0;
+     e04:	687b      	ldr	r3, [r7, #4]
+     e06:	2200      	movs	r2, #0
+     e08:	701a      	strb	r2, [r3, #0]
+    }
+
+    return iNumDig;
+     e0a:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+}
+     e0c:	4618      	mov	r0, r3
+     e0e:	3734      	adds	r7, #52	; 0x34
+     e10:	46bd      	mov	sp, r7
+     e12:	bcb0      	pop	{r4, r5, r7}
+     e14:	4770      	bx	lr
+
+00000e16 <simple_strlen>:
+// Return length of the given string.
+//
+//*****************************************************************************
+static uint32_t
+simple_strlen(char *pcBuf)
+{
+     e16:	b480      	push	{r7}
+     e18:	b085      	sub	sp, #20
+     e1a:	af00      	add	r7, sp, #0
+     e1c:	6078      	str	r0, [r7, #4]
+    uint32_t ui32RetVal = 0;
+     e1e:	2300      	movs	r3, #0
+     e20:	60fb      	str	r3, [r7, #12]
+    if ( !pcBuf )
+     e22:	687b      	ldr	r3, [r7, #4]
+     e24:	2b00      	cmp	r3, #0
+     e26:	d104      	bne.n	e32 <simple_strlen+0x1c>
+    {
+        return ui32RetVal;
+     e28:	68fb      	ldr	r3, [r7, #12]
+     e2a:	e009      	b.n	e40 <simple_strlen+0x2a>
+    }
+
+    while ( *pcBuf++ )
+    {
+        ui32RetVal++;
+     e2c:	68fb      	ldr	r3, [r7, #12]
+     e2e:	3301      	adds	r3, #1
+     e30:	60fb      	str	r3, [r7, #12]
+    while ( *pcBuf++ )
+     e32:	687b      	ldr	r3, [r7, #4]
+     e34:	1c5a      	adds	r2, r3, #1
+     e36:	607a      	str	r2, [r7, #4]
+     e38:	781b      	ldrb	r3, [r3, #0]
+     e3a:	2b00      	cmp	r3, #0
+     e3c:	d1f6      	bne.n	e2c <simple_strlen+0x16>
+    }
+    return ui32RetVal;
+     e3e:	68fb      	ldr	r3, [r7, #12]
+}
+     e40:	4618      	mov	r0, r3
+     e42:	3714      	adds	r7, #20
+     e44:	46bd      	mov	sp, r7
+     e46:	f85d 7b04 	ldr.w	r7, [sp], #4
+     e4a:	4770      	bx	lr
+
+00000e4c <padbuffer>:
+// Pad a string buffer with pad characters.
+//
+//*****************************************************************************
+static int32_t
+padbuffer(char *pcBuf, uint8_t cPadChar, int32_t i32NumChars)
+{
+     e4c:	b480      	push	{r7}
+     e4e:	b087      	sub	sp, #28
+     e50:	af00      	add	r7, sp, #0
+     e52:	60f8      	str	r0, [r7, #12]
+     e54:	460b      	mov	r3, r1
+     e56:	607a      	str	r2, [r7, #4]
+     e58:	72fb      	strb	r3, [r7, #11]
+    int32_t i32Cnt = 0;
+     e5a:	2300      	movs	r3, #0
+     e5c:	617b      	str	r3, [r7, #20]
+
+    if ( i32NumChars <= 0 )
+     e5e:	687b      	ldr	r3, [r7, #4]
+     e60:	2b00      	cmp	r3, #0
+     e62:	dc0c      	bgt.n	e7e <padbuffer+0x32>
+    {
+        return i32Cnt;
+     e64:	697b      	ldr	r3, [r7, #20]
+     e66:	e010      	b.n	e8a <padbuffer+0x3e>
+    }
+
+    while ( i32NumChars-- )
+    {
+        if ( pcBuf )
+     e68:	68fb      	ldr	r3, [r7, #12]
+     e6a:	2b00      	cmp	r3, #0
+     e6c:	d004      	beq.n	e78 <padbuffer+0x2c>
+        {
+            *pcBuf++ = cPadChar;
+     e6e:	68fb      	ldr	r3, [r7, #12]
+     e70:	1c5a      	adds	r2, r3, #1
+     e72:	60fa      	str	r2, [r7, #12]
+     e74:	7afa      	ldrb	r2, [r7, #11]
+     e76:	701a      	strb	r2, [r3, #0]
+        }
+        i32Cnt++;
+     e78:	697b      	ldr	r3, [r7, #20]
+     e7a:	3301      	adds	r3, #1
+     e7c:	617b      	str	r3, [r7, #20]
+    while ( i32NumChars-- )
+     e7e:	687b      	ldr	r3, [r7, #4]
+     e80:	1e5a      	subs	r2, r3, #1
+     e82:	607a      	str	r2, [r7, #4]
+     e84:	2b00      	cmp	r3, #0
+     e86:	d1ef      	bne.n	e68 <padbuffer+0x1c>
+    }
+
+    return i32Cnt;
+     e88:	697b      	ldr	r3, [r7, #20]
+}
+     e8a:	4618      	mov	r0, r3
+     e8c:	371c      	adds	r7, #28
+     e8e:	46bd      	mov	sp, r7
+     e90:	f85d 7b04 	ldr.w	r7, [sp], #4
+     e94:	4770      	bx	lr
+	...
+
+00000e98 <ftoa>:
+    int32_t I32;
+    float F;
+} i32fl_t;
+
+static int ftoa(float fValue, char *pcBuf, int iPrecision)
+{
+     e98:	b590      	push	{r4, r7, lr}
+     e9a:	b08f      	sub	sp, #60	; 0x3c
+     e9c:	af00      	add	r7, sp, #0
+     e9e:	60f8      	str	r0, [r7, #12]
+     ea0:	60b9      	str	r1, [r7, #8]
+     ea2:	607a      	str	r2, [r7, #4]
+    i32fl_t unFloatValue;
+    int iExp2, iBufSize;
+    int32_t i32Significand, i32IntPart, i32FracPart;
+    char *pcBufInitial, *pcBuftmp;
+
+    iBufSize = *(uint32_t*)pcBuf;
+     ea4:	68bb      	ldr	r3, [r7, #8]
+     ea6:	681b      	ldr	r3, [r3, #0]
+     ea8:	627b      	str	r3, [r7, #36]	; 0x24
+    if (iBufSize < 4)
+     eaa:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+     eac:	2b03      	cmp	r3, #3
+     eae:	dc02      	bgt.n	eb6 <ftoa+0x1e>
+    {
+        return AM_FTOA_ERR_BUFSIZE;
+     eb0:	f06f 0302 	mvn.w	r3, #2
+     eb4:	e0e7      	b.n	1086 <ftoa+0x1ee>
+    }
+
+    if (fValue == 0.0f)
+     eb6:	edd7 7a03 	vldr	s15, [r7, #12]
+     eba:	eef5 7a40 	vcmp.f32	s15, #0.0
+     ebe:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+     ec2:	d104      	bne.n	ece <ftoa+0x36>
+    {
+        // "0.0"
+        *(uint32_t*)pcBuf = 0x00 << 24 | ('0' << 16) | ('.' << 8) | ('0' << 0);
+     ec4:	68bb      	ldr	r3, [r7, #8]
+     ec6:	4a72      	ldr	r2, [pc, #456]	; (1090 <ftoa+0x1f8>)
+     ec8:	601a      	str	r2, [r3, #0]
+        return 3;
+     eca:	2303      	movs	r3, #3
+     ecc:	e0db      	b.n	1086 <ftoa+0x1ee>
+    }
+
+    pcBufInitial = pcBuf;
+     ece:	68bb      	ldr	r3, [r7, #8]
+     ed0:	623b      	str	r3, [r7, #32]
+
+    unFloatValue.F = fValue;
+     ed2:	68fb      	ldr	r3, [r7, #12]
+     ed4:	613b      	str	r3, [r7, #16]
+
+    iExp2 = ((unFloatValue.I32 >> 23) & 0x000000FF) - 127;
+     ed6:	693b      	ldr	r3, [r7, #16]
+     ed8:	15db      	asrs	r3, r3, #23
+     eda:	b2db      	uxtb	r3, r3
+     edc:	3b7f      	subs	r3, #127	; 0x7f
+     ede:	61fb      	str	r3, [r7, #28]
+    i32Significand = (unFloatValue.I32 & 0x00FFFFFF) | 0x00800000;
+     ee0:	693b      	ldr	r3, [r7, #16]
+     ee2:	f3c3 0316 	ubfx	r3, r3, #0, #23
+     ee6:	f443 0300 	orr.w	r3, r3, #8388608	; 0x800000
+     eea:	61bb      	str	r3, [r7, #24]
+    i32FracPart = 0;
+     eec:	2300      	movs	r3, #0
+     eee:	633b      	str	r3, [r7, #48]	; 0x30
+    i32IntPart = 0;
+     ef0:	2300      	movs	r3, #0
+     ef2:	637b      	str	r3, [r7, #52]	; 0x34
+
+    if (iExp2 >= 31)
+     ef4:	69fb      	ldr	r3, [r7, #28]
+     ef6:	2b1e      	cmp	r3, #30
+     ef8:	dd02      	ble.n	f00 <ftoa+0x68>
+    {
+        return AM_FTOA_ERR_VAL_TOO_LARGE;
+     efa:	f06f 0301 	mvn.w	r3, #1
+     efe:	e0c2      	b.n	1086 <ftoa+0x1ee>
+    }
+    else if (iExp2 < -23)
+     f00:	69fb      	ldr	r3, [r7, #28]
+     f02:	f113 0f17 	cmn.w	r3, #23
+     f06:	da02      	bge.n	f0e <ftoa+0x76>
+    {
+        return AM_FTOA_ERR_VAL_TOO_SMALL;
+     f08:	f04f 33ff 	mov.w	r3, #4294967295
+     f0c:	e0bb      	b.n	1086 <ftoa+0x1ee>
+    }
+    else if (iExp2 >= 23)
+     f0e:	69fb      	ldr	r3, [r7, #28]
+     f10:	2b16      	cmp	r3, #22
+     f12:	dd06      	ble.n	f22 <ftoa+0x8a>
+    {
+        i32IntPart = i32Significand << (iExp2 - 23);
+     f14:	69fb      	ldr	r3, [r7, #28]
+     f16:	3b17      	subs	r3, #23
+     f18:	69ba      	ldr	r2, [r7, #24]
+     f1a:	fa02 f303 	lsl.w	r3, r2, r3
+     f1e:	637b      	str	r3, [r7, #52]	; 0x34
+     f20:	e01a      	b.n	f58 <ftoa+0xc0>
+    }
+    else if (iExp2 >= 0)
+     f22:	69fb      	ldr	r3, [r7, #28]
+     f24:	2b00      	cmp	r3, #0
+     f26:	db0f      	blt.n	f48 <ftoa+0xb0>
+    {
+        i32IntPart = i32Significand >> (23 - iExp2);
+     f28:	69fb      	ldr	r3, [r7, #28]
+     f2a:	f1c3 0317 	rsb	r3, r3, #23
+     f2e:	69ba      	ldr	r2, [r7, #24]
+     f30:	fa42 f303 	asr.w	r3, r2, r3
+     f34:	637b      	str	r3, [r7, #52]	; 0x34
+        i32FracPart = (i32Significand << (iExp2 + 1)) & 0x00FFFFFF;
+     f36:	69fb      	ldr	r3, [r7, #28]
+     f38:	3301      	adds	r3, #1
+     f3a:	69ba      	ldr	r2, [r7, #24]
+     f3c:	fa02 f303 	lsl.w	r3, r2, r3
+     f40:	f023 437f 	bic.w	r3, r3, #4278190080	; 0xff000000
+     f44:	633b      	str	r3, [r7, #48]	; 0x30
+     f46:	e007      	b.n	f58 <ftoa+0xc0>
+    }
+    else // if (iExp2 < 0)
+    {
+        i32FracPart = (i32Significand & 0x00FFFFFF) >> -(iExp2 + 1);
+     f48:	69bb      	ldr	r3, [r7, #24]
+     f4a:	f023 427f 	bic.w	r2, r3, #4278190080	; 0xff000000
+     f4e:	69fb      	ldr	r3, [r7, #28]
+     f50:	43db      	mvns	r3, r3
+     f52:	fa42 f303 	asr.w	r3, r2, r3
+     f56:	633b      	str	r3, [r7, #48]	; 0x30
+    }
+
+    if (unFloatValue.I32 < 0)
+     f58:	693b      	ldr	r3, [r7, #16]
+     f5a:	2b00      	cmp	r3, #0
+     f5c:	da04      	bge.n	f68 <ftoa+0xd0>
+    {
+        *pcBuf++ = '-';
+     f5e:	68bb      	ldr	r3, [r7, #8]
+     f60:	1c5a      	adds	r2, r3, #1
+     f62:	60ba      	str	r2, [r7, #8]
+     f64:	222d      	movs	r2, #45	; 0x2d
+     f66:	701a      	strb	r2, [r3, #0]
+    }
+
+    if (i32IntPart == 0)
+     f68:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+     f6a:	2b00      	cmp	r3, #0
+     f6c:	d105      	bne.n	f7a <ftoa+0xe2>
+    {
+        *pcBuf++ = '0';
+     f6e:	68bb      	ldr	r3, [r7, #8]
+     f70:	1c5a      	adds	r2, r3, #1
+     f72:	60ba      	str	r2, [r7, #8]
+     f74:	2230      	movs	r2, #48	; 0x30
+     f76:	701a      	strb	r2, [r3, #0]
+     f78:	e021      	b.n	fbe <ftoa+0x126>
+    }
+    else
+    {
+        if (i32IntPart > 0)
+     f7a:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+     f7c:	2b00      	cmp	r3, #0
+     f7e:	dd08      	ble.n	f92 <ftoa+0xfa>
+        {
+            uint64_to_str(i32IntPart, pcBuf);
+     f80:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+     f82:	ea4f 74e3 	mov.w	r4, r3, asr #31
+     f86:	68ba      	ldr	r2, [r7, #8]
+     f88:	4618      	mov	r0, r3
+     f8a:	4621      	mov	r1, r4
+     f8c:	f7ff fe9b 	bl	cc6 <uint64_to_str>
+     f90:	e011      	b.n	fb6 <ftoa+0x11e>
+        }
+        else
+        {
+            *pcBuf++ = '-';
+     f92:	68bb      	ldr	r3, [r7, #8]
+     f94:	1c5a      	adds	r2, r3, #1
+     f96:	60ba      	str	r2, [r7, #8]
+     f98:	222d      	movs	r2, #45	; 0x2d
+     f9a:	701a      	strb	r2, [r3, #0]
+            uint64_to_str(-i32IntPart, pcBuf);
+     f9c:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+     f9e:	425b      	negs	r3, r3
+     fa0:	ea4f 74e3 	mov.w	r4, r3, asr #31
+     fa4:	68ba      	ldr	r2, [r7, #8]
+     fa6:	4618      	mov	r0, r3
+     fa8:	4621      	mov	r1, r4
+     faa:	f7ff fe8c 	bl	cc6 <uint64_to_str>
+        }
+        while (*pcBuf)    // Get to end of new string
+     fae:	e002      	b.n	fb6 <ftoa+0x11e>
+        {
+            pcBuf++;
+     fb0:	68bb      	ldr	r3, [r7, #8]
+     fb2:	3301      	adds	r3, #1
+     fb4:	60bb      	str	r3, [r7, #8]
+        while (*pcBuf)    // Get to end of new string
+     fb6:	68bb      	ldr	r3, [r7, #8]
+     fb8:	781b      	ldrb	r3, [r3, #0]
+     fba:	2b00      	cmp	r3, #0
+     fbc:	d1f8      	bne.n	fb0 <ftoa+0x118>
+    }
+
+    //
+    // Now, begin the fractional part
+    //
+    *pcBuf++ = '.';
+     fbe:	68bb      	ldr	r3, [r7, #8]
+     fc0:	1c5a      	adds	r2, r3, #1
+     fc2:	60ba      	str	r2, [r7, #8]
+     fc4:	222e      	movs	r2, #46	; 0x2e
+     fc6:	701a      	strb	r2, [r3, #0]
+
+    if (i32FracPart == 0)
+     fc8:	6b3b      	ldr	r3, [r7, #48]	; 0x30
+     fca:	2b00      	cmp	r3, #0
+     fcc:	d105      	bne.n	fda <ftoa+0x142>
+    {
+        *pcBuf++ = '0';
+     fce:	68bb      	ldr	r3, [r7, #8]
+     fd0:	1c5a      	adds	r2, r3, #1
+     fd2:	60ba      	str	r2, [r7, #8]
+     fd4:	2230      	movs	r2, #48	; 0x30
+     fd6:	701a      	strb	r2, [r3, #0]
+     fd8:	e04f      	b.n	107a <ftoa+0x1e2>
+    }
+    else
+    {
+        int jx, iMax;
+
+        iMax = iBufSize - (pcBuf - pcBufInitial) - 1;
+     fda:	68ba      	ldr	r2, [r7, #8]
+     fdc:	6a3b      	ldr	r3, [r7, #32]
+     fde:	1ad3      	subs	r3, r2, r3
+     fe0:	6a7a      	ldr	r2, [r7, #36]	; 0x24
+     fe2:	1ad3      	subs	r3, r2, r3
+     fe4:	3b01      	subs	r3, #1
+     fe6:	617b      	str	r3, [r7, #20]
+        iMax = (iMax > iPrecision) ? iPrecision : iMax;
+     fe8:	697a      	ldr	r2, [r7, #20]
+     fea:	687b      	ldr	r3, [r7, #4]
+     fec:	4293      	cmp	r3, r2
+     fee:	bfa8      	it	ge
+     ff0:	4613      	movge	r3, r2
+     ff2:	617b      	str	r3, [r7, #20]
+
+        for (jx = 0; jx < iMax; jx++)
+     ff4:	2300      	movs	r3, #0
+     ff6:	62bb      	str	r3, [r7, #40]	; 0x28
+     ff8:	e015      	b.n	1026 <ftoa+0x18e>
+        {
+            i32FracPart *= 10;
+     ffa:	6b3a      	ldr	r2, [r7, #48]	; 0x30
+     ffc:	4613      	mov	r3, r2
+     ffe:	009b      	lsls	r3, r3, #2
+    1000:	4413      	add	r3, r2
+    1002:	005b      	lsls	r3, r3, #1
+    1004:	633b      	str	r3, [r7, #48]	; 0x30
+            *pcBuf++ = (i32FracPart >> 24) + '0';
+    1006:	68bb      	ldr	r3, [r7, #8]
+    1008:	1c5a      	adds	r2, r3, #1
+    100a:	60ba      	str	r2, [r7, #8]
+    100c:	6b3a      	ldr	r2, [r7, #48]	; 0x30
+    100e:	1612      	asrs	r2, r2, #24
+    1010:	b2d2      	uxtb	r2, r2
+    1012:	3230      	adds	r2, #48	; 0x30
+    1014:	b2d2      	uxtb	r2, r2
+    1016:	701a      	strb	r2, [r3, #0]
+            i32FracPart &= 0x00FFFFFF;
+    1018:	6b3b      	ldr	r3, [r7, #48]	; 0x30
+    101a:	f023 437f 	bic.w	r3, r3, #4278190080	; 0xff000000
+    101e:	633b      	str	r3, [r7, #48]	; 0x30
+        for (jx = 0; jx < iMax; jx++)
+    1020:	6abb      	ldr	r3, [r7, #40]	; 0x28
+    1022:	3301      	adds	r3, #1
+    1024:	62bb      	str	r3, [r7, #40]	; 0x28
+    1026:	6aba      	ldr	r2, [r7, #40]	; 0x28
+    1028:	697b      	ldr	r3, [r7, #20]
+    102a:	429a      	cmp	r2, r3
+    102c:	dbe5      	blt.n	ffa <ftoa+0x162>
+        // 1.996        4                   1.9960
+        //
+        // To determine whether to round up, we'll look at what the next
+        // decimal value would have been.
+        //
+        if ( ((i32FracPart * 10) >> 24) >= 5 )
+    102e:	6b3a      	ldr	r2, [r7, #48]	; 0x30
+    1030:	4613      	mov	r3, r2
+    1032:	009b      	lsls	r3, r3, #2
+    1034:	4413      	add	r3, r2
+    1036:	005b      	lsls	r3, r3, #1
+    1038:	161b      	asrs	r3, r3, #24
+    103a:	2b04      	cmp	r3, #4
+    103c:	dd1d      	ble.n	107a <ftoa+0x1e2>
+        {
+            //
+            // Yes, we need to round up.
+            // Go back through the string and make adjustments as necessary.
+            //
+            pcBuftmp = pcBuf - 1;
+    103e:	68bb      	ldr	r3, [r7, #8]
+    1040:	3b01      	subs	r3, #1
+    1042:	62fb      	str	r3, [r7, #44]	; 0x2c
+            while ( pcBuftmp >= pcBufInitial )
+    1044:	e015      	b.n	1072 <ftoa+0x1da>
+            {
+                if ( *pcBuftmp == '.' )
+    1046:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+    1048:	781b      	ldrb	r3, [r3, #0]
+    104a:	2b2e      	cmp	r3, #46	; 0x2e
+    104c:	d00e      	beq.n	106c <ftoa+0x1d4>
+                {
+                }
+                else if ( *pcBuftmp == '9' )
+    104e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+    1050:	781b      	ldrb	r3, [r3, #0]
+    1052:	2b39      	cmp	r3, #57	; 0x39
+    1054:	d103      	bne.n	105e <ftoa+0x1c6>
+                {
+                    *pcBuftmp = '0';
+    1056:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+    1058:	2230      	movs	r2, #48	; 0x30
+    105a:	701a      	strb	r2, [r3, #0]
+    105c:	e006      	b.n	106c <ftoa+0x1d4>
+                }
+                else
+                {
+                    *pcBuftmp += 1;
+    105e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+    1060:	781b      	ldrb	r3, [r3, #0]
+    1062:	3301      	adds	r3, #1
+    1064:	b2da      	uxtb	r2, r3
+    1066:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+    1068:	701a      	strb	r2, [r3, #0]
+                    break;
+    106a:	e006      	b.n	107a <ftoa+0x1e2>
+                }
+                pcBuftmp--;
+    106c:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+    106e:	3b01      	subs	r3, #1
+    1070:	62fb      	str	r3, [r7, #44]	; 0x2c
+            while ( pcBuftmp >= pcBufInitial )
+    1072:	6afa      	ldr	r2, [r7, #44]	; 0x2c
+    1074:	6a3b      	ldr	r3, [r7, #32]
+    1076:	429a      	cmp	r2, r3
+    1078:	d2e5      	bcs.n	1046 <ftoa+0x1ae>
+    }
+
+    //
+    // Terminate the string and we're done
+    //
+    *pcBuf = 0x00;
+    107a:	68bb      	ldr	r3, [r7, #8]
+    107c:	2200      	movs	r2, #0
+    107e:	701a      	strb	r2, [r3, #0]
+
+    return (pcBuf - pcBufInitial);
+    1080:	68ba      	ldr	r2, [r7, #8]
+    1082:	6a3b      	ldr	r3, [r7, #32]
+    1084:	1ad3      	subs	r3, r2, r3
+} // ftoa()
+    1086:	4618      	mov	r0, r3
+    1088:	373c      	adds	r7, #60	; 0x3c
+    108a:	46bd      	mov	sp, r7
+    108c:	bd90      	pop	{r4, r7, pc}
+    108e:	bf00      	nop
+    1090:	00302e30 	.word	0x00302e30
+
+00001094 <am_util_stdio_vsprintf>:
+//! @return uint32_t representing the number of characters printed.
+//
+//******************************************************************************
+uint32_t
+am_util_stdio_vsprintf(char *pcBuf, const char *pcFmt, va_list pArgs)
+{
+    1094:	b590      	push	{r4, r7, lr}
+    1096:	b095      	sub	sp, #84	; 0x54
+    1098:	af00      	add	r7, sp, #0
+    109a:	60f8      	str	r0, [r7, #12]
+    109c:	60b9      	str	r1, [r7, #8]
+    109e:	607a      	str	r2, [r7, #4]
+    char *pcStr;
+    uint64_t ui64Val;
+    int64_t i64Val;
+    uint32_t ui32NumChars, ui32CharCnt = 0;
+    10a0:	2300      	movs	r3, #0
+    10a2:	63fb      	str	r3, [r7, #60]	; 0x3c
+    int iWidth, iVal, iPrecision;
+    uint8_t ui8CharSpecifier, ui8PadChar;
+    bool bLower, bLongLong, bNeg;
+    uint32_t ui32strlen = 0;
+    10a4:	2300      	movs	r3, #0
+    10a6:	627b      	str	r3, [r7, #36]	; 0x24
+
+    while ( *pcFmt != 0x0 )
+    10a8:	e2e3      	b.n	1672 <am_util_stdio_vsprintf+0x5de>
+    {
+        iPrecision = 6;             // printf() default precision for %f is 6
+    10aa:	2306      	movs	r3, #6
+    10ac:	633b      	str	r3, [r7, #48]	; 0x30
+
+        if ( *pcFmt != '%' )
+    10ae:	68bb      	ldr	r3, [r7, #8]
+    10b0:	781b      	ldrb	r3, [r3, #0]
+    10b2:	2b25      	cmp	r3, #37	; 0x25
+    10b4:	d01f      	beq.n	10f6 <am_util_stdio_vsprintf+0x62>
+        {
+            //
+            // Accumulate the string portion of the format specification.
+            //
+            if ( pcBuf )
+    10b6:	68fb      	ldr	r3, [r7, #12]
+    10b8:	2b00      	cmp	r3, #0
+    10ba:	d015      	beq.n	10e8 <am_util_stdio_vsprintf+0x54>
+            {
+                // If '\n', convert to '\r\n'
+                if ( *pcFmt == '\n'  &&  g_bTxtXlate )
+    10bc:	68bb      	ldr	r3, [r7, #8]
+    10be:	781b      	ldrb	r3, [r3, #0]
+    10c0:	2b0a      	cmp	r3, #10
+    10c2:	d10b      	bne.n	10dc <am_util_stdio_vsprintf+0x48>
+    10c4:	4bb1      	ldr	r3, [pc, #708]	; (138c <am_util_stdio_vsprintf+0x2f8>)
+    10c6:	781b      	ldrb	r3, [r3, #0]
+    10c8:	2b00      	cmp	r3, #0
+    10ca:	d007      	beq.n	10dc <am_util_stdio_vsprintf+0x48>
+                {
+                    *pcBuf++ = '\r';
+    10cc:	68fb      	ldr	r3, [r7, #12]
+    10ce:	1c5a      	adds	r2, r3, #1
+    10d0:	60fa      	str	r2, [r7, #12]
+    10d2:	220d      	movs	r2, #13
+    10d4:	701a      	strb	r2, [r3, #0]
+                    ++ui32CharCnt;
+    10d6:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    10d8:	3301      	adds	r3, #1
+    10da:	63fb      	str	r3, [r7, #60]	; 0x3c
+                }
+                *pcBuf++ = *pcFmt;
+    10dc:	68fb      	ldr	r3, [r7, #12]
+    10de:	1c5a      	adds	r2, r3, #1
+    10e0:	60fa      	str	r2, [r7, #12]
+    10e2:	68ba      	ldr	r2, [r7, #8]
+    10e4:	7812      	ldrb	r2, [r2, #0]
+    10e6:	701a      	strb	r2, [r3, #0]
+            }
+
+            ++pcFmt;
+    10e8:	68bb      	ldr	r3, [r7, #8]
+    10ea:	3301      	adds	r3, #1
+    10ec:	60bb      	str	r3, [r7, #8]
+            ++ui32CharCnt;
+    10ee:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    10f0:	3301      	adds	r3, #1
+    10f2:	63fb      	str	r3, [r7, #60]	; 0x3c
+            continue;
+    10f4:	e2bd      	b.n	1672 <am_util_stdio_vsprintf+0x5de>
+        }
+
+        //
+        // Handle the specifier.
+        //
+        ++pcFmt;
+    10f6:	68bb      	ldr	r3, [r7, #8]
+    10f8:	3301      	adds	r3, #1
+    10fa:	60bb      	str	r3, [r7, #8]
+        bLower = bLongLong = false;
+    10fc:	2300      	movs	r3, #0
+    10fe:	f887 302d 	strb.w	r3, [r7, #45]	; 0x2d
+    1102:	f897 302d 	ldrb.w	r3, [r7, #45]	; 0x2d
+    1106:	f887 302e 	strb.w	r3, [r7, #46]	; 0x2e
+
+        //
+        // Default to space as ui8PadChar
+        //
+        ui8PadChar = ' ';
+    110a:	2320      	movs	r3, #32
+    110c:	f887 302f 	strb.w	r3, [r7, #47]	; 0x2f
+
+        if ( *pcFmt == '0' )
+    1110:	68bb      	ldr	r3, [r7, #8]
+    1112:	781b      	ldrb	r3, [r3, #0]
+    1114:	2b30      	cmp	r3, #48	; 0x30
+    1116:	d105      	bne.n	1124 <am_util_stdio_vsprintf+0x90>
+        {
+            ui8PadChar = '0';
+    1118:	2330      	movs	r3, #48	; 0x30
+    111a:	f887 302f 	strb.w	r3, [r7, #47]	; 0x2f
+            ++pcFmt;
+    111e:	68bb      	ldr	r3, [r7, #8]
+    1120:	3301      	adds	r3, #1
+    1122:	60bb      	str	r3, [r7, #8]
+        }
+
+        //
+        // Width specifier
+        //
+        iWidth = decstr_to_int(pcFmt, &ui32NumChars);
+    1124:	f107 0310 	add.w	r3, r7, #16
+    1128:	4619      	mov	r1, r3
+    112a:	68b8      	ldr	r0, [r7, #8]
+    112c:	f7ff fd85 	bl	c3a <decstr_to_int>
+    1130:	4603      	mov	r3, r0
+    1132:	63bb      	str	r3, [r7, #56]	; 0x38
+        pcFmt += ui32NumChars;
+    1134:	693b      	ldr	r3, [r7, #16]
+    1136:	68ba      	ldr	r2, [r7, #8]
+    1138:	4413      	add	r3, r2
+    113a:	60bb      	str	r3, [r7, #8]
+
+        //
+        // For now, only support a negative width specifier for %s
+        //
+        if ( ( *pcFmt != 's' )  &&  ( iWidth < 0 ) )
+    113c:	68bb      	ldr	r3, [r7, #8]
+    113e:	781b      	ldrb	r3, [r3, #0]
+    1140:	2b73      	cmp	r3, #115	; 0x73
+    1142:	d005      	beq.n	1150 <am_util_stdio_vsprintf+0xbc>
+    1144:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1146:	2b00      	cmp	r3, #0
+    1148:	da02      	bge.n	1150 <am_util_stdio_vsprintf+0xbc>
+        {
+            iWidth = -iWidth;
+    114a:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    114c:	425b      	negs	r3, r3
+    114e:	63bb      	str	r3, [r7, #56]	; 0x38
+        }
+
+        //
+        // Check for precision specifier
+        //
+        if (*pcFmt == '.')
+    1150:	68bb      	ldr	r3, [r7, #8]
+    1152:	781b      	ldrb	r3, [r3, #0]
+    1154:	2b2e      	cmp	r3, #46	; 0x2e
+    1156:	d10e      	bne.n	1176 <am_util_stdio_vsprintf+0xe2>
+        {
+            ++pcFmt;
+    1158:	68bb      	ldr	r3, [r7, #8]
+    115a:	3301      	adds	r3, #1
+    115c:	60bb      	str	r3, [r7, #8]
+            iPrecision = decstr_to_int(pcFmt, &ui32NumChars);
+    115e:	f107 0310 	add.w	r3, r7, #16
+    1162:	4619      	mov	r1, r3
+    1164:	68b8      	ldr	r0, [r7, #8]
+    1166:	f7ff fd68 	bl	c3a <decstr_to_int>
+    116a:	4603      	mov	r3, r0
+    116c:	633b      	str	r3, [r7, #48]	; 0x30
+            pcFmt += ui32NumChars;
+    116e:	693b      	ldr	r3, [r7, #16]
+    1170:	68ba      	ldr	r2, [r7, #8]
+    1172:	4413      	add	r3, r2
+    1174:	60bb      	str	r3, [r7, #8]
+        // 'll', which must be a modifier for either 'd', 'i', 'u', 'x', or 'X'
+        // (or even 'o', which is not currently supported). Other sub-specifiers
+        // like 'hh','h', etc. are not currently handled.
+        // Note - 'l' is used in Coremark, a primary reason it's supported here.
+        //
+        if ( *pcFmt == 'l' )
+    1176:	68bb      	ldr	r3, [r7, #8]
+    1178:	781b      	ldrb	r3, [r3, #0]
+    117a:	2b6c      	cmp	r3, #108	; 0x6c
+    117c:	d10c      	bne.n	1198 <am_util_stdio_vsprintf+0x104>
+        {
+            pcFmt++;
+    117e:	68bb      	ldr	r3, [r7, #8]
+    1180:	3301      	adds	r3, #1
+    1182:	60bb      	str	r3, [r7, #8]
+            if ( *pcFmt == 'l' )    // "ll" (long long)
+    1184:	68bb      	ldr	r3, [r7, #8]
+    1186:	781b      	ldrb	r3, [r3, #0]
+    1188:	2b6c      	cmp	r3, #108	; 0x6c
+    118a:	d105      	bne.n	1198 <am_util_stdio_vsprintf+0x104>
+            {
+                pcFmt++;
+    118c:	68bb      	ldr	r3, [r7, #8]
+    118e:	3301      	adds	r3, #1
+    1190:	60bb      	str	r3, [r7, #8]
+                bLongLong = true;
+    1192:	2301      	movs	r3, #1
+    1194:	f887 302d 	strb.w	r3, [r7, #45]	; 0x2d
+            }
+        }
+
+        switch ( *pcFmt )
+    1198:	68bb      	ldr	r3, [r7, #8]
+    119a:	781b      	ldrb	r3, [r3, #0]
+    119c:	3b46      	subs	r3, #70	; 0x46
+    119e:	2b32      	cmp	r3, #50	; 0x32
+    11a0:	f200 8254 	bhi.w	164c <am_util_stdio_vsprintf+0x5b8>
+    11a4:	a201      	add	r2, pc, #4	; (adr r2, 11ac <am_util_stdio_vsprintf+0x118>)
+    11a6:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+    11aa:	bf00      	nop
+    11ac:	000015d7 	.word	0x000015d7
+    11b0:	0000164d 	.word	0x0000164d
+    11b4:	0000164d 	.word	0x0000164d
+    11b8:	0000164d 	.word	0x0000164d
+    11bc:	0000164d 	.word	0x0000164d
+    11c0:	0000164d 	.word	0x0000164d
+    11c4:	0000164d 	.word	0x0000164d
+    11c8:	0000164d 	.word	0x0000164d
+    11cc:	0000164d 	.word	0x0000164d
+    11d0:	0000164d 	.word	0x0000164d
+    11d4:	0000164d 	.word	0x0000164d
+    11d8:	0000164d 	.word	0x0000164d
+    11dc:	0000164d 	.word	0x0000164d
+    11e0:	0000164d 	.word	0x0000164d
+    11e4:	0000164d 	.word	0x0000164d
+    11e8:	0000164d 	.word	0x0000164d
+    11ec:	0000164d 	.word	0x0000164d
+    11f0:	0000164d 	.word	0x0000164d
+    11f4:	00001373 	.word	0x00001373
+    11f8:	0000164d 	.word	0x0000164d
+    11fc:	0000164d 	.word	0x0000164d
+    1200:	0000164d 	.word	0x0000164d
+    1204:	0000164d 	.word	0x0000164d
+    1208:	0000164d 	.word	0x0000164d
+    120c:	0000164d 	.word	0x0000164d
+    1210:	0000164d 	.word	0x0000164d
+    1214:	0000164d 	.word	0x0000164d
+    1218:	0000164d 	.word	0x0000164d
+    121c:	0000164d 	.word	0x0000164d
+    1220:	00001279 	.word	0x00001279
+    1224:	0000149f 	.word	0x0000149f
+    1228:	0000164d 	.word	0x0000164d
+    122c:	000015d7 	.word	0x000015d7
+    1230:	0000164d 	.word	0x0000164d
+    1234:	0000164d 	.word	0x0000164d
+    1238:	0000149f 	.word	0x0000149f
+    123c:	0000164d 	.word	0x0000164d
+    1240:	0000164d 	.word	0x0000164d
+    1244:	0000164d 	.word	0x0000164d
+    1248:	0000164d 	.word	0x0000164d
+    124c:	0000164d 	.word	0x0000164d
+    1250:	0000164d 	.word	0x0000164d
+    1254:	0000164d 	.word	0x0000164d
+    1258:	0000164d 	.word	0x0000164d
+    125c:	0000164d 	.word	0x0000164d
+    1260:	0000129f 	.word	0x0000129f
+    1264:	0000164d 	.word	0x0000164d
+    1268:	0000140d 	.word	0x0000140d
+    126c:	0000164d 	.word	0x0000164d
+    1270:	0000164d 	.word	0x0000164d
+    1274:	0000136d 	.word	0x0000136d
+        {
+            case 'c':
+                ui8CharSpecifier = va_arg(pArgs, uint32_t);
+    1278:	687b      	ldr	r3, [r7, #4]
+    127a:	1d1a      	adds	r2, r3, #4
+    127c:	607a      	str	r2, [r7, #4]
+    127e:	681b      	ldr	r3, [r3, #0]
+    1280:	f887 3023 	strb.w	r3, [r7, #35]	; 0x23
+
+                if ( pcBuf )
+    1284:	68fb      	ldr	r3, [r7, #12]
+    1286:	2b00      	cmp	r3, #0
+    1288:	d005      	beq.n	1296 <am_util_stdio_vsprintf+0x202>
+                {
+                    *pcBuf++ = ui8CharSpecifier;
+    128a:	68fb      	ldr	r3, [r7, #12]
+    128c:	1c5a      	adds	r2, r3, #1
+    128e:	60fa      	str	r2, [r7, #12]
+    1290:	f897 2023 	ldrb.w	r2, [r7, #35]	; 0x23
+    1294:	701a      	strb	r2, [r3, #0]
+                }
+
+                ++ui32CharCnt;
+    1296:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    1298:	3301      	adds	r3, #1
+    129a:	63fb      	str	r3, [r7, #60]	; 0x3c
+                break;
+    129c:	e1e6      	b.n	166c <am_util_stdio_vsprintf+0x5d8>
+
+            case 's':
+                pcStr = va_arg(pArgs, char *);
+    129e:	687b      	ldr	r3, [r7, #4]
+    12a0:	1d1a      	adds	r2, r3, #4
+    12a2:	607a      	str	r2, [r7, #4]
+    12a4:	681b      	ldr	r3, [r3, #0]
+    12a6:	64fb      	str	r3, [r7, #76]	; 0x4c
+                //
+                // For %s, we support the width specifier. If iWidth is negative
+                // the string is left-aligned (padding on the right).  Otherwise
+                // the string is padded at the beginning with spaces.
+                //
+                ui32strlen = simple_strlen(pcStr);
+    12a8:	6cf8      	ldr	r0, [r7, #76]	; 0x4c
+    12aa:	f7ff fdb4 	bl	e16 <simple_strlen>
+    12ae:	6278      	str	r0, [r7, #36]	; 0x24
+                if ( iWidth > 0 )
+    12b0:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    12b2:	2b00      	cmp	r3, #0
+    12b4:	dd2e      	ble.n	1314 <am_util_stdio_vsprintf+0x280>
+                {
+                    // Pad the beginning of the string (right-aligned).
+                    if ( ui32strlen < iWidth )
+    12b6:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    12b8:	6a7a      	ldr	r2, [r7, #36]	; 0x24
+    12ba:	429a      	cmp	r2, r3
+    12bc:	d22a      	bcs.n	1314 <am_util_stdio_vsprintf+0x280>
+                    {
+                        // String needs some padding.
+                        iWidth -= ui32strlen;
+    12be:	6bba      	ldr	r2, [r7, #56]	; 0x38
+    12c0:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+    12c2:	1ad3      	subs	r3, r2, r3
+    12c4:	63bb      	str	r3, [r7, #56]	; 0x38
+                        iWidth = padbuffer(pcBuf, ui8PadChar, iWidth);
+    12c6:	f897 302f 	ldrb.w	r3, [r7, #47]	; 0x2f
+    12ca:	6bba      	ldr	r2, [r7, #56]	; 0x38
+    12cc:	4619      	mov	r1, r3
+    12ce:	68f8      	ldr	r0, [r7, #12]
+    12d0:	f7ff fdbc 	bl	e4c <padbuffer>
+    12d4:	63b8      	str	r0, [r7, #56]	; 0x38
+                        pcBuf += pcBuf ? iWidth : 0;
+    12d6:	68fb      	ldr	r3, [r7, #12]
+    12d8:	2b00      	cmp	r3, #0
+    12da:	d001      	beq.n	12e0 <am_util_stdio_vsprintf+0x24c>
+    12dc:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    12de:	e000      	b.n	12e2 <am_util_stdio_vsprintf+0x24e>
+    12e0:	2300      	movs	r3, #0
+    12e2:	68fa      	ldr	r2, [r7, #12]
+    12e4:	4413      	add	r3, r2
+    12e6:	60fb      	str	r3, [r7, #12]
+                        ui32CharCnt += iWidth;
+    12e8:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    12ea:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    12ec:	4413      	add	r3, r2
+    12ee:	63fb      	str	r3, [r7, #60]	; 0x3c
+                        iWidth = 0;
+    12f0:	2300      	movs	r3, #0
+    12f2:	63bb      	str	r3, [r7, #56]	; 0x38
+                    }
+                }
+
+                while (*pcStr != 0x0)
+    12f4:	e00e      	b.n	1314 <am_util_stdio_vsprintf+0x280>
+                {
+                    if ( pcBuf )
+    12f6:	68fb      	ldr	r3, [r7, #12]
+    12f8:	2b00      	cmp	r3, #0
+    12fa:	d005      	beq.n	1308 <am_util_stdio_vsprintf+0x274>
+                    {
+                        *pcBuf++ = *pcStr;
+    12fc:	68fb      	ldr	r3, [r7, #12]
+    12fe:	1c5a      	adds	r2, r3, #1
+    1300:	60fa      	str	r2, [r7, #12]
+    1302:	6cfa      	ldr	r2, [r7, #76]	; 0x4c
+    1304:	7812      	ldrb	r2, [r2, #0]
+    1306:	701a      	strb	r2, [r3, #0]
+                    }
+
+                    ++pcStr;
+    1308:	6cfb      	ldr	r3, [r7, #76]	; 0x4c
+    130a:	3301      	adds	r3, #1
+    130c:	64fb      	str	r3, [r7, #76]	; 0x4c
+                    ++ui32CharCnt;
+    130e:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    1310:	3301      	adds	r3, #1
+    1312:	63fb      	str	r3, [r7, #60]	; 0x3c
+                while (*pcStr != 0x0)
+    1314:	6cfb      	ldr	r3, [r7, #76]	; 0x4c
+    1316:	781b      	ldrb	r3, [r3, #0]
+    1318:	2b00      	cmp	r3, #0
+    131a:	d1ec      	bne.n	12f6 <am_util_stdio_vsprintf+0x262>
+                }
+
+                if ( iWidth )
+    131c:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    131e:	2b00      	cmp	r3, #0
+    1320:	f000 81a1 	beq.w	1666 <am_util_stdio_vsprintf+0x5d2>
+                {
+                    iWidth = -iWidth;
+    1324:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1326:	425b      	negs	r3, r3
+    1328:	63bb      	str	r3, [r7, #56]	; 0x38
+
+                    // Pad the end of the string (left-aligned).
+                    if ( ui32strlen < iWidth )
+    132a:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    132c:	6a7a      	ldr	r2, [r7, #36]	; 0x24
+    132e:	429a      	cmp	r2, r3
+    1330:	f080 8199 	bcs.w	1666 <am_util_stdio_vsprintf+0x5d2>
+                    {
+                        // String needs some padding.
+                        iWidth -= ui32strlen;
+    1334:	6bba      	ldr	r2, [r7, #56]	; 0x38
+    1336:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+    1338:	1ad3      	subs	r3, r2, r3
+    133a:	63bb      	str	r3, [r7, #56]	; 0x38
+                        iWidth = padbuffer(pcBuf, ui8PadChar, iWidth);
+    133c:	f897 302f 	ldrb.w	r3, [r7, #47]	; 0x2f
+    1340:	6bba      	ldr	r2, [r7, #56]	; 0x38
+    1342:	4619      	mov	r1, r3
+    1344:	68f8      	ldr	r0, [r7, #12]
+    1346:	f7ff fd81 	bl	e4c <padbuffer>
+    134a:	63b8      	str	r0, [r7, #56]	; 0x38
+                        pcBuf += pcBuf ? iWidth : 0;
+    134c:	68fb      	ldr	r3, [r7, #12]
+    134e:	2b00      	cmp	r3, #0
+    1350:	d001      	beq.n	1356 <am_util_stdio_vsprintf+0x2c2>
+    1352:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1354:	e000      	b.n	1358 <am_util_stdio_vsprintf+0x2c4>
+    1356:	2300      	movs	r3, #0
+    1358:	68fa      	ldr	r2, [r7, #12]
+    135a:	4413      	add	r3, r2
+    135c:	60fb      	str	r3, [r7, #12]
+                        ui32CharCnt += iWidth;
+    135e:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1360:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    1362:	4413      	add	r3, r2
+    1364:	63fb      	str	r3, [r7, #60]	; 0x3c
+                        iWidth = 0;
+    1366:	2300      	movs	r3, #0
+    1368:	63bb      	str	r3, [r7, #56]	; 0x38
+                    }
+                }
+                break;
+    136a:	e17c      	b.n	1666 <am_util_stdio_vsprintf+0x5d2>
+
+            case 'x':
+                bLower = true;
+    136c:	2301      	movs	r3, #1
+    136e:	f887 302e 	strb.w	r3, [r7, #46]	; 0x2e
+            case 'X':
+                ui64Val = bLongLong ? va_arg(pArgs, uint64_t) :
+    1372:	f897 302d 	ldrb.w	r3, [r7, #45]	; 0x2d
+    1376:	2b00      	cmp	r3, #0
+    1378:	d00a      	beq.n	1390 <am_util_stdio_vsprintf+0x2fc>
+    137a:	687b      	ldr	r3, [r7, #4]
+    137c:	3307      	adds	r3, #7
+    137e:	f023 0307 	bic.w	r3, r3, #7
+    1382:	f103 0208 	add.w	r2, r3, #8
+    1386:	607a      	str	r2, [r7, #4]
+    1388:	cb18      	ldmia	r3, {r3, r4}
+    138a:	e007      	b.n	139c <am_util_stdio_vsprintf+0x308>
+    138c:	10001134 	.word	0x10001134
+                                      va_arg(pArgs, uint32_t);
+    1390:	687b      	ldr	r3, [r7, #4]
+    1392:	1d1a      	adds	r2, r3, #4
+    1394:	607a      	str	r2, [r7, #4]
+    1396:	681b      	ldr	r3, [r3, #0]
+                ui64Val = bLongLong ? va_arg(pArgs, uint64_t) :
+    1398:	f04f 0400 	mov.w	r4, #0
+    139c:	e9c7 3410 	strd	r3, r4, [r7, #64]	; 0x40
+
+                if ( iWidth )
+    13a0:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    13a2:	2b00      	cmp	r3, #0
+    13a4:	d01e      	beq.n	13e4 <am_util_stdio_vsprintf+0x350>
+                {
+                    //
+                    // Compute # of leading chars
+                    //
+                    iWidth -= ndigits_in_hex(ui64Val);
+    13a6:	e9d7 0110 	ldrd	r0, r1, [r7, #64]	; 0x40
+    13aa:	f7ff fc22 	bl	bf2 <ndigits_in_hex>
+    13ae:	4602      	mov	r2, r0
+    13b0:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    13b2:	1a9b      	subs	r3, r3, r2
+    13b4:	63bb      	str	r3, [r7, #56]	; 0x38
+
+                    iWidth = padbuffer(pcBuf, ui8PadChar, iWidth);
+    13b6:	f897 302f 	ldrb.w	r3, [r7, #47]	; 0x2f
+    13ba:	6bba      	ldr	r2, [r7, #56]	; 0x38
+    13bc:	4619      	mov	r1, r3
+    13be:	68f8      	ldr	r0, [r7, #12]
+    13c0:	f7ff fd44 	bl	e4c <padbuffer>
+    13c4:	63b8      	str	r0, [r7, #56]	; 0x38
+                    pcBuf += pcBuf ? iWidth : 0;
+    13c6:	68fb      	ldr	r3, [r7, #12]
+    13c8:	2b00      	cmp	r3, #0
+    13ca:	d001      	beq.n	13d0 <am_util_stdio_vsprintf+0x33c>
+    13cc:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    13ce:	e000      	b.n	13d2 <am_util_stdio_vsprintf+0x33e>
+    13d0:	2300      	movs	r3, #0
+    13d2:	68fa      	ldr	r2, [r7, #12]
+    13d4:	4413      	add	r3, r2
+    13d6:	60fb      	str	r3, [r7, #12]
+                    ui32CharCnt += iWidth;
+    13d8:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    13da:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    13dc:	4413      	add	r3, r2
+    13de:	63fb      	str	r3, [r7, #60]	; 0x3c
+                    iWidth = 0;
+    13e0:	2300      	movs	r3, #0
+    13e2:	63bb      	str	r3, [r7, #56]	; 0x38
+                }
+
+                iVal = uint64_to_hexstr(ui64Val, pcBuf, bLower);
+    13e4:	f897 302e 	ldrb.w	r3, [r7, #46]	; 0x2e
+    13e8:	68fa      	ldr	r2, [r7, #12]
+    13ea:	e9d7 0110 	ldrd	r0, r1, [r7, #64]	; 0x40
+    13ee:	f7ff fcb2 	bl	d56 <uint64_to_hexstr>
+    13f2:	6378      	str	r0, [r7, #52]	; 0x34
+
+                if ( pcBuf )
+    13f4:	68fb      	ldr	r3, [r7, #12]
+    13f6:	2b00      	cmp	r3, #0
+    13f8:	d003      	beq.n	1402 <am_util_stdio_vsprintf+0x36e>
+                {
+                    pcBuf += iVal;
+    13fa:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    13fc:	68fa      	ldr	r2, [r7, #12]
+    13fe:	4413      	add	r3, r2
+    1400:	60fb      	str	r3, [r7, #12]
+                }
+
+                ui32CharCnt += iVal;
+    1402:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    1404:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    1406:	4413      	add	r3, r2
+    1408:	63fb      	str	r3, [r7, #60]	; 0x3c
+                break;
+    140a:	e12f      	b.n	166c <am_util_stdio_vsprintf+0x5d8>
+
+            case 'u':
+                ui64Val = bLongLong ? va_arg(pArgs, uint64_t) :
+    140c:	f897 302d 	ldrb.w	r3, [r7, #45]	; 0x2d
+    1410:	2b00      	cmp	r3, #0
+    1412:	d008      	beq.n	1426 <am_util_stdio_vsprintf+0x392>
+    1414:	687b      	ldr	r3, [r7, #4]
+    1416:	3307      	adds	r3, #7
+    1418:	f023 0307 	bic.w	r3, r3, #7
+    141c:	f103 0208 	add.w	r2, r3, #8
+    1420:	607a      	str	r2, [r7, #4]
+    1422:	cb18      	ldmia	r3, {r3, r4}
+    1424:	e005      	b.n	1432 <am_util_stdio_vsprintf+0x39e>
+                                      va_arg(pArgs, uint32_t);
+    1426:	687b      	ldr	r3, [r7, #4]
+    1428:	1d1a      	adds	r2, r3, #4
+    142a:	607a      	str	r2, [r7, #4]
+    142c:	681b      	ldr	r3, [r3, #0]
+                ui64Val = bLongLong ? va_arg(pArgs, uint64_t) :
+    142e:	f04f 0400 	mov.w	r4, #0
+    1432:	e9c7 3410 	strd	r3, r4, [r7, #64]	; 0x40
+
+                if ( iWidth )
+    1436:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1438:	2b00      	cmp	r3, #0
+    143a:	d01e      	beq.n	147a <am_util_stdio_vsprintf+0x3e6>
+                {
+                    //
+                    // We need to pad the beginning of the value.
+                    // Compute # of leading chars
+                    //
+                    iWidth -= ndigits_in_u64(ui64Val);
+    143c:	e9d7 0110 	ldrd	r0, r1, [r7, #64]	; 0x40
+    1440:	f7ff fb99 	bl	b76 <ndigits_in_u64>
+    1444:	4602      	mov	r2, r0
+    1446:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1448:	1a9b      	subs	r3, r3, r2
+    144a:	63bb      	str	r3, [r7, #56]	; 0x38
+
+                    iWidth = padbuffer(pcBuf, ui8PadChar, iWidth);
+    144c:	f897 302f 	ldrb.w	r3, [r7, #47]	; 0x2f
+    1450:	6bba      	ldr	r2, [r7, #56]	; 0x38
+    1452:	4619      	mov	r1, r3
+    1454:	68f8      	ldr	r0, [r7, #12]
+    1456:	f7ff fcf9 	bl	e4c <padbuffer>
+    145a:	63b8      	str	r0, [r7, #56]	; 0x38
+                    pcBuf += pcBuf ? iWidth : 0;
+    145c:	68fb      	ldr	r3, [r7, #12]
+    145e:	2b00      	cmp	r3, #0
+    1460:	d001      	beq.n	1466 <am_util_stdio_vsprintf+0x3d2>
+    1462:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1464:	e000      	b.n	1468 <am_util_stdio_vsprintf+0x3d4>
+    1466:	2300      	movs	r3, #0
+    1468:	68fa      	ldr	r2, [r7, #12]
+    146a:	4413      	add	r3, r2
+    146c:	60fb      	str	r3, [r7, #12]
+                    ui32CharCnt += iWidth;
+    146e:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1470:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    1472:	4413      	add	r3, r2
+    1474:	63fb      	str	r3, [r7, #60]	; 0x3c
+                    iWidth = 0;
+    1476:	2300      	movs	r3, #0
+    1478:	63bb      	str	r3, [r7, #56]	; 0x38
+                }
+
+                iVal = uint64_to_str(ui64Val, pcBuf);
+    147a:	68fa      	ldr	r2, [r7, #12]
+    147c:	e9d7 0110 	ldrd	r0, r1, [r7, #64]	; 0x40
+    1480:	f7ff fc21 	bl	cc6 <uint64_to_str>
+    1484:	6378      	str	r0, [r7, #52]	; 0x34
+
+                if ( pcBuf )
+    1486:	68fb      	ldr	r3, [r7, #12]
+    1488:	2b00      	cmp	r3, #0
+    148a:	d003      	beq.n	1494 <am_util_stdio_vsprintf+0x400>
+                {
+                    pcBuf += iVal;
+    148c:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    148e:	68fa      	ldr	r2, [r7, #12]
+    1490:	4413      	add	r3, r2
+    1492:	60fb      	str	r3, [r7, #12]
+                }
+
+                ui32CharCnt += iVal;
+    1494:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    1496:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    1498:	4413      	add	r3, r2
+    149a:	63fb      	str	r3, [r7, #60]	; 0x3c
+                break;
+    149c:	e0e6      	b.n	166c <am_util_stdio_vsprintf+0x5d8>
+                // Output for a negative number, for example, -5:
+                //   %d:-5
+                //  %5d:   -5
+                // %05d:-0005
+                //
+                i64Val = bLongLong ? va_arg(pArgs, int64_t) :
+    149e:	f897 302d 	ldrb.w	r3, [r7, #45]	; 0x2d
+    14a2:	2b00      	cmp	r3, #0
+    14a4:	d008      	beq.n	14b8 <am_util_stdio_vsprintf+0x424>
+    14a6:	687b      	ldr	r3, [r7, #4]
+    14a8:	3307      	adds	r3, #7
+    14aa:	f023 0307 	bic.w	r3, r3, #7
+    14ae:	f103 0208 	add.w	r2, r3, #8
+    14b2:	607a      	str	r2, [r7, #4]
+    14b4:	cb18      	ldmia	r3, {r3, r4}
+    14b6:	e005      	b.n	14c4 <am_util_stdio_vsprintf+0x430>
+                                     va_arg(pArgs, int32_t);
+    14b8:	687b      	ldr	r3, [r7, #4]
+    14ba:	1d1a      	adds	r2, r3, #4
+    14bc:	607a      	str	r2, [r7, #4]
+    14be:	681b      	ldr	r3, [r3, #0]
+                i64Val = bLongLong ? va_arg(pArgs, int64_t) :
+    14c0:	ea4f 74e3 	mov.w	r4, r3, asr #31
+    14c4:	e9c7 3406 	strd	r3, r4, [r7, #24]
+
+                //
+                // Get absolute value
+                //
+                if ( i64Val < 0 )
+    14c8:	e9d7 3406 	ldrd	r3, r4, [r7, #24]
+    14cc:	2b00      	cmp	r3, #0
+    14ce:	f174 0300 	sbcs.w	r3, r4, #0
+    14d2:	da0a      	bge.n	14ea <am_util_stdio_vsprintf+0x456>
+                {
+                    ui64Val = -i64Val;          // Get absolute value
+    14d4:	e9d7 3406 	ldrd	r3, r4, [r7, #24]
+    14d8:	425b      	negs	r3, r3
+    14da:	eb64 0444 	sbc.w	r4, r4, r4, lsl #1
+    14de:	e9c7 3410 	strd	r3, r4, [r7, #64]	; 0x40
+                    bNeg = true;
+    14e2:	2301      	movs	r3, #1
+    14e4:	f887 302c 	strb.w	r3, [r7, #44]	; 0x2c
+    14e8:	e006      	b.n	14f8 <am_util_stdio_vsprintf+0x464>
+                }
+                else
+                {
+                    ui64Val = i64Val;
+    14ea:	e9d7 3406 	ldrd	r3, r4, [r7, #24]
+    14ee:	e9c7 3410 	strd	r3, r4, [r7, #64]	; 0x40
+                    bNeg = false;
+    14f2:	2300      	movs	r3, #0
+    14f4:	f887 302c 	strb.w	r3, [r7, #44]	; 0x2c
+                }
+
+                if ( iWidth )
+    14f8:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    14fa:	2b00      	cmp	r3, #0
+    14fc:	d04a      	beq.n	1594 <am_util_stdio_vsprintf+0x500>
+                {
+                    //
+                    // We need to pad the beginning of the value.
+                    // Compute # of leading chars
+                    //
+                    iWidth -= ndigits_in_i64(ui64Val);
+    14fe:	e9d7 3410 	ldrd	r3, r4, [r7, #64]	; 0x40
+    1502:	4618      	mov	r0, r3
+    1504:	4621      	mov	r1, r4
+    1506:	f7ff fb57 	bl	bb8 <ndigits_in_i64>
+    150a:	4602      	mov	r2, r0
+    150c:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    150e:	1a9b      	subs	r3, r3, r2
+    1510:	63bb      	str	r3, [r7, #56]	; 0x38
+
+                    if ( bNeg )
+    1512:	f897 302c 	ldrb.w	r3, [r7, #44]	; 0x2c
+    1516:	2b00      	cmp	r3, #0
+    1518:	d011      	beq.n	153e <am_util_stdio_vsprintf+0x4aa>
+                    {
+                        --iWidth;
+    151a:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    151c:	3b01      	subs	r3, #1
+    151e:	63bb      	str	r3, [r7, #56]	; 0x38
+
+                        //
+                        // Allow for the negative sign
+                        //
+                        if ( ui8PadChar == '0' )
+    1520:	f897 302f 	ldrb.w	r3, [r7, #47]	; 0x2f
+    1524:	2b30      	cmp	r3, #48	; 0x30
+    1526:	d10a      	bne.n	153e <am_util_stdio_vsprintf+0x4aa>
+                        {
+                            //
+                            // Print the neg sign BEFORE the leading zeros
+                            //
+                            if ( pcBuf )
+    1528:	68fb      	ldr	r3, [r7, #12]
+    152a:	2b00      	cmp	r3, #0
+    152c:	d004      	beq.n	1538 <am_util_stdio_vsprintf+0x4a4>
+                            {
+                                *pcBuf++ = '-';
+    152e:	68fb      	ldr	r3, [r7, #12]
+    1530:	1c5a      	adds	r2, r3, #1
+    1532:	60fa      	str	r2, [r7, #12]
+    1534:	222d      	movs	r2, #45	; 0x2d
+    1536:	701a      	strb	r2, [r3, #0]
+                            }
+
+                            ++ui32CharCnt;
+    1538:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    153a:	3301      	adds	r3, #1
+    153c:	63fb      	str	r3, [r7, #60]	; 0x3c
+                        }
+                    }
+
+                    iWidth = padbuffer(pcBuf, ui8PadChar, iWidth);
+    153e:	f897 302f 	ldrb.w	r3, [r7, #47]	; 0x2f
+    1542:	6bba      	ldr	r2, [r7, #56]	; 0x38
+    1544:	4619      	mov	r1, r3
+    1546:	68f8      	ldr	r0, [r7, #12]
+    1548:	f7ff fc80 	bl	e4c <padbuffer>
+    154c:	63b8      	str	r0, [r7, #56]	; 0x38
+                    pcBuf += pcBuf ? iWidth : 0;
+    154e:	68fb      	ldr	r3, [r7, #12]
+    1550:	2b00      	cmp	r3, #0
+    1552:	d001      	beq.n	1558 <am_util_stdio_vsprintf+0x4c4>
+    1554:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1556:	e000      	b.n	155a <am_util_stdio_vsprintf+0x4c6>
+    1558:	2300      	movs	r3, #0
+    155a:	68fa      	ldr	r2, [r7, #12]
+    155c:	4413      	add	r3, r2
+    155e:	60fb      	str	r3, [r7, #12]
+                    ui32CharCnt += iWidth;
+    1560:	6bbb      	ldr	r3, [r7, #56]	; 0x38
+    1562:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    1564:	4413      	add	r3, r2
+    1566:	63fb      	str	r3, [r7, #60]	; 0x3c
+                    iWidth = 0;
+    1568:	2300      	movs	r3, #0
+    156a:	63bb      	str	r3, [r7, #56]	; 0x38
+
+                    if ( bNeg  &&  (ui8PadChar == ' ') )
+    156c:	f897 302c 	ldrb.w	r3, [r7, #44]	; 0x2c
+    1570:	2b00      	cmp	r3, #0
+    1572:	d01e      	beq.n	15b2 <am_util_stdio_vsprintf+0x51e>
+    1574:	f897 302f 	ldrb.w	r3, [r7, #47]	; 0x2f
+    1578:	2b20      	cmp	r3, #32
+    157a:	d11a      	bne.n	15b2 <am_util_stdio_vsprintf+0x51e>
+                    {
+                        //
+                        // Print the neg sign AFTER the leading blanks
+                        //
+                        if ( pcBuf )
+    157c:	68fb      	ldr	r3, [r7, #12]
+    157e:	2b00      	cmp	r3, #0
+    1580:	d004      	beq.n	158c <am_util_stdio_vsprintf+0x4f8>
+                        {
+                            *pcBuf++ = '-';
+    1582:	68fb      	ldr	r3, [r7, #12]
+    1584:	1c5a      	adds	r2, r3, #1
+    1586:	60fa      	str	r2, [r7, #12]
+    1588:	222d      	movs	r2, #45	; 0x2d
+    158a:	701a      	strb	r2, [r3, #0]
+                        }
+
+                        ++ui32CharCnt;
+    158c:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    158e:	3301      	adds	r3, #1
+    1590:	63fb      	str	r3, [r7, #60]	; 0x3c
+    1592:	e00e      	b.n	15b2 <am_util_stdio_vsprintf+0x51e>
+                    }
+                }
+                else
+                {
+                    if ( bNeg )
+    1594:	f897 302c 	ldrb.w	r3, [r7, #44]	; 0x2c
+    1598:	2b00      	cmp	r3, #0
+    159a:	d00a      	beq.n	15b2 <am_util_stdio_vsprintf+0x51e>
+                    {
+                        if ( pcBuf )
+    159c:	68fb      	ldr	r3, [r7, #12]
+    159e:	2b00      	cmp	r3, #0
+    15a0:	d004      	beq.n	15ac <am_util_stdio_vsprintf+0x518>
+                        {
+                            *pcBuf++ = '-';
+    15a2:	68fb      	ldr	r3, [r7, #12]
+    15a4:	1c5a      	adds	r2, r3, #1
+    15a6:	60fa      	str	r2, [r7, #12]
+    15a8:	222d      	movs	r2, #45	; 0x2d
+    15aa:	701a      	strb	r2, [r3, #0]
+                        }
+                        ++ui32CharCnt;
+    15ac:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    15ae:	3301      	adds	r3, #1
+    15b0:	63fb      	str	r3, [r7, #60]	; 0x3c
+                    }
+                }
+
+                iVal = uint64_to_str(ui64Val, pcBuf);
+    15b2:	68fa      	ldr	r2, [r7, #12]
+    15b4:	e9d7 0110 	ldrd	r0, r1, [r7, #64]	; 0x40
+    15b8:	f7ff fb85 	bl	cc6 <uint64_to_str>
+    15bc:	6378      	str	r0, [r7, #52]	; 0x34
+
+                if ( pcBuf )
+    15be:	68fb      	ldr	r3, [r7, #12]
+    15c0:	2b00      	cmp	r3, #0
+    15c2:	d003      	beq.n	15cc <am_util_stdio_vsprintf+0x538>
+                {
+                    pcBuf += iVal;
+    15c4:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    15c6:	68fa      	ldr	r2, [r7, #12]
+    15c8:	4413      	add	r3, r2
+    15ca:	60fb      	str	r3, [r7, #12]
+                }
+
+                ui32CharCnt += iVal;
+    15cc:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    15ce:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    15d0:	4413      	add	r3, r2
+    15d2:	63fb      	str	r3, [r7, #60]	; 0x3c
+                break;
+    15d4:	e04a      	b.n	166c <am_util_stdio_vsprintf+0x5d8>
+
+
+            case 'f':
+            case 'F':
+                if ( pcBuf )
+    15d6:	68fb      	ldr	r3, [r7, #12]
+    15d8:	2b00      	cmp	r3, #0
+    15da:	d046      	beq.n	166a <am_util_stdio_vsprintf+0x5d6>
+                {
+                    float fValue = va_arg(pArgs, double);
+    15dc:	687b      	ldr	r3, [r7, #4]
+    15de:	3307      	adds	r3, #7
+    15e0:	f023 0307 	bic.w	r3, r3, #7
+    15e4:	f103 0208 	add.w	r2, r3, #8
+    15e8:	607a      	str	r2, [r7, #4]
+    15ea:	cb18      	ldmia	r3, {r3, r4}
+    15ec:	4618      	mov	r0, r3
+    15ee:	4621      	mov	r1, r4
+    15f0:	f7fe fd46 	bl	80 <__aeabi_d2f>
+    15f4:	4603      	mov	r3, r0
+    15f6:	617b      	str	r3, [r7, #20]
+
+                    //
+                    // pcBuf is an input (size of buffer) and also an output of ftoa()
+                    //
+                    *(uint32_t*)pcBuf = 20;
+    15f8:	68fb      	ldr	r3, [r7, #12]
+    15fa:	2214      	movs	r2, #20
+    15fc:	601a      	str	r2, [r3, #0]
+
+                    iVal = ftoa(fValue, pcBuf, iPrecision);
+    15fe:	6b3a      	ldr	r2, [r7, #48]	; 0x30
+    1600:	68f9      	ldr	r1, [r7, #12]
+    1602:	6978      	ldr	r0, [r7, #20]
+    1604:	f7ff fc48 	bl	e98 <ftoa>
+    1608:	6378      	str	r0, [r7, #52]	; 0x34
+                    if ( iVal < 0 )
+    160a:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    160c:	2b00      	cmp	r3, #0
+    160e:	da14      	bge.n	163a <am_util_stdio_vsprintf+0x5a6>
+                    {
+                        uint32_t u32PrntErrVal;
+                        if ( iVal == AM_FTOA_ERR_VAL_TOO_SMALL )
+    1610:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    1612:	f1b3 3fff 	cmp.w	r3, #4294967295
+    1616:	d102      	bne.n	161e <am_util_stdio_vsprintf+0x58a>
+                        {
+                            u32PrntErrVal = (0x00 << 24) | ('0' << 16) |
+    1618:	4b1e      	ldr	r3, [pc, #120]	; (1694 <am_util_stdio_vsprintf+0x600>)
+    161a:	62bb      	str	r3, [r7, #40]	; 0x28
+    161c:	e008      	b.n	1630 <am_util_stdio_vsprintf+0x59c>
+                                            ('.' << 8)   | ('0' << 0);  // "0.0"
+                        }
+                        else if ( iVal == AM_FTOA_ERR_VAL_TOO_LARGE )
+    161e:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    1620:	f113 0f02 	cmn.w	r3, #2
+    1624:	d102      	bne.n	162c <am_util_stdio_vsprintf+0x598>
+                        {
+                            u32PrntErrVal = (0x00 << 24) | ('#' << 16) |
+    1626:	4b1c      	ldr	r3, [pc, #112]	; (1698 <am_util_stdio_vsprintf+0x604>)
+    1628:	62bb      	str	r3, [r7, #40]	; 0x28
+    162a:	e001      	b.n	1630 <am_util_stdio_vsprintf+0x59c>
+                                            ('.' << 8)   | ('#' << 0);  // "#.#"
+                        }
+                        else
+                        {
+                            u32PrntErrVal = (0x00 << 24) | ('?' << 16) |
+    162c:	4b1b      	ldr	r3, [pc, #108]	; (169c <am_util_stdio_vsprintf+0x608>)
+    162e:	62bb      	str	r3, [r7, #40]	; 0x28
+                                            ('.' << 8)   | ('?' << 0);  // "?.?"
+                        }
+                        *(uint32_t*)pcBuf = u32PrntErrVal;
+    1630:	68fb      	ldr	r3, [r7, #12]
+    1632:	6aba      	ldr	r2, [r7, #40]	; 0x28
+    1634:	601a      	str	r2, [r3, #0]
+                        iVal = 3;
+    1636:	2303      	movs	r3, #3
+    1638:	637b      	str	r3, [r7, #52]	; 0x34
+                    }
+                    ui32CharCnt += iVal;
+    163a:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    163c:	6bfa      	ldr	r2, [r7, #60]	; 0x3c
+    163e:	4413      	add	r3, r2
+    1640:	63fb      	str	r3, [r7, #60]	; 0x3c
+                    pcBuf += iVal;
+    1642:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+    1644:	68fa      	ldr	r2, [r7, #12]
+    1646:	4413      	add	r3, r2
+    1648:	60fb      	str	r3, [r7, #12]
+                }
+                break;
+    164a:	e00e      	b.n	166a <am_util_stdio_vsprintf+0x5d6>
+            // For non-handled specifiers, we'll just print the character.
+            // e.g. this will allow the normal printing of a '%' using
+            // "%%".
+            //
+            default:
+                if ( pcBuf )
+    164c:	68fb      	ldr	r3, [r7, #12]
+    164e:	2b00      	cmp	r3, #0
+    1650:	d005      	beq.n	165e <am_util_stdio_vsprintf+0x5ca>
+                {
+                    *pcBuf++ = *pcFmt;
+    1652:	68fb      	ldr	r3, [r7, #12]
+    1654:	1c5a      	adds	r2, r3, #1
+    1656:	60fa      	str	r2, [r7, #12]
+    1658:	68ba      	ldr	r2, [r7, #8]
+    165a:	7812      	ldrb	r2, [r2, #0]
+    165c:	701a      	strb	r2, [r3, #0]
+                }
+
+                ++ui32CharCnt;
+    165e:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+    1660:	3301      	adds	r3, #1
+    1662:	63fb      	str	r3, [r7, #60]	; 0x3c
+                break;
+    1664:	e002      	b.n	166c <am_util_stdio_vsprintf+0x5d8>
+                break;
+    1666:	bf00      	nop
+    1668:	e000      	b.n	166c <am_util_stdio_vsprintf+0x5d8>
+                break;
+    166a:	bf00      	nop
+        } // switch()
+
+        //
+        // Bump the format specification to the next character
+        //
+        ++pcFmt;
+    166c:	68bb      	ldr	r3, [r7, #8]
+    166e:	3301      	adds	r3, #1
+    1670:	60bb      	str	r3, [r7, #8]
+    while ( *pcFmt != 0x0 )
+    1672:	68bb      	ldr	r3, [r7, #8]
+    1674:	781b      	ldrb	r3, [r3, #0]
+    1676:	2b00      	cmp	r3, #0
+    1678:	f47f ad17 	bne.w	10aa <am_util_stdio_vsprintf+0x16>
+    } // while ()
+
+    //
+    // Terminate the string
+    //
+    if ( pcBuf )
+    167c:	68fb      	ldr	r3, [r7, #12]
+    167e:	2b00      	cmp	r3, #0
+    1680:	d002      	beq.n	1688 <am_util_stdio_vsprintf+0x5f4>
+    {
+        *pcBuf = 0x0;
+    1682:	68fb      	ldr	r3, [r7, #12]
+    1684:	2200      	movs	r2, #0
+    1686:	701a      	strb	r2, [r3, #0]
+    }
+
+    return (ui32CharCnt);
+    1688:	6bfb      	ldr	r3, [r7, #60]	; 0x3c
+}
+    168a:	4618      	mov	r0, r3
+    168c:	3754      	adds	r7, #84	; 0x54
+    168e:	46bd      	mov	sp, r7
+    1690:	bd90      	pop	{r4, r7, pc}
+    1692:	bf00      	nop
+    1694:	00302e30 	.word	0x00302e30
+    1698:	00232e23 	.word	0x00232e23
+    169c:	003f2e3f 	.word	0x003f2e3f
+
+000016a0 <am_util_stdio_printf>:
+//! @return uint32_t representing the number of characters printed.
+//
+// *****************************************************************************
+uint32_t
+am_util_stdio_printf(const char *pcFmt, ...)
+{
+    16a0:	b40f      	push	{r0, r1, r2, r3}
+    16a2:	b580      	push	{r7, lr}
+    16a4:	b082      	sub	sp, #8
+    16a6:	af00      	add	r7, sp, #0
+
+    //
+    // Convert to the desired string.
+    //
+    va_list pArgs;
+    va_start(pArgs, pcFmt);
+    16a8:	f107 0314 	add.w	r3, r7, #20
+    16ac:	603b      	str	r3, [r7, #0]
+    ui32NumChars = am_util_stdio_vsprintf(g_prfbuf, pcFmt, pArgs);
+    16ae:	683a      	ldr	r2, [r7, #0]
+    16b0:	6939      	ldr	r1, [r7, #16]
+    16b2:	4808      	ldr	r0, [pc, #32]	; (16d4 <am_util_stdio_printf+0x34>)
+    16b4:	f7ff fcee 	bl	1094 <am_util_stdio_vsprintf>
+    16b8:	6078      	str	r0, [r7, #4]
+    va_end(pArgs);
+
+    //
+    // This is where we print the buffer to the configured interface.
+    //
+    g_pfnCharPrint(g_prfbuf);
+    16ba:	4b07      	ldr	r3, [pc, #28]	; (16d8 <am_util_stdio_printf+0x38>)
+    16bc:	681b      	ldr	r3, [r3, #0]
+    16be:	4805      	ldr	r0, [pc, #20]	; (16d4 <am_util_stdio_printf+0x34>)
+    16c0:	4798      	blx	r3
+
+    //
+    // return the number of characters printed.
+    //
+    return ui32NumChars;
+    16c2:	687b      	ldr	r3, [r7, #4]
+}
+    16c4:	4618      	mov	r0, r3
+    16c6:	3708      	adds	r7, #8
+    16c8:	46bd      	mov	sp, r7
+    16ca:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+    16ce:	b004      	add	sp, #16
+    16d0:	4770      	bx	lr
+    16d2:	bf00      	nop
+    16d4:	10001034 	.word	0x10001034
+    16d8:	10001140 	.word	0x10001140
+
+000016dc <am_util_stdio_terminal_clear>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_util_stdio_terminal_clear(void)
+{
+    16dc:	b580      	push	{r7, lr}
+    16de:	af00      	add	r7, sp, #0
+    // left corner.
+    // We'll first print a number of spaces, which helps get the ITM in sync
+    // with AM Flash, especially after a reset event or a system clock
+    // frequency change.
+    //
+    am_util_stdio_printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    16e0:	4802      	ldr	r0, [pc, #8]	; (16ec <am_util_stdio_terminal_clear+0x10>)
+    16e2:	f7ff ffdd 	bl	16a0 <am_util_stdio_printf>
+}
+    16e6:	bf00      	nop
+    16e8:	bd80      	pop	{r7, pc}
+    16ea:	bf00      	nop
+    16ec:	00001d68 	.word	0x00001d68
+
+000016f0 <am_bsp_low_power_init>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_bsp_low_power_init(void)
+{
+    16f0:	b508      	push	{r3, lr}
+    //
+    // Enable internal buck converters.
+    //
+    am_hal_mcuctrl_bucks_enable();
+    16f2:	f000 f951 	bl	1998 <am_hal_mcuctrl_bucks_enable>
+
+    //
+    // Turn off the voltage comparator as this is enabled on reset.
+    //
+    am_hal_vcomp_disable();
+    16f6:	f000 fa0b 	bl	1b10 <am_hal_vcomp_disable>
+
+    //
+    // Run the RTC off the LFRC.
+    //
+    am_hal_rtc_osc_select(AM_HAL_RTC_OSC_LFRC);
+    16fa:	2001      	movs	r0, #1
+    16fc:	f000 f97a 	bl	19f4 <am_hal_rtc_osc_select>
+
+    //
+    // Stop the XTAL.
+    //
+    am_hal_clkgen_osc_stop(AM_HAL_CLKGEN_OSC_XT);
+    1700:	2001      	movs	r0, #1
+    1702:	f000 f883 	bl	180c <am_hal_clkgen_osc_stop>
+
+    //
+    // Disable the RTC.
+    //
+    am_hal_rtc_osc_disable();
+    1706:	f000 f983 	bl	1a10 <am_hal_rtc_osc_disable>
+
+    //
+    // Disable the bandgap.
+    //
+    am_hal_mcuctrl_bandgap_disable();
+}
+    170a:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+    am_hal_mcuctrl_bandgap_disable();
+    170e:	f000 b93b 	b.w	1988 <am_hal_mcuctrl_bandgap_disable>
+    1712:	bf00      	nop
+
+00001714 <am_bsp_debug_printf_enable>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_bsp_debug_printf_enable(void)
+{
+    1714:	b510      	push	{r4, lr}
+    am_hal_tpiu_config_t TPIUcfg;
+
+    if (g_ui32HALflags & AM_HAL_FLAGS_ITMSKIPENABLEDISABLE_M)
+    1716:	4b10      	ldr	r3, [pc, #64]	; (1758 <am_bsp_debug_printf_enable+0x44>)
+    1718:	681c      	ldr	r4, [r3, #0]
+    171a:	f014 0401 	ands.w	r4, r4, #1
+{
+    171e:	b086      	sub	sp, #24
+    if (g_ui32HALflags & AM_HAL_FLAGS_ITMSKIPENABLEDISABLE_M)
+    1720:	d001      	beq.n	1726 <am_bsp_debug_printf_enable+0x12>
+    // Enable the ITM and TPIU
+    //
+    TPIUcfg.ui32SetItmBaud = AM_HAL_TPIU_BAUD_1M;
+    am_hal_tpiu_enable(&TPIUcfg);
+    am_bsp_pin_enable(ITM_SWO);
+}
+    1722:	b006      	add	sp, #24
+    1724:	bd10      	pop	{r4, pc}
+    TPIUcfg.ui32SetItmBaud = AM_HAL_TPIU_BAUD_1M;
+    1726:	a806      	add	r0, sp, #24
+    1728:	490c      	ldr	r1, [pc, #48]	; (175c <am_bsp_debug_printf_enable+0x48>)
+    172a:	f840 1d14 	str.w	r1, [r0, #-20]!
+    am_hal_tpiu_enable(&TPIUcfg);
+    172e:	f000 f98d 	bl	1a4c <am_hal_tpiu_enable>
+    am_bsp_pin_enable(ITM_SWO);
+    1732:	4a0b      	ldr	r2, [pc, #44]	; (1760 <am_bsp_debug_printf_enable+0x4c>)
+    1734:	480b      	ldr	r0, [pc, #44]	; (1764 <am_bsp_debug_printf_enable+0x50>)
+    1736:	490c      	ldr	r1, [pc, #48]	; (1768 <am_bsp_debug_printf_enable+0x54>)
+    1738:	2373      	movs	r3, #115	; 0x73
+    173a:	6013      	str	r3, [r2, #0]
+    173c:	6803      	ldr	r3, [r0, #0]
+    173e:	f023 0370 	bic.w	r3, r3, #112	; 0x70
+    1742:	6003      	str	r3, [r0, #0]
+    1744:	6808      	ldr	r0, [r1, #0]
+    1746:	f420 4c7f 	bic.w	ip, r0, #65280	; 0xff00
+    174a:	f44c 5380 	orr.w	r3, ip, #4096	; 0x1000
+    174e:	600b      	str	r3, [r1, #0]
+    1750:	6014      	str	r4, [r2, #0]
+}
+    1752:	b006      	add	sp, #24
+    1754:	bd10      	pop	{r4, pc}
+    1756:	bf00      	nop
+    1758:	10001138 	.word	0x10001138
+    175c:	000f4240 	.word	0x000f4240
+    1760:	40010060 	.word	0x40010060
+    1764:	40010054 	.word	0x40010054
+    1768:	40010028 	.word	0x40010028
+
+0000176c <am_bsp_debug_printf_disable>:
+//
+//*****************************************************************************
+void
+am_bsp_debug_printf_disable(void)
+{
+    if (g_ui32HALflags & AM_HAL_FLAGS_ITMSKIPENABLEDISABLE_M)
+    176c:	4b0f      	ldr	r3, [pc, #60]	; (17ac <am_bsp_debug_printf_disable+0x40>)
+{
+    176e:	b510      	push	{r4, lr}
+    if (g_ui32HALflags & AM_HAL_FLAGS_ITMSKIPENABLEDISABLE_M)
+    1770:	681c      	ldr	r4, [r3, #0]
+    1772:	f014 0401 	ands.w	r4, r4, #1
+    1776:	d000      	beq.n	177a <am_bsp_debug_printf_disable+0xe>
+    1778:	bd10      	pop	{r4, pc}
+    {
+        return;
+    }
+    am_hal_itm_not_busy();
+    177a:	f000 f8b1 	bl	18e0 <am_hal_itm_not_busy>
+    am_hal_gpio_pin_config(AM_BSP_GPIO_ITM_SWO, AM_HAL_GPIO_OUTPUT);
+    177e:	4a0c      	ldr	r2, [pc, #48]	; (17b0 <am_bsp_debug_printf_disable+0x44>)
+    1780:	480c      	ldr	r0, [pc, #48]	; (17b4 <am_bsp_debug_printf_disable+0x48>)
+    1782:	490d      	ldr	r1, [pc, #52]	; (17b8 <am_bsp_debug_printf_disable+0x4c>)
+    1784:	2373      	movs	r3, #115	; 0x73
+    1786:	6013      	str	r3, [r2, #0]
+    1788:	6803      	ldr	r3, [r0, #0]
+    178a:	f023 0c70 	bic.w	ip, r3, #112	; 0x70
+    178e:	f04c 0320 	orr.w	r3, ip, #32
+    1792:	6003      	str	r3, [r0, #0]
+    1794:	6808      	ldr	r0, [r1, #0]
+    1796:	f420 4c7f 	bic.w	ip, r0, #65280	; 0xff00
+    179a:	f44c 53c0 	orr.w	r3, ip, #6144	; 0x1800
+    179e:	600b      	str	r3, [r1, #0]
+    17a0:	6014      	str	r4, [r2, #0]
+    am_hal_tpiu_disable();
+}
+    17a2:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+    am_hal_tpiu_disable();
+    17a6:	f000 b9ad 	b.w	1b04 <am_hal_tpiu_disable>
+    17aa:	bf00      	nop
+    17ac:	10001138 	.word	0x10001138
+    17b0:	40010060 	.word	0x40010060
+    17b4:	40010054 	.word	0x40010054
+    17b8:	40010028 	.word	0x40010028
+
+000017bc <am_bsp_itm_string_print>:
+//
+//*****************************************************************************
+void
+am_bsp_itm_string_print(char *pcString)
+{
+    am_hal_itm_print(pcString);
+    17bc:	f000 b8a6 	b.w	190c <am_hal_itm_print>
+
+000017c0 <am_hal_clkgen_sysclk_select>:
+am_hal_clkgen_sysclk_select(uint32_t ui32ClockSetting)
+{
+    //
+    // Unlock the clock control register.
+    //
+    AM_REG(CLKGEN, CLKKEY) = AM_REG_CLKGEN_CLKKEY_KEYVAL;
+    17c0:	4b05      	ldr	r3, [pc, #20]	; (17d8 <am_hal_clkgen_sysclk_select+0x18>)
+
+    //
+    // Set the HFRC divisor to the user-selected value.
+    //
+    AM_REG(CLKGEN, CCTRL) = ui32ClockSetting;
+    17c2:	4906      	ldr	r1, [pc, #24]	; (17dc <am_hal_clkgen_sysclk_select+0x1c>)
+{
+    17c4:	b410      	push	{r4}
+
+    //
+    // Lock the clock configuration registers.
+    //
+    AM_REG(CLKGEN, CLKKEY) = 0;
+    17c6:	2200      	movs	r2, #0
+    AM_REG(CLKGEN, CLKKEY) = AM_REG_CLKGEN_CLKKEY_KEYVAL;
+    17c8:	2447      	movs	r4, #71	; 0x47
+    17ca:	601c      	str	r4, [r3, #0]
+    AM_REG(CLKGEN, CCTRL) = ui32ClockSetting;
+    17cc:	6008      	str	r0, [r1, #0]
+}
+    17ce:	f85d 4b04 	ldr.w	r4, [sp], #4
+    AM_REG(CLKGEN, CLKKEY) = 0;
+    17d2:	601a      	str	r2, [r3, #0]
+}
+    17d4:	4770      	bx	lr
+    17d6:	bf00      	nop
+    17d8:	40004014 	.word	0x40004014
+    17dc:	40004018 	.word	0x40004018
+
+000017e0 <am_hal_clkgen_sysclk_get>:
+    uint32_t ui32ClockSetting;
+
+    //
+    // Read the value of the clock divider.
+    //
+    ui32ClockSetting = AM_BFR(CLKGEN, CCTRL, CORESEL);
+    17e0:	4b03      	ldr	r3, [pc, #12]	; (17f0 <am_hal_clkgen_sysclk_get+0x10>)
+    17e2:	4a04      	ldr	r2, [pc, #16]	; (17f4 <am_hal_clkgen_sysclk_get+0x14>)
+    17e4:	6818      	ldr	r0, [r3, #0]
+    17e6:	f000 0107 	and.w	r1, r0, #7
+        case AM_HAL_CLKGEN_SYSCLK_3MHZ:
+            return 3000000;
+        default:
+            return 0xFFFFFFFF;
+    }
+}
+    17ea:	f852 0021 	ldr.w	r0, [r2, r1, lsl #2]
+    17ee:	4770      	bx	lr
+    17f0:	40004018 	.word	0x40004018
+    17f4:	00001d7c 	.word	0x00001d7c
+
+000017f8 <am_hal_clkgen_osc_start>:
+//
+//*****************************************************************************
+void
+am_hal_clkgen_osc_start(uint32_t ui32OscFlags)
+{
+    if ( ui32OscFlags & (AM_HAL_CLKGEN_OSC_LFRC | AM_HAL_CLKGEN_OSC_XT) )
+    17f8:	0783      	lsls	r3, r0, #30
+    17fa:	d004      	beq.n	1806 <am_hal_clkgen_osc_start+0xe>
+    {
+        //
+        // Start the oscillator(s).
+        // Note that these bits are cleared in order to enable the oscillator.
+        //
+        AM_REG(CLKGEN, OCTRL) &= ~ui32OscFlags;
+    17fc:	4a02      	ldr	r2, [pc, #8]	; (1808 <am_hal_clkgen_osc_start+0x10>)
+    17fe:	6813      	ldr	r3, [r2, #0]
+    1800:	ea23 0000 	bic.w	r0, r3, r0
+    1804:	6010      	str	r0, [r2, #0]
+    1806:	4770      	bx	lr
+    1808:	4000400c 	.word	0x4000400c
+
+0000180c <am_hal_clkgen_osc_stop>:
+//
+//*****************************************************************************
+void
+am_hal_clkgen_osc_stop(uint32_t ui32OscFlags)
+{
+    if ( ui32OscFlags & (AM_HAL_CLKGEN_OSC_LFRC | AM_HAL_CLKGEN_OSC_XT) )
+    180c:	0783      	lsls	r3, r0, #30
+    180e:	d003      	beq.n	1818 <am_hal_clkgen_osc_stop+0xc>
+    {
+        //
+        // Stop the oscillator(s).
+        // Note that these bits are set in order to stop the oscillator.
+        //
+        AM_REG(CLKGEN, OCTRL) |= ui32OscFlags;
+    1810:	4b02      	ldr	r3, [pc, #8]	; (181c <am_hal_clkgen_osc_stop+0x10>)
+    1812:	681a      	ldr	r2, [r3, #0]
+    1814:	4310      	orrs	r0, r2
+    1816:	6018      	str	r0, [r3, #0]
+    1818:	4770      	bx	lr
+    181a:	bf00      	nop
+    181c:	4000400c 	.word	0x4000400c
+
+00001820 <am_hal_flash_delay>:
+}
+#elif defined(__GNUC_STDC_INLINE__)
+void __attribute__((naked))
+am_hal_flash_delay(uint32_t ui32Iterations)
+{
+    __asm("    subs    r0, #1\n"
+    1820:	3801      	subs	r0, #1
+    1822:	f47f affd 	bne.w	1820 <am_hal_flash_delay>
+    1826:	4770      	bx	lr
+
+00001828 <am_hal_interrupt_enable>:
+am_hal_interrupt_enable(uint32_t ui32Interrupt)
+{
+    //
+    // Check to see what type of interrupt this is.
+    //
+    if ( ui32Interrupt > 15 )
+    1828:	280f      	cmp	r0, #15
+    182a:	d80b      	bhi.n	1844 <am_hal_interrupt_enable+0x1c>
+    {
+        //
+        // If this is an ARM internal interrupt number, route it to the
+        // appropriate enable register.
+        //
+        switch(ui32Interrupt)
+    182c:	2805      	cmp	r0, #5
+    182e:	d013      	beq.n	1858 <am_hal_interrupt_enable+0x30>
+    1830:	2806      	cmp	r0, #6
+    1832:	d017      	beq.n	1864 <am_hal_interrupt_enable+0x3c>
+    1834:	2804      	cmp	r0, #4
+    1836:	d104      	bne.n	1842 <am_hal_interrupt_enable+0x1a>
+            case AM_HAL_INTERRUPT_USAGEFAULT:
+                AM_BFW(SYSCTRL, SHCSR, USAGEFAULTENA, 1);
+            break;
+
+            case AM_HAL_INTERRUPT_MPUFAULT:
+                AM_BFW(SYSCTRL, SHCSR, MEMFAULTENA, 1);
+    1838:	4a0d      	ldr	r2, [pc, #52]	; (1870 <am_hal_interrupt_enable+0x48>)
+    183a:	6813      	ldr	r3, [r2, #0]
+    183c:	f443 3080 	orr.w	r0, r3, #65536	; 0x10000
+    1840:	6010      	str	r0, [r2, #0]
+    1842:	4770      	bx	lr
+        AM_REG(NVIC, ISER0) = 0x1 << ((ui32Interrupt - 16) & 0x1F);
+    1844:	f1a0 0310 	sub.w	r3, r0, #16
+    1848:	f003 0c1f 	and.w	ip, r3, #31
+    184c:	2001      	movs	r0, #1
+    184e:	4909      	ldr	r1, [pc, #36]	; (1874 <am_hal_interrupt_enable+0x4c>)
+    1850:	fa00 f20c 	lsl.w	r2, r0, ip
+    1854:	600a      	str	r2, [r1, #0]
+    1856:	4770      	bx	lr
+                AM_BFW(SYSCTRL, SHCSR, BUSFAULTENA, 1);
+    1858:	4805      	ldr	r0, [pc, #20]	; (1870 <am_hal_interrupt_enable+0x48>)
+    185a:	6801      	ldr	r1, [r0, #0]
+    185c:	f441 3200 	orr.w	r2, r1, #131072	; 0x20000
+    1860:	6002      	str	r2, [r0, #0]
+            break;
+    1862:	4770      	bx	lr
+                AM_BFW(SYSCTRL, SHCSR, USAGEFAULTENA, 1);
+    1864:	4902      	ldr	r1, [pc, #8]	; (1870 <am_hal_interrupt_enable+0x48>)
+    1866:	680a      	ldr	r2, [r1, #0]
+    1868:	f442 2380 	orr.w	r3, r2, #262144	; 0x40000
+    186c:	600b      	str	r3, [r1, #0]
+            break;
+    186e:	4770      	bx	lr
+    1870:	e000ed24 	.word	0xe000ed24
+    1874:	e000e100 	.word	0xe000e100
+
+00001878 <am_hal_interrupt_master_enable>:
+}
+#elif defined(__GNUC_STDC_INLINE__)
+uint32_t __attribute__((naked))
+am_hal_interrupt_master_enable(void)
+{
+    __asm("    mrs     r0, PRIMASK");
+    1878:	f3ef 8010 	mrs	r0, PRIMASK
+    __asm("    cpsie i");
+    187c:	b662      	cpsie	i
+    __asm("    bx lr");
+    187e:	4770      	bx	lr
+
+00001880 <am_hal_interrupt_master_disable>:
+}
+#elif defined(__GNUC_STDC_INLINE__)
+uint32_t __attribute__((naked))
+am_hal_interrupt_master_disable(void)
+{
+    __asm("    mrs     r0, PRIMASK");
+    1880:	f3ef 8010 	mrs	r0, PRIMASK
+    __asm("    cpsid i");
+    1884:	b672      	cpsid	i
+    __asm("    bx lr");
+    1886:	4770      	bx	lr
+
+00001888 <am_hal_itm_enable>:
+//
+//*****************************************************************************
+void
+am_hal_itm_enable(void)
+{
+    if (g_ui32HALflags & AM_HAL_FLAGS_ITMSKIPENABLEDISABLE_M)
+    1888:	4b0d      	ldr	r3, [pc, #52]	; (18c0 <am_hal_itm_enable+0x38>)
+    188a:	6818      	ldr	r0, [r3, #0]
+    188c:	07c2      	lsls	r2, r0, #31
+    188e:	d416      	bmi.n	18be <am_hal_itm_enable+0x36>
+
+    //
+    // To be able to access ITM registers, set the Trace Enable bit
+    // in the Debug Exception and Monitor Control Register (DEMCR).
+    //
+    AM_REG(SYSCTRL, DEMCR) |= AM_REG_SYSCTRL_DEMCR_TRCENA(1);
+    1890:	4a0c      	ldr	r2, [pc, #48]	; (18c4 <am_hal_itm_enable+0x3c>)
+    1892:	6811      	ldr	r1, [r2, #0]
+{
+    1894:	b430      	push	{r4, r5}
+    AM_REG(SYSCTRL, DEMCR) |= AM_REG_SYSCTRL_DEMCR_TRCENA(1);
+    1896:	f041 7480 	orr.w	r4, r1, #16777216	; 0x1000000
+    189a:	6014      	str	r4, [r2, #0]
+    while ( !(AM_REG(SYSCTRL, DEMCR) & AM_REG_SYSCTRL_DEMCR_TRCENA(1)) );
+    189c:	6815      	ldr	r5, [r2, #0]
+    189e:	01eb      	lsls	r3, r5, #7
+    18a0:	d5fc      	bpl.n	189c <am_hal_itm_enable+0x14>
+
+    //
+    // Write the key to the ITM Lock Access register to unlock the ITM_TCR.
+    //
+    AM_REGVAL(AM_REG_ITM_LOCKAREG_O) = AM_REG_ITM_LOCKAREG_KEYVAL;
+    18a2:	4809      	ldr	r0, [pc, #36]	; (18c8 <am_hal_itm_enable+0x40>)
+
+    //
+    // Set the enable bits in the ITM trace enable register, and the ITM
+    // control registers to enable trace data output.
+    //
+    AM_REGVAL(AM_REG_ITM_TPR_O) = 0x0000000f;
+    18a4:	4c09      	ldr	r4, [pc, #36]	; (18cc <am_hal_itm_enable+0x44>)
+    AM_REGVAL(AM_REG_ITM_LOCKAREG_O) = AM_REG_ITM_LOCKAREG_KEYVAL;
+    18a6:	4d0a      	ldr	r5, [pc, #40]	; (18d0 <am_hal_itm_enable+0x48>)
+    18a8:	6005      	str	r5, [r0, #0]
+    AM_REGVAL(AM_REG_ITM_TPR_O) = 0x0000000f;
+    18aa:	250f      	movs	r5, #15
+    18ac:	6025      	str	r5, [r4, #0]
+        AM_WRITE_SM(AM_REG_ITM_TCR_DWT_ENABLE, 0)     |
+        AM_WRITE_SM(AM_REG_ITM_TCR_SYNC_ENABLE, 0)    |
+        AM_WRITE_SM(AM_REG_ITM_TCR_TS_ENABLE, 0)      |
+        AM_WRITE_SM(AM_REG_ITM_TCR_ITM_ENABLE, 1);
+
+}
+    18ae:	bc30      	pop	{r4, r5}
+    AM_REGVAL(AM_REG_ITM_TER_O) = 0xffffffff;
+    18b0:	4908      	ldr	r1, [pc, #32]	; (18d4 <am_hal_itm_enable+0x4c>)
+    AM_REGVAL(AM_REG_ITM_TCR_O) =
+    18b2:	4b09      	ldr	r3, [pc, #36]	; (18d8 <am_hal_itm_enable+0x50>)
+    18b4:	4a09      	ldr	r2, [pc, #36]	; (18dc <am_hal_itm_enable+0x54>)
+    AM_REGVAL(AM_REG_ITM_TER_O) = 0xffffffff;
+    18b6:	f04f 30ff 	mov.w	r0, #4294967295
+    18ba:	6008      	str	r0, [r1, #0]
+    AM_REGVAL(AM_REG_ITM_TCR_O) =
+    18bc:	601a      	str	r2, [r3, #0]
+}
+    18be:	4770      	bx	lr
+    18c0:	10001138 	.word	0x10001138
+    18c4:	e000edfc 	.word	0xe000edfc
+    18c8:	e0000fb0 	.word	0xe0000fb0
+    18cc:	e0000e40 	.word	0xe0000e40
+    18d0:	c5acce55 	.word	0xc5acce55
+    18d4:	e0000e00 	.word	0xe0000e00
+    18d8:	e0000e80 	.word	0xe0000e80
+    18dc:	00150511 	.word	0x00150511
+
+000018e0 <am_hal_itm_not_busy>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_hal_itm_not_busy(void)
+{
+    18e0:	b508      	push	{r3, lr}
+    //
+    // Make sure the ITM/TPIU is not busy.
+    //
+    while (AM_REG(ITM, TCR) & AM_REG_ITM_TCR_BUSY(1));
+    18e2:	4a08      	ldr	r2, [pc, #32]	; (1904 <am_hal_itm_not_busy+0x24>)
+    18e4:	6813      	ldr	r3, [r2, #0]
+    18e6:	021b      	lsls	r3, r3, #8
+    18e8:	d4fc      	bmi.n	18e4 <am_hal_itm_not_busy+0x4>
+
+    // wait for 50us for the data to flush out
+    am_hal_flash_delay(FLASH_CYCLES_US(50));
+    18ea:	f7ff ff79 	bl	17e0 <am_hal_clkgen_sysclk_get>
+    18ee:	4906      	ldr	r1, [pc, #24]	; (1908 <am_hal_itm_not_busy+0x28>)
+    18f0:	fba1 3000 	umull	r3, r0, r1, r0
+    18f4:	0c80      	lsrs	r0, r0, #18
+    18f6:	2232      	movs	r2, #50	; 0x32
+    18f8:	fb02 f000 	mul.w	r0, r2, r0
+}
+    18fc:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+    am_hal_flash_delay(FLASH_CYCLES_US(50));
+    1900:	f7ff bf8e 	b.w	1820 <am_hal_flash_delay>
+    1904:	e0000e80 	.word	0xe0000e80
+    1908:	165e9f81 	.word	0x165e9f81
+
+0000190c <am_hal_itm_print>:
+    uint32_t ui32Idx;
+
+    //
+    // Determine the length of the string.
+    //
+    while (*(pcString + ui32Length))
+    190c:	7803      	ldrb	r3, [r0, #0]
+    190e:	b1b3      	cbz	r3, 193e <am_hal_itm_print+0x32>
+{
+    1910:	b410      	push	{r4}
+    1912:	4602      	mov	r2, r0
+    while (*(pcString + ui32Length))
+    1914:	2400      	movs	r4, #0
+    1916:	f812 1f01 	ldrb.w	r1, [r2, #1]!
+    {
+        ui32Length++;
+    191a:	3401      	adds	r4, #1
+    while (*(pcString + ui32Length))
+    191c:	2900      	cmp	r1, #0
+    191e:	d1fa      	bne.n	1916 <am_hal_itm_print+0xa>
+    1920:	1901      	adds	r1, r0, r4
+    while (!AM_REGVAL(ui32StimAddr));
+    1922:	f04f 4c60 	mov.w	ip, #3758096384	; 0xe0000000
+        else
+        {
+            //
+            // Print string out the ITM.
+            //
+            am_hal_itm_stimulus_reg_byte_write(0, (uint8_t)*pcString++);
+    1926:	f810 2b01 	ldrb.w	r2, [r0], #1
+    while (!AM_REGVAL(ui32StimAddr));
+    192a:	f8dc 3000 	ldr.w	r3, [ip]
+    192e:	2b00      	cmp	r3, #0
+    1930:	d0fb      	beq.n	192a <am_hal_itm_print+0x1e>
+    while (ui32Length)
+    1932:	4288      	cmp	r0, r1
+    *((volatile uint8_t *) ui32StimAddr) = ui8Value;
+    1934:	f88c 2000 	strb.w	r2, [ip]
+    while (ui32Length)
+    1938:	d1f5      	bne.n	1926 <am_hal_itm_print+0x1a>
+            // Subtract from length.
+            //
+            ui32Length--;
+        }
+    }
+}
+    193a:	f85d 4b04 	ldr.w	r4, [sp], #4
+    193e:	4770      	bx	lr
+
+00001940 <am_hal_mcuctrl_fault_status>:
+    psFault->bSYS = (ui32FaultStat & AM_REG_MCUCTRL_FAULTSTATUS_SYS_M);
+
+    //
+    // Read the DCODE fault capture address register.
+    //
+    psFault->ui32DCODE = AM_REG(MCUCTRL, DCODEFAULTADDR);
+    1940:	490d      	ldr	r1, [pc, #52]	; (1978 <am_hal_mcuctrl_fault_status+0x38>)
+    ui32FaultStat = AM_REG(MCUCTRL, FAULTSTATUS);
+    1942:	4b0e      	ldr	r3, [pc, #56]	; (197c <am_hal_mcuctrl_fault_status+0x3c>)
+
+    //
+    // Read the ICODE fault capture address register.
+    //
+    psFault->ui32ICODE |= AM_REG(MCUCTRL, ICODEFAULTADDR);
+    1944:	4a0e      	ldr	r2, [pc, #56]	; (1980 <am_hal_mcuctrl_fault_status+0x40>)
+    ui32FaultStat = AM_REG(MCUCTRL, FAULTSTATUS);
+    1946:	681b      	ldr	r3, [r3, #0]
+{
+    1948:	b470      	push	{r4, r5, r6}
+    psFault->ui32DCODE = AM_REG(MCUCTRL, DCODEFAULTADDR);
+    194a:	680d      	ldr	r5, [r1, #0]
+    194c:	60c5      	str	r5, [r0, #12]
+    psFault->ui32ICODE |= AM_REG(MCUCTRL, ICODEFAULTADDR);
+    194e:	6815      	ldr	r5, [r2, #0]
+    1950:	6841      	ldr	r1, [r0, #4]
+
+    //
+    // Read the ICODE fault capture address register.
+    //
+    psFault->ui32SYS |= AM_REG(MCUCTRL, SYSFAULTADDR);
+    1952:	4c0c      	ldr	r4, [pc, #48]	; (1984 <am_hal_mcuctrl_fault_status+0x44>)
+    1954:	6942      	ldr	r2, [r0, #20]
+    psFault->ui32ICODE |= AM_REG(MCUCTRL, ICODEFAULTADDR);
+    1956:	4329      	orrs	r1, r5
+    1958:	6041      	str	r1, [r0, #4]
+    psFault->ui32SYS |= AM_REG(MCUCTRL, SYSFAULTADDR);
+    195a:	6824      	ldr	r4, [r4, #0]
+    psFault->bICODE = (ui32FaultStat & AM_REG_MCUCTRL_FAULTSTATUS_ICODE_M);
+    195c:	f003 0601 	and.w	r6, r3, #1
+    psFault->ui32SYS |= AM_REG(MCUCTRL, SYSFAULTADDR);
+    1960:	4322      	orrs	r2, r4
+    psFault->bICODE = (ui32FaultStat & AM_REG_MCUCTRL_FAULTSTATUS_ICODE_M);
+    1962:	7006      	strb	r6, [r0, #0]
+    psFault->bDCODE = (ui32FaultStat & AM_REG_MCUCTRL_FAULTSTATUS_DCODE_M);
+    1964:	f3c3 0640 	ubfx	r6, r3, #1, #1
+    psFault->bSYS = (ui32FaultStat & AM_REG_MCUCTRL_FAULTSTATUS_SYS_M);
+    1968:	f3c3 0380 	ubfx	r3, r3, #2, #1
+    psFault->bDCODE = (ui32FaultStat & AM_REG_MCUCTRL_FAULTSTATUS_DCODE_M);
+    196c:	7206      	strb	r6, [r0, #8]
+    psFault->bSYS = (ui32FaultStat & AM_REG_MCUCTRL_FAULTSTATUS_SYS_M);
+    196e:	7403      	strb	r3, [r0, #16]
+    psFault->ui32SYS |= AM_REG(MCUCTRL, SYSFAULTADDR);
+    1970:	6142      	str	r2, [r0, #20]
+}
+    1972:	bc70      	pop	{r4, r5, r6}
+    1974:	4770      	bx	lr
+    1976:	bf00      	nop
+    1978:	400201c4 	.word	0x400201c4
+    197c:	400201cc 	.word	0x400201cc
+    1980:	400201c0 	.word	0x400201c0
+    1984:	400201c8 	.word	0x400201c8
+
+00001988 <am_hal_mcuctrl_bandgap_disable>:
+am_hal_mcuctrl_bandgap_disable(void)
+{
+    //
+    // Disable the Bandgap in the MCUCTRL.
+    //
+    AM_REG(MCUCTRL, BANDGAPEN) = ~AM_REG_MCUCTRL_BANDGAPEN_BGPEN_M;
+    1988:	4b02      	ldr	r3, [pc, #8]	; (1994 <am_hal_mcuctrl_bandgap_disable+0xc>)
+    198a:	f06f 0201 	mvn.w	r2, #1
+    198e:	601a      	str	r2, [r3, #0]
+    1990:	4770      	bx	lr
+    1992:	bf00      	nop
+    1994:	400200fc 	.word	0x400200fc
+
+00001998 <am_hal_mcuctrl_bucks_enable>:
+am_hal_mcuctrl_bucks_enable(void)
+{
+    //
+    // Enable the core buck converter in the MCUCTRL.
+    //
+    AM_BFW(MCUCTRL, SUPPLYSRC, COREBUCKEN, 1);
+    1998:	4b08      	ldr	r3, [pc, #32]	; (19bc <am_hal_mcuctrl_bucks_enable+0x24>)
+    AM_BFW(MCUCTRL, SUPPLYSRC, MEMBUCKEN, 1);
+
+    //
+    // Poll until core buck is enabled.
+    //
+    while( !AM_BFR(MCUCTRL, SUPPLYSTATUS, COREBUCKON) );
+    199a:	4a09      	ldr	r2, [pc, #36]	; (19c0 <am_hal_mcuctrl_bucks_enable+0x28>)
+    AM_BFW(MCUCTRL, SUPPLYSRC, COREBUCKEN, 1);
+    199c:	6819      	ldr	r1, [r3, #0]
+    199e:	f041 0002 	orr.w	r0, r1, #2
+    19a2:	6018      	str	r0, [r3, #0]
+    AM_BFW(MCUCTRL, SUPPLYSRC, MEMBUCKEN, 1);
+    19a4:	6819      	ldr	r1, [r3, #0]
+    19a6:	f041 0001 	orr.w	r0, r1, #1
+    19aa:	6018      	str	r0, [r3, #0]
+    while( !AM_BFR(MCUCTRL, SUPPLYSTATUS, COREBUCKON) );
+    19ac:	6813      	ldr	r3, [r2, #0]
+    19ae:	0799      	lsls	r1, r3, #30
+    19b0:	d5fc      	bpl.n	19ac <am_hal_mcuctrl_bucks_enable+0x14>
+
+    //
+    // Poll until SRAM buck is enabled.
+    //
+    while( !AM_BFR(MCUCTRL, SUPPLYSTATUS, MEMBUCKON) );
+    19b2:	4a03      	ldr	r2, [pc, #12]	; (19c0 <am_hal_mcuctrl_bucks_enable+0x28>)
+    19b4:	6811      	ldr	r1, [r2, #0]
+    19b6:	07cb      	lsls	r3, r1, #31
+    19b8:	d5fc      	bpl.n	19b4 <am_hal_mcuctrl_bucks_enable+0x1c>
+}
+    19ba:	4770      	bx	lr
+    19bc:	40020010 	.word	0x40020010
+    19c0:	40020014 	.word	0x40020014
+
+000019c4 <am_hal_reset_por>:
+void am_hal_reset_por(void)
+{
+    //
+    // Write the POR key to the software POR register.
+    //
+    AM_REG(RSTGEN, SWPOR) =
+    19c4:	4b01      	ldr	r3, [pc, #4]	; (19cc <am_hal_reset_por+0x8>)
+    19c6:	22d4      	movs	r2, #212	; 0xd4
+    19c8:	601a      	str	r2, [r3, #0]
+    19ca:	4770      	bx	lr
+    19cc:	40000008 	.word	0x40000008
+
+000019d0 <am_hal_reset_poi>:
+void am_hal_reset_poi(void)
+{
+    //
+    // Write the POI key to the software POI register.
+    //
+    AM_REG(RSTGEN, SWPOI) =
+    19d0:	4b01      	ldr	r3, [pc, #4]	; (19d8 <am_hal_reset_poi+0x8>)
+    19d2:	221b      	movs	r2, #27
+    19d4:	601a      	str	r2, [r3, #0]
+    19d6:	4770      	bx	lr
+    19d8:	40000004 	.word	0x40000004
+
+000019dc <am_hal_reset_status_get>:
+uint32_t am_hal_reset_status_get(void)
+{
+    //
+    // Retrieve the reset generator status bits
+    //
+    return AM_REG(RSTGEN, STAT);
+    19dc:	4b01      	ldr	r3, [pc, #4]	; (19e4 <am_hal_reset_status_get+0x8>)
+    19de:	6818      	ldr	r0, [r3, #0]
+}
+    19e0:	4770      	bx	lr
+    19e2:	bf00      	nop
+    19e4:	4000000c 	.word	0x4000000c
+
+000019e8 <am_hal_reset_status_clear>:
+//! @return None.
+//
+//*****************************************************************************
+void am_hal_reset_status_clear(void)
+{
+    AM_REG(RSTGEN, CLRSTAT) = AM_REG_RSTGEN_CLRSTAT_CLRSTAT(1);
+    19e8:	4b01      	ldr	r3, [pc, #4]	; (19f0 <am_hal_reset_status_clear+0x8>)
+    19ea:	2201      	movs	r2, #1
+    19ec:	601a      	str	r2, [r3, #0]
+    19ee:	4770      	bx	lr
+    19f0:	40000010 	.word	0x40000010
+
+000019f4 <am_hal_rtc_osc_select>:
+    // Set XT if flag is set.
+    // Otherwise configure for LFRC.
+    //
+    if (ui32OSC)
+    {
+        AM_REG(CLKGEN, OCTRL) |= AM_REG_CLKGEN_OCTRL_OSEL_M;
+    19f4:	4a05      	ldr	r2, [pc, #20]	; (1a0c <am_hal_rtc_osc_select+0x18>)
+    19f6:	6813      	ldr	r3, [r2, #0]
+    if (ui32OSC)
+    19f8:	b918      	cbnz	r0, 1a02 <am_hal_rtc_osc_select+0xe>
+    }
+    else
+    {
+        AM_REG(CLKGEN, OCTRL) &= ~AM_REG_CLKGEN_OCTRL_OSEL_M;
+    19fa:	f023 0080 	bic.w	r0, r3, #128	; 0x80
+    19fe:	6010      	str	r0, [r2, #0]
+    1a00:	4770      	bx	lr
+        AM_REG(CLKGEN, OCTRL) |= AM_REG_CLKGEN_OCTRL_OSEL_M;
+    1a02:	f043 0180 	orr.w	r1, r3, #128	; 0x80
+    1a06:	6011      	str	r1, [r2, #0]
+    1a08:	4770      	bx	lr
+    1a0a:	bf00      	nop
+    1a0c:	4000400c 	.word	0x4000400c
+
+00001a10 <am_hal_rtc_osc_disable>:
+am_hal_rtc_osc_disable(void)
+{
+    //
+    // Stop the RTC Oscillator.
+    //
+    AM_BFW(RTC, RTCCTL, RSTOP, 1);
+    1a10:	4a02      	ldr	r2, [pc, #8]	; (1a1c <am_hal_rtc_osc_disable+0xc>)
+    1a12:	6813      	ldr	r3, [r2, #0]
+    1a14:	f043 0010 	orr.w	r0, r3, #16
+    1a18:	6010      	str	r0, [r2, #0]
+    1a1a:	4770      	bx	lr
+    1a1c:	40004050 	.word	0x40004050
+
+00001a20 <am_hal_sysctrl_sleep>:
+        (AM_BFM(MCUCTRL, TPIUCTRL, ENABLE) == AM_REG_MCUCTRL_TPIUCTRL_ENABLE_DIS))
+    {
+        //
+        // Prepare the core for deepsleep (write 1 to the DEEPSLEEP bit).
+        //
+        AM_BFW(SYSCTRL, SCR, SLEEPDEEP, 1);
+    1a20:	4a08      	ldr	r2, [pc, #32]	; (1a44 <am_hal_sysctrl_sleep+0x24>)
+    if ((bSleepDeep == AM_HAL_SYSCTRL_SLEEP_DEEP) &&
+    1a22:	b118      	cbz	r0, 1a2c <am_hal_sysctrl_sleep+0xc>
+        (AM_BFM(MCUCTRL, TPIUCTRL, ENABLE) == AM_REG_MCUCTRL_TPIUCTRL_ENABLE_DIS))
+    1a24:	4b08      	ldr	r3, [pc, #32]	; (1a48 <am_hal_sysctrl_sleep+0x28>)
+    1a26:	6818      	ldr	r0, [r3, #0]
+    if ((bSleepDeep == AM_HAL_SYSCTRL_SLEEP_DEEP) &&
+    1a28:	07c3      	lsls	r3, r0, #31
+    1a2a:	d505      	bpl.n	1a38 <am_hal_sysctrl_sleep+0x18>
+    }
+    else
+    {
+        AM_BFW(SYSCTRL, SCR, SLEEPDEEP, 0);
+    1a2c:	6811      	ldr	r1, [r2, #0]
+    1a2e:	f021 0304 	bic.w	r3, r1, #4
+    1a32:	6013      	str	r3, [r2, #0]
+    }
+
+    //
+    // Go to sleep.
+    //
+    AM_ASM_WFI;
+    1a34:	bf30      	wfi
+    1a36:	4770      	bx	lr
+        AM_BFW(SYSCTRL, SCR, SLEEPDEEP, 1);
+    1a38:	6810      	ldr	r0, [r2, #0]
+    1a3a:	f040 0104 	orr.w	r1, r0, #4
+    1a3e:	6011      	str	r1, [r2, #0]
+    AM_ASM_WFI;
+    1a40:	bf30      	wfi
+    1a42:	4770      	bx	lr
+    1a44:	e000ed10 	.word	0xe000ed10
+    1a48:	40020250 	.word	0x40020250
+
+00001a4c <am_hal_tpiu_enable>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_hal_tpiu_enable(am_hal_tpiu_config_t *psConfig)
+{
+    1a4c:	b538      	push	{r3, r4, r5, lr}
+    ui32ITMbitrate = psConfig->ui32SetItmBaud;
+
+    //
+    // TPIU formatter & flush control register.
+    //
+    AM_REG(TPIU, FFCR) = 0;
+    1a4e:	4a24      	ldr	r2, [pc, #144]	; (1ae0 <am_hal_tpiu_enable+0x94>)
+    ui32ITMbitrate = psConfig->ui32SetItmBaud;
+    1a50:	6803      	ldr	r3, [r0, #0]
+    AM_REG(TPIU, FFCR) = 0;
+    1a52:	2100      	movs	r1, #0
+    1a54:	6011      	str	r1, [r2, #0]
+
+    if ( ui32ITMbitrate )
+    1a56:	b313      	cbz	r3, 1a9e <am_hal_tpiu_enable+0x52>
+    {
+        //
+        // Set the Current Parallel Port Size (note - only 1 bit can be set).
+        //
+        AM_REG(TPIU, CSPSR) = AM_REG_TPIU_CSPSR_CWIDTH_1BIT;
+    1a58:	f5a2 7c40 	sub.w	ip, r2, #768	; 0x300
+    1a5c:	2101      	movs	r1, #1
+
+        //
+        // Use some default assumptions to set the ITM frequency.
+        //
+        if ( (ui32ITMbitrate < AM_HAL_TPIU_BAUD_57600 )  ||
+    1a5e:	4c21      	ldr	r4, [pc, #132]	; (1ae4 <am_hal_tpiu_enable+0x98>)
+             (ui32ITMbitrate > AM_HAL_TPIU_BAUD_2M ) )
+        {
+            ui32ITMbitrate = AM_HAL_TPIU_BAUD_DEFAULT;
+    1a60:	4d21      	ldr	r5, [pc, #132]	; (1ae8 <am_hal_tpiu_enable+0x9c>)
+        AM_REG(TPIU, CSPSR) = AM_REG_TPIU_CSPSR_CWIDTH_1BIT;
+    1a62:	f8cc 1000 	str.w	r1, [ip]
+        if ( (ui32ITMbitrate < AM_HAL_TPIU_BAUD_57600 )  ||
+    1a66:	f5a3 4e61 	sub.w	lr, r3, #57600	; 0xe100
+            ui32ITMbitrate = AM_HAL_TPIU_BAUD_DEFAULT;
+    1a6a:	45a6      	cmp	lr, r4
+    1a6c:	bf94      	ite	ls
+    1a6e:	461c      	movls	r4, r3
+    1a70:	462c      	movhi	r4, r5
+        }
+
+        //
+        // Get the current HFRC frequency.
+        //
+        ui32HFRC = am_hal_clkgen_sysclk_get();
+    1a72:	f7ff feb5 	bl	17e0 <am_hal_clkgen_sysclk_get>
+
+        //
+        // Compute the SWO scaler value.
+        //
+        if ( ui32HFRC != 0xFFFFFFFF )
+    1a76:	1c43      	adds	r3, r0, #1
+    1a78:	d02f      	beq.n	1ada <am_hal_tpiu_enable+0x8e>
+        {
+            ui32SWOscaler = ((ui32HFRC / 8) / ui32ITMbitrate) - 1;
+    1a7a:	08c2      	lsrs	r2, r0, #3
+    1a7c:	fbb2 f3f4 	udiv	r3, r2, r4
+    1a80:	1e5d      	subs	r5, r3, #1
+    1a82:	b2a8      	uxth	r0, r5
+        }
+
+        //
+        // Set the scaler value.
+        //
+        AM_REG(TPIU, ACPR) = AM_REG_TPIU_ACPR_SWOSCALER(ui32SWOscaler);
+    1a84:	4a19      	ldr	r2, [pc, #100]	; (1aec <am_hal_tpiu_enable+0xa0>)
+
+        //
+        // Set for UART mode
+        //
+        AM_REG(TPIU, SPPR) = AM_REG_TPIU_SPPR_TXMODE_UART;
+    1a86:	4c1a      	ldr	r4, [pc, #104]	; (1af0 <am_hal_tpiu_enable+0xa4>)
+
+        //
+        // Make sure we are not in test mode (important for proper deep sleep
+        // operation).
+        //
+        AM_REG(TPIU, ITCTRL) = AM_REG_TPIU_ITCTRL_MODE_NORMAL;
+    1a88:	491a      	ldr	r1, [pc, #104]	; (1af4 <am_hal_tpiu_enable+0xa8>)
+
+        //
+        // Enable the TPIU clock source in MCU control.
+        // Set TPIU clock for HFRC/8 (3 MHz) operation.
+        //
+        AM_REGn(MCUCTRL, 0, TPIUCTRL) = AM_REG_MCUCTRL_TPIUCTRL_CLKSEL_3MHZ |
+    1a8a:	4b1b      	ldr	r3, [pc, #108]	; (1af8 <am_hal_tpiu_enable+0xac>)
+        AM_REG(TPIU, ACPR) = AM_REG_TPIU_ACPR_SWOSCALER(ui32SWOscaler);
+    1a8c:	6010      	str	r0, [r2, #0]
+        AM_REG(TPIU, SPPR) = AM_REG_TPIU_SPPR_TXMODE_UART;
+    1a8e:	2502      	movs	r5, #2
+        AM_REG(TPIU, ITCTRL) = AM_REG_TPIU_ITCTRL_MODE_NORMAL;
+    1a90:	2000      	movs	r0, #0
+        AM_REGn(MCUCTRL, 0, TPIUCTRL) = AM_REG_MCUCTRL_TPIUCTRL_CLKSEL_3MHZ |
+    1a92:	f240 2201 	movw	r2, #513	; 0x201
+        AM_REG(TPIU, SPPR) = AM_REG_TPIU_SPPR_TXMODE_UART;
+    1a96:	6025      	str	r5, [r4, #0]
+        AM_REG(TPIU, ITCTRL) = AM_REG_TPIU_ITCTRL_MODE_NORMAL;
+    1a98:	6008      	str	r0, [r1, #0]
+        AM_REGn(MCUCTRL, 0, TPIUCTRL) = AM_REG_MCUCTRL_TPIUCTRL_CLKSEL_3MHZ |
+    1a9a:	601a      	str	r2, [r3, #0]
+    1a9c:	e010      	b.n	1ac0 <am_hal_tpiu_enable+0x74>
+        //
+
+        //
+        // Set the Asynchronous Clock Prescaler Register.
+        //
+        AM_REG(TPIU, ACPR) = psConfig->ui32ClockPrescaler;
+    1a9e:	4c13      	ldr	r4, [pc, #76]	; (1aec <am_hal_tpiu_enable+0xa0>)
+    1aa0:	6905      	ldr	r5, [r0, #16]
+    1aa2:	6025      	str	r5, [r4, #0]
+
+        //
+        // Set the Selected Pin Protocol Register.
+        //  e.g. AM_REG_TPIU_SPPR_TXMODE_UART
+        //
+        AM_REG(TPIU, SPPR) = psConfig->ui32PinProtocol;
+    1aa4:	6882      	ldr	r2, [r0, #8]
+    1aa6:	f8c4 20e0 	str.w	r2, [r4, #224]	; 0xe0
+        //
+        // Set the Current Parallel Port Size (note - only 1 bit can be set).
+        // This may be redundant if the user has selected a serial protocol,
+        // but we'll set it anyway.
+        //
+        AM_REG(TPIU, CSPSR) = (1 << (psConfig->ui32ParallelPortSize - 1));
+    1aaa:	68c3      	ldr	r3, [r0, #12]
+    1aac:	4c13      	ldr	r4, [pc, #76]	; (1afc <am_hal_tpiu_enable+0xb0>)
+
+        //
+        // Set the clock freq in the MCUCTRL register.
+        //
+        AM_REG(MCUCTRL, TPIUCTRL) |= psConfig->ui32TraceClkIn;
+    1aae:	4912      	ldr	r1, [pc, #72]	; (1af8 <am_hal_tpiu_enable+0xac>)
+        AM_REG(TPIU, CSPSR) = (1 << (psConfig->ui32ParallelPortSize - 1));
+    1ab0:	1e5d      	subs	r5, r3, #1
+    1ab2:	2201      	movs	r2, #1
+    1ab4:	40aa      	lsls	r2, r5
+    1ab6:	6022      	str	r2, [r4, #0]
+        AM_REG(MCUCTRL, TPIUCTRL) |= psConfig->ui32TraceClkIn;
+    1ab8:	6840      	ldr	r0, [r0, #4]
+    1aba:	680b      	ldr	r3, [r1, #0]
+    1abc:	4303      	orrs	r3, r0
+    1abe:	600b      	str	r3, [r1, #0]
+    }
+
+    // wait for 50us for the data to flush out
+    am_hal_flash_delay(FLASH_CYCLES_US(50));
+    1ac0:	f7ff fe8e 	bl	17e0 <am_hal_clkgen_sysclk_get>
+    1ac4:	4c0e      	ldr	r4, [pc, #56]	; (1b00 <am_hal_tpiu_enable+0xb4>)
+    1ac6:	fba4 3100 	umull	r3, r1, r4, r0
+    1aca:	0c88      	lsrs	r0, r1, #18
+    1acc:	2332      	movs	r3, #50	; 0x32
+    1ace:	fb03 f000 	mul.w	r0, r3, r0
+}
+    1ad2:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
+    am_hal_flash_delay(FLASH_CYCLES_US(50));
+    1ad6:	f7ff bea3 	b.w	1820 <am_hal_flash_delay>
+    1ada:	2002      	movs	r0, #2
+    1adc:	e7d2      	b.n	1a84 <am_hal_tpiu_enable+0x38>
+    1ade:	bf00      	nop
+    1ae0:	e0040304 	.word	0xe0040304
+    1ae4:	001da380 	.word	0x001da380
+    1ae8:	000f4240 	.word	0x000f4240
+    1aec:	e0040010 	.word	0xe0040010
+    1af0:	e00400f0 	.word	0xe00400f0
+    1af4:	e0040f00 	.word	0xe0040f00
+    1af8:	40020250 	.word	0x40020250
+    1afc:	e0040004 	.word	0xe0040004
+    1b00:	165e9f81 	.word	0x165e9f81
+
+00001b04 <am_hal_tpiu_disable>:
+am_hal_tpiu_disable(void)
+{
+    //
+    // Disable the TPIU clock source in MCU control.
+    //
+    AM_REG(MCUCTRL, TPIUCTRL) = AM_REG_MCUCTRL_TPIUCTRL_CLKSEL_0MHz |
+    1b04:	4b01      	ldr	r3, [pc, #4]	; (1b0c <am_hal_tpiu_disable+0x8>)
+    1b06:	2200      	movs	r2, #0
+    1b08:	601a      	str	r2, [r3, #0]
+    1b0a:	4770      	bx	lr
+    1b0c:	40020250 	.word	0x40020250
+
+00001b10 <am_hal_vcomp_disable>:
+//
+//*****************************************************************************
+void
+am_hal_vcomp_disable(void)
+{
+    AM_REG(VCOMP, PWDKEY) = AM_REG_VCOMP_PWDKEY_KEYVAL;
+    1b10:	4b01      	ldr	r3, [pc, #4]	; (1b18 <am_hal_vcomp_disable+0x8>)
+    1b12:	2237      	movs	r2, #55	; 0x37
+    1b14:	601a      	str	r2, [r3, #0]
+    1b16:	4770      	bx	lr
+    1b18:	4000c008 	.word	0x4000c008
+
+00001b1c <am_hal_wdt_init>:
+
+    //
+    // Write the interrupt and reset count values to a temporary variable.
+    //
+    ui32ConfigVal = psConfig->ui32Config;
+    ui32ConfigVal |= AM_WRITE_SM(AM_REG_WDT_CFG_INTVAL, ui16IntCount);
+    1b1c:	8883      	ldrh	r3, [r0, #4]
+    ui32ConfigVal |= AM_WRITE_SM(AM_REG_WDT_CFG_RESVAL, ui16ResetCount);
+    1b1e:	88c2      	ldrh	r2, [r0, #6]
+    bool bResetEnabled = psConfig->ui32Config & AM_HAL_WDT_ENABLE_RESET;
+    1b20:	6801      	ldr	r1, [r0, #0]
+    ui32ConfigVal |= AM_WRITE_SM(AM_REG_WDT_CFG_RESVAL, ui16ResetCount);
+    1b22:	0212      	lsls	r2, r2, #8
+    ui32ConfigVal |= AM_WRITE_SM(AM_REG_WDT_CFG_INTVAL, ui16IntCount);
+    1b24:	0418      	lsls	r0, r3, #16
+    1b26:	f400 037f 	and.w	r3, r0, #16711680	; 0xff0000
+    ui32ConfigVal |= AM_WRITE_SM(AM_REG_WDT_CFG_RESVAL, ui16ResetCount);
+    1b2a:	b290      	uxth	r0, r2
+    1b2c:	4303      	orrs	r3, r0
+    if ( bInterruptEnabled )
+    {
+        //
+        // Enable the watchdog interrupt if the configuration calls for them.
+        //
+        AM_REGn(WDT, 0, INTEN) |= AM_REG_WDT_INTEN_WDTINT_M;
+    1b2e:	4811      	ldr	r0, [pc, #68]	; (1b74 <am_hal_wdt_init+0x58>)
+    if ( bInterruptEnabled )
+    1b30:	f011 0f02 	tst.w	r1, #2
+    ui32ConfigVal |= AM_WRITE_SM(AM_REG_WDT_CFG_RESVAL, ui16ResetCount);
+    1b34:	ea43 0301 	orr.w	r3, r3, r1
+    bool bResetEnabled = psConfig->ui32Config & AM_HAL_WDT_ENABLE_RESET;
+    1b38:	f001 0204 	and.w	r2, r1, #4
+        AM_REGn(WDT, 0, INTEN) |= AM_REG_WDT_INTEN_WDTINT_M;
+    1b3c:	6801      	ldr	r1, [r0, #0]
+    1b3e:	bf14      	ite	ne
+    1b40:	f041 0101 	orrne.w	r1, r1, #1
+    {
+        //
+        // Disable the watchdog interrupt if the configuration doesn't call for
+        // watchdog interrupts.
+        //
+        AM_REGn(WDT, 0, INTEN) &= ~AM_REG_WDT_INTEN_WDTINT_M;
+    1b44:	f021 0101 	biceq.w	r1, r1, #1
+    1b48:	6001      	str	r1, [r0, #0]
+    {
+
+        //
+        // Also enable watchdog resets in the reset module.
+        //
+        AM_REG(RSTGEN, CFG) |= AM_REG_RSTGEN_CFG_WDREN_M;
+    1b4a:	f04f 4c80 	mov.w	ip, #1073741824	; 0x40000000
+    if ( bResetEnabled )
+    1b4e:	b942      	cbnz	r2, 1b62 <am_hal_wdt_init+0x46>
+    else
+    {
+        //
+        // Disable watchdog resets in the reset module.
+        //
+        AM_REG(RSTGEN, CFG) &= ~AM_REG_RSTGEN_CFG_WDREN_M;
+    1b50:	f8dc 2000 	ldr.w	r2, [ip]
+    1b54:	f022 0002 	bic.w	r0, r2, #2
+    1b58:	f8cc 0000 	str.w	r0, [ip]
+    }
+
+    //
+    // Write the saved value to the watchdog configuration register.
+    //
+    AM_REGn(WDT, 0, CFG) = ui32ConfigVal;
+    1b5c:	4806      	ldr	r0, [pc, #24]	; (1b78 <am_hal_wdt_init+0x5c>)
+    1b5e:	6003      	str	r3, [r0, #0]
+    1b60:	4770      	bx	lr
+        AM_REG(RSTGEN, CFG) |= AM_REG_RSTGEN_CFG_WDREN_M;
+    1b62:	f8dc 1000 	ldr.w	r1, [ip]
+    AM_REGn(WDT, 0, CFG) = ui32ConfigVal;
+    1b66:	4804      	ldr	r0, [pc, #16]	; (1b78 <am_hal_wdt_init+0x5c>)
+        AM_REG(RSTGEN, CFG) |= AM_REG_RSTGEN_CFG_WDREN_M;
+    1b68:	f041 0202 	orr.w	r2, r1, #2
+    1b6c:	f8cc 2000 	str.w	r2, [ip]
+    AM_REGn(WDT, 0, CFG) = ui32ConfigVal;
+    1b70:	6003      	str	r3, [r0, #0]
+    1b72:	4770      	bx	lr
+    1b74:	40024200 	.word	0x40024200
+    1b78:	40024000 	.word	0x40024000
+
+00001b7c <am_hal_wdt_start>:
+{
+    //
+    // Make sure the watchdog timer is in the "reset" state, and then set the
+    // enable bit to start counting.
+    //
+    AM_REGn(WDT, 0, CFG) |= AM_REG_WDT_CFG_WDTEN_M;
+    1b7c:	4906      	ldr	r1, [pc, #24]	; (1b98 <am_hal_wdt_start+0x1c>)
+    AM_REGn(WDT, 0, RSTRT) |= AM_REG_WDT_RSTRT_RSTRT_KEYVALUE;
+    1b7e:	4b07      	ldr	r3, [pc, #28]	; (1b9c <am_hal_wdt_start+0x20>)
+    AM_REGn(WDT, 0, CFG) |= AM_REG_WDT_CFG_WDTEN_M;
+    1b80:	680a      	ldr	r2, [r1, #0]
+
+    //
+    // Bug workaround for all Apollo silicon.
+    //
+    g_ui32Bugfix = AM_REGn(WDT, 0, RSTRT);
+    1b82:	4807      	ldr	r0, [pc, #28]	; (1ba0 <am_hal_wdt_start+0x24>)
+    AM_REGn(WDT, 0, CFG) |= AM_REG_WDT_CFG_WDTEN_M;
+    1b84:	f042 0201 	orr.w	r2, r2, #1
+    1b88:	600a      	str	r2, [r1, #0]
+    AM_REGn(WDT, 0, RSTRT) |= AM_REG_WDT_RSTRT_RSTRT_KEYVALUE;
+    1b8a:	6819      	ldr	r1, [r3, #0]
+    1b8c:	f041 02b2 	orr.w	r2, r1, #178	; 0xb2
+    1b90:	601a      	str	r2, [r3, #0]
+    g_ui32Bugfix = AM_REGn(WDT, 0, RSTRT);
+    1b92:	681b      	ldr	r3, [r3, #0]
+    1b94:	6003      	str	r3, [r0, #0]
+    1b96:	4770      	bx	lr
+    1b98:	40024000 	.word	0x40024000
+    1b9c:	40024004 	.word	0x40024004
+    1ba0:	1000113c 	.word	0x1000113c
+
+00001ba4 <am_hal_wdt_halt>:
+{
+
+    //
+    // Clear the watchdog enable bit.
+    //
+    AM_REGn(WDT, 0, CFG) &= ~AM_REG_WDT_CFG_WDTEN_M;
+    1ba4:	4a02      	ldr	r2, [pc, #8]	; (1bb0 <am_hal_wdt_halt+0xc>)
+    1ba6:	6813      	ldr	r3, [r2, #0]
+    1ba8:	f023 0001 	bic.w	r0, r3, #1
+    1bac:	6010      	str	r0, [r2, #0]
+    1bae:	4770      	bx	lr
+    1bb0:	40024000 	.word	0x40024000
+
+00001bb4 <am_hal_wdt_int_clear>:
+//
+//*****************************************************************************
+void
+am_hal_wdt_int_clear(void)
+{
+    AM_REGn(WDT, 0, INTCLR) = AM_REG_WDT_INTCLR_WDTINT_M;
+    1bb4:	4b01      	ldr	r3, [pc, #4]	; (1bbc <am_hal_wdt_int_clear+0x8>)
+    1bb6:	2201      	movs	r2, #1
+    1bb8:	601a      	str	r2, [r3, #0]
+    1bba:	4770      	bx	lr
+    1bbc:	40024208 	.word	0x40024208
+    1bc0:	65746e49 	.word	0x65746e49
+    1bc4:	70757272 	.word	0x70757272
+    1bc8:	0a212174 	.word	0x0a212174
+    1bcc:	00000000 	.word	0x00000000
+    1bd0:	65736552 	.word	0x65736552
+    1bd4:	74532074 	.word	0x74532074
+    1bd8:	73757461 	.word	0x73757461
+    1bdc:	67655220 	.word	0x67655220
+    1be0:	65747369 	.word	0x65747369
+    1be4:	203d2072 	.word	0x203d2072
+    1be8:	30257830 	.word	0x30257830
+    1bec:	000a7832 	.word	0x000a7832
+    1bf0:	65776f50 	.word	0x65776f50
+    1bf4:	79432072 	.word	0x79432072
+    1bf8:	64656c63 	.word	0x64656c63
+    1bfc:	0000000a 	.word	0x0000000a
+    1c00:	63746157 	.word	0x63746157
+    1c04:	676f6468 	.word	0x676f6468
+    1c08:	73655220 	.word	0x73655220
+    1c0c:	000a7465 	.word	0x000a7465
+    1c10:	75626544 	.word	0x75626544
+    1c14:	72656767 	.word	0x72656767
+    1c18:	696e4920 	.word	0x696e4920
+    1c1c:	74616974 	.word	0x74616974
+    1c20:	52206465 	.word	0x52206465
+    1c24:	74657365 	.word	0x74657365
+    1c28:	0000000a 	.word	0x0000000a
+    1c2c:	74666f53 	.word	0x74666f53
+    1c30:	65726177 	.word	0x65726177
+    1c34:	494f5020 	.word	0x494f5020
+    1c38:	6f702820 	.word	0x6f702820
+    1c3c:	20726577 	.word	0x20726577
+    1c40:	72206e6f 	.word	0x72206e6f
+    1c44:	74657365 	.word	0x74657365
+    1c48:	746e6920 	.word	0x746e6920
+    1c4c:	616e7265 	.word	0x616e7265
+    1c50:	7473206c 	.word	0x7473206c
+    1c54:	29657461 	.word	0x29657461
+    1c58:	0000000a 	.word	0x0000000a
+    1c5c:	74666f53 	.word	0x74666f53
+    1c60:	65726177 	.word	0x65726177
+    1c64:	524f5020 	.word	0x524f5020
+    1c68:	696e4920 	.word	0x696e4920
+    1c6c:	74616974 	.word	0x74616974
+    1c70:	52206465 	.word	0x52206465
+    1c74:	74657365 	.word	0x74657365
+    1c78:	0000000a 	.word	0x0000000a
+    1c7c:	776f7242 	.word	0x776f7242
+    1c80:	74756f6e 	.word	0x74756f6e
+    1c84:	74654420 	.word	0x74654420
+    1c88:	6f746365 	.word	0x6f746365
+    1c8c:	6e492072 	.word	0x6e492072
+    1c90:	61697469 	.word	0x61697469
+    1c94:	20646574 	.word	0x20646574
+    1c98:	65736552 	.word	0x65736552
+    1c9c:	00000a74 	.word	0x00000a74
+    1ca0:	65747845 	.word	0x65747845
+    1ca4:	6c616e72 	.word	0x6c616e72
+    1ca8:	73655220 	.word	0x73655220
+    1cac:	50207465 	.word	0x50207465
+    1cb0:	49206e69 	.word	0x49206e69
+    1cb4:	6974696e 	.word	0x6974696e
+    1cb8:	64657461 	.word	0x64657461
+    1cbc:	69685420 	.word	0x69685420
+    1cc0:	65522073 	.word	0x65522073
+    1cc4:	0a746573 	.word	0x0a746573
+    1cc8:	00000000 	.word	0x00000000
+    1ccc:	654e2020 	.word	0x654e2020
+    1cd0:	69207478 	.word	0x69207478
+    1cd4:	7265746e 	.word	0x7265746e
+    1cd8:	74707572 	.word	0x74707572
+    1cdc:	20736920 	.word	0x20736920
+    1ce0:	2c544457 	.word	0x2c544457
+    1ce4:	206f7320 	.word	0x206f7320
+    1ce8:	6e692035 	.word	0x6e692035
+    1cec:	72726574 	.word	0x72726574
+    1cf0:	73747075 	.word	0x73747075
+    1cf4:	6f687320 	.word	0x6f687320
+    1cf8:	20646c75 	.word	0x20646c75
+    1cfc:	7563636f 	.word	0x7563636f
+    1d00:	000a2e72 	.word	0x000a2e72
+    1d04:	654e2020 	.word	0x654e2020
+    1d08:	69207478 	.word	0x69207478
+    1d0c:	7265746e 	.word	0x7265746e
+    1d10:	74707572 	.word	0x74707572
+    1d14:	20736920 	.word	0x20736920
+    1d18:	20746f6e 	.word	0x20746f6e
+    1d1c:	2c544457 	.word	0x2c544457
+    1d20:	206f7320 	.word	0x206f7320
+    1d24:	796c6e6f 	.word	0x796c6e6f
+    1d28:	69203320 	.word	0x69203320
+    1d2c:	7265746e 	.word	0x7265746e
+    1d30:	74707572 	.word	0x74707572
+    1d34:	68732073 	.word	0x68732073
+    1d38:	646c756f 	.word	0x646c756f
+    1d3c:	63636f20 	.word	0x63636f20
+    1d40:	0a2e7275 	.word	0x0a2e7275
+    1d44:	00000000 	.word	0x00000000
+    1d48:	65736552 	.word	0x65736552
+    1d4c:	74532074 	.word	0x74532074
+    1d50:	20657461 	.word	0x20657461
+    1d54:	63617254 	.word	0x63617254
+    1d58:	676e696b 	.word	0x676e696b
+    1d5c:	61784520 	.word	0x61784520
+    1d60:	656c706d 	.word	0x656c706d
+    1d64:	00000a2e 	.word	0x00000a2e
+    1d68:	0a0a0a0a 	.word	0x0a0a0a0a
+    1d6c:	0a0a0a0a 	.word	0x0a0a0a0a
+    1d70:	0a0a0a0a 	.word	0x0a0a0a0a
+    1d74:	0a0a0a0a 	.word	0x0a0a0a0a
+    1d78:	00000a0a 	.word	0x00000a0a
+
+00001d7c <CSWTCH.4>:
+    1d7c:	016e3600 00b71b00 007a1200 005b8d80     .6n.......z...[.
+    1d8c:	00493e00 003d0900 003450db 002dc6c0     .>I...=..P4...-.

@@ -1,0 +1,27 @@
+0000000_META_hci_patches_v7rc5_withPMI.emp (iram patch)
+Container ID                       59
+Build number                     3089
+User Build                          0
+
+0000000_META_hci_patches_v6_transfer.emp (transfer patch)
+Container ID                       53
+Build number                     3089
+User Build                          0
+
+eight_connections.emp
+Format Version                      1
+Container ID                       20
+Build number                     3089
+User Build                          2
+
+data_length_extension.emp
+Format Version                      1
+Container ID                       21
+Build number                     3089
+User Build                          2
+ 
+sleep_clk_src_apollo.emp
+Format Version                      1
+Container ID                       22
+Build number                     3089
+User Build                          2

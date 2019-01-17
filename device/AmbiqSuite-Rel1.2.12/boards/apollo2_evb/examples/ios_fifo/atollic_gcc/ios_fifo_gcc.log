@@ -1,0 +1,39 @@
+Create.
+Opening 'ios_fifo_gcc'.
+Refreshing '/ios_fifo_gcc'.
+15:44:08 **** Clean-only build of configuration bin for project ios_fifo_gcc ****
+"\\usr\\bin\\rm" -rf ios_fifo_gcc utils/am_util_stdio.d utils/am_util_delay.o utils/am_util_stdio.o ios_fifo_gcc.elf utils/am_util_delay.d src/ios_fifo.o startup_gcc.d startup_gcc.o src/ios_fifo.d 
+Cannot run program "\usr\bin\rm": Launching failed
+
+Error: Program "\usr\bin\rm" not found in PATH
+PATH=[C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\ARMTools\bin;C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\Tools;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 8.1.0/ide/jre/bin/client;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 8.1.0/ide/jre/bin;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 8.1.0/ide/jre/lib/i386;C:\cygwin64\bin;C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\ide;C:\Program Files (x86)\GNU Tools ARM Embedded\5.4 2016q3\bin;C:\Keil_v5\UV4;C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin;C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Users\jenkinsadmin\AppData\Local\Programs\Python\Python36-32p;C:\Program Files\Coverity\Coverity Static Analysis\bin;C:\Keil_v5\UV4;C:\Jenkins\workspace\AmbiqSuite\workspace\boards\apollo2_evb\examples\ios_fifo\atollic_gcc]
+
+
+15:44:08 Build Finished (took 46ms)
+
+15:44:08 **** Clean-only build of configuration bin for project ios_fifo_gcc ****
+
+15:44:08 Build Finished (took 0ms)
+
+15:44:08 **** Rebuild of configuration bin for project ios_fifo_gcc ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\..\..\..\..\..\utils\am_util_stdio.c -mthumb -std=c99 -DAM_PACKAGE_BGA -DAM_PART_APOLLO2 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../src -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../boards/apollo2_evb/bsp -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../.. -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../utils -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../devices -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../mcu/apollo2 -O0 -g -Wall -specs=nano.specs -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -ffunction-sections -fdata-sections -MMD -MP -O0 -Dgcc -o utils\am_util_stdio.o 
+arm-atollic-eabi-gcc -c ..\..\..\..\..\..\utils\am_util_delay.c -mthumb -std=c99 -DAM_PACKAGE_BGA -DAM_PART_APOLLO2 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../src -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../boards/apollo2_evb/bsp -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../.. -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../utils -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../devices -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../mcu/apollo2 -O0 -g -Wall -specs=nano.specs -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -ffunction-sections -fdata-sections -MMD -MP -O0 -Dgcc -o utils\am_util_delay.o 
+arm-atollic-eabi-gcc -c ..\startup_gcc.c -mthumb -std=c99 -DAM_PACKAGE_BGA -DAM_PART_APOLLO2 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../src -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../boards/apollo2_evb/bsp -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../.. -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../utils -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../devices -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../mcu/apollo2 -O0 -g -Wall -specs=nano.specs -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -ffunction-sections -fdata-sections -MMD -MP -O0 -Dgcc -o startup_gcc.o 
+arm-atollic-eabi-gcc -c ..\..\src\ios_fifo.c -mthumb -std=c99 -DAM_PACKAGE_BGA -DAM_PART_APOLLO2 -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../src -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../boards/apollo2_evb/bsp -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../.. -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../utils -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../devices -IC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/../../../../../mcu/apollo2 -O0 -g -Wall -specs=nano.specs -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -ffunction-sections -fdata-sections -MMD -MP -O0 -Dgcc -o src\ios_fifo.o 
+arm-atollic-eabi-gcc -o ios_fifo_gcc.elf src\ios_fifo.o startup_gcc.o utils\am_util_delay.o utils\am_util_stdio.o ..\..\..\..\bsp\atollic_gcc\bin\libam_bsp_gcc.a ..\..\..\..\..\..\mcu\apollo2\hal\atollic_gcc\bin\libam_hal_gcc.a -TC:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/ios_fifo.ld -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -nostartfiles -static -Wl,--gc-sections,--entry,am_reset_isr,-Map,C:/Jenkins/workspace/AmbiqSuite/workspace/boards/apollo2_evb/examples/ios_fifo/atollic_gcc/bin/ios_fifo_gcc.map -Wl,--start-group -lm -lc -lgcc -Wl,--end-group 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 8.1.0\Tools\arm-atollic-reports.jar sizeinfo list ios_fifo_gcc.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  12528	     72	   6012	  18612	   48b4	ios_fifo_gcc.elf
+Print size information done
+Generate listing file
+Output sent to: ios_fifo_gcc.list
+Generate listing file done
+Generate build reports done
+arm-atollic-eabi-objcopy -Obinary ios_fifo_gcc.elf ios_fifo_gcc.bin 
+Info: Parallel threads used: 2
+
+15:44:09 Build Finished (took 828ms)
+

@@ -1,0 +1,4062 @@
+
+spi_boot_host_gcc.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000034f8  00000000  00000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stack        00001000  10000000  10000000  00030000  2**2
+                  ALLOC
+  2 .data         0000000c  10001000  000034f8  00021000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000354  1000100c  00003504  0002100c  2**2
+                  ALLOC
+  4 .ARM.attributes 00000037  00000000  00000000  0002100c  2**0
+                  CONTENTS, READONLY
+  5 .debug_info   0000942e  00000000  00000000  00021043  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000019a6  00000000  00000000  0002a471  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 00000698  00000000  00000000  0002be17  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_ranges 000011e0  00000000  00000000  0002c4af  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00003a26  00000000  00000000  0002d68f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00002078  00000000  00000000  000310b5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .comment      0000007c  00000000  00000000  0003312d  2**0
+                  CONTENTS, READONLY
+ 12 .debug_frame  00001224  00000000  00000000  000331ac  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_loc    00008483  00000000  00000000  000343d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <g_am_pfnVectors>:
+       0:	00 10 00 10 f9 04 00 00 61 05 00 00 67 05 00 00     ........a...g...
+      10:	67 05 00 00 67 05 00 00 67 05 00 00 00 00 00 00     g...g...g.......
+	...
+      2c:	6d 05 00 00 6d 05 00 00 00 00 00 00 6d 05 00 00     m...m.......m...
+      3c:	6d 05 00 00 6d 05 00 00 6d 05 00 00 6d 05 00 00     m...m...m...m...
+      4c:	6d 05 00 00 6d 05 00 00 6d 05 00 00 6d 05 00 00     m...m...m...m...
+      5c:	6d 05 00 00 6d 05 00 00 71 01 00 00 6d 05 00 00     m...m...q...m...
+      6c:	6d 05 00 00 6d 05 00 00 6d 05 00 00 6d 05 00 00     m...m...m...m...
+      7c:	6d 05 00 00                                         m...
+
+00000080 <configure_pins>:
+// Configure GPIOs for this example
+//
+//*****************************************************************************
+void
+configure_pins(void)
+{
+      80:	b480      	push	{r7}
+      82:	af00      	add	r7, sp, #0
+    //
+    // Configure I/O Master 0 as SPI
+    //
+    am_hal_gpio_pin_config(5, AM_HAL_PIN_5_M0SCK);
+      84:	4b34      	ldr	r3, [pc, #208]	; (158 <configure_pins+0xd8>)
+      86:	2273      	movs	r2, #115	; 0x73
+      88:	601a      	str	r2, [r3, #0]
+      8a:	4a34      	ldr	r2, [pc, #208]	; (15c <configure_pins+0xdc>)
+      8c:	4b33      	ldr	r3, [pc, #204]	; (15c <configure_pins+0xdc>)
+      8e:	681b      	ldr	r3, [r3, #0]
+      90:	f423 03e0 	bic.w	r3, r3, #7340032	; 0x700000
+      94:	6013      	str	r3, [r2, #0]
+      96:	4a32      	ldr	r2, [pc, #200]	; (160 <configure_pins+0xe0>)
+      98:	4b31      	ldr	r3, [pc, #196]	; (160 <configure_pins+0xe0>)
+      9a:	681b      	ldr	r3, [r3, #0]
+      9c:	f423 437f 	bic.w	r3, r3, #65280	; 0xff00
+      a0:	f443 6320 	orr.w	r3, r3, #2560	; 0xa00
+      a4:	6013      	str	r3, [r2, #0]
+      a6:	4b2c      	ldr	r3, [pc, #176]	; (158 <configure_pins+0xd8>)
+      a8:	2200      	movs	r2, #0
+      aa:	601a      	str	r2, [r3, #0]
+    am_hal_gpio_pin_config(6, AM_HAL_PIN_6_M0MISO);
+      ac:	4b2a      	ldr	r3, [pc, #168]	; (158 <configure_pins+0xd8>)
+      ae:	2273      	movs	r2, #115	; 0x73
+      b0:	601a      	str	r2, [r3, #0]
+      b2:	4a2a      	ldr	r2, [pc, #168]	; (15c <configure_pins+0xdc>)
+      b4:	4b29      	ldr	r3, [pc, #164]	; (15c <configure_pins+0xdc>)
+      b6:	681b      	ldr	r3, [r3, #0]
+      b8:	f023 63e0 	bic.w	r3, r3, #117440512	; 0x7000000
+      bc:	6013      	str	r3, [r2, #0]
+      be:	4a28      	ldr	r2, [pc, #160]	; (160 <configure_pins+0xe0>)
+      c0:	4b27      	ldr	r3, [pc, #156]	; (160 <configure_pins+0xe0>)
+      c2:	681b      	ldr	r3, [r3, #0]
+      c4:	f423 037f 	bic.w	r3, r3, #16711680	; 0xff0000
+      c8:	f443 2320 	orr.w	r3, r3, #655360	; 0xa0000
+      cc:	6013      	str	r3, [r2, #0]
+      ce:	4b22      	ldr	r3, [pc, #136]	; (158 <configure_pins+0xd8>)
+      d0:	2200      	movs	r2, #0
+      d2:	601a      	str	r2, [r3, #0]
+    am_hal_gpio_pin_config(7, AM_HAL_PIN_7_M0MOSI);
+      d4:	4b20      	ldr	r3, [pc, #128]	; (158 <configure_pins+0xd8>)
+      d6:	2273      	movs	r2, #115	; 0x73
+      d8:	601a      	str	r2, [r3, #0]
+      da:	4a20      	ldr	r2, [pc, #128]	; (15c <configure_pins+0xdc>)
+      dc:	4b1f      	ldr	r3, [pc, #124]	; (15c <configure_pins+0xdc>)
+      de:	681b      	ldr	r3, [r3, #0]
+      e0:	f023 43e0 	bic.w	r3, r3, #1879048192	; 0x70000000
+      e4:	6013      	str	r3, [r2, #0]
+      e6:	4a1e      	ldr	r2, [pc, #120]	; (160 <configure_pins+0xe0>)
+      e8:	4b1d      	ldr	r3, [pc, #116]	; (160 <configure_pins+0xe0>)
+      ea:	681b      	ldr	r3, [r3, #0]
+      ec:	f023 437f 	bic.w	r3, r3, #4278190080	; 0xff000000
+      f0:	f043 6300 	orr.w	r3, r3, #134217728	; 0x8000000
+      f4:	6013      	str	r3, [r2, #0]
+      f6:	4b18      	ldr	r3, [pc, #96]	; (158 <configure_pins+0xd8>)
+      f8:	2200      	movs	r2, #0
+      fa:	601a      	str	r2, [r3, #0]
+    am_hal_gpio_pin_config(11, AM_HAL_PIN_11_M0nCE0);
+      fc:	4b16      	ldr	r3, [pc, #88]	; (158 <configure_pins+0xd8>)
+      fe:	2273      	movs	r2, #115	; 0x73
+     100:	601a      	str	r2, [r3, #0]
+     102:	4a18      	ldr	r2, [pc, #96]	; (164 <configure_pins+0xe4>)
+     104:	4b17      	ldr	r3, [pc, #92]	; (164 <configure_pins+0xe4>)
+     106:	681b      	ldr	r3, [r3, #0]
+     108:	f423 43e0 	bic.w	r3, r3, #28672	; 0x7000
+     10c:	6013      	str	r3, [r2, #0]
+     10e:	4a16      	ldr	r2, [pc, #88]	; (168 <configure_pins+0xe8>)
+     110:	4b15      	ldr	r3, [pc, #84]	; (168 <configure_pins+0xe8>)
+     112:	681b      	ldr	r3, [r3, #0]
+     114:	f023 437f 	bic.w	r3, r3, #4278190080	; 0xff000000
+     118:	f043 6300 	orr.w	r3, r3, #134217728	; 0x8000000
+     11c:	6013      	str	r3, [r2, #0]
+     11e:	4b0e      	ldr	r3, [pc, #56]	; (158 <configure_pins+0xd8>)
+     120:	2200      	movs	r2, #0
+     122:	601a      	str	r2, [r3, #0]
+
+
+    //
+    // Configure the I/O Slave interrupt pin
+    //
+    am_hal_gpio_pin_config(BOOTLOADER_HANDSHAKE_PIN, AM_HAL_PIN_INPUT | AM_HAL_GPIO_PULLUP);
+     124:	4b0c      	ldr	r3, [pc, #48]	; (158 <configure_pins+0xd8>)
+     126:	2273      	movs	r2, #115	; 0x73
+     128:	601a      	str	r2, [r3, #0]
+     12a:	4a0c      	ldr	r2, [pc, #48]	; (15c <configure_pins+0xdc>)
+     12c:	4b0b      	ldr	r3, [pc, #44]	; (15c <configure_pins+0xdc>)
+     12e:	681b      	ldr	r3, [r3, #0]
+     130:	f423 63e0 	bic.w	r3, r3, #1792	; 0x700
+     134:	6013      	str	r3, [r2, #0]
+     136:	4a0d      	ldr	r2, [pc, #52]	; (16c <configure_pins+0xec>)
+     138:	4b0c      	ldr	r3, [pc, #48]	; (16c <configure_pins+0xec>)
+     13a:	681b      	ldr	r3, [r3, #0]
+     13c:	f423 037f 	bic.w	r3, r3, #16711680	; 0xff0000
+     140:	f443 13d8 	orr.w	r3, r3, #1769472	; 0x1b0000
+     144:	6013      	str	r3, [r2, #0]
+     146:	4b04      	ldr	r3, [pc, #16]	; (158 <configure_pins+0xd8>)
+     148:	2200      	movs	r2, #0
+     14a:	601a      	str	r2, [r3, #0]
+}
+     14c:	bf00      	nop
+     14e:	46bd      	mov	sp, r7
+     150:	f85d 7b04 	ldr.w	r7, [sp], #4
+     154:	4770      	bx	lr
+     156:	bf00      	nop
+     158:	40010060 	.word	0x40010060
+     15c:	40010040 	.word	0x40010040
+     160:	40010004 	.word	0x40010004
+     164:	40010044 	.word	0x40010044
+     168:	40010008 	.word	0x40010008
+     16c:	40010000 	.word	0x40010000
+
+00000170 <am_gpio_isr>:
+// Interrupt handler for the GPIO pins.
+//
+//*****************************************************************************
+void
+am_gpio_isr(void)
+{
+     170:	b580      	push	{r7, lr}
+     172:	b082      	sub	sp, #8
+     174:	af00      	add	r7, sp, #0
+    uint64_t ui64Status;
+
+    //
+    // Read and clear the GPIO interrupt status.
+    //
+    ui64Status = am_hal_gpio_int_status_get(false);
+     176:	2000      	movs	r0, #0
+     178:	f000 fb22 	bl	7c0 <am_hal_gpio_int_status_get>
+     17c:	e9c7 0100 	strd	r0, r1, [r7]
+    am_hal_gpio_int_clear(ui64Status);
+     180:	e9d7 0100 	ldrd	r0, r1, [r7]
+     184:	f000 fb12 	bl	7ac <am_hal_gpio_int_clear>
+}
+     188:	bf00      	nop
+     18a:	3708      	adds	r7, #8
+     18c:	46bd      	mov	sp, r7
+     18e:	bd80      	pop	{r7, pc}
+
+00000190 <start_boot_mode>:
+// Reset the slave device and force it into boot mode.
+//
+//*****************************************************************************
+void
+start_boot_mode(void)
+{
+     190:	b580      	push	{r7, lr}
+     192:	af00      	add	r7, sp, #0
+    //
+    // Drive RESET low.
+    //
+    am_hal_gpio_out_bit_clear(DRIVE_SLAVE_RESET_PIN);
+     194:	4b21      	ldr	r3, [pc, #132]	; (21c <start_boot_mode+0x8c>)
+     196:	f44f 3200 	mov.w	r2, #131072	; 0x20000
+     19a:	601a      	str	r2, [r3, #0]
+    am_hal_gpio_pin_config(DRIVE_SLAVE_RESET_PIN, AM_HAL_PIN_OUTPUT);
+     19c:	4b20      	ldr	r3, [pc, #128]	; (220 <start_boot_mode+0x90>)
+     19e:	2273      	movs	r2, #115	; 0x73
+     1a0:	601a      	str	r2, [r3, #0]
+     1a2:	4a20      	ldr	r2, [pc, #128]	; (224 <start_boot_mode+0x94>)
+     1a4:	4b1f      	ldr	r3, [pc, #124]	; (224 <start_boot_mode+0x94>)
+     1a6:	681b      	ldr	r3, [r3, #0]
+     1a8:	f023 0370 	bic.w	r3, r3, #112	; 0x70
+     1ac:	f043 0320 	orr.w	r3, r3, #32
+     1b0:	6013      	str	r3, [r2, #0]
+     1b2:	4a1d      	ldr	r2, [pc, #116]	; (228 <start_boot_mode+0x98>)
+     1b4:	4b1c      	ldr	r3, [pc, #112]	; (228 <start_boot_mode+0x98>)
+     1b6:	681b      	ldr	r3, [r3, #0]
+     1b8:	f423 437f 	bic.w	r3, r3, #65280	; 0xff00
+     1bc:	f443 53c0 	orr.w	r3, r3, #6144	; 0x1800
+     1c0:	6013      	str	r3, [r2, #0]
+     1c2:	4b17      	ldr	r3, [pc, #92]	; (220 <start_boot_mode+0x90>)
+     1c4:	2200      	movs	r2, #0
+     1c6:	601a      	str	r2, [r3, #0]
+
+    //
+    // Drive the override pin low to force the slave into boot mode.
+    //
+    am_hal_gpio_out_bit_clear(DRIVE_SLAVE_OVERRIDE_PIN);
+     1c8:	4b14      	ldr	r3, [pc, #80]	; (21c <start_boot_mode+0x8c>)
+     1ca:	2210      	movs	r2, #16
+     1cc:	601a      	str	r2, [r3, #0]
+    am_hal_gpio_pin_config(DRIVE_SLAVE_OVERRIDE_PIN, AM_HAL_PIN_OUTPUT);
+     1ce:	4b14      	ldr	r3, [pc, #80]	; (220 <start_boot_mode+0x90>)
+     1d0:	2273      	movs	r2, #115	; 0x73
+     1d2:	601a      	str	r2, [r3, #0]
+     1d4:	4a15      	ldr	r2, [pc, #84]	; (22c <start_boot_mode+0x9c>)
+     1d6:	4b15      	ldr	r3, [pc, #84]	; (22c <start_boot_mode+0x9c>)
+     1d8:	681b      	ldr	r3, [r3, #0]
+     1da:	f423 23e0 	bic.w	r3, r3, #458752	; 0x70000
+     1de:	f443 3300 	orr.w	r3, r3, #131072	; 0x20000
+     1e2:	6013      	str	r3, [r2, #0]
+     1e4:	4a12      	ldr	r2, [pc, #72]	; (230 <start_boot_mode+0xa0>)
+     1e6:	4b12      	ldr	r3, [pc, #72]	; (230 <start_boot_mode+0xa0>)
+     1e8:	681b      	ldr	r3, [r3, #0]
+     1ea:	f023 03ff 	bic.w	r3, r3, #255	; 0xff
+     1ee:	f043 0318 	orr.w	r3, r3, #24
+     1f2:	6013      	str	r3, [r2, #0]
+     1f4:	4b0a      	ldr	r3, [pc, #40]	; (220 <start_boot_mode+0x90>)
+     1f6:	2200      	movs	r2, #0
+     1f8:	601a      	str	r2, [r3, #0]
+
+    //
+    // Short delay.
+    //
+    am_util_delay_us(5);
+     1fa:	2005      	movs	r0, #5
+     1fc:	f000 f9ba 	bl	574 <am_util_delay_us>
+
+    //
+    // Release RESET.
+    //
+    am_hal_gpio_out_bit_set(DRIVE_SLAVE_RESET_PIN);
+     200:	4b0c      	ldr	r3, [pc, #48]	; (234 <start_boot_mode+0xa4>)
+     202:	f44f 3200 	mov.w	r2, #131072	; 0x20000
+     206:	601a      	str	r2, [r3, #0]
+
+    //
+    // Wait for the slave to Set the handshake pin
+    //
+    while ( !am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     208:	bf00      	nop
+     20a:	4b0b      	ldr	r3, [pc, #44]	; (238 <start_boot_mode+0xa8>)
+     20c:	681b      	ldr	r3, [r3, #0]
+     20e:	f003 0304 	and.w	r3, r3, #4
+     212:	2b00      	cmp	r3, #0
+     214:	d0f9      	beq.n	20a <start_boot_mode+0x7a>
+}
+     216:	bf00      	nop
+     218:	bd80      	pop	{r7, pc}
+     21a:	bf00      	nop
+     21c:	40010098 	.word	0x40010098
+     220:	40010060 	.word	0x40010060
+     224:	40010048 	.word	0x40010048
+     228:	40010010 	.word	0x40010010
+     22c:	40010040 	.word	0x40010040
+     230:	40010004 	.word	0x40010004
+     234:	40010090 	.word	0x40010090
+     238:	40010080 	.word	0x40010080
+
+0000023c <start_new_image>:
+// Send the commands to start a new boot download.
+//
+//*****************************************************************************
+void
+start_new_image(void)
+{
+     23c:	b580      	push	{r7, lr}
+     23e:	b082      	sub	sp, #8
+     240:	af02      	add	r7, sp, #8
+    //
+    // Wait for the slave to send the ready signal
+    //
+    while ( am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     242:	bf00      	nop
+     244:	4b25      	ldr	r3, [pc, #148]	; (2dc <start_new_image+0xa0>)
+     246:	681b      	ldr	r3, [r3, #0]
+     248:	f003 0304 	and.w	r3, r3, #4
+     24c:	2b00      	cmp	r3, #0
+     24e:	d1f9      	bne.n	244 <start_new_image+0x8>
+    //
+    // Make sure the override pin is high so the slave will reboot into
+    // application mode when our boot procedure is complete.
+    //
+    am_hal_gpio_out_bit_set(DRIVE_SLAVE_OVERRIDE_PIN);
+     250:	4b23      	ldr	r3, [pc, #140]	; (2e0 <start_new_image+0xa4>)
+     252:	2210      	movs	r2, #16
+     254:	601a      	str	r2, [r3, #0]
+    // Clear any interrupts that may have happened while Slave is coming up
+    am_hal_iom_int_clear(0, 0xFFFFFFFF);
+     256:	f04f 31ff 	mov.w	r1, #4294967295
+     25a:	2000      	movs	r0, #0
+     25c:	f001 f9a0 	bl	15a0 <am_hal_iom_int_clear>
+    am_hal_iom_spi_read(0, 0, g_psRxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x0));
+     260:	2300      	movs	r3, #0
+     262:	9300      	str	r3, [sp, #0]
+     264:	2304      	movs	r3, #4
+     266:	4a1f      	ldr	r2, [pc, #124]	; (2e4 <start_new_image+0xa8>)
+     268:	2100      	movs	r1, #0
+     26a:	2000      	movs	r0, #0
+     26c:	f001 f910 	bl	1490 <am_hal_iom_spi_read>
+
+    //
+    // ACK the ready signal to have slave pull the interrupt line high.
+    //
+    g_psTxBuffer.words[0] = AM_BOOTLOADER_ACK_CMD;
+     270:	4b1d      	ldr	r3, [pc, #116]	; (2e8 <start_new_image+0xac>)
+     272:	2200      	movs	r2, #0
+     274:	601a      	str	r2, [r3, #0]
+    am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x80));
+     276:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+     27a:	9300      	str	r3, [sp, #0]
+     27c:	2304      	movs	r3, #4
+     27e:	4a1a      	ldr	r2, [pc, #104]	; (2e8 <start_new_image+0xac>)
+     280:	2100      	movs	r1, #0
+     282:	2000      	movs	r0, #0
+     284:	f000 fe0e 	bl	ea4 <am_hal_iom_spi_write>
+    //
+    // Wait for the slave to read the ACK
+    //
+    while ( !am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     288:	bf00      	nop
+     28a:	4b14      	ldr	r3, [pc, #80]	; (2dc <start_new_image+0xa0>)
+     28c:	681b      	ldr	r3, [r3, #0]
+     28e:	f003 0304 	and.w	r3, r3, #4
+     292:	2b00      	cmp	r3, #0
+     294:	d0f9      	beq.n	28a <start_new_image+0x4e>
+
+    //
+    // Write the image parameters to the SPI FIFO
+    //
+    g_psTxBuffer.words[0] = IMAGE_LINK_ADDRESS;
+     296:	4b14      	ldr	r3, [pc, #80]	; (2e8 <start_new_image+0xac>)
+     298:	f44f 4200 	mov.w	r2, #32768	; 0x8000
+     29c:	601a      	str	r2, [r3, #0]
+    g_psTxBuffer.words[1] = IMAGE_SIZE;
+     29e:	4b12      	ldr	r3, [pc, #72]	; (2e8 <start_new_image+0xac>)
+     2a0:	f641 3238 	movw	r2, #6968	; 0x1b38
+     2a4:	605a      	str	r2, [r3, #4]
+    g_psTxBuffer.words[2] = IMAGE_CRC;
+     2a6:	4b10      	ldr	r3, [pc, #64]	; (2e8 <start_new_image+0xac>)
+     2a8:	4a10      	ldr	r2, [pc, #64]	; (2ec <start_new_image+0xb0>)
+     2aa:	609a      	str	r2, [r3, #8]
+
+    //
+    // Send the image parameters to the slave.
+    //
+    am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 12, AM_HAL_IOM_OFFSET(0x84));
+     2ac:	f44f 4304 	mov.w	r3, #33792	; 0x8400
+     2b0:	9300      	str	r3, [sp, #0]
+     2b2:	230c      	movs	r3, #12
+     2b4:	4a0c      	ldr	r2, [pc, #48]	; (2e8 <start_new_image+0xac>)
+     2b6:	2100      	movs	r1, #0
+     2b8:	2000      	movs	r0, #0
+     2ba:	f000 fdf3 	bl	ea4 <am_hal_iom_spi_write>
+
+    //
+    // Finish out the image start routine with the "New Image" packet.
+    //
+    g_psTxBuffer.words[0] = AM_BOOTLOADER_NEW_IMAGE;
+     2be:	4b0a      	ldr	r3, [pc, #40]	; (2e8 <start_new_image+0xac>)
+     2c0:	2202      	movs	r2, #2
+     2c2:	601a      	str	r2, [r3, #0]
+    am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x80));
+     2c4:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+     2c8:	9300      	str	r3, [sp, #0]
+     2ca:	2304      	movs	r3, #4
+     2cc:	4a06      	ldr	r2, [pc, #24]	; (2e8 <start_new_image+0xac>)
+     2ce:	2100      	movs	r1, #0
+     2d0:	2000      	movs	r0, #0
+     2d2:	f000 fde7 	bl	ea4 <am_hal_iom_spi_write>
+}
+     2d6:	bf00      	nop
+     2d8:	46bd      	mov	sp, r7
+     2da:	bd80      	pop	{r7, pc}
+     2dc:	40010080 	.word	0x40010080
+     2e0:	40010090 	.word	0x40010090
+     2e4:	10001208 	.word	0x10001208
+     2e8:	10001018 	.word	0x10001018
+     2ec:	f4a03140 	.word	0xf4a03140
+
+000002f0 <override_pin_set>:
+// Set override pin.
+//
+//*****************************************************************************
+void
+override_pin_set(uint32_t ui32OverridePin, uint32_t ui32OverridePolarity)
+{
+     2f0:	b580      	push	{r7, lr}
+     2f2:	b084      	sub	sp, #16
+     2f4:	af02      	add	r7, sp, #8
+     2f6:	6078      	str	r0, [r7, #4]
+     2f8:	6039      	str	r1, [r7, #0]
+    //
+    // Wait for the slave to send the ready signal
+    //
+    while ( am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     2fa:	bf00      	nop
+     2fc:	4b1f      	ldr	r3, [pc, #124]	; (37c <override_pin_set+0x8c>)
+     2fe:	681b      	ldr	r3, [r3, #0]
+     300:	f003 0304 	and.w	r3, r3, #4
+     304:	2b00      	cmp	r3, #0
+     306:	d1f9      	bne.n	2fc <override_pin_set+0xc>
+    am_hal_iom_spi_read(0, 0, g_psRxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x0));
+     308:	2300      	movs	r3, #0
+     30a:	9300      	str	r3, [sp, #0]
+     30c:	2304      	movs	r3, #4
+     30e:	4a1c      	ldr	r2, [pc, #112]	; (380 <override_pin_set+0x90>)
+     310:	2100      	movs	r1, #0
+     312:	2000      	movs	r0, #0
+     314:	f001 f8bc 	bl	1490 <am_hal_iom_spi_read>
+
+    //
+    // ACK the ready signal to have slave pull the interrupt line high.
+    //
+    g_psTxBuffer.words[0] = AM_BOOTLOADER_ACK_CMD;
+     318:	4b1a      	ldr	r3, [pc, #104]	; (384 <override_pin_set+0x94>)
+     31a:	2200      	movs	r2, #0
+     31c:	601a      	str	r2, [r3, #0]
+    am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x80));
+     31e:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+     322:	9300      	str	r3, [sp, #0]
+     324:	2304      	movs	r3, #4
+     326:	4a17      	ldr	r2, [pc, #92]	; (384 <override_pin_set+0x94>)
+     328:	2100      	movs	r1, #0
+     32a:	2000      	movs	r0, #0
+     32c:	f000 fdba 	bl	ea4 <am_hal_iom_spi_write>
+    //
+    // Wait for the slave to read the ACK
+    //
+    while ( !am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     330:	bf00      	nop
+     332:	4b12      	ldr	r3, [pc, #72]	; (37c <override_pin_set+0x8c>)
+     334:	681b      	ldr	r3, [r3, #0]
+     336:	f003 0304 	and.w	r3, r3, #4
+     33a:	2b00      	cmp	r3, #0
+     33c:	d0f9      	beq.n	332 <override_pin_set+0x42>
+
+    //
+    // Write the image parameters to the SPI FIFO
+    //
+    g_psTxBuffer.words[0] = ui32OverridePin;
+     33e:	4a11      	ldr	r2, [pc, #68]	; (384 <override_pin_set+0x94>)
+     340:	687b      	ldr	r3, [r7, #4]
+     342:	6013      	str	r3, [r2, #0]
+    g_psTxBuffer.words[1] = ui32OverridePolarity;
+     344:	4a0f      	ldr	r2, [pc, #60]	; (384 <override_pin_set+0x94>)
+     346:	683b      	ldr	r3, [r7, #0]
+     348:	6053      	str	r3, [r2, #4]
+
+    //
+    // Send the image parameters to the slave.
+    //
+    am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 8, AM_HAL_IOM_OFFSET(0x84));
+     34a:	f44f 4304 	mov.w	r3, #33792	; 0x8400
+     34e:	9300      	str	r3, [sp, #0]
+     350:	2308      	movs	r3, #8
+     352:	4a0c      	ldr	r2, [pc, #48]	; (384 <override_pin_set+0x94>)
+     354:	2100      	movs	r1, #0
+     356:	2000      	movs	r0, #0
+     358:	f000 fda4 	bl	ea4 <am_hal_iom_spi_write>
+
+    //
+    // Finish out the image start routine with the "New Image" packet.
+    //
+    g_psTxBuffer.words[0] = AM_BOOTLOADER_SET_OVERRIDE_CMD;
+     35c:	4b09      	ldr	r3, [pc, #36]	; (384 <override_pin_set+0x94>)
+     35e:	2205      	movs	r2, #5
+     360:	601a      	str	r2, [r3, #0]
+    am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x80));
+     362:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+     366:	9300      	str	r3, [sp, #0]
+     368:	2304      	movs	r3, #4
+     36a:	4a06      	ldr	r2, [pc, #24]	; (384 <override_pin_set+0x94>)
+     36c:	2100      	movs	r1, #0
+     36e:	2000      	movs	r0, #0
+     370:	f000 fd98 	bl	ea4 <am_hal_iom_spi_write>
+}
+     374:	bf00      	nop
+     376:	3708      	adds	r7, #8
+     378:	46bd      	mov	sp, r7
+     37a:	bd80      	pop	{r7, pc}
+     37c:	40010080 	.word	0x40010080
+     380:	10001208 	.word	0x10001208
+     384:	10001018 	.word	0x10001018
+
+00000388 <transfer_image>:
+// Send the actual firmware image over to the boot slave.
+//
+//*****************************************************************************
+void
+transfer_image(void)
+{
+     388:	b580      	push	{r7, lr}
+     38a:	b086      	sub	sp, #24
+     38c:	af02      	add	r7, sp, #8
+    uint32_t i;
+
+    //
+    // Send the firmware image across.
+    //
+    ui32BytesRemaining = IMAGE_SIZE;
+     38e:	f641 3338 	movw	r3, #6968	; 0x1b38
+     392:	60fb      	str	r3, [r7, #12]
+    ui32Offset = 0;
+     394:	2300      	movs	r3, #0
+     396:	60bb      	str	r3, [r7, #8]
+
+    while ( ui32BytesRemaining )
+     398:	e05b      	b.n	452 <transfer_image+0xca>
+    {
+        //
+        // Wait for another ready signal.
+        //
+        while ( am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     39a:	bf00      	nop
+     39c:	4b30      	ldr	r3, [pc, #192]	; (460 <transfer_image+0xd8>)
+     39e:	681b      	ldr	r3, [r3, #0]
+     3a0:	f003 0304 	and.w	r3, r3, #4
+     3a4:	2b00      	cmp	r3, #0
+     3a6:	d1f9      	bne.n	39c <transfer_image+0x14>
+        am_hal_iom_spi_read(0, 0, g_psRxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x0));
+     3a8:	2300      	movs	r3, #0
+     3aa:	9300      	str	r3, [sp, #0]
+     3ac:	2304      	movs	r3, #4
+     3ae:	4a2d      	ldr	r2, [pc, #180]	; (464 <transfer_image+0xdc>)
+     3b0:	2100      	movs	r1, #0
+     3b2:	2000      	movs	r0, #0
+     3b4:	f001 f86c 	bl	1490 <am_hal_iom_spi_read>
+        //
+        // ACK the ready signal to have slave pull the interrupt line high.
+        //
+        g_psTxBuffer.words[0] = AM_BOOTLOADER_ACK_CMD;
+     3b8:	4b2b      	ldr	r3, [pc, #172]	; (468 <transfer_image+0xe0>)
+     3ba:	2200      	movs	r2, #0
+     3bc:	601a      	str	r2, [r3, #0]
+        am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x80));
+     3be:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+     3c2:	9300      	str	r3, [sp, #0]
+     3c4:	2304      	movs	r3, #4
+     3c6:	4a28      	ldr	r2, [pc, #160]	; (468 <transfer_image+0xe0>)
+     3c8:	2100      	movs	r1, #0
+     3ca:	2000      	movs	r0, #0
+     3cc:	f000 fd6a 	bl	ea4 <am_hal_iom_spi_write>
+        //
+        // Wait for the slave to read the ACK
+        //
+        while ( !am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     3d0:	bf00      	nop
+     3d2:	4b23      	ldr	r3, [pc, #140]	; (460 <transfer_image+0xd8>)
+     3d4:	681b      	ldr	r3, [r3, #0]
+     3d6:	f003 0304 	and.w	r3, r3, #4
+     3da:	2b00      	cmp	r3, #0
+     3dc:	d0f9      	beq.n	3d2 <transfer_image+0x4a>
+
+        //
+        // We can't transfer more than a few bytes at a time. Limit the
+        // transaction to 112 bytes max.
+        //
+        ui32TransferSize = ui32BytesRemaining > 112 ? 112 : ui32BytesRemaining;
+     3de:	68fb      	ldr	r3, [r7, #12]
+     3e0:	2b70      	cmp	r3, #112	; 0x70
+     3e2:	bf28      	it	cs
+     3e4:	2370      	movcs	r3, #112	; 0x70
+     3e6:	603b      	str	r3, [r7, #0]
+
+        //
+        // Start the packet with the packet length.
+        //
+        g_psTxBuffer.words[0] = ui32TransferSize;
+     3e8:	4a1f      	ldr	r2, [pc, #124]	; (468 <transfer_image+0xe0>)
+     3ea:	683b      	ldr	r3, [r7, #0]
+     3ec:	6013      	str	r3, [r2, #0]
+
+        //
+        // Fill in the packet contents.
+        //
+        for ( i = 0; i < ui32TransferSize; i++ )
+     3ee:	2300      	movs	r3, #0
+     3f0:	607b      	str	r3, [r7, #4]
+     3f2:	e00b      	b.n	40c <transfer_image+0x84>
+        {
+            g_psTxBuffer.bytes[4 + i] = IMAGE_ARRAY[ui32Offset + i];
+     3f4:	687b      	ldr	r3, [r7, #4]
+     3f6:	3304      	adds	r3, #4
+     3f8:	68b9      	ldr	r1, [r7, #8]
+     3fa:	687a      	ldr	r2, [r7, #4]
+     3fc:	440a      	add	r2, r1
+     3fe:	491b      	ldr	r1, [pc, #108]	; (46c <transfer_image+0xe4>)
+     400:	5c89      	ldrb	r1, [r1, r2]
+     402:	4a19      	ldr	r2, [pc, #100]	; (468 <transfer_image+0xe0>)
+     404:	54d1      	strb	r1, [r2, r3]
+        for ( i = 0; i < ui32TransferSize; i++ )
+     406:	687b      	ldr	r3, [r7, #4]
+     408:	3301      	adds	r3, #1
+     40a:	607b      	str	r3, [r7, #4]
+     40c:	687a      	ldr	r2, [r7, #4]
+     40e:	683b      	ldr	r3, [r7, #0]
+     410:	429a      	cmp	r2, r3
+     412:	d3ef      	bcc.n	3f4 <transfer_image+0x6c>
+        }
+
+        //
+        // Send the data over to the slave.
+        //
+        am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, ui32TransferSize + 4,
+     414:	683b      	ldr	r3, [r7, #0]
+     416:	1d1a      	adds	r2, r3, #4
+     418:	f44f 4304 	mov.w	r3, #33792	; 0x8400
+     41c:	9300      	str	r3, [sp, #0]
+     41e:	4613      	mov	r3, r2
+     420:	4a11      	ldr	r2, [pc, #68]	; (468 <transfer_image+0xe0>)
+     422:	2100      	movs	r1, #0
+     424:	2000      	movs	r0, #0
+     426:	f000 fd3d 	bl	ea4 <am_hal_iom_spi_write>
+                             AM_HAL_IOM_OFFSET(0x84));
+
+        //
+        // Finish with the "New Packet" boot command.
+        //
+        g_psTxBuffer.words[0] = AM_BOOTLOADER_NEW_PACKET;
+     42a:	4b0f      	ldr	r3, [pc, #60]	; (468 <transfer_image+0xe0>)
+     42c:	2203      	movs	r2, #3
+     42e:	601a      	str	r2, [r3, #0]
+        am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x80));
+     430:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+     434:	9300      	str	r3, [sp, #0]
+     436:	2304      	movs	r3, #4
+     438:	4a0b      	ldr	r2, [pc, #44]	; (468 <transfer_image+0xe0>)
+     43a:	2100      	movs	r1, #0
+     43c:	2000      	movs	r0, #0
+     43e:	f000 fd31 	bl	ea4 <am_hal_iom_spi_write>
+
+        //
+        // Update the loop variables.
+        //
+        ui32BytesRemaining -= ui32TransferSize;
+     442:	68fa      	ldr	r2, [r7, #12]
+     444:	683b      	ldr	r3, [r7, #0]
+     446:	1ad3      	subs	r3, r2, r3
+     448:	60fb      	str	r3, [r7, #12]
+        ui32Offset += ui32TransferSize;
+     44a:	68ba      	ldr	r2, [r7, #8]
+     44c:	683b      	ldr	r3, [r7, #0]
+     44e:	4413      	add	r3, r2
+     450:	60bb      	str	r3, [r7, #8]
+    while ( ui32BytesRemaining )
+     452:	68fb      	ldr	r3, [r7, #12]
+     454:	2b00      	cmp	r3, #0
+     456:	d1a0      	bne.n	39a <transfer_image+0x12>
+    }
+}
+     458:	bf00      	nop
+     45a:	3710      	adds	r7, #16
+     45c:	46bd      	mov	sp, r7
+     45e:	bd80      	pop	{r7, pc}
+     460:	40010080 	.word	0x40010080
+     464:	10001208 	.word	0x10001208
+     468:	10001018 	.word	0x10001018
+     46c:	00001778 	.word	0x00001778
+
+00000470 <main>:
+// Main function.
+//
+//*****************************************************************************
+int
+main(void)
+{
+     470:	b580      	push	{r7, lr}
+     472:	b082      	sub	sp, #8
+     474:	af02      	add	r7, sp, #8
+    //
+    // Set the clock frequency.
+    //
+    am_hal_clkgen_sysclk_select(AM_HAL_CLKGEN_SYSCLK_MAX);
+     476:	2000      	movs	r0, #0
+     478:	f000 f8f6 	bl	668 <am_hal_clkgen_sysclk_select>
+    am_hal_cachectrl_enable(&am_hal_cachectrl_defaults);
+
+    //
+    // Configure the board for low power operation.
+    //
+    am_bsp_low_power_init();
+     47c:	f000 f8e2 	bl	644 <am_bsp_low_power_init>
+
+    //
+    // Setup the pins for IO Master Example.
+    //
+    configure_pins();
+     480:	f7ff fdfe 	bl	80 <configure_pins>
+    // Initialize IOM 0 in SPI mode at 100KHz
+    //
+#ifndef AM_PART_APOLLO
+    am_hal_iom_pwrctrl_enable(0);
+#endif
+    am_hal_iom_config(0, &g_sIOMConfig);
+     484:	4918      	ldr	r1, [pc, #96]	; (4e8 <main+0x78>)
+     486:	2000      	movs	r0, #0
+     488:	f000 fb02 	bl	a90 <am_hal_iom_config>
+    //
+    // Turn on the IOM for this operation.
+    //
+    am_bsp_iom_enable(0);
+     48c:	2000      	movs	r0, #0
+     48e:	f000 f88b 	bl	5a8 <am_bsp_iom_enable>
+
+    //
+    // Force the slave into boot mode.
+    //
+    start_boot_mode();
+     492:	f7ff fe7d 	bl	190 <start_boot_mode>
+
+    //
+    // Wait for the 'READY' from the boot slave, and then send the packet
+    // information.
+    //
+    start_new_image();
+     496:	f7ff fed1 	bl	23c <start_new_image>
+
+    //
+    // Change the override pin to correspond to a button on the Apollo EVK
+    //
+    override_pin_set(TARGET_BOARD_OVERRIDE_PIN, 0);
+     49a:	2100      	movs	r1, #0
+     49c:	2012      	movs	r0, #18
+     49e:	f7ff ff27 	bl	2f0 <override_pin_set>
+
+    //
+    // Wait for another 'READY', and send the actual image across.
+    //
+    transfer_image();
+     4a2:	f7ff ff71 	bl	388 <transfer_image>
+    //
+    // At this point, the slave should send back a either 'CRC OK' or some sort
+    // of error. If the CRC was good, we should tell the slave to reset itself
+    // and run the new image.
+    //
+    while ( am_hal_gpio_input_bit_read(BOOTLOADER_HANDSHAKE_PIN) );
+     4a6:	bf00      	nop
+     4a8:	4b10      	ldr	r3, [pc, #64]	; (4ec <main+0x7c>)
+     4aa:	681b      	ldr	r3, [r3, #0]
+     4ac:	f003 0304 	and.w	r3, r3, #4
+     4b0:	2b00      	cmp	r3, #0
+     4b2:	d1f9      	bne.n	4a8 <main+0x38>
+    am_hal_iom_spi_read(0, 0, g_psRxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x0));
+     4b4:	2300      	movs	r3, #0
+     4b6:	9300      	str	r3, [sp, #0]
+     4b8:	2304      	movs	r3, #4
+     4ba:	4a0d      	ldr	r2, [pc, #52]	; (4f0 <main+0x80>)
+     4bc:	2100      	movs	r1, #0
+     4be:	2000      	movs	r0, #0
+     4c0:	f000 ffe6 	bl	1490 <am_hal_iom_spi_read>
+
+    if ( g_psRxBuffer.words[0] == AM_BOOTLOADER_IMAGE_COMPLETE )
+     4c4:	4b0a      	ldr	r3, [pc, #40]	; (4f0 <main+0x80>)
+     4c6:	681b      	ldr	r3, [r3, #0]
+     4c8:	2b03      	cmp	r3, #3
+     4ca:	d10b      	bne.n	4e4 <main+0x74>
+    {
+        //
+        // If the CRC is correct, send a RESET command.
+        //
+        g_psTxBuffer.words[0] = AM_BOOTLOADER_RESET;
+     4cc:	4b09      	ldr	r3, [pc, #36]	; (4f4 <main+0x84>)
+     4ce:	2204      	movs	r2, #4
+     4d0:	601a      	str	r2, [r3, #0]
+        am_hal_iom_spi_write(0, 0, g_psTxBuffer.words, 4, AM_HAL_IOM_OFFSET(0x80));
+     4d2:	f44f 4300 	mov.w	r3, #32768	; 0x8000
+     4d6:	9300      	str	r3, [sp, #0]
+     4d8:	2304      	movs	r3, #4
+     4da:	4a06      	ldr	r2, [pc, #24]	; (4f4 <main+0x84>)
+     4dc:	2100      	movs	r1, #0
+     4de:	2000      	movs	r0, #0
+     4e0:	f000 fce0 	bl	ea4 <am_hal_iom_spi_write>
+    }
+
+    //
+    // Loop forever.
+    //
+    while (1)
+     4e4:	e7fe      	b.n	4e4 <main+0x74>
+     4e6:	bf00      	nop
+     4e8:	000032b0 	.word	0x000032b0
+     4ec:	40010080 	.word	0x40010080
+     4f0:	10001208 	.word	0x10001208
+     4f4:	10001018 	.word	0x10001018
+
+000004f8 <am_reset_isr>:
+am_reset_isr(void)
+{
+    //
+    // Set the vector table pointer.
+    //
+    __asm("    ldr    r0, =0xE000ED08\n"
+     4f8:	4811      	ldr	r0, [pc, #68]	; (540 <zero_loop+0x12>)
+     4fa:	4912      	ldr	r1, [pc, #72]	; (544 <zero_loop+0x16>)
+     4fc:	6001      	str	r1, [r0, #0]
+          "    str    r1, [r0]");
+
+    //
+    // Set the stack pointer.
+    //
+    __asm("    ldr    sp, [r1]");
+     4fe:	f8d1 d000 	ldr.w	sp, [r1]
+#ifndef NOFPU
+    //
+    // Enable the FPU.
+    //
+    __asm("ldr  r0, =0xE000ED88\n"
+     502:	4811      	ldr	r0, [pc, #68]	; (548 <zero_loop+0x1a>)
+     504:	6801      	ldr	r1, [r0, #0]
+     506:	f441 0170 	orr.w	r1, r1, #15728640	; 0xf00000
+     50a:	6001      	str	r1, [r0, #0]
+     50c:	f3bf 8f4f 	dsb	sy
+     510:	f3bf 8f6f 	isb	sy
+          "isb\n");
+#endif
+    //
+    // Copy the data segment initializers from flash to SRAM.
+    //
+    __asm("    ldr     r0, =_init_data\n"
+     514:	480d      	ldr	r0, [pc, #52]	; (54c <zero_loop+0x1e>)
+     516:	490e      	ldr	r1, [pc, #56]	; (550 <zero_loop+0x22>)
+     518:	4a0e      	ldr	r2, [pc, #56]	; (554 <zero_loop+0x26>)
+
+0000051a <copy_loop>:
+     51a:	f850 3b04 	ldr.w	r3, [r0], #4
+     51e:	f841 3b04 	str.w	r3, [r1], #4
+     522:	4291      	cmp	r1, r2
+     524:	dbf9      	blt.n	51a <copy_loop>
+          "        cmp     r1, r2\n"
+          "        blt     copy_loop\n");
+    //
+    // Zero fill the bss segment.
+    //
+    __asm("    ldr     r0, =_sbss\n"
+     526:	480c      	ldr	r0, [pc, #48]	; (558 <zero_loop+0x2a>)
+     528:	490c      	ldr	r1, [pc, #48]	; (55c <zero_loop+0x2e>)
+     52a:	f04f 0200 	mov.w	r2, #0
+
+0000052e <zero_loop>:
+     52e:	4288      	cmp	r0, r1
+     530:	bfb8      	it	lt
+     532:	f840 2b04 	strlt.w	r2, [r0], #4
+     536:	dbfa      	blt.n	52e <zero_loop>
+          "        blt     zero_loop");
+
+    //
+    // Call the application's entry point.
+    //
+    main();
+     538:	f7ff ff9a 	bl	470 <main>
+
+    //
+    // If main returns then execute a break point instruction
+    //
+    __asm("    bkpt     ");
+     53c:	be00      	bkpt	0x0000
+}
+     53e:	bf00      	nop
+     540:	e000ed08 	.word	0xe000ed08
+     544:	00000000 	.word	0x00000000
+     548:	e000ed88 	.word	0xe000ed88
+     54c:	000034f8 	.word	0x000034f8
+     550:	10001000 	.word	0x10001000
+     554:	1000100c 	.word	0x1000100c
+     558:	1000100c 	.word	0x1000100c
+     55c:	10001360 	.word	0x10001360
+
+00000560 <am_nmi_isr>:
+// by a debugger.
+//
+//*****************************************************************************
+void
+am_nmi_isr(void)
+{
+     560:	b480      	push	{r7}
+     562:	af00      	add	r7, sp, #0
+    //
+    // Go into an infinite loop.
+    //
+    while(1)
+     564:	e7fe      	b.n	564 <am_nmi_isr+0x4>
+
+00000566 <am_busfault_isr>:
+// for examination by a debugger.
+//
+//*****************************************************************************
+void
+am_fault_isr(void)
+{
+     566:	b480      	push	{r7}
+     568:	af00      	add	r7, sp, #0
+    //
+    // Go into an infinite loop.
+    //
+    while(1)
+     56a:	e7fe      	b.n	56a <am_busfault_isr+0x4>
+
+0000056c <am_adc_isr>:
+// for examination by a debugger.
+//
+//*****************************************************************************
+void
+am_default_isr(void)
+{
+     56c:	b480      	push	{r7}
+     56e:	af00      	add	r7, sp, #0
+    //
+    // Go into an infinite loop.
+    //
+    while(1)
+     570:	e7fe      	b.n	570 <am_adc_isr+0x4>
+	...
+
+00000574 <am_util_delay_us>:
+//! @returns None
+//
+//*****************************************************************************
+void
+am_util_delay_us(uint32_t ui32MicroSeconds)
+{
+     574:	b580      	push	{r7, lr}
+     576:	b084      	sub	sp, #16
+     578:	af00      	add	r7, sp, #0
+     57a:	6078      	str	r0, [r7, #4]
+#if AM_APOLLO3_CLKGEN
+    am_hal_clkgen_status_t sClkgenStatus;
+    am_hal_clkgen_status_get(&sClkgenStatus);
+    ui32HFRC = sClkgenStatus.ui32SysclkFreq;
+#else
+    ui32HFRC = am_hal_clkgen_sysclk_get();
+     57c:	f000 f884 	bl	688 <am_hal_clkgen_sysclk_get>
+     580:	60f8      	str	r0, [r7, #12]
+#endif
+    ui32Loops = ui32MicroSeconds * (ui32HFRC / 3000000);
+     582:	68fb      	ldr	r3, [r7, #12]
+     584:	4a07      	ldr	r2, [pc, #28]	; (5a4 <am_util_delay_us+0x30>)
+     586:	fba2 2303 	umull	r2, r3, r2, r3
+     58a:	0c9b      	lsrs	r3, r3, #18
+     58c:	687a      	ldr	r2, [r7, #4]
+     58e:	fb02 f303 	mul.w	r3, r2, r3
+     592:	60bb      	str	r3, [r7, #8]
+
+    //
+    // Call the BOOTROM cycle delay function
+    //
+    am_hal_flash_delay(ui32Loops);
+     594:	68b8      	ldr	r0, [r7, #8]
+     596:	f000 f88d 	bl	6b4 <am_hal_flash_delay>
+}
+     59a:	bf00      	nop
+     59c:	3710      	adds	r7, #16
+     59e:	46bd      	mov	sp, r7
+     5a0:	bd80      	pop	{r7, pc}
+     5a2:	bf00      	nop
+     5a4:	165e9f81 	.word	0x165e9f81
+
+000005a8 <am_bsp_iom_enable>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_bsp_iom_enable(uint32_t ui32Module)
+{
+     5a8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+     5aa:	4604      	mov	r4, r0
+    am_hal_iom_enable(ui32Module);
+     5ac:	f000 fa26 	bl	9fc <am_hal_iom_enable>
+
+    // Check that the MISO pin is defined in BSP and we are in SPI mode.
+    if ( (AM_BSP_GPIO_UNDEF != g_SPIpins[ui32Module][0] ) &&
+     5b0:	4920      	ldr	r1, [pc, #128]	; (634 <am_bsp_iom_enable+0x8c>)
+     5b2:	4a21      	ldr	r2, [pc, #132]	; (638 <am_bsp_iom_enable+0x90>)
+     5b4:	f851 3034 	ldr.w	r3, [r1, r4, lsl #3]
+     5b8:	4293      	cmp	r3, r2
+     5ba:	d039      	beq.n	630 <am_bsp_iom_enable+0x88>
+         (1 == AM_BFRn(IOMSTR, ui32Module, CFG, IFCSEL) ) )
+     5bc:	f504 20a0 	add.w	r0, r4, #327680	; 0x50000
+     5c0:	3004      	adds	r0, #4
+     5c2:	0305      	lsls	r5, r0, #12
+     5c4:	f8d5 611c 	ldr.w	r6, [r5, #284]	; 0x11c
+    if ( (AM_BSP_GPIO_UNDEF != g_SPIpins[ui32Module][0] ) &&
+     5c8:	07f2      	lsls	r2, r6, #31
+     5ca:	d531      	bpl.n	630 <am_bsp_iom_enable+0x88>
+    {
+        am_hal_gpio_pin_config(g_SPIpins[ui32Module][0],
+     5cc:	2b00      	cmp	r3, #0
+     5ce:	db2f      	blt.n	630 <am_bsp_iom_enable+0x88>
+     5d0:	eb01 0cc4 	add.w	ip, r1, r4, lsl #3
+     5d4:	4d19      	ldr	r5, [pc, #100]	; (63c <am_bsp_iom_enable+0x94>)
+     5d6:	4f1a      	ldr	r7, [pc, #104]	; (640 <am_bsp_iom_enable+0x98>)
+     5d8:	f8dc 1004 	ldr.w	r1, [ip, #4]
+     5dc:	085c      	lsrs	r4, r3, #1
+     5de:	f004 0c7c 	and.w	ip, r4, #124	; 0x7c
+     5e2:	2273      	movs	r2, #115	; 0x73
+     5e4:	602a      	str	r2, [r5, #0]
+     5e6:	0098      	lsls	r0, r3, #2
+     5e8:	f85c 6007 	ldr.w	r6, [ip, r7]
+     5ec:	f000 041c 	and.w	r4, r0, #28
+     5f0:	2207      	movs	r2, #7
+     5f2:	f3c1 2002 	ubfx	r0, r1, #8, #3
+     5f6:	fa02 fe04 	lsl.w	lr, r2, r4
+     5fa:	40a0      	lsls	r0, r4
+     5fc:	f003 02fc 	and.w	r2, r3, #252	; 0xfc
+     600:	ea26 040e 	bic.w	r4, r6, lr
+     604:	4320      	orrs	r0, r4
+     606:	f102 4680 	add.w	r6, r2, #1073741824	; 0x40000000
+     60a:	f84c 0007 	str.w	r0, [ip, r7]
+     60e:	f506 3780 	add.w	r7, r6, #65536	; 0x10000
+     612:	00db      	lsls	r3, r3, #3
+     614:	f003 0218 	and.w	r2, r3, #24
+     618:	6838      	ldr	r0, [r7, #0]
+     61a:	24ff      	movs	r4, #255	; 0xff
+     61c:	4094      	lsls	r4, r2
+     61e:	b2c9      	uxtb	r1, r1
+     620:	fa01 f602 	lsl.w	r6, r1, r2
+     624:	ea20 0304 	bic.w	r3, r0, r4
+     628:	431e      	orrs	r6, r3
+     62a:	2200      	movs	r2, #0
+     62c:	603e      	str	r6, [r7, #0]
+     62e:	602a      	str	r2, [r5, #0]
+     630:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+     632:	bf00      	nop
+     634:	000032bc 	.word	0x000032bc
+     638:	deadbeef 	.word	0xdeadbeef
+     63c:	40010060 	.word	0x40010060
+     640:	40010040 	.word	0x40010040
+
+00000644 <am_bsp_low_power_init>:
+//! @return None.
+//
+//*****************************************************************************
+void
+am_bsp_low_power_init(void)
+{
+     644:	b508      	push	{r3, lr}
+    //
+    // Enable internal buck converters.
+    //
+    am_hal_mcuctrl_bucks_enable();
+     646:	f000 ffbd 	bl	15c4 <am_hal_mcuctrl_bucks_enable>
+
+    //
+    // Turn off the voltage comparator as this is enabled on reset.
+    //
+    am_hal_vcomp_disable();
+     64a:	f001 f88d 	bl	1768 <am_hal_vcomp_disable>
+
+    //
+    // Run the RTC off the LFRC.
+    //
+    am_hal_rtc_osc_select(AM_HAL_RTC_OSC_LFRC);
+     64e:	2001      	movs	r0, #1
+     650:	f001 f85e 	bl	1710 <am_hal_rtc_osc_select>
+
+    //
+    // Stop the XTAL.
+    //
+    am_hal_clkgen_osc_stop(AM_HAL_CLKGEN_OSC_XT);
+     654:	2001      	movs	r0, #1
+     656:	f000 f823 	bl	6a0 <am_hal_clkgen_osc_stop>
+
+    //
+    // Disable the RTC.
+    //
+    am_hal_rtc_osc_disable();
+     65a:	f001 f867 	bl	172c <am_hal_rtc_osc_disable>
+
+    //
+    // Disable the bandgap.
+    //
+    am_hal_mcuctrl_bandgap_disable();
+}
+     65e:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+    am_hal_mcuctrl_bandgap_disable();
+     662:	f000 bfa7 	b.w	15b4 <am_hal_mcuctrl_bandgap_disable>
+     666:	bf00      	nop
+
+00000668 <am_hal_clkgen_sysclk_select>:
+am_hal_clkgen_sysclk_select(uint32_t ui32ClockSetting)
+{
+    //
+    // Unlock the clock control register.
+    //
+    AM_REG(CLKGEN, CLKKEY) = AM_REG_CLKGEN_CLKKEY_KEYVAL;
+     668:	4b05      	ldr	r3, [pc, #20]	; (680 <am_hal_clkgen_sysclk_select+0x18>)
+
+    //
+    // Set the HFRC divisor to the user-selected value.
+    //
+    AM_REG(CLKGEN, CCTRL) = ui32ClockSetting;
+     66a:	4906      	ldr	r1, [pc, #24]	; (684 <am_hal_clkgen_sysclk_select+0x1c>)
+{
+     66c:	b410      	push	{r4}
+
+    //
+    // Lock the clock configuration registers.
+    //
+    AM_REG(CLKGEN, CLKKEY) = 0;
+     66e:	2200      	movs	r2, #0
+    AM_REG(CLKGEN, CLKKEY) = AM_REG_CLKGEN_CLKKEY_KEYVAL;
+     670:	2447      	movs	r4, #71	; 0x47
+     672:	601c      	str	r4, [r3, #0]
+    AM_REG(CLKGEN, CCTRL) = ui32ClockSetting;
+     674:	6008      	str	r0, [r1, #0]
+}
+     676:	f85d 4b04 	ldr.w	r4, [sp], #4
+    AM_REG(CLKGEN, CLKKEY) = 0;
+     67a:	601a      	str	r2, [r3, #0]
+}
+     67c:	4770      	bx	lr
+     67e:	bf00      	nop
+     680:	40004014 	.word	0x40004014
+     684:	40004018 	.word	0x40004018
+
+00000688 <am_hal_clkgen_sysclk_get>:
+    uint32_t ui32ClockSetting;
+
+    //
+    // Read the value of the clock divider.
+    //
+    ui32ClockSetting = AM_BFR(CLKGEN, CCTRL, CORESEL);
+     688:	4b03      	ldr	r3, [pc, #12]	; (698 <am_hal_clkgen_sysclk_get+0x10>)
+     68a:	4a04      	ldr	r2, [pc, #16]	; (69c <am_hal_clkgen_sysclk_get+0x14>)
+     68c:	6818      	ldr	r0, [r3, #0]
+     68e:	f000 0107 	and.w	r1, r0, #7
+        case AM_HAL_CLKGEN_SYSCLK_3MHZ:
+            return 3000000;
+        default:
+            return 0xFFFFFFFF;
+    }
+}
+     692:	f852 0021 	ldr.w	r0, [r2, r1, lsl #2]
+     696:	4770      	bx	lr
+     698:	40004018 	.word	0x40004018
+     69c:	000032cc 	.word	0x000032cc
+
+000006a0 <am_hal_clkgen_osc_stop>:
+//
+//*****************************************************************************
+void
+am_hal_clkgen_osc_stop(uint32_t ui32OscFlags)
+{
+    if ( ui32OscFlags & (AM_HAL_CLKGEN_OSC_LFRC | AM_HAL_CLKGEN_OSC_XT) )
+     6a0:	0783      	lsls	r3, r0, #30
+     6a2:	d003      	beq.n	6ac <am_hal_clkgen_osc_stop+0xc>
+    {
+        //
+        // Stop the oscillator(s).
+        // Note that these bits are set in order to stop the oscillator.
+        //
+        AM_REG(CLKGEN, OCTRL) |= ui32OscFlags;
+     6a4:	4b02      	ldr	r3, [pc, #8]	; (6b0 <am_hal_clkgen_osc_stop+0x10>)
+     6a6:	681a      	ldr	r2, [r3, #0]
+     6a8:	4310      	orrs	r0, r2
+     6aa:	6018      	str	r0, [r3, #0]
+     6ac:	4770      	bx	lr
+     6ae:	bf00      	nop
+     6b0:	4000400c 	.word	0x4000400c
+
+000006b4 <am_hal_flash_delay>:
+}
+#elif defined(__GNUC_STDC_INLINE__)
+void __attribute__((naked))
+am_hal_flash_delay(uint32_t ui32Iterations)
+{
+    __asm("    subs    r0, #1\n"
+     6b4:	3801      	subs	r0, #1
+     6b6:	f47f affd 	bne.w	6b4 <am_hal_flash_delay>
+     6ba:	4770      	bx	lr
+
+000006bc <am_hal_flash_delay_status_change>:
+//*****************************************************************************
+uint32_t
+am_hal_flash_delay_status_change(uint32_t ui32usMaxDelay, uint32_t ui32Address,
+                                 uint32_t ui32Mask, uint32_t ui32Value)
+{
+    while ( ui32usMaxDelay-- )
+     6bc:	2800      	cmp	r0, #0
+     6be:	d070      	beq.n	7a2 <am_hal_flash_delay_status_change+0xe6>
+{
+     6c0:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+     6c4:	1e47      	subs	r7, r0, #1
+    {
+        //
+        // Check the status
+        //
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     6c6:	6808      	ldr	r0, [r1, #0]
+     6c8:	4010      	ands	r0, r2
+     6ca:	4283      	cmp	r3, r0
+     6cc:	d063      	beq.n	796 <am_hal_flash_delay_status_change+0xda>
+     6ce:	f017 0903 	ands.w	r9, r7, #3
+     6d2:	461c      	mov	r4, r3
+     6d4:	4615      	mov	r5, r2
+     6d6:	460e      	mov	r6, r1
+        }
+
+        //
+        // Call the BOOTROM cycle function to delay for about 1 microsecond.
+        //
+        am_hal_flash_delay( FLASH_CYCLES_US(1) );
+     6d8:	f8df 80cc 	ldr.w	r8, [pc, #204]	; 7a8 <am_hal_flash_delay_status_change+0xec>
+     6dc:	d02c      	beq.n	738 <am_hal_flash_delay_status_change+0x7c>
+     6de:	f7ff ffd3 	bl	688 <am_hal_clkgen_sysclk_get>
+     6e2:	fba8 3100 	umull	r3, r1, r8, r0
+     6e6:	0c88      	lsrs	r0, r1, #18
+     6e8:	f7ff ffe4 	bl	6b4 <am_hal_flash_delay>
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     6ec:	6833      	ldr	r3, [r6, #0]
+     6ee:	402b      	ands	r3, r5
+     6f0:	42a3      	cmp	r3, r4
+    while ( ui32usMaxDelay-- )
+     6f2:	f107 37ff 	add.w	r7, r7, #4294967295
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     6f6:	d04e      	beq.n	796 <am_hal_flash_delay_status_change+0xda>
+     6f8:	f1b9 0f01 	cmp.w	r9, #1
+     6fc:	d01c      	beq.n	738 <am_hal_flash_delay_status_change+0x7c>
+     6fe:	f1b9 0f02 	cmp.w	r9, #2
+     702:	d00c      	beq.n	71e <am_hal_flash_delay_status_change+0x62>
+        am_hal_flash_delay( FLASH_CYCLES_US(1) );
+     704:	f7ff ffc0 	bl	688 <am_hal_clkgen_sysclk_get>
+     708:	fba8 3200 	umull	r3, r2, r8, r0
+     70c:	0c90      	lsrs	r0, r2, #18
+     70e:	f7ff ffd1 	bl	6b4 <am_hal_flash_delay>
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     712:	6830      	ldr	r0, [r6, #0]
+     714:	4028      	ands	r0, r5
+     716:	42a0      	cmp	r0, r4
+    while ( ui32usMaxDelay-- )
+     718:	f107 37ff 	add.w	r7, r7, #4294967295
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     71c:	d03b      	beq.n	796 <am_hal_flash_delay_status_change+0xda>
+        am_hal_flash_delay( FLASH_CYCLES_US(1) );
+     71e:	f7ff ffb3 	bl	688 <am_hal_clkgen_sysclk_get>
+     722:	fba8 3100 	umull	r3, r1, r8, r0
+     726:	0c88      	lsrs	r0, r1, #18
+     728:	f7ff ffc4 	bl	6b4 <am_hal_flash_delay>
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     72c:	6833      	ldr	r3, [r6, #0]
+     72e:	402b      	ands	r3, r5
+     730:	42a3      	cmp	r3, r4
+    while ( ui32usMaxDelay-- )
+     732:	f107 37ff 	add.w	r7, r7, #4294967295
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     736:	d02e      	beq.n	796 <am_hal_flash_delay_status_change+0xda>
+        am_hal_flash_delay( FLASH_CYCLES_US(1) );
+     738:	f7ff ffa6 	bl	688 <am_hal_clkgen_sysclk_get>
+     73c:	fba8 3200 	umull	r3, r2, r8, r0
+     740:	0c90      	lsrs	r0, r2, #18
+     742:	f7ff ffb7 	bl	6b4 <am_hal_flash_delay>
+    while ( ui32usMaxDelay-- )
+     746:	b34f      	cbz	r7, 79c <am_hal_flash_delay_status_change+0xe0>
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     748:	6830      	ldr	r0, [r6, #0]
+     74a:	4028      	ands	r0, r5
+     74c:	42a0      	cmp	r0, r4
+    while ( ui32usMaxDelay-- )
+     74e:	f1a7 0704 	sub.w	r7, r7, #4
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     752:	d020      	beq.n	796 <am_hal_flash_delay_status_change+0xda>
+        am_hal_flash_delay( FLASH_CYCLES_US(1) );
+     754:	f7ff ff98 	bl	688 <am_hal_clkgen_sysclk_get>
+     758:	fba8 3100 	umull	r3, r1, r8, r0
+     75c:	0c88      	lsrs	r0, r1, #18
+     75e:	f7ff ffa9 	bl	6b4 <am_hal_flash_delay>
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     762:	6833      	ldr	r3, [r6, #0]
+     764:	402b      	ands	r3, r5
+     766:	42a3      	cmp	r3, r4
+     768:	d015      	beq.n	796 <am_hal_flash_delay_status_change+0xda>
+        am_hal_flash_delay( FLASH_CYCLES_US(1) );
+     76a:	f7ff ff8d 	bl	688 <am_hal_clkgen_sysclk_get>
+     76e:	fba8 3200 	umull	r3, r2, r8, r0
+     772:	0c90      	lsrs	r0, r2, #18
+     774:	f7ff ff9e 	bl	6b4 <am_hal_flash_delay>
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     778:	6830      	ldr	r0, [r6, #0]
+     77a:	4028      	ands	r0, r5
+     77c:	42a0      	cmp	r0, r4
+     77e:	d00a      	beq.n	796 <am_hal_flash_delay_status_change+0xda>
+        am_hal_flash_delay( FLASH_CYCLES_US(1) );
+     780:	f7ff ff82 	bl	688 <am_hal_clkgen_sysclk_get>
+     784:	fba8 3100 	umull	r3, r1, r8, r0
+     788:	0c88      	lsrs	r0, r1, #18
+     78a:	f7ff ff93 	bl	6b4 <am_hal_flash_delay>
+        if ( ( AM_REGVAL(ui32Address) & ui32Mask ) == ui32Value )
+     78e:	6833      	ldr	r3, [r6, #0]
+     790:	402b      	ands	r3, r5
+     792:	42a3      	cmp	r3, r4
+     794:	d1d0      	bne.n	738 <am_hal_flash_delay_status_change+0x7c>
+            return 1;
+     796:	2001      	movs	r0, #1
+     798:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+    }
+
+    return 0;
+     79c:	2000      	movs	r0, #0
+     79e:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+     7a2:	2000      	movs	r0, #0
+} // am_hal_flash_delay_status_change()
+     7a4:	4770      	bx	lr
+     7a6:	bf00      	nop
+     7a8:	165e9f81 	.word	0x165e9f81
+
+000007ac <am_hal_gpio_int_clear>:
+am_hal_gpio_int_clear(uint64_t ui64Interrupt)
+{
+    //
+    // Clear the interrupts.
+    //
+    AM_REG(GPIO, INT1CLR) = (ui64Interrupt >> 32);
+     7ac:	4a02      	ldr	r2, [pc, #8]	; (7b8 <am_hal_gpio_int_clear+0xc>)
+    AM_REG(GPIO, INT0CLR) = (ui64Interrupt & 0xFFFFFFFF);
+     7ae:	4b03      	ldr	r3, [pc, #12]	; (7bc <am_hal_gpio_int_clear+0x10>)
+    AM_REG(GPIO, INT1CLR) = (ui64Interrupt >> 32);
+     7b0:	6011      	str	r1, [r2, #0]
+    AM_REG(GPIO, INT0CLR) = (ui64Interrupt & 0xFFFFFFFF);
+     7b2:	6018      	str	r0, [r3, #0]
+     7b4:	4770      	bx	lr
+     7b6:	bf00      	nop
+     7b8:	40010218 	.word	0x40010218
+     7bc:	40010208 	.word	0x40010208
+
+000007c0 <am_hal_gpio_int_status_get>:
+//! @return None
+//
+//*****************************************************************************
+uint64_t
+am_hal_gpio_int_status_get(bool bEnabledOnly)
+{
+     7c0:	b470      	push	{r4, r5, r6}
+    uint64_t u64RetVal, u64Mask;
+    //
+    // Combine upper or lower GPIO words into one 64 bit return value.
+    //
+    if (bEnabledOnly)
+     7c2:	b930      	cbnz	r0, 7d2 <am_hal_gpio_int_status_get+0x12>
+        u64Mask   |= ((uint64_t) AM_REGn(GPIO, 0, INT0STAT)) << 0;
+        return u64RetVal & u64Mask;
+    }
+    else
+    {
+        u64RetVal  = ((uint64_t) AM_REGn(GPIO, 0, INT1STAT)) << 32;
+     7c4:	4a0b      	ldr	r2, [pc, #44]	; (7f4 <am_hal_gpio_int_status_get+0x34>)
+        u64RetVal |= ((uint64_t) AM_REGn(GPIO, 0, INT0STAT)) << 0;
+     7c6:	4b0c      	ldr	r3, [pc, #48]	; (7f8 <am_hal_gpio_int_status_get+0x38>)
+        u64RetVal  = ((uint64_t) AM_REGn(GPIO, 0, INT1STAT)) << 32;
+     7c8:	6811      	ldr	r1, [r2, #0]
+        u64RetVal |= ((uint64_t) AM_REGn(GPIO, 0, INT0STAT)) << 0;
+     7ca:	681c      	ldr	r4, [r3, #0]
+     7cc:	4320      	orrs	r0, r4
+        return u64RetVal;
+    }
+}
+     7ce:	bc70      	pop	{r4, r5, r6}
+     7d0:	4770      	bx	lr
+        u64RetVal  = ((uint64_t) AM_REGn(GPIO, 0, INT1EN)) << 32;
+     7d2:	4d0a      	ldr	r5, [pc, #40]	; (7fc <am_hal_gpio_int_status_get+0x3c>)
+        u64RetVal |= ((uint64_t) AM_REGn(GPIO, 0, INT0EN)) << 0;
+     7d4:	4e0a      	ldr	r6, [pc, #40]	; (800 <am_hal_gpio_int_status_get+0x40>)
+        u64Mask    = ((uint64_t) AM_REGn(GPIO, 0, INT1STAT)) << 32;
+     7d6:	4c07      	ldr	r4, [pc, #28]	; (7f4 <am_hal_gpio_int_status_get+0x34>)
+        u64Mask   |= ((uint64_t) AM_REGn(GPIO, 0, INT0STAT)) << 0;
+     7d8:	4a07      	ldr	r2, [pc, #28]	; (7f8 <am_hal_gpio_int_status_get+0x38>)
+        u64RetVal  = ((uint64_t) AM_REGn(GPIO, 0, INT1EN)) << 32;
+     7da:	6829      	ldr	r1, [r5, #0]
+        u64RetVal |= ((uint64_t) AM_REGn(GPIO, 0, INT0EN)) << 0;
+     7dc:	6835      	ldr	r5, [r6, #0]
+        u64Mask    = ((uint64_t) AM_REGn(GPIO, 0, INT1STAT)) << 32;
+     7de:	6823      	ldr	r3, [r4, #0]
+        u64Mask   |= ((uint64_t) AM_REGn(GPIO, 0, INT0STAT)) << 0;
+     7e0:	6816      	ldr	r6, [r2, #0]
+        u64RetVal  = ((uint64_t) AM_REGn(GPIO, 0, INT1EN)) << 32;
+     7e2:	2000      	movs	r0, #0
+        u64Mask    = ((uint64_t) AM_REGn(GPIO, 0, INT1STAT)) << 32;
+     7e4:	4602      	mov	r2, r0
+        u64Mask   |= ((uint64_t) AM_REGn(GPIO, 0, INT0STAT)) << 0;
+     7e6:	4332      	orrs	r2, r6
+        u64RetVal |= ((uint64_t) AM_REGn(GPIO, 0, INT0EN)) << 0;
+     7e8:	4328      	orrs	r0, r5
+        return u64RetVal & u64Mask;
+     7ea:	4010      	ands	r0, r2
+     7ec:	4019      	ands	r1, r3
+}
+     7ee:	bc70      	pop	{r4, r5, r6}
+     7f0:	4770      	bx	lr
+     7f2:	bf00      	nop
+     7f4:	40010214 	.word	0x40010214
+     7f8:	40010204 	.word	0x40010204
+     7fc:	40010210 	.word	0x40010210
+     800:	40010200 	.word	0x40010200
+
+00000804 <am_hal_interrupt_master_disable>:
+}
+#elif defined(__GNUC_STDC_INLINE__)
+uint32_t __attribute__((naked))
+am_hal_interrupt_master_disable(void)
+{
+    __asm("    mrs     r0, PRIMASK");
+     804:	f3ef 8010 	mrs	r0, PRIMASK
+    __asm("    cpsid i");
+     808:	b672      	cpsid	i
+    __asm("    bx lr");
+     80a:	4770      	bx	lr
+
+0000080c <am_hal_interrupt_master_set>:
+//*****************************************************************************
+#if defined(__GNUC_STDC_INLINE__)
+void __attribute__((naked))
+am_hal_interrupt_master_set(uint32_t ui32InterruptState)
+{
+    __asm("    msr     PRIMASK, r0");
+     80c:	f380 8810 	msr	PRIMASK, r0
+    __asm("    bx lr");
+     810:	4770      	bx	lr
+     812:	bf00      	nop
+
+00000814 <am_hal_iom_sleeping_queue_flush>:
+    uint32_t ui32Critical;
+
+    //
+    // Validate parameters
+    //
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+     814:	2801      	cmp	r0, #1
+     816:	d900      	bls.n	81a <am_hal_iom_sleeping_queue_flush+0x6>
+     818:	4770      	bx	lr
+{
+     81a:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+     81c:	4f0c      	ldr	r7, [pc, #48]	; (850 <am_hal_iom_sleeping_queue_flush+0x3c>)
+     81e:	4e0d      	ldr	r6, [pc, #52]	; (854 <am_hal_iom_sleeping_queue_flush+0x40>)
+
+        //
+        // Check the queue and the IOM itself.
+        //
+        if ( (g_bIomBusy[ui32Module] == false) &&
+            am_hal_queue_empty(&g_psIOMQueue[ui32Module]) )
+     820:	eb00 0340 	add.w	r3, r0, r0, lsl #1
+     824:	4604      	mov	r4, r0
+     826:	eb07 07c3 	add.w	r7, r7, r3, lsl #3
+        ui32Critical = am_hal_interrupt_master_disable();
+     82a:	f7ff ffeb 	bl	804 <am_hal_interrupt_master_disable>
+        if ( (g_bIomBusy[ui32Module] == false) &&
+     82e:	5d31      	ldrb	r1, [r6, r4]
+        ui32Critical = am_hal_interrupt_master_disable();
+     830:	4605      	mov	r5, r0
+        if ( (g_bIomBusy[ui32Module] == false) &&
+     832:	b929      	cbnz	r1, 840 <am_hal_iom_sleeping_queue_flush+0x2c>
+     834:	68ba      	ldr	r2, [r7, #8]
+     836:	b91a      	cbnz	r2, 840 <am_hal_iom_sleeping_queue_flush+0x2c>
+        //
+        // End the critical section.
+        //
+        am_hal_interrupt_master_set(ui32Critical);
+    }
+}
+     838:	e8bd 40f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, lr}
+        am_hal_interrupt_master_set(ui32Critical);
+     83c:	f7ff bfe6 	b.w	80c <am_hal_interrupt_master_set>
+            am_hal_sysctrl_sleep(AM_HAL_SYSCTRL_SLEEP_NORMAL);
+     840:	2000      	movs	r0, #0
+     842:	f000 ff7b 	bl	173c <am_hal_sysctrl_sleep>
+        am_hal_interrupt_master_set(ui32Critical);
+     846:	4628      	mov	r0, r5
+     848:	f7ff ffe0 	bl	80c <am_hal_interrupt_master_set>
+     84c:	e7ed      	b.n	82a <am_hal_iom_sleeping_queue_flush+0x16>
+     84e:	bf00      	nop
+     850:	10001330 	.word	0x10001330
+     854:	1000100c 	.word	0x1000100c
+
+00000858 <am_hal_iom_spi_write_nb.part.6>:
+am_hal_iom_spi_write_nb(uint32_t ui32Module, uint32_t ui32ChipSelect,
+     858:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+     85c:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
+am_hal_iom_spi_write_nb(uint32_t ui32Module, uint32_t ui32ChipSelect,
+     860:	461f      	mov	r7, r3
+     862:	4606      	mov	r6, r0
+     864:	4688      	mov	r8, r1
+     866:	4691      	mov	r9, r2
+     868:	9d08      	ldr	r5, [sp, #32]
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+     86a:	f080 80a6 	bcs.w	9ba <am_hal_iom_spi_write_nb.part.6+0x162>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     86e:	2b00      	cmp	r3, #0
+     870:	f000 809c 	beq.w	9ac <am_hal_iom_spi_write_nb.part.6+0x154>
+     874:	495b      	ldr	r1, [pc, #364]	; (9e4 <am_hal_iom_spi_write_nb.part.6+0x18c>)
+    while ( g_bIomBusy[ui32Module] );
+     876:	5d8a      	ldrb	r2, [r1, r6]
+     878:	2a00      	cmp	r2, #0
+     87a:	d1fc      	bne.n	876 <am_hal_iom_spi_write_nb.part.6+0x1e>
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     87c:	f506 24a0 	add.w	r4, r6, #327680	; 0x50000
+    g_bIomBusy[ui32Module] = true;
+     880:	2301      	movs	r3, #1
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     882:	3404      	adds	r4, #4
+    g_bIomBusy[ui32Module] = true;
+     884:	558b      	strb	r3, [r1, r6]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     886:	0324      	lsls	r4, r4, #12
+    ui32TransferSize = (ui32NumBytes <= AM_HAL_IOM_MAX_FIFO_SIZE ? ui32NumBytes :
+     888:	2f40      	cmp	r7, #64	; 0x40
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     88a:	f8d4 0208 	ldr.w	r0, [r4, #520]	; 0x208
+     88e:	f040 0101 	orr.w	r1, r0, #1
+     892:	f8c4 1208 	str.w	r1, [r4, #520]	; 0x208
+    return (AM_HAL_IOM_MAX_FIFO_SIZE - AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ)) & (~0x3);
+     896:	f8d4 2100 	ldr.w	r2, [r4, #256]	; 0x100
+     89a:	f002 0a7f 	and.w	sl, r2, #127	; 0x7f
+     89e:	f1ca 0c40 	rsb	ip, sl, #64	; 0x40
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     8a2:	f00c 03fc 	and.w	r3, ip, #252	; 0xfc
+    ui32TransferSize = (ui32NumBytes <= AM_HAL_IOM_MAX_FIFO_SIZE ? ui32NumBytes :
+     8a6:	46ba      	mov	sl, r7
+     8a8:	bf28      	it	cs
+     8aa:	f04f 0a40 	movcs.w	sl, #64	; 0x40
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     8ae:	459a      	cmp	sl, r3
+     8b0:	f200 808a 	bhi.w	9c8 <am_hal_iom_spi_write_nb.part.6+0x170>
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     8b4:	f1ba 0f00 	cmp.w	sl, #0
+     8b8:	d076      	beq.n	9a8 <am_hal_iom_spi_write_nb.part.6+0x150>
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     8ba:	4648      	mov	r0, r9
+     8bc:	ea6f 0209 	mvn.w	r2, r9
+     8c0:	f850 1b04 	ldr.w	r1, [r0], #4
+     8c4:	6021      	str	r1, [r4, #0]
+     8c6:	444a      	add	r2, r9
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     8c8:	eba0 0c09 	sub.w	ip, r0, r9
+     8cc:	4452      	add	r2, sl
+     8ce:	45e2      	cmp	sl, ip
+     8d0:	f3c2 0382 	ubfx	r3, r2, #2, #3
+     8d4:	d943      	bls.n	95e <am_hal_iom_spi_write_nb.part.6+0x106>
+     8d6:	b323      	cbz	r3, 922 <am_hal_iom_spi_write_nb.part.6+0xca>
+     8d8:	2b01      	cmp	r3, #1
+     8da:	d01b      	beq.n	914 <am_hal_iom_spi_write_nb.part.6+0xbc>
+     8dc:	2b02      	cmp	r3, #2
+     8de:	d016      	beq.n	90e <am_hal_iom_spi_write_nb.part.6+0xb6>
+     8e0:	2b03      	cmp	r3, #3
+     8e2:	d011      	beq.n	908 <am_hal_iom_spi_write_nb.part.6+0xb0>
+     8e4:	2b04      	cmp	r3, #4
+     8e6:	d00c      	beq.n	902 <am_hal_iom_spi_write_nb.part.6+0xaa>
+     8e8:	2b05      	cmp	r3, #5
+     8ea:	d007      	beq.n	8fc <am_hal_iom_spi_write_nb.part.6+0xa4>
+     8ec:	2b06      	cmp	r3, #6
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     8ee:	bf1c      	itt	ne
+     8f0:	f850 3b04 	ldrne.w	r3, [r0], #4
+     8f4:	6023      	strne	r3, [r4, #0]
+     8f6:	f850 2b04 	ldr.w	r2, [r0], #4
+     8fa:	6022      	str	r2, [r4, #0]
+     8fc:	f850 1b04 	ldr.w	r1, [r0], #4
+     900:	6021      	str	r1, [r4, #0]
+     902:	f850 3b04 	ldr.w	r3, [r0], #4
+     906:	6023      	str	r3, [r4, #0]
+     908:	f850 2b04 	ldr.w	r2, [r0], #4
+     90c:	6022      	str	r2, [r4, #0]
+     90e:	f850 1b04 	ldr.w	r1, [r0], #4
+     912:	6021      	str	r1, [r4, #0]
+     914:	f850 3b04 	ldr.w	r3, [r0], #4
+     918:	6023      	str	r3, [r4, #0]
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     91a:	eba0 0209 	sub.w	r2, r0, r9
+     91e:	4592      	cmp	sl, r2
+     920:	d91d      	bls.n	95e <am_hal_iom_spi_write_nb.part.6+0x106>
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     922:	4684      	mov	ip, r0
+     924:	3020      	adds	r0, #32
+     926:	f85c 1b04 	ldr.w	r1, [ip], #4
+     92a:	6021      	str	r1, [r4, #0]
+     92c:	f850 3c1c 	ldr.w	r3, [r0, #-28]
+     930:	6023      	str	r3, [r4, #0]
+     932:	f8dc 2004 	ldr.w	r2, [ip, #4]
+     936:	6022      	str	r2, [r4, #0]
+     938:	f850 1c14 	ldr.w	r1, [r0, #-20]
+     93c:	6021      	str	r1, [r4, #0]
+     93e:	f850 3c10 	ldr.w	r3, [r0, #-16]
+     942:	6023      	str	r3, [r4, #0]
+     944:	f850 2c0c 	ldr.w	r2, [r0, #-12]
+     948:	6022      	str	r2, [r4, #0]
+     94a:	f850 1c08 	ldr.w	r1, [r0, #-8]
+     94e:	6021      	str	r1, [r4, #0]
+     950:	f850 3c04 	ldr.w	r3, [r0, #-4]
+     954:	6023      	str	r3, [r4, #0]
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     956:	eba0 0209 	sub.w	r2, r0, r9
+     95a:	4592      	cmp	sl, r2
+     95c:	d8e1      	bhi.n	922 <am_hal_iom_spi_write_nb.part.6+0xca>
+        g_psIOMBuffers[ui32Module].ui32State = BUFFER_SENDING;
+     95e:	eb06 0086 	add.w	r0, r6, r6, lsl #2
+     962:	0086      	lsls	r6, r0, #2
+     964:	4a20      	ldr	r2, [pc, #128]	; (9e8 <am_hal_iom_spi_write_nb.part.6+0x190>)
+        g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+     966:	9809      	ldr	r0, [sp, #36]	; 0x24
+        g_psIOMBuffers[ui32Module].ui32State = BUFFER_SENDING;
+     968:	2101      	movs	r1, #1
+     96a:	1993      	adds	r3, r2, r6
+     96c:	5191      	str	r1, [r2, r6]
+        g_psIOMBuffers[ui32Module].pui32Data += (ui32TransferSize / 4);
+     96e:	f02a 0203 	bic.w	r2, sl, #3
+        g_psIOMBuffers[ui32Module].ui32BytesLeft -= ui32TransferSize;
+     972:	eba7 060a 	sub.w	r6, r7, sl
+        g_psIOMBuffers[ui32Module].pui32Data += (ui32TransferSize / 4);
+     976:	444a      	add	r2, r9
+        g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+     978:	6118      	str	r0, [r3, #16]
+        g_psIOMBuffers[ui32Module].ui32Options = ui32Options;
+     97a:	60dd      	str	r5, [r3, #12]
+        g_psIOMBuffers[ui32Module].ui32BytesLeft -= ui32TransferSize;
+     97c:	609e      	str	r6, [r3, #8]
+        g_psIOMBuffers[ui32Module].pui32Data += (ui32TransferSize / 4);
+     97e:	605a      	str	r2, [r3, #4]
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     980:	b34f      	cbz	r7, 9d6 <am_hal_iom_spi_write_nb.part.6+0x17e>
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+     982:	ea4f 4808 	mov.w	r8, r8, lsl #16
+    ui32Command |= ui32Options & 0x5C00FF00;
+     986:	f025 4523 	bic.w	r5, r5, #2734686208	; 0xa3000000
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+     98a:	f408 23e0 	and.w	r3, r8, #458752	; 0x70000
+    ui32Command |= ui32Options & 0x5C00FF00;
+     98e:	f005 21ff 	and.w	r1, r5, #4278255360	; 0xff00ff00
+    ui32Command |= (ui32NumBytes & 0xFF);
+     992:	b2fa      	uxtb	r2, r7
+    ui32Command |= ui32Options & 0x5C00FF00;
+     994:	430b      	orrs	r3, r1
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+     996:	03ff      	lsls	r7, r7, #15
+    ui32Command |= ui32Options & 0x5C00FF00;
+     998:	4313      	orrs	r3, r2
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+     99a:	f007 66f0 	and.w	r6, r7, #125829120	; 0x7800000
+    ui32Command |= ui32Options & 0x5C00FF00;
+     99e:	4333      	orrs	r3, r6
+    AM_REGn(IOMSTR, ui32Module, CMD) = ui32Command;
+     9a0:	f8c4 3110 	str.w	r3, [r4, #272]	; 0x110
+     9a4:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+     9a8:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     9ac:	4a0f      	ldr	r2, [pc, #60]	; (9ec <am_hal_iom_spi_write_nb.part.6+0x194>)
+     9ae:	4810      	ldr	r0, [pc, #64]	; (9f0 <am_hal_iom_spi_write_nb.part.6+0x198>)
+     9b0:	f240 313f 	movw	r1, #831	; 0x33f
+     9b4:	f000 fede 	bl	1774 <am_hal_debug_error>
+     9b8:	e75c      	b.n	874 <am_hal_iom_spi_write_nb.part.6+0x1c>
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+     9ba:	4a0e      	ldr	r2, [pc, #56]	; (9f4 <am_hal_iom_spi_write_nb.part.6+0x19c>)
+     9bc:	480c      	ldr	r0, [pc, #48]	; (9f0 <am_hal_iom_spi_write_nb.part.6+0x198>)
+     9be:	f240 313d 	movw	r1, #829	; 0x33d
+     9c2:	f000 fed7 	bl	1774 <am_hal_debug_error>
+     9c6:	e755      	b.n	874 <am_hal_iom_spi_write_nb.part.6+0x1c>
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     9c8:	4a0b      	ldr	r2, [pc, #44]	; (9f8 <am_hal_iom_spi_write_nb.part.6+0x1a0>)
+     9ca:	4809      	ldr	r0, [pc, #36]	; (9f0 <am_hal_iom_spi_write_nb.part.6+0x198>)
+     9cc:	f240 71d6 	movw	r1, #2006	; 0x7d6
+     9d0:	f000 fed0 	bl	1774 <am_hal_debug_error>
+     9d4:	e771      	b.n	8ba <am_hal_iom_spi_write_nb.part.6+0x62>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     9d6:	4a05      	ldr	r2, [pc, #20]	; (9ec <am_hal_iom_spi_write_nb.part.6+0x194>)
+     9d8:	4805      	ldr	r0, [pc, #20]	; (9f0 <am_hal_iom_spi_write_nb.part.6+0x198>)
+     9da:	f240 4104 	movw	r1, #1028	; 0x404
+     9de:	f000 fec9 	bl	1774 <am_hal_debug_error>
+     9e2:	e7ce      	b.n	982 <am_hal_iom_spi_write_nb.part.6+0x12a>
+     9e4:	1000100c 	.word	0x1000100c
+     9e8:	10001308 	.word	0x10001308
+     9ec:	00003368 	.word	0x00003368
+     9f0:	0000338c 	.word	0x0000338c
+     9f4:	0000347c 	.word	0x0000347c
+     9f8:	00003494 	.word	0x00003494
+
+000009fc <am_hal_iom_enable>:
+    if ( ui32Module < AM_REG_IOMSTR_NUM_MODULES )
+     9fc:	2801      	cmp	r0, #1
+{
+     9fe:	b410      	push	{r4}
+    if ( ui32Module < AM_REG_IOMSTR_NUM_MODULES )
+     a00:	d906      	bls.n	a10 <am_hal_iom_enable+0x14>
+        if ( g_ui32Mod1Interface == AM_HAL_IOM_SPIMODE )
+     a02:	481d      	ldr	r0, [pc, #116]	; (a78 <am_hal_iom_enable+0x7c>)
+     a04:	6803      	ldr	r3, [r0, #0]
+     a06:	2b01      	cmp	r3, #1
+     a08:	d025      	beq.n	a56 <am_hal_iom_enable+0x5a>
+}
+     a0a:	f85d 4b04 	ldr.w	r4, [sp], #4
+     a0e:	4770      	bx	lr
+        AM_REGn(IOMSTR, ui32Module, CFG) |= AM_REG_IOMSTR_CFG_IFCEN(1);
+     a10:	f500 23a0 	add.w	r3, r0, #327680	; 0x50000
+     a14:	3304      	adds	r3, #4
+     a16:	031b      	lsls	r3, r3, #12
+        g_bIomBusy[ui32Module] = false;
+     a18:	4918      	ldr	r1, [pc, #96]	; (a7c <am_hal_iom_enable+0x80>)
+        AM_REGn(IOMSTR, ui32Module, CFG) |= AM_REG_IOMSTR_CFG_IFCEN(1);
+     a1a:	f8d3 211c 	ldr.w	r2, [r3, #284]	; 0x11c
+        g_bIomBusy[ui32Module] = false;
+     a1e:	2400      	movs	r4, #0
+        AM_REGn(IOMSTR, ui32Module, CFG) |= AM_REG_IOMSTR_CFG_IFCEN(1);
+     a20:	f042 4200 	orr.w	r2, r2, #2147483648	; 0x80000000
+     a24:	f8c3 211c 	str.w	r2, [r3, #284]	; 0x11c
+        g_bIomBusy[ui32Module] = false;
+     a28:	540c      	strb	r4, [r1, r0]
+    if ( ui32Module == 0 )
+     a2a:	2800      	cmp	r0, #0
+     a2c:	d1e9      	bne.n	a02 <am_hal_iom_enable+0x6>
+        if ( g_ui32Mod0Interface == AM_HAL_IOM_SPIMODE )
+     a2e:	4914      	ldr	r1, [pc, #80]	; (a80 <am_hal_iom_enable+0x84>)
+     a30:	680c      	ldr	r4, [r1, #0]
+     a32:	2c01      	cmp	r4, #1
+     a34:	d1e9      	bne.n	a0a <am_hal_iom_enable+0xe>
+            AM_REGn(GPIO, 0, PADKEY) = AM_REG_GPIO_PADKEY_KEYVAL;
+     a36:	4913      	ldr	r1, [pc, #76]	; (a84 <am_hal_iom_enable+0x88>)
+            AM_BFW(GPIO, PADREGB, PAD5INPEN, 1);
+     a38:	4b13      	ldr	r3, [pc, #76]	; (a88 <am_hal_iom_enable+0x8c>)
+            AM_REGn(GPIO, 0, PADKEY) = AM_REG_GPIO_PADKEY_KEYVAL;
+     a3a:	2273      	movs	r2, #115	; 0x73
+     a3c:	600a      	str	r2, [r1, #0]
+            AM_BFW(GPIO, PADREGB, PAD5INPEN, 1);
+     a3e:	681c      	ldr	r4, [r3, #0]
+     a40:	f444 7200 	orr.w	r2, r4, #512	; 0x200
+     a44:	601a      	str	r2, [r3, #0]
+            AM_BFW(GPIO, PADREGB, PAD6INPEN, 1);
+     a46:	681c      	ldr	r4, [r3, #0]
+     a48:	f444 3200 	orr.w	r2, r4, #131072	; 0x20000
+     a4c:	601a      	str	r2, [r3, #0]
+}
+     a4e:	f85d 4b04 	ldr.w	r4, [sp], #4
+            AM_REGn(GPIO, 0, PADKEY) = 0;
+     a52:	6008      	str	r0, [r1, #0]
+}
+     a54:	4770      	bx	lr
+            AM_REGn(GPIO, 0, PADKEY) = AM_REG_GPIO_PADKEY_KEYVAL;
+     a56:	490b      	ldr	r1, [pc, #44]	; (a84 <am_hal_iom_enable+0x88>)
+            AM_BFW(GPIO, PADREGC, PAD8INPEN, 1);
+     a58:	4c0c      	ldr	r4, [pc, #48]	; (a8c <am_hal_iom_enable+0x90>)
+            AM_REGn(GPIO, 0, PADKEY) = AM_REG_GPIO_PADKEY_KEYVAL;
+     a5a:	2273      	movs	r2, #115	; 0x73
+     a5c:	600a      	str	r2, [r1, #0]
+            AM_BFW(GPIO, PADREGC, PAD8INPEN, 1);
+     a5e:	6820      	ldr	r0, [r4, #0]
+     a60:	f040 0302 	orr.w	r3, r0, #2
+     a64:	6023      	str	r3, [r4, #0]
+            AM_BFW(GPIO, PADREGC, PAD9INPEN, 1);
+     a66:	6822      	ldr	r2, [r4, #0]
+            AM_REGn(GPIO, 0, PADKEY) = 0;
+     a68:	2000      	movs	r0, #0
+            AM_BFW(GPIO, PADREGC, PAD9INPEN, 1);
+     a6a:	f442 7300 	orr.w	r3, r2, #512	; 0x200
+     a6e:	6023      	str	r3, [r4, #0]
+            AM_REGn(GPIO, 0, PADKEY) = 0;
+     a70:	6008      	str	r0, [r1, #0]
+}
+     a72:	f85d 4b04 	ldr.w	r4, [sp], #4
+     a76:	4770      	bx	lr
+     a78:	10001014 	.word	0x10001014
+     a7c:	1000100c 	.word	0x1000100c
+     a80:	10001010 	.word	0x10001010
+     a84:	40010060 	.word	0x40010060
+     a88:	40010004 	.word	0x40010004
+     a8c:	40010008 	.word	0x40010008
+
+00000a90 <am_hal_iom_config>:
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+     a90:	2801      	cmp	r0, #1
+     a92:	d900      	bls.n	a96 <am_hal_iom_config+0x6>
+     a94:	4770      	bx	lr
+{
+     a96:	b538      	push	{r3, r4, r5, lr}
+    ui32Config = psConfig->ui32InterfaceMode;
+     a98:	680b      	ldr	r3, [r1, #0]
+    if ( ui32Module == 0 )
+     a9a:	b348      	cbz	r0, af0 <am_hal_iom_config+0x60>
+        g_ui32Mod1Interface = psConfig->ui32InterfaceMode;
+     a9c:	4a24      	ldr	r2, [pc, #144]	; (b30 <am_hal_iom_config+0xa0>)
+     a9e:	6013      	str	r3, [r2, #0]
+    if ( psConfig->bSPHA )
+     aa0:	7a0d      	ldrb	r5, [r1, #8]
+     aa2:	b10d      	cbz	r5, aa8 <am_hal_iom_config+0x18>
+        ui32Config |= AM_REG_IOMSTR_CFG_SPHA(1);
+     aa4:	f043 0304 	orr.w	r3, r3, #4
+    if ( psConfig->bSPOL )
+     aa8:	7a4a      	ldrb	r2, [r1, #9]
+     aaa:	b10a      	cbz	r2, ab0 <am_hal_iom_config+0x20>
+        ui32Config |= AM_REG_IOMSTR_CFG_SPOL(1);
+     aac:	f043 0302 	orr.w	r3, r3, #2
+    AM_REGn(IOMSTR, ui32Module, CFG) = ui32Config;
+     ab0:	f500 20a0 	add.w	r0, r0, #327680	; 0x50000
+     ab4:	3004      	adds	r0, #4
+     ab6:	0304      	lsls	r4, r0, #12
+     ab8:	460d      	mov	r5, r1
+     aba:	f8c4 311c 	str.w	r3, [r4, #284]	; 0x11c
+    am_hal_debug_assert_msg(
+     abe:	7a89      	ldrb	r1, [r1, #10]
+     ac0:	293c      	cmp	r1, #60	; 0x3c
+     ac2:	d82e      	bhi.n	b22 <am_hal_iom_config+0x92>
+    am_hal_debug_assert_msg(
+     ac4:	7aea      	ldrb	r2, [r5, #11]
+     ac6:	2a3c      	cmp	r2, #60	; 0x3c
+     ac8:	d824      	bhi.n	b14 <am_hal_iom_config+0x84>
+    am_hal_debug_assert_msg(
+     aca:	7aab      	ldrb	r3, [r5, #10]
+     acc:	2b03      	cmp	r3, #3
+     ace:	d91a      	bls.n	b06 <am_hal_iom_config+0x76>
+    am_hal_debug_assert_msg(
+     ad0:	7ae8      	ldrb	r0, [r5, #11]
+     ad2:	2803      	cmp	r0, #3
+     ad4:	d90f      	bls.n	af6 <am_hal_iom_config+0x66>
+        (AM_REG_IOMSTR_FIFOTHR_FIFOWTHR(psConfig->ui8WriteThreshold) |
+     ad6:	7aa9      	ldrb	r1, [r5, #10]
+     ad8:	020b      	lsls	r3, r1, #8
+         AM_REG_IOMSTR_FIFOTHR_FIFORTHR(psConfig->ui8ReadThreshold));
+     ada:	f000 023f 	and.w	r2, r0, #63	; 0x3f
+        (AM_REG_IOMSTR_FIFOTHR_FIFOWTHR(psConfig->ui8WriteThreshold) |
+     ade:	f403 507c 	and.w	r0, r3, #16128	; 0x3f00
+     ae2:	4310      	orrs	r0, r2
+    AM_REGn(IOMSTR, ui32Module, FIFOTHR) =
+     ae4:	f8c4 0108 	str.w	r0, [r4, #264]	; 0x108
+    AM_REGn(IOMSTR, ui32Module, CLKCFG) = psConfig->ui32ClockFrequency;
+     ae8:	686d      	ldr	r5, [r5, #4]
+     aea:	f8c4 510c 	str.w	r5, [r4, #268]	; 0x10c
+     aee:	bd38      	pop	{r3, r4, r5, pc}
+        g_ui32Mod0Interface = psConfig->ui32InterfaceMode;
+     af0:	4c10      	ldr	r4, [pc, #64]	; (b34 <am_hal_iom_config+0xa4>)
+     af2:	6023      	str	r3, [r4, #0]
+     af4:	e7d4      	b.n	aa0 <am_hal_iom_config+0x10>
+    am_hal_debug_assert_msg(
+     af6:	4810      	ldr	r0, [pc, #64]	; (b38 <am_hal_iom_config+0xa8>)
+     af8:	4a10      	ldr	r2, [pc, #64]	; (b3c <am_hal_iom_config+0xac>)
+     afa:	f44f 71ad 	mov.w	r1, #346	; 0x15a
+     afe:	f000 fe39 	bl	1774 <am_hal_debug_error>
+     b02:	7ae8      	ldrb	r0, [r5, #11]
+     b04:	e7e7      	b.n	ad6 <am_hal_iom_config+0x46>
+    am_hal_debug_assert_msg(
+     b06:	4a0e      	ldr	r2, [pc, #56]	; (b40 <am_hal_iom_config+0xb0>)
+     b08:	480b      	ldr	r0, [pc, #44]	; (b38 <am_hal_iom_config+0xa8>)
+     b0a:	f44f 71ac 	mov.w	r1, #344	; 0x158
+     b0e:	f000 fe31 	bl	1774 <am_hal_debug_error>
+     b12:	e7dd      	b.n	ad0 <am_hal_iom_config+0x40>
+    am_hal_debug_assert_msg(
+     b14:	4a0b      	ldr	r2, [pc, #44]	; (b44 <am_hal_iom_config+0xb4>)
+     b16:	4808      	ldr	r0, [pc, #32]	; (b38 <am_hal_iom_config+0xa8>)
+     b18:	f44f 71ab 	mov.w	r1, #342	; 0x156
+     b1c:	f000 fe2a 	bl	1774 <am_hal_debug_error>
+     b20:	e7d3      	b.n	aca <am_hal_iom_config+0x3a>
+    am_hal_debug_assert_msg(
+     b22:	4a09      	ldr	r2, [pc, #36]	; (b48 <am_hal_iom_config+0xb8>)
+     b24:	4804      	ldr	r0, [pc, #16]	; (b38 <am_hal_iom_config+0xa8>)
+     b26:	f44f 71aa 	mov.w	r1, #340	; 0x154
+     b2a:	f000 fe23 	bl	1774 <am_hal_debug_error>
+     b2e:	e7c9      	b.n	ac4 <am_hal_iom_config+0x34>
+     b30:	10001014 	.word	0x10001014
+     b34:	10001010 	.word	0x10001010
+     b38:	0000338c 	.word	0x0000338c
+     b3c:	00003348 	.word	0x00003348
+     b40:	00003328 	.word	0x00003328
+     b44:	0000330c 	.word	0x0000330c
+     b48:	000032ec 	.word	0x000032ec
+
+00000b4c <am_hal_iom_spi_write_nq>:
+{
+     b4c:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+     b50:	2801      	cmp	r0, #1
+{
+     b52:	b083      	sub	sp, #12
+     b54:	4606      	mov	r6, r0
+     b56:	4688      	mov	r8, r1
+     b58:	4617      	mov	r7, r2
+     b5a:	469b      	mov	fp, r3
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+     b5c:	d905      	bls.n	b6a <am_hal_iom_spi_write_nq+0x1e>
+     b5e:	4ac9      	ldr	r2, [pc, #804]	; (e84 <am_hal_iom_spi_write_nq+0x338>)
+     b60:	48c9      	ldr	r0, [pc, #804]	; (e88 <am_hal_iom_spi_write_nq+0x33c>)
+     b62:	f240 2121 	movw	r1, #545	; 0x221
+     b66:	f000 fe05 	bl	1774 <am_hal_debug_error>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     b6a:	f1bb 0f00 	cmp.w	fp, #0
+     b6e:	f000 8173 	beq.w	e58 <am_hal_iom_spi_write_nq+0x30c>
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+     b72:	f5bb 5f80 	cmp.w	fp, #4096	; 0x1000
+     b76:	f080 80e3 	bcs.w	d40 <am_hal_iom_spi_write_nq+0x1f4>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+     b7a:	2e01      	cmp	r6, #1
+     b7c:	f240 80e9 	bls.w	d52 <am_hal_iom_spi_write_nq+0x206>
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     b80:	f506 24a0 	add.w	r4, r6, #327680	; 0x50000
+     b84:	3404      	adds	r4, #4
+     b86:	0324      	lsls	r4, r4, #12
+    AM_REGn(IOMSTR, ui32Module, INTEN) = 0;
+     b88:	2500      	movs	r5, #0
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     b8a:	f8d4 9200 	ldr.w	r9, [r4, #512]	; 0x200
+    AM_REGn(IOMSTR, ui32Module, INTEN) = 0;
+     b8e:	f8c4 5200 	str.w	r5, [r4, #512]	; 0x200
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     b92:	f8d4 0208 	ldr.w	r0, [r4, #520]	; 0x208
+    ui32TransferSize = (ui32NumBytes <= AM_HAL_IOM_MAX_FIFO_SIZE ? ui32NumBytes :
+     b96:	465d      	mov	r5, fp
+     b98:	2d40      	cmp	r5, #64	; 0x40
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     b9a:	f040 0301 	orr.w	r3, r0, #1
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     b9e:	f504 7200 	add.w	r2, r4, #512	; 0x200
+    ui32TransferSize = (ui32NumBytes <= AM_HAL_IOM_MAX_FIFO_SIZE ? ui32NumBytes :
+     ba2:	bf28      	it	cs
+     ba4:	2540      	movcs	r5, #64	; 0x40
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     ba6:	f8c4 3208 	str.w	r3, [r4, #520]	; 0x208
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     baa:	9200      	str	r2, [sp, #0]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     bac:	f504 7a02 	add.w	sl, r4, #520	; 0x208
+     bb0:	f025 0303 	bic.w	r3, r5, #3
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     bb4:	f1bb 0f00 	cmp.w	fp, #0
+     bb8:	d107      	bne.n	bca <am_hal_iom_spi_write_nq+0x7e>
+     bba:	4ab4      	ldr	r2, [pc, #720]	; (e8c <am_hal_iom_spi_write_nq+0x340>)
+     bbc:	48b2      	ldr	r0, [pc, #712]	; (e88 <am_hal_iom_spi_write_nq+0x33c>)
+     bbe:	9301      	str	r3, [sp, #4]
+     bc0:	f240 4104 	movw	r1, #1028	; 0x404
+     bc4:	f000 fdd6 	bl	1774 <am_hal_debug_error>
+     bc8:	9b01      	ldr	r3, [sp, #4]
+    ui32Command |= ui32Options & 0x5C00FF00;
+     bca:	990c      	ldr	r1, [sp, #48]	; 0x30
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+     bcc:	ea4f 4008 	mov.w	r0, r8, lsl #16
+    ui32Command |= ui32Options & 0x5C00FF00;
+     bd0:	f021 4123 	bic.w	r1, r1, #2734686208	; 0xa3000000
+     bd4:	f001 28ff 	and.w	r8, r1, #4278255360	; 0xff00ff00
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+     bd8:	f400 2ee0 	and.w	lr, r0, #458752	; 0x70000
+    ui32Command |= ui32Options & 0x5C00FF00;
+     bdc:	ea4e 0208 	orr.w	r2, lr, r8
+    ui32Command |= (ui32NumBytes & 0xFF);
+     be0:	fa5f f08b 	uxtb.w	r0, fp
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+     be4:	ea4f 3ccb 	mov.w	ip, fp, lsl #15
+    ui32Command |= ui32Options & 0x5C00FF00;
+     be8:	4302      	orrs	r2, r0
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+     bea:	f00c 61f0 	and.w	r1, ip, #125829120	; 0x7800000
+    ui32Command |= ui32Options & 0x5C00FF00;
+     bee:	430a      	orrs	r2, r1
+    while ( ui32NumBytes && !AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP) )
+     bf0:	ebbb 0b05 	subs.w	fp, fp, r5
+    pui32Data += ui32TransferSize >> 2;
+     bf4:	441f      	add	r7, r3
+    AM_REGn(IOMSTR, ui32Module, CMD) = ui32Command;
+     bf6:	f8c4 2110 	str.w	r2, [r4, #272]	; 0x110
+     bfa:	bf08      	it	eq
+     bfc:	f504 7801 	addeq.w	r8, r4, #516	; 0x204
+    while ( ui32NumBytes && !AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP) )
+     c00:	f000 8082 	beq.w	d08 <am_hal_iom_spi_write_nq+0x1bc>
+     c04:	f8d4 5204 	ldr.w	r5, [r4, #516]	; 0x204
+     c08:	07e9      	lsls	r1, r5, #31
+     c0a:	f504 7801 	add.w	r8, r4, #516	; 0x204
+     c0e:	d47b      	bmi.n	d08 <am_hal_iom_spi_write_nq+0x1bc>
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     c10:	4653      	mov	r3, sl
+     c12:	46ca      	mov	sl, r9
+     c14:	e003      	b.n	c1e <am_hal_iom_spi_write_nq+0xd2>
+    while ( ui32NumBytes && !AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP) )
+     c16:	f8d8 5000 	ldr.w	r5, [r8]
+     c1a:	07ea      	lsls	r2, r5, #31
+     c1c:	d472      	bmi.n	d04 <am_hal_iom_spi_write_nq+0x1b8>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+     c1e:	2e01      	cmp	r6, #1
+     c20:	d8f9      	bhi.n	c16 <am_hal_iom_spi_write_nq+0xca>
+    return (AM_HAL_IOM_MAX_FIFO_SIZE - AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ)) & (~0x3);
+     c22:	f8d4 2100 	ldr.w	r2, [r4, #256]	; 0x100
+     c26:	f002 007f 	and.w	r0, r2, #127	; 0x7f
+     c2a:	f1c0 0140 	rsb	r1, r0, #64	; 0x40
+        ui32SpaceInFifo =  am_hal_iom_fifo_empty_slots(ui32Module);
+     c2e:	f001 09fc 	and.w	r9, r1, #252	; 0xfc
+        if ( ui32NumBytes <= ui32SpaceInFifo )
+     c32:	45cb      	cmp	fp, r9
+    return (AM_HAL_IOM_MAX_FIFO_SIZE - AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ)) & (~0x3);
+     c34:	f504 7e80 	add.w	lr, r4, #256	; 0x100
+        if ( ui32NumBytes <= ui32SpaceInFifo )
+     c38:	f200 811e 	bhi.w	e78 <am_hal_iom_spi_write_nq+0x32c>
+     c3c:	f02b 0903 	bic.w	r9, fp, #3
+     c40:	465d      	mov	r5, fp
+     c42:	f04f 0b00 	mov.w	fp, #0
+    return (AM_HAL_IOM_MAX_FIFO_SIZE - AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ)) & (~0x3);
+     c46:	f8de 2000 	ldr.w	r2, [lr]
+     c4a:	f002 007f 	and.w	r0, r2, #127	; 0x7f
+     c4e:	f1c0 0140 	rsb	r1, r0, #64	; 0x40
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     c52:	f001 0cfc 	and.w	ip, r1, #252	; 0xfc
+     c56:	4565      	cmp	r5, ip
+     c58:	f200 80f5 	bhi.w	e46 <am_hal_iom_spi_write_nq+0x2fa>
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     c5c:	2d00      	cmp	r5, #0
+     c5e:	d04d      	beq.n	cfc <am_hal_iom_spi_write_nq+0x1b0>
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     c60:	463a      	mov	r2, r7
+     c62:	43f9      	mvns	r1, r7
+     c64:	f852 0b04 	ldr.w	r0, [r2], #4
+     c68:	6020      	str	r0, [r4, #0]
+     c6a:	4439      	add	r1, r7
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     c6c:	1bd0      	subs	r0, r2, r7
+     c6e:	4429      	add	r1, r5
+     c70:	4285      	cmp	r5, r0
+     c72:	f3c1 0182 	ubfx	r1, r1, #2, #3
+     c76:	d941      	bls.n	cfc <am_hal_iom_spi_write_nq+0x1b0>
+     c78:	b319      	cbz	r1, cc2 <am_hal_iom_spi_write_nq+0x176>
+     c7a:	2901      	cmp	r1, #1
+     c7c:	d01b      	beq.n	cb6 <am_hal_iom_spi_write_nq+0x16a>
+     c7e:	2902      	cmp	r1, #2
+     c80:	d016      	beq.n	cb0 <am_hal_iom_spi_write_nq+0x164>
+     c82:	2903      	cmp	r1, #3
+     c84:	d011      	beq.n	caa <am_hal_iom_spi_write_nq+0x15e>
+     c86:	2904      	cmp	r1, #4
+     c88:	d00c      	beq.n	ca4 <am_hal_iom_spi_write_nq+0x158>
+     c8a:	2905      	cmp	r1, #5
+     c8c:	d007      	beq.n	c9e <am_hal_iom_spi_write_nq+0x152>
+     c8e:	2906      	cmp	r1, #6
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     c90:	bf1c      	itt	ne
+     c92:	f852 1b04 	ldrne.w	r1, [r2], #4
+     c96:	6021      	strne	r1, [r4, #0]
+     c98:	f852 0b04 	ldr.w	r0, [r2], #4
+     c9c:	6020      	str	r0, [r4, #0]
+     c9e:	f852 1b04 	ldr.w	r1, [r2], #4
+     ca2:	6021      	str	r1, [r4, #0]
+     ca4:	f852 0b04 	ldr.w	r0, [r2], #4
+     ca8:	6020      	str	r0, [r4, #0]
+     caa:	f852 1b04 	ldr.w	r1, [r2], #4
+     cae:	6021      	str	r1, [r4, #0]
+     cb0:	f852 0b04 	ldr.w	r0, [r2], #4
+     cb4:	6020      	str	r0, [r4, #0]
+     cb6:	f852 1b04 	ldr.w	r1, [r2], #4
+     cba:	6021      	str	r1, [r4, #0]
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     cbc:	1bd0      	subs	r0, r2, r7
+     cbe:	4285      	cmp	r5, r0
+     cc0:	d91c      	bls.n	cfc <am_hal_iom_spi_write_nq+0x1b0>
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     cc2:	4696      	mov	lr, r2
+     cc4:	3220      	adds	r2, #32
+     cc6:	f85e 1b04 	ldr.w	r1, [lr], #4
+     cca:	6021      	str	r1, [r4, #0]
+     ccc:	f852 0c1c 	ldr.w	r0, [r2, #-28]
+     cd0:	6020      	str	r0, [r4, #0]
+     cd2:	f8de 1004 	ldr.w	r1, [lr, #4]
+     cd6:	6021      	str	r1, [r4, #0]
+     cd8:	f852 0c14 	ldr.w	r0, [r2, #-20]
+     cdc:	6020      	str	r0, [r4, #0]
+     cde:	f852 1c10 	ldr.w	r1, [r2, #-16]
+     ce2:	6021      	str	r1, [r4, #0]
+     ce4:	f852 0c0c 	ldr.w	r0, [r2, #-12]
+     ce8:	6020      	str	r0, [r4, #0]
+     cea:	f852 1c08 	ldr.w	r1, [r2, #-8]
+     cee:	6021      	str	r1, [r4, #0]
+     cf0:	f852 0c04 	ldr.w	r0, [r2, #-4]
+     cf4:	6020      	str	r0, [r4, #0]
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     cf6:	1bd1      	subs	r1, r2, r7
+     cf8:	428d      	cmp	r5, r1
+     cfa:	d8e2      	bhi.n	cc2 <am_hal_iom_spi_write_nq+0x176>
+        pui32Data += ui32TransferSize >> 2;
+     cfc:	444f      	add	r7, r9
+    while ( ui32NumBytes && !AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP) )
+     cfe:	f1bb 0f00 	cmp.w	fp, #0
+     d02:	d188      	bne.n	c16 <am_hal_iom_spi_write_nq+0xca>
+     d04:	46d1      	mov	r9, sl
+     d06:	469a      	mov	sl, r3
+    ui32Status = am_hal_flash_delay_status_change(ui32StatusTimeout[ui32Module],
+     d08:	4f61      	ldr	r7, [pc, #388]	; (e90 <am_hal_iom_spi_write_nq+0x344>)
+     d0a:	2301      	movs	r3, #1
+     d0c:	f857 0026 	ldr.w	r0, [r7, r6, lsl #2]
+     d10:	461a      	mov	r2, r3
+     d12:	4641      	mov	r1, r8
+     d14:	f7ff fcd2 	bl	6bc <am_hal_flash_delay_status_change>
+    AM_REGn(IOMSTR, ui32Module, INTEN) = ui32IntConfig;
+     d18:	9a00      	ldr	r2, [sp, #0]
+    AM_REGn(IOMSTR, ui32Module, INTCLR) = (ui32IntConfig | AM_REG_IOMSTR_INTSTAT_CMDCMP_M);
+     d1a:	f049 0401 	orr.w	r4, r9, #1
+    am_hal_debug_assert_msg(ui32Status == 1, "IOM CMDCMP was not seen");
+     d1e:	2801      	cmp	r0, #1
+    AM_REGn(IOMSTR, ui32Module, INTCLR) = (ui32IntConfig | AM_REG_IOMSTR_INTSTAT_CMDCMP_M);
+     d20:	f8ca 4000 	str.w	r4, [sl]
+    ui32Status = am_hal_flash_delay_status_change(ui32StatusTimeout[ui32Module],
+     d24:	4606      	mov	r6, r0
+    AM_REGn(IOMSTR, ui32Module, INTEN) = ui32IntConfig;
+     d26:	f8c2 9000 	str.w	r9, [r2]
+    am_hal_debug_assert_msg(ui32Status == 1, "IOM CMDCMP was not seen");
+     d2a:	d005      	beq.n	d38 <am_hal_iom_spi_write_nq+0x1ec>
+     d2c:	4a59      	ldr	r2, [pc, #356]	; (e94 <am_hal_iom_spi_write_nq+0x348>)
+     d2e:	4856      	ldr	r0, [pc, #344]	; (e88 <am_hal_iom_spi_write_nq+0x33c>)
+     d30:	f240 2181 	movw	r1, #641	; 0x281
+     d34:	f000 fd1e 	bl	1774 <am_hal_debug_error>
+}
+     d38:	4630      	mov	r0, r6
+     d3a:	b003      	add	sp, #12
+     d3c:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+     d40:	4a55      	ldr	r2, [pc, #340]	; (e98 <am_hal_iom_spi_write_nq+0x34c>)
+     d42:	4851      	ldr	r0, [pc, #324]	; (e88 <am_hal_iom_spi_write_nq+0x33c>)
+     d44:	f44f 710a 	mov.w	r1, #552	; 0x228
+     d48:	f000 fd14 	bl	1774 <am_hal_debug_error>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+     d4c:	2e01      	cmp	r6, #1
+     d4e:	f63f af17 	bhi.w	b80 <am_hal_iom_spi_write_nq+0x34>
+     d52:	4952      	ldr	r1, [pc, #328]	; (e9c <am_hal_iom_spi_write_nq+0x350>)
+    while ( g_bIomBusy[ui32Module] );
+     d54:	5d8b      	ldrb	r3, [r1, r6]
+     d56:	f003 02ff 	and.w	r2, r3, #255	; 0xff
+     d5a:	2b00      	cmp	r3, #0
+     d5c:	d1fa      	bne.n	d54 <am_hal_iom_spi_write_nq+0x208>
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     d5e:	f506 24a0 	add.w	r4, r6, #327680	; 0x50000
+     d62:	3404      	adds	r4, #4
+     d64:	0324      	lsls	r4, r4, #12
+    ui32TransferSize = (ui32NumBytes <= AM_HAL_IOM_MAX_FIFO_SIZE ? ui32NumBytes :
+     d66:	465d      	mov	r5, fp
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     d68:	f8d4 9200 	ldr.w	r9, [r4, #512]	; 0x200
+    AM_REGn(IOMSTR, ui32Module, INTEN) = 0;
+     d6c:	f8c4 2200 	str.w	r2, [r4, #512]	; 0x200
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     d70:	f8d4 0208 	ldr.w	r0, [r4, #520]	; 0x208
+     d74:	f040 0101 	orr.w	r1, r0, #1
+     d78:	f8c4 1208 	str.w	r1, [r4, #520]	; 0x208
+    return (AM_HAL_IOM_MAX_FIFO_SIZE - AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ)) & (~0x3);
+     d7c:	f8d4 3100 	ldr.w	r3, [r4, #256]	; 0x100
+     d80:	f003 027f 	and.w	r2, r3, #127	; 0x7f
+    ui32TransferSize = (ui32NumBytes <= AM_HAL_IOM_MAX_FIFO_SIZE ? ui32NumBytes :
+     d84:	2d40      	cmp	r5, #64	; 0x40
+    return (AM_HAL_IOM_MAX_FIFO_SIZE - AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ)) & (~0x3);
+     d86:	f1c2 0040 	rsb	r0, r2, #64	; 0x40
+    ui32TransferSize = (ui32NumBytes <= AM_HAL_IOM_MAX_FIFO_SIZE ? ui32NumBytes :
+     d8a:	bf28      	it	cs
+     d8c:	2540      	movcs	r5, #64	; 0x40
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     d8e:	f000 01fc 	and.w	r1, r0, #252	; 0xfc
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     d92:	f504 7300 	add.w	r3, r4, #512	; 0x200
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     d96:	42a9      	cmp	r1, r5
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     d98:	9300      	str	r3, [sp, #0]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     d9a:	f504 7a02 	add.w	sl, r4, #520	; 0x208
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     d9e:	d362      	bcc.n	e66 <am_hal_iom_spi_write_nq+0x31a>
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     da0:	2d00      	cmp	r5, #0
+     da2:	d067      	beq.n	e74 <am_hal_iom_spi_write_nq+0x328>
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     da4:	4638      	mov	r0, r7
+     da6:	43fa      	mvns	r2, r7
+     da8:	f850 1b04 	ldr.w	r1, [r0], #4
+     dac:	6021      	str	r1, [r4, #0]
+     dae:	443a      	add	r2, r7
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     db0:	1bc3      	subs	r3, r0, r7
+     db2:	442a      	add	r2, r5
+     db4:	42ab      	cmp	r3, r5
+     db6:	f3c2 0282 	ubfx	r2, r2, #2, #3
+     dba:	f4bf aef9 	bcs.w	bb0 <am_hal_iom_spi_write_nq+0x64>
+     dbe:	b322      	cbz	r2, e0a <am_hal_iom_spi_write_nq+0x2be>
+     dc0:	2a01      	cmp	r2, #1
+     dc2:	d01b      	beq.n	dfc <am_hal_iom_spi_write_nq+0x2b0>
+     dc4:	2a02      	cmp	r2, #2
+     dc6:	d016      	beq.n	df6 <am_hal_iom_spi_write_nq+0x2aa>
+     dc8:	2a03      	cmp	r2, #3
+     dca:	d011      	beq.n	df0 <am_hal_iom_spi_write_nq+0x2a4>
+     dcc:	2a04      	cmp	r2, #4
+     dce:	d00c      	beq.n	dea <am_hal_iom_spi_write_nq+0x29e>
+     dd0:	2a05      	cmp	r2, #5
+     dd2:	d007      	beq.n	de4 <am_hal_iom_spi_write_nq+0x298>
+     dd4:	2a06      	cmp	r2, #6
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     dd6:	bf1c      	itt	ne
+     dd8:	f850 2b04 	ldrne.w	r2, [r0], #4
+     ddc:	6022      	strne	r2, [r4, #0]
+     dde:	f850 1b04 	ldr.w	r1, [r0], #4
+     de2:	6021      	str	r1, [r4, #0]
+     de4:	f850 3b04 	ldr.w	r3, [r0], #4
+     de8:	6023      	str	r3, [r4, #0]
+     dea:	f850 2b04 	ldr.w	r2, [r0], #4
+     dee:	6022      	str	r2, [r4, #0]
+     df0:	f850 1b04 	ldr.w	r1, [r0], #4
+     df4:	6021      	str	r1, [r4, #0]
+     df6:	f850 3b04 	ldr.w	r3, [r0], #4
+     dfa:	6023      	str	r3, [r4, #0]
+     dfc:	f850 2b04 	ldr.w	r2, [r0], #4
+     e00:	6022      	str	r2, [r4, #0]
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     e02:	1bc1      	subs	r1, r0, r7
+     e04:	42a9      	cmp	r1, r5
+     e06:	f4bf aed3 	bcs.w	bb0 <am_hal_iom_spi_write_nq+0x64>
+        AM_REGn(IOMSTR, ui32Module, FIFO) = pui32Data[ui32Index];
+     e0a:	4684      	mov	ip, r0
+     e0c:	3020      	adds	r0, #32
+     e0e:	f85c 3b04 	ldr.w	r3, [ip], #4
+     e12:	6023      	str	r3, [r4, #0]
+     e14:	f850 2c1c 	ldr.w	r2, [r0, #-28]
+     e18:	6022      	str	r2, [r4, #0]
+     e1a:	f8dc 1004 	ldr.w	r1, [ip, #4]
+     e1e:	6021      	str	r1, [r4, #0]
+     e20:	f850 3c14 	ldr.w	r3, [r0, #-20]
+     e24:	6023      	str	r3, [r4, #0]
+     e26:	f850 2c10 	ldr.w	r2, [r0, #-16]
+     e2a:	6022      	str	r2, [r4, #0]
+     e2c:	f850 1c0c 	ldr.w	r1, [r0, #-12]
+     e30:	6021      	str	r1, [r4, #0]
+     e32:	f850 3c08 	ldr.w	r3, [r0, #-8]
+     e36:	6023      	str	r3, [r4, #0]
+     e38:	f850 2c04 	ldr.w	r2, [r0, #-4]
+     e3c:	6022      	str	r2, [r4, #0]
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     e3e:	1bc1      	subs	r1, r0, r7
+     e40:	42a9      	cmp	r1, r5
+     e42:	d3e2      	bcc.n	e0a <am_hal_iom_spi_write_nq+0x2be>
+     e44:	e6b4      	b.n	bb0 <am_hal_iom_spi_write_nq+0x64>
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     e46:	4a16      	ldr	r2, [pc, #88]	; (ea0 <am_hal_iom_spi_write_nq+0x354>)
+     e48:	480f      	ldr	r0, [pc, #60]	; (e88 <am_hal_iom_spi_write_nq+0x33c>)
+     e4a:	9301      	str	r3, [sp, #4]
+     e4c:	f240 71d6 	movw	r1, #2006	; 0x7d6
+     e50:	f000 fc90 	bl	1774 <am_hal_debug_error>
+     e54:	9b01      	ldr	r3, [sp, #4]
+     e56:	e703      	b.n	c60 <am_hal_iom_spi_write_nq+0x114>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     e58:	4a0c      	ldr	r2, [pc, #48]	; (e8c <am_hal_iom_spi_write_nq+0x340>)
+     e5a:	480b      	ldr	r0, [pc, #44]	; (e88 <am_hal_iom_spi_write_nq+0x33c>)
+     e5c:	f240 2123 	movw	r1, #547	; 0x223
+     e60:	f000 fc88 	bl	1774 <am_hal_debug_error>
+     e64:	e689      	b.n	b7a <am_hal_iom_spi_write_nq+0x2e>
+    am_hal_debug_assert_msg((am_hal_iom_fifo_empty_slots(ui32Module) >= ui32NumBytes),
+     e66:	4a0e      	ldr	r2, [pc, #56]	; (ea0 <am_hal_iom_spi_write_nq+0x354>)
+     e68:	4807      	ldr	r0, [pc, #28]	; (e88 <am_hal_iom_spi_write_nq+0x33c>)
+     e6a:	f240 71d6 	movw	r1, #2006	; 0x7d6
+     e6e:	f000 fc81 	bl	1774 <am_hal_debug_error>
+     e72:	e797      	b.n	da4 <am_hal_iom_spi_write_nq+0x258>
+    for ( ui32Index = 0; (4 * ui32Index) < ui32NumBytes; ui32Index++ )
+     e74:	462b      	mov	r3, r5
+     e76:	e69d      	b.n	bb4 <am_hal_iom_spi_write_nq+0x68>
+     e78:	f029 0503 	bic.w	r5, r9, #3
+     e7c:	ebab 0b05 	sub.w	fp, fp, r5
+     e80:	46a9      	mov	r9, r5
+     e82:	e6e0      	b.n	c46 <am_hal_iom_spi_write_nq+0xfa>
+     e84:	000034c8 	.word	0x000034c8
+     e88:	0000338c 	.word	0x0000338c
+     e8c:	00003368 	.word	0x00003368
+     e90:	10001004 	.word	0x10001004
+     e94:	000033f0 	.word	0x000033f0
+     e98:	0000347c 	.word	0x0000347c
+     e9c:	1000100c 	.word	0x1000100c
+     ea0:	00003494 	.word	0x00003494
+
+00000ea4 <am_hal_iom_spi_write>:
+{
+     ea4:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+     ea8:	2801      	cmp	r0, #1
+{
+     eaa:	b08a      	sub	sp, #40	; 0x28
+     eac:	4604      	mov	r4, r0
+     eae:	460f      	mov	r7, r1
+     eb0:	4690      	mov	r8, r2
+     eb2:	461e      	mov	r6, r3
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+     eb4:	d905      	bls.n	ec2 <am_hal_iom_spi_write+0x1e>
+     eb6:	4a32      	ldr	r2, [pc, #200]	; (f80 <am_hal_iom_spi_write+0xdc>)
+     eb8:	4832      	ldr	r0, [pc, #200]	; (f84 <am_hal_iom_spi_write+0xe0>)
+     eba:	f240 118f 	movw	r1, #399	; 0x18f
+     ebe:	f000 fc59 	bl	1774 <am_hal_debug_error>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     ec2:	b18e      	cbz	r6, ee8 <am_hal_iom_spi_write+0x44>
+    if ( g_psIOMQueue[ui32Module].pui8Data != NULL )
+     ec4:	0065      	lsls	r5, r4, #1
+     ec6:	f8df 90d0 	ldr.w	r9, [pc, #208]	; f98 <am_hal_iom_spi_write+0xf4>
+     eca:	192a      	adds	r2, r5, r4
+     ecc:	eb09 00c2 	add.w	r0, r9, r2, lsl #3
+     ed0:	6943      	ldr	r3, [r0, #20]
+     ed2:	2b00      	cmp	r3, #0
+     ed4:	d032      	beq.n	f3c <am_hal_iom_spi_write+0x98>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+     ed6:	2c01      	cmp	r4, #1
+     ed8:	d90d      	bls.n	ef6 <am_hal_iom_spi_write+0x52>
+        am_hal_iom_queue_flush(ui32Module);
+     eda:	4e2b      	ldr	r6, [pc, #172]	; (f88 <am_hal_iom_spi_write+0xe4>)
+     edc:	4620      	mov	r0, r4
+     ede:	6834      	ldr	r4, [r6, #0]
+     ee0:	47a0      	blx	r4
+}
+     ee2:	b00a      	add	sp, #40	; 0x28
+     ee4:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     ee8:	4a28      	ldr	r2, [pc, #160]	; (f8c <am_hal_iom_spi_write+0xe8>)
+     eea:	4826      	ldr	r0, [pc, #152]	; (f84 <am_hal_iom_spi_write+0xe0>)
+     eec:	f240 1191 	movw	r1, #401	; 0x191
+     ef0:	f000 fc40 	bl	1774 <am_hal_debug_error>
+     ef4:	e7e6      	b.n	ec4 <am_hal_iom_spi_write+0x20>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     ef6:	b356      	cbz	r6, f4e <am_hal_iom_spi_write+0xaa>
+    ui32Critical = am_hal_interrupt_master_disable();
+     ef8:	f7ff fc84 	bl	804 <am_hal_interrupt_master_disable>
+    if ( (g_bIomBusy[ui32Module] == false) &&
+     efc:	4a24      	ldr	r2, [pc, #144]	; (f90 <am_hal_iom_spi_write+0xec>)
+    ui32Critical = am_hal_interrupt_master_disable();
+     efe:	4682      	mov	sl, r0
+    if ( (g_bIomBusy[ui32Module] == false) &&
+     f00:	5d10      	ldrb	r0, [r2, r4]
+     f02:	b928      	cbnz	r0, f10 <am_hal_iom_spi_write+0x6c>
+        am_hal_queue_empty(&g_psIOMQueue[ui32Module]) )
+     f04:	192b      	adds	r3, r5, r4
+     f06:	eb09 0cc3 	add.w	ip, r9, r3, lsl #3
+    if ( (g_bIomBusy[ui32Module] == false) &&
+     f0a:	f8dc 1008 	ldr.w	r1, [ip, #8]
+     f0e:	b361      	cbz	r1, f6a <am_hal_iom_spi_write+0xc6>
+        if ( am_hal_queue_item_add(&g_psIOMQueue[ui32Module], &sIOMTransaction, 1) == false )
+     f10:	4425      	add	r5, r4
+        sIOMTransaction.ui32Operation = AM_HAL_IOM_QUEUE_SPI_WRITE;
+     f12:	2300      	movs	r3, #0
+        sIOMTransaction.ui32ChipSelect = ui32ChipSelect;
+     f14:	9705      	str	r7, [sp, #20]
+        if ( am_hal_queue_item_add(&g_psIOMQueue[ui32Module], &sIOMTransaction, 1) == false )
+     f16:	eb09 00c5 	add.w	r0, r9, r5, lsl #3
+        sIOMTransaction.ui32Options = ui32Options;
+     f1a:	9f12      	ldr	r7, [sp, #72]	; 0x48
+        sIOMTransaction.ui32Module = ui32Module;
+     f1c:	9404      	str	r4, [sp, #16]
+        if ( am_hal_queue_item_add(&g_psIOMQueue[ui32Module], &sIOMTransaction, 1) == false )
+     f1e:	2201      	movs	r2, #1
+     f20:	a903      	add	r1, sp, #12
+        sIOMTransaction.pui32Data = pui32Data;
+     f22:	f8cd 8018 	str.w	r8, [sp, #24]
+        sIOMTransaction.ui32NumBytes = ui32NumBytes;
+     f26:	9607      	str	r6, [sp, #28]
+        sIOMTransaction.ui32Options = ui32Options;
+     f28:	9708      	str	r7, [sp, #32]
+        sIOMTransaction.ui32Operation = AM_HAL_IOM_QUEUE_SPI_WRITE;
+     f2a:	9303      	str	r3, [sp, #12]
+        sIOMTransaction.pfnCallback = pfnCallback;
+     f2c:	9309      	str	r3, [sp, #36]	; 0x24
+        if ( am_hal_queue_item_add(&g_psIOMQueue[ui32Module], &sIOMTransaction, 1) == false )
+     f2e:	f000 fb5f 	bl	15f0 <am_hal_queue_item_add>
+     f32:	b198      	cbz	r0, f5c <am_hal_iom_spi_write+0xb8>
+    am_hal_interrupt_master_set(ui32Critical);
+     f34:	4650      	mov	r0, sl
+     f36:	f7ff fc69 	bl	80c <am_hal_interrupt_master_set>
+     f3a:	e7ce      	b.n	eda <am_hal_iom_spi_write+0x36>
+        am_hal_iom_spi_write_nq(ui32Module, ui32ChipSelect, pui32Data,
+     f3c:	9912      	ldr	r1, [sp, #72]	; 0x48
+     f3e:	9100      	str	r1, [sp, #0]
+     f40:	4633      	mov	r3, r6
+     f42:	4642      	mov	r2, r8
+     f44:	4639      	mov	r1, r7
+     f46:	4620      	mov	r0, r4
+     f48:	f7ff fe00 	bl	b4c <am_hal_iom_spi_write_nq>
+     f4c:	e7c9      	b.n	ee2 <am_hal_iom_spi_write+0x3e>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     f4e:	4a0f      	ldr	r2, [pc, #60]	; (f8c <am_hal_iom_spi_write+0xe8>)
+     f50:	480c      	ldr	r0, [pc, #48]	; (f84 <am_hal_iom_spi_write+0xe0>)
+     f52:	f640 218c 	movw	r1, #2700	; 0xa8c
+     f56:	f000 fc0d 	bl	1774 <am_hal_debug_error>
+     f5a:	e7cd      	b.n	ef8 <am_hal_iom_spi_write+0x54>
+            am_hal_debug_assert_msg(0,
+     f5c:	4a0d      	ldr	r2, [pc, #52]	; (f94 <am_hal_iom_spi_write+0xf0>)
+     f5e:	4809      	ldr	r0, [pc, #36]	; (f84 <am_hal_iom_spi_write+0xe0>)
+     f60:	f640 21bd 	movw	r1, #2749	; 0xabd
+     f64:	f000 fc06 	bl	1774 <am_hal_debug_error>
+     f68:	e7e4      	b.n	f34 <am_hal_iom_spi_write+0x90>
+     f6a:	9a12      	ldr	r2, [sp, #72]	; 0x48
+     f6c:	9101      	str	r1, [sp, #4]
+     f6e:	9200      	str	r2, [sp, #0]
+     f70:	4633      	mov	r3, r6
+     f72:	4642      	mov	r2, r8
+     f74:	4639      	mov	r1, r7
+     f76:	4620      	mov	r0, r4
+     f78:	f7ff fc6e 	bl	858 <am_hal_iom_spi_write_nb.part.6>
+     f7c:	e7da      	b.n	f34 <am_hal_iom_spi_write+0x90>
+     f7e:	bf00      	nop
+     f80:	000034c8 	.word	0x000034c8
+     f84:	0000338c 	.word	0x0000338c
+     f88:	10001000 	.word	0x10001000
+     f8c:	00003368 	.word	0x00003368
+     f90:	1000100c 	.word	0x1000100c
+     f94:	00003408 	.word	0x00003408
+     f98:	10001330 	.word	0x10001330
+
+00000f9c <am_hal_iom_spi_read_nq>:
+{
+     f9c:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+     fa0:	b085      	sub	sp, #20
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+     fa2:	2801      	cmp	r0, #1
+{
+     fa4:	4607      	mov	r7, r0
+     fa6:	4688      	mov	r8, r1
+     fa8:	4692      	mov	sl, r2
+     faa:	461d      	mov	r5, r3
+     fac:	9e0e      	ldr	r6, [sp, #56]	; 0x38
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+     fae:	f240 81a2 	bls.w	12f6 <am_hal_iom_spi_read_nq+0x35a>
+     fb2:	4ab2      	ldr	r2, [pc, #712]	; (127c <am_hal_iom_spi_read_nq+0x2e0>)
+     fb4:	48b2      	ldr	r0, [pc, #712]	; (1280 <am_hal_iom_spi_read_nq+0x2e4>)
+     fb6:	f240 21ae 	movw	r1, #686	; 0x2ae
+     fba:	f000 fbdb 	bl	1774 <am_hal_debug_error>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+     fbe:	2d00      	cmp	r5, #0
+     fc0:	f000 8168 	beq.w	1294 <am_hal_iom_spi_read_nq+0x2f8>
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+     fc4:	f5b5 5f80 	cmp.w	r5, #4096	; 0x1000
+     fc8:	f080 8133 	bcs.w	1232 <am_hal_iom_spi_read_nq+0x296>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+     fcc:	2f01      	cmp	r7, #1
+     fce:	f240 8139 	bls.w	1244 <am_hal_iom_spi_read_nq+0x2a8>
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     fd2:	f507 24a0 	add.w	r4, r7, #327680	; 0x50000
+     fd6:	3404      	adds	r4, #4
+     fd8:	0324      	lsls	r4, r4, #12
+    AM_REGn(IOMSTR, ui32Module, INTEN) = 0;
+     fda:	2000      	movs	r0, #0
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     fdc:	f8d4 b200 	ldr.w	fp, [r4, #512]	; 0x200
+    AM_REGn(IOMSTR, ui32Module, INTEN) = 0;
+     fe0:	f8c4 0200 	str.w	r0, [r4, #512]	; 0x200
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     fe4:	f8d4 1208 	ldr.w	r1, [r4, #520]	; 0x208
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     fe8:	f504 7200 	add.w	r2, r4, #512	; 0x200
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     fec:	f041 0301 	orr.w	r3, r1, #1
+     ff0:	f504 7002 	add.w	r0, r4, #520	; 0x208
+     ff4:	f8c4 3208 	str.w	r3, [r4, #520]	; 0x208
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+     ff8:	9202      	str	r2, [sp, #8]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+     ffa:	9001      	str	r0, [sp, #4]
+    ui32Command |= ui32Options & 0x5C00FF00;
+     ffc:	f026 4923 	bic.w	r9, r6, #2734686208	; 0xa3000000
+    1000:	f009 2cff 	and.w	ip, r9, #4278255360	; 0xff00ff00
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+    1004:	ea4f 4308 	mov.w	r3, r8, lsl #16
+    ui32Command |= ui32Options & 0x5C00FF00;
+    1008:	f04c 4100 	orr.w	r1, ip, #2147483648	; 0x80000000
+    ui32Command |= (ui32NumBytes & 0xFF);
+    100c:	b2ee      	uxtb	r6, r5
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+    100e:	f403 22e0 	and.w	r2, r3, #458752	; 0x70000
+    ui32Command |= ui32Options & 0x5C00FF00;
+    1012:	430e      	orrs	r6, r1
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+    1014:	03e8      	lsls	r0, r5, #15
+    ui32Command |= ui32Options & 0x5C00FF00;
+    1016:	ea46 0102 	orr.w	r1, r6, r2
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+    101a:	f000 63f0 	and.w	r3, r0, #125829120	; 0x7800000
+    ui32Command |= ui32Options & 0x5C00FF00;
+    101e:	430b      	orrs	r3, r1
+    AM_REGn(IOMSTR, ui32Module, CMD) = ui32Command;
+    1020:	f8c4 3110 	str.w	r3, [r4, #272]	; 0x110
+    1024:	f504 7801 	add.w	r8, r4, #516	; 0x204
+    1028:	2600      	movs	r6, #0
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+    102a:	2f01      	cmp	r7, #1
+    102c:	d927      	bls.n	107e <am_hal_iom_spi_read_nq+0xe2>
+        if ( ui32BytesInFifo >= ui32NumBytes )
+    102e:	b9f5      	cbnz	r5, 106e <am_hal_iom_spi_read_nq+0xd2>
+        if ( bCmdCmp == true )
+    1030:	b90e      	cbnz	r6, 1036 <am_hal_iom_spi_read_nq+0x9a>
+        bCmdCmp = AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP);
+    1032:	f8d8 3000 	ldr.w	r3, [r8]
+    ui32Status = am_hal_flash_delay_status_change(ui32StatusTimeout[ui32Module],
+    1036:	4c93      	ldr	r4, [pc, #588]	; (1284 <am_hal_iom_spi_read_nq+0x2e8>)
+    1038:	2301      	movs	r3, #1
+    103a:	461a      	mov	r2, r3
+    103c:	f854 0027 	ldr.w	r0, [r4, r7, lsl #2]
+    1040:	4641      	mov	r1, r8
+    1042:	f7ff fb3b 	bl	6bc <am_hal_flash_delay_status_change>
+    AM_REGn(IOMSTR, ui32Module, INTCLR) = (ui32IntConfig | AM_REG_IOMSTR_INTSTAT_CMDCMP_M);
+    1046:	9a01      	ldr	r2, [sp, #4]
+    AM_REGn(IOMSTR, ui32Module, INTEN) = ui32IntConfig;
+    1048:	9d02      	ldr	r5, [sp, #8]
+    AM_REGn(IOMSTR, ui32Module, INTCLR) = (ui32IntConfig | AM_REG_IOMSTR_INTSTAT_CMDCMP_M);
+    104a:	f04b 0301 	orr.w	r3, fp, #1
+    am_hal_debug_assert_msg(ui32Status == 1, "IOM CMDCMP was not seen");
+    104e:	2801      	cmp	r0, #1
+    AM_REGn(IOMSTR, ui32Module, INTCLR) = (ui32IntConfig | AM_REG_IOMSTR_INTSTAT_CMDCMP_M);
+    1050:	6013      	str	r3, [r2, #0]
+    ui32Status = am_hal_flash_delay_status_change(ui32StatusTimeout[ui32Module],
+    1052:	4607      	mov	r7, r0
+    AM_REGn(IOMSTR, ui32Module, INTEN) = ui32IntConfig;
+    1054:	f8c5 b000 	str.w	fp, [r5]
+    am_hal_debug_assert_msg(ui32Status == 1, "IOM CMDCMP was not seen");
+    1058:	d005      	beq.n	1066 <am_hal_iom_spi_read_nq+0xca>
+    105a:	4a8b      	ldr	r2, [pc, #556]	; (1288 <am_hal_iom_spi_read_nq+0x2ec>)
+    105c:	4888      	ldr	r0, [pc, #544]	; (1280 <am_hal_iom_spi_read_nq+0x2e4>)
+    105e:	f240 3101 	movw	r1, #769	; 0x301
+    1062:	f000 fb87 	bl	1774 <am_hal_debug_error>
+}
+    1066:	4638      	mov	r0, r7
+    1068:	b005      	add	sp, #20
+    106a:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+        if ( bCmdCmp == true )
+    106e:	2e00      	cmp	r6, #0
+    1070:	d1e1      	bne.n	1036 <am_hal_iom_spi_read_nq+0x9a>
+        bCmdCmp = AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP);
+    1072:	f8d8 6000 	ldr.w	r6, [r8]
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+    1076:	2f01      	cmp	r7, #1
+        bCmdCmp = AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP);
+    1078:	f006 0601 	and.w	r6, r6, #1
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+    107c:	d8d7      	bhi.n	102e <am_hal_iom_spi_read_nq+0x92>
+    return AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ);
+    107e:	f8d4 2100 	ldr.w	r2, [r4, #256]	; 0x100
+        ui32BytesInFifo =  am_hal_iom_fifo_full_slots(ui32Module);
+    1082:	f002 097f 	and.w	r9, r2, #127	; 0x7f
+        if ( ui32BytesInFifo >= ui32NumBytes )
+    1086:	45a9      	cmp	r9, r5
+    return AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ);
+    1088:	f504 7e80 	add.w	lr, r4, #256	; 0x100
+        if ( ui32BytesInFifo >= ui32NumBytes )
+    108c:	d262      	bcs.n	1154 <am_hal_iom_spi_read_nq+0x1b8>
+        else if ( ui32BytesInFifo >= 4 )
+    108e:	f1b9 0f03 	cmp.w	r9, #3
+    1092:	d954      	bls.n	113e <am_hal_iom_spi_read_nq+0x1a2>
+    return AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ);
+    1094:	f8de 0000 	ldr.w	r0, [lr]
+            am_hal_iom_fifo_read(ui32Module, pui32Data, ui32BytesInFifo & ~0x3);
+    1098:	f029 0303 	bic.w	r3, r9, #3
+    am_hal_debug_assert_msg((am_hal_iom_fifo_full_slots(ui32Module) >= ui32NumBytes),
+    109c:	f000 017f 	and.w	r1, r0, #127	; 0x7f
+    10a0:	428b      	cmp	r3, r1
+    10a2:	f200 8139 	bhi.w	1318 <am_hal_iom_spi_read_nq+0x37c>
+        pui32Data[i] = AM_REGn(IOMSTR, ui32Module, FIFO);
+    10a6:	4652      	mov	r2, sl
+    10a8:	6820      	ldr	r0, [r4, #0]
+    10aa:	f842 0b04 	str.w	r0, [r2], #4
+    10ae:	f009 097c 	and.w	r9, r9, #124	; 0x7c
+    10b2:	46d4      	mov	ip, sl
+    10b4:	44ca      	add	sl, r9
+    10b6:	ebaa 0e0c 	sub.w	lr, sl, ip
+    10ba:	f1ae 0104 	sub.w	r1, lr, #4
+    for ( i = 0; i < ui32NumWords; i++ )
+    10be:	4552      	cmp	r2, sl
+    10c0:	f3c1 0082 	ubfx	r0, r1, #2, #3
+    10c4:	d03a      	beq.n	113c <am_hal_iom_spi_read_nq+0x1a0>
+    10c6:	b318      	cbz	r0, 1110 <am_hal_iom_spi_read_nq+0x174>
+    10c8:	2801      	cmp	r0, #1
+    10ca:	d01c      	beq.n	1106 <am_hal_iom_spi_read_nq+0x16a>
+    10cc:	2802      	cmp	r0, #2
+    10ce:	d017      	beq.n	1100 <am_hal_iom_spi_read_nq+0x164>
+    10d0:	2803      	cmp	r0, #3
+    10d2:	d012      	beq.n	10fa <am_hal_iom_spi_read_nq+0x15e>
+    10d4:	2804      	cmp	r0, #4
+    10d6:	d00d      	beq.n	10f4 <am_hal_iom_spi_read_nq+0x158>
+    10d8:	2805      	cmp	r0, #5
+    10da:	d008      	beq.n	10ee <am_hal_iom_spi_read_nq+0x152>
+    10dc:	2806      	cmp	r0, #6
+    10de:	d003      	beq.n	10e8 <am_hal_iom_spi_read_nq+0x14c>
+        pui32Data[i] = AM_REGn(IOMSTR, ui32Module, FIFO);
+    10e0:	6821      	ldr	r1, [r4, #0]
+    10e2:	f8cc 1004 	str.w	r1, [ip, #4]
+    10e6:	3204      	adds	r2, #4
+    10e8:	6820      	ldr	r0, [r4, #0]
+    10ea:	f842 0b04 	str.w	r0, [r2], #4
+    10ee:	6821      	ldr	r1, [r4, #0]
+    10f0:	f842 1b04 	str.w	r1, [r2], #4
+    10f4:	6820      	ldr	r0, [r4, #0]
+    10f6:	f842 0b04 	str.w	r0, [r2], #4
+    10fa:	6821      	ldr	r1, [r4, #0]
+    10fc:	f842 1b04 	str.w	r1, [r2], #4
+    1100:	6820      	ldr	r0, [r4, #0]
+    1102:	f842 0b04 	str.w	r0, [r2], #4
+    1106:	6821      	ldr	r1, [r4, #0]
+    1108:	f842 1b04 	str.w	r1, [r2], #4
+    for ( i = 0; i < ui32NumWords; i++ )
+    110c:	4552      	cmp	r2, sl
+    110e:	d015      	beq.n	113c <am_hal_iom_spi_read_nq+0x1a0>
+        pui32Data[i] = AM_REGn(IOMSTR, ui32Module, FIFO);
+    1110:	4694      	mov	ip, r2
+    1112:	6820      	ldr	r0, [r4, #0]
+    1114:	f84c 0b04 	str.w	r0, [ip], #4
+    1118:	6821      	ldr	r1, [r4, #0]
+    111a:	6051      	str	r1, [r2, #4]
+    111c:	6820      	ldr	r0, [r4, #0]
+    111e:	f8cc 0004 	str.w	r0, [ip, #4]
+    1122:	6821      	ldr	r1, [r4, #0]
+    1124:	60d1      	str	r1, [r2, #12]
+    1126:	6820      	ldr	r0, [r4, #0]
+    1128:	6110      	str	r0, [r2, #16]
+    112a:	6821      	ldr	r1, [r4, #0]
+    112c:	6151      	str	r1, [r2, #20]
+    112e:	6820      	ldr	r0, [r4, #0]
+    1130:	6190      	str	r0, [r2, #24]
+    1132:	6821      	ldr	r1, [r4, #0]
+    1134:	61d1      	str	r1, [r2, #28]
+    1136:	3220      	adds	r2, #32
+    for ( i = 0; i < ui32NumWords; i++ )
+    1138:	4552      	cmp	r2, sl
+    113a:	d1e9      	bne.n	1110 <am_hal_iom_spi_read_nq+0x174>
+            ui32NumBytes -= ui32BytesInFifo & ~0x3;
+    113c:	1aed      	subs	r5, r5, r3
+        if ( bCmdCmp == true )
+    113e:	2e00      	cmp	r6, #0
+    1140:	f47f af79 	bne.w	1036 <am_hal_iom_spi_read_nq+0x9a>
+        bCmdCmp = AM_BFRn(IOMSTR, ui32Module, INTSTAT, CMDCMP);
+    1144:	f8d8 6000 	ldr.w	r6, [r8]
+    1148:	f006 0601 	and.w	r6, r6, #1
+    while ( ui32NumBytes )
+    114c:	2d00      	cmp	r5, #0
+    114e:	f47f af6c 	bne.w	102a <am_hal_iom_spi_read_nq+0x8e>
+    1152:	e770      	b.n	1036 <am_hal_iom_spi_read_nq+0x9a>
+    return AM_BFRn(IOMSTR, ui32Module, FIFOPTR, FIFOSIZ);
+    1154:	f8de 2000 	ldr.w	r2, [lr]
+    am_hal_debug_assert_msg((am_hal_iom_fifo_full_slots(ui32Module) >= ui32NumBytes),
+    1158:	f002 097f 	and.w	r9, r2, #127	; 0x7f
+    115c:	45a9      	cmp	r9, r5
+    115e:	f0c0 80d4 	bcc.w	130a <am_hal_iom_spi_read_nq+0x36e>
+    1162:	f005 0103 	and.w	r1, r5, #3
+    for ( i = 0; i < ui32NumWords; i++ )
+    1166:	08ad      	lsrs	r5, r5, #2
+    1168:	d04b      	beq.n	1202 <am_hal_iom_spi_read_nq+0x266>
+        pui32Data[i] = AM_REGn(IOMSTR, ui32Module, FIFO);
+    116a:	4653      	mov	r3, sl
+    116c:	6820      	ldr	r0, [r4, #0]
+    116e:	f843 0b04 	str.w	r0, [r3], #4
+    1172:	eb0a 0c85 	add.w	ip, sl, r5, lsl #2
+    1176:	ebac 0e0a 	sub.w	lr, ip, sl
+    117a:	f1ae 0204 	sub.w	r2, lr, #4
+    for ( i = 0; i < ui32NumWords; i++ )
+    117e:	4563      	cmp	r3, ip
+    1180:	f3c2 0082 	ubfx	r0, r2, #2, #3
+    1184:	d03d      	beq.n	1202 <am_hal_iom_spi_read_nq+0x266>
+    1186:	b310      	cbz	r0, 11ce <am_hal_iom_spi_read_nq+0x232>
+    1188:	2801      	cmp	r0, #1
+    118a:	d01b      	beq.n	11c4 <am_hal_iom_spi_read_nq+0x228>
+    118c:	2802      	cmp	r0, #2
+    118e:	d016      	beq.n	11be <am_hal_iom_spi_read_nq+0x222>
+    1190:	2803      	cmp	r0, #3
+    1192:	d011      	beq.n	11b8 <am_hal_iom_spi_read_nq+0x21c>
+    1194:	2804      	cmp	r0, #4
+    1196:	d00c      	beq.n	11b2 <am_hal_iom_spi_read_nq+0x216>
+    1198:	2805      	cmp	r0, #5
+    119a:	d007      	beq.n	11ac <am_hal_iom_spi_read_nq+0x210>
+    119c:	2806      	cmp	r0, #6
+        pui32Data[i] = AM_REGn(IOMSTR, ui32Module, FIFO);
+    119e:	bf1c      	itt	ne
+    11a0:	6820      	ldrne	r0, [r4, #0]
+    11a2:	f843 0b04 	strne.w	r0, [r3], #4
+    11a6:	6822      	ldr	r2, [r4, #0]
+    11a8:	f843 2b04 	str.w	r2, [r3], #4
+    11ac:	6820      	ldr	r0, [r4, #0]
+    11ae:	f843 0b04 	str.w	r0, [r3], #4
+    11b2:	6822      	ldr	r2, [r4, #0]
+    11b4:	f843 2b04 	str.w	r2, [r3], #4
+    11b8:	6820      	ldr	r0, [r4, #0]
+    11ba:	f843 0b04 	str.w	r0, [r3], #4
+    11be:	6822      	ldr	r2, [r4, #0]
+    11c0:	f843 2b04 	str.w	r2, [r3], #4
+    11c4:	6820      	ldr	r0, [r4, #0]
+    11c6:	f843 0b04 	str.w	r0, [r3], #4
+    for ( i = 0; i < ui32NumWords; i++ )
+    11ca:	4563      	cmp	r3, ip
+    11cc:	d019      	beq.n	1202 <am_hal_iom_spi_read_nq+0x266>
+        pui32Data[i] = AM_REGn(IOMSTR, ui32Module, FIFO);
+    11ce:	4699      	mov	r9, r3
+    11d0:	f8d4 e000 	ldr.w	lr, [r4]
+    11d4:	f849 eb04 	str.w	lr, [r9], #4
+    11d8:	f8d4 e000 	ldr.w	lr, [r4]
+    11dc:	f8c3 e004 	str.w	lr, [r3, #4]
+    11e0:	f8d4 e000 	ldr.w	lr, [r4]
+    11e4:	f8c9 e004 	str.w	lr, [r9, #4]
+    11e8:	6822      	ldr	r2, [r4, #0]
+    11ea:	60da      	str	r2, [r3, #12]
+    11ec:	6820      	ldr	r0, [r4, #0]
+    11ee:	6118      	str	r0, [r3, #16]
+    11f0:	6822      	ldr	r2, [r4, #0]
+    11f2:	615a      	str	r2, [r3, #20]
+    11f4:	6820      	ldr	r0, [r4, #0]
+    11f6:	6198      	str	r0, [r3, #24]
+    11f8:	6822      	ldr	r2, [r4, #0]
+    11fa:	61da      	str	r2, [r3, #28]
+    11fc:	3320      	adds	r3, #32
+    for ( i = 0; i < ui32NumWords; i++ )
+    11fe:	4563      	cmp	r3, ip
+    1200:	d1e5      	bne.n	11ce <am_hal_iom_spi_read_nq+0x232>
+    if ( ui32Leftovers )
+    1202:	2900      	cmp	r1, #0
+    1204:	f43f af14 	beq.w	1030 <am_hal_iom_spi_read_nq+0x94>
+        sTempBuffer.words[0] = AM_REGn(IOMSTR, ui32Module, FIFO);
+    1208:	6824      	ldr	r4, [r4, #0]
+            pui8Data[j] = sTempBuffer.bytes[j];
+    120a:	f80a 4025 	strb.w	r4, [sl, r5, lsl #2]
+        for ( j = 0; j < ui32Leftovers; j++ )
+    120e:	2901      	cmp	r1, #1
+        pui8Data = (uint8_t *) (&pui32Data[i]);
+    1210:	ea4f 0385 	mov.w	r3, r5, lsl #2
+        for ( j = 0; j < ui32Leftovers; j++ )
+    1214:	f43f af0c 	beq.w	1030 <am_hal_iom_spi_read_nq+0x94>
+            pui8Data[j] = sTempBuffer.bytes[j];
+    1218:	449a      	add	sl, r3
+        for ( j = 0; j < ui32Leftovers; j++ )
+    121a:	2903      	cmp	r1, #3
+            pui8Data[j] = sTempBuffer.bytes[j];
+    121c:	f3c4 2507 	ubfx	r5, r4, #8, #8
+    1220:	bf08      	it	eq
+    1222:	f3c4 4407 	ubfxeq	r4, r4, #16, #8
+    1226:	f88a 5001 	strb.w	r5, [sl, #1]
+    122a:	bf08      	it	eq
+    122c:	f88a 4002 	strbeq.w	r4, [sl, #2]
+    1230:	e6fe      	b.n	1030 <am_hal_iom_spi_read_nq+0x94>
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+    1232:	4a16      	ldr	r2, [pc, #88]	; (128c <am_hal_iom_spi_read_nq+0x2f0>)
+    1234:	4812      	ldr	r0, [pc, #72]	; (1280 <am_hal_iom_spi_read_nq+0x2e4>)
+    1236:	f240 21b5 	movw	r1, #693	; 0x2b5
+    123a:	f000 fa9b 	bl	1774 <am_hal_debug_error>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+    123e:	2f01      	cmp	r7, #1
+    1240:	f63f aec7 	bhi.w	fd2 <am_hal_iom_spi_read_nq+0x36>
+    1244:	4912      	ldr	r1, [pc, #72]	; (1290 <am_hal_iom_spi_read_nq+0x2f4>)
+    while ( g_bIomBusy[ui32Module] );
+    1246:	5dcb      	ldrb	r3, [r1, r7]
+    1248:	f003 02ff 	and.w	r2, r3, #255	; 0xff
+    124c:	2b00      	cmp	r3, #0
+    124e:	d1fa      	bne.n	1246 <am_hal_iom_spi_read_nq+0x2aa>
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+    1250:	f507 24a0 	add.w	r4, r7, #327680	; 0x50000
+    1254:	3404      	adds	r4, #4
+    1256:	0324      	lsls	r4, r4, #12
+    1258:	f504 7000 	add.w	r0, r4, #512	; 0x200
+    125c:	f8d4 b200 	ldr.w	fp, [r4, #512]	; 0x200
+    AM_REGn(IOMSTR, ui32Module, INTEN) = 0;
+    1260:	f8c4 2200 	str.w	r2, [r4, #512]	; 0x200
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1264:	f8d4 1208 	ldr.w	r1, [r4, #520]	; 0x208
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+    1268:	9002      	str	r0, [sp, #8]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    126a:	f041 0301 	orr.w	r3, r1, #1
+    126e:	f504 7202 	add.w	r2, r4, #520	; 0x208
+    1272:	f8c4 3208 	str.w	r3, [r4, #520]	; 0x208
+    1276:	9201      	str	r2, [sp, #4]
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    1278:	b335      	cbz	r5, 12c8 <am_hal_iom_spi_read_nq+0x32c>
+    127a:	e6bf      	b.n	ffc <am_hal_iom_spi_read_nq+0x60>
+    127c:	000034c8 	.word	0x000034c8
+    1280:	0000338c 	.word	0x0000338c
+    1284:	10001004 	.word	0x10001004
+    1288:	000033f0 	.word	0x000033f0
+    128c:	0000347c 	.word	0x0000347c
+    1290:	1000100c 	.word	0x1000100c
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    1294:	4a25      	ldr	r2, [pc, #148]	; (132c <am_hal_iom_spi_read_nq+0x390>)
+    1296:	4826      	ldr	r0, [pc, #152]	; (1330 <am_hal_iom_spi_read_nq+0x394>)
+    1298:	f44f 712c 	mov.w	r1, #688	; 0x2b0
+    129c:	f000 fa6a 	bl	1774 <am_hal_debug_error>
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+    12a0:	f507 21a0 	add.w	r1, r7, #327680	; 0x50000
+    12a4:	3104      	adds	r1, #4
+    12a6:	030c      	lsls	r4, r1, #12
+    12a8:	f504 7000 	add.w	r0, r4, #512	; 0x200
+    12ac:	f8d4 b200 	ldr.w	fp, [r4, #512]	; 0x200
+    AM_REGn(IOMSTR, ui32Module, INTEN) = 0;
+    12b0:	f8c4 5200 	str.w	r5, [r4, #512]	; 0x200
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    12b4:	f8d4 2208 	ldr.w	r2, [r4, #520]	; 0x208
+    ui32IntConfig = AM_REGn(IOMSTR, ui32Module, INTEN);
+    12b8:	9002      	str	r0, [sp, #8]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    12ba:	f042 0301 	orr.w	r3, r2, #1
+    12be:	f504 7502 	add.w	r5, r4, #520	; 0x208
+    12c2:	f8c4 3208 	str.w	r3, [r4, #520]	; 0x208
+    12c6:	9501      	str	r5, [sp, #4]
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    12c8:	4819      	ldr	r0, [pc, #100]	; (1330 <am_hal_iom_spi_read_nq+0x394>)
+    12ca:	4a18      	ldr	r2, [pc, #96]	; (132c <am_hal_iom_spi_read_nq+0x390>)
+    12cc:	f240 4104 	movw	r1, #1028	; 0x404
+    ui32Command |= ui32Options & 0x5C00FF00;
+    12d0:	f026 4a23 	bic.w	sl, r6, #2734686208	; 0xa3000000
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    12d4:	f000 fa4e 	bl	1774 <am_hal_debug_error>
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+    12d8:	ea4f 4108 	mov.w	r1, r8, lsl #16
+    ui32Command |= ui32Options & 0x5C00FF00;
+    12dc:	f00a 2cff 	and.w	ip, sl, #4278255360	; 0xff00ff00
+    12e0:	f04c 4900 	orr.w	r9, ip, #2147483648	; 0x80000000
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+    12e4:	f401 26e0 	and.w	r6, r1, #458752	; 0x70000
+    ui32Command |= ui32Options & 0x5C00FF00;
+    12e8:	ea49 0006 	orr.w	r0, r9, r6
+    AM_REGn(IOMSTR, ui32Module, CMD) = ui32Command;
+    12ec:	f8c4 0110 	str.w	r0, [r4, #272]	; 0x110
+    12f0:	f504 7801 	add.w	r8, r4, #516	; 0x204
+    12f4:	e69f      	b.n	1036 <am_hal_iom_spi_read_nq+0x9a>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    12f6:	2b00      	cmp	r3, #0
+    12f8:	f47f ae64 	bne.w	fc4 <am_hal_iom_spi_read_nq+0x28>
+    12fc:	4a0b      	ldr	r2, [pc, #44]	; (132c <am_hal_iom_spi_read_nq+0x390>)
+    12fe:	480c      	ldr	r0, [pc, #48]	; (1330 <am_hal_iom_spi_read_nq+0x394>)
+    1300:	f44f 712c 	mov.w	r1, #688	; 0x2b0
+    1304:	f000 fa36 	bl	1774 <am_hal_debug_error>
+    1308:	e79c      	b.n	1244 <am_hal_iom_spi_read_nq+0x2a8>
+    am_hal_debug_assert_msg((am_hal_iom_fifo_full_slots(ui32Module) >= ui32NumBytes),
+    130a:	4a0a      	ldr	r2, [pc, #40]	; (1334 <am_hal_iom_spi_read_nq+0x398>)
+    130c:	4808      	ldr	r0, [pc, #32]	; (1330 <am_hal_iom_spi_read_nq+0x394>)
+    130e:	f640 010e 	movw	r1, #2062	; 0x80e
+    1312:	f000 fa2f 	bl	1774 <am_hal_debug_error>
+    1316:	e724      	b.n	1162 <am_hal_iom_spi_read_nq+0x1c6>
+    1318:	4a06      	ldr	r2, [pc, #24]	; (1334 <am_hal_iom_spi_read_nq+0x398>)
+    131a:	4805      	ldr	r0, [pc, #20]	; (1330 <am_hal_iom_spi_read_nq+0x394>)
+    131c:	9303      	str	r3, [sp, #12]
+    131e:	f640 010e 	movw	r1, #2062	; 0x80e
+    1322:	f000 fa27 	bl	1774 <am_hal_debug_error>
+    1326:	9b03      	ldr	r3, [sp, #12]
+    1328:	e6bd      	b.n	10a6 <am_hal_iom_spi_read_nq+0x10a>
+    132a:	bf00      	nop
+    132c:	00003368 	.word	0x00003368
+    1330:	0000338c 	.word	0x0000338c
+    1334:	000033b8 	.word	0x000033b8
+
+00001338 <am_hal_iom_spi_read_nb>:
+{
+    1338:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+    133c:	2801      	cmp	r0, #1
+{
+    133e:	4604      	mov	r4, r0
+    1340:	460f      	mov	r7, r1
+    1342:	4691      	mov	r9, r2
+    1344:	461e      	mov	r6, r3
+    1346:	f8dd 8020 	ldr.w	r8, [sp, #32]
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+    134a:	d944      	bls.n	13d6 <am_hal_iom_spi_read_nb+0x9e>
+    134c:	4a4a      	ldr	r2, [pc, #296]	; (1478 <am_hal_iom_spi_read_nb+0x140>)
+    134e:	484b      	ldr	r0, [pc, #300]	; (147c <am_hal_iom_spi_read_nb+0x144>)
+    1350:	f240 319d 	movw	r1, #925	; 0x39d
+    1354:	f000 fa0e 	bl	1774 <am_hal_debug_error>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    1358:	2e00      	cmp	r6, #0
+    135a:	d06b      	beq.n	1434 <am_hal_iom_spi_read_nb+0xfc>
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+    135c:	f5b6 5f80 	cmp.w	r6, #4096	; 0x1000
+    1360:	d232      	bcs.n	13c8 <am_hal_iom_spi_read_nb+0x90>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+    1362:	2c01      	cmp	r4, #1
+    1364:	d93f      	bls.n	13e6 <am_hal_iom_spi_read_nb+0xae>
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1366:	f504 25a0 	add.w	r5, r4, #327680	; 0x50000
+    g_bIomBusy[ui32Module] = true;
+    136a:	4845      	ldr	r0, [pc, #276]	; (1480 <am_hal_iom_spi_read_nb+0x148>)
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    136c:	4945      	ldr	r1, [pc, #276]	; (1484 <am_hal_iom_spi_read_nb+0x14c>)
+    g_bIomBusy[ui32Module] = true;
+    136e:	2301      	movs	r3, #1
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1370:	3504      	adds	r5, #4
+    g_bIomBusy[ui32Module] = true;
+    1372:	5503      	strb	r3, [r0, r4]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1374:	032d      	lsls	r5, r5, #12
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1376:	eb04 0484 	add.w	r4, r4, r4, lsl #2
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    137a:	f8d5 2208 	ldr.w	r2, [r5, #520]	; 0x208
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    137e:	00a0      	lsls	r0, r4, #2
+    1380:	180b      	adds	r3, r1, r0
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1382:	f042 0401 	orr.w	r4, r2, #1
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1386:	2202      	movs	r2, #2
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1388:	f8c5 4208 	str.w	r4, [r5, #520]	; 0x208
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    138c:	500a      	str	r2, [r1, r0]
+    g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+    138e:	9909      	ldr	r1, [sp, #36]	; 0x24
+    g_psIOMBuffers[ui32Module].pui32Data = pui32Data;
+    1390:	f8c3 9004 	str.w	r9, [r3, #4]
+    g_psIOMBuffers[ui32Module].ui32BytesLeft = ui32NumBytes;
+    1394:	609e      	str	r6, [r3, #8]
+    g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+    1396:	6119      	str	r1, [r3, #16]
+    g_psIOMBuffers[ui32Module].ui32Options = ui32Options;
+    1398:	f8c3 800c 	str.w	r8, [r3, #12]
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+    139c:	043f      	lsls	r7, r7, #16
+    ui32Command |= ui32Options & 0x5C00FF00;
+    139e:	f028 4323 	bic.w	r3, r8, #2734686208	; 0xa3000000
+    ui32Command |= ((ui32ChipSelect << 16) & 0x00070000);
+    13a2:	f407 2ce0 	and.w	ip, r7, #458752	; 0x70000
+    ui32Command |= ui32Options & 0x5C00FF00;
+    13a6:	f003 22ff 	and.w	r2, r3, #4278255360	; 0xff00ff00
+    13aa:	ea4c 0402 	orr.w	r4, ip, r2
+    13ae:	f044 4100 	orr.w	r1, r4, #2147483648	; 0x80000000
+    ui32Command |= (ui32NumBytes & 0xFF);
+    13b2:	b2f0      	uxtb	r0, r6
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+    13b4:	03f6      	lsls	r6, r6, #15
+    ui32Command |= ui32Options & 0x5C00FF00;
+    13b6:	4308      	orrs	r0, r1
+    ui32Command |= ((ui32NumBytes & 0xF00) << 15);
+    13b8:	f006 67f0 	and.w	r7, r6, #125829120	; 0x7800000
+    ui32Command |= ui32Options & 0x5C00FF00;
+    13bc:	4338      	orrs	r0, r7
+    AM_REGn(IOMSTR, ui32Module, CMD) = ui32Command;
+    13be:	f8c5 0110 	str.w	r0, [r5, #272]	; 0x110
+}
+    13c2:	2001      	movs	r0, #1
+    13c4:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+    13c8:	4a2f      	ldr	r2, [pc, #188]	; (1488 <am_hal_iom_spi_read_nb+0x150>)
+    13ca:	482c      	ldr	r0, [pc, #176]	; (147c <am_hal_iom_spi_read_nb+0x144>)
+    13cc:	f44f 7169 	mov.w	r1, #932	; 0x3a4
+    13d0:	f000 f9d0 	bl	1774 <am_hal_debug_error>
+    13d4:	e7c5      	b.n	1362 <am_hal_iom_spi_read_nb+0x2a>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    13d6:	2b00      	cmp	r3, #0
+    13d8:	d1c0      	bne.n	135c <am_hal_iom_spi_read_nb+0x24>
+    13da:	4a2c      	ldr	r2, [pc, #176]	; (148c <am_hal_iom_spi_read_nb+0x154>)
+    13dc:	4827      	ldr	r0, [pc, #156]	; (147c <am_hal_iom_spi_read_nb+0x144>)
+    13de:	f240 319f 	movw	r1, #927	; 0x39f
+    13e2:	f000 f9c7 	bl	1774 <am_hal_debug_error>
+    13e6:	4a26      	ldr	r2, [pc, #152]	; (1480 <am_hal_iom_spi_read_nb+0x148>)
+    while ( g_bIomBusy[ui32Module] );
+    13e8:	5d13      	ldrb	r3, [r2, r4]
+    13ea:	2b00      	cmp	r3, #0
+    13ec:	d1fc      	bne.n	13e8 <am_hal_iom_spi_read_nb+0xb0>
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    13ee:	f504 25a0 	add.w	r5, r4, #327680	; 0x50000
+    g_bIomBusy[ui32Module] = true;
+    13f2:	2001      	movs	r0, #1
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    13f4:	3504      	adds	r5, #4
+    g_bIomBusy[ui32Module] = true;
+    13f6:	5510      	strb	r0, [r2, r4]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    13f8:	032d      	lsls	r5, r5, #12
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    13fa:	4922      	ldr	r1, [pc, #136]	; (1484 <am_hal_iom_spi_read_nb+0x14c>)
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    13fc:	f8d5 2208 	ldr.w	r2, [r5, #520]	; 0x208
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1400:	eb04 0484 	add.w	r4, r4, r4, lsl #2
+    1404:	00a0      	lsls	r0, r4, #2
+    1406:	180b      	adds	r3, r1, r0
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1408:	f042 0401 	orr.w	r4, r2, #1
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    140c:	2202      	movs	r2, #2
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    140e:	f8c5 4208 	str.w	r4, [r5, #520]	; 0x208
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1412:	500a      	str	r2, [r1, r0]
+    g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+    1414:	9909      	ldr	r1, [sp, #36]	; 0x24
+    g_psIOMBuffers[ui32Module].pui32Data = pui32Data;
+    1416:	f8c3 9004 	str.w	r9, [r3, #4]
+    g_psIOMBuffers[ui32Module].ui32BytesLeft = ui32NumBytes;
+    141a:	609e      	str	r6, [r3, #8]
+    g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+    141c:	6119      	str	r1, [r3, #16]
+    g_psIOMBuffers[ui32Module].ui32Options = ui32Options;
+    141e:	f8c3 800c 	str.w	r8, [r3, #12]
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    1422:	2e00      	cmp	r6, #0
+    1424:	d1ba      	bne.n	139c <am_hal_iom_spi_read_nb+0x64>
+    1426:	4a19      	ldr	r2, [pc, #100]	; (148c <am_hal_iom_spi_read_nb+0x154>)
+    1428:	4814      	ldr	r0, [pc, #80]	; (147c <am_hal_iom_spi_read_nb+0x144>)
+    142a:	f240 4104 	movw	r1, #1028	; 0x404
+    142e:	f000 f9a1 	bl	1774 <am_hal_debug_error>
+    1432:	e7b3      	b.n	139c <am_hal_iom_spi_read_nb+0x64>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    1434:	4a15      	ldr	r2, [pc, #84]	; (148c <am_hal_iom_spi_read_nb+0x154>)
+    1436:	4811      	ldr	r0, [pc, #68]	; (147c <am_hal_iom_spi_read_nb+0x144>)
+    1438:	f240 319f 	movw	r1, #927	; 0x39f
+    143c:	f000 f99a 	bl	1774 <am_hal_debug_error>
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1440:	f504 25a0 	add.w	r5, r4, #327680	; 0x50000
+    g_bIomBusy[ui32Module] = true;
+    1444:	4b0e      	ldr	r3, [pc, #56]	; (1480 <am_hal_iom_spi_read_nb+0x148>)
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1446:	480f      	ldr	r0, [pc, #60]	; (1484 <am_hal_iom_spi_read_nb+0x14c>)
+    g_bIomBusy[ui32Module] = true;
+    1448:	2201      	movs	r2, #1
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    144a:	3504      	adds	r5, #4
+    g_bIomBusy[ui32Module] = true;
+    144c:	551a      	strb	r2, [r3, r4]
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    144e:	032d      	lsls	r5, r5, #12
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1450:	eb04 0484 	add.w	r4, r4, r4, lsl #2
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1454:	f8d5 1208 	ldr.w	r1, [r5, #520]	; 0x208
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1458:	00a2      	lsls	r2, r4, #2
+    145a:	1883      	adds	r3, r0, r2
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    145c:	f041 0401 	orr.w	r4, r1, #1
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1460:	2102      	movs	r1, #2
+    AM_BFWn(IOMSTR, ui32Module, INTCLR, CMDCMP, 1);
+    1462:	f8c5 4208 	str.w	r4, [r5, #520]	; 0x208
+    g_psIOMBuffers[ui32Module].ui32State = BUFFER_RECEIVING;
+    1466:	5081      	str	r1, [r0, r2]
+    g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+    1468:	9809      	ldr	r0, [sp, #36]	; 0x24
+    g_psIOMBuffers[ui32Module].pui32Data = pui32Data;
+    146a:	f8c3 9004 	str.w	r9, [r3, #4]
+    g_psIOMBuffers[ui32Module].ui32BytesLeft = ui32NumBytes;
+    146e:	609e      	str	r6, [r3, #8]
+    g_psIOMBuffers[ui32Module].pfnCallback = pfnCallback;
+    1470:	6118      	str	r0, [r3, #16]
+    g_psIOMBuffers[ui32Module].ui32Options = ui32Options;
+    1472:	f8c3 800c 	str.w	r8, [r3, #12]
+    1476:	e7d6      	b.n	1426 <am_hal_iom_spi_read_nb+0xee>
+    1478:	000034c8 	.word	0x000034c8
+    147c:	0000338c 	.word	0x0000338c
+    1480:	1000100c 	.word	0x1000100c
+    1484:	10001308 	.word	0x10001308
+    1488:	0000347c 	.word	0x0000347c
+    148c:	00003368 	.word	0x00003368
+
+00001490 <am_hal_iom_spi_read>:
+{
+    1490:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+    1494:	2801      	cmp	r0, #1
+{
+    1496:	b08a      	sub	sp, #40	; 0x28
+    1498:	4604      	mov	r4, r0
+    149a:	460f      	mov	r7, r1
+    149c:	4690      	mov	r8, r2
+    149e:	461d      	mov	r5, r3
+    am_hal_debug_assert_msg(ui32Module < AM_REG_IOMSTR_NUM_MODULES,
+    14a0:	d905      	bls.n	14ae <am_hal_iom_spi_read+0x1e>
+    14a2:	4a37      	ldr	r2, [pc, #220]	; (1580 <am_hal_iom_spi_read+0xf0>)
+    14a4:	4837      	ldr	r0, [pc, #220]	; (1584 <am_hal_iom_spi_read+0xf4>)
+    14a6:	f44f 71e9 	mov.w	r1, #466	; 0x1d2
+    14aa:	f000 f963 	bl	1774 <am_hal_debug_error>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    14ae:	b1dd      	cbz	r5, 14e8 <am_hal_iom_spi_read+0x58>
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+    14b0:	f5b5 5f80 	cmp.w	r5, #4096	; 0x1000
+    14b4:	d211      	bcs.n	14da <am_hal_iom_spi_read+0x4a>
+    if ( g_psIOMQueue[ui32Module].pui8Data != NULL )
+    14b6:	0066      	lsls	r6, r4, #1
+    14b8:	f8df 90e0 	ldr.w	r9, [pc, #224]	; 159c <am_hal_iom_spi_read+0x10c>
+    14bc:	1932      	adds	r2, r6, r4
+    14be:	eb09 00c2 	add.w	r0, r9, r2, lsl #3
+    14c2:	6943      	ldr	r3, [r0, #20]
+    14c4:	2b00      	cmp	r3, #0
+    14c6:	d03a      	beq.n	153e <am_hal_iom_spi_read+0xae>
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+    14c8:	2c01      	cmp	r4, #1
+    14ca:	d914      	bls.n	14f6 <am_hal_iom_spi_read+0x66>
+        am_hal_iom_queue_flush(ui32Module);
+    14cc:	492e      	ldr	r1, [pc, #184]	; (1588 <am_hal_iom_spi_read+0xf8>)
+    14ce:	4620      	mov	r0, r4
+    14d0:	680c      	ldr	r4, [r1, #0]
+    14d2:	47a0      	blx	r4
+}
+    14d4:	b00a      	add	sp, #40	; 0x28
+    14d6:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+    am_hal_debug_assert_msg(ui32NumBytes < 4096, "SPI transfer too big.");
+    14da:	4a2c      	ldr	r2, [pc, #176]	; (158c <am_hal_iom_spi_read+0xfc>)
+    14dc:	4829      	ldr	r0, [pc, #164]	; (1584 <am_hal_iom_spi_read+0xf4>)
+    14de:	f240 11d9 	movw	r1, #473	; 0x1d9
+    14e2:	f000 f947 	bl	1774 <am_hal_debug_error>
+    14e6:	e7e6      	b.n	14b6 <am_hal_iom_spi_read+0x26>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    14e8:	4a29      	ldr	r2, [pc, #164]	; (1590 <am_hal_iom_spi_read+0x100>)
+    14ea:	4826      	ldr	r0, [pc, #152]	; (1584 <am_hal_iom_spi_read+0xf4>)
+    14ec:	f44f 71ea 	mov.w	r1, #468	; 0x1d4
+    14f0:	f000 f940 	bl	1774 <am_hal_debug_error>
+    14f4:	e7df      	b.n	14b6 <am_hal_iom_spi_read+0x26>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    14f6:	b35d      	cbz	r5, 1550 <am_hal_iom_spi_read+0xc0>
+    ui32Critical = am_hal_interrupt_master_disable();
+    14f8:	f7ff f984 	bl	804 <am_hal_interrupt_master_disable>
+    if ( (g_bIomBusy[ui32Module] == false) &&
+    14fc:	4a25      	ldr	r2, [pc, #148]	; (1594 <am_hal_iom_spi_read+0x104>)
+    ui32Critical = am_hal_interrupt_master_disable();
+    14fe:	4682      	mov	sl, r0
+    if ( (g_bIomBusy[ui32Module] == false) &&
+    1500:	5d10      	ldrb	r0, [r2, r4]
+    1502:	b928      	cbnz	r0, 1510 <am_hal_iom_spi_read+0x80>
+        am_hal_queue_empty(&g_psIOMQueue[ui32Module]) )
+    1504:	1933      	adds	r3, r6, r4
+    1506:	eb09 0cc3 	add.w	ip, r9, r3, lsl #3
+    if ( (g_bIomBusy[ui32Module] == false) &&
+    150a:	f8dc 1008 	ldr.w	r1, [ip, #8]
+    150e:	b369      	cbz	r1, 156c <am_hal_iom_spi_read+0xdc>
+        sIOMTransaction.ui32Operation = AM_HAL_IOM_QUEUE_SPI_READ;
+    1510:	2301      	movs	r3, #1
+        if ( am_hal_queue_item_add(&g_psIOMQueue[ui32Module], &sIOMTransaction, 1) == false )
+    1512:	4426      	add	r6, r4
+        sIOMTransaction.ui32ChipSelect = ui32ChipSelect;
+    1514:	9705      	str	r7, [sp, #20]
+        sIOMTransaction.ui32NumBytes = ui32NumBytes;
+    1516:	9507      	str	r5, [sp, #28]
+        sIOMTransaction.pfnCallback = pfnCallback;
+    1518:	2700      	movs	r7, #0
+        sIOMTransaction.ui32Options = ui32Options;
+    151a:	9d12      	ldr	r5, [sp, #72]	; 0x48
+        sIOMTransaction.ui32Module = ui32Module;
+    151c:	9404      	str	r4, [sp, #16]
+        if ( am_hal_queue_item_add(&g_psIOMQueue[ui32Module], &sIOMTransaction, 1) == false )
+    151e:	eb09 00c6 	add.w	r0, r9, r6, lsl #3
+    1522:	461a      	mov	r2, r3
+    1524:	a903      	add	r1, sp, #12
+        sIOMTransaction.pui32Data = pui32Data;
+    1526:	f8cd 8018 	str.w	r8, [sp, #24]
+        sIOMTransaction.ui32Options = ui32Options;
+    152a:	9508      	str	r5, [sp, #32]
+        sIOMTransaction.ui32Operation = AM_HAL_IOM_QUEUE_SPI_READ;
+    152c:	9303      	str	r3, [sp, #12]
+        sIOMTransaction.pfnCallback = pfnCallback;
+    152e:	9709      	str	r7, [sp, #36]	; 0x24
+        if ( am_hal_queue_item_add(&g_psIOMQueue[ui32Module], &sIOMTransaction, 1) == false )
+    1530:	f000 f85e 	bl	15f0 <am_hal_queue_item_add>
+    1534:	b198      	cbz	r0, 155e <am_hal_iom_spi_read+0xce>
+    am_hal_interrupt_master_set(ui32Critical);
+    1536:	4650      	mov	r0, sl
+    1538:	f7ff f968 	bl	80c <am_hal_interrupt_master_set>
+    153c:	e7c6      	b.n	14cc <am_hal_iom_spi_read+0x3c>
+        am_hal_iom_spi_read_nq(ui32Module, ui32ChipSelect, pui32Data,
+    153e:	9912      	ldr	r1, [sp, #72]	; 0x48
+    1540:	9100      	str	r1, [sp, #0]
+    1542:	462b      	mov	r3, r5
+    1544:	4642      	mov	r2, r8
+    1546:	4639      	mov	r1, r7
+    1548:	4620      	mov	r0, r4
+    154a:	f7ff fd27 	bl	f9c <am_hal_iom_spi_read_nq>
+    154e:	e7c1      	b.n	14d4 <am_hal_iom_spi_read+0x44>
+    am_hal_debug_assert_msg(ui32NumBytes > 0,
+    1550:	4a0f      	ldr	r2, [pc, #60]	; (1590 <am_hal_iom_spi_read+0x100>)
+    1552:	480c      	ldr	r0, [pc, #48]	; (1584 <am_hal_iom_spi_read+0xf4>)
+    1554:	f640 21f8 	movw	r1, #2808	; 0xaf8
+    1558:	f000 f90c 	bl	1774 <am_hal_debug_error>
+    155c:	e7cc      	b.n	14f8 <am_hal_iom_spi_read+0x68>
+            am_hal_debug_assert_msg(0,
+    155e:	4a0e      	ldr	r2, [pc, #56]	; (1598 <am_hal_iom_spi_read+0x108>)
+    1560:	4808      	ldr	r0, [pc, #32]	; (1584 <am_hal_iom_spi_read+0xf4>)
+    1562:	f640 3128 	movw	r1, #2856	; 0xb28
+    1566:	f000 f905 	bl	1774 <am_hal_debug_error>
+    156a:	e7e4      	b.n	1536 <am_hal_iom_spi_read+0xa6>
+        am_hal_iom_spi_read_nb(ui32Module, ui32ChipSelect, pui32Data,
+    156c:	9a12      	ldr	r2, [sp, #72]	; 0x48
+    156e:	9101      	str	r1, [sp, #4]
+    1570:	9200      	str	r2, [sp, #0]
+    1572:	462b      	mov	r3, r5
+    1574:	4642      	mov	r2, r8
+    1576:	4639      	mov	r1, r7
+    1578:	4620      	mov	r0, r4
+    157a:	f7ff fedd 	bl	1338 <am_hal_iom_spi_read_nb>
+    157e:	e7da      	b.n	1536 <am_hal_iom_spi_read+0xa6>
+    1580:	000034c8 	.word	0x000034c8
+    1584:	0000338c 	.word	0x0000338c
+    1588:	10001000 	.word	0x10001000
+    158c:	0000347c 	.word	0x0000347c
+    1590:	00003368 	.word	0x00003368
+    1594:	1000100c 	.word	0x1000100c
+    1598:	00003408 	.word	0x00003408
+    159c:	10001330 	.word	0x10001330
+
+000015a0 <am_hal_iom_int_clear>:
+am_hal_iom_int_clear(uint32_t ui32Module, uint32_t ui32Interrupt)
+{
+    //
+    // Validate parameters
+    //
+    if ( ui32Module >= AM_REG_IOMSTR_NUM_MODULES )
+    15a0:	2801      	cmp	r0, #1
+    15a2:	d805      	bhi.n	15b0 <am_hal_iom_int_clear+0x10>
+    {
+        return;
+    }
+
+    AM_REGn(IOMSTR, ui32Module, INTCLR) = ui32Interrupt;
+    15a4:	f500 20a0 	add.w	r0, r0, #327680	; 0x50000
+    15a8:	3004      	adds	r0, #4
+    15aa:	0302      	lsls	r2, r0, #12
+    15ac:	f8c2 1208 	str.w	r1, [r2, #520]	; 0x208
+    15b0:	4770      	bx	lr
+    15b2:	bf00      	nop
+
+000015b4 <am_hal_mcuctrl_bandgap_disable>:
+am_hal_mcuctrl_bandgap_disable(void)
+{
+    //
+    // Disable the Bandgap in the MCUCTRL.
+    //
+    AM_REG(MCUCTRL, BANDGAPEN) = ~AM_REG_MCUCTRL_BANDGAPEN_BGPEN_M;
+    15b4:	4b02      	ldr	r3, [pc, #8]	; (15c0 <am_hal_mcuctrl_bandgap_disable+0xc>)
+    15b6:	f06f 0201 	mvn.w	r2, #1
+    15ba:	601a      	str	r2, [r3, #0]
+    15bc:	4770      	bx	lr
+    15be:	bf00      	nop
+    15c0:	400200fc 	.word	0x400200fc
+
+000015c4 <am_hal_mcuctrl_bucks_enable>:
+am_hal_mcuctrl_bucks_enable(void)
+{
+    //
+    // Enable the core buck converter in the MCUCTRL.
+    //
+    AM_BFW(MCUCTRL, SUPPLYSRC, COREBUCKEN, 1);
+    15c4:	4b08      	ldr	r3, [pc, #32]	; (15e8 <am_hal_mcuctrl_bucks_enable+0x24>)
+    AM_BFW(MCUCTRL, SUPPLYSRC, MEMBUCKEN, 1);
+
+    //
+    // Poll until core buck is enabled.
+    //
+    while( !AM_BFR(MCUCTRL, SUPPLYSTATUS, COREBUCKON) );
+    15c6:	4a09      	ldr	r2, [pc, #36]	; (15ec <am_hal_mcuctrl_bucks_enable+0x28>)
+    AM_BFW(MCUCTRL, SUPPLYSRC, COREBUCKEN, 1);
+    15c8:	6819      	ldr	r1, [r3, #0]
+    15ca:	f041 0002 	orr.w	r0, r1, #2
+    15ce:	6018      	str	r0, [r3, #0]
+    AM_BFW(MCUCTRL, SUPPLYSRC, MEMBUCKEN, 1);
+    15d0:	6819      	ldr	r1, [r3, #0]
+    15d2:	f041 0001 	orr.w	r0, r1, #1
+    15d6:	6018      	str	r0, [r3, #0]
+    while( !AM_BFR(MCUCTRL, SUPPLYSTATUS, COREBUCKON) );
+    15d8:	6813      	ldr	r3, [r2, #0]
+    15da:	0799      	lsls	r1, r3, #30
+    15dc:	d5fc      	bpl.n	15d8 <am_hal_mcuctrl_bucks_enable+0x14>
+
+    //
+    // Poll until SRAM buck is enabled.
+    //
+    while( !AM_BFR(MCUCTRL, SUPPLYSTATUS, MEMBUCKON) );
+    15de:	4a03      	ldr	r2, [pc, #12]	; (15ec <am_hal_mcuctrl_bucks_enable+0x28>)
+    15e0:	6811      	ldr	r1, [r2, #0]
+    15e2:	07cb      	lsls	r3, r1, #31
+    15e4:	d5fc      	bpl.n	15e0 <am_hal_mcuctrl_bucks_enable+0x1c>
+}
+    15e6:	4770      	bx	lr
+    15e8:	40020010 	.word	0x40020010
+    15ec:	40020014 	.word	0x40020014
+
+000015f0 <am_hal_queue_item_add>:
+//! didn't have enough space.
+//
+//*****************************************************************************
+bool
+am_hal_queue_item_add(am_hal_queue_t *psQueue, const void *pvSource, uint32_t ui32NumItems)
+{
+    15f0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    15f2:	4604      	mov	r4, r0
+    uint32_t i;
+    uint8_t *pui8Source;
+    uint32_t ui32Bytes = ui32NumItems * psQueue->ui32ItemSize;
+    15f4:	6907      	ldr	r7, [r0, #16]
+{
+    15f6:	460e      	mov	r6, r1
+    uint32_t ui32Bytes = ui32NumItems * psQueue->ui32ItemSize;
+    15f8:	fb07 f702 	mul.w	r7, r7, r2
+    bool bSuccess = false;
+    uint32_t ui32Primask;
+
+    pui8Source = (uint8_t *) pvSource;
+
+    ui32Primask = am_hal_interrupt_master_disable();
+    15fc:	f7ff f902 	bl	804 <am_hal_interrupt_master_disable>
+
+    //
+    // Check to make sure that the buffer isn't already full
+    //
+    if ( am_hal_queue_space_left(psQueue) >= ui32Bytes )
+    1600:	68a5      	ldr	r5, [r4, #8]
+    1602:	68e3      	ldr	r3, [r4, #12]
+    1604:	1b59      	subs	r1, r3, r5
+    1606:	428f      	cmp	r7, r1
+    1608:	d87c      	bhi.n	1704 <am_hal_queue_item_add+0x114>
+    {
+        //
+        // Loop over the bytes in the source array.
+        //
+        for ( i = 0; i < ui32Bytes; i++ )
+    160a:	2f00      	cmp	r7, #0
+    160c:	d073      	beq.n	16f6 <am_hal_queue_item_add+0x106>
+        {
+            //
+            // Write the value to the buffer.
+            //
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    160e:	4635      	mov	r5, r6
+    1610:	6823      	ldr	r3, [r4, #0]
+    1612:	6962      	ldr	r2, [r4, #20]
+    1614:	f815 1b01 	ldrb.w	r1, [r5], #1
+    1618:	54d1      	strb	r1, [r2, r3]
+
+            //
+            // Advance the write index, making sure to wrap if necessary.
+            //
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    161a:	6823      	ldr	r3, [r4, #0]
+    161c:	f8d4 e00c 	ldr.w	lr, [r4, #12]
+    1620:	1c5a      	adds	r2, r3, #1
+    1622:	19f1      	adds	r1, r6, r7
+    1624:	f107 3cff 	add.w	ip, r7, #4294967295
+    1628:	fbb2 f6fe 	udiv	r6, r2, lr
+        for ( i = 0; i < ui32Bytes; i++ )
+    162c:	42a9      	cmp	r1, r5
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    162e:	fb0e 2316 	mls	r3, lr, r6, r2
+    1632:	6023      	str	r3, [r4, #0]
+    1634:	f00c 0203 	and.w	r2, ip, #3
+        for ( i = 0; i < ui32Bytes; i++ )
+    1638:	d05c      	beq.n	16f4 <am_hal_queue_item_add+0x104>
+    163a:	b34a      	cbz	r2, 1690 <am_hal_queue_item_add+0xa0>
+    163c:	2a01      	cmp	r2, #1
+    163e:	d019      	beq.n	1674 <am_hal_queue_item_add+0x84>
+    1640:	2a02      	cmp	r2, #2
+    1642:	d00b      	beq.n	165c <am_hal_queue_item_add+0x6c>
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    1644:	6962      	ldr	r2, [r4, #20]
+    1646:	f815 6b01 	ldrb.w	r6, [r5], #1
+    164a:	54d6      	strb	r6, [r2, r3]
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    164c:	6823      	ldr	r3, [r4, #0]
+    164e:	68e6      	ldr	r6, [r4, #12]
+    1650:	1c5a      	adds	r2, r3, #1
+    1652:	fbb2 fef6 	udiv	lr, r2, r6
+    1656:	fb06 231e 	mls	r3, r6, lr, r2
+    165a:	6023      	str	r3, [r4, #0]
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    165c:	6962      	ldr	r2, [r4, #20]
+    165e:	f815 6b01 	ldrb.w	r6, [r5], #1
+    1662:	54d6      	strb	r6, [r2, r3]
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    1664:	6823      	ldr	r3, [r4, #0]
+    1666:	68e6      	ldr	r6, [r4, #12]
+    1668:	1c5a      	adds	r2, r3, #1
+    166a:	fbb2 fcf6 	udiv	ip, r2, r6
+    166e:	fb06 231c 	mls	r3, r6, ip, r2
+    1672:	6023      	str	r3, [r4, #0]
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    1674:	6962      	ldr	r2, [r4, #20]
+    1676:	f815 6b01 	ldrb.w	r6, [r5], #1
+    167a:	54d6      	strb	r6, [r2, r3]
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    167c:	6823      	ldr	r3, [r4, #0]
+    167e:	68e6      	ldr	r6, [r4, #12]
+    1680:	1c5a      	adds	r2, r3, #1
+        for ( i = 0; i < ui32Bytes; i++ )
+    1682:	42a9      	cmp	r1, r5
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    1684:	fbb2 fef6 	udiv	lr, r2, r6
+    1688:	fb06 231e 	mls	r3, r6, lr, r2
+    168c:	6023      	str	r3, [r4, #0]
+        for ( i = 0; i < ui32Bytes; i++ )
+    168e:	d031      	beq.n	16f4 <am_hal_queue_item_add+0x104>
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    1690:	46ac      	mov	ip, r5
+    1692:	6962      	ldr	r2, [r4, #20]
+    1694:	f81c 6b01 	ldrb.w	r6, [ip], #1
+    1698:	54d6      	strb	r6, [r2, r3]
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    169a:	6823      	ldr	r3, [r4, #0]
+    169c:	68e2      	ldr	r2, [r4, #12]
+    169e:	1c5e      	adds	r6, r3, #1
+    16a0:	fbb6 fef2 	udiv	lr, r6, r2
+    16a4:	fb02 631e 	mls	r3, r2, lr, r6
+    16a8:	6023      	str	r3, [r4, #0]
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    16aa:	6962      	ldr	r2, [r4, #20]
+    16ac:	786e      	ldrb	r6, [r5, #1]
+    16ae:	54d6      	strb	r6, [r2, r3]
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    16b0:	6823      	ldr	r3, [r4, #0]
+    16b2:	68e2      	ldr	r2, [r4, #12]
+    16b4:	1c5e      	adds	r6, r3, #1
+    16b6:	fbb6 fef2 	udiv	lr, r6, r2
+    16ba:	fb02 631e 	mls	r3, r2, lr, r6
+    16be:	6023      	str	r3, [r4, #0]
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    16c0:	6962      	ldr	r2, [r4, #20]
+    16c2:	f89c 6001 	ldrb.w	r6, [ip, #1]
+    16c6:	54d6      	strb	r6, [r2, r3]
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    16c8:	6823      	ldr	r3, [r4, #0]
+    16ca:	68e2      	ldr	r2, [r4, #12]
+    16cc:	1c5e      	adds	r6, r3, #1
+    16ce:	fbb6 fcf2 	udiv	ip, r6, r2
+    16d2:	fb02 631c 	mls	r3, r2, ip, r6
+    16d6:	6023      	str	r3, [r4, #0]
+            psQueue->pui8Data[psQueue->ui32WriteIndex] = pui8Source[i];
+    16d8:	6962      	ldr	r2, [r4, #20]
+    16da:	78ee      	ldrb	r6, [r5, #3]
+    16dc:	54d6      	strb	r6, [r2, r3]
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    16de:	6823      	ldr	r3, [r4, #0]
+    16e0:	68e2      	ldr	r2, [r4, #12]
+    16e2:	1c5e      	adds	r6, r3, #1
+    16e4:	3504      	adds	r5, #4
+    16e6:	fbb6 fef2 	udiv	lr, r6, r2
+        for ( i = 0; i < ui32Bytes; i++ )
+    16ea:	42a9      	cmp	r1, r5
+            psQueue->ui32WriteIndex = ((psQueue->ui32WriteIndex + 1) %
+    16ec:	fb02 631e 	mls	r3, r2, lr, r6
+    16f0:	6023      	str	r3, [r4, #0]
+        for ( i = 0; i < ui32Bytes; i++ )
+    16f2:	d1cd      	bne.n	1690 <am_hal_queue_item_add+0xa0>
+    16f4:	68a5      	ldr	r5, [r4, #8]
+        }
+
+        //
+        // Update the length value appropriately.
+        //
+        psQueue->ui32Length += ui32Bytes;
+    16f6:	443d      	add	r5, r7
+    16f8:	60a5      	str	r5, [r4, #8]
+
+        //
+        // Report a success.
+        //
+        bSuccess = true;
+    16fa:	2401      	movs	r4, #1
+        // failure.
+        //
+        bSuccess = false;
+    }
+
+    am_hal_interrupt_master_set(ui32Primask);
+    16fc:	f7ff f886 	bl	80c <am_hal_interrupt_master_set>
+
+    return bSuccess;
+}
+    1700:	4620      	mov	r0, r4
+    1702:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+        bSuccess = false;
+    1704:	2400      	movs	r4, #0
+    am_hal_interrupt_master_set(ui32Primask);
+    1706:	f7ff f881 	bl	80c <am_hal_interrupt_master_set>
+}
+    170a:	4620      	mov	r0, r4
+    170c:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+    170e:	bf00      	nop
+
+00001710 <am_hal_rtc_osc_select>:
+    // Set XT if flag is set.
+    // Otherwise configure for LFRC.
+    //
+    if (ui32OSC)
+    {
+        AM_REG(CLKGEN, OCTRL) |= AM_REG_CLKGEN_OCTRL_OSEL_M;
+    1710:	4a05      	ldr	r2, [pc, #20]	; (1728 <am_hal_rtc_osc_select+0x18>)
+    1712:	6813      	ldr	r3, [r2, #0]
+    if (ui32OSC)
+    1714:	b918      	cbnz	r0, 171e <am_hal_rtc_osc_select+0xe>
+    }
+    else
+    {
+        AM_REG(CLKGEN, OCTRL) &= ~AM_REG_CLKGEN_OCTRL_OSEL_M;
+    1716:	f023 0080 	bic.w	r0, r3, #128	; 0x80
+    171a:	6010      	str	r0, [r2, #0]
+    171c:	4770      	bx	lr
+        AM_REG(CLKGEN, OCTRL) |= AM_REG_CLKGEN_OCTRL_OSEL_M;
+    171e:	f043 0180 	orr.w	r1, r3, #128	; 0x80
+    1722:	6011      	str	r1, [r2, #0]
+    1724:	4770      	bx	lr
+    1726:	bf00      	nop
+    1728:	4000400c 	.word	0x4000400c
+
+0000172c <am_hal_rtc_osc_disable>:
+am_hal_rtc_osc_disable(void)
+{
+    //
+    // Stop the RTC Oscillator.
+    //
+    AM_BFW(RTC, RTCCTL, RSTOP, 1);
+    172c:	4a02      	ldr	r2, [pc, #8]	; (1738 <am_hal_rtc_osc_disable+0xc>)
+    172e:	6813      	ldr	r3, [r2, #0]
+    1730:	f043 0010 	orr.w	r0, r3, #16
+    1734:	6010      	str	r0, [r2, #0]
+    1736:	4770      	bx	lr
+    1738:	40004050 	.word	0x40004050
+
+0000173c <am_hal_sysctrl_sleep>:
+        (AM_BFM(MCUCTRL, TPIUCTRL, ENABLE) == AM_REG_MCUCTRL_TPIUCTRL_ENABLE_DIS))
+    {
+        //
+        // Prepare the core for deepsleep (write 1 to the DEEPSLEEP bit).
+        //
+        AM_BFW(SYSCTRL, SCR, SLEEPDEEP, 1);
+    173c:	4a08      	ldr	r2, [pc, #32]	; (1760 <am_hal_sysctrl_sleep+0x24>)
+    if ((bSleepDeep == AM_HAL_SYSCTRL_SLEEP_DEEP) &&
+    173e:	b118      	cbz	r0, 1748 <am_hal_sysctrl_sleep+0xc>
+        (AM_BFM(MCUCTRL, TPIUCTRL, ENABLE) == AM_REG_MCUCTRL_TPIUCTRL_ENABLE_DIS))
+    1740:	4b08      	ldr	r3, [pc, #32]	; (1764 <am_hal_sysctrl_sleep+0x28>)
+    1742:	6818      	ldr	r0, [r3, #0]
+    if ((bSleepDeep == AM_HAL_SYSCTRL_SLEEP_DEEP) &&
+    1744:	07c3      	lsls	r3, r0, #31
+    1746:	d505      	bpl.n	1754 <am_hal_sysctrl_sleep+0x18>
+    }
+    else
+    {
+        AM_BFW(SYSCTRL, SCR, SLEEPDEEP, 0);
+    1748:	6811      	ldr	r1, [r2, #0]
+    174a:	f021 0304 	bic.w	r3, r1, #4
+    174e:	6013      	str	r3, [r2, #0]
+    }
+
+    //
+    // Go to sleep.
+    //
+    AM_ASM_WFI;
+    1750:	bf30      	wfi
+    1752:	4770      	bx	lr
+        AM_BFW(SYSCTRL, SCR, SLEEPDEEP, 1);
+    1754:	6810      	ldr	r0, [r2, #0]
+    1756:	f040 0104 	orr.w	r1, r0, #4
+    175a:	6011      	str	r1, [r2, #0]
+    AM_ASM_WFI;
+    175c:	bf30      	wfi
+    175e:	4770      	bx	lr
+    1760:	e000ed10 	.word	0xe000ed10
+    1764:	40020250 	.word	0x40020250
+
+00001768 <am_hal_vcomp_disable>:
+//
+//*****************************************************************************
+void
+am_hal_vcomp_disable(void)
+{
+    AM_REG(VCOMP, PWDKEY) = AM_REG_VCOMP_PWDKEY_KEYVAL;
+    1768:	4b01      	ldr	r3, [pc, #4]	; (1770 <am_hal_vcomp_disable+0x8>)
+    176a:	2237      	movs	r2, #55	; 0x37
+    176c:	601a      	str	r2, [r3, #0]
+    176e:	4770      	bx	lr
+    1770:	4000c008 	.word	0x4000c008
+
+00001774 <am_hal_debug_error>:
+__weak void
+#else
+void __attribute__((weak))
+#endif
+am_hal_debug_error(const char *pcFile, uint32_t ui32Line, const char *pcMessage)
+{
+    1774:	e7fe      	b.n	1774 <am_hal_debug_error>
+    1776:	bf00      	nop
+
+00001778 <g_pui8ApolloBootDemo>:
+    1778:	1000 1000 94a5 0000 9511 0000 8195 0000     ................
+	...
+    1790:	9519 0000 0000 0000 0000 0000 0000 0000     ................
+    17a0:	0000 0000 9519 0000 9519 0000 0000 0000     ................
+    17b0:	9519 0000 9519 0000 9519 0000 9519 0000     ................
+    17c0:	9519 0000 9519 0000 9519 0000 9519 0000     ................
+    17d0:	9519 0000 9519 0000 9519 0000 9519 0000     ................
+    17e0:	80c5 0000 9519 0000 9519 0000 9519 0000     ................
+    17f0:	9519 0000 9519 0000 b580 b082 af00 2002     ............... 
+    1800:	f001 fad0 2000 f64f 71ff f001 fb01 2000     ..... O..q..... 
+    1810:	4909 f001 fad7 2308 607b 687b 085b 2000     .I.....#{`{h[.. 
+    1820:	f64f 71ff 687a f001 fafd 2001 f001 fb42     O..qzh..... ..B.
+    1830:	3708 46bd bd80 bf00 1000 1000 b580 af00     .7.F............
+    1840:	2001 f001 fb37 4b05 681b 3301 4a03 6013     . ..7..K.h.3.J.`
+    1850:	2b1f d902 4b01 2200 601a bd80 1034 1000     .+...K.".`..4...
+    1860:	b580 af00 2000 f001 fa81 f001 fa15 4820     ..... ........ H
+    1870:	f000 f8d6 4b1f 2273 601a 4b1f 4a1e 6812     .....Ks".`.K.J.h
+    1880:	f022 0270 601a 4b1d 4a1c 6812 f422 427f     ".p..`.K.J.h"..B
+    1890:	f442 5280 601a 4b17 2200 601a 4818 2105     B..R.`.K.".`.H.!
+    18a0:	f001 f89c f001 fb4c f001 fa0a f000 ff4e     ......L.......N.
+    18b0:	4814 f000 ff2d f7ff ff9f 2001 f001 faf2     .H..-...... ....
+    18c0:	201a f001 fb01 f001 fb27 2000 f64f 71ff     . ......'.. O..q
+    18d0:	f001 fa8c f001 fa20 2001 f001 fbe3 4b0a     ...... .. .....K
+    18e0:	681b 4807 2105 461a f001 f972 e7f4 bf00     .h.H.!.F..r.....
+    18f0:	95f1 0000 0060 4001 0054 4001 0028 4001     ....`..@T..@(..@
+    1900:	100c 1000 9ac0 0000 1034 1000 b580 4668     ........4.....hF
+    1910:	3008 f000 f809 bd01 4618 bf00 0080 1840     .0.......F....@.
+    1920:	6800 4770 4618 bf00 b580 b096 af00 6078     .hpG.F........x`
+    1930:	f107 030c 2200 601a 3304 2200 601a 3304     .....".`.3.".`.3
+    1940:	2200 601a 3304 2200 601a 3304 2200 601a     .".`.3.".`.3.".`
+    1950:	3304 2200 601a 3304 2300 657b 6d7b 64fb     .3.".`.3.#{e{m.d
+    1960:	4b2d 681b 64fb 6cfb b2db f887 3050 6cfb     -K.h.d.l....P0.l
+    1970:	0a1b b2db f887 3051 6cfb 0c1b b29b f8a7     ......Q0.l......
+    1980:	3052 4b26 681b 64bb f897 3051 b2db f003     R0&K.h.d..Q0....
+    1990:	0302 2b00 d005 2006 6879 f7ff ffbf 4603     ...+... yh.....F
+    19a0:	e001 f04f 33ff 647b 2000 6879 f7ff ffb6     ..O..3{d. yh....
+    19b0:	4603 627b 2001 6879 f7ff ffb0 4603 62bb     .F{b. yh.....F.b
+    19c0:	2002 6879 f7ff ffaa 4603 62fb 2003 6879     . yh.....F.b. yh
+    19d0:	f7ff ffa4 4603 633b 2004 6879 f7ff ff9e     .....F;c. yh....
+    19e0:	4603 637b 2005 6879 f7ff ff98 4603 63bb     .F{c. yh.....F.c
+    19f0:	2006 6879 f7ff ff92 4603 63fb 2007 6879     . yh.....F.c. yh
+    1a00:	f7ff ff8c 4603 643b f107 030c 4618 f001     .....F;d.....F..
+    1a10:	faf1 2300 657b e7fe ed28 e000 ed38 e000     ...#{e..(...8...
+    1a20:	b480 b083 af00 6078 4b03 687a 601a 370c     ......x`.Kzh.`.7
+    1a30:	46bd f85d 7b04 4770 1140 1000 e92d 0fb0     .F]..{pG@...-...
+    1a40:	b097 af00 e9c7 010c e9d7 230c 001c 2500     ...........#...%
+    1a50:	ea54 0005 f000 8094 e9d7 230c 0859 ea4f     T..........#Y.O.
+    1a60:	0032 e9d7 230c ea4f 0892 ea48 7883 ea4f     2....#O...H..xO.
+    1a70:	0993 eb10 0208 eb41 0309 e9c7 2314 e9d7     ......A......#..
+    1a80:	2314 ea4f 1a12 ea4a 7a03 ea4f 1b13 e9d7     .#O...J..zO.....
+    1a90:	2314 eb12 020a eb43 030b e9c7 2314 e9d7     .#....C......#..
+    1aa0:	2314 0a11 62b9 6ab8 ea40 6003 62b8 0a19     .#...b.j@..`.b..
+    1ab0:	62f9 e9d7 2314 e9d7 010a 1812 eb43 0301     .b...#......C...
+    1ac0:	e9c7 2314 e9d7 2314 0c11 6239 6a38 ea40     ...#...#..9b8j@.
+    1ad0:	4003 6238 0c19 6279 e9d7 2314 e9d7 0108     .@8b..yb...#....
+    1ae0:	1812 eb43 0301 e9c7 2314 e9d7 2314 0019     ..C......#...#..
+    1af0:	61b9 2200 61fa e9d7 2314 e9d7 0106 1812     .a.".a...#......
+    1b00:	eb43 0301 e9c7 2314 e9d7 2314 08d1 60b9     C......#...#...`
+    1b10:	68b8 ea40 7043 60b8 08d9 60f9 e9d7 2302     .h@.Cp.`...`...#
+    1b20:	e9c7 2314 e9d7 2314 1892 eb43 0303 0098     ...#...#..C.....
+    1b30:	6078 6879 ea41 7192 6079 0090 6038 e9d7     x`yhA..qy`..8`..
+    1b40:	0100 1812 eb43 0301 e9d7 010c 1a82 eb61     ....C.........a.
+    1b50:	0303 e9c7 2312 e9d7 2312 3206 f143 0300     .....#...#.2C...
+    1b60:	0911 6139 6938 ea40 7003 6138 0919 6179     ..9a8i@..p8a..ya
+    1b70:	e9d7 2314 e9d7 0104 1812 eb43 0301 e029     ...#......C...).
+    1b80:	6b3b 647b 6c7b 085a 6c7b 089b 4413 643b     ;k{d{lZ.{l...D;d
+    1b90:	6c3b 091b 6c3a 4413 643b 6c3b 0a1b 6c3a     ;l..:l.D;d;l..:l
+    1ba0:	4413 643b 6c3b 0c1b 6c3a 4413 643b 6c3b     .D;d;l..:l.D;d;l
+    1bb0:	08db 643b 6c3a 4613 009b 4413 005b 6c7a     ..;d:l.F...D[.zl
+    1bc0:	1ad3 63fb 6bfb 3306 091a 6c3b 4413 461a     ...c.k.3..;l.D.F
+    1bd0:	f04f 0300 4610 4619 375c 46bd e8bd 0fb0     O....F.F\7.F....
+    1be0:	4770 bf00 b580 b084 af00 e9c7 0100 683a     pG............:h
+    1bf0:	687b 4313 2b00 bf14 2300 2301 b2db 60fb     {h.C.+...#.#...`
+    1c00:	e008 e9d7 0100 f7ff ff19 e9c7 0100 68fb     ...............h
+    1c10:	3301 60fb e9d7 2300 ea52 0103 d1f1 68fb     .3.`...#R......h
+    1c20:	4618 3710 46bd bd80 b580 b082 af00 e9c7     .F.7.F..........
+    1c30:	0100 e9d7 2300 2a00 f173 0100 da06 e9d7     .....#.*s.......
+    1c40:	2300 4252 eb63 0343 e9c7 2300 e9d7 2300     .#RBc.C....#...#
+    1c50:	4610 4619 f7ff ffc6 4603 4618 3708 46bd     .F.F.....F.F.7.F
+    1c60:	bd80 bf00 b480 b085 af00 e9c7 0100 6838     ..............8h
+    1c70:	6879 4301 2900 bf14 2100 2101 b2c9 60f9     yh.C.)...!.!...`
+    1c80:	e00a e9d7 0100 0902 ea42 7201 090b e9c7     ........B..r....
+    1c90:	2300 68f9 3101 60f9 e9d7 0100 ea50 0c01     .#.h.1.`....P...
+    1ca0:	d1ef 68fb 4618 3714 46bd f85d 7b04 4770     ...h.F.7.F]..{pG
+    1cb0:	b480 b087 af00 6078 6039 2300 75fb 2300     ......x`9`.#.u.#
+    1cc0:	613b 2300 60fb 687b 781b 2b2d d108 2301     ;a.#.`{h.x-+...#
+    1cd0:	75fb 687b 3301 607b 68fb 3301 60fb e013     .u{h.3{`.h.3.`..
+    1ce0:	e012 68fb 3301 60fb 693a 4613 009b 4413     ...h.3.`:i.F...D
+    1cf0:	005b 613b 687b 781b 461a 693b 4413 3b30     [.;a{h.x.F;i.D0;
+    1d00:	613b 687b 3301 607b 687b 781b 2b2f d903     ;a{h.3{`{h.x/+..
+    1d10:	687b 781b 2b39 d9e4 683b 2b00 d002 683b     {h.x9+..;h.+..;h
+    1d20:	68fa 601a 7dfb 2b00 d002 693b 425b e000     .h.`.}.+..;i[B..
+    1d30:	693b 4618 371c 46bd f85d 7b04 4770 bf00     ;i.F.7.F]..{pG..
+    1d40:	b580 b090 af00 e9c7 0102 607a 2300 63fb     ..........z`.#.c
+    1d50:	2300 63bb e9d7 0102 f7ff fe70 e9c7 010c     .#.c......p.....
+    1d60:	68b9 6b3a 4613 009b 4413 005b 1acb 62fb     .h:k.F...D[....b
+    1d70:	6bfb 1c5a 63fa 6afa b2d2 3230 b2d2 f107     .kZ..c.j..02....
+    1d80:	0140 440b f803 2c30 e9d7 230c e9c7 2302     @..D..0,...#...#
+    1d90:	e9d7 2302 ea52 0103 d1dc 6bfb 63bb 687b     ...#R......k.c{h
+    1da0:	2b00 d011 e008 687b 1c5a 607a f107 0110     .+....{hZ.z`....
+    1db0:	6bfa 440a 7812 701a 6bfb 1e5a 63fa 2b00     .k.D.x.p.kZ..c.+
+    1dc0:	d1f1 687b 2200 701a 6bbb 4618 3740 46bd     ..{h.".p.k.F@7.F
+    1dd0:	bd80 bf00 b4b0 b08d af00 e9c7 0102 607a     ..............z`
+    1de0:	70fb 2300 62fb e9d7 2302 ea52 0103 d109     .p.#.b...#R.....
+    1df0:	6afb 1c5a 62fa f107 0230 4413 2230 f803     .jZ..b..0..D0"..
+    1e00:	2c20 e028 e027 7a3b f003 030f f887 302b      ,(.'.;z......+0
+    1e10:	f897 302b 2b09 d90a 78fb 2b00 d001 2327     ..+0.+...x.+..'#
+    1e20:	e000 2307 f897 202b 4413 f887 302b 6afb     ...#..+ .D..+0.j
+    1e30:	1c5a 62fa f897 202b 3230 b2d2 f107 0130     Z..b..+ 02....0.
+    1e40:	440b f803 2c20 e9d7 2302 0914 ea44 7403     .D.. ,...#..D..t
+    1e50:	091d e9c7 4502 e9d7 2302 ea52 0103 d1d2     .....E...#R.....
+    1e60:	6afb 627b 687b 2b00 d011 e008 687b 1c5a     .j{b{h.+....{hZ.
+    1e70:	607a f107 0110 6afa 440a 7812 701a 6afb     z`.....j.D.x.p.j
+    1e80:	1e5a 62fa 2b00 d1f1 687b 2200 701a 6a7b     Z..b.+..{h.".p{j
+    1e90:	4618 3734 46bd bcb0 4770 bf00 b480 b085     .F47.F..pG......
+    1ea0:	af00 6078 2300 60fb 687b 2b00 d101 68fb     ..x`.#.`{h.+...h
+    1eb0:	e00a e002 68fb 3301 60fb 687b 1c5a 607a     .....h.3.`{hZ.z`
+    1ec0:	781b 2b00 d1f6 68fb 4618 3714 46bd f85d     .x.+...h.F.7.F].
+    1ed0:	7b04 4770 b480 b087 af00 60f8 460b 607a     .{pG.......`.Fz`
+    1ee0:	72fb 2300 617b 687b 2b00 dc01 697b e011     .r.#{a{h.+..{i..
+    1ef0:	e00a 68fb 2b00 d004 68fb 1c5a 60fa 7afa     ...h.+...hZ..`.z
+    1f00:	701a 697b 3301 617b 687b 1e5a 607a 2b00     .p{i.3{a{hZ.z`.+
+    1f10:	d1ef 697b 4618 371c 46bd f85d 7b04 4770     ..{i.F.7.F]..{pG
+    1f20:	b580 b08e af00 60f8 60b9 607a 68bb 681b     .......`.`z`.h.h
+    1f30:	62bb 6abb 2b03 dc02 f06f 0302 e0d6 edd7     .b.j.+..o.......
+    1f40:	7a03 eef5 7a40 eef1 fa10 d104 68bb 4a69     .z..@z.......hiJ
+    1f50:	601a 2303 e0ca 68bb 627b 68fb 617b 697b     .`.#...h{b.h{a{i
+    1f60:	15db b2db 3b7f 623b 697b f3c3 0316 f443     .....;;b{i....C.
+    1f70:	0300 61fb 2300 633b 2300 637b 6a3b 2b1e     ...a.#;c.#{c;j.+
+    1f80:	dd02 f06f 0301 e0b1 6a3b f113 0f17 da02     ..o.....;j......
+    1f90:	f04f 33ff e0aa 6a3b 2b16 dd06 6a3b 3b17     O..3..;j.+..;j.;
+    1fa0:	69fa fa02 f303 637b e01a 6a3b 2b00 db0f     .i....{c..;j.+..
+    1fb0:	6a3b f1c3 0317 69fa fa42 f303 637b 6a3b     ;j.....iB...{c;j
+    1fc0:	3301 69fa fa02 f303 f023 437f 633b e007     .3.i....#..C;c..
+    1fd0:	69fb f023 427f 6a3b 43db fa42 f303 633b     .i#..B;j.CB...;c
+    1fe0:	697b 2b00 da04 68bb 1c5a 60ba 222d 701a     {i.+...hZ..`-".p
+    1ff0:	6b7b 2b00 d105 68bb 1c5a 60ba 2230 701a     {k.+...hZ..`0".p
+    2000:	e023 6b7b 2b00 dd09 6b7b 461a ea4f 73e2     #.{k.+..{k.FO..s
+    2010:	4610 4619 68ba f7ff fe93 e012 68bb 1c5a     .F.F.h.......hZ.
+    2020:	60ba 222d 701a 6b7b 425b 461a ea4f 73e2     .`-".p{k[B.FO..s
+    2030:	4610 4619 68ba f7ff fe83 e002 68bb 3301     .F.F.h.......h.3
+    2040:	60bb 68bb 781b 2b00 d1f8 68bb 1c5a 60ba     .`.h.x.+...hZ..`
+    2050:	222e 701a 6b3b 2b00 d105 68bb 1c5a 60ba     .".p;k.+...hZ..`
+    2060:	2230 701a e03c 6a7a 68bb 1ad2 6abb 4413     0".p<.zj.h...j.D
+    2070:	3b01 61bb 69ba 687b 429a bfb8 4613 61bb     .;.a.i{h.B...F.a
+    2080:	2300 62fb e015 6b3a 4613 009b 4413 005b     .#.b..:k.F...D[.
+    2090:	633b 68bb 1c5a 60ba 6b3a 1612 b2d2 3230     ;c.hZ..`:k....02
+    20a0:	b2d2 701a 6b3b f023 437f 633b 6afb 3301     ...p;k#..C;c.j.3
+    20b0:	62fb 6afa 69bb 429a dbe5 68bb 3b01 60bb     .b.j.i.B...h.;.`
+    20c0:	e002 68bb 3b01 60bb 68bb 781b 2b30 d104     ...h.;.`.h.x0+..
+    20d0:	68bb 3b01 781b 2b2e d1f3 68bb 3301 60bb     .h.;.x.+...h.3.`
+    20e0:	68bb 2200 701a 68ba 6a7b 1ad3 4618 3738     .h.".p.h{j...F87
+    20f0:	46bd bd80 2e30 0030 b580 b094 af00 60f8     .F..0.0........`
+    2100:	60b9 607a 2300 63fb 2300 627b e2e9 2306     .`z`.#.c.#{b...#
+    2110:	633b 68bb 781b 2b25 d01f 68fb 2b00 d015     ;c.h.x%+...h.+..
+    2120:	68bb 781b 2b0a d10b 4bb2 781b 2b00 d007     .h.x.+...K.x.+..
+    2130:	68fb 1c5a 60fa 220d 701a 6bfb 3301 63fb     .hZ..`.".p.k.3.c
+    2140:	68fb 1c5a 60fa 68ba 7812 701a 68bb 3301     .hZ..`.h.x.p.h.3
+    2150:	60bb 6bfb 3301 63fb e2c3 68bb 3301 60bb     .`.k.3.c...h.3.`
+    2160:	2300 f887 302d f897 302d f887 302e 2320     .#..-0..-0...0 #
+    2170:	f887 302f 68bb 781b 2b30 d105 2330 f887     ../0.h.x0+..0#..
+    2180:	302f 68bb 3301 60bb f107 0310 68b8 4619     /0.h.3.`.....h.F
+    2190:	f7ff fd8e 4603 63bb 693b 68ba 4413 60bb     .....F.c;i.h.D.`
+    21a0:	68bb 781b 2b73 d005 6bbb 2b00 da02 6bbb     .h.xs+...k.+...k
+    21b0:	425b 63bb 68bb 781b 2b2e d10e 68bb 3301     [B.c.h.x.+...h.3
+    21c0:	60bb f107 0310 68b8 4619 f7ff fd71 4603     .`.....h.F..q..F
+    21d0:	633b 693b 68ba 4413 60bb 68bb 781b 2b6c     ;c;i.h.D.`.h.xl+
+    21e0:	d10c 68bb 3301 60bb 68bb 781b 2b6c d105     ...h.3.`.h.xl+..
+    21f0:	68bb 3301 60bb 2301 f887 302d 68bb 781b     .h.3.`.#..-0.h.x
+    2200:	3b46 2b32 f200 825d a101 f851 f023 bf00     F;2+..]...Q.#...
+    2210:	8ed1 0000 8f4b 0000 8f4b 0000 8f4b 0000     ....K...K...K...
+    2220:	8f4b 0000 8f4b 0000 8f4b 0000 8f4b 0000     K...K...K...K...
+    2230:	8f4b 0000 8f4b 0000 8f4b 0000 8f4b 0000     K...K...K...K...
+    2240:	8f4b 0000 8f4b 0000 8f4b 0000 8f4b 0000     K...K...K...K...
+    2250:	8f4b 0000 8f4b 0000 8c5f 0000 8f4b 0000     K...K..._...K...
+    2260:	8f4b 0000 8f4b 0000 8f4b 0000 8f4b 0000     K...K...K...K...
+    2270:	8f4b 0000 8f4b 0000 8f4b 0000 8f4b 0000     K...K...K...K...
+    2280:	8f4b 0000 8b65 0000 8d95 0000 8f4b 0000     K...e.......K...
+    2290:	8ed1 0000 8f4b 0000 8f4b 0000 8d95 0000     ....K...K.......
+    22a0:	8f4b 0000 8f4b 0000 8f4b 0000 8f4b 0000     K...K...K...K...
+    22b0:	8f4b 0000 8f4b 0000 8f4b 0000 8f4b 0000     K...K...K...K...
+    22c0:	8f4b 0000 8b8b 0000 8f4b 0000 8cff 0000     K.......K.......
+    22d0:	8f4b 0000 8f4b 0000 8c59 0000 687b 1d1a     K...K...Y...{h..
+    22e0:	607a 681b f887 3023 68fb 2b00 d005 68fb     z`.h..#0.h.+...h
+    22f0:	1c5a 60fa f897 2023 701a 6bfb 3301 63fb     Z..`..# .p.k.3.c
+    2300:	e1ec 687b 1d1a 607a 681b 64fb 6cf8 f7ff     ..{h..z`.h.d.l..
+    2310:	fdc5 6278 6bbb 2b00 dd1f 6bba 6a7b 429a     ..xb.k.+...k{j.B
+    2320:	d91b 6bba 6a7b 1ad3 63bb f897 302f 68f8     ...k{j...c../0.h
+    2330:	4619 6bba f7ff fdce 63b8 68fb 2b00 d001     .F.k.....c.h.+..
+    2340:	6bbb e000 2300 68fa 4413 60fb 6bbb 6bfa     .k...#.h.D.`.k.k
+    2350:	4413 63fb 2300 63bb e00f e00e 68fb 2b00     .D.c.#.c.....h.+
+    2360:	d005 68fb 1c5a 60fa 6cfa 7812 701a 6cfb     ...hZ..`.l.x.p.l
+    2370:	3301 64fb 6bfb 3301 63fb 6cfb 781b 2b00     .3.d.k.3.c.l.x.+
+    2380:	d1ec 6bbb 2b00 d022 6bbb 425b 63bb 6bba     ...k.+"..k[B.c.k
+    2390:	6a7b 429a d91b 6bba 6a7b 1ad3 63bb f897     {j.B...k{j...c..
+    23a0:	302f 68f8 4619 6bba f7ff fd94 63b8 68fb     /0.h.F.k.....c.h
+    23b0:	2b00 d001 6bbb e000 2300 68fa 4413 60fb     .+...k...#.h.D.`
+    23c0:	6bbb 6bfa 4413 63fb 2300 63bb e186 e185     .k.k.D.c.#.c....
+    23d0:	2301 f887 302e f897 302d 2b00 d00c 687b     .#...0..-0.+..{h
+    23e0:	3307 f023 0307 f103 0208 607a e9d3 2300     .3#.......z`...#
+    23f0:	e009 bf00 1138 1000 687b 1d1a 607a 681b     ....8...{h..z`.h
+    2400:	461a f04f 0300 e9c7 2310 6bbb 2b00 d01e     .FO......#.k.+..
+    2410:	e9d7 0110 f7ff fc26 4603 6bba 1ad3 63bb     ......&..F.k...c
+    2420:	f897 302f 68f8 4619 6bba f7ff fd53 63b8     ../0.h.F.k..S..c
+    2430:	68fb 2b00 d001 6bbb e000 2300 68fa 4413     .h.+...k...#.h.D
+    2440:	60fb 6bbb 6bfa 4413 63fb 2300 63bb f897     .`.k.k.D.c.#.c..
+    2450:	302e e9d7 0110 68fa f7ff fcbc 6378 68fb     .0.....h....xc.h
+    2460:	2b00 d003 6b7b 68fa 4413 60fb 6b7b 6bfa     .+..{k.h.D.`{k.k
+    2470:	4413 63fb e132 f897 302d 2b00 d009 687b     .D.c2...-0.+..{h
+    2480:	3307 f023 0307 f103 0208 607a e9d3 2300     .3#.......z`...#
+    2490:	e006 687b 1d1a 607a 681b 461a f04f 0300     ..{h..z`.h.FO...
+    24a0:	e9c7 2310 6bbb 2b00 d01e e9d7 0110 f7ff     ...#.k.+........
+    24b0:	fb99 4603 6bba 1ad3 63bb f897 302f 68f8     ...F.k...c../0.h
+    24c0:	4619 6bba f7ff fd06 63b8 68fb 2b00 d001     .F.k.....c.h.+..
+    24d0:	6bbb e000 2300 68fa 4413 60fb 6bbb 6bfa     .k...#.h.D.`.k.k
+    24e0:	4413 63fb 2300 63bb e9d7 0110 68fa f7ff     .D.c.#.c.....h..
+    24f0:	fc27 6378 68fb 2b00 d003 6b7b 68fa 4413     '.xc.h.+..{k.h.D
+    2500:	60fb 6b7b 6bfa 4413 63fb e0e7 f897 302d     .`{k.k.D.c....-0
+    2510:	2b00 d009 687b 3307 f023 0307 f103 0208     .+..{h.3#.......
+    2520:	607a e9d3 2300 e006 687b 1d1a 607a 681b     z`...#..{h..z`.h
+    2530:	461a ea4f 73e2 e9c7 2306 e9d7 2306 2a00     .FO..s...#...#.*
+    2540:	f173 0100 da0a e9d7 2306 4252 eb63 0343     s........#RBc.C.
+    2550:	e9c7 2310 2301 f887 302c e006 e9d7 2306     ...#.#..,0.....#
+    2560:	e9c7 2310 2300 f887 302c 6bbb 2b00 d04a     ...#.#..,0.k.+J.
+    2570:	e9d7 2310 4610 4619 f7ff fb56 4603 6bba     ...#.F.F..V..F.k
+    2580:	1ad3 63bb f897 302c 2b00 d011 6bbb 3b01     ...c..,0.+...k.;
+    2590:	63bb f897 302f 2b30 d10a 68fb 2b00 d004     .c../00+...h.+..
+    25a0:	68fb 1c5a 60fa 222d 701a 6bfb 3301 63fb     .hZ..`-".p.k.3.c
+    25b0:	f897 302f 68f8 4619 6bba f7ff fc8b 63b8     ../0.h.F.k.....c
+    25c0:	68fb 2b00 d001 6bbb e000 2300 68fa 4413     .h.+...k...#.h.D
+    25d0:	60fb 6bbb 6bfa 4413 63fb 2300 63bb f897     .`.k.k.D.c.#.c..
+    25e0:	302c 2b00 d01e f897 302f 2b20 d11a 68fb     ,0.+..../0 +...h
+    25f0:	2b00 d004 68fb 1c5a 60fa 222d 701a 6bfb     .+...hZ..`-".p.k
+    2600:	3301 63fb e00e f897 302c 2b00 d00a 68fb     .3.c....,0.+...h
+    2610:	2b00 d004 68fb 1c5a 60fa 222d 701a 6bfb     .+...hZ..`-".p.k
+    2620:	3301 63fb e9d7 0110 68fa f7ff fb89 6378     .3.c.....h....xc
+    2630:	68fb 2b00 d003 6b7b 68fa 4413 60fb 6b7b     .h.+..{k.h.D.`{k
+    2640:	6bfa 4413 63fb e049 68fb 2b00 d038 687b     .k.D.cI..h.+8.{h
+    2650:	3307 f023 0307 f103 0208 607a e9d3 2300     .3#.......z`...#
+    2660:	4610 4619 f000 fd98 4603 617b 68fb 2214     .F.F.....F{a.h."
+    2670:	601a 6978 68f9 6b3a f7ff fc52 6378 6b7b     .`xi.h:k..R.xc{k
+    2680:	2b00 da14 6b7b f1b3 3fff d102 4b1d 62bb     .+..{k...?...K.b
+    2690:	e008 6b7b f113 0f02 d102 4b1b 62bb e001     ..{k.......K.b..
+    26a0:	4b1a 62bb 68fb 6aba 601a 2303 637b 6b7b     .K.b.h.j.`.#{c{k
+    26b0:	6bfa 4413 63fb 6b7b 68fa 4413 60fb e00d     .k.D.c{k.h.D.`..
+    26c0:	e00c 68fb 2b00 d005 68fb 1c5a 60fa 68ba     ...h.+...hZ..`.h
+    26d0:	7812 701a 6bfb 3301 63fb bf00 68bb 3301     .x.p.k.3.c...h.3
+    26e0:	60bb 68bb 781b 2b00 f47f ad11 68fb 2b00     .`.h.x.+.....h.+
+    26f0:	d002 68fb 2200 701a 6bfb 4618 3750 46bd     ...h.".p.k.FP7.F
+    2700:	bd80 bf00 2e30 0030 2e23 0023 2e3f 003f     ....0.0.#.#.?.?.
+    2710:	b40f b580 b082 af00 f107 0314 603b 4809     ............;`.H
+    2720:	6939 683a f7ff fce8 6078 4b07 681b 4805     9i:h....x`.K.h.H
+    2730:	4798 687b 4618 3708 46bd e8bd 4080 b004     .G{h.F.7.F...@..
+    2740:	4770 bf00 1038 1000 1140 1000 b580 af00     pG..8...@.......
+    2750:	4801 f7ff ffdd bd80 9ad8 0000 b490 b082     .H..............
+    2760:	af00 6078 687b 685b f003 0302 2b00 f000     ..x`{h[h.....+..
+    2770:	8094 687b 681b 2b00 da00 e04d 4b92 2273     ..{h.h.+..M..Ks"
+    2780:	601a 687b 681b f003 03f8 085a 4b8f 4413     .`{h.h....Z..K.D
+    2790:	461a 687b 681b f003 0307 009b 2102 4099     .F{h.h.......!.@
+    27a0:	687b 681b f003 03f8 0858 4b88 4403 6818     {h.h....X..K.D.h
+    27b0:	687b 681b f003 0307 009b 2407 fa04 f303     {h.h.......$....
+    27c0:	43db 4003 430b 6013 687b 681b f003 03fc     .C.@.C.`{h.h....
+    27d0:	f103 4380 f503 3380 461a 687b 681b f003     ...C...3.F{h.h..
+    27e0:	0303 00db 2118 4099 687b 681b f003 03fc     .....!.@{h.h....
+    27f0:	f103 4380 f503 3380 6818 687b 681b f003     ...C...3.h{h.h..
+    2800:	0303 00db 24ff fa04 f303 43db 4003 430b     .....$.....C.@.C
+    2810:	6013 4b6d 2200 601a 687b 681b f003 0320     .`mK.".`{h.h.. .
+    2820:	08da 4b6b 4413 687a 6812 f002 021f 2101     ..kK.Dzh.h.....!
+    2830:	fa01 f202 601a 687b 681b f003 0320 08da     .....`{h.h.. ...
+    2840:	4b64 4413 461a 687b 685b f003 0301 2b00     dK.D.F{h[h.....+
+    2850:	d010 687b 681b f003 0320 08d9 4b5d 440b     ..{h.h.. ...]K.D
+    2860:	6819 687b 681b f003 031f 2001 fa00 f303     .h{h.h..... ....
+    2870:	430b e010 687b 681b f003 0320 08d9 4b55     .C..{h.h.. ...UK
+    2880:	440b 6819 687b 681b f003 031f 2001 fa00     .D.h{h.h..... ..
+    2890:	f303 43db 400b 6013 e092 687b 681b 2b00     ...C.@.`..{h.h.+
+    28a0:	da00 e04d 4b48 2273 601a 687b 681b f003     ..M.HKs".`{h.h..
+    28b0:	03f8 085a 4b45 4413 461a 687b 681b f003     ..Z.EK.D.F{h.h..
+    28c0:	0307 009b 2106 4099 687b 681b f003 03f8     .....!.@{h.h....
+    28d0:	0858 4b3e 4403 6818 687b 681b f003 0307     X.>K.D.h{h.h....
+    28e0:	009b 2407 fa04 f303 43db 4003 430b 6013     ...$.....C.@.C.`
+    28f0:	687b 681b f003 03fc f103 4380 f503 3380     {h.h.......C...3
+    2900:	461a 687b 681b f003 0303 00db 2118 4099     .F{h.h.......!.@
+    2910:	687b 681b f003 03fc f103 4380 f503 3380     {h.h.......C...3
+    2920:	6818 687b 681b f003 0303 00db 24ff fa04     .h{h.h.......$..
+    2930:	f303 43db 4003 430b 6013 4b23 2200 601a     ...C.@.C.`#K.".`
+    2940:	687b 681b f003 0320 08da 4b23 4413 687a     {h.h.. ...#K.Dzh
+    2950:	6812 f002 021f 2101 fa01 f202 601a 687b     .h.....!.....`{h
+    2960:	681b f003 0320 08da 4b1a 4413 461a 687b     .h.. ....K.D.F{h
+    2970:	685b f003 0301 2b00 d010 687b 681b f003     [h.....+..{h.h..
+    2980:	0320 08d9 4b13 440b 6819 687b 681b f003      ....K.D.h{h.h..
+    2990:	031f 2001 fa00 f303 430b e010 687b 681b     ... .....C..{h.h
+    29a0:	f003 0320 08d9 4b0b 440b 6819 687b 681b     .. ....K.D.h{h.h
+    29b0:	f003 031f 2001 fa00 f303 43db 400b 6013     ..... .....C.@.`
+    29c0:	3708 46bd bc90 4770 0060 4001 0040 4001     .7.F..pG`..@@..@
+    29d0:	00a8 4001 0088 4001 00b4 4001 b580 b084     ...@...@...@....
+    29e0:	af00 6078 6039 2300 60fb e009 68fb 00db     ..x`9`.#.`...h..
+    29f0:	687a 4413 4618 f7ff feb1 68fb 3301 60fb     zh.D.F.....h.3.`
+    2a00:	68fa 683b 429a d3f1 3710 46bd bd80 bf00     .h;h.B...7.F....
+    2a10:	b480 b083 af00 6078 6039 683b 00db 687a     ......x`9`;h..zh
+    2a20:	4413 685b f003 0302 2b00 d043 683b 00db     .D[h.....+C.;h..
+    2a30:	687a 4413 681b f003 0320 08da 4b2a 4413     zh.D.h.. ...*K.D
+    2a40:	461a 683b 00db 6879 440b 685b f003 0301     .F;h..yh.D[h....
+    2a50:	2b00 d016 683b 00db 6879 440b 681b f003     .+..;h..yh.D.h..
+    2a60:	0320 08d9 4b20 440b 6819 683b 00db 6878      ... K.D.h;h..xh
+    2a70:	4403 681b f003 031f 2001 fa00 f303 430b     .D.h..... .....C
+    2a80:	e016 683b 00db 6879 440b 681b f003 0320     ..;h..yh.D.h.. .
+    2a90:	08d9 4b15 440b 6819 683b 00db 6878 4403     ...K.D.h;h..xh.D
+    2aa0:	681b f003 031f 2001 fa00 f303 43db 400b     .h..... .....C.@
+    2ab0:	6013 e014 683b 00db 687a 4413 681b f003     .`..;h..zh.D.h..
+    2ac0:	0320 08da 4b09 4413 683a 00d2 6879 440a      ....K.D:h..yh.D
+    2ad0:	6812 f002 021f 2101 fa01 f202 601a 370c     .h.....!.....`.7
+    2ae0:	46bd f85d 7b04 4770 0088 4001 00a8 4001     .F]..{pG...@...@
+    2af0:	b480 b083 af00 6078 6039 683b 00db 687a     ......x`9`;h..zh
+    2b00:	4413 685b f003 0302 2b00 d043 683b 00db     .D[h.....+C.;h..
+    2b10:	687a 4413 681b f003 0320 08da 4b2a 4413     zh.D.h.. ...*K.D
+    2b20:	461a 683b 00db 6879 440b 685b f003 0301     .F;h..yh.D[h....
+    2b30:	2b00 d116 683b 00db 6879 440b 681b f003     .+..;h..yh.D.h..
+    2b40:	0320 08d9 4b20 440b 6819 683b 00db 6878      ... K.D.h;h..xh
+    2b50:	4403 681b f003 031f 2001 fa00 f303 430b     .D.h..... .....C
+    2b60:	e016 683b 00db 6879 440b 681b f003 0320     ..;h..yh.D.h.. .
+    2b70:	08d9 4b15 440b 6819 683b 00db 6878 4403     ...K.D.h;h..xh.D
+    2b80:	681b f003 031f 2001 fa00 f303 43db 400b     .h..... .....C.@
+    2b90:	6013 e014 683b 00db 687a 4413 681b f003     .`..;h..zh.D.h..
+    2ba0:	0320 08da 4b09 4413 683a 00d2 6879 440a      ....K.D:h..yh.D
+    2bb0:	6812 f002 021f 2101 fa01 f202 601a 370c     .h.....!.....`.7
+    2bc0:	46bd f85d 7b04 4770 0088 4001 00b4 4001     .F]..{pG...@...@
+    2bd0:	b580 b086 af00 60f8 60b9 607a 2300 617b     .......`.`z`.#{a
+    2be0:	e014 697b 2201 fa02 f303 461a 687b 4013     ..{i.".....F{h.@
+    2bf0:	2b00 d004 68f8 6979 f7ff ff0a e003 68f8     .+...hyi.......h
+    2c00:	6979 f7ff ff75 697b 3301 617b 697a 68bb     yi..u.{i.3{azi.h
+    2c10:	429a d3e6 3718 46bd bd80 bf00 4812 4913     .B...7.F.....H.I
+    2c20:	6001 f8d1 d000 4812 6801 f441 0170 6001     .`.....H.hA.p..`
+    2c30:	f3bf 8f4f f3bf 8f6f 480e 490f 4a0f f850     ..O...o..H.I.JP.
+    2c40:	3b04 f841 3b04 4291 f77f aff9 480c 490d     .;A..;.B.....H.I
+    2c50:	f04f 0200 4288 bfb8 f840 2b04 f6ff affa     O....B..@..+....
+    2c60:	f7fe fdfe be00 0000 ed08 e000 8000 0000     ................
+    2c70:	ed88 e000 9b04 0000 1000 1000 1034 1000     ............4...
+    2c80:	1034 1000 1144 1000 b480 af00 e7fe bf00     4...D...........
+    2c90:	b480 af00 e7fe bf00 b508 f000 f9d7 f000     ................
+    2ca0:	fa75 2001 f000 f9e8 2001 f000 f883 2002     u.. ..... ..... 
+    2cb0:	f000 f880 f000 f9ee e8bd 4008 f000 b9be     ...........@....
+    2cc0:	b510 4b10 681b f013 0401 b086 d001 b006     ...K.h..........
+    2cd0:	bd10 a806 4b0c f840 3d14 f000 f9fd 4b0b     .....K@..=.....K
+    2ce0:	490b 4a0c 2073 6018 6808 f020 0070 6008     .I.Js .`.h .p..`
+    2cf0:	6811 f421 417f f441 5180 6011 601c b006     .h!..AA..Q.`.`..
+    2d00:	bd10 bf00 113c 1000 4240 000f 0060 4001     ....<...@B..`..@
+    2d10:	0054 4001 0028 4001 4b0f 681b b510 f013     T..@(..@.K.h....
+    2d20:	0401 d000 bd10 f000 f937 4b0c 490c 4a0d     ........7..K.I.J
+    2d30:	2073 6018 6808 f020 0070 f040 0020 6008     s .`.h .p.@. ..`
+    2d40:	6811 f421 417f f441 51c0 6011 601c e8bd     .h!..AA..Q.`.`..
+    2d50:	4010 f000 ba15 bf00 113c 1000 0060 4001     .@......<...`..@
+    2d60:	0054 4001 0028 4001 f000 b92c 4b05 4a06     T..@(..@..,..K.J
+    2d70:	b410 2100 2447 601c 6010 f85d 4b04 6019     ...!G$.`.`]..K.`
+    2d80:	4770 bf00 4014 4000 4018 4000 4a03 4b04     pG...@.@.@.@.J.K
+    2d90:	6812 f002 0207 f853 0022 4770 4018 4000     .h....S.".pG.@.@
+    2da0:	9ae4 0000 4b02 681a ea22 0000 6018 4770     .....K.h"....`pG
+    2db0:	400c 4000 4b02 681a 4310 6018 4770 bf00     .@.@.K.h.C.`pG..
+    2dc0:	400c 4000 b430 680d 688c 684a 4b06 2d00     .@.@0..h.hJh.K.-
+    2dd0:	ea42 4204 ea4f 1000 bf0c 2100 f04f 4100     B..BO......!O..A
+    2de0:	430a 50c2 bc30 4770 800c 4000 0100 4b07     .C.P0.pG...@...K
+    2df0:	58c2 b410 f001 2408 ea22 0204 f001 1101     .X.....$".......
+    2e00:	4311 50c1 f85d 4b04 4770 bf00 800c 4000     .C.P]..KpG.....@
+    2e10:	0100 4b03 58c2 f001 2108 430a 50c2 4770     ...K.X...!.C.PpG
+    2e20:	800c 4000 b4f0 0100 4c1b 5904 f511 3f80     ...@.....L.Y...?
+    2e30:	bf08 0c24 f404 74c0 2c80 d016 f64f 75ff     ..$....t.,..O..u
+    2e40:	2400 42a9 4626 4f15 f8df c054 d019 f511     .$.B&F.O..T.....
+    2e50:	3f80 d01b 0c33 b291 041b 430c ea43 4212     .?..3......CC..B
+    2e60:	51c4 f840 200c bcf0 4770 f64f 75ff 42a9     .Q@.. ..pGO..u.B
+    2e70:	ea4f 4402 4616 4f09 f8df c024 ebc3 0202     O..D.F.O..$.....
+    2e80:	d1e5 b292 4314 51c4 bcf0 4770 b292 4314     .....C.Q..pG...C
+    2e90:	f840 400c bcf0 4770 800c 4000 8004 4000     @..@..pG...@...@
+    2ea0:	8008 4000 4b02 681a 4310 6018 4770 bf00     ...@.K.h.C.`pG..
+    2eb0:	8200 4000 4b01 6018 4770 bf00 8208 4000     ...@.K.`pG.....@
+    2ec0:	3801 f47f affd 4770 280f d80b 2805 d012     .8....pG.(...(..
+    2ed0:	2806 d016 2804 d104 4b0d 681a f442 3280     .(...(...K.hB..2
+    2ee0:	601a 4770 3810 f000 001f 2201 4b09 fa02     .`pG.8.....".K..
+    2ef0:	f000 6018 4770 4b06 681a f442 3200 601a     ...`pG.K.hB..2.`
+    2f00:	4770 4b03 681a f442 2280 601a 4770 bf00     pG.K.hB..".`pG..
+    2f10:	ed24 e000 e100 e000 f3ef 8010 b662 4770     $...........b.pG
+    2f20:	b510 4604 f7ff ff32 4b04 fba3 2000 0c80     ...F..2..K... ..
+    2f30:	fb04 f000 e8bd 4010 f7ff bfc2 9f81 165e     .......@......^.
+    2f40:	4b0d 681b 07da b430 d414 4a0c 6813 f043     .K.h..0....J.hC.
+    2f50:	7380 6013 6813 01db d5fc 4809 4d09 4c0a     .s.`.h.....H.M.L
+    2f60:	490a 4b0b 6005 4a0b 250f f04f 30ff 6025     .I.K.`.J.%O..0%`
+    2f70:	6008 601a bc30 4770 113c 1000 edfc e000     .`.`0.pG<.......
+    2f80:	0fb0 e000 ce55 c5ac 0e40 e000 0e00 e000     ....U...@.......
+    2f90:	0e80 e000 0511 0015 b508 4a08 6813 021b     ...........J.h..
+    2fa0:	d4fc f7ff fef3 4b06 fba3 2000 0c80 2332     .......K... ..2#
+    2fb0:	fb03 f000 e8bd 4008 f7ff bf82 0e80 e000     .......@........
+    2fc0:	9f81 165e 7803 b430 b193 4602 2300 f812     ..^..x0....F.#..
+    2fd0:	1f01 3301 2900 d1fa f04f 4260 18c5 4614     ...3.)..O.`B...F
+    2fe0:	f810 1b01 6813 2b00 d0fc 42a8 7021 d1f7     .....h.+...B!p..
+    2ff0:	bc30 4770 4b0d 490e 681b 4a0e 6809 60c1     0.pG.K.I.h.J.h.`
+    3000:	b470 6841 6815 4c0c 6942 4329 6041 6824     p.Ah.h.LBi)CA`$h
+    3010:	f003 0601 f3c3 0140 4322 f3c3 0380 7006     ......@."C.....p
+    3020:	7201 7403 6142 bc70 4770 bf00 01cc 4002     .r.tBap.pG.....@
+    3030:	01c4 4002 01c0 4002 01c8 4002 4b02 f06f     ...@...@...@.Ko.
+    3040:	0201 601a 4770 bf00 00fc 4002 4b08 4a09     ...`pG.....@.K.J
+    3050:	6819 f041 0102 6019 6819 f041 0101 6019     .hA....`.hA....`
+    3060:	6813 0799 d5fc 4a03 6813 07db d5fc 4770     .h.....J.h....pG
+    3070:	0010 4002 0014 4002 4b05 681a b918 f022     ...@...@.K.h..".
+    3080:	0280 601a 4770 f042 0280 601a 4770 bf00     ...`pGB....`pG..
+    3090:	400c 4000 4b02 681a f042 0210 601a 4770     .@.@.K.hB....`pG
+    30a0:	4050 4000 b158 4b0a 681b f033 0201 4b09     P@.@X..K.h3....K
+    30b0:	681a d007 f022 0204 601a bf30 4770 4b05     .h.."....`0.pG.K
+    30c0:	681a e7f7 f042 0204 601a bf30 4770 bf00     .h..B....`0.pG..
+    30d0:	0250 4002 ed10 e000 b538 4b21 6804 2200     P..@....8.!K.h."
+    30e0:	601a b31c 491f 4b20 4a20 2001 6008 f5a4     .`...I K J. .`..
+    30f0:	4161 4291 bf88 461c f7ff fe48 1c43 d02c     aA.B...F..H.C.,.
+    3100:	08c0 fbb0 f4f4 3c01 b2a4 4a19 4d19 4b1a     .......<...J.M.K
+    3110:	491a 6014 2000 2402 f240 2201 602c 6008     .I.`. .$@..",`.`
+    3120:	601a 2032 e8bd 4038 f7ff befa 4a10 6903     .`2 ..8@.....J.i
+    3130:	6013 6883 f8c2 30e0 68c2 490a 4b0e 2401     .`.h...0.h.I.K.$
+    3140:	3a01 fa04 f202 600a 6842 6819 430a 601a     .:.....`Bh.h.C.`
+    3150:	2032 e8bd 4038 f7ff bee3 2402 e7d5 bf00     2 ..8@.....$....
+    3160:	0304 e004 0004 e004 4240 000f a380 001d     ........@B......
+    3170:	0010 e004 00f0 e004 0250 4002 0f00 e004     ........P..@....
+    3180:	4b01 2200 601a 4770 0250 4002 4b01 2237     .K.".`pGP..@.K7"
+    3190:	601a 4770 c008 4000 ea4f 0241 f1b2 43e0     .`pG...@O.A....C
+    31a0:	bf24 f5b3 1c00 f1dc 5cfe d90d f001 4c00     $........\.....L
+    31b0:	ea4f 02c0 ea4c 7050 f1b2 4f00 eb40 0083     O...L.Pp...O@...
+    31c0:	bf08 f020 0001 4770 f011 4f80 d121 f113     .. ...pG...O!...
+    31d0:	7238 bfbc f001 4000 4770 f441 1180 ea4f     8r.....@pGA...O.
+    31e0:	5252 f1c2 0218 f1c2 0c20 fa10 f30c fa20     RR...... ..... .
+    31f0:	f002 bf18 f040 0001 ea4f 23c1 ea4f 23d3     ....@...O..#O..#
+    3200:	fa03 fc0c ea40 000c fa23 f302 ea4f 0343     ....@...#...O.C.
+    3210:	e7cc ea7f 5362 d107 ea50 3301 bf1e f04f     ....bS..P..3..O.
+    3220:	40fe f440 0040 4770 f001 4000 f040 40fe     .@@.@.pG...@@..@
+    3230:	f440 0000 4770 bf00 6942 616e 7972 4320     @...pG..Binary C
+    3240:	756f 746e 7265 4520 6178 706d 656c 000a     ounter Example..
+    3250:	3e3e 3e3e 3e3e 203e 0000 0000 3600 016e     >>>>>>> .....6n.
+    3260:	1b00 00b7 1200 007a 8d80 005b 3e00 0049     ......z...[..>I.
+    3270:	0900 003d 50db 0034 c6c0 002d 0000 0000     ..=..P4...-.....
+    3280:	0256 0000 0000 0000 0022 0000 0000 0000     V.......".......
+    3290:	0021 0000 0000 0000 001c 0000 0000 0000     !...............
+    32a0:	001a 0000 0000 0000 0019 0000 0000 0000     ................
+
+000032b0 <g_sIOMConfig>:
+    32b0:	0001 0000 1c00 0904 0000 3c04               ...........<
+
+000032bc <g_SPIpins>:
+    32bc:	0006 0000 000a 0000 0009 0000 000a 0000     ................
+
+000032cc <CSWTCH.4>:
+    32cc:	3600 016e 1b00 00b7 1200 007a 8d80 005b     .6n.......z...[.
+    32dc:	3e00 0049 0900 003d 50db 0034 c6c0 002d     .>I...=..P4...-.
+    32ec:	4f49 204d 7277 7469 2065 6874 6572 6873     IOM write thresh
+    32fc:	6c6f 2064 6f74 206f 6962 2e67 0000 0000     old too big.....
+    330c:	4f49 204d 6572 6461 7420 7268 7365 6f68     IOM read thresho
+    331c:	646c 7420 6f6f 6220 6769 002e 4f49 204d     ld too big..IOM 
+    332c:	7277 7469 2065 6874 6572 6873 6c6f 2064     write threshold 
+    333c:	6f74 206f 6d73 6c61 2e6c 0000 4f49 204d     too small...IOM 
+    334c:	6572 6461 7420 7268 7365 6f68 646c 7420     read threshold t
+    335c:	6f6f 7320 616d 6c6c 002e 0000 7254 6979     oo small....Tryi
+    336c:	676e 7420 206f 6f64 6120 3020 6220 7479     ng to do a 0 byt
+    337c:	2065 7274 6e61 6173 7463 6f69 006e 0000     e transaction...
+    338c:	2e2e 2e5c 5c2e 6d61 685f 6c61 695f 6d6f     ..\..\am_hal_iom
+    339c:	632e 0000 3249 2043 7274 6e61 6673 7265     .c..I2C transfer
+    33ac:	7420 6f6f 6220 6769 002e 0000 6854 2065      too big....The 
+    33bc:	6966 6f66 6420 656f 6e73 7427 6320 6e6f     fifo doesn't con
+    33cc:	6174 6e69 7420 6568 7220 7165 6575 7473     tain the request
+    33dc:	6465 6e20 6d75 6562 2072 666f 6220 7479     ed number of byt
+    33ec:	7365 002e 4f49 204d 4d43 4344 504d 7720     es..IOM CMDCMP w
+    33fc:	7361 6e20 746f 7320 6565 006e 6854 2065     as not seen.The 
+    340c:	4f49 204d 7571 7565 2065 7369 6620 6c75     IOM queue is ful
+    341c:	2e6c 4120 6c6c 636f 7461 2065 6f6d 6572     l. Allocate more
+    342c:	656d 6f6d 7972 7420 206f 6874 2065 4f49     memory to the IO
+    343c:	204d 7571 7565 2c65 6f20 2072 6c61 6f6c     M queue, or allo
+    344c:	2077 7469 6d20 726f 7465 6d69 2065 6f74     w it moretime to
+    345c:	6520 706d 7974 6220 7465 6577 6e65 7420      empty between t
+    346c:	6172 736e 6361 6974 6e6f 2e73 0000 0000     ransactions.....
+    347c:	5053 2049 7274 6e61 6673 7265 7420 6f6f     SPI transfer too
+    348c:	6220 6769 002e 0000 6854 2065 6966 6f66      big....The fifo
+    349c:	6320 756f 646c 276e 2074 6966 2074 6874      couldn't fit th
+    34ac:	2065 6572 7571 7365 6574 2064 756e 626d     e requested numb
+    34bc:	7265 6f20 2066 7962 6574 0073 7254 6979     er of bytes.Tryi
+    34cc:	676e 7420 206f 7375 2065 6e61 4920 4d4f     ng to use an IOM
+    34dc:	6d20 646f 6c75 2065 6874 7461 6420 656f      module that doe
+    34ec:	6e73 7427 6520 6978 7473 002e               sn't exist..

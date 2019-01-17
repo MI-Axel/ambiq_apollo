@@ -1,0 +1,338 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.30.1.114/W32 for ARM         10/Sep/2018  16:57:41
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\src\binary_counter.c
+#    Command line =  
+#        -f C:\Users\agao\AppData\Local\Temp\EW7E0E.tmp
+#        (C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\src\binary_counter.c
+#        -D iar -D AM_PACKAGE_BGA -D AM_PART_APOLLO2 -lcN
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.1\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\..\src\
+#        -I
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\..\..\..\bsp\
+#        -I
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\..\..\..\..\..\
+#        -I
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\..\..\..\..\..\mcu\apollo2\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\bin\binary_counter.lst
+#    Object file  =  
+#        C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\iar\bin\binary_counter.o
+#
+###############################################################################
+
+C:\ambiq\AmbiqSuite-Rel1.2.12.tar\AmbiqSuite-Rel1.2.12\AmbiqSuite-Rel1.2.12\boards\apollo2_blue_evb\examples\binary_counter\src\binary_counter.c
+      1          //*****************************************************************************
+      2          //
+      3          //! @file binary_counter.c
+      4          //!
+      5          //! @brief Example that displays the timer count on the LEDs.
+      6          //!
+      7          //! This example increments a variable on every timer interrupt. The global
+      8          //! variable is used to set the state of the LEDs. The example sleeps otherwise.
+      9          //!
+     10          //! SWO is configured in 1M baud, 8-n-1 mode.
+     11          //
+     12          //*****************************************************************************
+     13          
+     14          //*****************************************************************************
+     15          //
+     16          // Copyright (c) 2018, Ambiq Micro
+     17          // All rights reserved.
+     18          // 
+     19          // Redistribution and use in source and binary forms, with or without
+     20          // modification, are permitted provided that the following conditions are met:
+     21          // 
+     22          // 1. Redistributions of source code must retain the above copyright notice,
+     23          // this list of conditions and the following disclaimer.
+     24          // 
+     25          // 2. Redistributions in binary form must reproduce the above copyright
+     26          // notice, this list of conditions and the following disclaimer in the
+     27          // documentation and/or other materials provided with the distribution.
+     28          // 
+     29          // 3. Neither the name of the copyright holder nor the names of its
+     30          // contributors may be used to endorse or promote products derived from this
+     31          // software without specific prior written permission.
+     32          // 
+     33          // Third party software included in this distribution is subject to the
+     34          // additional license terms as defined in the /docs/licenses directory.
+     35          // 
+     36          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     37          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     38          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     39          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     40          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     41          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     42          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     43          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     44          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     45          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     46          // POSSIBILITY OF SUCH DAMAGE.
+     47          //
+     48          // This is part of revision 1.2.12 of the AmbiqSuite Development Package.
+     49          //
+     50          //*****************************************************************************
+     51          
+     52          #include "am_mcu_apollo.h"
+     53          #include "am_bsp.h"
+     54          #include "am_util.h"
+     55          
+     56          volatile uint32_t g_ui32TimerCount = 0;
+     57          
+     58          //*****************************************************************************
+     59          //
+     60          // Timer configuration.
+     61          //
+     62          //*****************************************************************************
+     63          am_hal_ctimer_config_t g_sTimer0 =
+     64          {
+     65              // Don't link timers.
+     66              0,
+     67          
+     68              // Set up Timer0A.
+     69              (AM_HAL_CTIMER_FN_REPEAT |
+     70               AM_HAL_CTIMER_INT_ENABLE    |
+     71               AM_HAL_CTIMER_LFRC_32HZ),
+     72          
+     73              // No configuration for Timer0B.
+     74              0,
+     75          };
+     76          
+     77          //*****************************************************************************
+     78          //
+     79          // Function to initialize Timer A0 to interrupt every 1/4 second.
+     80          //
+     81          //*****************************************************************************
+     82          void
+     83          timerA0_init(void)
+     84          {
+     85              uint32_t ui32Period;
+     86          
+     87              //
+     88              // Enable the LFRC.
+     89              //
+     90              am_hal_clkgen_osc_start(AM_HAL_CLKGEN_OSC_LFRC);
+     91          
+     92              //
+     93              // Set up timer A0.
+     94              //
+     95              am_hal_ctimer_clear(0, AM_HAL_CTIMER_TIMERA);
+     96              am_hal_ctimer_config(0, &g_sTimer0);
+     97          
+     98              //
+     99              // Set up timerA0 to 32Hz from LFRC divided to 1 second period.
+    100              //
+    101              ui32Period = 8;
+    102              am_hal_ctimer_period_set(0, AM_HAL_CTIMER_TIMERA, ui32Period,
+    103                                       (ui32Period >> 1));
+    104          
+    105              //
+    106              // Clear the timer Interrupt
+    107              //
+    108              am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0);
+    109          }
+    110          
+    111          //*****************************************************************************
+    112          //
+    113          // Timer Interrupt Service Routine (ISR)
+    114          //
+    115          //*****************************************************************************
+    116          void
+    117          am_ctimer_isr(void)
+    118          {
+    119              //
+    120              // Increment count and set limit based on the number of LEDs available.
+    121              //
+    122              if (++g_ui32TimerCount >= (1 << AM_BSP_NUM_LEDS))
+    123              {
+    124                  //
+    125                  // Reset the global.
+    126                  //
+    127                  g_ui32TimerCount = 0;
+    128              }
+    129              //
+    130              // Clear TimerA0 Interrupt (write to clear).
+    131              //
+    132              am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0);
+    133          
+    134          }
+    135          
+    136          //*****************************************************************************
+    137          //
+    138          // Main function.
+    139          //
+    140          //*****************************************************************************
+    141          int
+    142          main(void)
+    143          {
+    144              //
+    145              // Set the clock frequency.
+    146              //
+    147              am_hal_clkgen_sysclk_select(AM_HAL_CLKGEN_SYSCLK_MAX);
+    148          
+    149              //
+    150              // Set the default cache configuration
+    151              //
+    152              am_hal_cachectrl_enable(&am_hal_cachectrl_defaults);
+    153          
+    154              //
+    155              // Configure the board for low power operation.
+    156              //
+    157              am_bsp_low_power_init();
+    158          
+    159              //
+    160              // Initialize the printf interface for ITM/SWO output.
+    161              //
+    162              am_util_stdio_printf_init((am_util_stdio_print_char_t) am_bsp_itm_string_print);
+    163          
+    164              //
+    165              // Initialize the SWO GPIO pin
+    166              //
+    167              am_bsp_pin_enable(ITM_SWO);
+    168              am_devices_led_array_init(am_bsp_psLEDs, AM_BSP_NUM_LEDS);
+    169          
+    170              //
+    171              // Enable the ITM.
+    172              //
+    173              am_hal_itm_enable();
+    174          
+    175              //
+    176              // Enable debug printf messages using ITM on SWO pin
+    177              //
+    178              am_bsp_debug_printf_enable();
+    179          
+    180              //
+    181              // Clear the terminal and print the banner.
+    182              //
+    183              am_util_stdio_terminal_clear();
+    184              am_util_stdio_printf("Binary Counter Example\n");
+    185          
+    186              //
+    187              // TimerA0 init.
+    188              //
+    189              timerA0_init();
+    190          
+    191              //
+    192              // Enable the timer Interrupt.
+    193              //
+    194              am_hal_ctimer_int_enable(AM_HAL_CTIMER_INT_TIMERA0);
+    195          
+    196              //
+    197              // Enable the timer interrupt in the NVIC.
+    198              //
+    199              am_hal_interrupt_enable(AM_HAL_INTERRUPT_CTIMER);
+    200              am_hal_interrupt_master_enable();
+    201          
+    202              //
+    203              // Start timer A0
+    204              //
+    205              am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
+    206          
+    207              //
+    208              // We are done printing. Disable debug printf messages on ITM.
+    209              //
+    210              am_bsp_debug_printf_disable();
+    211          
+    212              //
+    213              // Loop forever.
+    214              //
+    215              while (1)
+    216              {
+    217                  //
+    218                  // Go to Deep Sleep.
+    219                  //
+    220                  am_hal_sysctrl_sleep(AM_HAL_SYSCTRL_SLEEP_DEEP);
+    221          
+    222                  //
+    223                  // Set the LEDs.
+    224                  //
+    225                  am_devices_led_array_out(am_bsp_psLEDs, AM_BSP_NUM_LEDS,
+    226                                   g_ui32TimerCount);
+    227              }
+    228          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   am_ctimer_isr
+         8   -> am_hal_ctimer_int_clear
+      16   main
+        16   -> am_bsp_debug_printf_disable
+        16   -> am_bsp_debug_printf_enable
+        16   -> am_bsp_low_power_init
+        16   -> am_devices_led_array_init
+        16   -> am_devices_led_array_out
+        16   -> am_hal_cachectrl_enable
+        16   -> am_hal_clkgen_sysclk_select
+        16   -> am_hal_ctimer_int_enable
+        16   -> am_hal_ctimer_start
+        16   -> am_hal_interrupt_enable
+        16   -> am_hal_interrupt_master_disable
+        16   -> am_hal_interrupt_master_enable
+        16   -> am_hal_interrupt_master_set
+        16   -> am_hal_itm_enable
+        16   -> am_hal_sysctrl_sleep
+        16   -> am_util_stdio_printf
+        16   -> am_util_stdio_printf_init
+        16   -> am_util_stdio_terminal_clear
+        16   -> timerA0_init
+      16   timerA0_init
+        16   -> am_hal_clkgen_osc_start
+        16   -> am_hal_ctimer_clear
+        16   -> am_hal_ctimer_config
+        16   -> am_hal_ctimer_int_clear
+        16   -> am_hal_ctimer_period_set
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       4  ??DataTable2_2
+       4  ??DataTable2_3
+       4  ??DataTable2_4
+       4  ??DataTable2_5
+       4  ??DataTable2_6
+       4  ??DataTable2_7
+       4  ??DataTable2_8
+       4  ??DataTable2_9
+      24  ?_0
+      26  am_ctimer_isr
+      12  g_sTimer0
+       4  g_ui32TimerCount
+     162  main
+      52  timerA0_init
+
+ 
+   4 bytes in section .bss
+  12 bytes in section .data
+  24 bytes in section .rodata
+ 280 bytes in section .text
+ 
+ 280 bytes of CODE  memory
+  24 bytes of CONST memory
+  16 bytes of DATA  memory
+
+Errors: none
+Warnings: none

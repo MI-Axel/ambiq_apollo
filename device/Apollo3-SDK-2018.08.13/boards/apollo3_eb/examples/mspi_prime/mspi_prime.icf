@@ -1,0 +1,96 @@
+//*****************************************************************************
+//
+// mspi_prime.icf
+//
+// IAR linker Configuration File
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+// ${copyright}
+//
+// This is part of revision ${version} of the AmbiqSuite Development Package.
+//
+//*****************************************************************************
+
+//
+// Define a memory section that covers the entire 4 GB addressable space of the
+// processor. (32-bit can address up to 4GB)
+//
+define memory mem with size = 4G;
+
+//
+// Define a region for the flash.
+//
+define region FLASH = mem:[from 0x00000000 to 0x00007fff];
+
+//
+// Define a region for the external flash accessed by the MSPI/XIP interface.
+//
+define region EXTFLASH = mem:[from 0x04000000 to 0x04010000];
+
+//
+// Define a region for the SRAM.
+//
+define region SRAM = mem:[from 0x10000000 to 0x10060000];
+
+//
+// Define a block for the heap.
+//
+define block HEAP with alignment = 0x8, size = 0x00000000 { };
+
+//
+// Define a block for the stack.
+//
+define block CSTACK with alignment = 0x8, size = 1024 { };
+
+//
+// Define a block for the Interrupt Vectors and Patchable Region.
+//
+define block FLASHBASE with fixed order
+{
+ readonly section .intvec,
+ readonly section .patch
+};
+
+//
+// Define a block for the external functions.
+//
+define block PRIME_CORE with fixed order
+{
+ readonly section .text object prime.o,
+// readonly section .rodata object prime.o
+};
+
+//
+// Read/Write values should be initialized by copying from flash.
+//
+initialize by copy { readwrite };
+
+//
+// Indicate that the noinit values should be left alone.
+//
+do not initialize { section .noinit };
+
+//
+// Place the interrupt vectors and patchable section at the start of flash.
+//
+place at start of FLASH { block FLASHBASE };
+
+place in EXTFLASH { block PRIME_CORE };
+
+//
+// Place the remainder of the read-only items into flash.
+//
+place in FLASH { readonly };
+
+//
+// Place the stack at the start of SRAM.
+//
+place at start of SRAM { block CSTACK, section .noinit };
+
+//
+// Place all read/write items into SRAM.
+//
+place in SRAM { block HEAP, readwrite };
