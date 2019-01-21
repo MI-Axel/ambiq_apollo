@@ -80,6 +80,34 @@ all clean:
 	$(info Tools $(TOOLCHAIN)-$(COMPILERNAME) not installed.)
 	$(RM) -rf bin
 else
+#################### OPUS PART #######################
+
+# Uncomment this for fixed-point build
+FIXED_POINT=1
+
+# It is strongly recommended to uncomment one of these
+# VAR_ARRAYS: Use C99 variable-length arrays for stack allocation
+# USE_ALLOCA: Use alloca() for stack allocation
+# If none is defined, then the fallback is a non-threadsafe global array
+#EXTRA_CFLAGS := -DUSE_ALLOCA $(EXTRA_CFLAGS)
+EXTRA_CFLAGS := -DVAR_ARRAYS $(EXTRA_CFLAGS)
+
+# These options affect performance
+# HAVE_LRINTF: Use C99 intrinsics to speed up float-to-int conversion
+EXTRA_CFLAGS := -DHAVE_LRINTF $(EXTRA_CFLAGS)
+
+include silk_sources.mk
+include celt_sources.mk
+include opus_sources.mk
+
+ifdef FIXED_POINT
+SILK_SOURCES += $(SILK_SOURCES_FIXED)
+else
+SILK_SOURCES += $(SILK_SOURCES_FLOAT)
+OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
+endif
+
+###################### END OF OPUS PART ######################
 
 DEFINES = -DPART_$(PART)
 DEFINES += -DAM_PACKAGE_BGA
@@ -111,6 +139,8 @@ VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
 VPATH +=:${AM_SoftwareRoot}/mcu/apollo3/hal
 VPATH +=:../src
+
+# OPUS FOLDERS
 VPATH +=:${AM_OpusRoot}/src
 VPATH +=:${AM_OpusRoot}/silk
 VPATH +=:${AM_OpusRoot}/celt
@@ -118,14 +148,14 @@ VPATH +=:${AM_OpusRoot}/silk/arm
 VPATH +=:${AM_OpusRoot}/celt/arm
 VPATH +=:${AM_OpusRoot}/silk/fixed
 
-
-OPUS_FILE = $(wildcard ${AM_OpusRoot}/src/*.c)
-OPUS_FILE += $(wildcard ${AM_OpusRoot}/celt/*.c)
-OPUS_FILE += $(wildcard ${AM_OpusRoot}/celt/arm/*.c)
-OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/*.c)
-OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/arm/*.c)
-OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/fixed/*.c)
-OPUS_SRC = $(notdir ${OPUS_FILE})
+# OPUS SOURCE FILES
+#OPUS_FILE = $(wildcard ${AM_OpusRoot}/src/*.c)
+#OPUS_FILE += $(wildcard ${AM_OpusRoot}/celt/*.c)
+#OPUS_FILE += $(wildcard ${AM_OpusRoot}/celt/arm/*.c)
+#OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/*.c)
+#OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/arm/*.c)
+#OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/fixed/*.c)
+OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
 
 
 SRC = main.c
@@ -158,7 +188,7 @@ INCS += ${AM_SoftwareRoot}/mcu/apollo3/hal/am_hal_pin.h
 CFLAGS = -mthumb -mcpu=$(CPU) -mfpu=$(FPU) -mfloat-abi=$(FABI)
 CFLAGS+= -ffunction-sections -fdata-sections
 CFLAGS+= -MMD -MP -std=c99 -Wall -g
-CFLAGS+= -O0
+CFLAGS+= -O4
 CFLAGS+= $(DEFINES)
 CFLAGS+= $(INCLUDES)
 CFLAGS+= -Dgcc
@@ -167,7 +197,8 @@ LFLAGS = -mthumb -mcpu=$(CPU) -mfpu=$(FPU) -mfloat-abi=$(FABI)
 LFLAGS+= -nostartfiles -static
 LFLAGS+= -Wl,--gc-sections,--entry,Reset_Handler,-Map,$(CONFIG)/$(TARGET).map
 LFLAGS+= -Wl,--start-group -lm -lc -lgcc -Wl,--end-group
-LFLAGS+= 
+# use libnosys.a to realize malloc, free, etc. 
+LFLAGS+= -specs=nosys.specs
 
 # Additional user specified CFLAGS
 CFLAGS+=$(EXTRA_CFLAGS)
@@ -211,7 +242,7 @@ clean:
 $(CONFIG)/%.d: ;
 
 debug:
-	@echo "Opus source file: ${OPUS_SRC}"
+	@echo "Opus configs: ${EXTRA_CFLAGS}"
 
 # Automatically include any generated dependencies
 -include $(DEPS)

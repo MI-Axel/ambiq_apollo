@@ -12,7 +12,7 @@
 
 /* Do not build the float API */
 /* #undef DISABLE_FLOAT_API */
-
+#define DISABLE_FLOAT_API 1
 /* Disable bitstream fixes from RFC 8251 */
 /* #undef DISABLE_UPDATE_DRAFT */
 
@@ -27,7 +27,7 @@
 
 /* Compile as fixed-point (for machines without a fast enough FPU) */
 /* #undef FIXED_POINT */
-#define FIXED_POINT     1
+#define FIXED_POINT 1
 
 /* Float approximations */
 /* #undef FLOAT_APPROX */
@@ -42,31 +42,31 @@
 /* #undef HAVE_ARM_NE10 */
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#define HAVE_DLFCN_H 1
+//#define HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
-#define HAVE_INTTYPES_H 1
+//#define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have the `lrint' function. */
-#define HAVE_LRINT 1
+//#define HAVE_LRINT 1
 
 /* Define to 1 if you have the `lrintf' function. */
-#define HAVE_LRINTF 1
+//#define HAVE_LRINTF 1
 
 /* Define to 1 if you have the <memory.h> header file. */
-#define HAVE_MEMORY_H 1
+//#define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
-#define HAVE_STDINT_H 1
+//#define HAVE_STDINT_H 1
 
 /* Define to 1 if you have the <stdlib.h> header file. */
-#define HAVE_STDLIB_H 1
+//#define HAVE_STDLIB_H 1
 
 /* Define to 1 if you have the <strings.h> header file. */
-#define HAVE_STRINGS_H 1
+//#define HAVE_STRINGS_H 1
 
 /* Define to 1 if you have the <string.h> header file. */
-#define HAVE_STRING_H 1
+//#define HAVE_STRING_H 1
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 //#define HAVE_SYS_STAT_H 1
@@ -75,13 +75,13 @@
 //#define HAVE_SYS_TYPES_H 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
-#define HAVE_UNISTD_H 1
+//#define HAVE_UNISTD_H 1
 
 /* Define to 1 if you have the `__malloc_hook' function. */
 /* #undef HAVE___MALLOC_HOOK */
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
-#define LT_OBJDIR ".libs/"
+//#define LT_OBJDIR ".libs/"
 
 /* Make use of ARM asm optimization */
 /* #undef OPUS_ARM_ASM */

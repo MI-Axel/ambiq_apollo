@@ -14,7 +14,7 @@
 //*****************************************************************************
 
 #define FRAME_SIZE 320  // Capture one 320-sample (20-ms) frame at a time
-#define NUM_FRAMES 250   // Number of frames in 1 second
+#define NUM_FRAMES 50   // Number of frames in 1 second
 
 
 //*****************************************************************************

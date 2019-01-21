@@ -85,6 +85,9 @@ bin/main.o: ../src/main.c \
  ../../../device/Apollo3-SDK-2018.08.13/utils/am_util_string.h \
  ../../../device/Apollo3-SDK-2018.08.13/utils/am_util_time.h \
  ../include/board_setup.h ../include/audio_driver.h \
+ ../../../tools/opus/opus-1.3/include/opus.h \
+ ../../../tools/opus/opus-1.3/include/opus_types.h \
+ ../../../tools/opus/opus-1.3/include/opus_defines.h \
  ../../../device/Apollo3-SDK-2018.08.13/CMSIS/ARM/Include/arm_math.h \
  ../../../device/Apollo3-SDK-2018.08.13/CMSIS/ARM/Include/core_cm4.h
 
@@ -261,6 +264,12 @@ bin/main.o: ../src/main.c \
 ../include/board_setup.h:
 
 ../include/audio_driver.h:
+
+../../../tools/opus/opus-1.3/include/opus.h:
+
+../../../tools/opus/opus-1.3/include/opus_types.h:
+
+../../../tools/opus/opus-1.3/include/opus_defines.h:
 
 ../../../device/Apollo3-SDK-2018.08.13/CMSIS/ARM/Include/arm_math.h:
 

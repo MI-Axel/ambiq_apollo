@@ -6,6 +6,8 @@
 
 ENTRY(Reset_Handler)
 
+_heap_size = 0;    /* required amount of heap  */
+
 MEMORY
 {
     FLASH (rx) : ORIGIN = 0x0000C000, LENGTH = 960K
@@ -59,7 +61,14 @@ SECTIONS
         . = ALIGN(4);
         _ebss = .;
     } > SRAM
-
+    PROVIDE ( end = _ebss );
+    .heap :
+    {
+        . = ALIGN(4);
+/*        *(.heap*)*/
+        . = . + _heap_size;
+        . = ALIGN(4);
+    } >SRAM
   .ARM.attributes 0 : { *(.ARM.attributes) }
 }
 

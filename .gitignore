@@ -3,6 +3,7 @@
 #./AmbiqSuite-KWD/boards/apollo2_blue_evb/examples/key_word_detection/iar/Debug/:
 tags
 *.o
+*.d
 *.pbi
 *.xcl
 *.pbi.xcl
@@ -23,3 +24,4 @@ tags
 *.csv
 *.orig
 key_word_detection_ota.dep
+*.DS_Store
