@@ -1,6 +1,5 @@
-#./AmbiqSuite-Rel1.2.12/boards/apollo2_blue_evb/examples/key_word_detection/iar/bin/
-#./AmbiqSuite-KWD/boards/apollo2_blue_evb/examples/key_word_detection/iar/settings/:
-#./AmbiqSuite-KWD/boards/apollo2_blue_evb/examples/key_word_detection/iar/Debug/:
+.\app\audio_experiment_ap3\iar\Debug\:
+.\app\audio_experiment_ap3\iar\settings\:
 tags
 *.o
 *.d
