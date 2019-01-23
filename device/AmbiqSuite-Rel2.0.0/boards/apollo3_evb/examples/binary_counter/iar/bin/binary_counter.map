@@ -1,0 +1,437 @@
+###############################################################################
+#
+# IAR ELF Linker V8.32.2.178/W32 for ARM                  23/Jan/2019  19:34:56
+# Copyright 2007-2018 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\binary_counter.out
+#    Map file     =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\binary_counter.map
+#    Command line =  
+#        -f C:\temp\EW1373.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\am_devices_led.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\am_util_delay.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\am_util_faultisr.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\am_util_stdio.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\binary_counter.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\startup_iar.o
+#        --no_out_extension -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\binary_counter.out
+#        --map
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\binary_counter.map
+#        --log libraries,initialization,modules,redirects,sections --log_file
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin\binary_counter.log
+#        --config
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\binary_counter.icf
+#        --semihosting
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\..\..\..\bsp\iar\bin\libam_bsp.a
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\..\..\..\..\..\mcu\apollo3\hal\iar\bin\libam_hal.a
+#        --entry __iar_program_start --no_vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because no calls to memory allocation
+functions were found in the application outside of system library
+functions, and there are calls to deallocation functions in the
+application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+define block FLASHBASE
+   with fixed order { ro section .intvec, ro section .patch };
+"A0":  place at start of [from 0xc000 to 0xf'c000] { block FLASHBASE };
+"P1":  place in [from 0xc000 to 0xf'c000] { ro };
+define block CSTACK with size = 1K, alignment = 8 { };
+"A1":  place at start of [from 0x1000'0000 to 0x1006'0000] {
+          block CSTACK, section .noinit };
+define block HEAP with size = 0M, alignment = 8 { };
+"P2":  place in [from 0x1000'0000 to 0x1006'0000] { block HEAP, rw };
+do not initialize { section .noinit };
+initialize by copy { rw };
+
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                       0x100
+  FLASHBASE                        0xc000   0x100  <Block>
+    .intvec          const         0xc000    0xc0  startup_iar.o [1]
+    .patch           const         0xc0c0    0x40  startup_iar.o [1]
+                                 - 0xc100   0x100
+
+"P1":                                      0x2a75
+  .text              ro code       0xc100   0x9f4  am_hal_uart.o [4]
+  .text              ro code       0xcaf4   0x13c  am_hal_pwrctrl.o [4]
+  .text              ro code       0xcc30    0x20  am_hal_interrupt.o [4]
+  .text              ro code       0xcc50   0x1b8  am_hal_queue.o [4]
+  .text              ro code       0xce08    0x4c  am_hal_flash.o [4]
+  .text              ro code       0xce54   0x8a8  am_util_stdio.o [1]
+  .text              ro code       0xd6fc    0x68  DblToFlt.o [5]
+  .text              ro code       0xd764   0x2e0  am_hal_gpio.o [4]
+  .text              ro code       0xda44   0x2a8  am_bsp.o [3]
+  .text              ro code       0xdcec   0x10a  am_hal_itm.o [4]
+  .text              ro code       0xddf6    0x3a  zero_init3.o [6]
+  .text              ro code       0xde30    0x34  am_hal_rtc.o [4]
+  .text              ro code       0xde64    0xf0  am_hal_clkgen.o [4]
+  .text              ro code       0xdf54    0x90  am_hal_tpiu.o [4]
+  .text              ro code       0xdfe4   0x198  am_hal_ctimer.o [4]
+  .rodata            const         0xe17c   0x164  am_hal_gpio.o [4]
+  .text              ro code       0xe2e0   0x140  am_hal_mcuctrl.o [4]
+  .text              ro code       0xe420   0x13c  am_devices_led.o [1]
+  .text              ro code       0xe55c   0x124  binary_counter.o [1]
+  .text              ro code       0xe680    0x60  am_hal_cachectrl.o [4]
+  .text              ro code       0xe6e0    0x5c  am_hal_sysctrl.o [4]
+  .text              ro code       0xe73c    0xd8  am_util_faultisr.o [1]
+  .text              ro code       0xe814     0x6  ABImemclr4.o [6]
+  .rodata            const         0xe81a     0x2  binary_counter.o [1]
+  .text              ro code       0xe81c    0x32  ABImemset48.o [6]
+  .text              ro code       0xe84e     0x2  startup_iar.o [1]
+  .rodata            const         0xe850    0xb4  am_hal_pwrctrl.o [4]
+  .rodata            const         0xe904    0x80  am_hal_mcuctrl.o [4]
+  .text              ro code       0xe984    0x38  packbits_init_single.o [6]
+  .rodata            const         0xe9bc    0x28  am_bsp.o [3]
+  .text              ro code       0xe9e4    0x28  data_init.o [6]
+  .text              ro code       0xea0c    0x22  fpinit_M.o [5]
+  .iar.init_table    const         0xea30    0x20  - Linker created -
+  .rodata            const         0xea50    0x20  binary_counter.o [1]
+  .text              ro code       0xea70    0x1e  startup_iar.o [1]
+  .text              ro code       0xea8e     0xc  cstartup_M.o [6]
+  .text              ro code       0xea9c    0x1e  cmain.o [6]
+  .text              ro code       0xeaba     0x4  exit.o [2]
+  .text              ro code       0xeac0     0xa  cexit.o [6]
+  .text              ro code       0xeacc    0x14  exit.o [7]
+  .rodata            const         0xeae0    0x18  binary_counter.o [1]
+  .rodata            const         0xeaf8    0x14  am_util_stdio.o [1]
+  .rodata            const         0xeb0c     0xc  am_bsp_pins.o [3]
+  .rodata            const         0xeb18     0x8  am_hal_gpio.o [4]
+  .rodata            const         0xeb20     0x4  binary_counter.o [1]
+  .rodata            const         0xeb24     0x4  am_hal_cachectrl.o [4]
+  .rodata            const         0xeb28     0x0  zero_init3.o [6]
+  .rodata            const         0xeb28     0x0  packbits_init_single.o [6]
+  Initializer bytes  const         0xeb28    0x4d  <for P2-1>
+                                 - 0xeb75  0x2a75
+
+"A1":                                      0x1000
+  .noinit            uninit   0x1000'0000  0x1000  startup_iar.o [1]
+                            - 0x1000'1000  0x1000
+
+"P2", part 1 of 2:                           0x74
+  P2-1                        0x1000'1000    0x74  <Init block>
+    .data            inited   0x1000'1000     0xc  binary_counter.o [1]
+    .data            inited   0x1000'100c    0x28  am_bsp.o [3]
+    .data            inited   0x1000'1034    0x30  am_bsp.o [3]
+    .data            inited   0x1000'1064    0x10  am_hal_ctimer.o [4]
+                            - 0x1000'1074    0x74
+
+"P2", part 2 of 2:                          0x9dc
+  .bss               zero     0x1000'1074   0x400  am_bsp.o [3]
+  .bss               zero     0x1000'1474   0x400  am_bsp.o [3]
+  .bss               zero     0x1000'1874   0x100  am_util_stdio.o [1]
+  .bss               zero     0x1000'1974    0xc8  am_hal_uart.o [4]
+  .bss               zero     0x1000'1a3c     0x4  am_util_stdio.o [1]
+  .bss               zero     0x1000'1a40     0x4  binary_counter.o [1]
+  .bss               zero     0x1000'1a44     0x4  am_hal_sysctrl.o [4]
+  .bss               zero     0x1000'1a48     0x4  am_hal_reset.o [4]
+  .bss               zero     0x1000'1a4c     0x1  am_util_stdio.o [1]
+                            - 0x1000'1a4d   0x9d9
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+       0xeb75     0xf'c000  0xe'd48c
+  0x1000'1a50  0x1006'0000  0x5'e5b1
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x9d9:
+          0x1000'1074  0x9d9
+
+Copy/packbits (__iar_packbits_init_single3)
+    1 source range, total size 0x4d (66% of destination):
+               0xeb28   0x4d
+    1 destination range, total size 0x74:
+          0x1000'1000   0x74
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+command line/config:
+    -------------------------------------------------
+    Total:
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin: [1]
+    am_devices_led.o            316
+    am_util_faultisr.o          216
+    am_util_stdio.o           2 216       20      261
+    binary_counter.o            292       69       16
+    startup_iar.o                32      256    4 096
+    -------------------------------------------------
+    Total:                    3 072      345    4 373
+
+dl7M_tln.a: [2]
+    exit.o                        4
+    -------------------------------------------------
+    Total:                        4
+
+libam_bsp.a: [3]
+    am_bsp.o                    680       99    2 136
+    am_bsp_pins.o                         12
+    -------------------------------------------------
+    Total:                      680      111    2 136
+
+libam_hal.a: [4]
+    am_hal_cachectrl.o           96        4
+    am_hal_clkgen.o             240
+    am_hal_ctimer.o             408       11       16
+    am_hal_flash.o               76
+    am_hal_gpio.o               736      364
+    am_hal_interrupt.o           32
+    am_hal_itm.o                266
+    am_hal_mcuctrl.o            320      128
+    am_hal_pwrctrl.o            316      180
+    am_hal_queue.o              440
+    am_hal_reset.o                                  4
+    am_hal_rtc.o                 52
+    am_hal_sysctrl.o             92                 4
+    am_hal_tpiu.o               144
+    am_hal_uart.o             2 548               200
+    -------------------------------------------------
+    Total:                    5 766      687      224
+
+m7M_tls.a: [5]
+    DblToFlt.o                  104
+    fpinit_M.o                   34
+    -------------------------------------------------
+    Total:                      138
+
+rt7M_tl.a: [6]
+    ABImemclr4.o                  6
+    ABImemset48.o                50
+    cexit.o                      10
+    cmain.o                      30
+    cstartup_M.o                 12
+    data_init.o                  40
+    packbits_init_single.o       56
+    zero_init3.o                 58
+    -------------------------------------------------
+    Total:                      262
+
+shb_l.a: [7]
+    exit.o                       20
+    -------------------------------------------------
+    Total:                       20
+
+    Gaps                          6        2
+    Linker created                        32
+-----------------------------------------------------
+    Grand Total:              9 948    1 177    6 733
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address    Size  Type      Object
+-----                       -------    ----  ----      ------
+.iar.init_table$$Base        0xea30           --   Gb  - Linker created -
+.iar.init_table$$Limit       0xea50           --   Gb  - Linker created -
+?main                        0xea9d          Code  Gb  cmain.o [6]
+FLASHBASE$$Base              0xc000           --   Gb  - Linker created -
+FLASHBASE$$Limit             0xc100           --   Gb  - Linker created -
+HardFault_Handler            0xe73d    0x1c  Code  Gb  am_util_faultisr.o [1]
+Region$$Table$$Base          0xea30           --   Gb  - Linker created -
+Region$$Table$$Limit         0xea50           --   Gb  - Linker created -
+Reset_Handler                0xea85     0x6  Code  Gb  startup_iar.o [1]
+__NVIC_EnableIRQ             0xe55d    0x1e  Code  Lc  binary_counter.o [1]
+__Patchable                  0xc0c0    0x40  Data  Gb  startup_iar.o [1]
+__aeabi_d2f                  0xd6fd          Code  Gb  DblToFlt.o [5]
+__aeabi_memclr4              0xe815          Code  Gb  ABImemclr4.o [6]
+__cmain                      0xea9d          Code  Gb  cmain.o [6]
+__exit                       0xeacd    0x14  Code  Gb  exit.o [7]
+__iar_Memset4_word           0xe81d          Code  Gb  ABImemset48.o [6]
+__iar_Memset8_word           0xe81d          Code  Gb  ABImemset48.o [6]
+__iar_data_init3             0xe9e5    0x28  Code  Gb  data_init.o [6]
+__iar_init_vfp               0xea0d          Code  Gb  fpinit_M.o [5]
+__iar_packbits_init_single3
+                             0xe985    0x38  Code  Gb  packbits_init_single.o [6]
+__iar_program_start          0xea8f          Code  Gb  cstartup_M.o [6]
+__iar_zero_init3             0xddf7    0x3a  Code  Gb  zero_init3.o [6]
+__low_level_init             0xea71     0xa  Code  Gb  startup_iar.o [1]
+__vector_table               0xc000    0xc0  Data  Gb  startup_iar.o [1]
+_call_main                   0xeaa9          Code  Gb  cmain.o [6]
+_exit                        0xeac1          Code  Gb  cexit.o [6]
+_main                        0xeab7          Code  Gb  cmain.o [6]
+am_bsp_debug_printf_disable
+                             0xdbc7    0x5a  Code  Gb  am_bsp.o [3]
+am_bsp_debug_printf_enable
+                             0xdb01    0xc6  Code  Gb  am_bsp.o [3]
+am_bsp_itm_printf_enable
+                             0xdc21    0x34  Code  Gb  am_bsp.o [3]
+am_bsp_low_power_init        0xda45    0xbc  Code  Gb  am_bsp.o [3]
+am_bsp_psLEDs           0x1000'100c    0x28  Data  Gb  am_bsp.o [3]
+am_bsp_uart_string_print
+                             0xdc55    0x56  Code  Gb  am_bsp.o [3]
+am_ctimer_isr                0xe5b1    0x1c  Code  Gb  binary_counter.o [1]
+am_default_isr               0xea8b     0x2  Code  Lc  startup_iar.o [1]
+am_devices_led_array_init
+                             0xe481    0x24  Code  Gb  am_devices_led.o [1]
+am_devices_led_array_out
+                             0xe52f    0x2e  Code  Gb  am_devices_led.o [1]
+am_devices_led_init          0xe421    0x56  Code  Gb  am_devices_led.o [1]
+am_devices_led_off           0xe4e7    0x48  Code  Gb  am_devices_led.o [1]
+am_devices_led_on            0xe4a5    0x42  Code  Gb  am_devices_led.o [1]
+am_hal_cachectrl_config
+                             0xe681    0x4e  Code  Gb  am_hal_cachectrl.o [4]
+am_hal_cachectrl_defaults
+                             0xeb24     0x4  Data  Gb  am_hal_cachectrl.o [4]
+am_hal_cachectrl_enable
+                             0xe6cf     0xe  Code  Gb  am_hal_cachectrl.o [4]
+am_hal_clkgen_control        0xde65    0xaa  Code  Gb  am_hal_clkgen.o [4]
+am_hal_clkgen_status_get
+                             0xdf0f    0x28  Code  Gb  am_hal_clkgen.o [4]
+am_hal_ctimer_clear          0xe091    0x2a  Code  Gb  am_hal_ctimer.o [4]
+am_hal_ctimer_config         0xdfe5    0x5a  Code  Gb  am_hal_ctimer.o [4]
+am_hal_ctimer_int_clear
+                             0xe145    0x1c  Code  Gb  am_hal_ctimer.o [4]
+am_hal_ctimer_int_enable
+                             0xe125    0x20  Code  Gb  am_hal_ctimer.o [4]
+am_hal_ctimer_period_set
+                             0xe0bb    0x6a  Code  Gb  am_hal_ctimer.o [4]
+am_hal_ctimer_start          0xe03f    0x52  Code  Gb  am_hal_ctimer.o [4]
+am_hal_flash_delay           0xce09     0x6  Code  Gb  am_hal_flash.o [4]
+am_hal_flash_delay_status_check
+                             0xce0f    0x40  Code  Gb  am_hal_flash.o [4]
+am_hal_gpio_pinconfig        0xd765   0x21e  Code  Gb  am_hal_gpio.o [4]
+am_hal_gpio_state_write
+                             0xd985    0x7c  Code  Gb  am_hal_gpio.o [4]
+am_hal_interrupt_master_disable
+                             0xcc3d     0xa  Code  Gb  am_hal_interrupt.o [4]
+am_hal_interrupt_master_enable
+                             0xcc31     0xa  Code  Gb  am_hal_interrupt.o [4]
+am_hal_interrupt_master_set
+                             0xcc49     0x8  Code  Gb  am_hal_interrupt.o [4]
+am_hal_itm_disable           0xdd19    0x86  Code  Gb  am_hal_itm.o [4]
+am_hal_itm_enable            0xdced    0x2a  Code  Gb  am_hal_itm.o [4]
+am_hal_itm_print             0xddb9    0x3e  Code  Gb  am_hal_itm.o [4]
+am_hal_mcuctrl_info_get
+                             0xe2e1   0x134  Code  Gb  am_hal_mcuctrl.o [4]
+am_hal_pwrctrl_low_power_init
+                             0xcb8d    0x88  Code  Gb  am_hal_pwrctrl.o [4]
+am_hal_pwrctrl_periph_disable
+                             0xcb3f    0x4c  Code  Gb  am_hal_pwrctrl.o [4]
+am_hal_pwrctrl_periph_enable
+                             0xcaf5    0x4a  Code  Gb  am_hal_pwrctrl.o [4]
+am_hal_pwrctrl_peripheral_control
+                             0xe850    0xb4  Data  Gb  am_hal_pwrctrl.o [4]
+am_hal_queue_init            0xcc51    0x14  Code  Gb  am_hal_queue.o [4]
+am_hal_queue_item_add        0xcc65    0xd4  Code  Gb  am_hal_queue.o [4]
+am_hal_queue_item_get        0xcd39    0xd0  Code  Gb  am_hal_queue.o [4]
+am_hal_rtc_osc_disable       0xde4d     0xe  Code  Gb  am_hal_rtc.o [4]
+am_hal_rtc_osc_select        0xde31    0x1c  Code  Gb  am_hal_rtc.o [4]
+am_hal_sysctrl_sleep         0xe6e1    0x4a  Code  Gb  am_hal_sysctrl.o [4]
+am_hal_tpiu_enable           0xdf55    0x80  Code  Gb  am_hal_tpiu.o [4]
+am_hal_uart_configure        0xc249   0x1ea  Code  Gb  am_hal_uart.o [4]
+am_hal_uart_deinitialize
+                             0xc143    0x24  Code  Gb  am_hal_uart.o [4]
+am_hal_uart_initialize       0xc101    0x42  Code  Gb  am_hal_uart.o [4]
+am_hal_uart_power_control
+                             0xc167    0xe2  Code  Gb  am_hal_uart.o [4]
+am_hal_uart_transfer         0xc435   0x63a  Code  Gb  am_hal_uart.o [4]
+am_hal_uart_tx_flush         0xca71    0x5a  Code  Gb  am_hal_uart.o [4]
+am_util_faultisr_collect_data
+                             0xe763    0xa8  Code  Gb  am_util_faultisr.o [1]
+am_util_stdio_printf         0xd69d    0x36  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_printf_init
+                             0xce55     0x8  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_terminal_clear
+                             0xd6d3     0xa  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_vsprintf       0xd27b   0x422  Code  Gb  am_util_stdio.o [1]
+decstr_to_int                0xcf8d    0x48  Code  Lc  am_util_stdio.o [1]
+divu64_10                    0xce5d    0xbe  Code  Lc  am_util_stdio.o [1]
+exit                         0xeabb     0x4  Code  Gb  exit.o [2]
+ftoa                         0xd105   0x176  Code  Lc  am_util_stdio.o [1]
+gAmHalResetStatus       0x1000'1a48     0x4  Data  Gb  am_hal_reset.o [4]
+g_AM_BSP_GPIO_COM_UART_RX
+                             0xeb10     0x4  Data  Gb  am_bsp_pins.o [3]
+g_AM_BSP_GPIO_COM_UART_TX
+                             0xeb0c     0x4  Data  Gb  am_bsp_pins.o [3]
+g_AM_BSP_GPIO_ITM_SWO        0xeb14     0x4  Data  Gb  am_bsp_pins.o [3]
+g_AM_HAL_GPIO_DISABLE        0xda40     0x4  Data  Gb  am_hal_gpio.o [4]
+g_AM_HAL_GPIO_OUTPUT         0xeb18     0x4  Data  Gb  am_hal_gpio.o [4]
+g_AM_HAL_GPIO_TRISTATE       0xeb1c     0x4  Data  Gb  am_hal_gpio.o [4]
+g_am_hal_mcuctrl_flash_size
+                             0xe904    0x40  Data  Gb  am_hal_mcuctrl.o [4]
+g_am_hal_mcuctrl_sram_size
+                             0xe944    0x40  Data  Gb  am_hal_mcuctrl.o [4]
+g_am_hal_uart_states    0x1000'1974    0xc8  Data  Gb  am_hal_uart.o [4]
+g_bTxtXlate             0x1000'1a4c     0x1  Data  Lc  am_util_stdio.o [1]
+g_pfnCharPrint          0x1000'1a3c     0x4  Data  Gb  am_util_stdio.o [1]
+g_prfbuf                0x1000'1874   0x100  Data  Lc  am_util_stdio.o [1]
+g_sBspUartBufferedConfig
+                        0x1000'103c    0x28  Data  Lc  am_bsp.o [3]
+g_sBspUartConfig             0xe9bc    0x28  Data  Lc  am_bsp.o [3]
+g_sCOMUART              0x1000'1038     0x4  Data  Lc  am_bsp.o [3]
+g_sTimer0               0x1000'1000     0xc  Data  Gb  binary_counter.o [1]
+g_ui32BusWriteFlush     0x1000'1a44     0x4  Data  Lc  am_hal_sysctrl.o [4]
+g_ui32PrintInterface    0x1000'1034     0x4  Data  Lc  am_bsp.o [3]
+g_ui32TimerCount        0x1000'1a40     0x4  Data  Gb  binary_counter.o [1]
+g_ui8Bit76Capabilities       0xe278    0x34  Data  Lc  am_hal_gpio.o [4]
+g_ui8ClkSrc             0x1000'1064    0x10  Data  Lc  am_hal_ctimer.o [4]
+g_ui8Inpen                   0xe244    0x34  Data  Lc  am_hal_gpio.o [4]
+g_ui8NCEtable                0xe17c    0xc8  Data  Lc  am_hal_gpio.o [4]
+g_ui8nCEpins                 0xe2ac    0x34  Data  Lc  am_hal_gpio.o [4]
+getStackedReg                0xe759     0xa  Code  Gb  am_util_faultisr.o [1]
+main                         0xe5cd    0x8e  Code  Gb  binary_counter.o [1]
+ndigits_in_hex               0xcf65    0x28  Code  Lc  am_util_stdio.o [1]
+ndigits_in_i64               0xcf4b    0x1a  Code  Lc  am_util_stdio.o [1]
+ndigits_in_u64               0xcf1b    0x30  Code  Lc  am_util_stdio.o [1]
+padbuffer                    0xd0e3    0x22  Code  Lc  am_util_stdio.o [1]
+pui32Stack              0x1000'0000  0x1000  Data  Lc  startup_iar.o [1]
+pui8UartRxBuffer        0x1000'1474   0x400  Data  Lc  am_bsp.o [3]
+pui8UartTxBuffer        0x1000'1074   0x400  Data  Lc  am_bsp.o [3]
+simple_strlen                0xd0cb    0x18  Code  Lc  am_util_stdio.o [1]
+timerA0_init                 0xe57b    0x36  Code  Gb  binary_counter.o [1]
+uint64_to_hexstr             0xd053    0x78  Code  Lc  am_util_stdio.o [1]
+uint64_to_str                0xcfd5    0x7e  Code  Lc  am_util_stdio.o [1]
+
+
+[1] = C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\binary_counter\iar\bin
+[2] = dl7M_tln.a
+[3] = libam_bsp.a
+[4] = libam_hal.a
+[5] = m7M_tls.a
+[6] = rt7M_tl.a
+[7] = shb_l.a
+
+  9 948 bytes of readonly  code memory
+  1 177 bytes of readonly  data memory
+  6 733 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

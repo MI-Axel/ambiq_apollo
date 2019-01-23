@@ -46,16 +46,27 @@
 #ifndef AM_APP_UTILS_H
 #define AM_APP_UTILS_H
 
-
-//*****************************************************************************
-//
-// Application utils include files.
-//
-//*****************************************************************************
-#include "am_app_utils_ring_buffer.h"
-#include "am_app_utils_macros.h"
-#include "am_app_utils_stdio.h"
 /**************************************************************************************************
  Type Macros
 **************************************************************************************************/
+
+#ifndef NULL
+#define NULL  0
+#endif
+
+#ifndef TRUE
+#define TRUE  1
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+
+
+/* Define to trap errors during development. */
+#define configASSERT(x)     if (( x ) == 0) while(1);
+
+
+
 #endif

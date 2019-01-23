@@ -1,6 +1,0 @@
-The latest versions of the ARM Cordio stack and the Ambiq EM9303 HCI Driver support a method 
-to restart the Host side stack on either error indication or for power savings by the customer.  
-To restart the ARM Cordio stack, call:
-
-	HciDrvRadioBoot(0);
-	DmDevReset();

@@ -1,0 +1,583 @@
+###############################################################################
+#
+# IAR ELF Linker V8.32.2.178/W32 for ARM                  23/Jan/2019  20:24:19
+# Copyright 2007-2018 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\audio_experiment_ap3.out
+#    Map file     =  
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\audio_experiment_ap3.map
+#    Command line =  
+#        -f C:\temp\EW48ED.tmp
+#        (C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_app_utils_ring_buffer.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_app_utils_rtt_recorder.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_bsp.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_bsp_pins.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_devices_button.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_devices_led.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_adc.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_ble.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_ble_patch.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_ble_patch_b0.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_burst.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_cachectrl.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_clkgen.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_cmdq.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_ctimer.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_debug.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_flash.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_global.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_gpio.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_interrupt.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_iom.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_ios.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_itm.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_mcuctrl.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_mspi.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_pdm.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_pwrctrl.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_queue.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_reset.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_rtc.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_secure_ota.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_security.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_stimer.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_sysctrl.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_systick.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_tpiu.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_uart.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_hal_wdt.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_ble.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_debug.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_delay.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_faultisr.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_id.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_regdump.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_stdio.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_string.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\am_util_time.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\audio_driver.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\board_setup.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\main.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\SEGGER_RTT.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\SEGGER_RTT_printf.o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\startup_iar.o
+#        --no_out_extension -o
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\audio_experiment_ap3.out
+#        --map
+#        C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin\audio_experiment_ap3.map
+#        --config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\config\linker\AmbiqMicro\apollo3_1024.icf" --semihosting
+#        --entry __iar_program_start "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench
+#        8.2\arm\CMSIS\Lib\IAR\iar_cortexM4lf_math.a" --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because no calls to memory allocation
+functions were found in the application outside of system library
+functions, and there are calls to deallocation functions in the
+application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0xc000 { ro section .intvec };
+"P1":  place in [from 0xc000 to 0x7'ffff] |
+                [from 0x8'0000 to 0xf'ffff] { ro };
+define block CSTACK with size = 1K, alignment = 8 { };
+define block HEAP with size = 2K, alignment = 8 { };
+"P3":  place in [from 0x0 to 0x0] |
+                [from 0x1000'0000 to 0x1005'ffff] {
+          rw, block CSTACK, block HEAP };
+do not initialize { section .noinit };
+initialize by copy { rw };
+
+No sections matched the following patterns:
+
+  ro section application_specific_ro  in "P2|P4"
+  rw section application_specific_rw  in "P2|P4"
+
+
+  Section            Kind         Address     Size  Object
+  -------            ----         -------     ----  ------
+"A0":                                         0xc0
+  .intvec            const         0xc000     0xc0  startup_iar.o [1]
+                                 - 0xc0c0     0xc0
+
+"P1":                                       0x32a8
+  .text              ro code       0xc0c0    0x890  am_hal_uart.o [1]
+  .text              ro code       0xc950    0x170  am_hal_pwrctrl.o [1]
+  .text              ro code       0xcac0     0x20  am_hal_interrupt.o [1]
+  .text              ro code       0xcae0     0xd0  am_hal_queue.o [1]
+  .text              ro code       0xcbb0     0x54  am_hal_flash.o [1]
+  .text              ro code       0xcc04    0x79c  am_util_stdio.o [1]
+  .text              ro code       0xd3a0     0x68  DblToFlt.o [3]
+  .text              ro code       0xd408    0x4a4  am_hal_pdm.o [1]
+  .text              ro code       0xd8ac    0x118  am_hal_clkgen.o [1]
+  .text              ro code       0xd9c4    0x464  am_hal_gpio.o [1]
+  .text              ro code       0xde28    0x27c  SEGGER_RTT.o [1]
+  .text              ro code       0xe0a4     0x18  strcpy.o [4]
+  .text              ro code       0xe0bc     0x76  ABImemcpy_unaligned.o [4]
+  .text              ro code       0xe132     0x3a  zero_init3.o [4]
+  .text              ro code       0xe16c    0x1c0  am_hal_mcuctrl.o [1]
+  .text              ro code       0xe32c    0x1a8  am_hal_ctimer.o [1]
+  .text              ro code       0xe4d4    0x180  board_setup.o [1]
+  .text              ro code       0xe654     0x5c  am_hal_cachectrl.o [1]
+  .text              ro code       0xe6b0    0x10c  am_bsp.o [1]
+  .text              ro code       0xe7bc    0x166  am_devices_led.o [1]
+  .text              ro code       0xe922      0x2  startup_iar.o [1]
+  .text              ro code       0xe924    0x15c  audio_driver.o [1]
+  .text              ro code       0xea80     0x2e  am_app_utils_rtt_recorder.o [1]
+  .text              ro code       0xeaae    0x104  am_app_utils_ring_buffer.o [1]
+  .text              ro code       0xebb2      0x2  startup_iar.o [1]
+  .text              ro code       0xebb4     0x30  am_hal_rtc.o [1]
+  .text              ro code       0xebe4     0xb4  am_hal_itm.o [1]
+  .text              ro code       0xec98     0xd8  am_util_faultisr.o [1]
+  .text              ro code       0xed70      0x6  ABImemclr4.o [4]
+  .text              ro code       0xed78     0x32  ABImemset48.o [4]
+  .rodata            const         0xedac     0xc8  am_hal_gpio.o [1]
+  .rodata            const         0xee74     0xb4  am_hal_pwrctrl.o [1]
+  .text              ro code       0xef28     0x6c  main.o [1]
+  .rodata            const         0xef94     0x60  am_hal_flash.o [1]
+  .patch             const         0xeff4     0x40  startup_iar.o [1]
+  .rodata            const         0xf034     0x40  am_hal_mcuctrl.o [1]
+  .rodata            const         0xf074     0x40  am_hal_mcuctrl.o [1]
+  .rodata            const         0xf0b4     0x34  am_hal_gpio.o [1]
+  .rodata            const         0xf0e8     0x34  am_hal_gpio.o [1]
+  .rodata            const         0xf11c     0x34  am_hal_gpio.o [1]
+  .text              ro code       0xf150     0x2c  copy_init3.o [4]
+  .rodata            const         0xf17c     0x28  am_bsp.o [1]
+  .text              ro code       0xf1a4     0x28  data_init.o [4]
+  .text              ro code       0xf1cc     0x22  fpinit_M.o [3]
+  .iar.init_table    const         0xf1f0     0x24  - Linker created -
+  .rodata            const         0xf214     0x20  audio_driver.o [1]
+  .text              ro code       0xf234     0x1e  startup_iar.o [1]
+  .text              ro code       0xf252      0xc  cstartup_M.o [4]
+  .text              ro code       0xf260     0x1e  cmain.o [4]
+  .text              ro code       0xf27e      0x4  exit.o [2]
+  .text              ro code       0xf284      0xa  cexit.o [4]
+  .text              ro code       0xf290     0x14  exit.o [5]
+  .rodata            const         0xf2a4     0x18  main.o [1]
+  .rodata            const         0xf2bc     0x14  am_bsp.o [1]
+  .rodata            const         0xf2d0      0xc  am_app_utils_rtt_recorder.o [1]
+  .rodata            const         0xf2dc      0xc  board_setup.o [1]
+  .rodata            const         0xf2e8      0xc  SEGGER_RTT.o [1]
+  .rodata            const         0xf2f4      0x8  SEGGER_RTT.o [1]
+  .rodata            const         0xf2fc      0x4  am_bsp_pins.o [1]
+  .rodata            const         0xf300      0x4  am_bsp_pins.o [1]
+  .rodata            const         0xf304      0x4  am_hal_cachectrl.o [1]
+  .rodata            const         0xf308      0x4  am_hal_gpio.o [1]
+  .rodata            const         0xf30c      0x4  am_hal_gpio.o [1]
+  .rodata            const         0xf310      0x4  am_hal_gpio.o [1]
+  .rodata            const         0xf314      0x4  audio_driver.o [1]
+  .rodata            const         0xf318      0x4  board_setup.o [1]
+  .rodata            const         0xf31c      0x4  board_setup.o [1]
+  .rodata            const         0xf320      0x4  SEGGER_RTT.o [1]
+  .rodata            const         0xf324      0x0  zero_init3.o [4]
+  .rodata            const         0xf324      0x0  copy_init3.o [4]
+  Initializer bytes  const         0xf324     0x44  <for P3 s0>
+                                 - 0xf368   0x32a8
+
+"P3", part 1 of 3:                            0x44
+  P3 s0                       0x1000'0000     0x44  <Init block>
+    .data            inited   0x1000'0000     0x28  am_bsp.o [1]
+    .data            inited   0x1000'0028     0x10  am_hal_ctimer.o [1]
+    .data            inited   0x1000'0038      0xc  board_setup.o [1]
+                            - 0x1000'0044     0x44
+
+"P3", part 2 of 3:                         0x305d8
+  .bss               zero     0x1000'0044  0x20000  board_setup.o [1]
+  .bss               zero     0x1002'0044   0xfa00  board_setup.o [1]
+  .bss               zero     0x1002'fa44    0x500  audio_driver.o [1]
+  .bss               zero     0x1002'ff44    0x400  SEGGER_RTT.o [1]
+  .bss               zero     0x1003'0344    0x100  am_util_stdio.o [1]
+  .bss               zero     0x1003'0444     0xc8  am_hal_uart.o [1]
+  .bss               zero     0x1003'050c     0xa8  SEGGER_RTT.o [1]
+  .bss               zero     0x1003'05b4     0x28  board_setup.o [1]
+  .bss               zero     0x1003'05dc     0x10  SEGGER_RTT.o [1]
+  .bss               zero     0x1003'05ec      0xc  am_hal_pdm.o [1]
+  .bss               zero     0x1003'05f8      0x4  am_bsp.o [1]
+  .bss               zero     0x1003'05fc      0x4  am_bsp.o [1]
+  .bss               zero     0x1003'0600      0x4  am_hal_reset.o [1]
+  .bss               zero     0x1003'0604      0x4  am_util_stdio.o [1]
+  .bss               zero     0x1003'0608      0x4  audio_driver.o [1]
+  .bss               zero     0x1003'060c      0x4  audio_driver.o [1]
+  .bss               zero     0x1003'0610      0x4  board_setup.o [1]
+  .bss               zero     0x1003'0614      0x4  board_setup.o [1]
+  .bss               zero     0x1003'0618      0x1  am_util_stdio.o [1]
+  .bss               zero     0x1003'0619      0x1  board_setup.o [1]
+  .bss               zero     0x1003'061a      0x1  board_setup.o [1]
+  .bss               zero     0x1003'061b      0x1  board_setup.o [1]
+                            - 0x1003'061c  0x305d8
+
+"P3", part 3 of 3:                          0x2300
+  .noinit            uninit   0x1003'061c   0x2300  startup_iar.o [1]
+                            - 0x1003'291c   0x2300
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+          0x0          0x0       0x1
+       0xf368     0x7'ffff  0x7'0c98
+     0x8'0000     0xf'ffff  0x8'0000
+  0x1003'291c  0x1005'ffff  0x2'd6e4
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x305d8:
+          0x1000'0044  0x305d8
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0x44:
+               0xf324     0x44
+    1 destination range, total size 0x44:
+          0x1000'0000     0x44
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                       ro code  ro data  rw data
+    ------                       -------  -------  -------
+command line/config:
+    ------------------------------------------------------
+    Total:
+
+C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin: [1]
+    SEGGER_RTT.o                     636       24    1 208
+    am_app_utils_ring_buffer.o       260
+    am_app_utils_rtt_recorder.o       46       12
+    am_bsp.o                         268      100       48
+    am_bsp_pins.o                               8
+    am_devices_led.o                 358
+    am_hal_cachectrl.o                92        4
+    am_hal_clkgen.o                  280
+    am_hal_ctimer.o                  424       16       16
+    am_hal_flash.o                    84       96
+    am_hal_gpio.o                  1 124      368
+    am_hal_interrupt.o                32
+    am_hal_itm.o                     180
+    am_hal_mcuctrl.o                 448      128
+    am_hal_pdm.o                   1 188                12
+    am_hal_pwrctrl.o                 368      180
+    am_hal_queue.o                   208
+    am_hal_reset.o                                       4
+    am_hal_rtc.o                      48
+    am_hal_uart.o                  2 192               200
+    am_util_faultisr.o               216
+    am_util_stdio.o                1 948               261
+    audio_driver.o                   348       36    1 288
+    board_setup.o                    384       32  195 135
+    main.o                           108       24
+    startup_iar.o                     34      256    8 960
+    ------------------------------------------------------
+    Total:                        11 274    1 284  207 132
+
+dl7M_tln.a: [2]
+    exit.o                             4
+    ------------------------------------------------------
+    Total:                             4
+
+m7M_tls.a: [3]
+    DblToFlt.o                       104
+    fpinit_M.o                        34
+    ------------------------------------------------------
+    Total:                           138
+
+rt7M_tl.a: [4]
+    ABImemclr4.o                       6
+    ABImemcpy_unaligned.o            118
+    ABImemset48.o                     50
+    cexit.o                           10
+    cmain.o                           30
+    copy_init3.o                      44
+    cstartup_M.o                      12
+    data_init.o                       40
+    strcpy.o                          24
+    zero_init3.o                      58
+    ------------------------------------------------------
+    Total:                           392
+
+shb_l.a: [5]
+    exit.o                            20
+    ------------------------------------------------------
+    Total:                            20
+
+    Gaps                               8        4
+    Linker created                             36
+----------------------------------------------------------
+    Grand Total:                  11 836    1 324  207 132
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address     Size  Type      Object
+-----                       -------     ----  ----      ------
+.iar.init_table$$Base        0xf1f0            --   Gb  - Linker created -
+.iar.init_table$$Limit       0xf214            --   Gb  - Linker created -
+?main                        0xf261           Code  Gb  cmain.o [4]
+DebugLog                     0xe4f1      0xc  Code  Gb  board_setup.o [1]
+HardFault_Handler            0xec99     0x1c  Code  Gb  am_util_faultisr.o [1]
+PDMHandle               0x1003'060c      0x4  Data  Gb  audio_driver.o [1]
+Region$$Table$$Base          0xf1f0            --   Gb  - Linker created -
+Region$$Table$$Limit         0xf214            --   Gb  - Linker created -
+Reset_Handler                0xf249      0x6  Code  Gb  startup_iar.o [1]
+SEGGER_RTT_ConfigUpBuffer
+                             0xe013     0x78  Code  Gb  SEGGER_RTT.o [1]
+SEGGER_RTT_Write             0xdfe3     0x30  Code  Gb  SEGGER_RTT.o [1]
+SEGGER_RTT_WriteNoLock       0xdf77     0x6c  Code  Gb  SEGGER_RTT.o [1]
+_DoInit                      0xde29     0x5e  Code  Lc  SEGGER_RTT.o [1]
+_GetAvailWriteSpace          0xdf5d     0x1a  Code  Lc  SEGGER_RTT.o [1]
+_SEGGER_RTT             0x1003'050c     0xa8  Data  Gb  SEGGER_RTT.o [1]
+_WriteBlocking               0xde87     0x82  Code  Lc  SEGGER_RTT.o [1]
+_WriteNoCheck                0xdf09     0x54  Code  Lc  SEGGER_RTT.o [1]
+__NVIC_EnableIRQ             0xe925     0x1c  Code  Lc  audio_driver.o [1]
+__NVIC_EnableIRQ             0xe4d5     0x1c  Code  Lc  board_setup.o [1]
+__NVIC_SetPriority           0xe941     0x24  Code  Lc  audio_driver.o [1]
+__Patchable                  0xeff4     0x40  Data  Gb  startup_iar.o [1]
+__aeabi_d2f                  0xd3a1           Code  Gb  DblToFlt.o [3]
+__aeabi_memclr4              0xed71           Code  Gb  ABImemclr4.o [4]
+__cmain                      0xf261           Code  Gb  cmain.o [4]
+__exit                       0xf291     0x14  Code  Gb  exit.o [5]
+__iar_Memset4_word           0xed79           Code  Gb  ABImemset48.o [4]
+__iar_Memset8_word           0xed79           Code  Gb  ABImemset48.o [4]
+__iar_copy_init3             0xf151     0x2c  Code  Gb  copy_init3.o [4]
+__iar_data_init3             0xf1a5     0x28  Code  Gb  data_init.o [4]
+__iar_init_vfp               0xf1cd           Code  Gb  fpinit_M.o [3]
+__iar_program_start          0xf253           Code  Gb  cstartup_M.o [4]
+__iar_unaligned_memcpy       0xe0bd           Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_unaligned_memcpy4
+                             0xe0dd           Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_unaligned_memcpy8
+                             0xe0dd           Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_zero_init3             0xe133     0x3a  Code  Gb  zero_init3.o [4]
+__low_level_init             0xf235      0xa  Code  Gb  startup_iar.o [1]
+__vector_table               0xc000     0xc0  Data  Gb  startup_iar.o [1]
+_acDownBuffer           0x1003'05dc     0x10  Data  Lc  SEGGER_RTT.o [1]
+_acUpBuffer             0x1002'ff44    0x400  Data  Lc  SEGGER_RTT.o [1]
+_call_main                   0xf26d           Code  Gb  cmain.o [4]
+_exit                        0xf285           Code  Gb  cexit.o [4]
+_main                        0xf27b           Code  Gb  cmain.o [4]
+am_app_AEP_pdm_init          0xe965     0x78  Code  Gb  audio_driver.o [1]
+am_app_AEP_sys_init          0xe533     0x94  Code  Gb  board_setup.o [1]
+am_app_utils_ring_buffer_init
+                             0xeaaf     0x34  Code  Gb  am_app_utils_ring_buffer.o [1]
+am_app_utils_ring_buffer_init_all
+                             0xeae3     0x28  Code  Gb  am_app_utils_ring_buffer.o [1]
+am_app_utils_ring_buffer_push_fast
+                             0xeb0b     0xa8  Code  Gb  am_app_utils_ring_buffer.o [1]
+am_app_utils_rtt_init        0xea81     0x14  Code  Gb  am_app_utils_rtt_recorder.o [1]
+am_app_utils_rtt_record
+                             0xea99     0x16  Code  Gb  am_app_utils_rtt_recorder.o [1]
+am_bsp_itm_printf_disable
+                             0xe6fd     0x1a  Code  Gb  am_bsp.o [1]
+am_bsp_low_power_init        0xe6b1     0x4c  Code  Gb  am_bsp.o [1]
+am_bsp_psLEDs           0x1000'0000     0x28  Data  Gb  am_bsp.o [1]
+am_bsp_uart_printf_enable
+                             0xe755     0x40  Code  Gb  am_bsp.o [1]
+am_bsp_uart_string_print
+                             0xe717     0x3e  Code  Gb  am_bsp.o [1]
+am_ctimer_isr                0xe5c7     0x36  Code  Gb  board_setup.o [1]
+am_default_isr               0xf24f      0x2  Code  Lc  startup_iar.o [1]
+am_devices_led_array_init
+                             0xe81d     0x24  Code  Gb  am_devices_led.o [1]
+am_devices_led_init          0xe7bd     0x56  Code  Gb  am_devices_led.o [1]
+am_devices_led_off           0xe881     0x46  Code  Gb  am_devices_led.o [1]
+am_devices_led_on            0xe841     0x40  Code  Gb  am_devices_led.o [1]
+am_devices_led_toggle        0xe8c7     0x5c  Code  Gb  am_devices_led.o [1]
+am_gpio_isr                  0xe5fd     0x20  Code  Gb  board_setup.o [1]
+am_hal_cachectrl_config
+                             0xe655     0x4a  Code  Gb  am_hal_cachectrl.o [1]
+am_hal_cachectrl_defaults
+                             0xf304      0x4  Data  Gb  am_hal_cachectrl.o [1]
+am_hal_cachectrl_enable
+                             0xe69f      0xe  Code  Gb  am_hal_cachectrl.o [1]
+am_hal_clkgen_control        0xd8ad     0xc0  Code  Gb  am_hal_clkgen.o [1]
+am_hal_clkgen_status_get
+                             0xd96d     0x2e  Code  Gb  am_hal_clkgen.o [1]
+am_hal_ctimer_clear          0xe3e1     0x26  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_config         0xe32d     0x66  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_int_clear
+                             0xe4a3     0x16  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_int_enable
+                             0xe489     0x1a  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_period_set
+                             0xe407     0x82  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_start          0xe393     0x4e  Code  Gb  am_hal_ctimer.o [1]
+am_hal_flash_delay           0xcbb1      0xc  Code  Gb  am_hal_flash.o [1]
+am_hal_flash_delay_status_check
+                             0xcbbd     0x44  Code  Gb  am_hal_flash.o [1]
+am_hal_gpio_interrupt_clear
+                             0xdd8b     0x32  Code  Gb  am_hal_gpio.o [1]
+am_hal_gpio_interrupt_enable
+                             0xdd51     0x3a  Code  Gb  am_hal_gpio.o [1]
+am_hal_gpio_pinconfig        0xd9d7    0x288  Code  Gb  am_hal_gpio.o [1]
+am_hal_gpio_state_read       0xdc5f     0x5e  Code  Gb  am_hal_gpio.o [1]
+am_hal_gpio_state_write
+                             0xdcbd     0x94  Code  Gb  am_hal_gpio.o [1]
+am_hal_interrupt_master_disable
+                             0xcacd      0xa  Code  Gb  am_hal_interrupt.o [1]
+am_hal_interrupt_master_enable
+                             0xcac1      0xa  Code  Gb  am_hal_interrupt.o [1]
+am_hal_interrupt_master_set
+                             0xcad9      0x8  Code  Gb  am_hal_interrupt.o [1]
+am_hal_itm_disable           0xec11     0x50  Code  Gb  am_hal_itm.o [1]
+am_hal_itm_enable            0xebe5     0x2c  Code  Gb  am_hal_itm.o [1]
+am_hal_itm_not_busy          0xec61     0x14  Code  Gb  am_hal_itm.o [1]
+am_hal_mcuctrl_info_get
+                             0xe26f     0x66  Code  Gb  am_hal_mcuctrl.o [1]
+am_hal_pdm_configure         0xd4fd    0x1ae  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_dma_start         0xd6ef     0xd0  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_enable            0xd6ab     0x44  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_fifo_flush        0xd7bf     0x28  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_initialize        0xd409     0x6e  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_interrupt_clear
+                             0xd81d     0x28  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_interrupt_enable
+                             0xd7e7     0x36  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_interrupt_status_get
+                             0xd845     0x52  Code  Gb  am_hal_pdm.o [1]
+am_hal_pdm_power_control
+                             0xd477     0x86  Code  Gb  am_hal_pdm.o [1]
+am_hal_pwrctrl_low_power_init
+                             0xca11     0x84  Code  Gb  am_hal_pwrctrl.o [1]
+am_hal_pwrctrl_periph_disable
+                             0xc9b1     0x60  Code  Gb  am_hal_pwrctrl.o [1]
+am_hal_pwrctrl_periph_enable
+                             0xc951     0x60  Code  Gb  am_hal_pwrctrl.o [1]
+am_hal_pwrctrl_peripheral_control
+                             0xee74     0xb4  Data  Gb  am_hal_pwrctrl.o [1]
+am_hal_queue_init            0xcae1     0x18  Code  Gb  am_hal_queue.o [1]
+am_hal_queue_item_add        0xcaf9     0x5e  Code  Gb  am_hal_queue.o [1]
+am_hal_queue_item_get        0xcb57     0x5a  Code  Gb  am_hal_queue.o [1]
+am_hal_rtc_osc_disable       0xebd1      0xc  Code  Gb  am_hal_rtc.o [1]
+am_hal_rtc_osc_select        0xebb5     0x1c  Code  Gb  am_hal_rtc.o [1]
+am_hal_uart_configure        0xc27b    0x1ac  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_initialize       0xc0c1     0x78  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_interrupt_clear
+                             0xc8fd     0x28  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_interrupt_disable
+                             0xc8c7     0x36  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_interrupt_enable
+                             0xc893     0x34  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_power_control
+                             0xc139    0x142  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_transfer         0xc7d1     0x32  Code  Gb  am_hal_uart.o [1]
+am_pdm_isr                   0xe9f5     0x5e  Code  Gb  audio_driver.o [1]
+am_sys_ring_buffers     0x1003'05b4     0x28  Data  Gb  board_setup.o [1]
+am_util_faultisr_collect_data
+                             0xecbf     0xa8  Code  Gb  am_util_faultisr.o [1]
+am_util_stdio_printf         0xd35d     0x2c  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_printf_init
+                             0xcc05      0x8  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_vsprintf       0xcfb7    0x3a6  Code  Gb  am_util_stdio.o [1]
+buffer_configure             0xc427     0x98  Code  Lc  am_hal_uart.o [1]
+config_baudrate              0xc4bf     0xa6  Code  Lc  am_hal_uart.o [1]
+decstr_to_int                0xcd1f     0x42  Code  Lc  am_util_stdio.o [1]
+device_info_get              0xe16d     0xca  Code  Lc  am_hal_mcuctrl.o [1]
+divu64_10                    0xcc0d     0xb6  Code  Lc  am_util_stdio.o [1]
+exit                         0xf27f      0x4  Code  Gb  exit.o [2]
+ftoa                         0xce77    0x140  Code  Lc  am_util_stdio.o [1]
+gAmHalResetStatus       0x1003'0600      0x4  Data  Gb  am_hal_reset.o [1]
+g_AM_BSP_GPIO_COM_UART_RX
+                             0xf300      0x4  Data  Gb  am_bsp_pins.o [1]
+g_AM_BSP_GPIO_COM_UART_TX
+                             0xf2fc      0x4  Data  Gb  am_bsp_pins.o [1]
+g_AM_HAL_GPIO_DISABLE        0xf308      0x4  Data  Gb  am_hal_gpio.o [1]
+g_AM_HAL_GPIO_OUTPUT         0xf30c      0x4  Data  Gb  am_hal_gpio.o [1]
+g_AM_HAL_GPIO_TRISTATE       0xf310      0x4  Data  Gb  am_hal_gpio.o [1]
+g_DebugValue            0x1003'0608      0x4  Data  Gb  audio_driver.o [1]
+g_SysRingBuffSetup           0xf2dc      0xc  Data  Lc  board_setup.o [1]
+g_am_hal_flash               0xef94     0x60  Data  Gb  am_hal_flash.o [1]
+g_am_hal_mcuctrl_flash_size
+                             0xf034     0x40  Data  Gb  am_hal_mcuctrl.o [1]
+g_am_hal_mcuctrl_sram_size
+                             0xf074     0x40  Data  Gb  am_hal_mcuctrl.o [1]
+g_am_hal_pdm_states     0x1003'05ec      0xc  Data  Gb  am_hal_pdm.o [1]
+g_am_hal_uart_states    0x1003'0444     0xc8  Data  Gb  am_hal_uart.o [1]
+g_bTxtXlate             0x1003'0618      0x1  Data  Lc  am_util_stdio.o [1]
+g_deepsleep_button0          0xf31c      0x4  Data  Gb  board_setup.o [1]
+g_pfnCharPrint          0x1003'0604      0x4  Data  Gb  am_util_stdio.o [1]
+g_prfbuf                0x1003'0344    0x100  Data  Lc  am_util_stdio.o [1]
+g_rttRecorderBuff       0x1000'0044  0x20000  Data  Gb  board_setup.o [1]
+g_rttRecordingFlag      0x1003'061b      0x1  Data  Gb  board_setup.o [1]
+g_sBspUartConfig             0xf17c     0x28  Data  Lc  am_bsp.o [1]
+g_sCOMUART              0x1003'05fc      0x4  Data  Lc  am_bsp.o [1]
+g_sTimer0               0x1000'0038      0xc  Data  Gb  board_setup.o [1]
+g_sysKeyValue           0x1003'061a      0x1  Data  Gb  board_setup.o [1]
+g_ui32DebounceTimerCount
+                        0x1003'0614      0x4  Data  Gb  board_setup.o [1]
+g_ui32PCMDataBuff       0x1002'fa44    0x500  Data  Gb  audio_driver.o [1]
+g_ui32PrintInterface    0x1003'05f8      0x4  Data  Lc  am_bsp.o [1]
+g_ui32TimerCount        0x1003'0610      0x4  Data  Gb  board_setup.o [1]
+g_ui8Bit76Capabilities       0xf0e8     0x34  Data  Lc  am_hal_gpio.o [1]
+g_ui8ClkSrc             0x1000'0028     0x10  Data  Lc  am_hal_ctimer.o [1]
+g_ui8DebounceFlag       0x1003'0619      0x1  Data  Gb  board_setup.o [1]
+g_ui8Inpen                   0xf0b4     0x34  Data  Lc  am_hal_gpio.o [1]
+g_ui8NCEtable                0xedac     0xc8  Data  Lc  am_hal_gpio.o [1]
+g_ui8PCMDataRingBuff    0x1002'0044   0xfa00  Data  Gb  board_setup.o [1]
+g_ui8nCEpins                 0xf11c     0x34  Data  Lc  am_hal_gpio.o [1]
+getStackedReg                0xecb5      0xa  Code  Gb  am_util_faultisr.o [1]
+main                         0xef29     0x6c  Code  Gb  main.o [1]
+mcuctrl_fault_status         0xe237     0x38  Code  Lc  am_hal_mcuctrl.o [1]
+ndigits_in_hex               0xccf9     0x26  Code  Lc  am_util_stdio.o [1]
+ndigits_in_i64               0xcce7     0x12  Code  Lc  am_util_stdio.o [1]
+ndigits_in_u64               0xccc3     0x24  Code  Lc  am_util_stdio.o [1]
+padbuffer                    0xce55     0x22  Code  Lc  am_util_stdio.o [1]
+pdm_trigger_dma              0xe9dd     0x18  Code  Gb  audio_driver.o [1]
+pincfg_equ                   0xd9c5     0x12  Code  Lc  am_hal_gpio.o [1]
+pui32Stack              0x1003'061c   0x2300  Data  Lc  startup_iar.o [1]
+read_nonblocking             0xc5eb     0x7e  Code  Lc  am_hal_uart.o [1]
+read_timeout                 0xc6d9     0x7e  Code  Lc  am_hal_uart.o [1]
+rx_queue_update              0xc803     0x3e  Code  Lc  am_hal_uart.o [1]
+simple_strlen                0xce3d     0x18  Code  Lc  am_util_stdio.o [1]
+strcpy                       0xe0a5           Code  Gb  strcpy.o [4]
+timerA0_init                 0xe4fd     0x36  Code  Gb  board_setup.o [1]
+tx_queue_update              0xc841     0x52  Code  Lc  am_hal_uart.o [1]
+uart_fifo_read               0xc565     0x4a  Code  Lc  am_hal_uart.o [1]
+uart_fifo_write              0xc5af     0x3c  Code  Lc  am_hal_uart.o [1]
+uint64_to_hexstr             0xcdc5     0x78  Code  Lc  am_util_stdio.o [1]
+uint64_to_str                0xcd61     0x64  Code  Lc  am_util_stdio.o [1]
+write_nonblocking            0xc669     0x70  Code  Lc  am_hal_uart.o [1]
+write_timeout                0xc757     0x7a  Code  Lc  am_hal_uart.o [1]
+
+
+[1] = C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\bin
+[2] = dl7M_tln.a
+[3] = m7M_tls.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+
+   11 836 bytes of readonly  code memory
+    1 324 bytes of readonly  data memory
+  207 132 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

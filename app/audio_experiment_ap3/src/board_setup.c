@@ -11,6 +11,30 @@
 //*****************************************************************************
 volatile uint32_t g_ui32TimerCount = 0;
 
+volatile uint8_t g_ui8DebounceFlag = 0;
+
+volatile uint32_t g_ui32DebounceTimerCount = 0;
+
+volatile  am_app_AEP_key_value_enum_t g_sysKeyValue = AM_APP_KEY_NONE;
+
+uint8_t g_rttRecorderBuff[RTT_BUFFER_LENGTH];
+
+volatile uint8_t g_rttRecordingFlag = 0; 
+
+//******************************************************************************
+//Global data buffers used by ring buffers
+//*****************************************************************************
+volatile uint8_t g_ui8PCMDataRingBuff[PCM_FRAME_SIZE*PCM_DATA_BYTES*NUM_PCM_FRAMES];
+
+am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
+
+static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] = 
+{
+    {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
+};
+#define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
+
+
 //*****************************************************************************
 // The stdio function for debug usage
 //*****************************************************************************
@@ -41,12 +65,7 @@ am_hal_ctimer_config_t g_sTimer0 =
     // Set up Timer0A.
     (AM_HAL_CTIMER_FN_REPEAT    |
      AM_HAL_CTIMER_INT_ENABLE   |
-#if USE_XTAL
-     AM_HAL_CTIMER_XT_256HZ),
-#else
-     AM_HAL_CTIMER_LFRC_32HZ),
-#endif
-
+    AM_HAL_CTIMER_HFRC_12MHZ), 
     // No configuration for Timer0B.
     0,
 };
@@ -64,11 +83,8 @@ timerA0_init(void)
     //
     // Enable the LFRC.
     //
-#if USE_XTAL
-    am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_XTAL_START, 0);
-#else
-    am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_LFRC_START, 0);
-#endif
+    am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_HFADJ_ENABLE, 0);
+    
 
     //
     // Set up timer A0.
@@ -79,10 +95,7 @@ timerA0_init(void)
     //
     // Set up timerA0 to 32Hz from LFRC divided to 1 second period.
     //
-    ui32Period = 32;
-#if USE_XTAL
-    ui32Period *= 8;
-#endif
+    ui32Period = 12000;
     am_hal_ctimer_period_set(0, AM_HAL_CTIMER_TIMERA, ui32Period,
                              (ui32Period >> 1));
 
@@ -90,6 +103,100 @@ timerA0_init(void)
     // Clear the timer Interrupt
     //
     am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0);
+}
+
+
+//*****************************************************************************
+//
+// Function to initialize Timer A0 to interrupt every 1/4 second.
+//
+//*****************************************************************************
+void am_app_AEP_sys_init(void)
+{
+    //
+    // Set the clock frequency.
+    //
+    am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_SYSCLK_MAX, 0);
+    
+    //
+    // Set the default cache configuration
+    //
+    am_hal_cachectrl_config(&am_hal_cachectrl_defaults);
+    am_hal_cachectrl_enable();
+    
+    //
+    // Configure the board for low power operation.
+    //
+    am_bsp_low_power_init();
+
+#if defined(AM_BSP_NUM_BUTTONS) && defined(AM_BSP_NUM_LEDS)
+    //
+    // Configure the button pin.
+    //
+    am_hal_gpio_pinconfig(AM_BSP_GPIO_BUTTON0, g_deepsleep_button0);
+    
+    //
+    // Clear the GPIO Interrupt (write to clear).
+    //
+    am_hal_gpio_interrupt_clear(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
+    
+    //
+    // Enable the GPIO/button interrupt.
+    //
+    am_hal_gpio_interrupt_enable(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
+    
+    //
+    // Configure the LEDs.
+    //
+    am_devices_led_array_init(am_bsp_psLEDs, AM_BSP_NUM_LEDS);
+    
+    //
+    // Turn the LEDs off
+    //
+    for (int ix = 0; ix < AM_BSP_NUM_LEDS; ix++) 
+    {
+        am_devices_led_off(am_bsp_psLEDs, ix);
+    }
+    //
+    // TimerA0 init.
+    //
+    timerA0_init();
+
+    //
+    // Enable the timer Interrupt.
+    //
+    am_hal_ctimer_int_enable(AM_HAL_CTIMER_INT_TIMERA0);
+
+#endif  // defined(AM_BSP_NUM_BUTTONS)  &&  defined(AM_BSP_NUM_LEDS)
+
+    // Turn on PDM
+    am_app_AEP_pdm_init();
+ 
+#if AM_CMSIS_REGS
+    NVIC_EnableIRQ(GPIO_IRQn);
+    NVIC_EnableIRQ(CTIMER_IRQn);
+#else   // AM_CMSIS_REGS
+    am_hal_interrupt_enable(AM_HAL_INTERRUPT_GPIO);
+    am_hal_interrupt_enable(AM_HAL_INTERRUPT_CTIMER);
+#endif  // AM_CMSIS_REGS
+
+    //
+    // Enable interrupts to the core.
+    //
+    am_hal_interrupt_master_enable();
+    
+   
+    //
+    // Initialize the printf interface for UART output
+    //
+    am_bsp_uart_printf_enable();
+ 
+    am_app_utils_rtt_init(g_rttRecorderBuff, RTT_BUFFER_LENGTH);
+    
+    am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
+
+    am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);
+
 }
 
 //*****************************************************************************
@@ -104,13 +211,16 @@ am_ctimer_isr(void)
     // Increment count and set limit based on the number of LEDs available.
     //
     g_ui32TimerCount++;
-//    if ( g_ui32TimerCount >= 1)
-//    {
-        //
-        // Reset the global.
-        //
-//        g_ui32TimerCount = 0;
-//    }
+    if ( g_ui8DebounceFlag == 1)
+    {
+        g_ui32DebounceTimerCount++;
+
+        if(g_ui32DebounceTimerCount > 300)
+        {
+            g_sysKeyValue = AM_APP_KEY_0;
+            g_ui8DebounceFlag = 0;
+        }
+    } 
 
     //
     // Clear TimerA0 Interrupt (write to clear).
@@ -126,26 +236,18 @@ am_ctimer_isr(void)
 void am_gpio_isr(void) 
 {
     //
-    // Delay for debounce.
+    // debounce.
     //
-    am_util_delay_ms(200);
-  
+    if(g_ui8DebounceFlag == 0)
+    {
+        g_ui8DebounceFlag = 1;
+        g_ui32DebounceTimerCount = 0;
+    }  
     //
     // Clear the GPIO Interrupt (write to clear).
     //
     am_hal_gpio_interrupt_clear(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
-    if(g_audioRunningFlag == 0)
-    {   
-        g_audioRunningFlag = 1;
-        am_devices_led_on(am_bsp_psLEDs, 0);
-    
-        am_hal_pdm_fifo_flush(PDMHandle);
-        pdm_data_get();
-        am_hal_pdm_enable(PDMHandle);
-    } 
-    //
-    // Turn on LED 0
-    //
+
 }
 
 

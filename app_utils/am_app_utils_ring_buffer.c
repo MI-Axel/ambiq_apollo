@@ -44,11 +44,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 //#include <string.h>
-#include "am_app_utils_task.h"
-#include "am_app_utils_macros.h"
 #include "am_app_utils_ring_buffer.h"
 
-extern void* memcpy();  // fixme: to suppress the warnings, however, 
+//extern void* memcpy();  // fixme: to suppress the warnings, however, 
                         // include not correct, need further debug
 //*****************************************************************************
 //
@@ -76,24 +74,23 @@ extern void* memcpy();  // fixme: to suppress the warnings, however,
 //
 //*****************************************************************************
 void
-am_app_utils_ring_buffer_init(am_app_utils_ringbuff_setup_t setup)
+am_app_utils_ring_buffer_init(am_app_utils_ring_buffer_t* ring_buffs, am_app_utils_ringbuff_setup_t setup)
 {
-    configASSERT(setup.indx < AM_APP_RINGBUFF_MAX);
-    am_KWD_ring_buffers[setup.indx].ui32BufferHead_read = 0;
-    am_KWD_ring_buffers[setup.indx].ui32BufferTail_write = 0;
-    am_KWD_ring_buffers[setup.indx].ui32OverWriting = 0;
-    am_KWD_ring_buffers[setup.indx].ui32Capacity = setup.ui32ByteSize;
-    am_KWD_ring_buffers[setup.indx].pui8Data = setup.pData;
+    ring_buffs[setup.indx].ui32BufferHead_read = 0;
+    ring_buffs[setup.indx].ui32BufferTail_write = 0;
+    ring_buffs[setup.indx].ui32OverWriting = 0;
+    ring_buffs[setup.indx].ui32Capacity = setup.ui32ByteSize;
+    ring_buffs[setup.indx].pui8Data = setup.pData;
 }
 
 void
-am_app_utils_ring_buffer_init_all(const am_app_utils_ringbuff_setup_t* setup_array, 
+am_app_utils_ring_buffer_init_all(am_app_utils_ring_buffer_t* ring_buffs, const am_app_utils_ringbuff_setup_t* setup_array, 
                                     uint32_t ui32BufferCount)
 {
     uint32_t ringbuff = 0;
     for(ringbuff =0; ringbuff<ui32BufferCount; ringbuff++)
     {
-        am_app_utils_ring_buffer_init(setup_array[ringbuff]);    
+        am_app_utils_ring_buffer_init(ring_buffs,setup_array[ringbuff]);    
     }
 
 }

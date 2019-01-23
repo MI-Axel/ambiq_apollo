@@ -1,15 +1,15 @@
 /* This file is the driver of PDM functions*/
 
 #include "audio_driver.h"
-
+#include "board_setup.h"
 //*****************************************************************************
 // GLOBALS
 //*****************************************************************************
 
-volatile int16_t g_numFramesCaptured = 0;
+volatile int32_t g_DebugValue = 0;
 volatile bool g_bPDMDataReady = false;
-uint32_t
-    captured_data[FRAME_SIZE * NUM_FRAMES];  // Location of 1-second data buffer
+volatile uint32_t 
+            g_ui32PCMDataBuff[PCM_FRAME_SIZE];  // Location of 1-second data buffer
 
 volatile bool g_audioRunningFlag = 0;    
 
@@ -18,36 +18,13 @@ volatile bool g_audioRunningFlag = 0;
 //*****************************************************************************
 void* PDMHandle;
 
-am_hal_pdm_config_t g_sPdmConfig = {
-    .eClkDivider = AM_HAL_PDM_MCLKDIV_1,
-    .eLeftGain = AM_HAL_PDM_GAIN_P225DB,
-    .eRightGain = AM_HAL_PDM_GAIN_P225DB,
-    .ui32DecimationRate =
-        48,  // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
-    .bHighPassEnable = 0,
-    .ui32HighPassCutoff = 0xB,
-    .ePDMClkSpeed = AM_HAL_PDM_CLK_1_5MHZ,
-    .bInvertI2SBCLK = 0,
-    .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
-    .bPDMSampleDelay = 0,
-    .bDataPacking = 1,
-    .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,
-    .bLRSwap = 0,
-};
+
 
 //*****************************************************************************
 // PDM initialization.
 //*****************************************************************************
-void pdm_init(void) 
+void am_app_AEP_pdm_init(void) 
 {
-  //
-  // Initialize, power-up, and configure the PDM.
-  //
-  am_hal_pdm_initialize(0, &PDMHandle);
-  am_hal_pdm_power_control(PDMHandle, AM_HAL_PDM_POWER_ON, false);
-  am_hal_pdm_configure(PDMHandle, &g_sPdmConfig);
-  am_hal_pdm_enable(PDMHandle);
-
   //
   // Configure the necessary pins.
   //
@@ -62,8 +39,35 @@ void pdm_init(void)
   sPinCfg.uFuncSel = AM_HAL_PIN_11_PDMDATA;
   am_hal_gpio_pinconfig(11, sPinCfg);
 
-  // am_hal_gpio_state_write(14, AM_HAL_GPIO_OUTPUT_CLEAR);
-  // am_hal_gpio_pinconfig(14, g_AM_HAL_GPIO_OUTPUT);
+
+    am_hal_pdm_config_t g_sPdmConfig = {
+        .eClkDivider = AM_HAL_PDM_MCLKDIV_1,
+        .eLeftGain = AM_HAL_PDM_GAIN_P105DB,
+        .eRightGain = AM_HAL_PDM_GAIN_P105DB,
+        .ui32DecimationRate =
+            24,  // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
+        .bHighPassEnable = 1,
+        .ui32HighPassCutoff = 0xB,
+        .ePDMClkSpeed = AM_HAL_PDM_CLK_750KHZ,
+        .bInvertI2SBCLK = 0,
+        .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
+        .bPDMSampleDelay = 0,
+        .bDataPacking = 1,
+        .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,
+        .bLRSwap = 0,
+    };
+    
+//
+  // Initialize, power-up, and configure the PDM.
+  //
+    am_hal_pdm_initialize(0, &PDMHandle);
+    am_hal_pdm_power_control(PDMHandle, AM_HAL_PDM_POWER_ON, false);
+    am_hal_pdm_configure(PDMHandle, &g_sPdmConfig);
+    am_hal_pdm_fifo_flush(PDMHandle);
+
+
+  am_hal_pdm_enable(PDMHandle);
+
 
   //
   // Configure and enable PDM interrupts (set up to trigger on DMA
@@ -74,10 +78,19 @@ void pdm_init(void)
                                AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF));
 
 #if AM_CMSIS_REGS
-  NVIC_EnableIRQ(PDM_IRQn);
+    NVIC_SetPriority(PDM_IRQn, 4);
+    NVIC_EnableIRQ(PDM_IRQn);
 #else
-  am_hal_interrupt_enable(AM_HAL_INTERRUPT_PDM);
+    am_hal_interrupt_enable(AM_HAL_INTERRUPT_PDM);
 #endif
+
+
+    //
+    // Enable PDM
+    //
+    am_hal_pdm_enable(PDMHandle);
+    pdm_trigger_dma();
+
 }
 
 //*****************************************************************************
@@ -85,20 +98,34 @@ void pdm_init(void)
 // Start a transaction to get some number of bytes from the PDM interface.
 //
 //*****************************************************************************
-void pdm_data_get(void) 
-{
+//void pdm_data_get(void) 
+//{
   //
   // Configure DMA and target address.
   //
-  am_hal_pdm_transfer_t sTransfer;
-  sTransfer.ui32TargetAddr =
-      (uint32_t)(&captured_data[FRAME_SIZE * g_numFramesCaptured]);
-  sTransfer.ui32TotalCount = 4 * FRAME_SIZE;  // Each sample is 2 bytes
+//  am_hal_pdm_transfer_t sTransfer;
+//  sTransfer.ui32TargetAddr =
+//      (uint32_t)(&captured_data[FRAME_SIZE * g_numFramesCaptured]);
+//  sTransfer.ui32TotalCount = 4 * FRAME_SIZE;  // Each sample is 2 bytes
 
   //
   // Start the data transfer.
   //
-  am_hal_pdm_dma_start(PDMHandle, &sTransfer);
+//  am_hal_pdm_dma_start(PDMHandle, &sTransfer);
+//}
+void pdm_trigger_dma(void)
+{
+    //
+    // Configure DMA and target address.
+    //
+    am_hal_pdm_transfer_t sTransfer;
+    sTransfer.ui32TargetAddr = (uint32_t ) g_ui32PCMDataBuff;
+    sTransfer.ui32TotalCount = (PCM_FRAME_SIZE * PCM_DATA_BYTES);
+
+    //
+    // Start the data transfer.
+    //
+    am_hal_pdm_dma_start(PDMHandle, &sTransfer);
 }
 
 //*****************************************************************************
@@ -108,17 +135,36 @@ void pdm_data_get(void)
 //*****************************************************************************
 void am_pdm_isr(void) 
 {
-  uint32_t ui32Status;
-  //
-  // Read the interrupt status.
-  //
-  am_hal_pdm_interrupt_status_get(PDMHandle, &ui32Status, true);
-  am_hal_pdm_interrupt_clear(PDMHandle, ui32Status);
+    uint32_t ui32Status;
+    //
+    // Read the interrupt status.
+    //
+    am_hal_pdm_interrupt_status_get(PDMHandle, &ui32Status, true);
+    am_hal_pdm_interrupt_clear(PDMHandle, ui32Status);
+    
+    g_DebugValue++;
+    if (ui32Status & AM_HAL_PDM_INT_DCMP)
+    {
+        // trigger next traction
+        PDMn(0)->DMATOTCOUNT = PCM_FRAME_SIZE*PCM_DATA_BYTES;  // FIFO unit in bytes
 
-  //
-  // Once our DMA transaction completes, send a flag to the main routine
-  //
-  if (ui32Status & AM_HAL_PDM_INT_DCMP) g_bPDMDataReady = true;
+        am_app_utils_ring_buffer_push_fast(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES);
+
+#if configUSE_RTT_DATA_OUTPUT
+        //
+        // Record the raw PCM data and send over RTT
+        //
+        if(g_rttRecordingFlag == 1)
+            am_app_utils_rtt_record((void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES); 
+#endif /* USE_RTT_DATA_OUTPUT */ 
+
+//        am_util_debug_printf("PDM DCMP interrupt, pick g_ui32PDMDataBuffer[5] = 0x%8x\n", g_ui32PDMDataBuffer[5]);
+    }
+    else if(ui32Status & (AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF))
+    {
+        am_hal_pdm_fifo_flush(PDMHandle);
+    }
+
 }
 
 

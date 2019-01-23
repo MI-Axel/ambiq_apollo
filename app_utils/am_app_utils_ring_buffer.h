@@ -45,11 +45,8 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "am_app_utils_macros.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "am_app_KWD_task.h"
+#include <string.h>
+#include "am_app_utils.h"
 #ifdef __cplusplus
 extern "C"
 {
@@ -57,31 +54,14 @@ extern "C"
   
 //*****************************************************************************
 //
-// App ring buffer list structure typedefs
-//
-//*****************************************************************************
-// this enum list contains all app related ring buffers between AM_APP_RINGBUFF_NONE and AM_APP_RINGBUFF_MAX
-// where each index corresponds to a ring buffer
-typedef enum
-{
-    AM_APP_RINGBUFF_NONE = 0, // The enum must begin with this value as named.
-    AM_APP_RINGBUFF_PCM,
-    AM_APP_RINGBUFF_PRE_AUDIO_STREAM,
-    AM_APP_RINGBUFF_POST_AUDIO_STREAM,
-    AM_APP_RINGBUFF_TEST,
-    AM_APP_RINGBUFF_MAX // The enum must end with this value as named.
-} am_app_utils_ring_buffer_enum_t;
-
-//*****************************************************************************
-//
 // Ring buffer setup structure definitions
 //
 //*****************************************************************************
 typedef struct
 {
-    am_app_utils_ring_buffer_enum_t indx;
-    uint8_t* pData;
-    uint32_t ui32ByteSize;
+    int32_t indx;
+    volatile uint8_t* pData;
+    volatile uint32_t ui32ByteSize;
 }am_app_utils_ringbuff_setup_t;
 
 //*****************************************************************************
@@ -119,11 +99,10 @@ am_app_utils_ring_buffer_t;
 // External function definitions
 //
 //*****************************************************************************
-extern am_app_utils_ring_buffer_t am_KWD_ring_buffers[AM_APP_RINGBUFF_MAX];
 
-void am_app_utils_ring_buffer_init(am_app_utils_ringbuff_setup_t setup);
+void am_app_utils_ring_buffer_init(am_app_utils_ring_buffer_t* ring_buffs, am_app_utils_ringbuff_setup_t setup);
 
-void am_app_utils_ring_buffer_init_all(const am_app_utils_ringbuff_setup_t* setup_array, uint32_t ui32BufferCount);
+void am_app_utils_ring_buffer_init_all(am_app_utils_ring_buffer_t* ring_buffs, const am_app_utils_ringbuff_setup_t* setup_array, uint32_t ui32BufferCount);
 
 bool am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer,
                                void *pvSource, uint32_t ui32Bytes, bool bFullCheck);
