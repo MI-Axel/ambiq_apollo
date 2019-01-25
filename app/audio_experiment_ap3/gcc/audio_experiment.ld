@@ -6,7 +6,7 @@
 
 ENTRY(Reset_Handler)
 
-_heap_size = 0;    /* required amount of heap  */
+_heap_size = 0x200;    /* 500B required amount of heap  */
 
 MEMORY
 {
@@ -61,15 +61,19 @@ SECTIONS
         . = ALIGN(4);
         _ebss = .;
     } > SRAM
-    PROVIDE ( end = _ebss );
+    . = ALIGN(4);
     .heap :
     {
-        . = ALIGN(4);
-/*        *(.heap*)*/
+        __end__ = .;
+        /* _heap_start = .; */
+        /* "end" is used by newlib's syscalls!!! */
+        PROVIDE(end = .);
+        PROVIDE(_heap_start = end );
         . = . + _heap_size;
+        PROVIDE(_heap_end = .);
         . = ALIGN(4);
     } >SRAM
-  .ARM.attributes 0 : { *(.ARM.attributes) }
+    .ARM.attributes 0 : { *(.ARM.attributes) }
 }
 
 
