@@ -1,7 +1,7 @@
 ./app/audio_experiment_ap3/iar/Debug/:
 ./app/audio_experiment_ap3/iar/settings/:
-./script/*.bin
-./script/*.wav
+**/script/*.bin
+**/script/*.wav
 tags
 *.o
 *.d
