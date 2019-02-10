@@ -1,3 +1,4 @@
+.gitignore
 ./app/audio_experiment_ap3/iar/Debug/:
 ./app/audio_experiment_ap3/iar/settings/:
 **/script/*.bin
@@ -25,4 +26,6 @@ tags
 *.csv
 *.orig
 key_word_detection_ota.dep
-*.DS_Store
+.DS_Store
+*.exe
+

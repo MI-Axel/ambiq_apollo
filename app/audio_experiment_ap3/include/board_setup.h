@@ -5,12 +5,15 @@
 #include "am_bsp.h"
 #include "am_mcu_apollo.h"  // Defines AM_CMSIS_REGS
 #include "am_util.h"
-/* application utils header files */
-#include "am_app_utils_ring_buffer.h"
-#include "am_app_utils_rtt_recorder.h"
-
 /* AEP config header file */ 
 #include "am_audio_platform_config.h"
+
+/* application utils header files */
+#include "am_app_utils_ring_buffer.h"
+#if configUSE_RTT_DATA_OUTPUT
+#include "am_app_utils_rtt_recorder.h"
+#endif // configUSE_RTT_DATA_OUTPUT
+
 
 #ifdef AM_BSP_NUM_LEDS
 #define NUM_LEDS    AM_BSP_NUM_LEDS
@@ -54,9 +57,10 @@ extern volatile uint8_t g_ui8DebounceFlag;
 
 extern volatile uint32_t g_ui32DebounceTimerCount;
 
+#if configUSE_RTT_DATA_OUTPUT
 extern uint8_t g_rttRecorderBuff[RTT_BUFFER_LENGTH];
-
 extern volatile uint8_t g_rttRecordingFlag; 
+#endif // configUSE_RTT_DATA_OUTPUT
 
 extern void DebugLog(const char* s);
 extern void DebugLogInt32(int32_t i);

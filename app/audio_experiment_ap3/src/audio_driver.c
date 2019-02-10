@@ -2,6 +2,9 @@
 
 #include "audio_driver.h"
 #include "board_setup.h"
+#if configUSE_SYSVIEW
+#include "SEGGER_SYSVIEW.h"
+#endif
 //*****************************************************************************
 // GLOBALS
 //*****************************************************************************
@@ -135,6 +138,9 @@ void pdm_trigger_dma(void)
 //*****************************************************************************
 void am_pdm_isr(void) 
 {
+#if configUSE_SYSVIEW    
+    SEGGER_SYSVIEW_RecordEnterISR();
+#endif
     uint32_t ui32Status;
     //
     // Read the interrupt status.
@@ -164,6 +170,10 @@ void am_pdm_isr(void)
     {
         am_hal_pdm_fifo_flush(PDMHandle);
     }
+
+#if configUSE_SYSVIEW
+    SEGGER_SYSVIEW_RecordExitISR(); //emit Exit ISR signal
+#endif
 
 }
 

@@ -41,7 +41,8 @@ TARGET := audio_experiment
 COMPILERNAME := gcc
 PROJECT := audio_experiment_gcc
 CONFIG := bin
-AM_SoftwareRoot ?= ../../../device/Apollo3-SDK-2018.08.13
+#AM_SoftwareRoot ?= ../../../device/Apollo3-SDK-2018.08.13
+AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
 AM_FolderRoot ?= ../../..
 AM_OpusRoot ?= ../../../tools/opus/opus-1.3
 
@@ -52,7 +53,7 @@ TOOLCHAIN ?= arm-none-eabi
 PART = apollo3
 CPU = cortex-m4
 FPU = fpv4-sp-d16
-FABI = softfp
+FABI = hard
 
 LINKER_FILE := ./audio_experiment.ld
 STARTUP_FILE := ./startup_$(COMPILERNAME).c
@@ -83,70 +84,86 @@ else
 #################### OPUS PART #######################
 
 # Uncomment this for fixed-point build
-FIXED_POINT=1
+#FIXED_POINT=1
 
 # It is strongly recommended to uncomment one of these
 # VAR_ARRAYS: Use C99 variable-length arrays for stack allocation
 # USE_ALLOCA: Use alloca() for stack allocation
 # If none is defined, then the fallback is a non-threadsafe global array
 #EXTRA_CFLAGS := -DUSE_ALLOCA $(EXTRA_CFLAGS)
-EXTRA_CFLAGS := -DVAR_ARRAYS $(EXTRA_CFLAGS)
+#EXTRA_CFLAGS := -DVAR_ARRAYS $(EXTRA_CFLAGS)
 
 # These options affect performance
 # HAVE_LRINTF: Use C99 intrinsics to speed up float-to-int conversion
-EXTRA_CFLAGS := -DHAVE_LRINTF $(EXTRA_CFLAGS)
+#EXTRA_CFLAGS := -DHAVE_LRINTF $(EXTRA_CFLAGS)
 
-include silk_sources.mk
-include celt_sources.mk
-include opus_sources.mk
+#include silk_sources.mk
+#include celt_sources.mk
+#include opus_sources.mk
 
-ifdef FIXED_POINT
-SILK_SOURCES += $(SILK_SOURCES_FIXED)
-else
-SILK_SOURCES += $(SILK_SOURCES_FLOAT)
-OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
-endif
+#ifdef FIXED_POINT
+#SILK_SOURCES += $(SILK_SOURCES_FIXED)
+#else
+#SILK_SOURCES += $(SILK_SOURCES_FLOAT)
+#OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
+#endif
 
 ###################### END OF OPUS PART ######################
+
+#################### APPLICATION UTILS PART #######################
+include ${AM_FolderRoot}/app_utils/am_app_utils.mk
+
+###################### END OF APPLICATION UTILS PART ######################
+
+
+#################### SEGGER TOOLS PART #######################
+include SEGGER_SYSVIEW.mk
+###################### END OF SEGGER TOOLS PART ######################
+
+# opus pre-definition
+#DEFINES += -DHAVE_CONFIG_H
 
 DEFINES = -DPART_$(PART)
 DEFINES += -DAM_PACKAGE_BGA
 DEFINES += -DAM_PART_APOLLO3
-# opus pre-definition
-DEFINES += -DHAVE_CONFIG_H
-
+DEFINES += -DARM_MATH_CM4
 
 INCLUDES = -I../src
 INCLUDES += -I../include
+INCLUDES += -I${AM_FolderRoot}/app_utils
+INCLUDES += -I${AM_FolderRoot}/tools/segger/SEGGER_RTT_V640/RTT
 INCLUDES += -I${AM_SoftwareRoot}/boards/apollo3_evb/bsp
-INCLUDES += -I${AM_SoftwareRoot}
 INCLUDES += -I${AM_SoftwareRoot}/mcu/apollo3
 INCLUDES += -I${AM_SoftwareRoot}/CMSIS/ARM/Include
 INCLUDES += -I${AM_SoftwareRoot}/CMSIS/AmbiqMicro/Include
 INCLUDES += -I${AM_SoftwareRoot}/devices
 INCLUDES += -I${AM_SoftwareRoot}/utils
+# SEGGER tools include
+INCLUDES += ${SEGGER_SYSVIEW_INC}
 # OPUS INCLUDES
-INCLUDES += -I${AM_OpusRoot}/include
-INCLUDES += -I${AM_OpusRoot}/src
-INCLUDES += -I${AM_OpusRoot}/celt
-INCLUDES += -I${AM_OpusRoot}/celt/arm
-INCLUDES += -I${AM_OpusRoot}/silk
-INCLUDES += -I${AM_OpusRoot}/silk/arm
-INCLUDES += -I${AM_OpusRoot}/silk/fixed
-INCLUDES += -I${AM_OpusRoot}
+#INCLUDES += -I${AM_OpusRoot}/include
+#INCLUDES += -I${AM_OpusRoot}/src
+#INCLUDES += -I${AM_OpusRoot}/celt
+#INCLUDES += -I${AM_OpusRoot}/celt/arm
+#INCLUDES += -I${AM_OpusRoot}/silk
+#INCLUDES += -I${AM_OpusRoot}/silk/arm
+#INCLUDES += -I${AM_OpusRoot}/silk/fixed
+#INCLUDES += -I${AM_OpusRoot}
 
 VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
 VPATH +=:${AM_SoftwareRoot}/mcu/apollo3/hal
+VPATH +=:${AM_FolderRoot}/app_utils
 VPATH +=:../src
-
+# SEGGER tools VPATH
+VPATH +=:${SEGGER_SYSVIEW_VPATH}
 # OPUS FOLDERS
-VPATH +=:${AM_OpusRoot}/src
-VPATH +=:${AM_OpusRoot}/silk
-VPATH +=:${AM_OpusRoot}/celt
-VPATH +=:${AM_OpusRoot}/silk/arm
-VPATH +=:${AM_OpusRoot}/celt/arm
-VPATH +=:${AM_OpusRoot}/silk/fixed
+#VPATH +=:${AM_OpusRoot}/src
+#VPATH +=:${AM_OpusRoot}/silk
+#VPATH +=:${AM_OpusRoot}/celt
+#VPATH +=:${AM_OpusRoot}/silk/arm
+#VPATH +=:${AM_OpusRoot}/celt/arm
+#VPATH +=:${AM_OpusRoot}/silk/fixed
 
 # OPUS SOURCE FILES
 #OPUS_FILE = $(wildcard ${AM_OpusRoot}/src/*.c)
@@ -155,7 +172,7 @@ VPATH +=:${AM_OpusRoot}/silk/fixed
 #OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/*.c)
 #OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/arm/*.c)
 #OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/fixed/*.c)
-OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
+#OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
 
 
 SRC = main.c
@@ -164,12 +181,15 @@ SRC += am_hal_gpio.c
 SRC += am_util_delay.c
 SRC += am_util_faultisr.c
 SRC += am_util_stdio.c
+SRC += ${AM_APP_UTILS_SRC}
 SRC += am_devices_led.c
 SRC += startup_gcc.c
 SRC += board_setup.c
 SRC += audio_driver.c
-SRC += ${OPUS_SRC}
-
+SRC += am_memcpy_ringbuff_test.c
+SRC += am_app_USP1602_mono_array.c
+#SRC += ${OPUS_SRC}
+SRC += ${SEGGER_SYSVIEW_SRC}
 
 CSRC = $(filter %.c,$(SRC))
 ASRC = $(filter %.s,$(SRC))
@@ -182,6 +202,7 @@ DEPS+= $(ASRC:%.s=$(CONFIG)/%.d)
 
 LIBS = ${AM_SoftwareRoot}/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a
 LIBS += ${AM_SoftwareRoot}/mcu/apollo3/hal/gcc/bin/libam_hal.a
+
 INCS = 
 INCS += ${AM_SoftwareRoot}/mcu/apollo3/hal/am_hal_pin.h
 
@@ -197,6 +218,7 @@ LFLAGS = -mthumb -mcpu=$(CPU) -mfpu=$(FPU) -mfloat-abi=$(FABI)
 LFLAGS+= -nostartfiles -static
 LFLAGS+= -Wl,--gc-sections,--entry,Reset_Handler,-Map,$(CONFIG)/$(TARGET).map
 LFLAGS+= -Wl,--start-group -lm -lc -lgcc -Wl,--end-group
+
 # use libnosys.a to realize malloc, free, etc. 
 LFLAGS+= -specs=nosys.specs
 
@@ -242,7 +264,7 @@ clean:
 $(CONFIG)/%.d: ;
 
 debug:
-	@echo "Opus configs: ${EXTRA_CFLAGS}"
+	@echo "ASM files: ${ASRC}"
 
 # Automatically include any generated dependencies
 -include $(DEPS)

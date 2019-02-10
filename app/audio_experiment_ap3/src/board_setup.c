@@ -17,10 +17,10 @@ volatile uint32_t g_ui32DebounceTimerCount = 0;
 
 volatile  am_app_AEP_key_value_enum_t g_sysKeyValue = AM_APP_KEY_NONE;
 
+#if configUSE_RTT_DATA_OUTPUT
 uint8_t g_rttRecorderBuff[RTT_BUFFER_LENGTH];
-
 volatile uint8_t g_rttRecordingFlag = 0; 
-
+#endif
 //******************************************************************************
 //Global data buffers used by ring buffers
 //*****************************************************************************
@@ -170,7 +170,7 @@ void am_app_AEP_sys_init(void)
 #endif  // defined(AM_BSP_NUM_BUTTONS)  &&  defined(AM_BSP_NUM_LEDS)
 
     // Turn on PDM
-    am_app_AEP_pdm_init();
+//    am_app_AEP_pdm_init();
  
 #if AM_CMSIS_REGS
     NVIC_EnableIRQ(GPIO_IRQn);
@@ -190,9 +190,9 @@ void am_app_AEP_sys_init(void)
     // Initialize the printf interface for UART output
     //
     am_bsp_uart_printf_enable();
- 
+#if configUSE_RTT_DATA_OUTPUT 
     am_app_utils_rtt_init(g_rttRecorderBuff, RTT_BUFFER_LENGTH);
-    
+#endif
     am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
 
     am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);

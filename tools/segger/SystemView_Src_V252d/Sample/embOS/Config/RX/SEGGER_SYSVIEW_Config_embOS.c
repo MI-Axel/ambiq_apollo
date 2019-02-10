@@ -57,13 +57,20 @@
 **********************************************************************
 -------------------------- END-OF-HEADER -----------------------------
 
-File    : SEGGER_SYSVIEW_Conf.h
-Purpose : SEGGER SystemView configuration.
-Revision: $Rev: 12706 $
+File    : SEGGER_SYSVIEW_Config_embOS_RX.c
+Purpose : Sample setup configuration of SystemView with embOS
+          on Renesas RX systems.
+Revision: $Rev: 12706 $              
 */
+#include "RTOS.h"
+#include "SEGGER_SYSVIEW.h"
+#include "SEGGER_SYSVIEW_embOS.h"
 
-#ifndef SEGGER_SYSVIEW_CONF_H
-#define SEGGER_SYSVIEW_CONF_H
+//
+// SystemcoreClock can be used in most CMSIS compatible projects.
+// In non-CMSIS projects define SYSVIEW_CPU_FREQ directly.
+//
+extern unsigned int SystemCoreClock;
 
 /*********************************************************************
 *
@@ -71,47 +78,6 @@ Revision: $Rev: 12706 $
 *
 **********************************************************************
 */
-//
-// Constants for known core configuration
-//
-#define SEGGER_SYSVIEW_CORE_OTHER   0
-#define SEGGER_SYSVIEW_CORE_CM0     1 // Cortex-M0/M0+/M1
-#define SEGGER_SYSVIEW_CORE_CM3     2 // Cortex-M3/M4/M7
-#define SEGGER_SYSVIEW_CORE_RX      3 // Renesas RX
-
-#if (defined __SES_ARM) || (defined __CROSSWORKS_ARM) || (defined __GNUC__) || (defined __clang__)
-  #if (defined __ARM_ARCH_6M__) || (defined __ARM_ARCH_8M_BASE__)
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM0
-  #elif (defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__))
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM3
-  #endif
-#elif defined(__ICCARM__)
-  #if (defined (__ARM6M__) && (__CORE__ == __ARM6M__))
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM0
-  #elif ((defined (__ARM7M__) && (__CORE__ == __ARM7M__)) || (defined (__ARM7EM__) && (__CORE__ == __ARM7EM__)))
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM3
-  #endif
-#elif defined(__CC_ARM)
-  #if (defined(__TARGET_ARCH_6S_M))
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM0
-  #elif (defined(__TARGET_ARCH_7_M) || defined(__TARGET_ARCH_7E_M))
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM3
-  #endif
-#elif defined(__TI_ARM__)
-  #ifdef __TI_ARM_V6M0__
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM0
-  #elif (defined(__TI_ARM_V7M3__) || defined(__TI_ARM_V7M4__))
-    #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_CM3
-  #endif
-#elif defined(__ICCRX__)
-  #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_RX
-#elif defined(__RX)
-  #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_RX
-#endif
-
-#ifndef   SEGGER_SYSVIEW_CORE
-  #define SEGGER_SYSVIEW_CORE SEGGER_SYSVIEW_CORE_OTHER
-#endif
 
 /*********************************************************************
 *
@@ -119,56 +85,146 @@ Revision: $Rev: 12706 $
 *
 **********************************************************************
 */
-/*********************************************************************
-*
-*       SystemView buffer configuration
-*/
-#define SEGGER_SYSVIEW_RTT_BUFFER_SIZE      1024                                // Number of bytes that SystemView uses for the buffer.
-#define SEGGER_SYSVIEW_RTT_CHANNEL          1                                   // The RTT channel that SystemView will use. 0: Auto selection
-
-#define SEGGER_SYSVIEW_USE_STATIC_BUFFER    1                                   // Use a static buffer to generate events instead of a buffer on the stack
-
-#define SEGGER_SYSVIEW_POST_MORTEM_MODE     0                                   // 1: Enable post mortem analysis mode
-
-/*********************************************************************
-*
-*       SystemView timestamp configuration
-*/
-#if SEGGER_SYSVIEW_CORE == SEGGER_SYSVIEW_CORE_CM3
-  #define SEGGER_SYSVIEW_GET_TIMESTAMP()      (*(U32 *)(0xE0001004))            // Retrieve a system timestamp. Cortex-M cycle counter.
-  #define SEGGER_SYSVIEW_TIMESTAMP_BITS       32                                // Define number of valid bits low-order delivered by clock source
-#else
-  #define SEGGER_SYSVIEW_GET_TIMESTAMP()      SEGGER_SYSVIEW_X_GetTimestamp()   // Retrieve a system timestamp via user-defined function
-  #define SEGGER_SYSVIEW_TIMESTAMP_BITS       32                                // Define number of valid bits low-order delivered by SEGGER_SYSVIEW_X_GetTimestamp()
+// The application name to be displayed in SystemViewer
+#ifndef   SYSVIEW_APP_NAME
+  #define SYSVIEW_APP_NAME          "Demo Application"
 #endif
 
-/*********************************************************************
-*
-*       SystemView Id configuration
-*/
-#define SEGGER_SYSVIEW_ID_BASE         0x10000000                               // Default value for the lowest Id reported by the application. Can be overridden by the application via SEGGER_SYSVIEW_SetRAMBase(). (i.e. 0x20000000 when all Ids are an address in this RAM)
-#define SEGGER_SYSVIEW_ID_SHIFT        2                                        // Number of bits to shift the Id to save bandwidth. (i.e. 2 when Ids are 4 byte aligned)
-
-/*********************************************************************
-*
-*       SystemView interrupt configuration
-*/
-#if SEGGER_SYSVIEW_CORE == SEGGER_SYSVIEW_CORE_CM3
-  #define SEGGER_SYSVIEW_GET_INTERRUPT_ID()   ((*(U32 *)(0xE000ED04)) & 0x1FF)  // Get the currently active interrupt Id. (i.e. read Cortex-M ICSR[8:0] = active vector)
-#elif SEGGER_SYSVIEW_CORE == SEGGER_SYSVIEW_CORE_CM0
-  #if defined(__ICCARM__)
-    #if (__VER__ > 6100000)
-    #define SEGGER_SYSVIEW_GET_INTERRUPT_ID()   (__get_IPSR())                  // Workaround for IAR, which might do a byte-access to 0xE000ED04. Read IPSR instead.
-    #else
-      #define SEGGER_SYSVIEW_GET_INTERRUPT_ID()   ((*(U32 *)(0xE000ED04)) & 0x3F) // Older versions of IAR do not include __get_IPSR, but might also not optimize to byte-access.
-    #endif
-  #else
-    #define SEGGER_SYSVIEW_GET_INTERRUPT_ID()   ((*(U32 *)(0xE000ED04)) & 0x3F) // Get the currently active interrupt Id. (i.e. read Cortex-M ICSR[5:0] = active vector)
-  #endif
-#else
-  #define SEGGER_SYSVIEW_GET_INTERRUPT_ID()   SEGGER_SYSVIEW_X_GetInterruptId() // Get the currently active interrupt Id from the user-provided function.
+// The target device name
+#ifndef   SYSVIEW_DEVICE_NAME
+  #define SYSVIEW_DEVICE_NAME       "RX64M"
 #endif
 
-#endif  // SEGGER_SYSVIEW_CONF_H
+// System Frequency. SystemcoreClock is used in most CMSIS compatible projects.
+#ifndef   SYSVIEW_CPU_FREQ
+  #define SYSVIEW_CPU_FREQ        (SystemCoreClock)
+#endif
+
+// Frequency of the timestamp. Must match SEGGER_SYSVIEW_Conf.h and RTOSInit.c
+#ifndef   SYSVIEW_TIMESTAMP_FREQ
+  #define SYSVIEW_TIMESTAMP_FREQ  (SYSVIEW_CPU_FREQ/2u/8u) // Assume system timer runs at 1/16th of the CPU frequency
+#endif
+
+// The lowest RAM address used for IDs (pointers)
+#ifndef   SYSVIEW_RAM_BASE
+  #define SYSVIEW_RAM_BASE        (0)
+#endif
+
+// Define as 1 to immediately start recording after initialization to catch system initialization.
+#ifndef   SYSVIEW_START_ON_INIT
+  #define SYSVIEW_START_ON_INIT 0
+#endif
+
+#ifndef   SYSVIEW_SYSDESC0
+  #define SYSVIEW_SYSDESC0        "I#0=IntPrio0,I#1=IntPrio1,I#2=IntPrio2,I#3=IntPrio3,I#4=IntPrio4"
+#endif
+
+//#ifndef   SYSVIEW_SYSDESC1
+//  #define SYSVIEW_SYSDESC1      "I#5=IntPrio5,I#6=IntPrio6,I#7=IntPrio7,I#8=IntPrio8,I#9=IntPrio9,I#10=IntPrio10"
+//#endif
+
+//#ifndef   SYSVIEW_SYSDESC2
+//  #define SYSVIEW_SYSDESC2      "I#11=IntPrio11,I#12=IntPrio12,I#13=IntPrio13,I#14=IntPrio14,I#15=IntPrio15"
+//#endif
+
+// System Timer configuration
+#define IRR_BASE_ADDR        (0x00087000u)
+#define CMT0_VECT            28u
+#define OS_TIMER_VECT        CMT0_VECT
+#define TIMER_PRESCALE       (8u)
+#define CMT0_BASE_ADDR       (0x00088000u)
+#define CMT0_CMCNT           (*(volatile U16*) (CMT0_BASE_ADDR + 0x04u))
+
+extern unsigned SEGGER_SYSVIEW_TickCnt;  // Tick Counter value incremented in the tick handler.
+
+/*********************************************************************
+*
+*       _cbSendSystemDesc()
+*
+*  Function description
+*    Sends SystemView description strings.
+*/
+static void _cbSendSystemDesc(void) {
+  SEGGER_SYSVIEW_SendSysDesc("N=" SYSVIEW_APP_NAME ",O=embOS,D=" SYSVIEW_DEVICE_NAME );
+#ifdef SYSVIEW_SYSDESC0
+  SEGGER_SYSVIEW_SendSysDesc(SYSVIEW_SYSDESC0);
+#endif
+#ifdef SYSVIEW_SYSDESC1
+  SEGGER_SYSVIEW_SendSysDesc(SYSVIEW_SYSDESC1);
+#endif
+#ifdef SYSVIEW_SYSDESC2
+  SEGGER_SYSVIEW_SendSysDesc(SYSVIEW_SYSDESC2);
+#endif
+}
+
+/*********************************************************************
+*
+*       Global functions
+*
+**********************************************************************
+*/
+void SEGGER_SYSVIEW_Conf(void) {
+  SEGGER_SYSVIEW_Init(SYSVIEW_TIMESTAMP_FREQ, SYSVIEW_CPU_FREQ,
+                      &SYSVIEW_X_OS_TraceAPI, _cbSendSystemDesc);
+  SEGGER_SYSVIEW_SetRAMBase(SYSVIEW_RAM_BASE);
+  OS_SetTraceAPI(&embOS_TraceAPI_SYSVIEW);    // Configure embOS to use SYSVIEW.
+#if SYSVIEW_START_ON_INIT
+  SEGGER_SYSVIEW_Start();                     // Start recording to catch system initialization.
+#endif
+}
+
+/*********************************************************************
+*
+*       SEGGER_SYSVIEW_X_GetTimestamp()
+*
+* Function description
+*   Returns the current timestamp in ticks using the system tick
+*   count and the SysTick counter.
+*   All parameters of the SysTick have to be known and are set via
+*   configuration defines on top of the file.
+*
+* Return value
+*   The current timestamp.
+*
+* Additional information
+*   SEGGER_SYSVIEW_X_GetTimestamp is always called when interrupts are
+*   disabled. 
+*   Therefore locking here is not required and OS_GetTime_Cycles() may
+*   be called.
+*/
+U32 SEGGER_SYSVIEW_X_GetTimestamp(void) {
+  U32 Time;
+  U32 Cnt;
+
+  Time = SEGGER_SYSVIEW_TickCnt;
+  Cnt  = CMT0_CMCNT;
+  //
+  // Check if timer interrupt pending ...
+  //
+  if ((*(volatile U8*)(IRR_BASE_ADDR + OS_TIMER_VECT) & (1u << 0u)) != 0u) {
+    Cnt = CMT0_CMCNT;      // Interrupt pending, re-read timer and adjust result
+    Time++;
+  }
+  return ((SYSVIEW_TIMESTAMP_FREQ/1000) * Time) + Cnt;
+}
+
+/*********************************************************************
+*
+*       SEGGER_SYSVIEW_X_GetInterruptId()
+*
+*  Function description
+*    Return the priority of the currently active interrupt.
+*/
+U32 SEGGER_SYSVIEW_X_GetInterruptId(void) {
+  U32 IntId;
+ __asm volatile ("mvfc    PSW, %0           \t\n" // Load current PSW
+                 "and     #0x0F000000, %0   \t\n" // Clear all except IPL ([27:24])
+                 "shlr    #24, %0           \t\n" // Shift IPL to [3:0]
+                 : "=r" (IntId)                   // Output result
+                 :                                // Input
+                 :                                // Clobbered list
+                );
+  return IntId;
+}
 
 /*************************** End of file ****************************/

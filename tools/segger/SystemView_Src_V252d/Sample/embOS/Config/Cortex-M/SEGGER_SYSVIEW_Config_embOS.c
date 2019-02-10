@@ -57,15 +57,19 @@
 **********************************************************************
 -------------------------- END-OF-HEADER -----------------------------
 
-File    : SEGGER_SYSVIEW_Config_NoOS.c
-Purpose : Sample setup configuration of SystemView without an OS.
+File    : SEGGER_SYSVIEW_Config_embOS.c
+Purpose : Sample setup configuration of SystemView with embOS.
 Revision: $Rev: 12706 $
 */
+#include "RTOS.h"
 #include "SEGGER_SYSVIEW.h"
 #include "SEGGER_SYSVIEW_Conf.h"
+#include "SEGGER_SYSVIEW_embOS.h"
 
+//
 // SystemcoreClock can be used in most CMSIS compatible projects.
 // In non-CMSIS projects define SYSVIEW_CPU_FREQ.
+//
 extern unsigned int SystemCoreClock;
 
 /*********************************************************************
@@ -75,19 +79,33 @@ extern unsigned int SystemCoreClock;
 **********************************************************************
 */
 // The application name to be displayed in SystemViewer
-#define SYSVIEW_APP_NAME        "Demo Application"
+#ifndef   SYSVIEW_APP_NAME
+  #define SYSVIEW_APP_NAME        "Demo Application"
+#endif
 
 // The target device name
-#define SYSVIEW_DEVICE_NAME     "Cortex-M4"
+#ifndef   SYSVIEW_DEVICE_NAME
+  #define SYSVIEW_DEVICE_NAME     "Cortex-M4"
+#endif
 
 // Frequency of the timestamp. Must match SEGGER_SYSVIEW_Conf.h
-#define SYSVIEW_TIMESTAMP_FREQ  (48000000)
+#ifndef   SYSVIEW_TIMESTAMP_FREQ
+  #define SYSVIEW_TIMESTAMP_FREQ  (SystemCoreClock)
+#endif
 
 // System Frequency. SystemcoreClock is used in most CMSIS compatible projects.
-#define SYSVIEW_CPU_FREQ        (48000000)
+#ifndef   SYSVIEW_CPU_FREQ
+  #define SYSVIEW_CPU_FREQ        (SystemCoreClock)
+#endif
 
 // The lowest RAM address used for IDs (pointers)
-#define SYSVIEW_RAM_BASE        (0x10000000)
+#ifndef   SYSVIEW_RAM_BASE
+  #define SYSVIEW_RAM_BASE        (0x20000000)
+#endif
+
+#ifndef   SYSVIEW_SYSDESC0
+  #define SYSVIEW_SYSDESC0        "I#15=SysTick"
+#endif
 
 // Define as 1 if the Cortex-M cycle counter is used as SystemView timestamp. Must match SEGGER_SYSVIEW_Conf.h
 #ifndef   USE_CYCCNT_TIMESTAMP
@@ -99,17 +117,30 @@ extern unsigned int SystemCoreClock;
   #define ENABLE_DWT_CYCCNT       (USE_CYCCNT_TIMESTAMP & SEGGER_SYSVIEW_POST_MORTEM_MODE)
 #endif
 
+// Define as 1 to immediately start recording after initialization to catch system initialization.
+#ifndef   SYSVIEW_START_ON_INIT
+  #define SYSVIEW_START_ON_INIT 0
+#endif
+
+//#ifndef   SYSVIEW_SYSDESC1
+//  #define SYSVIEW_SYSDESC1      ""
+//#endif
+
+//#ifndef   SYSVIEW_SYSDESC2
+//  #define SYSVIEW_SYSDESC2      ""
+//#endif
+
 /*********************************************************************
 *
 *       Defines, fixed
 *
 **********************************************************************
 */
-#define DEMCR                     (*(volatile unsigned long*) (0xE000EDFCuL))   // Debug Exception and Monitor Control Register
-#define TRACEENA_BIT              (1uL << 24)                                   // Trace enable bit
-#define DWT_CTRL                  (*(volatile unsigned long*) (0xE0001000uL))   // DWT Control Register
-#define NOCYCCNT_BIT              (1uL << 25)                                   // Cycle counter support bit
-#define CYCCNTENA_BIT             (1uL << 0)                                    // Cycle counter enable bit
+#define DEMCR                     (*(volatile OS_U32*) (0xE000EDFCuL))  // Debug Exception and Monitor Control Register
+#define TRACEENA_BIT              (1uL << 24)                           // Trace enable bit
+#define DWT_CTRL                  (*(volatile OS_U32*) (0xE0001000uL))  // DWT Control Register
+#define NOCYCCNT_BIT              (1uL << 25)                           // Cycle counter support bit
+#define CYCCNTENA_BIT             (1uL << 0)                            // Cycle counter enable bit
 
 /*********************************************************************
 *
@@ -119,8 +150,16 @@ extern unsigned int SystemCoreClock;
 *    Sends SystemView description strings.
 */
 static void _cbSendSystemDesc(void) {
-  SEGGER_SYSVIEW_SendSysDesc("N="SYSVIEW_APP_NAME",D="SYSVIEW_DEVICE_NAME);
-  SEGGER_SYSVIEW_SendSysDesc("I#15=SysTick");
+  SEGGER_SYSVIEW_SendSysDesc("N=" SYSVIEW_APP_NAME ",O=embOS,D=" SYSVIEW_DEVICE_NAME );
+#ifdef SYSVIEW_SYSDESC0
+  SEGGER_SYSVIEW_SendSysDesc(SYSVIEW_SYSDESC0);
+#endif
+#ifdef SYSVIEW_SYSDESC1
+  SEGGER_SYSVIEW_SendSysDesc(SYSVIEW_SYSDESC1);
+#endif
+#ifdef SYSVIEW_SYSDESC2
+  SEGGER_SYSVIEW_SendSysDesc(SYSVIEW_SYSDESC2);
+#endif
 }
 
 /*********************************************************************
@@ -150,8 +189,12 @@ void SEGGER_SYSVIEW_Conf(void) {
   }
 #endif
   SEGGER_SYSVIEW_Init(SYSVIEW_TIMESTAMP_FREQ, SYSVIEW_CPU_FREQ,
-                      0, _cbSendSystemDesc);
+                      &SYSVIEW_X_OS_TraceAPI, _cbSendSystemDesc);
   SEGGER_SYSVIEW_SetRAMBase(SYSVIEW_RAM_BASE);
+  OS_SetTraceAPI(&embOS_TraceAPI_SYSVIEW);    // Configure embOS to use SYSVIEW.
+#if SYSVIEW_START_ON_INIT
+  SEGGER_SYSVIEW_Start();                     // Start recording to catch system initialization.
+#endif
 }
 
 /*************************** End of file ****************************/

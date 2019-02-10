@@ -12,7 +12,7 @@
 
 /* Do not build the float API */
 /* #undef DISABLE_FLOAT_API */
-
+//#define DISABLE_FLOAT_API 1
 /* Assertions */
 /* #undef ENABLE_ASSERTIONS */
 
@@ -27,7 +27,7 @@
 
 /* Compile as fixed-point (for machines without a fast enough FPU) */
 /* #undef FIXED_POINT */
-
+//#define FIXED_POINT 1
 /* Float approximations */
 /* #undef FLOAT_APPROX */
 

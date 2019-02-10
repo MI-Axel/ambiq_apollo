@@ -6,12 +6,15 @@
 #include "am_bsp.h"
 #include "am_mcu_apollo.h"  // Defines AM_CMSIS_REGS
 #include "am_util.h"
-/* application layer utils header file */
-#include "am_app_utils_ring_buffer.h"
-#include "am_app_utils_rtt_recorder.h"
 
 /* AEP config header file */ 
 #include "am_audio_platform_config.h"
+
+/* application layer utils header file */
+#if configUSE_RTT_DATA_OUTPUT
+#include "am_app_utils_ring_buffer.h"
+#include "am_app_utils_rtt_recorder.h"
+#endif
 //*****************************************************************************
 // Parameters
 //

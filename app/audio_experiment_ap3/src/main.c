@@ -16,6 +16,7 @@ limitations under the License.
 /* This file is the main file of the audio experiment platform. */
 
 #include <stdint.h>
+
 #include "am_bsp.h"
 #include "am_mcu_apollo.h"  // Defines AM_CMSIS_REGS
 #include "am_util.h"
@@ -23,29 +24,44 @@ limitations under the License.
 #include "am_audio_platform_config.h"
 #include "board_setup.h"
 #include "audio_driver.h"
+
+#include <arm_math.h>
+
 /* app utils include file */
 //#include "am_app_utils.h"
-
-#if AM_AEP_OPUS_TEST
-/* apollo opus include file */
-#include "am_opus.h"
-#endif /* AM_OPUS_TEST */
 
 #if configUSE_RTT_DATA_OUTPUT
 #include "am_app_utils_rtt_recorder.h"
 #endif /* USE_RTT_DATA_OUTPUT */
 
-#include <arm_math.h>
+#if configUSE_SYSVIEW
+#include "SEGGER_SYSVIEW.h"
+#endif
 
+#if AM_AEP_OPUS_TEST
+/* apollo opus include file */
+#include "am_opus.h"
+#endif /* AM_AEP_OPUS_TEST */
+
+#if AM_AEP_MEMCPY_TEST
+#include "am_memcpy_ringbuff_test.h"
+#endif // AM_AEP_MEMCPY_TEST
 
 int main(void)
 {
-    am_app_AEP_sys_init(); 
+    am_app_AEP_sys_init();
+
+    SEGGER_SYSVIEW_Conf(); // initialize SystemView
+    SEGGER_SYSVIEW_Start(); // start SystemView
+    SEGGER_SYSVIEW_OnIdle();          /* Tells SystemView that System is currently in "Idle"*/
     //
     // Print the banner.
     //
     DebugLog("Starting audio test\r\n\n");
 
+#if AM_AEP_MEMCPY_TEST
+    uint32_t ui32CpyLen = 37957;
+#endif // AM_AEP_MEMCPY_TEST
 
 //    am_opus_encoder_init(g_opusEnc);
 
@@ -61,35 +77,30 @@ int main(void)
 
     while (1)
     {
-//        am_hal_interrupt_master_disable();
-
-//         if (g_bPDMDataReady) 
-//        {
-//            g_bPDMDataReady = false;
-//            g_numFramesCaptured++;
-
-//            if (g_numFramesCaptured < NUM_FRAMES) 
-//            {
-//                pdm_data_get();  // Start converting the next set of PCM samples.
-//            }
-
-//            else 
-//            {
-//                g_numFramesCaptured = 0;
-//                g_audioRunningFlag = 0;
-//                am_hal_pdm_disable(PDMHandle);
-//                am_devices_led_off(am_bsp_psLEDs, 0);
-//                DebugLog("PDM data recording ends!\r\n");
-//            }
-//        }
 
         /* breathing LED */
         if (g_ui32TimerCount >=1000)
         {
             g_ui32TimerCount = 0;
             am_devices_led_toggle(am_bsp_psLEDs, 0);
-        
         }
+
+#if AM_AEP_MEMCPY_TEST
+        am_memcpy_test(&mono_16b_USP1602[11], &g_pui8MemcpyBuff[1], ui32CpyLen);
+
+        am_fast_memcpy_test(&mono_16b_USP1602[11], &g_pui8FastMemcpyBuff[1], ui32CpyLen);
+
+        if(am_memcpy_verify(&mono_16b_USP1602[11], &g_pui8MemcpyBuff[1], ui32CpyLen) && am_memcpy_verify(&mono_16b_USP1602[11], &g_pui8FastMemcpyBuff[1], ui32CpyLen))
+            am_devices_led_on(am_bsp_psLEDs, 2);
+        else
+        {
+            am_devices_led_off(am_bsp_psLEDs, 2);
+            while(1);                           // if error occurs, the code will stuck here
+        }
+#endif // AM_AEP_MEMCPY_TEST
+
+
+#if configUSE_RTT_DATA_OUTPUT
         if(g_sysKeyValue == AM_APP_KEY_0)
         {
             g_sysKeyValue = AM_APP_KEY_NONE;
@@ -105,6 +116,7 @@ int main(void)
                 am_devices_led_on(am_bsp_psLEDs, 1);
             }
         }
+#endif // configUSE_RTT_DATA_OUTPUT
     //
     // Go to Deep Sleep.
     //
