@@ -203,11 +203,11 @@ void silk_encode_pulses(
     /****************/
     silk_encode_signs( psRangeEnc, pulses, frame_length, signalType, quantOffsetType, sum_pulses );
     RESTORE_STACK;
-    if(abs_pulses)
-      vPortFree((void *)abs_pulses);
-    if(sum_pulses)
-      vPortFree((void *)sum_pulses);
-    if(nRshifts)
-      vPortFree((void *)nRshifts);
+//    if(abs_pulses)
+//      vPortFree((void *)abs_pulses);
+//    if(sum_pulses)
+//      vPortFree((void *)sum_pulses);
+//    if(nRshifts)
+//      vPortFree((void *)nRshifts);
     
 }

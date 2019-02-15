@@ -44,7 +44,7 @@ CONFIG := bin
 #AM_SoftwareRoot ?= ../../../device/Apollo3-SDK-2018.08.13
 AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
 AM_FolderRoot ?= ../../..
-AM_OpusRoot ?= ../../../tools/opus/opus-1.3
+AM_OpusRoot ?= ../../../tools/opus/am_opus-1.2.1
 
 SHELL:=/bin/bash
 #### Setup ####
@@ -97,15 +97,15 @@ else
 # HAVE_LRINTF: Use C99 intrinsics to speed up float-to-int conversion
 #EXTRA_CFLAGS := -DHAVE_LRINTF $(EXTRA_CFLAGS)
 
-#include silk_sources.mk
-#include celt_sources.mk
-#include opus_sources.mk
+include ${AM_OpusRoot}/silk_sources.mk
+include ${AM_OpusRoot}/celt_sources.mk
+include ${AM_OpusRoot}/opus_sources.mk
 
 #ifdef FIXED_POINT
-#SILK_SOURCES += $(SILK_SOURCES_FIXED)
+SILK_SOURCES += $(SILK_SOURCES_FIXED)
 #else
 #SILK_SOURCES += $(SILK_SOURCES_FLOAT)
-#OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
+OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
 #endif
 
 ###################### END OF OPUS PART ######################
@@ -120,13 +120,15 @@ include ${AM_FolderRoot}/app_utils/am_app_utils.mk
 include SEGGER_SYSVIEW.mk
 ###################### END OF SEGGER TOOLS PART ######################
 
-# opus pre-definition
-#DEFINES += -DHAVE_CONFIG_H
 
 DEFINES = -DPART_$(PART)
 DEFINES += -DAM_PACKAGE_BGA
 DEFINES += -DAM_PART_APOLLO3
 DEFINES += -DARM_MATH_CM4
+
+# opus pre-definition
+DEFINES += -DHAVE_CONFIG_H
+DEFINES += -DCUSTOM_SUPPORT
 
 INCLUDES = -I../src
 INCLUDES += -I../include
@@ -141,14 +143,14 @@ INCLUDES += -I${AM_SoftwareRoot}/utils
 # SEGGER tools include
 INCLUDES += ${SEGGER_SYSVIEW_INC}
 # OPUS INCLUDES
-#INCLUDES += -I${AM_OpusRoot}/include
-#INCLUDES += -I${AM_OpusRoot}/src
-#INCLUDES += -I${AM_OpusRoot}/celt
-#INCLUDES += -I${AM_OpusRoot}/celt/arm
-#INCLUDES += -I${AM_OpusRoot}/silk
-#INCLUDES += -I${AM_OpusRoot}/silk/arm
-#INCLUDES += -I${AM_OpusRoot}/silk/fixed
-#INCLUDES += -I${AM_OpusRoot}
+INCLUDES += -I${AM_OpusRoot}/include
+INCLUDES += -I${AM_OpusRoot}/src
+INCLUDES += -I${AM_OpusRoot}/celt
+INCLUDES += -I${AM_OpusRoot}/celt/arm
+INCLUDES += -I${AM_OpusRoot}/silk
+INCLUDES += -I${AM_OpusRoot}/silk/arm
+INCLUDES += -I${AM_OpusRoot}/silk/fixed
+INCLUDES += -I${AM_OpusRoot}
 
 VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
@@ -157,22 +159,18 @@ VPATH +=:${AM_FolderRoot}/app_utils
 VPATH +=:../src
 # SEGGER tools VPATH
 VPATH +=:${SEGGER_SYSVIEW_VPATH}
+
 # OPUS FOLDERS
-#VPATH +=:${AM_OpusRoot}/src
-#VPATH +=:${AM_OpusRoot}/silk
-#VPATH +=:${AM_OpusRoot}/celt
-#VPATH +=:${AM_OpusRoot}/silk/arm
-#VPATH +=:${AM_OpusRoot}/celt/arm
-#VPATH +=:${AM_OpusRoot}/silk/fixed
+VPATH +=:${AM_OpusRoot}/src
+VPATH +=:${AM_OpusRoot}/silk
+VPATH +=:${AM_OpusRoot}/celt
+VPATH +=:${AM_OpusRoot}/silk/arm
+VPATH +=:${AM_OpusRoot}/celt/arm
+VPATH +=:${AM_OpusRoot}/silk/fixed
+VPATH +=:${AM_OpusRoot}/silk/float
 
 # OPUS SOURCE FILES
-#OPUS_FILE = $(wildcard ${AM_OpusRoot}/src/*.c)
-#OPUS_FILE += $(wildcard ${AM_OpusRoot}/celt/*.c)
-#OPUS_FILE += $(wildcard ${AM_OpusRoot}/celt/arm/*.c)
-#OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/*.c)
-#OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/arm/*.c)
-#OPUS_FILE += $(wildcard ${AM_OpusRoot}/silk/fixed/*.c)
-#OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
+OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
 
 
 SRC = main.c
@@ -186,9 +184,12 @@ SRC += am_devices_led.c
 SRC += startup_gcc.c
 SRC += board_setup.c
 SRC += audio_driver.c
-SRC += am_memcpy_ringbuff_test.c
+SRC += am_opus.c
+SRC += am_opus_custom_support.c
+#SRC += am_memcpy_ringbuff_test.c
 SRC += am_app_USP1602_mono_array.c
-#SRC += ${OPUS_SRC}
+#SRC += am_alloc_free_test.c
+SRC += ${OPUS_SRC}
 SRC += ${SEGGER_SYSVIEW_SRC}
 
 CSRC = $(filter %.c,$(SRC))
@@ -219,8 +220,8 @@ LFLAGS+= -nostartfiles -static
 LFLAGS+= -Wl,--gc-sections,--entry,Reset_Handler,-Map,$(CONFIG)/$(TARGET).map
 LFLAGS+= -Wl,--start-group -lm -lc -lgcc -Wl,--end-group
 
-# use libnosys.a to realize malloc, free, etc. 
-LFLAGS+= -specs=nosys.specs
+# use libnosys.a to realize _sbrk for malloc, free. 
+#LFLAGS+= -specs=nosys.specs
 
 # Additional user specified CFLAGS
 CFLAGS+=$(EXTRA_CFLAGS)

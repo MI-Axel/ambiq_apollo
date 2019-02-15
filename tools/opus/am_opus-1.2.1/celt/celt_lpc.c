@@ -124,7 +124,7 @@ void celt_fir_c(
       y[i] = ROUND16(sum, SIG_SHIFT);
    }
    RESTORE_STACK;
-   vPortFree((void *)rnum);
+//   vPortFree((void *)rnum);
 }
 
 void celt_iir(const opus_val32 *_x,
@@ -205,8 +205,8 @@ void celt_iir(const opus_val32 *_x,
    for(i=0;i<ord;i++)
       mem[i] = _y[N-i-1];
    RESTORE_STACK;
-   vPortFree((void *)rden);
-   vPortFree((void *)y);
+//   vPortFree((void *)rden);
+//   vPortFree((void *)y);
    
 #endif
 }
@@ -296,7 +296,7 @@ int _celt_autocorr(
 #endif
 
    RESTORE_STACK;
-   vPortFree((void *)xx);
+//   vPortFree((void *)xx);
    
    return shift;
 }

@@ -604,7 +604,7 @@ static void deinterleave_hadamard(celt_norm *X, int N0, int stride, int hadamard
    }
    OPUS_COPY(X, tmp, N);
    RESTORE_STACK;
-   vPortFree((void *)tmp);
+//   vPortFree((void *)tmp);
 }
 
 static void interleave_hadamard(celt_norm *X, int N0, int stride, int hadamard)
@@ -628,7 +628,7 @@ static void interleave_hadamard(celt_norm *X, int N0, int stride, int hadamard)
    }
    OPUS_COPY(X, tmp, N);
    RESTORE_STACK;
-   vPortFree((void *)tmp);
+//   vPortFree((void *)tmp);
 }
 
 void haar1(celt_norm *X, int N0, int stride)
@@ -1667,12 +1667,12 @@ void quant_all_bands(int encode, const CELTMode *m, int start, int end,
    *seed = ctx.seed;
 
    RESTORE_STACK;
-   vPortFree((void *)_norm);
-   vPortFree((void *)_lowband_scratch);
-   vPortFree((void *)X_save);
-   vPortFree((void *)Y_save);
-   vPortFree((void *)X_save2);
-   vPortFree((void *)Y_save2);
-   vPortFree((void *)norm_save2);
+//   vPortFree((void *)_norm);
+//   vPortFree((void *)_lowband_scratch);
+//   vPortFree((void *)X_save);
+//   vPortFree((void *)Y_save);
+//   vPortFree((void *)X_save2);
+//   vPortFree((void *)Y_save2);
+//   vPortFree((void *)norm_save2);
 }
 

@@ -100,6 +100,6 @@ void silk_resampler_down2_3(
     /* Copy last part of filtered signal to the state for the next call */
     silk_memcpy( S, &buf[ nSamplesIn ], ORDER_FIR * sizeof( opus_int32 ) );
     RESTORE_STACK;
-    if(buf)
-      vPortFree((void *)buf);
+//    if(buf)
+//      vPortFree((void *)buf);
 }

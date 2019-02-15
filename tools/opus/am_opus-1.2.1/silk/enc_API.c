@@ -560,8 +560,8 @@ opus_int silk_Encode(                                   /* O    Returns error co
                          [ psEnc->state_Fxx[0].sCmn.indices.signalType >> 1 ]
                          [ psEnc->state_Fxx[0].sCmn.indices.quantOffsetType ];
     RESTORE_STACK;
-    if(buf)
-      vPortFree((void *)buf);
+//    if(buf)
+//      vPortFree((void *)buf);
     
     return ret;
 }

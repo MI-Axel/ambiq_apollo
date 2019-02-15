@@ -20,10 +20,6 @@
 // Defines the OPUS parameters
 //
 //*****************************************************************************
-#define VAR_ARRAYS              1
-#define FIXED_POINT             1
-#define OPUS_BUILD              1
-
 #define OPUS_DATA_SCALER        2
 #define OPUS_BITRATE_SCALER     2
 #define OPUS_FRAME_SIZE_IN_MS   20
@@ -52,16 +48,24 @@ typedef struct
     uint32_t ui32SubChunk2Size;
 }
 tWaveHeader;
+
+extern const uint8_t mono_16b_USP1602[80000];
 extern OpusEncoder *g_opusEnc;
 extern int g_opusErr;
 extern uint32_t g_audioSampleRate;
 extern int32_t g_audioChannel;
 extern opus_int32 g_opusComplexity;
 extern opus_int32 g_opusEncRet;
-extern int16_t g_opusTestData[FRAME_SIZE];
-extern uint8_t g_opusOutputBuff[MAX_PACKET_SIZE];
+extern opus_int32 g_opusBitRate_bps;
+extern opus_int32 g_opusBandWidth;
+extern opus_int32 g_opusUseVbr;
+extern opus_int32 g_opusVariableDuration;
 
-void am_opus_encoder_init(OpusEncoder* opusEnc);
+
+extern opus_int32 g_opusEncRet;
+extern uint8_t g_opusOutputBuff[OPUS_MAX_PACKET];
+
+extern void am_opus_encoder_init(OpusEncoder* opusEnc);
 
 #endif /* AM_OPUS_H_ */
 

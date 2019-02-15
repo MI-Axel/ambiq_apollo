@@ -226,15 +226,15 @@ void silk_stereo_LR_to_MS(
     state->pred_prev_Q13[ 1 ] = (opus_int16)pred_Q13[ 1 ];
     state->width_prev_Q14     = (opus_int16)width_Q14;
     RESTORE_STACK;
-    if(side)
-      vPortFree((void *)side);
-    if(LP_mid)
-      vPortFree((void *)LP_mid);
-    if(HP_mid)
-      vPortFree((void *)HP_mid);
-    if(LP_side)
-      vPortFree((void *)LP_side);
-    if(HP_side)
-      vPortFree((void *)HP_side);
+//    if(side)
+//      vPortFree((void *)side);
+//    if(LP_mid)
+//      vPortFree((void *)LP_mid);
+//    if(HP_mid)
+//      vPortFree((void *)HP_mid);
+//    if(LP_side)
+//      vPortFree((void *)LP_side);
+//    if(HP_side)
+//      vPortFree((void *)HP_side);
     
 }

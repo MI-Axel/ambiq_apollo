@@ -51,8 +51,6 @@
 #include "celt_lpc.h"
 #include "vq.h"
 
-#include "FreeRTOS.h"
-#include "portable.h"
 
 /** Encoder state
  @brief Encoder state
@@ -397,7 +395,7 @@ static int transient_analysis(const opus_val32 * OPUS_RESTRICT in, int len, int 
    *tf_estimate = celt_sqrt(MAX32(0, SHL32(MULT16_16(QCONST16(0.0069,14),MIN16(163,tf_max)),14)-QCONST32(0.139,28)));
    /*printf("%d %f\n", tf_max, mask_metric);*/
    RESTORE_STACK;
-   vPortFree(tmp);
+//   vPortFree(tmp);
    
 #ifdef FUZZING
    is_transient = rand()&0x1;
@@ -732,11 +730,11 @@ static int tf_analysis(const CELTMode *m, int len, int isTransient,
    }
    /*printf("%d %f\n", *tf_sum, tf_estimate);*/
    RESTORE_STACK;
-   vPortFree((void *)metric);
-   vPortFree((void *)tmp);
-   vPortFree((void *)tmp_1);
-   vPortFree((void *)path0);
-   vPortFree((void *)path1);
+//   vPortFree((void *)metric);
+//   vPortFree((void *)tmp);
+//   vPortFree((void *)tmp_1);
+//   vPortFree((void *)path0);
+//   vPortFree((void *)path1);
    
 #ifdef FUZZING
    tf_select = rand()&0x1;
@@ -1115,8 +1113,8 @@ static opus_val16 dynalloc_analysis(const opus_val16 *bandLogE, const opus_val16
    }
    *tot_boost_ = tot_boost;
    RESTORE_STACK;
-   vPortFree((void *)follower);
-   vPortFree((void *)noise_floor);
+//   vPortFree((void *)follower);
+//   vPortFree((void *)noise_floor);
    
    return maxDepth;
 }
@@ -1136,7 +1134,7 @@ static int run_prefilter(CELTEncoder *st, celt_sig *in, celt_sig *prefilter_mem,
    int qg;
    int overlap;
    SAVE_STACK;
-   opus_val16 *pitch_buf = NULL;
+//   opus_val16 *pitch_buf = NULL;
 
    mode = st->mode;
    overlap = mode->overlap;
@@ -1155,7 +1153,7 @@ static int run_prefilter(CELTEncoder *st, celt_sig *in, celt_sig *prefilter_mem,
    {
       VARDECL(opus_val16, pitch_buf);
       ALLOC(pitch_buf, (COMBFILTER_MAXPERIOD+N)>>1, opus_val16);
-      pitch_buf = (opus_val16 *) pvPortMalloc(sizeof(opus_val16) * ((COMBFILTER_MAXPERIOD+N)>>1));
+//      pitch_buf = (opus_val16 *) pvPortMalloc(sizeof(opus_val16) * ((COMBFILTER_MAXPERIOD+N)>>1));
 
       pitch_downsample(pre, pitch_buf, COMBFILTER_MAXPERIOD+N, CC, st->arch);
       /* Don't search for the fir last 1.5 octave of the range because
@@ -1245,10 +1243,10 @@ static int run_prefilter(CELTEncoder *st, celt_sig *in, celt_sig *prefilter_mem,
    } while (++c<CC);
 
    RESTORE_STACK;
-   if(_pre)
-     vPortFree((void *)_pre);
-   if(pitch_buf)
-     vPortFree((void *)pitch_buf);
+//   if(_pre)
+//     vPortFree((void *)_pre);
+//   if(pitch_buf)
+//     vPortFree((void *)pitch_buf);
    
    *gain = gain1;
    *pitch = pitch_index;
@@ -2280,21 +2278,21 @@ int celt_encode_with_ec(CELTEncoder * OPUS_RESTRICT st, const opus_val16 * pcm, 
 #endif
 
    RESTORE_STACK;
-   vPortFree((void *)in);
-   vPortFree((void *)freq);
-   vPortFree((void *)bandE);
-   vPortFree((void *)bandLogE);
-   vPortFree((void *)bandLogE2);
-   vPortFree((void *)surround_dynalloc);
-   vPortFree((void *)X);
-   vPortFree((void *)tf_res);
-   vPortFree((void *)error);
-   vPortFree((void *)offsets);
-   vPortFree((void *)cap);
-   vPortFree((void *)fine_quant);
-   vPortFree((void *)pulses);
-   vPortFree((void *)fine_priority);
-   vPortFree((void *)collapse_masks);
+//   vPortFree((void *)in);
+//   vPortFree((void *)freq);
+//   vPortFree((void *)bandE);
+//   vPortFree((void *)bandLogE);
+//   vPortFree((void *)bandLogE2);
+//   vPortFree((void *)surround_dynalloc);
+//   vPortFree((void *)X);
+//   vPortFree((void *)tf_res);
+//   vPortFree((void *)error);
+//   vPortFree((void *)offsets);
+//   vPortFree((void *)cap);
+//   vPortFree((void *)fine_quant);
+//   vPortFree((void *)pulses);
+//   vPortFree((void *)fine_priority);
+//   vPortFree((void *)collapse_masks);
    
    if (ec_get_error(enc))
       return OPUS_INTERNAL_ERROR;
@@ -2334,7 +2332,7 @@ int opus_custom_encode_float(CELTEncoder * OPUS_RESTRICT st, const float * pcm, 
       ((float*)pcm)[j]=in[j]*(1.f/32768.f);
 #endif
    RESTORE_STACK;
-   vPortFree((void *)in);
+//   vPortFree((void *)in);
    
    return ret;
 }
@@ -2363,7 +2361,7 @@ int opus_custom_encode(CELTEncoder * OPUS_RESTRICT st, const opus_int16 * pcm, i
       ((opus_int16*)pcm)[j] = FLOAT2INT16(in[j]);
 #endif
    RESTORE_STACK;
-   vPortFree((void *)in);
+//   vPortFree((void *)in);
    
    return ret;
 }

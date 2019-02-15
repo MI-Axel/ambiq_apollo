@@ -205,12 +205,12 @@ static opus_val32 downmix_and_resample(downmix_func downmix, const void *_x, opu
          tmp3x[3*j+2] = tmp[j];
       }
       silk_resampler_down2_hp(S, y, tmp3x, 3*subframe);
-      if(tmp3x)
-        vPortFree((void *)tmp3x);
+//      if(tmp3x)
+//        vPortFree((void *)tmp3x);
    }
    RESTORE_STACK;
-   if(tmp)
-     vPortFree((void *)tmp);
+//   if(tmp)
+//     vPortFree((void *)tmp);
    
    return ret;
 }
@@ -911,14 +911,14 @@ static void tonality_analysis(TonalityAnalysisState *tonal, const CELTMode *celt
     info->noisiness = frame_noisiness;
     info->valid = 1;
     RESTORE_STACK;
-    if(in)
-      vPortFree((void *)in);
-    if(out)
-      vPortFree((void *)out);
-    if(tonality)
-      vPortFree((void *)tonality);
-    if(noisiness)
-      vPortFree((void *)noisiness);
+//    if(in)
+//      vPortFree((void *)in);
+//    if(out)
+//      vPortFree((void *)out);
+//    if(tonality)
+//      vPortFree((void *)tonality);
+//    if(noisiness)
+//      vPortFree((void *)noisiness);
 }
 
 void run_analysis(TonalityAnalysisState *analysis, const CELTMode *celt_mode, const void *analysis_pcm,

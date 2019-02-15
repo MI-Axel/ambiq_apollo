@@ -187,12 +187,12 @@ static opus_int silk_setup_resamplers(
 #ifndef FIXED_POINT
             silk_short2float_array( psEnc->x_buf, x_bufFIX, new_buf_samples);
 #endif
-            if(x_bufFIX)
-              vPortFree((void *)x_bufFIX);
-            if(temp_resampler_state)
-              vPortFree((void *)temp_resampler_state);
-            if(x_buf_API_fs_Hz)
-              vPortFree((void *)x_buf_API_fs_Hz);
+//            if(x_bufFIX)
+//              vPortFree((void *)x_bufFIX);
+//            if(temp_resampler_state)
+//              vPortFree((void *)temp_resampler_state);
+//            if(x_buf_API_fs_Hz)
+//              vPortFree((void *)x_buf_API_fs_Hz);
             
         }
     }

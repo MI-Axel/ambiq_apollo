@@ -542,10 +542,10 @@ opus_int silk_pitch_analysis_core(                  /* O    Voicing estimate: 0 
         *lagIndex = (opus_int16)( lag_new - min_lag);
         *contourIndex = (opus_int8)CBimax;
         
-        if(energies_st3)
-          vPortFree((void *)energies_st3);
-        if(cross_corr_st3)
-          vPortFree((void *)cross_corr_st3);
+//        if(energies_st3)
+//          vPortFree((void *)energies_st3);
+//        if(cross_corr_st3)
+//          vPortFree((void *)cross_corr_st3);
         
     } else {        /* Fs_kHz == 8 */
         /* Save Lags */
@@ -559,18 +559,18 @@ opus_int silk_pitch_analysis_core(                  /* O    Voicing estimate: 0 
     silk_assert( *lagIndex >= 0 );
     /* return as voiced */
     RESTORE_STACK;
-    if(frame_scaled)
-      vPortFree((void *)frame_scaled);
-    if(frame_8kHz_buf)
-      vPortFree((void *)frame_8kHz_buf);
-    if(frame_4kHz)
-      vPortFree((void *)frame_4kHz);
-    if(C)
-      vPortFree((void *)C);
-    if(xcorr32)
-      vPortFree((void *)xcorr32);
-    if(d_comp)
-      vPortFree((void *)d_comp);
+//    if(frame_scaled)
+//      vPortFree((void *)frame_scaled);
+//    if(frame_8kHz_buf)
+//      vPortFree((void *)frame_8kHz_buf);
+//    if(frame_4kHz)
+//      vPortFree((void *)frame_4kHz);
+//    if(C)
+//      vPortFree((void *)C);
+//    if(xcorr32)
+//     vPortFree((void *)xcorr32);
+//    if(d_comp)
+//      vPortFree((void *)d_comp);
     
     return 0;
 }
@@ -654,10 +654,10 @@ static void silk_P_Ana_calc_corr_st3(
         target_ptr += sf_length;
     }
     RESTORE_STACK;
-    if(scratch_mem)
-      vPortFree((void *)scratch_mem);
-    if(xcorr32)
-      vPortFree((void *)xcorr32);
+//    if(scratch_mem)
+//      vPortFree((void *)scratch_mem);
+//    if(xcorr32)
+//      vPortFree((void *)xcorr32);
 }
 
 /********************************************************************/
@@ -741,7 +741,7 @@ static void silk_P_Ana_calc_energy_st3(
         target_ptr += sf_length;
     }
     RESTORE_STACK;
-    if(scratch_mem)
-      vPortFree((void *)scratch_mem);
+//    if(scratch_mem)
+//      vPortFree((void *)scratch_mem);
     
 }

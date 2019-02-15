@@ -403,8 +403,8 @@ void silk_noise_shape_analysis_FIX(
         psEncCtrl->Tilt_Q14[ k ]          = ( opus_int )silk_RSHIFT_ROUND( psShapeSt->Tilt_smth_Q16,          2 );
     }
     RESTORE_STACK;
-    if(x_windowed)
-      vPortFree((void *)x_windowed);
+//    if(x_windowed)
+//      vPortFree((void *)x_windowed);
 
 }
 #endif /* OVERRIDE_silk_noise_shape_analysis_FIX */

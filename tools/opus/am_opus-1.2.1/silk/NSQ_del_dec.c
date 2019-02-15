@@ -309,16 +309,16 @@ void silk_NSQ_del_dec_c(
     silk_memmove( NSQ->xq,           &NSQ->xq[           psEncC->frame_length ], psEncC->ltp_mem_length * sizeof( opus_int16 ) );
     silk_memmove( NSQ->sLTP_shp_Q14, &NSQ->sLTP_shp_Q14[ psEncC->frame_length ], psEncC->ltp_mem_length * sizeof( opus_int32 ) );
     RESTORE_STACK;
-    if(psDelDec)
-      vPortFree((void *)psDelDec);
-    if(sLTP_Q15)
-      vPortFree((void *)sLTP_Q15);
-    if(sLTP)
-      vPortFree((void *)sLTP);
-    if(x_sc_Q10)
-      vPortFree((void *)x_sc_Q10);
-    if(delayedGain_Q10)
-      vPortFree((void *)delayedGain_Q10);
+//    if(psDelDec)
+//      vPortFree((void *)psDelDec);
+//    if(sLTP_Q15)
+//      vPortFree((void *)sLTP_Q15);
+//    if(sLTP)
+//      vPortFree((void *)sLTP);
+//    if(x_sc_Q10)
+//      vPortFree((void *)x_sc_Q10);
+//    if(delayedGain_Q10)
+//      vPortFree((void *)delayedGain_Q10);
     
 }
 

@@ -139,8 +139,8 @@ void silk_find_LPC_FIX(
                 psEncC->indices.NLSFInterpCoef_Q2 = (opus_int8)k;
             }
         }
-        if(LPC_res)
-          vPortFree((void *)LPC_res);
+//        if(LPC_res)
+//          vPortFree((void *)LPC_res);
     }
 
     if( psEncC->indices.NLSFInterpCoef_Q2 == 4 ) {

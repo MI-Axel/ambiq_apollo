@@ -397,12 +397,12 @@ void pitch_search(const opus_val16 * OPUS_RESTRICT x_lp, opus_val16 * OPUS_RESTR
    *pitch = 2*best_pitch[0]-offset;
 
    RESTORE_STACK;
-   if(x_lp4)
-     vPortFree((void *)x_lp4);
-   if(y_lp4)
-     vPortFree((void *)y_lp4);
-   if(xcorr)
-     vPortFree((void *)xcorr);
+//   if(x_lp4)
+//     vPortFree((void *)x_lp4);
+//   if(y_lp4)
+//     vPortFree((void *)y_lp4);
+//   if(xcorr)
+//     vPortFree((void *)xcorr);
 
 }
 
@@ -547,8 +547,8 @@ opus_val16 remove_doubling(opus_val16 *x, int maxperiod, int minperiod,
    if (*T0_<minperiod0)
       *T0_=minperiod0;
    RESTORE_STACK;
-   if(yy_lookup)
-     vPortFree((void *)yy_lookup);
+//   if(yy_lookup)
+//     vPortFree((void *)yy_lookup);
    
    return pg;
 }

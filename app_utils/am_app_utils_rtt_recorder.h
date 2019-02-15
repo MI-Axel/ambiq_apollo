@@ -8,7 +8,7 @@
 #include "SEGGER_RTT_Conf.h"
 #include "am_app_utils.h"
 
-#define RTT_BUFFER_LENGTH                   (128*1024)
+#define RTT_BUFFER_LENGTH                   (32*1024)
 
 extern uint8_t g_rttRecorderBuff[RTT_BUFFER_LENGTH];
 

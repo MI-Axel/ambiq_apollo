@@ -235,10 +235,10 @@ void clt_mdct_forward_c(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scal
       }
    }
    RESTORE_STACK;
-   if(f)
-     vPortFree((void *)f);
-   if(f2)
-     vPortFree((void *)f2);
+//   if(f)
+//     vPortFree((void *)f);
+//   if(f2)
+//     vPortFree((void *)f2);
 }
 #endif /* OVERRIDE_clt_mdct_forward */
 

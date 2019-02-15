@@ -177,8 +177,8 @@ void silk_CNG(
 
         }
         silk_memcpy( psCNG->CNG_synth_state, &CNG_sig_Q14[ length ], MAX_LPC_ORDER * sizeof( opus_int32 ) );
-        if(CNG_sig_Q14)
-          vPortFree((void *)CNG_sig_Q14);
+//        if(CNG_sig_Q14)
+//          vPortFree((void *)CNG_sig_Q14);
     } else {
         silk_memset( psCNG->CNG_synth_state, 0, psDec->LPC_order *  sizeof( opus_int32 ) );
     }

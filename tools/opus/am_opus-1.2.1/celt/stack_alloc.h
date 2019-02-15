@@ -90,9 +90,9 @@
 
 #if defined(VAR_ARRAYS)
 
-#define VARDECL(type, var) type *var = {0, };
-//#define ALLOC(var, size, type) type var[size]
-#define ALLOC(var, size, type) var = (type *)pvPortMalloc(sizeof(type) *(size))
+#define VARDECL(type, var)
+#define ALLOC(var, size, type) type var[size]
+//#define ALLOC(var, size, type) var = (type *)pvPortMalloc(sizeof(type) *(size))
 #define SAVE_STACK
 #define RESTORE_STACK
 #define ALLOC_STACK

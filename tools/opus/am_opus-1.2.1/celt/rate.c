@@ -639,14 +639,14 @@ int compute_allocation(const CELTMode *m, int start, int end, const int *offsets
          total, balance, skip_rsv, intensity, intensity_rsv, dual_stereo, dual_stereo_rsv,
          pulses, ebits, fine_priority, C, LM, ec, encode, prev, signalBandwidth);
    RESTORE_STACK;
-   if(bits1)
-     vPortFree((void*)bits1);
-   if(bits2)
-     vPortFree((void*)bits2);
-   if(thresh)
-     vPortFree((void*)thresh);
-   if(trim_offset)
-     vPortFree((void*)trim_offset);
+//   if(bits1)
+//     vPortFree((void*)bits1);
+//   if(bits2)
+//     vPortFree((void*)bits2);
+//   if(thresh)
+//     vPortFree((void*)thresh);
+//   if(trim_offset)
+//     vPortFree((void*)trim_offset);
    
    return codedBands;
 }

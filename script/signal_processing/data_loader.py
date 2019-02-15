@@ -27,7 +27,7 @@ import subprocess
 import soundfile as sf
 
 class DataLoader(object):
-    def __init__(self, data_format, bits_per_sample, sample_frequency, audio_channels=2, LRswap=False, chunk_size_byte=None, hop_size_byte=None):
+    def __init__(self, data_format, bits_per_sample=None, sample_frequency=None, audio_channels=2, LRswap=False, chunk_size_byte=None, hop_size_byte=None):
         self.chunk = chunk_size_byte
         self.hop = hop_size_byte
         self.format = data_format
@@ -42,10 +42,10 @@ class DataLoader(object):
             elif self.channels == 1:
                 self.pcmMonoStream = np.array([], dtype=int)
         elif self.format == 'wav':
-            self.sample_frequency = sample_frequency
             self.wavStream = np.array([], dtype=float)
         elif self.format == 'raw':
             self.rawData = np.array([], dtype=int)
+            self.sample_frequency = sample_frequency
 
     def stream_input_parse(self, input_file):
         if self.format == 'pcm': 
@@ -88,7 +88,8 @@ class DataLoader(object):
             rawParse = struct.unpack(rawOutFormat, binStream)
             print('First {} bytes raw data are listed as following:\n {}\n'.format(len(binStream), rawParse))
 
-
+        if self.format == 'wav':
+            self.wavStream, self.sample_frequency = sf.read(input_file)
 
 
     def wav_output(self, output_file,  Norm=False):

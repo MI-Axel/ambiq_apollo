@@ -70,6 +70,12 @@ am_hal_ctimer_config_t g_sTimer0 =
     0,
 };
 
+//**************************************
+// Burst mode configuration.
+//**************************************
+am_hal_burst_avail_e          eBurstModeAvailable;
+am_hal_burst_mode_e           eBurstMode;
+
 //*****************************************************************************
 //
 // Function to initialize Timer A0 to interrupt every 1/4 second.
@@ -129,6 +135,8 @@ void am_app_AEP_sys_init(void)
     //
     am_bsp_low_power_init();
 
+
+
 #if defined(AM_BSP_NUM_BUTTONS) && defined(AM_BSP_NUM_LEDS)
     //
     // Configure the button pin.
@@ -184,7 +192,6 @@ void am_app_AEP_sys_init(void)
     // Enable interrupts to the core.
     //
     am_hal_interrupt_master_enable();
-    
    
     //
     // Initialize the printf interface for UART output
@@ -193,6 +200,42 @@ void am_app_AEP_sys_init(void)
 #if configUSE_RTT_DATA_OUTPUT 
     am_app_utils_rtt_init(g_rttRecorderBuff, RTT_BUFFER_LENGTH);
 #endif
+
+    //
+    // Configure of burst mode
+    //
+    if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_initialize(&eBurstModeAvailable))
+    {
+        if (AM_HAL_BURST_AVAIL == eBurstModeAvailable)
+        {
+            am_util_stdio_printf("Apollo3 Burst Mode is Available\r\n");
+        }
+        else
+        {
+            am_util_stdio_printf("Apollo3 Burst Mode is Not Available\r\n");
+        }
+    }
+    else
+    {
+        am_util_stdio_printf("Failed to Initialize for Burst Mode operation\r\n");
+    }
+
+#if configUSE_BURST_ALWAYS_ON
+    // Put the MCU into "Burst" mode.
+    if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_enable(&eBurstMode))
+    {
+        if (AM_HAL_BURST_MODE == eBurstMode)
+        {
+            am_util_stdio_printf("Apollo3 operating in Burst Mode (96MHz)\r\n");
+        }
+    }
+    else
+    {
+        am_util_stdio_printf("Failed to Enable Burst Mode operation\r\n");
+    }
+
+#endif // configUSE_BURST_ALWAYS_ON
+
     am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
 
     am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);

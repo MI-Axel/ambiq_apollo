@@ -320,10 +320,10 @@ opus_val16 op_pvq_search_c(celt_norm *X, int *iy, int K, int N, int arch)
       iy[j] = (iy[j]^-signx[j]) + signx[j];
    } while (++j<N);
    RESTORE_STACK;
-   if(y)
-     vPortFree((void*)y);
-   if(signx)
-     vPortFree((void*)signx);
+//   if(y)
+//     vPortFree((void*)y);
+//   if(signx)
+//     vPortFree((void*)signx);
    
    return yy;
 }
@@ -356,8 +356,8 @@ unsigned alg_quant(celt_norm *X, int N, int K, int spread, int B, ec_enc *enc,
 
    collapse_mask = extract_collapse_mask(iy, N, B);
    RESTORE_STACK;
-   if(iy)
-     vPortFree((void*)iy);
+//   if(iy)
+//     vPortFree((void*)iy);
    
    return collapse_mask;
 }
@@ -380,8 +380,8 @@ unsigned alg_unquant(celt_norm *X, int N, int K, int spread, int B,
    exp_rotation(X, N, -1, B, K, spread);
    collapse_mask = extract_collapse_mask(iy, N, B);
    RESTORE_STACK;
-   if(iy)
-     vPortFree((void*)iy);
+//   if(iy)
+//     vPortFree((void*)iy);
    
    return collapse_mask;
 }

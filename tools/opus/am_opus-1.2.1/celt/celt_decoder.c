@@ -315,7 +315,7 @@ void deemphasis(celt_sig *in[], opus_val16 *pcm, int N, int C, int downsample, c
       }
    } while (++c<C);
    RESTORE_STACK;
-   vPortFree((void *)scratch);
+//   vPortFree((void *)scratch);
 }
 
 #ifndef RESYNTH
@@ -397,7 +397,7 @@ void celt_synthesis(const CELTMode *mode, celt_norm *X, celt_sig * out_syn[],
          out_syn[c][i] = SATURATE(out_syn[c][i], SIG_SAT);
    } while (++c<CC);
    RESTORE_STACK;
-   vPortFree((void *)freq);
+//   vPortFree((void *)freq);
 }
 
 static void tf_decode(int start, int end, int isTransient, int *tf_res, int LM, ec_dec *dec)
@@ -460,7 +460,7 @@ static int celt_plc_pitch_search(celt_sig *decode_mem[2], int C, int arch)
          PLC_PITCH_LAG_MAX-PLC_PITCH_LAG_MIN, &pitch_index, arch);
    pitch_index = PLC_PITCH_LAG_MAX-pitch_index;
    RESTORE_STACK;
-   vPortFree((void *)lp_pitch_buf);
+//   vPortFree((void *)lp_pitch_buf);
    
    return pitch_index;
 }
@@ -782,9 +782,9 @@ static void celt_decode_lost(CELTDecoder * OPUS_RESTRICT st, int N, int LM)
    st->loss_count = loss_count+1;
 
    RESTORE_STACK;
-   vPortFree((void *)X);
-   vPortFree((void *)etmp);
-   vPortFree((void *)_exc);
+//   vPortFree((void *)X);
+//   vPortFree((void *)etmp);
+//   vPortFree((void *)_exc);
 }
 
 int celt_decode_with_ec(CELTDecoder * OPUS_RESTRICT st, const unsigned char *data,
@@ -1146,14 +1146,14 @@ int celt_decode_with_ec(CELTDecoder * OPUS_RESTRICT st, const unsigned char *dat
    deemphasis(out_syn, pcm, N, CC, st->downsample, mode->preemph, st->preemph_memD, accum);
    st->loss_count = 0;
    RESTORE_STACK;
-   vPortFree((void *)tf_res);
-   vPortFree((void *)cap);
-   vPortFree((void *)offsets);
-   vPortFree((void *)fine_quant);
-   vPortFree((void *)pulses);
-   vPortFree((void *)find_priority);
-   vPortFree((void *)collapse_masks);
-   vPortFree((void *)X);
+//   vPortFree((void *)tf_res);
+//   vPortFree((void *)cap);
+//   vPortFree((void *)offsets);
+//   vPortFree((void *)fine_quant);
+//   vPortFree((void *)pulses);
+//   vPortFree((void *)find_priority);
+//   vPortFree((void *)collapse_masks);
+//   vPortFree((void *)X);
    
    if (ec_tell(dec) > 8*len)
       return OPUS_INTERNAL_ERROR;
@@ -1191,7 +1191,7 @@ int opus_custom_decode_float(CELTDecoder * OPUS_RESTRICT st, const unsigned char
          pcm[j]=out[j]*(1.f/32768.f);
 
    RESTORE_STACK;
-   vPortFree((void *)out);
+//   vPortFree((void *)out);
 
    return ret;
 }
@@ -1224,7 +1224,7 @@ int opus_custom_decode(CELTDecoder * OPUS_RESTRICT st, const unsigned char *data
          pcm[j] = FLOAT2INT16 (out[j]);
 
    RESTORE_STACK;
-   vPortFree((void *)out);
+//   vPortFree((void *)out);
 
    return ret;
 }

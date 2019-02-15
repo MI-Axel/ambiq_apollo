@@ -120,14 +120,14 @@ opus_int32 silk_NLSF_encode(                                    /* O    Returns 
 
     ret = RD_Q25[ 0 ];
     RESTORE_STACK;
-    if(err_Q24)
-      vPortFree((void *)err_Q24);
-    if(tempIndices1)
-      vPortFree((void *)tempIndices1);
-    if(RD_Q25)
-      vPortFree((void *)RD_Q25);
-    if(tempIndices2)
-      vPortFree((void *)tempIndices2);
+//    if(err_Q24)
+//      vPortFree((void *)err_Q24);
+//    if(tempIndices1)
+//      vPortFree((void *)tempIndices1);
+//    if(RD_Q25)
+//      vPortFree((void *)RD_Q25);
+//    if(tempIndices2)
+//      vPortFree((void *)tempIndices2);
     
     return ret;
 }

@@ -51,8 +51,6 @@
 #include "float/structs_FLP.h"
 #endif
 
-#include "FreeRTOS.h"
-#include "portable.h"
 
 #define MAX_ENCODER_BUFFER 480
 
@@ -548,8 +546,8 @@ OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, i
          *error = OPUS_BAD_ARG;
       return NULL;
    }
-//   st = (OpusEncoder *)opus_alloc(opus_encoder_get_size(channels));
-   st = (OpusEncoder *)pvPortMalloc(opus_encoder_get_size(channels));
+   st = (OpusEncoder *)opus_alloc(opus_encoder_get_size(channels));
+//   st = (OpusEncoder *)pvPortMalloc(opus_encoder_get_size(channels));
    if (st == NULL)
    {
       if (error)
@@ -561,8 +559,8 @@ OpusEncoder *opus_encoder_create(opus_int32 Fs, int channels, int application, i
       *error = ret;
    if (ret != OPUS_OK)
    {
-      //opus_free(st);
-      vPortFree(st);
+      opus_free(st);
+//      vPortFree(st);
       st = NULL;
    }
    return st;
@@ -1046,10 +1044,10 @@ static opus_int32 encode_multiframe_packet(OpusEncoder *st,
    st->silk_mode.toMono = bak_to_mono;
 
    RESTORE_STACK;
-   if(tmp_data)
-     vPortFree((void *)tmp_data);
-   if(rp)
-     vPortFree((void *)rp);
+//   if(tmp_data)
+//     vPortFree((void *)tmp_data);
+//   if(rp)
+//     vPortFree((void *)rp);
 
    return ret;
 }
@@ -1874,10 +1872,10 @@ opus_int32 opus_encode_native(OpusEncoder *st, const opus_val16 *pcm, int frame_
            celt_to_silk = 0;
            st->silk_bw_switch = 1;
         }
-#ifndef FIXED_POINT
-        if(pcm_silk)
-          vPortFree((void *)pcm_silk);
-#endif
+//#ifndef FIXED_POINT
+//        if(pcm_silk)
+//          vPortFree((void *)pcm_silk);
+//#endif
     }
 
     /* CELT processing */
@@ -2143,8 +2141,8 @@ opus_int32 opus_encode_native(OpusEncoder *st, const opus_val16 *pcm, int frame_
           st->rangeFinal = 0;
           data[0] = gen_toc(st->mode, st->Fs/frame_size, curr_bandwidth, st->stream_channels);
           RESTORE_STACK;
-          if(tmp_prefill)
-            vPortFree((void *)tmp_prefill);
+//          if(tmp_prefill)
+//            vPortFree((void *)tmp_prefill);
           return 1;
        }
     }
@@ -2184,10 +2182,10 @@ opus_int32 opus_encode_native(OpusEncoder *st, const opus_val16 *pcm, int frame_
        ret = max_data_bytes;
     }
     RESTORE_STACK;
-    if(pcm_buf)
-      vPortFree((void *)pcm_buf);
-    if(tmp_prefill)
-      vPortFree((void *)tmp_prefill);
+//    if(pcm_buf)
+//      vPortFree((void *)pcm_buf);
+//    if(tmp_prefill)
+//      vPortFree((void *)tmp_prefill);
 
     return ret;
 }
@@ -2216,7 +2214,7 @@ opus_int32 opus_encode_float(OpusEncoder *st, const float *pcm, int analysis_fra
    ret = opus_encode_native(st, in, frame_size, data, max_data_bytes, 16,
                             pcm, analysis_frame_size, 0, -2, st->channels, downmix_float, 1);
    RESTORE_STACK;
-   vPortFree((void *)in);
+//   vPortFree((void *)in);
 
    return ret;
 }
@@ -2253,8 +2251,8 @@ opus_int32 opus_encode(OpusEncoder *st, const opus_int16 *pcm, int analysis_fram
    ret = opus_encode_native(st, in, frame_size, data, max_data_bytes, 16,
                             pcm, analysis_frame_size, 0, -2, st->channels, downmix_int, 0);
    RESTORE_STACK;
-   if(in)
-     vPortFree((void *)in);
+//   if(in)
+//     vPortFree((void *)in);
 
    return ret;
 }

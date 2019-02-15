@@ -292,8 +292,8 @@ opus_int silk_VAD_GetSA_Q8_c(                                   /* O    Return v
     }
 
     RESTORE_STACK;
-    if(X)
-      vPortFree((void *)X);
+//    if(X)
+//      vPortFree((void *)X);
     
     return( ret );
 }

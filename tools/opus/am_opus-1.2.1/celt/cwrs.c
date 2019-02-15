@@ -685,8 +685,8 @@ void get_required_bits(opus_int16 *_bits,int _n,int _maxk,int _frac){
     for(k=1;k<=_maxk;k++)
       _bits[k]=log2_frac(u[k]+u[k+1],_frac);
     RESTORE_STACK;
-    if(u)
-      vPortFree((void *)u);
+//    if(u)
+//      vPortFree((void *)u);
   }
 }
 #endif /* CUSTOM_MODES */
@@ -701,8 +701,8 @@ void encode_pulses(const int *_y,int _n,int _k,ec_enc *_enc){
   i=icwrs(_n,_k,&nc,_y,u);
   ec_enc_uint(_enc,i,nc);
   RESTORE_STACK;
-  if(u)
-    vPortFree((void *)u);
+//  if(u)
+//    vPortFree((void *)u);
 }
 
 opus_val32 decode_pulses(int *_y,int _n,int _k,ec_dec *_dec){
@@ -713,8 +713,8 @@ opus_val32 decode_pulses(int *_y,int _n,int _k,ec_dec *_dec){
   ALLOC(u,_k+2U,opus_uint32);
   ret = cwrsi(_n,_k,ec_dec_uint(_dec,ncwrs_urow(_n,_k,u)),_y,u);
   RESTORE_STACK;
-  if(u)
-    vPortFree((void *)u);
+//  if(u)
+//    vPortFree((void *)u);
   
   return ret;
 }

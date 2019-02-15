@@ -95,7 +95,7 @@ void silk_residual_energy_FIX(
         nrgsQ[ i ] += lz1 + 2 * lz2 - 32 - 32;
     }
     RESTORE_STACK;
-    if(LPC_res)
-      vPortFree((void *)LPC_res);
+//    if(LPC_res)
+//      vPortFree((void *)LPC_res);
     
 }

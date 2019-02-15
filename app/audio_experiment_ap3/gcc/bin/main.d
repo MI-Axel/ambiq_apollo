@@ -88,13 +88,18 @@ bin/main.o: ../src/main.c \
  ../include/am_audio_platform_config.h ../include/board_setup.h \
  ../include/am_audio_platform_config.h \
  ../../../app_utils/am_app_utils_ring_buffer.h \
- ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
+ ../../../app_utils/am_app_utils.h \
+ ../../../app_utils/am_app_utils_rtt_recorder.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
+ ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h \
- ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h \
- ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h \
- ../../../tools/segger/SystemView_Src_V252d/Config/Global.h \
- ../src/am_memcpy_ringbuff_test.h
+ ../include/am_opus.h ../include/board_setup.h ../include/audio_driver.h \
+ ../../../tools/opus/am_opus-1.2.1/include/opus.h \
+ ../../../tools/opus/am_opus-1.2.1/include/opus_types.h \
+ ../../../tools/opus/am_opus-1.2.1/include/opus_defines.h
 
 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -278,16 +283,28 @@ bin/main.o: ../src/main.c \
 
 ../../../app_utils/am_app_utils.h:
 
+../../../app_utils/am_app_utils_rtt_recorder.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
+
 ../include/audio_driver.h:
 
 ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h:
 
 ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h:
 
-../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h:
+../include/am_opus.h:
 
-../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h:
+../include/board_setup.h:
 
-../../../tools/segger/SystemView_Src_V252d/Config/Global.h:
+../include/audio_driver.h:
 
-../src/am_memcpy_ringbuff_test.h:
+../../../tools/opus/am_opus-1.2.1/include/opus.h:
+
+../../../tools/opus/am_opus-1.2.1/include/opus_types.h:
+
+../../../tools/opus/am_opus-1.2.1/include/opus_defines.h:

@@ -171,12 +171,12 @@ void silk_NSQ_c
     silk_memmove( NSQ->xq,           &NSQ->xq[           psEncC->frame_length ], psEncC->ltp_mem_length * sizeof( opus_int16 ) );
     silk_memmove( NSQ->sLTP_shp_Q14, &NSQ->sLTP_shp_Q14[ psEncC->frame_length ], psEncC->ltp_mem_length * sizeof( opus_int32 ) );
     RESTORE_STACK;
-    if(sLTP_Q15)
-      vPortFree((void *)sLTP_Q15);
-    if(sLTP)
-      vPortFree((void *)sLTP);
-    if(x_sc_Q10);
-    vPortFree((void *)x_sc_Q10);
+//    if(sLTP_Q15)
+//      vPortFree((void *)sLTP_Q15);
+//    if(sLTP)
+//      vPortFree((void *)sLTP);
+//    if(x_sc_Q10);
+//    vPortFree((void *)x_sc_Q10);
 }
 
 /***********************************/

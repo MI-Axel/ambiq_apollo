@@ -47,13 +47,18 @@ limitations under the License.
 #include "am_memcpy_ringbuff_test.h"
 #endif // AM_AEP_MEMCPY_TEST
 
+#if AM_AEP_ALLOC_FREE_TEST
+#include "am_alloc_free_test.h"
+#endif // AM_AEP_ALLOC_FREE_TEST
+
 int main(void)
 {
     am_app_AEP_sys_init();
-
+#if configUSE_SYSVIEW
     SEGGER_SYSVIEW_Conf(); // initialize SystemView
     SEGGER_SYSVIEW_Start(); // start SystemView
     SEGGER_SYSVIEW_OnIdle();          /* Tells SystemView that System is currently in "Idle"*/
+#endif // configUSE_SYSVIEW
     //
     // Print the banner.
     //
@@ -63,17 +68,22 @@ int main(void)
     uint32_t ui32CpyLen = 37957;
 #endif // AM_AEP_MEMCPY_TEST
 
-//    am_opus_encoder_init(g_opusEnc);
+#if AM_AEP_ALLOC_FREE_TEST
+    am_alloc_free_test();
+#endif // AM_AEP_ALLOC_FREE_TEST
 
-//    g_opusEncRet = opus_encode(g_opusEnc, g_opusTestData, FRAME_SIZE, g_opusOutputBuff, MAX_PACKET_SIZE);
-//    if(g_opusEncRet < 0)
-//    {
-//        am_util_stdio_printf("encode failed: %s\r\n", opus_strerror(g_opusEncRet));
-//    }
-//    else
-//    {
-//        am_util_stdio_printf("encode finished: %d bytes is encoded.\r\n", g_opusEncRet);
-//    }
+#if AM_AEP_OPUS_TEST
+    uint8_t g_ui8EncCompleteFlag = 0;
+    uint32_t g_ui32LocalDataIndex = 0;
+    uint32_t g_ui32LocalDataFrameNum = sizeof(mono_16b_USP1602) / sizeof(opus_int16);
+    uint32_t g_ui32FrameSize = 320;                 // encoder frame size
+    uint32_t g_ui32EncOutputBytes = 80;             // FrameSize * 2 bytes / 8 
+//    uint32_t g_ui32EncOutputBytes = 40;             // FrameSize * 2 bytes / 16 
+    uint32_t g_ui32OutputSumBytes = 0;              // used to summary the output bytes
+    
+    am_opus_encoder_init(g_opusEnc);
+
+#endif // AM_AEP_OPUS_TEST
 
     while (1)
     {
@@ -84,6 +94,38 @@ int main(void)
             g_ui32TimerCount = 0;
             am_devices_led_toggle(am_bsp_psLEDs, 0);
         }
+
+#if AM_AEP_OPUS_TEST
+
+        if((g_ui32LocalDataIndex <= (sizeof(mono_16b_USP1602) - g_ui32FrameSize * sizeof(opus_int16))) && (g_ui8EncCompleteFlag == 0) && (g_rttRecordingFlag == 1))
+        {
+//            SEGGER_SYSVIEW_OnUserStart(10);
+            g_opusEncRet = opus_encode(g_opusEnc, &mono_16b_USP1602[g_ui32LocalDataIndex], g_ui32FrameSize, g_opusOutputBuff, g_ui32EncOutputBytes);
+//            SEGGER_SYSVIEW_OnUserStop(10);
+            if(g_opusEncRet < 0)
+            {
+                am_util_stdio_printf("encode failed: %s\r\n", opus_strerror(g_opusEncRet));
+            }
+            else
+            {
+                g_ui32LocalDataIndex += g_ui32FrameSize * sizeof(opus_int16);
+                g_ui32OutputSumBytes += g_opusEncRet;
+#if configUSE_RTT_DATA_OUTPUT
+                // Output opus data to rtt buffer
+                am_app_utils_rtt_record(g_opusOutputBuff, g_ui32EncOutputBytes);
+#endif
+                am_util_stdio_printf("encode finished: %d bytes is output.\r\n", g_opusEncRet);
+            }
+        }
+        else if((g_ui32LocalDataIndex > (sizeof(mono_16b_USP1602) - g_ui32FrameSize * sizeof(opus_int16))) && (g_ui8EncCompleteFlag == 0) && (g_rttRecordingFlag == 1))
+        {
+            g_ui8EncCompleteFlag = 1;
+            g_rttRecordingFlag = 0;
+            am_util_stdio_printf("Totally %d bytes are output.\r\n", g_ui32OutputSumBytes);
+            DebugLog("Local data are all encoded!\r\n");
+        }
+
+#endif // AM_AEP_OPUS_TEST
 
 #if AM_AEP_MEMCPY_TEST
         am_memcpy_test(&mono_16b_USP1602[11], &g_pui8MemcpyBuff[1], ui32CpyLen);
@@ -116,6 +158,12 @@ int main(void)
                 am_devices_led_on(am_bsp_psLEDs, 1);
             }
         }
+        
+        if(g_rttRecordingFlag == 0)
+        {
+            am_devices_led_off(am_bsp_psLEDs, 1);
+        }
+
 #endif // configUSE_RTT_DATA_OUTPUT
     //
     // Go to Deep Sleep.

@@ -100,8 +100,8 @@ opus_int silk_encode_frame_FIX(
     opus_int     best_sum[ MAX_NB_SUBFR ];
     SAVE_STACK;
 
-    opus_int16 *res_pitch;
-    opus_uint8 *ec_buf_copy;
+//    opus_int16 *res_pitch;
+//    opus_uint8 *ec_buf_copy;
     
     /* This is totally unnecessary but many compilers (including gcc) are too dumb to realise it */
     LastGainIndex_copy2 = nBits_lower = nBits_upper = gainMult_lower = gainMult_upper = 0;
@@ -125,16 +125,16 @@ opus_int silk_encode_frame_FIX(
     silk_memcpy( x_frame + LA_SHAPE_MS * psEnc->sCmn.fs_kHz, psEnc->sCmn.inputBuf + 1, psEnc->sCmn.frame_length * sizeof( opus_int16 ) );
 //    VARDECL( opus_int16, res_pitch );
 //    VARDECL( opus_uint8, ec_buf_copy );
-    opus_int16 *res_pitch_frame;
+//    opus_int16 *res_pitch_frame;
     if( !psEnc->sCmn.prefillFlag ) {
-//        VARDECL( opus_int16, res_pitch );
-//        VARDECL( opus_uint8, ec_buf_copy );
-//        opus_int16 *res_pitch_frame;
+        VARDECL( opus_int16, res_pitch );
+        VARDECL( opus_uint8, ec_buf_copy );
+        opus_int16 *res_pitch_frame;
 
-//        ALLOC( res_pitch,
-//               psEnc->sCmn.la_pitch + psEnc->sCmn.frame_length
-//                   + psEnc->sCmn.ltp_mem_length, opus_int16 );
-        res_pitch = (opus_int16 *) pvPortMalloc(sizeof(opus_int16) * (psEnc->sCmn.la_pitch + psEnc->sCmn.frame_length + psEnc->sCmn.ltp_mem_length));
+        ALLOC( res_pitch,
+               psEnc->sCmn.la_pitch + psEnc->sCmn.frame_length
+                   + psEnc->sCmn.ltp_mem_length, opus_int16 );
+//        res_pitch = (opus_int16 *) pvPortMalloc(sizeof(opus_int16) * (psEnc->sCmn.la_pitch + psEnc->sCmn.frame_length + psEnc->sCmn.ltp_mem_length));
         
         /* start of pitch LPC residual frame */
         res_pitch_frame = res_pitch + psEnc->sCmn.ltp_mem_length;
@@ -178,8 +178,8 @@ opus_int silk_encode_frame_FIX(
         seed_copy = psEnc->sCmn.indices.Seed;
         ec_prevLagIndex_copy = psEnc->sCmn.ec_prevLagIndex;
         ec_prevSignalType_copy = psEnc->sCmn.ec_prevSignalType;
-        //ALLOC( ec_buf_copy, 1275, opus_uint8 );
-        ec_buf_copy = (opus_uint8 *) pvPortMalloc(1275);
+        ALLOC( ec_buf_copy, 1275, opus_uint8 );
+//        ec_buf_copy = (opus_uint8 *) pvPortMalloc(1275);
         
         for( iter = 0; ; iter++ ) {
             if( gainsID == gainsID_lower ) {
@@ -387,10 +387,10 @@ opus_int silk_encode_frame_FIX(
     *pnBytesOut = silk_RSHIFT( ec_tell( psRangeEnc ) + 7, 3 );
 
     RESTORE_STACK;
-    if(res_pitch)
-      vPortFree((void*)res_pitch);
-    if(ec_buf_copy)
-      vPortFree((void*)ec_buf_copy);
+//    if(res_pitch)
+//      vPortFree((void*)res_pitch);
+//    if(ec_buf_copy)
+//      vPortFree((void*)ec_buf_copy);
 
     return ret;
 }

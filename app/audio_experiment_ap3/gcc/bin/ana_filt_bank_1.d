@@ -1,59 +1,50 @@
 bin/ana_filt_bank_1.o: \
- ../../../tools/opus/opus-1.3/silk/ana_filt_bank_1.c \
- ../../../tools/opus/opus-1.3/config.h \
- ../../../tools/opus/opus-1.3/silk/SigProc_FIX.h \
- ../../../tools/opus/opus-1.3/silk/typedef.h \
- ../../../tools/opus/opus-1.3/include/opus_types.h \
- ../../../tools/opus/opus-1.3/include/opus_defines.h \
- ../../../tools/opus/opus-1.3/include/opus_types.h \
- ../../../tools/opus/opus-1.3/silk/resampler_structs.h \
- ../../../tools/opus/opus-1.3/silk/macros.h \
- ../../../tools/opus/opus-1.3/celt/arch.h \
- ../../../tools/opus/opus-1.3/celt/fixed_generic.h \
- ../../../tools/opus/opus-1.3/celt/ecintrin.h \
- ../../../tools/opus/opus-1.3/celt/arch.h \
- ../../../tools/opus/opus-1.3/celt/cpu_support.h \
- ../../../tools/opus/opus-1.3/silk/arm/biquad_alt_arm.h \
- ../../../tools/opus/opus-1.3/celt/arm/armcpu.h \
- ../../../tools/opus/opus-1.3/silk/arm/LPC_inv_pred_gain_arm.h \
- ../../../tools/opus/opus-1.3/silk/Inlines.h \
- ../../../tools/opus/opus-1.3/silk/MacroCount.h \
- ../../../tools/opus/opus-1.3/silk/MacroDebug.h
+ ../../../tools/opus/am_opus-1.2.1/silk/ana_filt_bank_1.c \
+ ../../../tools/opus/am_opus-1.2.1/include/config.h \
+ ../../../tools/opus/am_opus-1.2.1/silk/SigProc_FIX.h \
+ ../../../tools/opus/am_opus-1.2.1/silk/typedef.h \
+ ../../../tools/opus/am_opus-1.2.1/include/opus_types.h \
+ ../../../tools/opus/am_opus-1.2.1/include/opus_defines.h \
+ ../../../tools/opus/am_opus-1.2.1/include/opus_types.h \
+ ../../../tools/opus/am_opus-1.2.1/silk/resampler_structs.h \
+ ../../../tools/opus/am_opus-1.2.1/silk/macros.h \
+ ../../../tools/opus/am_opus-1.2.1/celt/arch.h \
+ ../../../tools/opus/am_opus-1.2.1/celt/fixed_generic.h \
+ ../../../tools/opus/am_opus-1.2.1/celt/ecintrin.h \
+ ../../../tools/opus/am_opus-1.2.1/celt/arch.h \
+ ../../../tools/opus/am_opus-1.2.1/celt/cpu_support.h \
+ ../../../tools/opus/am_opus-1.2.1/silk/Inlines.h \
+ ../../../tools/opus/am_opus-1.2.1/silk/MacroCount.h \
+ ../../../tools/opus/am_opus-1.2.1/silk/MacroDebug.h
 
-../../../tools/opus/opus-1.3/config.h:
+../../../tools/opus/am_opus-1.2.1/include/config.h:
 
-../../../tools/opus/opus-1.3/silk/SigProc_FIX.h:
+../../../tools/opus/am_opus-1.2.1/silk/SigProc_FIX.h:
 
-../../../tools/opus/opus-1.3/silk/typedef.h:
+../../../tools/opus/am_opus-1.2.1/silk/typedef.h:
 
-../../../tools/opus/opus-1.3/include/opus_types.h:
+../../../tools/opus/am_opus-1.2.1/include/opus_types.h:
 
-../../../tools/opus/opus-1.3/include/opus_defines.h:
+../../../tools/opus/am_opus-1.2.1/include/opus_defines.h:
 
-../../../tools/opus/opus-1.3/include/opus_types.h:
+../../../tools/opus/am_opus-1.2.1/include/opus_types.h:
 
-../../../tools/opus/opus-1.3/silk/resampler_structs.h:
+../../../tools/opus/am_opus-1.2.1/silk/resampler_structs.h:
 
-../../../tools/opus/opus-1.3/silk/macros.h:
+../../../tools/opus/am_opus-1.2.1/silk/macros.h:
 
-../../../tools/opus/opus-1.3/celt/arch.h:
+../../../tools/opus/am_opus-1.2.1/celt/arch.h:
 
-../../../tools/opus/opus-1.3/celt/fixed_generic.h:
+../../../tools/opus/am_opus-1.2.1/celt/fixed_generic.h:
 
-../../../tools/opus/opus-1.3/celt/ecintrin.h:
+../../../tools/opus/am_opus-1.2.1/celt/ecintrin.h:
 
-../../../tools/opus/opus-1.3/celt/arch.h:
+../../../tools/opus/am_opus-1.2.1/celt/arch.h:
 
-../../../tools/opus/opus-1.3/celt/cpu_support.h:
+../../../tools/opus/am_opus-1.2.1/celt/cpu_support.h:
 
-../../../tools/opus/opus-1.3/silk/arm/biquad_alt_arm.h:
+../../../tools/opus/am_opus-1.2.1/silk/Inlines.h:
 
-../../../tools/opus/opus-1.3/celt/arm/armcpu.h:
+../../../tools/opus/am_opus-1.2.1/silk/MacroCount.h:
 
-../../../tools/opus/opus-1.3/silk/arm/LPC_inv_pred_gain_arm.h:
-
-../../../tools/opus/opus-1.3/silk/Inlines.h:
-
-../../../tools/opus/opus-1.3/silk/MacroCount.h:
-
-../../../tools/opus/opus-1.3/silk/MacroDebug.h:
+../../../tools/opus/am_opus-1.2.1/silk/MacroDebug.h:

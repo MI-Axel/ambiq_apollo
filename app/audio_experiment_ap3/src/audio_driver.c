@@ -160,8 +160,8 @@ void am_pdm_isr(void)
         //
         // Record the raw PCM data and send over RTT
         //
-        if(g_rttRecordingFlag == 1)
-            am_app_utils_rtt_record((void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES); 
+//        if(g_rttRecordingFlag == 1)
+//            am_app_utils_rtt_record((void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES); 
 #endif /* USE_RTT_DATA_OUTPUT */ 
 
 //        am_util_debug_printf("PDM DCMP interrupt, pick g_ui32PDMDataBuffer[5] = 0x%8x\n", g_ui32PDMDataBuffer[5]);

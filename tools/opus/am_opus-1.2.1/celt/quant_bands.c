@@ -272,7 +272,7 @@ void quant_coarse_energy(const CELTMode *m, int start, int end, int effEnd,
    int badness1=0;
    opus_int32 intra_bias;
    opus_val32 new_distortion;
-   unsigned char *intra_bits;
+//   unsigned char *intra_bits;
    SAVE_STACK;
 
    intra = force_intra || (!two_pass && *delayedIntra>2*C*(end-start) && nbAvailableBytes > (end-start)*C);
@@ -327,8 +327,8 @@ void quant_coarse_energy(const CELTMode *m, int start, int end, int effEnd,
       save_bytes = nintra_bytes-nstart_bytes;
       if (save_bytes == 0)
          save_bytes = ALLOC_NONE;
-      //ALLOC(intra_bits, save_bytes, unsigned char);
-      intra_bits = (unsigned char *) pvPortMalloc(save_bytes);
+      ALLOC(intra_bits, save_bytes, unsigned char);
+//      intra_bits = (unsigned char *) pvPortMalloc(save_bytes);
       
       /* Copy bits from intra bit-stream */
       OPUS_COPY(intra_bits, intra_buf, nintra_bytes - nstart_bytes);
@@ -347,8 +347,8 @@ void quant_coarse_energy(const CELTMode *m, int start, int end, int effEnd,
          OPUS_COPY(error, error_intra, C*m->nbEBands);
          intra = 1;
       }
-     if(intra_bits)
-       vPortFree((void *)intra_bits);
+//     if(intra_bits)
+//       vPortFree((void *)intra_bits);
    } else {
       OPUS_COPY(oldEBands, oldEBands_intra, C*m->nbEBands);
       OPUS_COPY(error, error_intra, C*m->nbEBands);
@@ -361,10 +361,10 @@ void quant_coarse_energy(const CELTMode *m, int start, int end, int effEnd,
             new_distortion);
 
    RESTORE_STACK;
-   if(oldEBands_intra)
-     vPortFree((void *)oldEBands_intra);
-   if(error_intra)
-     vPortFree((void *)error_intra);
+//   if(oldEBands_intra)
+//     vPortFree((void *)oldEBands_intra);
+//   if(error_intra)
+//     vPortFree((void *)error_intra);
 
 }
 
