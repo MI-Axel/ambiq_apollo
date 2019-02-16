@@ -97,9 +97,9 @@ bin/main.o: ../src/main.c \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h \
  ../include/am_opus.h ../include/board_setup.h ../include/audio_driver.h \
- ../../../tools/opus/am_opus-1.2.1/include/opus.h \
- ../../../tools/opus/am_opus-1.2.1/include/opus_types.h \
- ../../../tools/opus/am_opus-1.2.1/include/opus_defines.h
+ ../../../tools/opus/opus-1.2.1/include/opus.h \
+ ../../../tools/opus/opus-1.2.1/include/opus_types.h \
+ ../../../tools/opus/opus-1.2.1/include/opus_defines.h
 
 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -303,8 +303,8 @@ bin/main.o: ../src/main.c \
 
 ../include/audio_driver.h:
 
-../../../tools/opus/am_opus-1.2.1/include/opus.h:
+../../../tools/opus/opus-1.2.1/include/opus.h:
 
-../../../tools/opus/am_opus-1.2.1/include/opus_types.h:
+../../../tools/opus/opus-1.2.1/include/opus_types.h:
 
-../../../tools/opus/am_opus-1.2.1/include/opus_defines.h:
+../../../tools/opus/opus-1.2.1/include/opus_defines.h:

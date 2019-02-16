@@ -44,7 +44,7 @@ CONFIG := bin
 #AM_SoftwareRoot ?= ../../../device/Apollo3-SDK-2018.08.13
 AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
 AM_FolderRoot ?= ../../..
-AM_OpusRoot ?= ../../../tools/opus/am_opus-1.2.1
+AM_OpusRoot ?= ../../../tools/opus/opus-1.2.1
 
 SHELL:=/bin/bash
 #### Setup ####
@@ -128,7 +128,7 @@ DEFINES += -DARM_MATH_CM4
 
 # opus pre-definition
 DEFINES += -DHAVE_CONFIG_H
-DEFINES += -DCUSTOM_SUPPORT
+#DEFINES += -DCUSTOM_SUPPORT
 
 INCLUDES = -I../src
 INCLUDES += -I../include

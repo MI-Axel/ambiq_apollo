@@ -73,12 +73,12 @@ int main(void)
 #endif // AM_AEP_ALLOC_FREE_TEST
 
 #if AM_AEP_OPUS_TEST
-    uint8_t g_ui8EncCompleteFlag = 0;
+    uint8_t g_ui8EncStartFlag = 0;
     uint32_t g_ui32LocalDataIndex = 0;
     uint32_t g_ui32LocalDataFrameNum = sizeof(mono_16b_USP1602) / sizeof(opus_int16);
     uint32_t g_ui32FrameSize = 320;                 // encoder frame size
-    uint32_t g_ui32EncOutputBytes = 80;             // FrameSize * 2 bytes / 8 
-//    uint32_t g_ui32EncOutputBytes = 40;             // FrameSize * 2 bytes / 16 
+//    uint32_t g_ui32EncOutputBytes = 80;             // FrameSize * 2 bytes / 8 
+    uint32_t g_ui32EncOutputBytes = 40;             // FrameSize * 2 bytes / 16 
     uint32_t g_ui32OutputSumBytes = 0;              // used to summary the output bytes
     
     am_opus_encoder_init(g_opusEnc);
@@ -97,11 +97,17 @@ int main(void)
 
 #if AM_AEP_OPUS_TEST
 
-        if((g_ui32LocalDataIndex <= (sizeof(mono_16b_USP1602) - g_ui32FrameSize * sizeof(opus_int16))) && (g_ui8EncCompleteFlag == 0) && (g_rttRecordingFlag == 1))
+        if((g_ui32LocalDataIndex <= (sizeof(mono_16b_USP1602) - g_ui32FrameSize * sizeof(opus_int16))) && (g_ui8EncStartFlag == 1))
         {
-//            SEGGER_SYSVIEW_OnUserStart(10);
+#if configUSE_SYSVIEW            
+            SEGGER_SYSVIEW_OnUserStart(10);
+#endif // configUSE_SYSVIEW
             g_opusEncRet = opus_encode(g_opusEnc, &mono_16b_USP1602[g_ui32LocalDataIndex], g_ui32FrameSize, g_opusOutputBuff, g_ui32EncOutputBytes);
-//            SEGGER_SYSVIEW_OnUserStop(10);
+
+#if configUSE_SYSVIEW
+            SEGGER_SYSVIEW_OnUserStop(10);
+#endif // configUSE_SYSVIEW
+
             if(g_opusEncRet < 0)
             {
                 am_util_stdio_printf("encode failed: %s\r\n", opus_strerror(g_opusEncRet));
@@ -111,18 +117,23 @@ int main(void)
                 g_ui32LocalDataIndex += g_ui32FrameSize * sizeof(opus_int16);
                 g_ui32OutputSumBytes += g_opusEncRet;
 #if configUSE_RTT_DATA_OUTPUT
-                // Output opus data to rtt buffer
-                am_app_utils_rtt_record(g_opusOutputBuff, g_ui32EncOutputBytes);
-#endif
+                if(g_rttRecordingFlag == 1)
+                    // Output opus data to rtt buffer
+                    am_app_utils_rtt_record(g_opusOutputBuff, g_ui32EncOutputBytes);
+#endif // configUSE_RTT_DATA_OUTPUT
                 am_util_stdio_printf("encode finished: %d bytes is output.\r\n", g_opusEncRet);
             }
         }
-        else if((g_ui32LocalDataIndex > (sizeof(mono_16b_USP1602) - g_ui32FrameSize * sizeof(opus_int16))) && (g_ui8EncCompleteFlag == 0) && (g_rttRecordingFlag == 1))
+        else if((g_ui32LocalDataIndex > (sizeof(mono_16b_USP1602) - g_ui32FrameSize * sizeof(opus_int16))) && (g_ui8EncStartFlag == 1))
         {
-            g_ui8EncCompleteFlag = 1;
-            g_rttRecordingFlag = 0;
             am_util_stdio_printf("Totally %d bytes are output.\r\n", g_ui32OutputSumBytes);
             DebugLog("Local data are all encoded!\r\n");
+            g_ui8EncStartFlag = 0;
+            g_ui32LocalDataIndex = 0;
+            g_ui32OutputSumBytes = 0;
+#if configUSE_RTT_DATA_OUTPUT
+            g_rttRecordingFlag = 0;
+#endif // configUSE_RTT_DATA_OUTPUT
         }
 
 #endif // AM_AEP_OPUS_TEST
@@ -142,29 +153,64 @@ int main(void)
 #endif // AM_AEP_MEMCPY_TEST
 
 
-#if configUSE_RTT_DATA_OUTPUT
+//
+// Board key interface for debug using
+//
+
         if(g_sysKeyValue == AM_APP_KEY_0)
         {
             g_sysKeyValue = AM_APP_KEY_NONE;
 
+#if configUSE_RTT_DATA_OUTPUT
             if(g_rttRecordingFlag == 1)
             {
                 g_rttRecordingFlag = 0;
-                am_devices_led_off(am_bsp_psLEDs, 1);
             }
             else if(g_rttRecordingFlag == 0)
             {
                 g_rttRecordingFlag = 1;
-                am_devices_led_on(am_bsp_psLEDs, 1);
             }
+#endif // configUSE_RTT_DATA_OUTPUT
+
+#if AM_AEP_OPUS_TEST
+            if(g_ui8EncStartFlag == 1)
+            {
+                g_ui8EncStartFlag = 0;
+            }
+            else if(g_ui8EncStartFlag == 0)
+            {
+                g_ui8EncStartFlag = 1;
+            }
+
+#endif // AM_AEP_OPUS_TEST
         }
-        
+
+//
+// Board LED indicators polling
+//
+#if configUSE_RTT_DATA_OUTPUT
         if(g_rttRecordingFlag == 0)
         {
             am_devices_led_off(am_bsp_psLEDs, 1);
         }
-
+        else if(g_rttRecordingFlag == 1)
+        {
+            am_devices_led_on(am_bsp_psLEDs, 1);
+        }
 #endif // configUSE_RTT_DATA_OUTPUT
+
+#if AM_AEP_OPUS_TEST
+
+        if(g_ui8EncStartFlag == 0)
+        {
+            am_devices_led_off(am_bsp_psLEDs, 1);
+        }
+        else if(g_ui8EncStartFlag == 1)
+        {
+            am_devices_led_on(am_bsp_psLEDs, 1);
+        }
+
+#endif // AM_AEP_OPUS_TEST
     //
     // Go to Deep Sleep.
     //
