@@ -128,6 +128,7 @@ int main(void)
         {
             am_util_stdio_printf("Totally %d bytes are output.\r\n", g_ui32OutputSumBytes);
             DebugLog("Local data are all encoded!\r\n");
+            am_devices_led_off(am_bsp_psLEDs, 1);
             g_ui8EncStartFlag = 0;
             g_ui32LocalDataIndex = 0;
             g_ui32OutputSumBytes = 0;
@@ -180,37 +181,12 @@ int main(void)
             else if(g_ui8EncStartFlag == 0)
             {
                 g_ui8EncStartFlag = 1;
+                am_devices_led_on(am_bsp_psLEDs, 1);
             }
 
 #endif // AM_AEP_OPUS_TEST
         }
 
-//
-// Board LED indicators polling
-//
-#if configUSE_RTT_DATA_OUTPUT
-        if(g_rttRecordingFlag == 0)
-        {
-            am_devices_led_off(am_bsp_psLEDs, 1);
-        }
-        else if(g_rttRecordingFlag == 1)
-        {
-            am_devices_led_on(am_bsp_psLEDs, 1);
-        }
-#endif // configUSE_RTT_DATA_OUTPUT
-
-#if AM_AEP_OPUS_TEST
-
-        if(g_ui8EncStartFlag == 0)
-        {
-            am_devices_led_off(am_bsp_psLEDs, 1);
-        }
-        else if(g_ui8EncStartFlag == 1)
-        {
-            am_devices_led_on(am_bsp_psLEDs, 1);
-        }
-
-#endif // AM_AEP_OPUS_TEST
     //
     // Go to Deep Sleep.
     //

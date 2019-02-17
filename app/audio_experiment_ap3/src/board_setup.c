@@ -65,7 +65,8 @@ am_hal_ctimer_config_t g_sTimer0 =
     // Set up Timer0A.
     (AM_HAL_CTIMER_FN_REPEAT    |
      AM_HAL_CTIMER_INT_ENABLE   |
-    AM_HAL_CTIMER_HFRC_12MHZ), 
+    AM_HAL_CTIMER_XT_32_768KHZ),
+     //    AM_HAL_CTIMER_HFRC_12MHZ), 
     // No configuration for Timer0B.
     0,
 };
@@ -89,7 +90,7 @@ timerA0_init(void)
     //
     // Enable the LFRC.
     //
-    am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_HFADJ_ENABLE, 0);
+    am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_XTAL_START, 0);
     
 
     //
@@ -101,7 +102,7 @@ timerA0_init(void)
     //
     // Set up timerA0 to 32Hz from LFRC divided to 1 second period.
     //
-    ui32Period = 12000;
+    ui32Period = 33;
     am_hal_ctimer_period_set(0, AM_HAL_CTIMER_TIMERA, ui32Period,
                              (ui32Period >> 1));
 

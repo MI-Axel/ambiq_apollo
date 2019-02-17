@@ -8,7 +8,7 @@
 
 //*****************************************************************************
 //
-// Copyright (c) 2018, Ambiq Micro
+// Copyright (c) 2019, Ambiq Micro
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -40,19 +40,17 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-// This is part of revision v1.2.12-830-g39ebe7dbe of the AmbiqSuite Development Package.
+// This is part of revision v2.0.0 of the AmbiqSuite Development Package.
 //
 //*****************************************************************************
 
 #include <stdint.h>
-#include "am_mcu_apollo.h"              // Defines AM_CMSIS_REGS
 
 //*****************************************************************************
 //
 // Forward declaration of interrupt handlers.
 //
 //*****************************************************************************
-#if AM_CMSIS_REGS
 extern void Reset_Handler(void)       __attribute ((naked));
 extern void NMI_Handler(void)         __attribute ((weak));
 extern void HardFault_Handler(void)   __attribute ((weak));
@@ -64,18 +62,6 @@ extern void SVC_Handler(void)         __attribute ((weak, alias ("am_default_isr
 extern void DebugMon_Handler(void)    __attribute ((weak, alias ("am_default_isr")));
 extern void PendSV_Handler(void)      __attribute ((weak, alias ("am_default_isr")));
 extern void SysTick_Handler(void)     __attribute ((weak, alias ("am_default_isr")));
-#else // AM_CMSIS_REGS
-extern void am_reset_isr(void)        __attribute ((naked));
-extern void am_nmi_isr(void)          __attribute ((weak));
-extern void am_fault_isr(void)        __attribute ((weak));
-extern void am_mpufault_isr(void)     __attribute ((weak, alias ("am_fault_isr")));
-extern void am_busfault_isr(void)     __attribute ((weak, alias ("am_fault_isr")));
-extern void am_usagefault_isr(void)   __attribute ((weak, alias ("am_fault_isr")));
-extern void am_svcall_isr(void)       __attribute ((weak, alias ("am_default_isr")));
-extern void am_debugmon_isr(void)     __attribute ((weak, alias ("am_default_isr")));
-extern void am_pendsv_isr(void)       __attribute ((weak, alias ("am_default_isr")));
-extern void am_systick_isr(void)      __attribute ((weak, alias ("am_default_isr")));
-#endif // AM_CMSIS_REGS
 
 extern void am_brownout_isr(void)     __attribute ((weak, alias ("am_default_isr")));
 extern void am_watchdog_isr(void)     __attribute ((weak, alias ("am_default_isr")));
@@ -96,8 +82,9 @@ extern void am_uart_isr(void)         __attribute ((weak, alias ("am_default_isr
 extern void am_uart1_isr(void)        __attribute ((weak, alias ("am_default_isr")));
 extern void am_scard_isr(void)        __attribute ((weak, alias ("am_default_isr")));
 extern void am_adc_isr(void)          __attribute ((weak, alias ("am_default_isr")));
-extern void am_pdm_isr(void)          __attribute ((weak, alias ("am_default_isr")));
-extern void am_mspi_isr(void)         __attribute ((weak, alias ("am_default_isr")));
+extern void am_pdm0_isr(void)         __attribute ((weak, alias ("am_default_isr")));
+extern void am_mspi0_isr(void)        __attribute ((weak, alias ("am_default_isr")));
+extern void am_software0_isr(void)    __attribute ((weak, alias ("am_default_isr")));
 extern void am_stimer_isr(void)       __attribute ((weak, alias ("am_default_isr")));
 extern void am_stimer_cmpr0_isr(void) __attribute ((weak, alias ("am_default_isr")));
 extern void am_stimer_cmpr1_isr(void) __attribute ((weak, alias ("am_default_isr")));
@@ -108,10 +95,6 @@ extern void am_stimer_cmpr5_isr(void) __attribute ((weak, alias ("am_default_isr
 extern void am_stimer_cmpr6_isr(void) __attribute ((weak, alias ("am_default_isr")));
 extern void am_stimer_cmpr7_isr(void) __attribute ((weak, alias ("am_default_isr")));
 extern void am_clkgen_isr(void)       __attribute ((weak, alias ("am_default_isr")));
-extern void am_software0_isr(void)    __attribute ((weak, alias ("am_default_isr")));
-extern void am_software1_isr(void)    __attribute ((weak, alias ("am_default_isr")));
-extern void am_software2_isr(void)    __attribute ((weak, alias ("am_default_isr")));
-extern void am_software3_isr(void)    __attribute ((weak, alias ("am_default_isr")));
 
 extern void am_default_isr(void)      __attribute ((weak));
 
@@ -128,7 +111,7 @@ extern int main(void);
 //
 //*****************************************************************************
 __attribute__ ((section(".stack")))
-static uint32_t g_pui32Stack[12288];
+static uint32_t g_pui32Stack[0x3000];
 
 //*****************************************************************************
 //
@@ -145,7 +128,6 @@ void (* const g_am_pfnVectors[])(void) =
 {
     (void (*)(void))((uint32_t)g_pui32Stack + sizeof(g_pui32Stack)),
                                             // The initial stack pointer
-#if AM_CMSIS_REGS
     Reset_Handler,                          // The reset handler
     NMI_Handler,                            // The NMI handler
     HardFault_Handler,                      // The hard fault handler
@@ -161,23 +143,6 @@ void (* const g_am_pfnVectors[])(void) =
     0,                                      // Reserved
     PendSV_Handler,                         // The PendSV handler
     SysTick_Handler,                        // The SysTick handler
-#else // AM_CMSIS_REGS
-    am_reset_isr,                           // The reset handler
-    am_nmi_isr,                             // The NMI handler
-    am_fault_isr,                           // The hard fault handler
-    am_fault_isr,                           // The MPU fault handler
-    am_fault_isr,                           // The bus fault handler
-    am_fault_isr,                           // The usage fault handler
-    0,                                      // Reserved
-    0,                                      // Reserved
-    0,                                      // Reserved
-    0,                                      // Reserved
-    am_svcall_isr,                          // SVCall handle
-    am_debugmon_isr,                        // Debug monitor handler
-    0,                                      // Reserved
-    am_pendsv_isr,                          // The PendSV handler
-    am_systick_isr,                         // The SysTick handler
-#endif // AM_CMSIS_REGS
 
     //
     // Peripheral Interrupts
@@ -201,9 +166,9 @@ void (* const g_am_pfnVectors[])(void) =
     am_uart1_isr,                           // 16: UART1
     am_scard_isr,                           // 17: SCARD
     am_adc_isr,                             // 18: ADC
-    am_pdm_isr,                             // 19: PDM
-    am_mspi_isr,                            // 20: MSPI
-    am_default_isr,                         // 21: reserved
+    am_pdm0_isr,                            // 19: PDM
+    am_mspi0_isr,                           // 20: MSPI
+    am_software0_isr,                       // 21: SOFTWARE0
     am_stimer_isr,                          // 22: SYSTEM TIMER
     am_stimer_cmpr0_isr,                    // 23: SYSTEM TIMER COMPARE0
     am_stimer_cmpr1_isr,                    // 24: SYSTEM TIMER COMPARE1
@@ -214,10 +179,6 @@ void (* const g_am_pfnVectors[])(void) =
     am_stimer_cmpr6_isr,                    // 29: SYSTEM TIMER COMPARE6
     am_stimer_cmpr7_isr,                    // 30: SYSTEM TIMER COMPARE7
     am_clkgen_isr,                          // 31: CLKGEN
-    am_software0_isr,                       // 32: SOFTWARE0
-    am_software1_isr,                       // 33: SOFTWARE1
-    am_software2_isr,                       // 34: SOFTWARE2
-    am_software3_isr                        // 35: SOFTWARE3
 };
 
 //******************************************************************************
@@ -233,6 +194,10 @@ void (* const g_am_pfnVectors[])(void) =
 __attribute__ ((section(".patch")))
 uint32_t const __Patchable[] =
 {
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,
@@ -269,11 +234,7 @@ extern uint32_t _ebss;
 //*****************************************************************************
 #if defined(__GNUC_STDC_INLINE__)
 void
-#if AM_CMSIS_REGS
 Reset_Handler(void)
-#else // AM_CMSIS_REGS
-am_reset_isr(void)
-#endif // AM_CMSIS_REGS
 {
     //
     // Set the vector table pointer.
@@ -342,11 +303,7 @@ am_reset_isr(void)
 //
 //*****************************************************************************
 void
-#if AM_CMSIS_REGS
 NMI_Handler(void)
-#else // AM_CMSIS_REGS
-am_nmi_isr(void)
-#endif // AM_CMSIS_REGS
 {
     //
     // Go into an infinite loop.
@@ -364,11 +321,7 @@ am_nmi_isr(void)
 //
 //*****************************************************************************
 void
-#if AM_CMSIS_REGS
 HardFault_Handler(void)
-#else // AM_CMSIS_REGS
-am_fault_isr(void)
-#endif // AM_CMSIS_REGS
 {
     //
     // Go into an infinite loop.
@@ -395,4 +348,3 @@ am_default_isr(void)
     {
     }
 }
-

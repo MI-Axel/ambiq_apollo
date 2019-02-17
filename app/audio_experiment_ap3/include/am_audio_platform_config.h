@@ -26,7 +26,7 @@
 
 
 /* Data Block Output configuration */
-#define configUSE_RTT_DATA_OUTPUT           1
+#define configUSE_RTT_DATA_OUTPUT           0
 
 /* SEGGER sysview configuration */
 #define configUSE_SYSVIEW                   0

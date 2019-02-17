@@ -3,10 +3,7 @@
  * binary_counter.ld - Linker script for applications using startup_gnu.c
  *
  *****************************************************************************/
-
 ENTRY(Reset_Handler)
-
-_heap_size = 0x200;    /* 1000B required amount of heap  */
 
 MEMORY
 {
@@ -30,7 +27,7 @@ SECTIONS
     } > FLASH
 
   /* User stack section initialized by startup code. */
-  .stack (NOLOAD):
+    .stack (NOLOAD):
     {
         . = ALIGN(8);
         *(.stack)
@@ -69,8 +66,7 @@ SECTIONS
         PROVIDE(end = .);
         /* _heap_start = .; */
         /* "end" is used by newlib's syscalls!!! */
-        PROVIDE(_heap_start = end );
-        . = . + _heap_size;
+        PROVIDE(_heap_start = end);
         PROVIDE(_heap_end = .);
         . = ALIGN(4);
     } >SRAM
