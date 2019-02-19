@@ -87,7 +87,10 @@ bin/audio_driver.o: ../src/audio_driver.c ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_ble.h \
  ../include/am_audio_platform_config.h ../include/board_setup.h \
  ../../../app_utils/am_app_utils_ring_buffer.h \
- ../../../app_utils/am_app_utils.h
+ ../../../app_utils/am_app_utils.h \
+ ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h \
+ ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h \
+ ../../../tools/segger/SystemView_Src_V252d/Config/Global.h
 
 ../include/audio_driver.h:
 
@@ -270,3 +273,9 @@ bin/audio_driver.o: ../src/audio_driver.c ../include/audio_driver.h \
 ../../../app_utils/am_app_utils_ring_buffer.h:
 
 ../../../app_utils/am_app_utils.h:
+
+../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h:
+
+../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h:
+
+../../../tools/segger/SystemView_Src_V252d/Config/Global.h:

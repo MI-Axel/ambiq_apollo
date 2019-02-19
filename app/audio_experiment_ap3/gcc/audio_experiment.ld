@@ -5,6 +5,8 @@
  *****************************************************************************/
 ENTRY(Reset_Handler)
 
+_heap_size = 0x200;    /* 1000B required amount of heap  */
+
 MEMORY
 {
     FLASH (rx) : ORIGIN = 0x0000C000, LENGTH = 960K
@@ -67,6 +69,7 @@ SECTIONS
         /* _heap_start = .; */
         /* "end" is used by newlib's syscalls!!! */
         PROVIDE(_heap_start = end);
+        . = . + _heap_size;
         PROVIDE(_heap_end = .);
         . = ALIGN(4);
     } >SRAM

@@ -91,6 +91,9 @@ bin/main.o: ../src/main.c \
  ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h \
+ ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h \
+ ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h \
+ ../../../tools/segger/SystemView_Src_V252d/Config/Global.h \
  ../include/am_opus.h ../include/board_setup.h ../include/audio_driver.h \
  ../../../tools/opus/opus-1.2.1/include/opus.h \
  ../../../tools/opus/opus-1.2.1/include/opus_types.h \
@@ -283,6 +286,12 @@ bin/main.o: ../src/main.c \
 ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h:
 
 ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h:
+
+../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h:
+
+../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h:
+
+../../../tools/segger/SystemView_Src_V252d/Config/Global.h:
 
 ../include/am_opus.h:
 
