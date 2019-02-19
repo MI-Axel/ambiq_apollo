@@ -190,7 +190,7 @@ extern void __iar_program_start(void);
 // Reserve space for the system stack.
 //
 //*****************************************************************************
-static uint32_t pui32Stack[0x8C0] @ ".noinit";
+static uint32_t pui32Stack[0x4000] @ ".noinit";
 
 //*****************************************************************************
 //

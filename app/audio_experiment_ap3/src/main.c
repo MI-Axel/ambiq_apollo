@@ -77,8 +77,8 @@ int main(void)
     uint32_t g_ui32LocalDataIndex = 0;
     uint32_t g_ui32LocalDataFrameNum = sizeof(mono_16b_USP1602) / sizeof(opus_int16);
     uint32_t g_ui32FrameSize = 320;                 // encoder frame size
-//    uint32_t g_ui32EncOutputBytes = 80;             // FrameSize * 2 bytes / 8 
-    uint32_t g_ui32EncOutputBytes = 40;             // FrameSize * 2 bytes / 16 
+    uint32_t g_ui32EncOutputBytes = 80;             // FrameSize * 2 bytes / 8 
+//    uint32_t g_ui32EncOutputBytes = 40;             // FrameSize * 2 bytes / 16 
     uint32_t g_ui32OutputSumBytes = 0;              // used to summary the output bytes
     
     am_opus_encoder_init(g_opusEnc);
@@ -102,7 +102,7 @@ int main(void)
 #if configUSE_SYSVIEW            
             SEGGER_SYSVIEW_OnUserStart(10);
 #endif // configUSE_SYSVIEW
-            g_opusEncRet = opus_encode(g_opusEnc, &mono_16b_USP1602[g_ui32LocalDataIndex], g_ui32FrameSize, g_opusOutputBuff, g_ui32EncOutputBytes);
+            g_opusEncRet = opus_encode(g_opusEnc, (opus_int16*)&mono_16b_USP1602[g_ui32LocalDataIndex], g_ui32FrameSize, g_opusOutputBuff, g_ui32EncOutputBytes);
 
 #if configUSE_SYSVIEW
             SEGGER_SYSVIEW_OnUserStop(10);

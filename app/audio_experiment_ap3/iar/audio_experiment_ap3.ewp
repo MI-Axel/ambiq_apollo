@@ -229,7 +229,6 @@
                     <state>ARM_MATH_CM4</state>
                     <state>USE_V4_FEATURES</state>
                     <state>HAVE_CONFIG_H</state>
-                    <state>OPUS_ARM_ASM</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -362,14 +361,15 @@
                     <state>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\CMSIS\AmbiqMicro\Include</state>
                     <state>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\devices</state>
                     <state>$PROJ_DIR$\..\..\..\app_utils\</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\include</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\arm</state>
-                    <state>$PROJ_DIR$\..\..\..\tools\segger\rtt</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\include</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\arm</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\segger\SystemView_Src_V252d\Config</state>
+                    <state>$PROJ_DIR$\..\..\..\tools\segger\SystemView_Src_V252d\SEGGER</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -385,7 +385,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -394,7 +394,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules98</name>
@@ -428,7 +428,7 @@
                 </option>
                 <option>
                     <name>IccAllowVLA</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IccStaticDestr</name>
@@ -791,11 +791,11 @@
                 </option>
                 <option>
                     <name>IlinkIcfOverride</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$TOOLKIT_DIR$\config\linker\AmbiqMicro\apollo3_1024.icf</state>
+                    <state>C:\Users\agao\ambiq_apollo\app\audio_experiment_ap3\iar\audio_experiment_ap3.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -2145,6 +2145,9 @@
         <file>
             <name>$PROJ_DIR$\..\..\..\app_utils\am_app_utils_rtt_recorder.c</name>
         </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\app_utils\am_app_utils_syscall.c</name>
+        </file>
     </group>
     <group>
         <name>bsp</name>
@@ -2256,73 +2259,70 @@
     </group>
     <group>
         <name>opus</name>
-        <excluded>
-            <configuration>Debug</configuration>
-        </excluded>
         <group>
             <name>celt</name>
             <group>
                 <name>arm</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\arm\armcpu.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\arm\arm_celt_map.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\arm\armcpu.c</name>
                 </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\bands.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\bands.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\celt.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\celt.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\celt_decoder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\celt_decoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\celt_encoder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\celt_encoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\celt_lpc.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\celt_lpc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\cwrs.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\cwrs.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\entcode.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\entcode.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\entdec.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\entdec.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\entenc.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\entenc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\kiss_fft.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\kiss_fft.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\laplace.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\laplace.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\mathops.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\mathops.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\mdct.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\mdct.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\modes.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\modes.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\opus_custom_demo.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\pitch.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\pitch.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\quant_bands.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\quant_bands.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\rate.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\rate.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\celt\vq.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\celt\vq.c</name>
             </file>
         </group>
         <group>
@@ -2330,353 +2330,359 @@
             <group>
                 <name>fixed</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\apply_sine_window_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\apply_sine_window_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\autocorr_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\autocorr_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\burg_modified_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\burg_modified_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\corrMatrix_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\corrMatrix_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\encode_frame_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\encode_frame_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\find_LPC_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\find_LPC_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\find_LTP_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\find_LTP_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\find_pitch_lags_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\find_pitch_lags_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\find_pred_coefs_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\find_pred_coefs_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\k2a_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\k2a_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\k2a_Q16_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\k2a_Q16_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\LTP_analysis_filter_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\LTP_analysis_filter_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\LTP_scale_ctrl_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\LTP_scale_ctrl_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\noise_shape_analysis_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\noise_shape_analysis_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\pitch_analysis_core_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\pitch_analysis_core_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\process_gains_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\process_gains_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\regularize_correlations_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\regularize_correlations_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\residual_energy16_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\residual_energy16_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\residual_energy_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\residual_energy_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\schur64_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\schur64_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\schur_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\schur_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\vector_ops_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\vector_ops_FIX.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\fixed\warped_autocorrelation_FIX.c</name>
+                    <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\fixed\warped_autocorrelation_FIX.c</name>
                 </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\A2NLSF.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\A2NLSF.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\ana_filt_bank_1.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\ana_filt_bank_1.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\biquad_alt.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\biquad_alt.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\bwexpander.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\bwexpander.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\bwexpander_32.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\bwexpander_32.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\check_control_input.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\check_control_input.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\CNG.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\CNG.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\code_signs.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\code_signs.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\control_audio_bandwidth.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\control_audio_bandwidth.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\control_codec.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\control_codec.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\control_SNR.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\control_SNR.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\debug.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\debug.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\dec_API.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\dec_API.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\decode_core.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\decode_core.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\decode_frame.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\decode_frame.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\decode_indices.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\decode_indices.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\decode_parameters.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\decode_parameters.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\decode_pitch.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\decode_pitch.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\decode_pulses.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\decode_pulses.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\decoder_set_fs.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\decoder_set_fs.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\enc_API.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\enc_API.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\encode_indices.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\encode_indices.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\encode_pulses.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\encode_pulses.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\gain_quant.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\gain_quant.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\HP_variable_cutoff.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\HP_variable_cutoff.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\init_decoder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\init_decoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\init_encoder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\init_encoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\inner_prod_aligned.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\inner_prod_aligned.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\interpolate.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\interpolate.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\lin2log.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\lin2log.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\log2lin.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\log2lin.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\LP_variable_cutoff.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\LP_variable_cutoff.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\LPC_analysis_filter.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\LPC_analysis_filter.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\LPC_fit.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\LPC_fit.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\LPC_inv_pred_gain.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\LPC_inv_pred_gain.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF2A.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF2A.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF_decode.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF_decode.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF_del_dec_quant.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF_del_dec_quant.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF_encode.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF_encode.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF_stabilize.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF_stabilize.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF_unpack.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF_unpack.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF_VQ.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF_VQ.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NLSF_VQ_weights_laroia.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NLSF_VQ_weights_laroia.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NSQ.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NSQ.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\NSQ_del_dec.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\NSQ_del_dec.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\pitch_est_tables.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\pitch_est_tables.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\PLC.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\PLC.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\process_NLSFs.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\process_NLSFs.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\quant_LTP_gains.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\quant_LTP_gains.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler_down2.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler_down2.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler_down2_3.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler_down2_3.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler_private_AR2.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler_private_AR2.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler_private_down_FIR.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler_private_down_FIR.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler_private_IIR_FIR.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler_private_IIR_FIR.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler_private_up2_HQ.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler_private_up2_HQ.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\resampler_rom.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\resampler_rom.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\shell_coder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\shell_coder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\sigm_Q15.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\sigm_Q15.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\sort.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\sort.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\stereo_decode_pred.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\stereo_decode_pred.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\stereo_encode_pred.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\stereo_encode_pred.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\stereo_find_predictor.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\stereo_find_predictor.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\stereo_LR_to_MS.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\stereo_LR_to_MS.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\stereo_MS_to_LR.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\stereo_MS_to_LR.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\stereo_quant_pred.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\stereo_quant_pred.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\sum_sqr_shift.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\sum_sqr_shift.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\table_LSF_cos.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\table_LSF_cos.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\tables_gain.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\tables_gain.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\tables_LTP.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\tables_LTP.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\tables_NLSF_CB_NB_MB.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\tables_NLSF_CB_NB_MB.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\tables_NLSF_CB_WB.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\tables_NLSF_CB_WB.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\tables_other.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\tables_other.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\tables_pitch_lag.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\tables_pitch_lag.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\tables_pulses_per_block.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\tables_pulses_per_block.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\VAD.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\VAD.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\silk\VQ_WMat_EC.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\silk\VQ_WMat_EC.c</name>
             </file>
         </group>
         <group>
             <name>src</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\analysis.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\analysis.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\mlp.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\mlp.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\mlp_data.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\mlp_data.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\opus.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\opus.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\opus_compare.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\opus_decoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\opus_decoder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\opus_encoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\opus_encoder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\opus_multistream.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\opus_multistream.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\opus_multistream_decoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\opus_multistream_decoder.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\opus_multistream_encoder.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\opus_multistream_encoder.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.3\src\repacketizer.c</name>
+                <name>$PROJ_DIR$\..\..\..\tools\opus\opus-1.2.1\src\repacketizer.c</name>
             </file>
         </group>
     </group>
     <group>
-        <name>rtt</name>
+        <name>segger</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\tools\segger\rtt\SEGGER_RTT.c</name>
+            <name>$PROJ_DIR$\..\..\..\tools\segger\SystemView_Src_V252d\SEGGER\SEGGER_RTT.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\tools\segger\rtt\SEGGER_RTT_printf.c</name>
+            <name>$PROJ_DIR$\..\..\..\tools\segger\SystemView_Src_V252d\SEGGER\SEGGER_SYSVIEW.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\src\SEGGER_SYSVIEW_Config_NoOS.c</name>
         </file>
     </group>
+    <file>
+        <name>$PROJ_DIR$\..\src\am_app_USP1602_mono_array.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\src\am_opus.c</name>
+    </file>
     <file>
         <name>$PROJ_DIR$\..\src\audio_driver.c</name>
     </file>

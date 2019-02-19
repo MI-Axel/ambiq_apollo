@@ -5,7 +5,7 @@
  *****************************************************************************/
 ENTRY(Reset_Handler)
 
-_heap_size = 0x200;    /* 1000B required amount of heap  */
+_heap_size = 0x400;    /* 1000B required amount of heap  */
 
 MEMORY
 {
@@ -63,7 +63,7 @@ SECTIONS
 
     .heap :
     {
-        . = ALIGN(4);
+        . = ALIGN(8);
         PROVIDE(__end__ = .);
         PROVIDE(end = .);
         /* _heap_start = .; */
@@ -71,7 +71,7 @@ SECTIONS
         PROVIDE(_heap_start = end);
         . = . + _heap_size;
         PROVIDE(_heap_end = .);
-        . = ALIGN(4);
+        . = ALIGN(8);
     } >SRAM
 
     .ARM.attributes 0 : { *(.ARM.attributes) }
