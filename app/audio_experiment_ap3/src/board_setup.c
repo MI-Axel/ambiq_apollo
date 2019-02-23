@@ -24,15 +24,15 @@ volatile uint8_t g_rttRecordingFlag = 0;
 //******************************************************************************
 //Global data buffers used by ring buffers
 //*****************************************************************************
-volatile uint8_t g_ui8PCMDataRingBuff[PCM_FRAME_SIZE*PCM_DATA_BYTES*NUM_PCM_FRAMES];
+//volatile uint8_t g_ui8PCMDataRingBuff[PCM_FRAME_SIZE*PCM_DATA_BYTES*NUM_PCM_FRAMES];
 
-am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
+//am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
 
-static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] = 
-{
-    {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
-};
-#define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
+//static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] = 
+//{
+//    {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
+//};
+//#define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
 
 
 //*****************************************************************************
@@ -239,7 +239,7 @@ void am_app_AEP_sys_init(void)
 
     am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
 
-    am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);
+//    am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);
 
 }
 

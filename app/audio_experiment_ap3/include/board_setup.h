@@ -28,12 +28,12 @@
 //*****************************************************************************
 // this enum list contains all app related ring buffers between AM_APP_RINGBUFF_NONE and AM_APP_RINGBUFF_MAX
 // where each index corresponds to a ring buffer
-typedef enum
-{
-    AM_APP_RINGBUFF_NONE = 0, // The enum must begin with this value as named.
-    AM_APP_RINGBUFF_PCM,
-    AM_APP_RINGBUFF_MAX // The enum must end with this value as named.
-} am_app_utils_ring_buffer_enum_t;
+//typedef enum
+//{
+//    AM_APP_RINGBUFF_NONE = 0, // The enum must begin with this value as named.
+//    AM_APP_RINGBUFF_PCM,
+//    AM_APP_RINGBUFF_MAX // The enum must end with this value as named.
+//} am_app_utils_ring_buffer_enum_t;
 
 typedef enum
 {
@@ -47,7 +47,7 @@ typedef enum
 
 extern volatile  am_app_AEP_key_value_enum_t g_sysKeyValue;
 
-extern am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
+//extern am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
 
 extern const am_hal_gpio_pincfg_t g_deepsleep_button0;
 extern am_hal_ctimer_config_t g_sTimer0; 

@@ -37,9 +37,9 @@
 # This is part of revision v1.2.12-830-g39ebe7dbe of the AmbiqSuite Development Package.
 #
 #******************************************************************************
-TARGET := audio_experiment
+TARGET := rtos_audio_experiment_platform
 COMPILERNAME := gcc
-PROJECT := audio_experiment_gcc
+PROJECT := rtos_audio_experiment_platform_gcc
 CONFIG := bin
 #AM_SoftwareRoot ?= ../../../device/Apollo3-SDK-2018.08.13
 AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
@@ -55,7 +55,7 @@ CPU = cortex-m4
 FPU = fpv4-sp-d16
 FABI = hard
 
-LINKER_FILE := ./audio_experiment.ld
+LINKER_FILE := ./rtos_audio_experiment_platform.ld
 STARTUP_FILE := ./startup_$(COMPILERNAME).c
 
 #### Required Executables ####
@@ -111,13 +111,13 @@ OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
 ###################### END OF OPUS PART ######################
 
 #################### APPLICATION UTILS PART #######################
-include ${AM_FolderRoot}/app_utils/am_app_utils.mk
+include ${AM_FolderRoot}/app_utils/am_app_utils_rtos.mk
 
 ###################### END OF APPLICATION UTILS PART ######################
 
 
 #################### SEGGER TOOLS PART #######################
-include SEGGER_SYSVIEW.mk
+include ${AM_FolderRoot}/tools/segger/SEGGER_SYSVIEW_FreeRTOS.mk
 ###################### END OF SEGGER TOOLS PART ######################
 
 
@@ -125,6 +125,10 @@ DEFINES = -DPART_$(PART)
 DEFINES += -DAM_PACKAGE_BGA
 DEFINES += -DAM_PART_APOLLO3
 DEFINES += -DARM_MATH_CM4
+DEFINES += -DAM_FREERTOS
+DEFINES+= -DAM_CUSTOM_BDADDR
+DEFINES+= -DAM_DEBUG_PRINTF
+DEFINES+= -DWSF_TRACE_ENABLED
 
 # opus pre-definition
 DEFINES += -DHAVE_CONFIG_H
@@ -140,6 +144,10 @@ INCLUDES += -I${AM_SoftwareRoot}/CMSIS/ARM/Include
 INCLUDES += -I${AM_SoftwareRoot}/CMSIS/AmbiqMicro/Include
 INCLUDES += -I${AM_SoftwareRoot}/devices
 INCLUDES += -I${AM_SoftwareRoot}/utils
+INCLUDES += -I${AM_SoftwareRoot}/third_party/FreeRTOS9/Source/portable/GCC/AMapollo2
+INCLUDES += -I${AM_SoftwareRoot}/third_party/FreeRTOS9/Source/include
+
+
 # SEGGER tools include
 INCLUDES += ${SEGGER_SYSVIEW_INC}
 # OPUS INCLUDES
@@ -152,9 +160,14 @@ INCLUDES += -I${AM_OpusRoot}/silk/arm
 INCLUDES += -I${AM_OpusRoot}/silk/fixed
 INCLUDES += -I${AM_OpusRoot}
 
+# Platform folder
 VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
 VPATH +=:${AM_SoftwareRoot}/mcu/apollo3/hal
+VPATH +=:${AM_SoftwareRoot}/third_party/FreeRTOS9/Source/portable/GCC/AMapollo2
+VPATH +=:${AM_SoftwareRoot}/third_party/FreeRTOS9/Source/portable/MemMang
+VPATH +=:${AM_SoftwareRoot}/third_party/FreeRTOS9/Source
+
 VPATH +=:${AM_FolderRoot}/app_utils
 VPATH +=:../src
 # SEGGER tools VPATH
@@ -172,8 +185,16 @@ VPATH +=:${AM_OpusRoot}/silk/float
 # OPUS SOURCE FILES
 OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
 
-
 SRC = main.c
+# FreeRTOS files
+SRC += event_groups.c
+SRC += list.c
+SRC += queue.c
+SRC += tasks.c
+SRC += timers.c
+SRC += heap_4.c
+SRC += port.c
+# App utils files and board related files
 SRC += am_hal_pdm.c
 SRC += am_hal_gpio.c
 SRC += am_util_delay.c
@@ -181,16 +202,23 @@ SRC += am_util_faultisr.c
 SRC += am_util_stdio.c
 SRC += ${AM_APP_UTILS_SRC}
 SRC += am_devices_led.c
-SRC += startup_gcc.c
-SRC += board_setup.c
-#SRC += audio_driver.c
-SRC += am_opus.c
-SRC += am_opus_custom_support.c
-SRC += am_memcpy_ringbuff_test.c
-SRC += am_app_USP1602_mono_array.c
-#SRC += am_alloc_free_test.c
-#SRC += ${OPUS_SRC}
+# Third party source files
 SRC += ${SEGGER_SYSVIEW_SRC}
+#SRC += ${OPUS_SRC}
+# User source files
+SRC += rtos_AEP_hook.c
+SRC += am_AEP_init.c
+SRC += am_AEP_board_setup.c
+SRC += am_AEP_task.c
+SRC += am_AEP_isr_handler.c
+#SRC += audio_driver.c
+#SRC += am_opus.c
+#SRC += am_opus_custom_support.c
+#SRC += am_memcpy_ringbuff_test.c
+#SRC += am_app_USP1602_mono_array.c
+#SRC += am_alloc_free_test.c
+# Start up file
+SRC += startup_gcc.c
 
 CSRC = $(filter %.c,$(SRC))
 ASRC = $(filter %.s,$(SRC))
@@ -210,7 +238,7 @@ INCS += ${AM_SoftwareRoot}/mcu/apollo3/hal/am_hal_pin.h
 CFLAGS = -mthumb -mcpu=$(CPU) -mfpu=$(FPU) -mfloat-abi=$(FABI)
 CFLAGS+= -ffunction-sections -fdata-sections
 CFLAGS+= -MMD -MP -std=c99 -Wall -g
-CFLAGS+= -O0
+CFLAGS+= -Ofast
 CFLAGS+= $(DEFINES)
 CFLAGS+= $(INCLUDES)
 CFLAGS+= -Dgcc

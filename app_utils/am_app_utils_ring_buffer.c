@@ -95,175 +95,79 @@ am_app_utils_ring_buffer_init_all(am_app_utils_ring_buffer_t* ring_buffs, const 
 
 }
 
-//*****************************************************************************
-//
-//! @brief Write a single byte to the ring buffer.
-//!
-//! @param psBuffer is the address of the ring buffer structure to be written.
-//! @param ui8Value is the byte to be added to the ring buffer.
-//!
-//! This function will write a single byte to the given ring buffer. Make sure
-//! that the ring buffer is not already full when calling this function. If the
-//! ring buffer is already full, this function will fail silently.
-//!
-//! @note This operation is not inherently thread-safe, so the caller must make
-//! sure that it is appropriately guarded from interrupts and context switches.
-//!
-//! @return True if the data was written to the buffer. False for insufficient
-//! space.
-//
-//*****************************************************************************
-bool
-am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer, void *pvSource,
-                          uint32_t ui32Bytes, bool bFullCheck)
+
+uint32_t am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer, void *pvSource, uint32_t ui32Bytes)
 {
-    uint32_t i;
+    uint32_t ui32CopyLen = 0;
+    uint32_t ui32ReturnPushLen = 0;
+    uint32_t ui32TempLen = 0;
     uint8_t *pui8Source;
-
-    pui8Source = (uint8_t *) pvSource;
-
-        //
-        // Loop over the bytes in the source array.
-        //
-    for ( i = 0; i < ui32Bytes; i++ )
-    {
-        //
-        // Check to make sure that the buffer isn't already full
-        //
-
-        if((bFullCheck) && am_app_utils_ring_buffer_full(psBuffer))
-            return FALSE;
-        
-        //
-        // Write the value to the buffer.
-        //
-        psBuffer->pui8Data[psBuffer->ui32BufferTail_write] = pui8Source[i];
-
-        //
-        // Advance the write index, making sure to wrap if necessary.
-        //
-        psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + 1) %
-                                        psBuffer->ui32Capacity);
-        
-        if(psBuffer->ui32BufferTail_write == psBuffer->ui32BufferHead_read)
-            psBuffer->ui32OverWriting = 1;
-    }
-        //
-        // Report a success.
-        //
-        return TRUE;
-
-}
-
-void
-am_app_utils_ring_buffer_push_fast(am_app_utils_ring_buffer_t *psBuffer, void *pvSource, uint32_t ui32Bytes)
-{
-    uint32_t ui32CopyLen;
-    uint32_t ui32TempLen;
-
+    
     ui32CopyLen = ui32Bytes;
+    pui8Source = (uint8_t*)pvSource;
 
+    // won't push any data if buffer is full
+    if(am_app_utils_ring_buffer_full(psBuffer))
+    {
+        ui32CopyLen = 0;
+        ui32ReturnPushLen =0;
+        return ui32ReturnPushLen;
+    }
+
+    // push data until the buffer is full
     if(am_app_utils_ring_buffer_empty(psBuffer))
     {
         if(ui32CopyLen >= psBuffer->ui32Capacity)
+        {      
             psBuffer->ui32OverWriting = 1;
+            ui32CopyLen = psBuffer->ui32Capacity;
+        }
     }
     else
     {
         if(((psBuffer->ui32BufferHead_read + psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write) 
             % psBuffer->ui32Capacity) <= ui32CopyLen)
+        {    
             psBuffer->ui32OverWriting = 1;
+            ui32CopyLen = ((psBuffer->ui32BufferHead_read + psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write) 
+            % psBuffer->ui32Capacity);
+        }
 
     }        
         
+    ui32ReturnPushLen = ui32CopyLen;
+
     while((psBuffer->ui32BufferTail_write + ui32CopyLen) >= psBuffer->ui32Capacity)
     {
         ui32TempLen = psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write;
-        memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], (void*)pvSource, ui32TempLen);
+        memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], pui8Source, ui32TempLen);
         psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32TempLen) % psBuffer->ui32Capacity);
         ui32CopyLen -= ui32TempLen;
     }
     configASSERT((psBuffer->ui32BufferTail_write + ui32CopyLen) < psBuffer->ui32Capacity);
     
-    memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], (void*)pvSource, ui32CopyLen);
+    memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], &pui8Source[ui32TempLen], ui32CopyLen);
     psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32CopyLen) % psBuffer->ui32Capacity);
     
+    return ui32ReturnPushLen;
 
 }
 
-//*****************************************************************************
-//
-//! @brief Read a single byte from the ring buffer.
-//!
-//! @param psBuffer is the address of the ring buffer structure to be read.
-//!
-//! This function will write a single byte to the given ring buffer. Make sure
-//! that the ring buffer is not already empty. If the ring buffer is empty,
-//! this function will just return a NULL character.
-//!
-//! @note This operation is not inherently thread-safe, so the caller must make
-//! sure that it is appropriately guarded from interrupts and context switches.
-//!
-//! @return The byte read from the buffer, or a NULL if the buffer was empty.
-//
-//*****************************************************************************
-bool
-am_app_utils_ring_buffer_pop(am_app_utils_ring_buffer_t *psBuffer, void *pvDest,
-                         uint32_t ui32Bytes, bool bCheckEmpty)
+
+uint32_t am_app_utils_ring_buffer_pop(am_app_utils_ring_buffer_t *psBuffer, void *pvDest,
+                         uint32_t ui32Bytes)
 {
-    uint32_t i;
+    uint32_t ui32CopyLen = 0;
+    
+    uint32_t ui32TempLen = 0;
+    
+    uint32_t ui32DataLen = 0;
+
+    uint32_t ui32ReturnPopLen = 0;
+
     uint8_t *pui8Dest;
 
     pui8Dest = (uint8_t *) pvDest;
-
-    //
-    // Check to make sure that the buffer isn't over writed and isn't empty
-    //
-
-    for ( i = 0; i < ui32Bytes; i++ )
-    {    
-        if((bCheckEmpty) && am_app_utils_ring_buffer_empty(psBuffer) )
-            return FALSE;
-
-        //
-        // Grab the next value from the buffer.
-        //
-        if(am_app_utils_ring_buffer_overwrite(psBuffer))
-        {    
-            psBuffer->ui32BufferHead_read = (psBuffer->ui32BufferTail_write); 
-        }
-
-        
-        pui8Dest[i] = psBuffer->pui8Data[psBuffer->ui32BufferHead_read];
-
-        //
-        // Advance the read index, wrapping if needed.
-        //
-        psBuffer->ui32BufferHead_read = ((psBuffer->ui32BufferHead_read + 1) %
-                                           psBuffer->ui32Capacity);
-        
-        //
-        // it clears the buffer full flag
-        //
-        psBuffer->ui32OverWriting = 0;
-    }
-        //
-        // Report a success.
-        //
-    return TRUE;
-    
-}
-
-void
-am_app_utils_ring_buffer_pop_fast(am_app_utils_ring_buffer_t *psBuffer, void *pvDest,
-                         uint32_t ui32Bytes)
-{
-    uint32_t ui32CopyLen;
-    
-    uint32_t ui32TempLen;
-    
-    uint32_t ui32DataLen;
-
     ui32DataLen = am_app_utils_get_ring_buffer_status(psBuffer);
    
     if(am_app_utils_ring_buffer_overwrite(psBuffer))
@@ -272,25 +176,28 @@ am_app_utils_ring_buffer_pop_fast(am_app_utils_ring_buffer_t *psBuffer, void *pv
        
     }
 
+    // pop len can't exceed the length of buffer
     ui32CopyLen = ui32Bytes < ui32DataLen ? ui32Bytes : ui32DataLen;
-   
+    
+    ui32ReturnPopLen = ui32CopyLen;
+
     while((psBuffer->ui32BufferHead_read + ui32CopyLen) >= psBuffer->ui32Capacity)
     {
         ui32TempLen = psBuffer->ui32Capacity - psBuffer->ui32BufferHead_read;
-        memcpy((void*)pvDest, (void*)&psBuffer->pui8Data[psBuffer->ui32BufferHead_read], ui32TempLen);
+        memcpy(pui8Dest, (void*)&psBuffer->pui8Data[psBuffer->ui32BufferHead_read], ui32TempLen);
         psBuffer->ui32BufferHead_read = ((psBuffer->ui32BufferHead_read + ui32TempLen) % psBuffer->ui32Capacity);
         ui32CopyLen -= ui32TempLen;
     }
 
     configASSERT((psBuffer->ui32BufferHead_read + ui32CopyLen) < psBuffer->ui32Capacity);
     
-    memcpy((void*)pvDest, (void*)&psBuffer->pui8Data[psBuffer->ui32BufferHead_read], ui32CopyLen);
+    memcpy(&pui8Dest[ui32TempLen], (void*)&psBuffer->pui8Data[psBuffer->ui32BufferHead_read], ui32CopyLen);
+    
     psBuffer->ui32BufferHead_read = ((psBuffer->ui32BufferHead_read + ui32CopyLen) % psBuffer->ui32Capacity);
       
-
-    
     psBuffer->ui32OverWriting = 0;
 
+    return ui32ReturnPopLen;
 }
 //*****************************************************************************
 //

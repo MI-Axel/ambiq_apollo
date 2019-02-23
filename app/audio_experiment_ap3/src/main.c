@@ -66,6 +66,9 @@ int main(void)
 
 #if AM_AEP_MEMCPY_TEST
     uint32_t ui32CpyLen = 37957;
+    am_app_utils_ring_buffer_init_all(am_AEP_ring_buffers, g_AEP_RingBuffSetup, g_ui32RingBuffCount);
+
+    am_ringbuff_test();
 #endif // AM_AEP_MEMCPY_TEST
 
 #if AM_AEP_ALLOC_FREE_TEST
@@ -93,6 +96,9 @@ int main(void)
         {
             g_ui32TimerCount = 0;
             am_devices_led_toggle(am_bsp_psLEDs, 0);
+#if AM_AEP_MEMCPY_TEST
+            am_ringbuff_test();
+#endif // AM_AEP_MEMCPY_TEST
         }
 
 #if AM_AEP_OPUS_TEST
@@ -140,17 +146,17 @@ int main(void)
 #endif // AM_AEP_OPUS_TEST
 
 #if AM_AEP_MEMCPY_TEST
-        am_memcpy_test(&mono_16b_USP1602[11], &g_pui8MemcpyBuff[1], ui32CpyLen);
+//        am_memcpy_test(&mono_16b_USP1602[11], &g_pui8MemcpyBuff[1], ui32CpyLen);
 
-        am_fast_memcpy_test(&mono_16b_USP1602[11], &g_pui8FastMemcpyBuff[1], ui32CpyLen);
+//        am_fast_memcpy_test(&mono_16b_USP1602[11], &g_pui8FastMemcpyBuff[1], ui32CpyLen);
 
-        if(am_memcpy_verify(&mono_16b_USP1602[11], &g_pui8MemcpyBuff[1], ui32CpyLen) && am_memcpy_verify(&mono_16b_USP1602[11], &g_pui8FastMemcpyBuff[1], ui32CpyLen))
-            am_devices_led_on(am_bsp_psLEDs, 2);
-        else
-        {
-            am_devices_led_off(am_bsp_psLEDs, 2);
-            while(1);                           // if error occurs, the code will stuck here
-        }
+//        if(am_memcpy_verify(&mono_16b_USP1602[11], &g_pui8MemcpyBuff[1], ui32CpyLen) && am_memcpy_verify(&mono_16b_USP1602[11], &g_pui8FastMemcpyBuff[1], ui32CpyLen))
+//            am_devices_led_on(am_bsp_psLEDs, 2);
+//        else
+//        {
+//            am_devices_led_off(am_bsp_psLEDs, 2);
+//            while(1);                           // if error occurs, the code will stuck here
+//        }
 #endif // AM_AEP_MEMCPY_TEST
 
 
