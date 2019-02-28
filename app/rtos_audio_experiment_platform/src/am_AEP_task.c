@@ -9,7 +9,7 @@
 #include "am_AEP_config.h"
 #include "am_AEP_init.h"
 #include "am_AEP_task.h"
-
+#include "am_opus.h"
 
 // AEP led task
 void am_AEP_led_task(void *pvParameters)
@@ -76,7 +76,14 @@ void am_AEP_codec_task(void *pvParameters)
     am_app_utils_task_queue_element_t QueueElement;
 #if configUSE_PDM_DATA
     int32_t in32LRSample[PCM_FRAME_SIZE];
+    int16_t in16LeftSample;
+    int16_t in16RightSample;
 #endif // configUSE_PDM_DATA
+
+    uint32_t index = 0;
+    int16_t in16PCMDataBuff[PCM_FRAME_SIZE];
+    uint32_t g_ui32FrameSize = 320;                 // encoder frame size
+    uint32_t g_ui32EncOutputBytes = 80;             // FrameSize * 2 bytes / 8 
 
     while(1)
     {
@@ -95,18 +102,25 @@ void am_AEP_codec_task(void *pvParameters)
             default: 
                 break;
         }
+        
+        for(index=0; index<g_ui32FrameSize; index++)
+        {
+            in16LeftSample = in32LRSample[index] >>16;           
+            in16RightSample = in32LRSample[index] & 0x0000FFFF;
+            in16PCMDataBuff[index] = (int16_t) ((in16LeftSample+in16RightSample)/2);
+        }
 
- #if (configUSE_RTT_LOGGER && configUSE_RTT_PCM)
+   
+        g_opusEncRet = opus_encode(g_opusEnc, (opus_int16*)&in16PCMDataBuff, g_ui32FrameSize, g_opusOutputBuff, g_ui32EncOutputBytes);
+
+#if (configUSE_RTT_LOGGER && configUSE_RTT_CODEC)
         //
         // Record the raw PCM data and send over RTT
         //
         if(g_ui8RttRecordFlag == 1)
-            am_app_utils_rtt_record(in32LRSample, PCM_FRAME_SIZE*PCM_DATA_BYTES); 
+            am_app_utils_rtt_record(g_opusOutputBuff, g_ui32EncOutputBytes); 
 #endif /* configUSE_RTT_LOGGER && configUSE_RTT_PCM */ 
-   
-    
-    
-    
+
     }
 }
 

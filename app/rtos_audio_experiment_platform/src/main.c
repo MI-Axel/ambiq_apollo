@@ -30,6 +30,7 @@
 #include "task.h"
 #include "event_groups.h"
 #include "queue.h"
+#include "timers.h"
 //*****************************************************************************
 #include "SEGGER_SYSVIEW.h"
 

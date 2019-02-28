@@ -5,6 +5,7 @@
 #include "am_AEP_init.h"
 #include "am_AEP_task.h"
 #include "am_AEP_board_setup.h"
+#include "am_opus.h"
 
 //******************************************************************************
 // AEP ring buffers
@@ -42,7 +43,7 @@ am_app_utils_task_setup_t g_AEP_TaskSetup[] =
 #endif // configUSE_STDIO_PRINTF   
 
 #if configUSE_AUDIO_CODEC
-    {AM_AEP_TASK_CODEC, &am_AEP_codec_task, "codec_encoder", 1024, NULL, 2, 16},
+    {AM_AEP_TASK_CODEC, &am_AEP_codec_task, "codec_encoder", 16*1024, NULL, 2, 16},
 #endif // configUSE_AUDIO_CODEC
 
     {AM_AEP_TASK_BUTTON, &am_AEP_button_task, "button_responser", 1024, NULL, 3, 16}
@@ -105,7 +106,9 @@ void am_AEP_init(void)
     am_app_utils_task_init(am_AEP_tasks, taskCount);
     am_app_utils_task_create_all_tasks(g_AEP_TaskSetup, am_AEP_tasks, taskSetupCount);
     am_app_utils_timer_create_all_timers(g_AEP_TimerSetup, am_AEP_timers, timerSetupCount);
-
+#if configUSE_AUDIO_CODEC
+    am_opus_encoder_init(g_opusEnc);
+#endif // configUSE_AUDIO_CODEC
     // Enable system heart beat LED
     xTimerStart(am_AEP_timers[AM_AEP_TIMER_HEART_BEAT], 0);    
 

@@ -190,6 +190,7 @@ Additional information:
 #endif
 
 
+#define SEGGER_RTT_SECTION
 /*********************************************************************
 *
 *       Defines, fixed

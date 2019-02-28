@@ -25,14 +25,15 @@
 // Parameters configuration
 
 #if configUSE_PDM_DATA
-    #define PCM_FRAME_SIZE                          80
+    #define PCM_FRAME_SIZE                          320
     #define PCM_DATA_BYTES                          4
     #define PCM_PUSH_OVER                           4
 #endif // configUSE_PDM_DATA
 
 #if configUSE_RTT_LOGGER 
-    #define configUSE_RTT_PCM                       1
-    #define RTT_BUFFER_LENGTH                       (128*1024)
+    #define configUSE_RTT_PCM                       0
+    #define configUSE_RTT_CODEC                     1
+    #define RTT_BUFFER_LENGTH                       (64*1024)
 #endif // configUSE_RTT_LOGGER
 
 

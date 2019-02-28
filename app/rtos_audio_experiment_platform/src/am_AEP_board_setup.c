@@ -204,16 +204,16 @@ void am_AEP_board_setup(void)
     {
         if (AM_HAL_BURST_AVAIL == eBurstModeAvailable)
         {
-            am_util_stdio_printf("Apollo3 Burst Mode is Available\r\n");
+//            am_util_stdio_printf("Apollo3 Burst Mode is Available\r\n");
         }
         else
         {
-            am_util_stdio_printf("Apollo3 Burst Mode is Not Available\r\n");
+//            am_util_stdio_printf("Apollo3 Burst Mode is Not Available\r\n");
         }
     }
     else
     {
-        am_util_stdio_printf("Failed to Initialize for Burst Mode operation\r\n");
+//        am_util_stdio_printf("Failed to Initialize for Burst Mode operation\r\n");
     }
 
 #if configUSE_BURST_ALWAYS_ON
@@ -227,7 +227,7 @@ void am_AEP_board_setup(void)
     }
     else
     {
-        am_util_stdio_printf("Failed to Enable Burst Mode operation\r\n");
+//        am_util_stdio_printf("Failed to Enable Burst Mode operation\r\n");
     }
 
 #endif // configUSE_BURST_ALWAYS_ON

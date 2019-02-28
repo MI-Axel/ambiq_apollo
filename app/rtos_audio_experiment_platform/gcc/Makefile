@@ -132,7 +132,7 @@ DEFINES+= -DWSF_TRACE_ENABLED
 
 # opus pre-definition
 DEFINES += -DHAVE_CONFIG_H
-#DEFINES += -DCUSTOM_SUPPORT
+DEFINES += -DCUSTOM_SUPPORT
 
 INCLUDES = -I../src
 INCLUDES += -I../include
@@ -203,7 +203,7 @@ SRC += ${AM_APP_UTILS_SRC}
 SRC += am_devices_led.c
 # Third party source files
 SRC += ${SEGGER_SYSVIEW_SRC}
-#SRC += ${OPUS_SRC}
+SRC += ${OPUS_SRC}
 
 # User source files
 SRC += rtos_AEP_hook.c
@@ -211,12 +211,8 @@ SRC += am_AEP_init.c
 SRC += am_AEP_board_setup.c
 SRC += am_AEP_task.c
 SRC += am_AEP_isr_handler.c
-#SRC += audio_driver.c
-#SRC += am_opus.c
+SRC += am_opus.c
 #SRC += am_opus_custom_support.c
-#SRC += am_memcpy_ringbuff_test.c
-#SRC += am_app_USP1602_mono_array.c
-#SRC += am_alloc_free_test.c
 # Start up file
 SRC += startup_gcc.c
 

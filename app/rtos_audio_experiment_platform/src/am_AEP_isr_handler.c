@@ -58,6 +58,15 @@ void am_pdm0_isr(void)
         PDMn(0)->DMATOTCOUNT = PCM_FRAME_SIZE*PCM_DATA_BYTES;  // FIFO unit in bytes
 
         am_app_utils_ring_buffer_push(&am_AEP_ring_buffers[AM_AEP_RINGBUFF_PDM], g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES);
+
+#if (configUSE_RTT_LOGGER && configUSE_RTT_PCM)
+        //
+        // Record the raw PCM data and send over RTT
+        //
+        if(g_ui8RttRecordFlag == 1)
+            am_app_utils_rtt_record(g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES); 
+#endif /* configUSE_RTT_LOGGER && configUSE_RTT_PCM */ 
+
 #if configUSE_AUDIO_CODEC
         am_app_utils_task_send_fromISR(am_AEP_tasks, AM_AEP_ISR_PDM, AM_AEP_TASK_CODEC, 
                    AM_APP_MESSAGE_LONG, PCM_FRAME_SIZE*PCM_DATA_BYTES, &am_AEP_ring_buffers[AM_AEP_RINGBUFF_PDM]);
