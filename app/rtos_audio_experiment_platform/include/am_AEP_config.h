@@ -11,20 +11,29 @@
 
 #define configUSE_LOCAL_DATA                        0
 
-#define configUSE_SYSVIEWER                         1
+#define configUSE_AUDIO_CODEC                       1
 
-#define configUSE_RTT_LOGGER                        0
+// SYSVIEWER and RTT could only choose one item
+#define configUSE_SYSVIEWER                         0
+
+#define configUSE_RTT_LOGGER                        1
+
+// CPU runs at 96MHZ or 48MHZ
+#define configUSE_BURST_ALWAYS_ON                   1
 
 
 // Parameters configuration
 
 #if configUSE_PDM_DATA
-    #define PCM_FRAME_SIZE                          320
+    #define PCM_FRAME_SIZE                          80
     #define PCM_DATA_BYTES                          4
     #define PCM_PUSH_OVER                           4
 #endif // configUSE_PDM_DATA
 
-
+#if configUSE_RTT_LOGGER 
+    #define configUSE_RTT_PCM                       1
+    #define RTT_BUFFER_LENGTH                       (128*1024)
+#endif // configUSE_RTT_LOGGER
 
 
 

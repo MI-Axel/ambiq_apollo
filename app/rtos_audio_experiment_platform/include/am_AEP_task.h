@@ -40,8 +40,9 @@ extern void am_AEP_led_task(void *pvParameters);
 
 extern void am_AEP_button_task(void *pvParameters);
 
-extern void am_AEP_timer_heart_beat_callback(TimerHandle_t xTimer);
+extern void am_AEP_codec_task(void *pvParameters);
 
+extern void am_AEP_timer_heart_beat_callback(TimerHandle_t xTimer);
 
 
 

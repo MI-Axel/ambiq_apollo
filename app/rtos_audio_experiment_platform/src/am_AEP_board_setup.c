@@ -1,5 +1,10 @@
 
 /* This file is the seyup code of ap3blue evb for the audio experiment platform. */
+#include "am_mcu_apollo.h"
+#include "am_bsp.h"
+#include "am_devices.h"
+#include "am_util.h"
+
 #include "am_AEP_config.h"
 #include "am_AEP_board_setup.h"
 
@@ -7,9 +12,13 @@
 // BUTTON pins configuration settings.
 //*****************************************************************************
 const am_hal_gpio_pincfg_t g_AP3EVB_button0 = {
-    .uFuncSel = 3,
-    .eIntDir = AM_HAL_GPIO_PIN_INTDIR_LO2HI,
-    .eGPInput = AM_HAL_GPIO_PIN_INPUT_ENABLE,
+    .uFuncSel       = 3, // GPIO
+    .eGPOutcfg      = AM_HAL_GPIO_PIN_OUTCFG_DISABLE,
+    .eGPInput       = AM_HAL_GPIO_PIN_INPUT_ENABLE,
+    .eGPRdZero      = AM_HAL_GPIO_PIN_RDZERO_READPIN,
+    .eIntDir        = AM_HAL_GPIO_PIN_INTDIR_HI2LO,
+    .ePullup        = AM_HAL_GPIO_PIN_PULLUP_WEAK
+
 };
 
 //**************************************
@@ -24,9 +33,22 @@ am_hal_burst_mode_e           eBurstMode;
 //*****************************************************************************
 void* PDMHandle;
 uint32_t g_ui32PCMDataBuff[PCM_FRAME_SIZE];
-//*****************************************************************************
-// PDM initialization.
-//*****************************************************************************
+
+void pdm_trigger_dma(void)
+{
+    //
+    // Configure DMA and target address.
+    //
+    am_hal_pdm_transfer_t sTransfer;
+    sTransfer.ui32TargetAddr = (uint32_t ) g_ui32PCMDataBuff;
+    sTransfer.ui32TotalCount = (PCM_FRAME_SIZE * PCM_DATA_BYTES);
+
+    //
+    // Start the data transfer.
+    //
+    am_hal_pdm_dma_start(PDMHandle, &sTransfer);
+}
+
 void am_AEP_pdm_init(void) 
 {
   //
@@ -97,20 +119,7 @@ void am_AEP_pdm_init(void)
 
 }
 
-void pdm_trigger_dma(void)
-{
-    //
-    // Configure DMA and target address.
-    //
-    am_hal_pdm_transfer_t sTransfer;
-    sTransfer.ui32TargetAddr = (uint32_t ) g_ui32PCMDataBuff;
-    sTransfer.ui32TotalCount = (PCM_FRAME_SIZE * PCM_DATA_BYTES);
 
-    //
-    // Start the data transfer.
-    //
-    am_hal_pdm_dma_start(PDMHandle, &sTransfer);
-}
 #endif // configUSE_PDM_DATA
 
 //*****************************************************************************
@@ -152,7 +161,7 @@ void am_AEP_board_setup(void)
     //
     // Enable the GPIO/button interrupt.
     //
-    am_hal_gpio_interrupt_enable(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
+//    am_hal_gpio_interrupt_enable(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
     
     //
     // Configure the LEDs.
@@ -176,23 +185,17 @@ void am_AEP_board_setup(void)
 
 
 #if AM_CMSIS_REGS
-    NVIC_EnableIRQ(GPIO_IRQn);
+//    NVIC_SetPriority(GPIO_IRQn, 4);     // if you want to use API in this isr, you can't set higher than 4.
+//    NVIC_EnableIRQ(GPIO_IRQn);
 #else   // AM_CMSIS_REGS
-    am_hal_interrupt_enable(AM_HAL_INTERRUPT_GPIO);
+//    am_hal_interrupt_enable(AM_HAL_INTERRUPT_GPIO);
 #endif  // AM_CMSIS_REGS
 
-    //
-    // Enable interrupts to the core.
-    //
-    am_hal_interrupt_master_enable();
-   
+    
     //
     // Initialize the printf interface for UART output
     //
     am_bsp_uart_printf_enable();
-#if configUSE_RTT_DATA_OUTPUT 
-    am_app_utils_rtt_init(g_rttRecorderBuff, RTT_BUFFER_LENGTH);
-#endif
 
     //
     // Configure of burst mode
@@ -219,7 +222,7 @@ void am_AEP_board_setup(void)
     {
         if (AM_HAL_BURST_MODE == eBurstMode)
         {
-            am_util_stdio_printf("Apollo3 operating in Burst Mode (96MHz)\r\n");
+//            am_util_stdio_printf("Apollo3 operating in Burst Mode (96MHz)\r\n");
         }
     }
     else
@@ -228,6 +231,11 @@ void am_AEP_board_setup(void)
     }
 
 #endif // configUSE_BURST_ALWAYS_ON
+   
+    //
+    // Enable interrupts to the core.
+    //
+    am_hal_interrupt_master_enable();
 
 }
 

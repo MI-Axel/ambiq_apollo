@@ -87,6 +87,8 @@ bin/board_setup.o: ../src/board_setup.c ../include/board_setup.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_ble.h \
  ../include/am_audio_platform_config.h \
  ../../../app_utils/am_app_utils_ring_buffer.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
  ../../../app_utils/am_app_utils.h ../include/audio_driver.h
 
 ../include/board_setup.h:
@@ -266,6 +268,10 @@ bin/board_setup.o: ../src/board_setup.c ../include/board_setup.h \
 ../include/am_audio_platform_config.h:
 
 ../../../app_utils/am_app_utils_ring_buffer.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
 
 ../../../app_utils/am_app_utils.h:
 

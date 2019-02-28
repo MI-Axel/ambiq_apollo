@@ -220,14 +220,14 @@ Discarded input sections
  .text.am_app_utils_rtt_init
                 0x0000000000000000       0x28 bin/am_app_utils_rtt_recorder.o
  .text.am_app_utils_rtt_record
-                0x0000000000000000       0x28 bin/am_app_utils_rtt_recorder.o
- .debug_info    0x0000000000000000      0xa96 bin/am_app_utils_rtt_recorder.o
- .debug_abbrev  0x0000000000000000      0x1d7 bin/am_app_utils_rtt_recorder.o
+                0x0000000000000000       0x1e bin/am_app_utils_rtt_recorder.o
+ .debug_info    0x0000000000000000      0xa7a bin/am_app_utils_rtt_recorder.o
+ .debug_abbrev  0x0000000000000000      0x1ce bin/am_app_utils_rtt_recorder.o
  .debug_aranges
                 0x0000000000000000       0x28 bin/am_app_utils_rtt_recorder.o
  .debug_ranges  0x0000000000000000       0x18 bin/am_app_utils_rtt_recorder.o
- .debug_line    0x0000000000000000      0x258 bin/am_app_utils_rtt_recorder.o
- .debug_str     0x0000000000000000      0x6b1 bin/am_app_utils_rtt_recorder.o
+ .debug_line    0x0000000000000000      0x231 bin/am_app_utils_rtt_recorder.o
+ .debug_str     0x0000000000000000      0x69f bin/am_app_utils_rtt_recorder.o
  .comment       0x0000000000000000       0x72 bin/am_app_utils_rtt_recorder.o
  .debug_frame   0x0000000000000000       0x58 bin/am_app_utils_rtt_recorder.o
  .ARM.attributes
@@ -315,13 +315,13 @@ Discarded input sections
  .rodata        0x0000000000000000       0x48 bin/am_opus.o
  .text.am_opus_encoder_init
                 0x0000000000000000      0x138 bin/am_opus.o
- .debug_info    0x0000000000000000     0x18a7 bin/am_opus.o
+ .debug_info    0x0000000000000000     0x19ef bin/am_opus.o
  .debug_abbrev  0x0000000000000000      0x240 bin/am_opus.o
  .debug_aranges
                 0x0000000000000000       0x20 bin/am_opus.o
  .debug_ranges  0x0000000000000000       0x10 bin/am_opus.o
- .debug_line    0x0000000000000000      0x4e6 bin/am_opus.o
- .debug_str     0x0000000000000000     0x1ed7 bin/am_opus.o
+ .debug_line    0x0000000000000000      0x520 bin/am_opus.o
+ .debug_str     0x0000000000000000     0x1f77 bin/am_opus.o
  .comment       0x0000000000000000       0x72 bin/am_opus.o
  .debug_frame   0x0000000000000000       0x34 bin/am_opus.o
  .ARM.attributes
@@ -1789,35 +1789,35 @@ LOAD /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/b
 END GROUP
 OUTPUT(bin/audio_experiment.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000    0x1146b
- .debug_info    0x0000000000000000     0x1642 bin/main.o
- .debug_info    0x0000000000001642     0x4d16 bin/am_hal_gpio.o
- .debug_info    0x0000000000006358      0x942 bin/am_util_faultisr.o
- .debug_info    0x0000000000006c9a      0x8a3 bin/am_util_stdio.o
- .debug_info    0x000000000000753d      0xb5b bin/am_app_utils_ring_buffer.o
- .debug_info    0x0000000000008098      0xa4f bin/am_devices_led.o
- .debug_info    0x0000000000008ae7      0x17f bin/startup_gcc.o
- .debug_info    0x0000000000008c66     0x1c03 bin/board_setup.o
- .debug_info    0x000000000000a869     0x1955 bin/am_memcpy_ringbuff_test.o
- .debug_info    0x000000000000c1be       0xa8 bin/am_app_USP1602_mono_array.o
- .debug_info    0x000000000000c266     0x16ae bin/SEGGER_RTT.o
- .debug_info    0x000000000000d914     0x3ad4 bin/SEGGER_SYSVIEW.o
- .debug_info    0x00000000000113e8       0x83 bin/SEGGER_SYSVIEW_Config_NoOS.o
+.debug_info     0x0000000000000000    0x1198b
+ .debug_info    0x0000000000000000     0x178a bin/main.o
+ .debug_info    0x000000000000178a     0x4d16 bin/am_hal_gpio.o
+ .debug_info    0x00000000000064a0      0x942 bin/am_util_faultisr.o
+ .debug_info    0x0000000000006de2      0x8a3 bin/am_util_stdio.o
+ .debug_info    0x0000000000007685      0xca3 bin/am_app_utils_ring_buffer.o
+ .debug_info    0x0000000000008328      0xa4f bin/am_devices_led.o
+ .debug_info    0x0000000000008d77      0x17f bin/startup_gcc.o
+ .debug_info    0x0000000000008ef6     0x1d4b bin/board_setup.o
+ .debug_info    0x000000000000ac41     0x1a9d bin/am_memcpy_ringbuff_test.o
+ .debug_info    0x000000000000c6de       0xa8 bin/am_app_USP1602_mono_array.o
+ .debug_info    0x000000000000c786     0x16ae bin/SEGGER_RTT.o
+ .debug_info    0x000000000000de34     0x3ad4 bin/SEGGER_SYSVIEW.o
+ .debug_info    0x0000000000011908       0x83 bin/SEGGER_SYSVIEW_Config_NoOS.o
 
-.debug_abbrev   0x0000000000000000     0x1a15
+.debug_abbrev   0x0000000000000000     0x1a26
  .debug_abbrev  0x0000000000000000      0x21b bin/main.o
  .debug_abbrev  0x000000000000021b      0x2c9 bin/am_hal_gpio.o
  .debug_abbrev  0x00000000000004e4      0x1cc bin/am_util_faultisr.o
  .debug_abbrev  0x00000000000006b0      0x20d bin/am_util_stdio.o
- .debug_abbrev  0x00000000000008bd      0x227 bin/am_app_utils_ring_buffer.o
- .debug_abbrev  0x0000000000000ae4      0x214 bin/am_devices_led.o
- .debug_abbrev  0x0000000000000cf8       0xca bin/startup_gcc.o
- .debug_abbrev  0x0000000000000dc2      0x2eb bin/board_setup.o
- .debug_abbrev  0x00000000000010ad      0x29c bin/am_memcpy_ringbuff_test.o
- .debug_abbrev  0x0000000000001349       0x5d bin/am_app_USP1602_mono_array.o
- .debug_abbrev  0x00000000000013a6      0x2d3 bin/SEGGER_RTT.o
- .debug_abbrev  0x0000000000001679      0x333 bin/SEGGER_SYSVIEW.o
- .debug_abbrev  0x00000000000019ac       0x69 bin/SEGGER_SYSVIEW_Config_NoOS.o
+ .debug_abbrev  0x00000000000008bd      0x238 bin/am_app_utils_ring_buffer.o
+ .debug_abbrev  0x0000000000000af5      0x214 bin/am_devices_led.o
+ .debug_abbrev  0x0000000000000d09       0xca bin/startup_gcc.o
+ .debug_abbrev  0x0000000000000dd3      0x2eb bin/board_setup.o
+ .debug_abbrev  0x00000000000010be      0x29c bin/am_memcpy_ringbuff_test.o
+ .debug_abbrev  0x000000000000135a       0x5d bin/am_app_USP1602_mono_array.o
+ .debug_abbrev  0x00000000000013b7      0x2d3 bin/SEGGER_RTT.o
+ .debug_abbrev  0x000000000000168a      0x333 bin/SEGGER_SYSVIEW.o
+ .debug_abbrev  0x00000000000019bd       0x69 bin/SEGGER_SYSVIEW_Config_NoOS.o
 
 .debug_aranges  0x0000000000000000      0x698
  .debug_aranges
@@ -1861,43 +1861,43 @@ OUTPUT(bin/audio_experiment.axf elf32-littlearm)
  .debug_ranges  0x0000000000000350      0x258 bin/SEGGER_SYSVIEW.o
  .debug_ranges  0x00000000000005a8       0x18 bin/SEGGER_SYSVIEW_Config_NoOS.o
 
-.debug_line     0x0000000000000000     0x419f
- .debug_line    0x0000000000000000      0x4c5 bin/main.o
- .debug_line    0x00000000000004c5      0x4e9 bin/am_hal_gpio.o
- .debug_line    0x00000000000009ae      0x35f bin/am_util_faultisr.o
- .debug_line    0x0000000000000d0d      0x60f bin/am_util_stdio.o
- .debug_line    0x000000000000131c      0x2e5 bin/am_app_utils_ring_buffer.o
- .debug_line    0x0000000000001601      0x44e bin/am_devices_led.o
- .debug_line    0x0000000000001a4f      0x177 bin/startup_gcc.o
- .debug_line    0x0000000000001bc6      0x592 bin/board_setup.o
- .debug_line    0x0000000000002158      0x54b bin/am_memcpy_ringbuff_test.o
- .debug_line    0x00000000000026a3      0x130 bin/am_app_USP1602_mono_array.o
- .debug_line    0x00000000000027d3      0x580 bin/SEGGER_RTT.o
- .debug_line    0x0000000000002d53     0x13dd bin/SEGGER_SYSVIEW.o
- .debug_line    0x0000000000004130       0x6f bin/SEGGER_SYSVIEW_Config_NoOS.o
+.debug_line     0x0000000000000000     0x4287
+ .debug_line    0x0000000000000000      0x4ff bin/main.o
+ .debug_line    0x00000000000004ff      0x4e9 bin/am_hal_gpio.o
+ .debug_line    0x00000000000009e8      0x35f bin/am_util_faultisr.o
+ .debug_line    0x0000000000000d47      0x60f bin/am_util_stdio.o
+ .debug_line    0x0000000000001356      0x31f bin/am_app_utils_ring_buffer.o
+ .debug_line    0x0000000000001675      0x44e bin/am_devices_led.o
+ .debug_line    0x0000000000001ac3      0x177 bin/startup_gcc.o
+ .debug_line    0x0000000000001c3a      0x5cc bin/board_setup.o
+ .debug_line    0x0000000000002206      0x585 bin/am_memcpy_ringbuff_test.o
+ .debug_line    0x000000000000278b      0x130 bin/am_app_USP1602_mono_array.o
+ .debug_line    0x00000000000028bb      0x580 bin/SEGGER_RTT.o
+ .debug_line    0x0000000000002e3b     0x13dd bin/SEGGER_SYSVIEW.o
+ .debug_line    0x0000000000004218       0x6f bin/SEGGER_SYSVIEW_Config_NoOS.o
 
 .debug_str      0x0000000000000000     0x6130
- .debug_str     0x0000000000000000     0x177c bin/main.o
-                                       0x180d (size before relaxing)
- .debug_str     0x000000000000177c     0x29b5 bin/am_hal_gpio.o
+ .debug_str     0x0000000000000000     0x180e bin/main.o
+                                       0x18ad (size before relaxing)
+ .debug_str     0x000000000000180e     0x29b5 bin/am_hal_gpio.o
                                        0x343f (size before relaxing)
- .debug_str     0x0000000000004131      0x1d4 bin/am_util_faultisr.o
+ .debug_str     0x00000000000041c3      0x1d4 bin/am_util_faultisr.o
                                         0xbfb (size before relaxing)
- .debug_str     0x0000000000004305      0x34a bin/am_util_stdio.o
+ .debug_str     0x0000000000004397      0x34a bin/am_util_stdio.o
                                         0x566 (size before relaxing)
- .debug_str     0x000000000000464f      0x1af bin/am_app_utils_ring_buffer.o
-                                        0x7da (size before relaxing)
- .debug_str     0x00000000000047fe      0x11e bin/am_devices_led.o
+ .debug_str     0x00000000000046e1      0x1af bin/am_app_utils_ring_buffer.o
+                                        0x87a (size before relaxing)
+ .debug_str     0x0000000000004890      0x11e bin/am_devices_led.o
                                         0xda2 (size before relaxing)
- .debug_str     0x000000000000491c       0x81 bin/startup_gcc.o
+ .debug_str     0x00000000000049ae       0x81 bin/startup_gcc.o
                                         0x219 (size before relaxing)
- .debug_str     0x000000000000499d      0x588 bin/board_setup.o
-                                       0x23ef (size before relaxing)
- .debug_str     0x0000000000004f25       0xf3 bin/am_memcpy_ringbuff_test.o
-                                       0x1f79 (size before relaxing)
- .debug_str     0x0000000000005018       0x23 bin/am_app_USP1602_mono_array.o
+ .debug_str     0x0000000000004a2f      0x588 bin/board_setup.o
+                                       0x248f (size before relaxing)
+ .debug_str     0x0000000000004fb7       0xf3 bin/am_memcpy_ringbuff_test.o
+                                       0x2019 (size before relaxing)
+ .debug_str     0x00000000000050aa       0x23 bin/am_app_USP1602_mono_array.o
                                         0x1b8 (size before relaxing)
- .debug_str     0x000000000000503b      0x43f bin/SEGGER_RTT.o
+ .debug_str     0x00000000000050cd      0x3ad bin/SEGGER_RTT.o
                                         0x9b8 (size before relaxing)
  .debug_str     0x000000000000547a      0xc6c bin/SEGGER_SYSVIEW.o
                                        0x1303 (size before relaxing)

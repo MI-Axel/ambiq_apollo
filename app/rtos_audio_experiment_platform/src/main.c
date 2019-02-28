@@ -35,11 +35,10 @@
 
 #include "am_AEP_config.h"
 #include "am_AEP_init.h"
+#include "am_app_utils_rtt_recorder.h"
 
 
-//*****************************************************************************
-// Globals
-//*****************************************************************************
+
 int main()
 {
     //
@@ -77,6 +76,7 @@ int main()
     // Configure the SEGGER SystemView Interface.
     //
     SEGGER_SYSVIEW_Conf();
+
 #endif
 
     am_util_stdio_printf("FreeRTOS stars to operate!\r\n");

@@ -137,7 +137,6 @@ DEFINES += -DHAVE_CONFIG_H
 INCLUDES = -I../src
 INCLUDES += -I../include
 INCLUDES += -I${AM_FolderRoot}/app_utils
-INCLUDES += -I${AM_FolderRoot}/tools/segger/SEGGER_RTT_V640/RTT
 INCLUDES += -I${AM_SoftwareRoot}/boards/apollo3_evb/bsp
 INCLUDES += -I${AM_SoftwareRoot}/mcu/apollo3
 INCLUDES += -I${AM_SoftwareRoot}/CMSIS/ARM/Include
@@ -205,6 +204,7 @@ SRC += am_devices_led.c
 # Third party source files
 SRC += ${SEGGER_SYSVIEW_SRC}
 #SRC += ${OPUS_SRC}
+
 # User source files
 SRC += rtos_AEP_hook.c
 SRC += am_AEP_init.c

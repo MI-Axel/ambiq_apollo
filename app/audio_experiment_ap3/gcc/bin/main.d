@@ -88,6 +88,8 @@ bin/main.o: ../src/main.c \
  ../include/am_audio_platform_config.h ../include/board_setup.h \
  ../include/am_audio_platform_config.h \
  ../../../app_utils/am_app_utils_ring_buffer.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
  ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h \
@@ -275,6 +277,10 @@ bin/main.o: ../src/main.c \
 ../include/am_audio_platform_config.h:
 
 ../../../app_utils/am_app_utils_ring_buffer.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
 
 ../../../app_utils/am_app_utils.h:
 

@@ -14,7 +14,7 @@ void am_app_utils_rtt_record(void* pBuffer, uint32_t NumBytes)
 {
     uint32_t bytes_stored;
     bytes_stored = SEGGER_RTT_Write(1, (uint8_t*)pBuffer, NumBytes);
-    configASSERT((bytes_stored == NumBytes));
+//    configASSERT((bytes_stored == NumBytes));
 }
 
 

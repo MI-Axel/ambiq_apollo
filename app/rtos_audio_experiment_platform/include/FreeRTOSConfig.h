@@ -57,7 +57,7 @@ extern "C"
 #define configUSE_PREEMPTION                    1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 0
 
-#define configCPU_CLOCK_HZ                      48000000UL      //fixme: 96MHz for burst mode always on
+#define configCPU_CLOCK_HZ                      96000000UL      //fixme: 96MHz for burst mode always on
 
 #define configTICK_RATE_HZ                      1000
 #define configMAX_PRIORITIES                    7 

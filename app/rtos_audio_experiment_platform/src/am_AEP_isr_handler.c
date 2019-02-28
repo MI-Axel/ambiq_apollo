@@ -25,6 +25,8 @@
 #include "SEGGER_SYSVIEW.h"
 
 #include "am_app_utils_ring_buffer.h"
+#include "am_app_utils_task.h"
+#include "am_app_utils_rtt_recorder.h"
 
 // user include
 #include "am_AEP_config.h"
@@ -56,16 +58,10 @@ void am_pdm0_isr(void)
         PDMn(0)->DMATOTCOUNT = PCM_FRAME_SIZE*PCM_DATA_BYTES;  // FIFO unit in bytes
 
         am_app_utils_ring_buffer_push(&am_AEP_ring_buffers[AM_AEP_RINGBUFF_PDM], g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES);
-
-#if configUSE_RTT_DATA_OUTPUT
-        //
-        // Record the raw PCM data and send over RTT
-        //
-//        if(g_rttRecordingFlag == 1)
-//            am_app_utils_rtt_record((void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES); 
-#endif /* USE_RTT_DATA_OUTPUT */ 
-
-//        am_util_debug_printf("PDM DCMP interrupt, pick g_ui32PDMDataBuffer[5] = 0x%8x\n", g_ui32PDMDataBuffer[5]);
+#if configUSE_AUDIO_CODEC
+        am_app_utils_task_send_fromISR(am_AEP_tasks, AM_AEP_ISR_PDM, AM_AEP_TASK_CODEC, 
+                   AM_APP_MESSAGE_LONG, PCM_FRAME_SIZE*PCM_DATA_BYTES, &am_AEP_ring_buffers[AM_AEP_RINGBUFF_PDM]);
+#endif // configUSE_AUDIO_CODEC
     }
     else if(ui32Status & (AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF))
     {
@@ -79,3 +75,36 @@ void am_pdm0_isr(void)
 }
 #endif // configUSE_PDM_DATA
 
+// GPIO isr handle the buttons on board
+void am_gpio_isr(void)
+{
+    uint64_t ui64IntStatus = 0;
+    uint32_t ui32KeyValue = 0;
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    
+    //
+    // Read and clear the GPIO interrupt status.
+    //
+    am_hal_gpio_interrupt_status_get(false, &ui64IntStatus);
+    am_hal_gpio_interrupt_clear(ui64IntStatus);
+
+    if(ui64IntStatus & AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0))
+    {   
+        am_hal_gpio_interrupt_disable(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
+        am_hal_gpio_interrupt_clear(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
+        //
+        // debounce.
+        //
+        if(g_ui8DebounceFlag == 0)
+        {
+            g_ui8DebounceFlag = 1;
+            ui32KeyValue = AM_BSP_GPIO_BUTTON0;
+//            xTimerStartFromISR(am_AEP_timers[AM_AEP_TIMER_DEBOUNCE], &xHigherPriorityTaskWoken);    
+//            am_app_utils_task_send_fromISR(am_AEP_tasks, AM_AEP_ISR_GPIO, 2, 
+//                   AM_APP_MESSAGE_SHORT, ui32KeyValue, NULL);
+        }  
+
+    }
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+
+}

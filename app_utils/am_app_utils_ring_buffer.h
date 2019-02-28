@@ -46,6 +46,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+
+#include "SEGGER_RTT.h"
+
 #include "am_app_utils.h"
 #ifdef __cplusplus
 extern "C"
