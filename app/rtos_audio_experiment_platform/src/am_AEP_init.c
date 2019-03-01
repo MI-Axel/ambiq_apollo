@@ -1,3 +1,15 @@
+//*****************************************************************************
+//
+// FreeRTOS include files.
+//
+//*****************************************************************************
+#include "FreeRTOSConfig.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "event_groups.h"
+#include "queue.h"
+#include "timers.h"
+
 #include "am_app_utils_task.h"
 #include "am_app_utils_rtt_recorder.h"
 
@@ -43,7 +55,7 @@ am_app_utils_task_setup_t g_AEP_TaskSetup[] =
 #endif // configUSE_STDIO_PRINTF   
 
 #if configUSE_AUDIO_CODEC
-    {AM_AEP_TASK_CODEC, &am_AEP_codec_task, "codec_encoder", 16*1024, NULL, 2, 16},
+    {AM_AEP_TASK_CODEC, &am_AEP_codec_task, "codec_encoder", 12*1024, NULL, 2, 16},
 #endif // configUSE_AUDIO_CODEC
 
     {AM_AEP_TASK_BUTTON, &am_AEP_button_task, "button_responser", 1024, NULL, 3, 16}
@@ -84,7 +96,9 @@ void am_AEP_init(void)
     uint32_t taskCount = 0;
     uint32_t taskSetupCount = 0;
     uint32_t timerSetupCount = 0;
-    
+
+    uint32_t byteSize = 0;
+
     am_AEP_board_setup();
 #if configUSE_RTT_LOGGER
     am_app_utils_rtt_init(g_rttRecorderBuff, RTT_BUFFER_LENGTH);
@@ -107,7 +121,10 @@ void am_AEP_init(void)
     am_app_utils_task_create_all_tasks(g_AEP_TaskSetup, am_AEP_tasks, taskSetupCount);
     am_app_utils_timer_create_all_timers(g_AEP_TimerSetup, am_AEP_timers, timerSetupCount);
 #if configUSE_AUDIO_CODEC
+    byteSize = xPortGetFreeHeapSize();
+    am_util_stdio_printf("There are %d bytes free heap left.", byteSize);
     am_opus_encoder_init(g_opusEnc);
+    am_util_stdio_printf("There are %d bytes free heap left after encoder.", byteSize);
 #endif // configUSE_AUDIO_CODEC
     // Enable system heart beat LED
     xTimerStart(am_AEP_timers[AM_AEP_TIMER_HEART_BEAT], 0);    

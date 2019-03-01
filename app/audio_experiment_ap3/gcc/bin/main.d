@@ -96,7 +96,10 @@ bin/main.o: ../src/main.c \
  ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h \
  ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h \
  ../../../tools/segger/SystemView_Src_V252d/Config/Global.h \
- ../include/am_memcpy_ringbuff_test.h
+ ../include/am_opus.h ../include/board_setup.h ../include/audio_driver.h \
+ ../../../tools/opus/opus-1.2.1/include/opus.h \
+ ../../../tools/opus/opus-1.2.1/include/opus_types.h \
+ ../../../tools/opus/opus-1.2.1/include/opus_defines.h
 
 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -296,4 +299,14 @@ bin/main.o: ../src/main.c \
 
 ../../../tools/segger/SystemView_Src_V252d/Config/Global.h:
 
-../include/am_memcpy_ringbuff_test.h:
+../include/am_opus.h:
+
+../include/board_setup.h:
+
+../include/audio_driver.h:
+
+../../../tools/opus/opus-1.2.1/include/opus.h:
+
+../../../tools/opus/opus-1.2.1/include/opus_types.h:
+
+../../../tools/opus/opus-1.2.1/include/opus_defines.h:

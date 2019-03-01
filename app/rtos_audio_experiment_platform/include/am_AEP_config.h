@@ -14,9 +14,9 @@
 #define configUSE_AUDIO_CODEC                       1
 
 // SYSVIEWER and RTT could only choose one item
-#define configUSE_SYSVIEWER                         0
+#define configUSE_SYSVIEWER                         1
 
-#define configUSE_RTT_LOGGER                        1
+#define configUSE_RTT_LOGGER                        0
 
 // CPU runs at 96MHZ or 48MHZ
 #define configUSE_BURST_ALWAYS_ON                   1

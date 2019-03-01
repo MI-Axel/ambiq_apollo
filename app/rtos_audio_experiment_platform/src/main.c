@@ -80,7 +80,7 @@ int main()
 
 #endif
 
-    am_util_stdio_printf("FreeRTOS stars to operate!\r\n");
+//    am_util_stdio_printf("FreeRTOS stars to operate!\r\n");
     //
     // Start the scheduler.
     //

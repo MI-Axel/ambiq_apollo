@@ -185,11 +185,10 @@ SRC += startup_gcc.c
 SRC += board_setup.c
 #SRC += audio_driver.c
 SRC += am_opus.c
-SRC += am_opus_custom_support.c
-SRC += am_memcpy_ringbuff_test.c
+#SRC += am_memcpy_ringbuff_test.c
 SRC += am_app_USP1602_mono_array.c
 #SRC += am_alloc_free_test.c
-#SRC += ${OPUS_SRC}
+SRC += ${OPUS_SRC}
 SRC += ${SEGGER_SYSVIEW_SRC}
 
 CSRC = $(filter %.c,$(SRC))
