@@ -1666,6 +1666,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
  .data          0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
  .bss           0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+ .text.am_hal_burst_mode_enable
+                0x0000000000000000       0x5c ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
  .text.am_hal_burst_mode_disable
                 0x0000000000000000       0x60 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
  .text          0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
@@ -2042,7 +2044,7 @@ SRAM             0x0000000010000000 0x0000000000060000 xrw
 Linker script and memory map
 
 
-.text           0x000000000000c000    0x38e68
+.text           0x000000000000c000    0x38e00
                 0x000000000000c000                . = ALIGN (0x4)
  *(.isr_vector)
  .isr_vector    0x000000000000c000       0xc0 bin/startup_gcc.o
@@ -3013,773 +3015,770 @@ Linker script and memory map
                 0x000000000003b00c       0xb4 bin/am_AEP_board_setup.o
                 0x000000000003b00c                am_AEP_pdm_init
  .text.am_AEP_board_setup
-                0x000000000003b0c0       0x78 bin/am_AEP_board_setup.o
+                0x000000000003b0c0       0x6c bin/am_AEP_board_setup.o
                 0x000000000003b0c0                am_AEP_board_setup
  .text.am_AEP_led_task
-                0x000000000003b138       0x24 bin/am_AEP_task.o
-                0x000000000003b138                am_AEP_led_task
+                0x000000000003b12c       0x24 bin/am_AEP_task.o
+                0x000000000003b12c                am_AEP_led_task
  .text.am_AEP_button_task
-                0x000000000003b15c       0x20 bin/am_AEP_task.o
-                0x000000000003b15c                am_AEP_button_task
+                0x000000000003b150       0x20 bin/am_AEP_task.o
+                0x000000000003b150                am_AEP_button_task
  .text.am_AEP_codec_task
-                0x000000000003b17c       0x84 bin/am_AEP_task.o
-                0x000000000003b17c                am_AEP_codec_task
+                0x000000000003b170       0x84 bin/am_AEP_task.o
+                0x000000000003b170                am_AEP_codec_task
  .text.am_AEP_timer_heart_beat_callback
-                0x000000000003b200       0x20 bin/am_AEP_task.o
-                0x000000000003b200                am_AEP_timer_heart_beat_callback
+                0x000000000003b1f4       0x20 bin/am_AEP_task.o
+                0x000000000003b1f4                am_AEP_timer_heart_beat_callback
  .text.am_pdm0_isr
-                0x000000000003b220       0x80 bin/am_AEP_isr_handler.o
-                0x000000000003b220                am_pdm0_isr
+                0x000000000003b214       0x80 bin/am_AEP_isr_handler.o
+                0x000000000003b214                am_pdm0_isr
  .text.am_gpio_isr
-                0x000000000003b2a0       0x64 bin/am_AEP_isr_handler.o
-                0x000000000003b2a0                am_gpio_isr
+                0x000000000003b294       0x64 bin/am_AEP_isr_handler.o
+                0x000000000003b294                am_gpio_isr
  .text.am_opus_encoder_init
-                0x000000000003b304       0xe4 bin/am_opus.o
-                0x000000000003b304                am_opus_encoder_init
+                0x000000000003b2f8       0xe4 bin/am_opus.o
+                0x000000000003b2f8                am_opus_encoder_init
  .text.NMI_Handler
-                0x000000000003b3e8        0x4 bin/startup_gcc.o
-                0x000000000003b3e8                NMI_Handler
+                0x000000000003b3dc        0x4 bin/startup_gcc.o
+                0x000000000003b3dc                NMI_Handler
  .text.am_default_isr
-                0x000000000003b3ec        0x4 bin/startup_gcc.o
-                0x000000000003b3ec                am_default_isr
-                0x000000000003b3ec                am_iomaster4_isr
-                0x000000000003b3ec                am_rtc_isr
-                0x000000000003b3ec                am_stimer_cmpr3_isr
-                0x000000000003b3ec                am_adc_isr
-                0x000000000003b3ec                am_iomaster3_isr
-                0x000000000003b3ec                am_clkgen_isr
-                0x000000000003b3ec                am_stimer_isr
-                0x000000000003b3ec                am_software0_isr
-                0x000000000003b3ec                am_stimer_cmpr5_isr
-                0x000000000003b3ec                am_iomaster5_isr
-                0x000000000003b3ec                am_uart_isr
-                0x000000000003b3ec                am_ctimer_isr
-                0x000000000003b3ec                am_ioslave_acc_isr
-                0x000000000003b3ec                am_mspi0_isr
-                0x000000000003b3ec                am_stimer_cmpr6_isr
-                0x000000000003b3ec                am_iomaster1_isr
-                0x000000000003b3ec                am_brownout_isr
-                0x000000000003b3ec                am_vcomp_isr
-                0x000000000003b3ec                am_stimer_cmpr1_isr
-                0x000000000003b3ec                am_iomaster2_isr
-                0x000000000003b3ec                am_stimer_cmpr2_isr
-                0x000000000003b3ec                am_ioslave_ios_isr
-                0x000000000003b3ec                am_uart1_isr
-                0x000000000003b3ec                am_stimer_cmpr7_isr
-                0x000000000003b3ec                am_scard_isr
-                0x000000000003b3ec                am_watchdog_isr
-                0x000000000003b3ec                am_iomaster0_isr
-                0x000000000003b3ec                am_ble_isr
-                0x000000000003b3ec                am_stimer_cmpr4_isr
-                0x000000000003b3ec                DebugMon_Handler
+                0x000000000003b3e0        0x4 bin/startup_gcc.o
+                0x000000000003b3e0                am_default_isr
+                0x000000000003b3e0                am_iomaster4_isr
+                0x000000000003b3e0                am_rtc_isr
+                0x000000000003b3e0                am_stimer_cmpr3_isr
+                0x000000000003b3e0                am_adc_isr
+                0x000000000003b3e0                am_iomaster3_isr
+                0x000000000003b3e0                am_clkgen_isr
+                0x000000000003b3e0                am_stimer_isr
+                0x000000000003b3e0                am_software0_isr
+                0x000000000003b3e0                am_stimer_cmpr5_isr
+                0x000000000003b3e0                am_iomaster5_isr
+                0x000000000003b3e0                am_uart_isr
+                0x000000000003b3e0                am_ctimer_isr
+                0x000000000003b3e0                am_ioslave_acc_isr
+                0x000000000003b3e0                am_mspi0_isr
+                0x000000000003b3e0                am_stimer_cmpr6_isr
+                0x000000000003b3e0                am_iomaster1_isr
+                0x000000000003b3e0                am_brownout_isr
+                0x000000000003b3e0                am_vcomp_isr
+                0x000000000003b3e0                am_stimer_cmpr1_isr
+                0x000000000003b3e0                am_iomaster2_isr
+                0x000000000003b3e0                am_stimer_cmpr2_isr
+                0x000000000003b3e0                am_ioslave_ios_isr
+                0x000000000003b3e0                am_uart1_isr
+                0x000000000003b3e0                am_stimer_cmpr7_isr
+                0x000000000003b3e0                am_scard_isr
+                0x000000000003b3e0                am_watchdog_isr
+                0x000000000003b3e0                am_iomaster0_isr
+                0x000000000003b3e0                am_ble_isr
+                0x000000000003b3e0                am_stimer_cmpr4_isr
+                0x000000000003b3e0                DebugMon_Handler
  .text.Reset_Handler
-                0x000000000003b3f0       0x68 bin/startup_gcc.o
-                0x000000000003b3f0                Reset_Handler
+                0x000000000003b3e4       0x68 bin/startup_gcc.o
+                0x000000000003b3e4                Reset_Handler
  .text.am_bsp_uart_string_print
-                0x000000000003b458       0x48 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000003b458                am_bsp_uart_string_print
+                0x000000000003b44c       0x48 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000003b44c                am_bsp_uart_string_print
  .text.am_bsp_low_power_init
-                0x000000000003b4a0       0x64 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000003b4a0                am_bsp_low_power_init
+                0x000000000003b494       0x64 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000003b494                am_bsp_low_power_init
  .text.am_bsp_uart_printf_enable
-                0x000000000003b504       0x5c ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000003b504                am_bsp_uart_printf_enable
+                0x000000000003b4f8       0x5c ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000003b4f8                am_bsp_uart_printf_enable
  .text.am_hal_burst_mode_initialize
-                0x000000000003b560       0x90 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
-                0x000000000003b560                am_hal_burst_mode_initialize
- .text.am_hal_burst_mode_enable
-                0x000000000003b5f0       0x5c ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
-                0x000000000003b5f0                am_hal_burst_mode_enable
+                0x000000000003b554       0x90 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+                0x000000000003b554                am_hal_burst_mode_initialize
  .text.am_hal_cachectrl_config
-                0x000000000003b64c       0x54 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000003b64c                am_hal_cachectrl_config
+                0x000000000003b5e4       0x54 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000003b5e4                am_hal_cachectrl_config
  .text.am_hal_cachectrl_enable
-                0x000000000003b6a0       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000003b6a0                am_hal_cachectrl_enable
+                0x000000000003b638       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000003b638                am_hal_cachectrl_enable
  .text.am_hal_clkgen_control
-                0x000000000003b6b4       0xd8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
-                0x000000000003b6b4                am_hal_clkgen_control
+                0x000000000003b64c       0xd8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
+                0x000000000003b64c                am_hal_clkgen_control
  .text.am_hal_clkgen_status_get
-                0x000000000003b78c       0x3c ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
-                0x000000000003b78c                am_hal_clkgen_status_get
+                0x000000000003b724       0x3c ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
+                0x000000000003b724                am_hal_clkgen_status_get
  .text.am_hal_flash_delay
-                0x000000000003b7c8        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000003b7c8                am_hal_flash_delay
+                0x000000000003b760        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000003b760                am_hal_flash_delay
  .text.am_hal_flash_delay_status_check
-                0x000000000003b7d0       0x58 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000003b7d0                am_hal_flash_delay_status_check
+                0x000000000003b768       0x58 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000003b768                am_hal_flash_delay_status_check
  .text.am_hal_interrupt_master_enable
-                0x000000000003b828        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000003b828                am_hal_interrupt_master_enable
+                0x000000000003b7c0        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000003b7c0                am_hal_interrupt_master_enable
  .text.am_hal_interrupt_master_disable
-                0x000000000003b830        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000003b830                am_hal_interrupt_master_disable
+                0x000000000003b7c8        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000003b7c8                am_hal_interrupt_master_disable
  .text.am_hal_interrupt_master_set
-                0x000000000003b838        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000003b838                am_hal_interrupt_master_set
+                0x000000000003b7d0        0x8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000003b7d0                am_hal_interrupt_master_set
  .text.am_hal_itm_disable
-                0x000000000003b840       0xac ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_itm.o)
-                0x000000000003b840                am_hal_itm_disable
+                0x000000000003b7d8       0xac ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_itm.o)
+                0x000000000003b7d8                am_hal_itm_disable
  .text.am_hal_mcuctrl_info_get
-                0x000000000003b8ec      0x12c ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x000000000003b8ec                am_hal_mcuctrl_info_get
+                0x000000000003b884      0x12c ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x000000000003b884                am_hal_mcuctrl_info_get
  .text.am_hal_pwrctrl_periph_enable
-                0x000000000003ba18       0x54 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x000000000003ba18                am_hal_pwrctrl_periph_enable
+                0x000000000003b9b0       0x54 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x000000000003b9b0                am_hal_pwrctrl_periph_enable
  .text.am_hal_pwrctrl_periph_disable
-                0x000000000003ba6c       0x58 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x000000000003ba6c                am_hal_pwrctrl_periph_disable
+                0x000000000003ba04       0x58 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x000000000003ba04                am_hal_pwrctrl_periph_disable
  .text.am_hal_pwrctrl_low_power_init
-                0x000000000003bac4       0x94 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x000000000003bac4                am_hal_pwrctrl_low_power_init
+                0x000000000003ba5c       0x94 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x000000000003ba5c                am_hal_pwrctrl_low_power_init
  .text.am_hal_rtc_osc_select
-                0x000000000003bb58       0x18 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
-                0x000000000003bb58                am_hal_rtc_osc_select
+                0x000000000003baf0       0x18 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
+                0x000000000003baf0                am_hal_rtc_osc_select
  .text.am_hal_rtc_osc_disable
-                0x000000000003bb70       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
-                0x000000000003bb70                am_hal_rtc_osc_disable
+                0x000000000003bb08       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
+                0x000000000003bb08                am_hal_rtc_osc_disable
  .text.am_hal_stimer_config
-                0x000000000003bb84       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
-                0x000000000003bb84                am_hal_stimer_config
+                0x000000000003bb1c       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
+                0x000000000003bb1c                am_hal_stimer_config
  .text.am_hal_stimer_counter_get
-                0x000000000003bb98        0xc ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
-                0x000000000003bb98                am_hal_stimer_counter_get
+                0x000000000003bb30        0xc ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
+                0x000000000003bb30                am_hal_stimer_counter_get
  .text.am_hal_stimer_compare_delta_set
-                0x000000000003bba4       0xa8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
-                0x000000000003bba4                am_hal_stimer_compare_delta_set
+                0x000000000003bb3c       0xa8 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
+                0x000000000003bb3c                am_hal_stimer_compare_delta_set
  .text.am_hal_stimer_int_enable
-                0x000000000003bc4c       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
-                0x000000000003bc4c                am_hal_stimer_int_enable
+                0x000000000003bbe4       0x14 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
+                0x000000000003bbe4                am_hal_stimer_int_enable
  .text.am_hal_stimer_int_clear
-                0x000000000003bc60        0xc ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
-                0x000000000003bc60                am_hal_stimer_int_clear
+                0x000000000003bbf8        0xc ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
+                0x000000000003bbf8                am_hal_stimer_int_clear
  .text.am_hal_stimer_int_status_get
-                0x000000000003bc6c       0x18 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
-                0x000000000003bc6c                am_hal_stimer_int_status_get
+                0x000000000003bc04       0x18 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_stimer.o)
+                0x000000000003bc04                am_hal_stimer_int_status_get
  .text.am_hal_sysctrl_sleep
-                0x000000000003bc84       0x58 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_sysctrl.o)
-                0x000000000003bc84                am_hal_sysctrl_sleep
+                0x000000000003bc1c       0x58 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_sysctrl.o)
+                0x000000000003bc1c                am_hal_sysctrl_sleep
  .text.am_hal_uart_initialize
-                0x000000000003bcdc       0x50 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000000003bcdc                am_hal_uart_initialize
+                0x000000000003bc74       0x50 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x000000000003bc74                am_hal_uart_initialize
  .text.am_hal_uart_power_control
-                0x000000000003bd2c       0xe4 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000000003bd2c                am_hal_uart_power_control
+                0x000000000003bcc4       0xe4 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x000000000003bcc4                am_hal_uart_power_control
  .text.am_hal_uart_configure
-                0x000000000003be10      0x218 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000000003be10                am_hal_uart_configure
+                0x000000000003bda8      0x218 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x000000000003bda8                am_hal_uart_configure
  .text.am_hal_uart_transfer
-                0x000000000003c028      0x474 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000000003c028                am_hal_uart_transfer
+                0x000000000003bfc0      0x474 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x000000000003bfc0                am_hal_uart_transfer
  .text.am_hal_queue_init
-                0x000000000003c49c       0x18 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x000000000003c49c                am_hal_queue_init
+                0x000000000003c434       0x18 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x000000000003c434                am_hal_queue_init
  .text.am_hal_queue_item_add
-                0x000000000003c4b4       0x70 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x000000000003c4b4                am_hal_queue_item_add
+                0x000000000003c44c       0x70 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x000000000003c44c                am_hal_queue_item_add
  .text.am_hal_queue_item_get
-                0x000000000003c524       0x70 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x000000000003c524                am_hal_queue_item_get
- *fill*         0x000000000003c594        0x4 
- .text.floor    0x000000000003c598      0x110 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_floor.o)
-                0x000000000003c598                floor
- .text.log      0x000000000003c6a8      0x100 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log.o)
-                0x000000000003c6a8                log
- .text.log10    0x000000000003c7a8      0x100 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log10.o)
-                0x000000000003c7a8                log10
- .text.pow      0x000000000003c8a8      0x338 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_pow.o)
-                0x000000000003c8a8                pow
- .text.sqrt     0x000000000003cbe0       0xb8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_sqrt.o)
-                0x000000000003cbe0                sqrt
+                0x000000000003c4bc       0x70 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x000000000003c4bc                am_hal_queue_item_get
+ *fill*         0x000000000003c52c        0x4 
+ .text.floor    0x000000000003c530      0x110 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_floor.o)
+                0x000000000003c530                floor
+ .text.log      0x000000000003c640      0x100 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log.o)
+                0x000000000003c640                log
+ .text.log10    0x000000000003c740      0x100 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log10.o)
+                0x000000000003c740                log10
+ .text.pow      0x000000000003c840      0x338 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_pow.o)
+                0x000000000003c840                pow
+ .text.sqrt     0x000000000003cb78       0xb8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_sqrt.o)
+                0x000000000003cb78                sqrt
  .text.__ieee754_log
-                0x000000000003cc98      0x3b4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_log.o)
-                0x000000000003cc98                __ieee754_log
- *fill*         0x000000000003d04c        0x4 
+                0x000000000003cc30      0x3b4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_log.o)
+                0x000000000003cc30                __ieee754_log
+ *fill*         0x000000000003cfe4        0x4 
  .text.__ieee754_log10
-                0x000000000003d050      0x13c /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_log10.o)
-                0x000000000003d050                __ieee754_log10
- *fill*         0x000000000003d18c        0x4 
+                0x000000000003cfe8      0x13c /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_log10.o)
+                0x000000000003cfe8                __ieee754_log10
+ *fill*         0x000000000003d124        0x4 
  .text.__ieee754_pow
-                0x000000000003d190      0xab8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_pow.o)
-                0x000000000003d190                __ieee754_pow
+                0x000000000003d128      0xab8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_pow.o)
+                0x000000000003d128                __ieee754_pow
  .text.__ieee754_sqrt
-                0x000000000003dc48      0x194 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_sqrt.o)
-                0x000000000003dc48                __ieee754_sqrt
- .text.fabs     0x000000000003dddc       0x14 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_fabs.o)
-                0x000000000003dddc                fabs
- .text.finite   0x000000000003ddf0       0x10 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_finite.o)
-                0x000000000003ddf0                finite
- .text.matherr  0x000000000003de00        0x4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_matherr.o)
-                0x000000000003de00                matherr
- *fill*         0x000000000003de04        0x4 
- .text.nan      0x000000000003de08       0x10 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_nan.o)
-                0x000000000003de08                nan
- .text.rint     0x000000000003de18      0x110 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_rint.o)
-                0x000000000003de18                rint
- .text.scalbn   0x000000000003df28      0x114 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_scalbn.o)
-                0x000000000003df28                scalbn
+                0x000000000003dbe0      0x194 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_sqrt.o)
+                0x000000000003dbe0                __ieee754_sqrt
+ .text.fabs     0x000000000003dd74       0x14 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_fabs.o)
+                0x000000000003dd74                fabs
+ .text.finite   0x000000000003dd88       0x10 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_finite.o)
+                0x000000000003dd88                finite
+ .text.matherr  0x000000000003dd98        0x4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_matherr.o)
+                0x000000000003dd98                matherr
+ *fill*         0x000000000003dd9c        0x4 
+ .text.nan      0x000000000003dda0       0x10 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_nan.o)
+                0x000000000003dda0                nan
+ .text.rint     0x000000000003ddb0      0x110 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_rint.o)
+                0x000000000003ddb0                rint
+ .text.scalbn   0x000000000003dec0      0x114 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_scalbn.o)
+                0x000000000003dec0                scalbn
  .text.copysign
-                0x000000000003e03c       0x1c /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_copysign.o)
-                0x000000000003e03c                copysign
- .text.__errno  0x000000000003e058        0xc /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
-                0x000000000003e058                __errno
- .text.memcmp   0x000000000003e064       0x64 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memcmp.o)
-                0x000000000003e064                memcmp
- .text.memmove  0x000000000003e0c8       0xc8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memmove.o)
-                0x000000000003e0c8                memmove
- .text.memset   0x000000000003e190       0x94 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
-                0x000000000003e190                memset
+                0x000000000003dfd4       0x1c /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_copysign.o)
+                0x000000000003dfd4                copysign
+ .text.__errno  0x000000000003dff0        0xc /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
+                0x000000000003dff0                __errno
+ .text.memcmp   0x000000000003dffc       0x64 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memcmp.o)
+                0x000000000003dffc                memcmp
+ .text.memmove  0x000000000003e060       0xc8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memmove.o)
+                0x000000000003e060                memmove
+ .text.memset   0x000000000003e128       0x94 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
+                0x000000000003e128                memset
  .text.__udivmoddi4
-                0x000000000003e224      0x2cc /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
-                0x000000000003e224                __udivmoddi4
+                0x000000000003e1bc      0x2cc /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
+                0x000000000003e1bc                __udivmoddi4
  *(.rodata)
  *(.rodata*)
  .rodata.vTaskSwitchContext.str1.4
-                0x000000000003e4f0        0x5 bin/tasks.o
- *fill*         0x000000000003e4f5        0x3 
+                0x000000000003e488        0x5 bin/tasks.o
+ *fill*         0x000000000003e48d        0x3 
  .rodata.xTimerCreateTimerTask.str1.4
-                0x000000000003e4f8        0x8 bin/timers.o
+                0x000000000003e490        0x8 bin/timers.o
  .rodata.g_AM_HAL_GPIO_DISABLE
-                0x000000000003e500        0x4 bin/am_hal_gpio.o
-                0x000000000003e500                g_AM_HAL_GPIO_DISABLE
+                0x000000000003e498        0x4 bin/am_hal_gpio.o
+                0x000000000003e498                g_AM_HAL_GPIO_DISABLE
  .rodata.g_AM_HAL_GPIO_OUTPUT
-                0x000000000003e504        0x4 bin/am_hal_gpio.o
-                0x000000000003e504                g_AM_HAL_GPIO_OUTPUT
+                0x000000000003e49c        0x4 bin/am_hal_gpio.o
+                0x000000000003e49c                g_AM_HAL_GPIO_OUTPUT
  .rodata.g_AM_HAL_GPIO_TRISTATE
-                0x000000000003e508        0x4 bin/am_hal_gpio.o
-                0x000000000003e508                g_AM_HAL_GPIO_TRISTATE
+                0x000000000003e4a0        0x4 bin/am_hal_gpio.o
+                0x000000000003e4a0                g_AM_HAL_GPIO_TRISTATE
  .rodata.g_ui8Bit76Capabilities
-                0x000000000003e50c       0x32 bin/am_hal_gpio.o
- *fill*         0x000000000003e53e        0x2 
+                0x000000000003e4a4       0x32 bin/am_hal_gpio.o
+ *fill*         0x000000000003e4d6        0x2 
  .rodata.g_ui8Inpen
-                0x000000000003e540       0x32 bin/am_hal_gpio.o
- *fill*         0x000000000003e572        0x2 
+                0x000000000003e4d8       0x32 bin/am_hal_gpio.o
+ *fill*         0x000000000003e50a        0x2 
  .rodata.g_ui8NCEtable
-                0x000000000003e574       0xc8 bin/am_hal_gpio.o
+                0x000000000003e50c       0xc8 bin/am_hal_gpio.o
  .rodata.g_ui8nCEpins
-                0x000000000003e63c       0x32 bin/am_hal_gpio.o
- *fill*         0x000000000003e66e        0x2 
+                0x000000000003e5d4       0x32 bin/am_hal_gpio.o
+ *fill*         0x000000000003e606        0x2 
  .rodata.SEGGER_RTT_ReadNoLock.str1.4
-                0x000000000003e670       0x17 bin/SEGGER_RTT.o
- *fill*         0x000000000003e687        0x1 
+                0x000000000003e608       0x17 bin/SEGGER_RTT.o
+ *fill*         0x000000000003e61f        0x1 
  .rodata.SEGGER_SYSVIEW_Init.str1.4
-                0x000000000003e688        0x8 bin/SEGGER_SYSVIEW.o
+                0x000000000003e620        0x8 bin/SEGGER_SYSVIEW.o
  .rodata._abSync
-                0x000000000003e690        0xa bin/SEGGER_SYSVIEW.o
- *fill*         0x000000000003e69a        0x2 
+                0x000000000003e628        0xa bin/SEGGER_SYSVIEW.o
+ *fill*         0x000000000003e632        0x2 
  .rodata.SYSVIEW_AddTask.str1.4
-                0x000000000003e69c       0x50 bin/SEGGER_SYSVIEW_FreeRTOS.o
+                0x000000000003e634       0x50 bin/SEGGER_SYSVIEW_FreeRTOS.o
                                          0x58 (size before relaxing)
  .rodata.SYSVIEW_X_OS_TraceAPI
-                0x000000000003e6ec        0x8 bin/SEGGER_SYSVIEW_FreeRTOS.o
-                0x000000000003e6ec                SYSVIEW_X_OS_TraceAPI
+                0x000000000003e684        0x8 bin/SEGGER_SYSVIEW_FreeRTOS.o
+                0x000000000003e684                SYSVIEW_X_OS_TraceAPI
  .rodata._cbSendSystemDesc.str1.4
-                0x000000000003e6f4       0x41 bin/SEGGER_SYSVIEW_Config_FreeRTOS.o
- *fill*         0x000000000003e735        0x3 
+                0x000000000003e68c       0x41 bin/SEGGER_SYSVIEW_Config_FreeRTOS.o
+ *fill*         0x000000000003e6cd        0x3 
  .rodata.silk_delta_gain_iCDF
-                0x000000000003e738       0x29 bin/tables_gain.o
-                0x000000000003e738                silk_delta_gain_iCDF
- *fill*         0x000000000003e761        0x3 
+                0x000000000003e6d0       0x29 bin/tables_gain.o
+                0x000000000003e6d0                silk_delta_gain_iCDF
+ *fill*         0x000000000003e6f9        0x3 
  .rodata.silk_gain_iCDF
-                0x000000000003e764       0x18 bin/tables_gain.o
-                0x000000000003e764                silk_gain_iCDF
+                0x000000000003e6fc       0x18 bin/tables_gain.o
+                0x000000000003e6fc                silk_gain_iCDF
  .rodata.silk_LTP_gain_BITS_Q5_0
-                0x000000000003e77c        0x8 bin/tables_LTP.o
+                0x000000000003e714        0x8 bin/tables_LTP.o
  .rodata.silk_LTP_gain_BITS_Q5_1
-                0x000000000003e784       0x10 bin/tables_LTP.o
+                0x000000000003e71c       0x10 bin/tables_LTP.o
  .rodata.silk_LTP_gain_BITS_Q5_2
-                0x000000000003e794       0x20 bin/tables_LTP.o
+                0x000000000003e72c       0x20 bin/tables_LTP.o
  .rodata.silk_LTP_gain_BITS_Q5_ptrs
-                0x000000000003e7b4        0xc bin/tables_LTP.o
-                0x000000000003e7b4                silk_LTP_gain_BITS_Q5_ptrs
+                0x000000000003e74c        0xc bin/tables_LTP.o
+                0x000000000003e74c                silk_LTP_gain_BITS_Q5_ptrs
  .rodata.silk_LTP_gain_iCDF_0
-                0x000000000003e7c0        0x8 bin/tables_LTP.o
+                0x000000000003e758        0x8 bin/tables_LTP.o
  .rodata.silk_LTP_gain_iCDF_1
-                0x000000000003e7c8       0x10 bin/tables_LTP.o
+                0x000000000003e760       0x10 bin/tables_LTP.o
  .rodata.silk_LTP_gain_iCDF_2
-                0x000000000003e7d8       0x20 bin/tables_LTP.o
+                0x000000000003e770       0x20 bin/tables_LTP.o
  .rodata.silk_LTP_gain_iCDF_ptrs
-                0x000000000003e7f8        0xc bin/tables_LTP.o
-                0x000000000003e7f8                silk_LTP_gain_iCDF_ptrs
+                0x000000000003e790        0xc bin/tables_LTP.o
+                0x000000000003e790                silk_LTP_gain_iCDF_ptrs
  .rodata.silk_LTP_gain_vq_0
-                0x000000000003e804       0x28 bin/tables_LTP.o
+                0x000000000003e79c       0x28 bin/tables_LTP.o
  .rodata.silk_LTP_gain_vq_0_gain
-                0x000000000003e82c        0x8 bin/tables_LTP.o
+                0x000000000003e7c4        0x8 bin/tables_LTP.o
  .rodata.silk_LTP_gain_vq_1
-                0x000000000003e834       0x50 bin/tables_LTP.o
+                0x000000000003e7cc       0x50 bin/tables_LTP.o
  .rodata.silk_LTP_gain_vq_1_gain
-                0x000000000003e884       0x10 bin/tables_LTP.o
+                0x000000000003e81c       0x10 bin/tables_LTP.o
  .rodata.silk_LTP_gain_vq_2
-                0x000000000003e894       0xa0 bin/tables_LTP.o
+                0x000000000003e82c       0xa0 bin/tables_LTP.o
  .rodata.silk_LTP_gain_vq_2_gain
-                0x000000000003e934       0x20 bin/tables_LTP.o
+                0x000000000003e8cc       0x20 bin/tables_LTP.o
  .rodata.silk_LTP_per_index_iCDF
-                0x000000000003e954        0x3 bin/tables_LTP.o
-                0x000000000003e954                silk_LTP_per_index_iCDF
- *fill*         0x000000000003e957        0x1 
+                0x000000000003e8ec        0x3 bin/tables_LTP.o
+                0x000000000003e8ec                silk_LTP_per_index_iCDF
+ *fill*         0x000000000003e8ef        0x1 
  .rodata.silk_LTP_vq_gain_ptrs_Q7
-                0x000000000003e958        0xc bin/tables_LTP.o
-                0x000000000003e958                silk_LTP_vq_gain_ptrs_Q7
+                0x000000000003e8f0        0xc bin/tables_LTP.o
+                0x000000000003e8f0                silk_LTP_vq_gain_ptrs_Q7
  .rodata.silk_LTP_vq_ptrs_Q7
-                0x000000000003e964        0xc bin/tables_LTP.o
-                0x000000000003e964                silk_LTP_vq_ptrs_Q7
+                0x000000000003e8fc        0xc bin/tables_LTP.o
+                0x000000000003e8fc                silk_LTP_vq_ptrs_Q7
  .rodata.silk_LTP_vq_sizes
-                0x000000000003e970        0x3 bin/tables_LTP.o
-                0x000000000003e970                silk_LTP_vq_sizes
- *fill*         0x000000000003e973        0x1 
+                0x000000000003e908        0x3 bin/tables_LTP.o
+                0x000000000003e908                silk_LTP_vq_sizes
+ *fill*         0x000000000003e90b        0x1 
  .rodata.silk_NLSF_CB1_NB_MB_Q8
-                0x000000000003e974      0x140 bin/tables_NLSF_CB_NB_MB.o
+                0x000000000003e90c      0x140 bin/tables_NLSF_CB_NB_MB.o
  .rodata.silk_NLSF_CB1_Wght_Q9
-                0x000000000003eab4      0x280 bin/tables_NLSF_CB_NB_MB.o
+                0x000000000003ea4c      0x280 bin/tables_NLSF_CB_NB_MB.o
  .rodata.silk_NLSF_CB1_iCDF_NB_MB
-                0x000000000003ed34       0x40 bin/tables_NLSF_CB_NB_MB.o
+                0x000000000003eccc       0x40 bin/tables_NLSF_CB_NB_MB.o
  .rodata.silk_NLSF_CB2_BITS_NB_MB_Q5
-                0x000000000003ed74       0x48 bin/tables_NLSF_CB_NB_MB.o
+                0x000000000003ed0c       0x48 bin/tables_NLSF_CB_NB_MB.o
  .rodata.silk_NLSF_CB2_SELECT_NB_MB
-                0x000000000003edbc       0xa0 bin/tables_NLSF_CB_NB_MB.o
+                0x000000000003ed54       0xa0 bin/tables_NLSF_CB_NB_MB.o
  .rodata.silk_NLSF_CB2_iCDF_NB_MB
-                0x000000000003ee5c       0x48 bin/tables_NLSF_CB_NB_MB.o
+                0x000000000003edf4       0x48 bin/tables_NLSF_CB_NB_MB.o
  .rodata.silk_NLSF_CB_NB_MB
-                0x000000000003eea4       0x28 bin/tables_NLSF_CB_NB_MB.o
-                0x000000000003eea4                silk_NLSF_CB_NB_MB
+                0x000000000003ee3c       0x28 bin/tables_NLSF_CB_NB_MB.o
+                0x000000000003ee3c                silk_NLSF_CB_NB_MB
  .rodata.silk_NLSF_DELTA_MIN_NB_MB_Q15
-                0x000000000003eecc       0x16 bin/tables_NLSF_CB_NB_MB.o
- *fill*         0x000000000003eee2        0x2 
+                0x000000000003ee64       0x16 bin/tables_NLSF_CB_NB_MB.o
+ *fill*         0x000000000003ee7a        0x2 
  .rodata.silk_NLSF_PRED_NB_MB_Q8
-                0x000000000003eee4       0x12 bin/tables_NLSF_CB_NB_MB.o
- *fill*         0x000000000003eef6        0x2 
+                0x000000000003ee7c       0x12 bin/tables_NLSF_CB_NB_MB.o
+ *fill*         0x000000000003ee8e        0x2 
  .rodata.silk_NLSF_CB1_WB_Q8
-                0x000000000003eef8      0x200 bin/tables_NLSF_CB_WB.o
+                0x000000000003ee90      0x200 bin/tables_NLSF_CB_WB.o
  .rodata.silk_NLSF_CB1_WB_Wght_Q9
-                0x000000000003f0f8      0x400 bin/tables_NLSF_CB_WB.o
+                0x000000000003f090      0x400 bin/tables_NLSF_CB_WB.o
  .rodata.silk_NLSF_CB1_iCDF_WB
-                0x000000000003f4f8       0x40 bin/tables_NLSF_CB_WB.o
+                0x000000000003f490       0x40 bin/tables_NLSF_CB_WB.o
  .rodata.silk_NLSF_CB2_BITS_WB_Q5
-                0x000000000003f538       0x48 bin/tables_NLSF_CB_WB.o
+                0x000000000003f4d0       0x48 bin/tables_NLSF_CB_WB.o
  .rodata.silk_NLSF_CB2_SELECT_WB
-                0x000000000003f580      0x100 bin/tables_NLSF_CB_WB.o
+                0x000000000003f518      0x100 bin/tables_NLSF_CB_WB.o
  .rodata.silk_NLSF_CB2_iCDF_WB
-                0x000000000003f680       0x48 bin/tables_NLSF_CB_WB.o
+                0x000000000003f618       0x48 bin/tables_NLSF_CB_WB.o
  .rodata.silk_NLSF_CB_WB
-                0x000000000003f6c8       0x28 bin/tables_NLSF_CB_WB.o
-                0x000000000003f6c8                silk_NLSF_CB_WB
+                0x000000000003f660       0x28 bin/tables_NLSF_CB_WB.o
+                0x000000000003f660                silk_NLSF_CB_WB
  .rodata.silk_NLSF_DELTA_MIN_WB_Q15
-                0x000000000003f6f0       0x22 bin/tables_NLSF_CB_WB.o
- *fill*         0x000000000003f712        0x2 
+                0x000000000003f688       0x22 bin/tables_NLSF_CB_WB.o
+ *fill*         0x000000000003f6aa        0x2 
  .rodata.silk_NLSF_PRED_WB_Q8
-                0x000000000003f714       0x1e bin/tables_NLSF_CB_WB.o
- *fill*         0x000000000003f732        0x2 
+                0x000000000003f6ac       0x1e bin/tables_NLSF_CB_WB.o
+ *fill*         0x000000000003f6ca        0x2 
  .rodata.silk_LBRR_flags_2_iCDF
-                0x000000000003f734        0x3 bin/tables_other.o
- *fill*         0x000000000003f737        0x1 
+                0x000000000003f6cc        0x3 bin/tables_other.o
+ *fill*         0x000000000003f6cf        0x1 
  .rodata.silk_LBRR_flags_3_iCDF
-                0x000000000003f738        0x7 bin/tables_other.o
- *fill*         0x000000000003f73f        0x1 
+                0x000000000003f6d0        0x7 bin/tables_other.o
+ *fill*         0x000000000003f6d7        0x1 
  .rodata.silk_LBRR_flags_iCDF_ptr
-                0x000000000003f740        0x8 bin/tables_other.o
-                0x000000000003f740                silk_LBRR_flags_iCDF_ptr
+                0x000000000003f6d8        0x8 bin/tables_other.o
+                0x000000000003f6d8                silk_LBRR_flags_iCDF_ptr
  .rodata.silk_LTPScales_table_Q14
-                0x000000000003f748        0x6 bin/tables_other.o
-                0x000000000003f748                silk_LTPScales_table_Q14
- *fill*         0x000000000003f74e        0x2 
+                0x000000000003f6e0        0x6 bin/tables_other.o
+                0x000000000003f6e0                silk_LTPScales_table_Q14
+ *fill*         0x000000000003f6e6        0x2 
  .rodata.silk_LTPscale_iCDF
-                0x000000000003f750        0x3 bin/tables_other.o
-                0x000000000003f750                silk_LTPscale_iCDF
- *fill*         0x000000000003f753        0x1 
+                0x000000000003f6e8        0x3 bin/tables_other.o
+                0x000000000003f6e8                silk_LTPscale_iCDF
+ *fill*         0x000000000003f6eb        0x1 
  .rodata.silk_NLSF_EXT_iCDF
-                0x000000000003f754        0x7 bin/tables_other.o
-                0x000000000003f754                silk_NLSF_EXT_iCDF
- *fill*         0x000000000003f75b        0x1 
+                0x000000000003f6ec        0x7 bin/tables_other.o
+                0x000000000003f6ec                silk_NLSF_EXT_iCDF
+ *fill*         0x000000000003f6f3        0x1 
  .rodata.silk_NLSF_interpolation_factor_iCDF
-                0x000000000003f75c        0x5 bin/tables_other.o
-                0x000000000003f75c                silk_NLSF_interpolation_factor_iCDF
- *fill*         0x000000000003f761        0x3 
+                0x000000000003f6f4        0x5 bin/tables_other.o
+                0x000000000003f6f4                silk_NLSF_interpolation_factor_iCDF
+ *fill*         0x000000000003f6f9        0x3 
  .rodata.silk_Quantization_Offsets_Q10
-                0x000000000003f764        0x8 bin/tables_other.o
-                0x000000000003f764                silk_Quantization_Offsets_Q10
+                0x000000000003f6fc        0x8 bin/tables_other.o
+                0x000000000003f6fc                silk_Quantization_Offsets_Q10
  .rodata.silk_SNR_table_Q1
-                0x000000000003f76c       0x10 bin/tables_other.o
-                0x000000000003f76c                silk_SNR_table_Q1
+                0x000000000003f704       0x10 bin/tables_other.o
+                0x000000000003f704                silk_SNR_table_Q1
  .rodata.silk_TargetRate_table_MB
-                0x000000000003f77c       0x20 bin/tables_other.o
-                0x000000000003f77c                silk_TargetRate_table_MB
+                0x000000000003f714       0x20 bin/tables_other.o
+                0x000000000003f714                silk_TargetRate_table_MB
  .rodata.silk_TargetRate_table_NB
-                0x000000000003f79c       0x20 bin/tables_other.o
-                0x000000000003f79c                silk_TargetRate_table_NB
+                0x000000000003f734       0x20 bin/tables_other.o
+                0x000000000003f734                silk_TargetRate_table_NB
  .rodata.silk_TargetRate_table_WB
-                0x000000000003f7bc       0x20 bin/tables_other.o
-                0x000000000003f7bc                silk_TargetRate_table_WB
+                0x000000000003f754       0x20 bin/tables_other.o
+                0x000000000003f754                silk_TargetRate_table_WB
  .rodata.silk_Transition_LP_A_Q28
-                0x000000000003f7dc       0x28 bin/tables_other.o
-                0x000000000003f7dc                silk_Transition_LP_A_Q28
+                0x000000000003f774       0x28 bin/tables_other.o
+                0x000000000003f774                silk_Transition_LP_A_Q28
  .rodata.silk_Transition_LP_B_Q28
-                0x000000000003f804       0x3c bin/tables_other.o
-                0x000000000003f804                silk_Transition_LP_B_Q28
+                0x000000000003f79c       0x3c bin/tables_other.o
+                0x000000000003f79c                silk_Transition_LP_B_Q28
  .rodata.silk_lsb_iCDF
-                0x000000000003f840        0x2 bin/tables_other.o
-                0x000000000003f840                silk_lsb_iCDF
- *fill*         0x000000000003f842        0x2 
+                0x000000000003f7d8        0x2 bin/tables_other.o
+                0x000000000003f7d8                silk_lsb_iCDF
+ *fill*         0x000000000003f7da        0x2 
  .rodata.silk_stereo_only_code_mid_iCDF
-                0x000000000003f844        0x2 bin/tables_other.o
-                0x000000000003f844                silk_stereo_only_code_mid_iCDF
- *fill*         0x000000000003f846        0x2 
+                0x000000000003f7dc        0x2 bin/tables_other.o
+                0x000000000003f7dc                silk_stereo_only_code_mid_iCDF
+ *fill*         0x000000000003f7de        0x2 
  .rodata.silk_stereo_pred_joint_iCDF
-                0x000000000003f848       0x19 bin/tables_other.o
-                0x000000000003f848                silk_stereo_pred_joint_iCDF
- *fill*         0x000000000003f861        0x3 
+                0x000000000003f7e0       0x19 bin/tables_other.o
+                0x000000000003f7e0                silk_stereo_pred_joint_iCDF
+ *fill*         0x000000000003f7f9        0x3 
  .rodata.silk_stereo_pred_quant_Q13
-                0x000000000003f864       0x20 bin/tables_other.o
-                0x000000000003f864                silk_stereo_pred_quant_Q13
+                0x000000000003f7fc       0x20 bin/tables_other.o
+                0x000000000003f7fc                silk_stereo_pred_quant_Q13
  .rodata.silk_type_offset_VAD_iCDF
-                0x000000000003f884        0x4 bin/tables_other.o
-                0x000000000003f884                silk_type_offset_VAD_iCDF
+                0x000000000003f81c        0x4 bin/tables_other.o
+                0x000000000003f81c                silk_type_offset_VAD_iCDF
  .rodata.silk_type_offset_no_VAD_iCDF
-                0x000000000003f888        0x2 bin/tables_other.o
-                0x000000000003f888                silk_type_offset_no_VAD_iCDF
- *fill*         0x000000000003f88a        0x2 
+                0x000000000003f820        0x2 bin/tables_other.o
+                0x000000000003f820                silk_type_offset_no_VAD_iCDF
+ *fill*         0x000000000003f822        0x2 
  .rodata.silk_uniform3_iCDF
-                0x000000000003f88c        0x3 bin/tables_other.o
-                0x000000000003f88c                silk_uniform3_iCDF
- *fill*         0x000000000003f88f        0x1 
+                0x000000000003f824        0x3 bin/tables_other.o
+                0x000000000003f824                silk_uniform3_iCDF
+ *fill*         0x000000000003f827        0x1 
  .rodata.silk_uniform4_iCDF
-                0x000000000003f890        0x4 bin/tables_other.o
-                0x000000000003f890                silk_uniform4_iCDF
+                0x000000000003f828        0x4 bin/tables_other.o
+                0x000000000003f828                silk_uniform4_iCDF
  .rodata.silk_uniform5_iCDF
-                0x000000000003f894        0x5 bin/tables_other.o
-                0x000000000003f894                silk_uniform5_iCDF
- *fill*         0x000000000003f899        0x3 
+                0x000000000003f82c        0x5 bin/tables_other.o
+                0x000000000003f82c                silk_uniform5_iCDF
+ *fill*         0x000000000003f831        0x3 
  .rodata.silk_uniform6_iCDF
-                0x000000000003f89c        0x6 bin/tables_other.o
-                0x000000000003f89c                silk_uniform6_iCDF
- *fill*         0x000000000003f8a2        0x2 
+                0x000000000003f834        0x6 bin/tables_other.o
+                0x000000000003f834                silk_uniform6_iCDF
+ *fill*         0x000000000003f83a        0x2 
  .rodata.silk_uniform8_iCDF
-                0x000000000003f8a4        0x8 bin/tables_other.o
-                0x000000000003f8a4                silk_uniform8_iCDF
+                0x000000000003f83c        0x8 bin/tables_other.o
+                0x000000000003f83c                silk_uniform8_iCDF
  .rodata.silk_pitch_contour_10_ms_NB_iCDF
-                0x000000000003f8ac        0x3 bin/tables_pitch_lag.o
-                0x000000000003f8ac                silk_pitch_contour_10_ms_NB_iCDF
- *fill*         0x000000000003f8af        0x1 
+                0x000000000003f844        0x3 bin/tables_pitch_lag.o
+                0x000000000003f844                silk_pitch_contour_10_ms_NB_iCDF
+ *fill*         0x000000000003f847        0x1 
  .rodata.silk_pitch_contour_10_ms_iCDF
-                0x000000000003f8b0        0xc bin/tables_pitch_lag.o
-                0x000000000003f8b0                silk_pitch_contour_10_ms_iCDF
+                0x000000000003f848        0xc bin/tables_pitch_lag.o
+                0x000000000003f848                silk_pitch_contour_10_ms_iCDF
  .rodata.silk_pitch_contour_NB_iCDF
-                0x000000000003f8bc        0xb bin/tables_pitch_lag.o
-                0x000000000003f8bc                silk_pitch_contour_NB_iCDF
- *fill*         0x000000000003f8c7        0x1 
+                0x000000000003f854        0xb bin/tables_pitch_lag.o
+                0x000000000003f854                silk_pitch_contour_NB_iCDF
+ *fill*         0x000000000003f85f        0x1 
  .rodata.silk_pitch_contour_iCDF
-                0x000000000003f8c8       0x22 bin/tables_pitch_lag.o
-                0x000000000003f8c8                silk_pitch_contour_iCDF
- *fill*         0x000000000003f8ea        0x2 
+                0x000000000003f860       0x22 bin/tables_pitch_lag.o
+                0x000000000003f860                silk_pitch_contour_iCDF
+ *fill*         0x000000000003f882        0x2 
  .rodata.silk_pitch_delta_iCDF
-                0x000000000003f8ec       0x15 bin/tables_pitch_lag.o
-                0x000000000003f8ec                silk_pitch_delta_iCDF
- *fill*         0x000000000003f901        0x3 
+                0x000000000003f884       0x15 bin/tables_pitch_lag.o
+                0x000000000003f884                silk_pitch_delta_iCDF
+ *fill*         0x000000000003f899        0x3 
  .rodata.silk_pitch_lag_iCDF
-                0x000000000003f904       0x20 bin/tables_pitch_lag.o
-                0x000000000003f904                silk_pitch_lag_iCDF
+                0x000000000003f89c       0x20 bin/tables_pitch_lag.o
+                0x000000000003f89c                silk_pitch_lag_iCDF
  .rodata.silk_max_pulses_table
-                0x000000000003f924        0x4 bin/tables_pulses_per_block.o
-                0x000000000003f924                silk_max_pulses_table
+                0x000000000003f8bc        0x4 bin/tables_pulses_per_block.o
+                0x000000000003f8bc                silk_max_pulses_table
  .rodata.silk_pulses_per_block_BITS_Q5
-                0x000000000003f928       0xa2 bin/tables_pulses_per_block.o
-                0x000000000003f928                silk_pulses_per_block_BITS_Q5
- *fill*         0x000000000003f9ca        0x2 
+                0x000000000003f8c0       0xa2 bin/tables_pulses_per_block.o
+                0x000000000003f8c0                silk_pulses_per_block_BITS_Q5
+ *fill*         0x000000000003f962        0x2 
  .rodata.silk_pulses_per_block_iCDF
-                0x000000000003f9cc       0xb4 bin/tables_pulses_per_block.o
-                0x000000000003f9cc                silk_pulses_per_block_iCDF
+                0x000000000003f964       0xb4 bin/tables_pulses_per_block.o
+                0x000000000003f964                silk_pulses_per_block_iCDF
  .rodata.silk_rate_levels_BITS_Q5
-                0x000000000003fa80       0x12 bin/tables_pulses_per_block.o
-                0x000000000003fa80                silk_rate_levels_BITS_Q5
- *fill*         0x000000000003fa92        0x2 
+                0x000000000003fa18       0x12 bin/tables_pulses_per_block.o
+                0x000000000003fa18                silk_rate_levels_BITS_Q5
+ *fill*         0x000000000003fa2a        0x2 
  .rodata.silk_rate_levels_iCDF
-                0x000000000003fa94       0x12 bin/tables_pulses_per_block.o
-                0x000000000003fa94                silk_rate_levels_iCDF
- *fill*         0x000000000003faa6        0x2 
+                0x000000000003fa2c       0x12 bin/tables_pulses_per_block.o
+                0x000000000003fa2c                silk_rate_levels_iCDF
+ *fill*         0x000000000003fa3e        0x2 
  .rodata.silk_shell_code_table0
-                0x000000000003faa8       0x98 bin/tables_pulses_per_block.o
-                0x000000000003faa8                silk_shell_code_table0
+                0x000000000003fa40       0x98 bin/tables_pulses_per_block.o
+                0x000000000003fa40                silk_shell_code_table0
  .rodata.silk_shell_code_table1
-                0x000000000003fb40       0x98 bin/tables_pulses_per_block.o
-                0x000000000003fb40                silk_shell_code_table1
+                0x000000000003fad8       0x98 bin/tables_pulses_per_block.o
+                0x000000000003fad8                silk_shell_code_table1
  .rodata.silk_shell_code_table2
-                0x000000000003fbd8       0x98 bin/tables_pulses_per_block.o
-                0x000000000003fbd8                silk_shell_code_table2
+                0x000000000003fb70       0x98 bin/tables_pulses_per_block.o
+                0x000000000003fb70                silk_shell_code_table2
  .rodata.silk_shell_code_table3
-                0x000000000003fc70       0x98 bin/tables_pulses_per_block.o
-                0x000000000003fc70                silk_shell_code_table3
+                0x000000000003fc08       0x98 bin/tables_pulses_per_block.o
+                0x000000000003fc08                silk_shell_code_table3
  .rodata.silk_shell_code_table_offsets
-                0x000000000003fd08       0x11 bin/tables_pulses_per_block.o
-                0x000000000003fd08                silk_shell_code_table_offsets
- *fill*         0x000000000003fd19        0x3 
+                0x000000000003fca0       0x11 bin/tables_pulses_per_block.o
+                0x000000000003fca0                silk_shell_code_table_offsets
+ *fill*         0x000000000003fcb1        0x3 
  .rodata.silk_sign_iCDF
-                0x000000000003fd1c       0x2a bin/tables_pulses_per_block.o
-                0x000000000003fd1c                silk_sign_iCDF
- *fill*         0x000000000003fd46        0x2 
+                0x000000000003fcb4       0x2a bin/tables_pulses_per_block.o
+                0x000000000003fcb4                silk_sign_iCDF
+ *fill*         0x000000000003fcde        0x2 
  .rodata.tiltWeights
-                0x000000000003fd48       0x10 bin/VAD.o
+                0x000000000003fce0       0x10 bin/VAD.o
  .rodata.silk_LSFCosTab_FIX_Q12
-                0x000000000003fd58      0x102 bin/table_LSF_cos.o
-                0x000000000003fd58                silk_LSFCosTab_FIX_Q12
- *fill*         0x000000000003fe5a        0x2 
+                0x000000000003fcf0      0x102 bin/table_LSF_cos.o
+                0x000000000003fcf0                silk_LSFCosTab_FIX_Q12
+ *fill*         0x000000000003fdf2        0x2 
  .rodata.ordering10.7257
-                0x000000000003fe5c        0xa bin/NLSF2A.o
- *fill*         0x000000000003fe66        0x2 
+                0x000000000003fdf4        0xa bin/NLSF2A.o
+ *fill*         0x000000000003fdfe        0x2 
  .rodata.ordering16.7256
-                0x000000000003fe68       0x10 bin/NLSF2A.o
+                0x000000000003fe00       0x10 bin/NLSF2A.o
  .rodata.silk_CB_lags_stage2
-                0x000000000003fe78       0x2c bin/pitch_est_tables.o
-                0x000000000003fe78                silk_CB_lags_stage2
+                0x000000000003fe10       0x2c bin/pitch_est_tables.o
+                0x000000000003fe10                silk_CB_lags_stage2
  .rodata.silk_CB_lags_stage2_10_ms
-                0x000000000003fea4        0x6 bin/pitch_est_tables.o
-                0x000000000003fea4                silk_CB_lags_stage2_10_ms
- *fill*         0x000000000003feaa        0x2 
+                0x000000000003fe3c        0x6 bin/pitch_est_tables.o
+                0x000000000003fe3c                silk_CB_lags_stage2_10_ms
+ *fill*         0x000000000003fe42        0x2 
  .rodata.silk_CB_lags_stage3
-                0x000000000003feac       0x88 bin/pitch_est_tables.o
-                0x000000000003feac                silk_CB_lags_stage3
+                0x000000000003fe44       0x88 bin/pitch_est_tables.o
+                0x000000000003fe44                silk_CB_lags_stage3
  .rodata.silk_CB_lags_stage3_10_ms
-                0x000000000003ff34       0x18 bin/pitch_est_tables.o
-                0x000000000003ff34                silk_CB_lags_stage3_10_ms
+                0x000000000003fecc       0x18 bin/pitch_est_tables.o
+                0x000000000003fecc                silk_CB_lags_stage3_10_ms
  .rodata.silk_Lag_range_stage3
-                0x000000000003ff4c       0x18 bin/pitch_est_tables.o
-                0x000000000003ff4c                silk_Lag_range_stage3
+                0x000000000003fee4       0x18 bin/pitch_est_tables.o
+                0x000000000003fee4                silk_Lag_range_stage3
  .rodata.silk_Lag_range_stage3_10_ms
-                0x000000000003ff64        0x4 bin/pitch_est_tables.o
-                0x000000000003ff64                silk_Lag_range_stage3_10_ms
+                0x000000000003fefc        0x4 bin/pitch_est_tables.o
+                0x000000000003fefc                silk_Lag_range_stage3_10_ms
  .rodata.silk_nb_cbk_searchs_stage3
-                0x000000000003ff68        0x3 bin/pitch_est_tables.o
-                0x000000000003ff68                silk_nb_cbk_searchs_stage3
- *fill*         0x000000000003ff6b        0x1 
+                0x000000000003ff00        0x3 bin/pitch_est_tables.o
+                0x000000000003ff00                silk_nb_cbk_searchs_stage3
+ *fill*         0x000000000003ff03        0x1 
  .rodata.delay_matrix_dec
-                0x000000000003ff6c        0xf bin/resampler.o
- *fill*         0x000000000003ff7b        0x1 
+                0x000000000003ff04        0xf bin/resampler.o
+ *fill*         0x000000000003ff13        0x1 
  .rodata.delay_matrix_enc
-                0x000000000003ff7c        0xf bin/resampler.o
- *fill*         0x000000000003ff8b        0x1 
+                0x000000000003ff14        0xf bin/resampler.o
+ *fill*         0x000000000003ff23        0x1 
  .rodata.silk_Resampler_1_2_COEFS
-                0x000000000003ff8c       0x1c bin/resampler_rom.o
-                0x000000000003ff8c                silk_Resampler_1_2_COEFS
+                0x000000000003ff24       0x1c bin/resampler_rom.o
+                0x000000000003ff24                silk_Resampler_1_2_COEFS
  .rodata.silk_Resampler_1_3_COEFS
-                0x000000000003ffa8       0x28 bin/resampler_rom.o
-                0x000000000003ffa8                silk_Resampler_1_3_COEFS
+                0x000000000003ff40       0x28 bin/resampler_rom.o
+                0x000000000003ff40                silk_Resampler_1_3_COEFS
  .rodata.silk_Resampler_1_4_COEFS
-                0x000000000003ffd0       0x28 bin/resampler_rom.o
-                0x000000000003ffd0                silk_Resampler_1_4_COEFS
+                0x000000000003ff68       0x28 bin/resampler_rom.o
+                0x000000000003ff68                silk_Resampler_1_4_COEFS
  .rodata.silk_Resampler_1_6_COEFS
-                0x000000000003fff8       0x28 bin/resampler_rom.o
-                0x000000000003fff8                silk_Resampler_1_6_COEFS
+                0x000000000003ff90       0x28 bin/resampler_rom.o
+                0x000000000003ff90                silk_Resampler_1_6_COEFS
  .rodata.silk_Resampler_2_3_COEFS
-                0x0000000000040020       0x28 bin/resampler_rom.o
-                0x0000000000040020                silk_Resampler_2_3_COEFS
+                0x000000000003ffb8       0x28 bin/resampler_rom.o
+                0x000000000003ffb8                silk_Resampler_2_3_COEFS
  .rodata.silk_Resampler_2_3_COEFS_LQ
-                0x0000000000040048        0xc bin/resampler_rom.o
-                0x0000000000040048                silk_Resampler_2_3_COEFS_LQ
+                0x000000000003ffe0        0xc bin/resampler_rom.o
+                0x000000000003ffe0                silk_Resampler_2_3_COEFS_LQ
  .rodata.silk_Resampler_3_4_COEFS
-                0x0000000000040054       0x3a bin/resampler_rom.o
-                0x0000000000040054                silk_Resampler_3_4_COEFS
- *fill*         0x000000000004008e        0x2 
+                0x000000000003ffec       0x3a bin/resampler_rom.o
+                0x000000000003ffec                silk_Resampler_3_4_COEFS
+ *fill*         0x0000000000040026        0x2 
  .rodata.silk_resampler_frac_FIR_12
-                0x0000000000040090       0x60 bin/resampler_rom.o
-                0x0000000000040090                silk_resampler_frac_FIR_12
+                0x0000000000040028       0x60 bin/resampler_rom.o
+                0x0000000000040028                silk_resampler_frac_FIR_12
  .rodata.sigm_LUT_neg_Q15
-                0x00000000000400f0       0x18 bin/sigm_Q15.o
+                0x0000000000040088       0x18 bin/sigm_Q15.o
  .rodata.sigm_LUT_pos_Q15
-                0x0000000000040108       0x18 bin/sigm_Q15.o
+                0x00000000000400a0       0x18 bin/sigm_Q15.o
  .rodata.sigm_LUT_slope_Q10
-                0x0000000000040120       0x18 bin/sigm_Q15.o
+                0x00000000000400b8       0x18 bin/sigm_Q15.o
  .rodata.freq_table_Q16
-                0x0000000000040138       0x36 bin/apply_sine_window_FIX.o
- *fill*         0x000000000004016e        0x2 
+                0x00000000000400d0       0x36 bin/apply_sine_window_FIX.o
+ *fill*         0x0000000000040106        0x2 
  .rodata.bit_deinterleave_table.8722
-                0x0000000000040170       0x10 bin/bands.o
+                0x0000000000040108       0x10 bin/bands.o
  .rodata.bit_interleave_table.8712
-                0x0000000000040180       0x10 bin/bands.o
+                0x0000000000040118       0x10 bin/bands.o
  .rodata.exp2_table8.8553
-                0x0000000000040190       0x10 bin/bands.o
+                0x0000000000040128       0x10 bin/bands.o
  .rodata.ordery_table
-                0x00000000000401a0       0x78 bin/bands.o
+                0x0000000000040138       0x78 bin/bands.o
  .rodata.gains.8321
-                0x0000000000040218       0x12 bin/celt.o
- *fill*         0x000000000004022a        0x2 
+                0x00000000000401b0       0x12 bin/celt.o
+ *fill*         0x00000000000401c2        0x2 
  .rodata.tf_select_table
-                0x000000000004022c       0x20 bin/celt.o
-                0x000000000004022c                tf_select_table
+                0x00000000000401c4       0x20 bin/celt.o
+                0x00000000000401c4                tf_select_table
  .rodata.intensity_histeresis.8936
-                0x000000000004024c       0x2a bin/celt_encoder.o
- *fill*         0x0000000000040276        0x2 
+                0x00000000000401e4       0x2a bin/celt_encoder.o
+ *fill*         0x000000000004020e        0x2 
  .rodata.intensity_thresholds.8935
-                0x0000000000040278       0x2a bin/celt_encoder.o
- *fill*         0x00000000000402a2        0x2 
+                0x0000000000040210       0x2a bin/celt_encoder.o
+ *fill*         0x000000000004023a        0x2 
  .rodata.inv_table.8353
-                0x00000000000402a4       0x80 bin/celt_encoder.o
+                0x000000000004023c       0x80 bin/celt_encoder.o
  .rodata.spread_icdf
-                0x0000000000040324        0x4 bin/celt_encoder.o
+                0x00000000000402bc        0x4 bin/celt_encoder.o
  .rodata.tapset_icdf
-                0x0000000000040328        0x3 bin/celt_encoder.o
- *fill*         0x000000000004032b        0x1 
+                0x00000000000402c0        0x3 bin/celt_encoder.o
+ *fill*         0x00000000000402c3        0x1 
  .rodata.trim_icdf
-                0x000000000004032c        0xb bin/celt_encoder.o
- *fill*         0x0000000000040337        0x1 
+                0x00000000000402c4        0xb bin/celt_encoder.o
+ *fill*         0x00000000000402cf        0x1 
  .rodata.CELT_PVQ_U_DATA
-                0x0000000000040338     0x13e0 bin/cwrs.o
+                0x00000000000402d0     0x13e0 bin/cwrs.o
  .rodata.CELT_PVQ_U_ROW
-                0x0000000000041718       0x3c bin/cwrs.o
+                0x00000000000416b0       0x3c bin/cwrs.o
  .rodata.correction.5981
-                0x0000000000041754       0x20 bin/entcode.o
+                0x00000000000416ec       0x20 bin/entcode.o
  .rodata.band_allocation
-                0x0000000000041774       0xe7 bin/modes.o
- *fill*         0x000000000004185b        0x1 
+                0x000000000004170c       0xe7 bin/modes.o
+ *fill*         0x00000000000417f3        0x1 
  .rodata.cache_bits50
-                0x000000000004185c      0x188 bin/modes.o
+                0x00000000000417f4      0x188 bin/modes.o
  .rodata.cache_caps50
-                0x00000000000419e4       0xa8 bin/modes.o
+                0x000000000004197c       0xa8 bin/modes.o
  .rodata.cache_index50
-                0x0000000000041a8c       0xd2 bin/modes.o
- *fill*         0x0000000000041b5e        0x2 
+                0x0000000000041a24       0xd2 bin/modes.o
+ *fill*         0x0000000000041af6        0x2 
  .rodata.eband5ms
-                0x0000000000041b60       0x2c bin/modes.o
+                0x0000000000041af8       0x2c bin/modes.o
  .rodata.fft_bitrev120
-                0x0000000000041b8c       0xf0 bin/modes.o
+                0x0000000000041b24       0xf0 bin/modes.o
  .rodata.fft_bitrev240
-                0x0000000000041c7c      0x1e0 bin/modes.o
+                0x0000000000041c14      0x1e0 bin/modes.o
  .rodata.fft_bitrev480
-                0x0000000000041e5c      0x3c0 bin/modes.o
+                0x0000000000041df4      0x3c0 bin/modes.o
  .rodata.fft_bitrev60
-                0x000000000004221c       0x78 bin/modes.o
+                0x00000000000421b4       0x78 bin/modes.o
  .rodata.fft_state48000_960_0
-                0x0000000000042294       0x3c bin/modes.o
+                0x000000000004222c       0x3c bin/modes.o
  .rodata.fft_state48000_960_1
-                0x00000000000422d0       0x3c bin/modes.o
+                0x0000000000042268       0x3c bin/modes.o
  .rodata.fft_state48000_960_2
-                0x000000000004230c       0x3c bin/modes.o
+                0x00000000000422a4       0x3c bin/modes.o
  .rodata.fft_state48000_960_3
-                0x0000000000042348       0x3c bin/modes.o
+                0x00000000000422e0       0x3c bin/modes.o
  .rodata.fft_twiddles48000_960
-                0x0000000000042384      0x780 bin/modes.o
+                0x000000000004231c      0x780 bin/modes.o
  .rodata.logN400
-                0x0000000000042b04       0x2a bin/modes.o
- *fill*         0x0000000000042b2e        0x2 
+                0x0000000000042a9c       0x2a bin/modes.o
+ *fill*         0x0000000000042ac6        0x2 
  .rodata.mdct_twiddles960
-                0x0000000000042b30      0xe10 bin/modes.o
+                0x0000000000042ac8      0xe10 bin/modes.o
  .rodata.mode48000_960_120
-                0x0000000000043940       0x64 bin/modes.o
+                0x00000000000438d8       0x64 bin/modes.o
  .rodata.window120
-                0x00000000000439a4       0xf0 bin/modes.o
+                0x000000000004393c       0xf0 bin/modes.o
  .rodata.second_check
-                0x0000000000043a94       0x40 bin/pitch.o
+                0x0000000000043a2c       0x40 bin/pitch.o
  .rodata.beta_coef
-                0x0000000000043ad4        0x8 bin/quant_bands.o
+                0x0000000000043a6c        0x8 bin/quant_bands.o
  .rodata.eMeans
-                0x0000000000043adc       0x19 bin/quant_bands.o
-                0x0000000000043adc                eMeans
- *fill*         0x0000000000043af5        0x3 
+                0x0000000000043a74       0x19 bin/quant_bands.o
+                0x0000000000043a74                eMeans
+ *fill*         0x0000000000043a8d        0x3 
  .rodata.e_prob_model
-                0x0000000000043af8      0x150 bin/quant_bands.o
+                0x0000000000043a90      0x150 bin/quant_bands.o
  .rodata.pred_coef
-                0x0000000000043c48        0x8 bin/quant_bands.o
+                0x0000000000043be0        0x8 bin/quant_bands.o
  .rodata.small_energy_icdf
-                0x0000000000043c50        0x3 bin/quant_bands.o
- *fill*         0x0000000000043c53        0x1 
+                0x0000000000043be8        0x3 bin/quant_bands.o
+ *fill*         0x0000000000043beb        0x1 
  .rodata.LOG2_FRAC_TABLE
-                0x0000000000043c54       0x18 bin/rate.o
+                0x0000000000043bec       0x18 bin/rate.o
  .rodata.SPREAD_FACTOR.8184
-                0x0000000000043c6c        0xc bin/vq.o
+                0x0000000000043c04        0xc bin/vq.o
  .rodata.CSWTCH.194
-                0x0000000000043c78       0x10 bin/opus_encoder.o
+                0x0000000000043c10       0x10 bin/opus_encoder.o
  .rodata.fec_thresholds
-                0x0000000000043c88       0x28 bin/opus_encoder.o
+                0x0000000000043c20       0x28 bin/opus_encoder.o
  .rodata.mono_music_bandwidth_thresholds
-                0x0000000000043cb0       0x20 bin/opus_encoder.o
+                0x0000000000043c48       0x20 bin/opus_encoder.o
  .rodata.mono_voice_bandwidth_thresholds
-                0x0000000000043cd0       0x20 bin/opus_encoder.o
+                0x0000000000043c68       0x20 bin/opus_encoder.o
  .rodata.rate_table.9364
-                0x0000000000043cf0       0x8c bin/opus_encoder.o
+                0x0000000000043c88       0x8c bin/opus_encoder.o
  .rodata.stereo_music_bandwidth_thresholds
-                0x0000000000043d7c       0x20 bin/opus_encoder.o
+                0x0000000000043d14       0x20 bin/opus_encoder.o
  .rodata.stereo_voice_bandwidth_thresholds
-                0x0000000000043d9c       0x20 bin/opus_encoder.o
+                0x0000000000043d34       0x20 bin/opus_encoder.o
  .rodata.analysis_window
-                0x0000000000043dbc      0x3c0 bin/analysis.o
+                0x0000000000043d54      0x3c0 bin/analysis.o
  .rodata.tbands
-                0x000000000004417c       0x4c bin/analysis.o
+                0x0000000000044114       0x4c bin/analysis.o
  .rodata.tansig_table
-                0x00000000000441c8      0x324 bin/mlp.o
- .rodata.net    0x00000000000444ec        0xc bin/mlp_data.o
-                0x00000000000444ec                net
- .rodata.topo   0x00000000000444f8        0xc bin/mlp_data.o
+                0x0000000000044160      0x324 bin/mlp.o
+ .rodata.net    0x0000000000044484        0xc bin/mlp_data.o
+                0x0000000000044484                net
+ .rodata.topo   0x0000000000044490        0xc bin/mlp_data.o
  .rodata.weights
-                0x0000000000044504      0x708 bin/mlp_data.o
+                0x000000000004449c      0x708 bin/mlp_data.o
  .rodata.am_AEP_init.str1.4
-                0x0000000000044c0c       0x55 bin/am_AEP_init.o
- *fill*         0x0000000000044c61        0x3 
+                0x0000000000044ba4       0x55 bin/am_AEP_init.o
+ *fill*         0x0000000000044bf9        0x3 
  .rodata.str1.4
-                0x0000000000044c64       0x3d bin/am_AEP_init.o
- *fill*         0x0000000000044ca1        0x3 
+                0x0000000000044bfc       0x3d bin/am_AEP_init.o
+ *fill*         0x0000000000044c39        0x3 
  .rodata.g_AP3EVB_button0
-                0x0000000000044ca4        0x4 bin/am_AEP_board_setup.o
-                0x0000000000044ca4                g_AP3EVB_button0
+                0x0000000000044c3c        0x4 bin/am_AEP_board_setup.o
+                0x0000000000044c3c                g_AP3EVB_button0
  .rodata.am_opus_encoder_init.str1.4
-                0x0000000000044ca8       0x2c bin/am_opus.o
+                0x0000000000044c40       0x2c bin/am_opus.o
  .rodata.g_sBspUartConfig
-                0x0000000000044cd4       0x28 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x0000000000044c6c       0x28 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
  .rodata.g_AM_BSP_GPIO_COM_UART_TX
-                0x0000000000044cfc        0x4 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
-                0x0000000000044cfc                g_AM_BSP_GPIO_COM_UART_TX
+                0x0000000000044c94        0x4 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
+                0x0000000000044c94                g_AM_BSP_GPIO_COM_UART_TX
  .rodata.g_AM_BSP_GPIO_COM_UART_RX
-                0x0000000000044d00        0x4 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
-                0x0000000000044d00                g_AM_BSP_GPIO_COM_UART_RX
+                0x0000000000044c98        0x4 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
+                0x0000000000044c98                g_AM_BSP_GPIO_COM_UART_RX
  .rodata.am_hal_cachectrl_defaults
-                0x0000000000044d04        0x4 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x0000000000044d04                am_hal_cachectrl_defaults
+                0x0000000000044c9c        0x4 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x0000000000044c9c                am_hal_cachectrl_defaults
  .rodata.g_am_hal_mcuctrl_flash_size
-                0x0000000000044d08       0x40 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x0000000000044d08                g_am_hal_mcuctrl_flash_size
+                0x0000000000044ca0       0x40 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x0000000000044ca0                g_am_hal_mcuctrl_flash_size
  .rodata.g_am_hal_mcuctrl_sram_size
-                0x0000000000044d48       0x40 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x0000000000044d48                g_am_hal_mcuctrl_sram_size
+                0x0000000000044ce0       0x40 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x0000000000044ce0                g_am_hal_mcuctrl_sram_size
  .rodata.am_hal_pwrctrl_peripheral_control
-                0x0000000000044d88       0xb4 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x0000000000044d88                am_hal_pwrctrl_peripheral_control
+                0x0000000000044d20       0xb4 ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x0000000000044d20                am_hal_pwrctrl_peripheral_control
  .rodata.log.str1.4
-                0x0000000000044e3c        0x4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log.o)
+                0x0000000000044dd4        0x4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log.o)
                                           0x5 (size before relaxing)
  .rodata.log10.str1.4
-                0x0000000000044e40        0x6 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log10.o)
+                0x0000000000044dd8        0x6 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_log10.o)
                                           0x9 (size before relaxing)
- *fill*         0x0000000000044e46        0x2 
+ *fill*         0x0000000000044dde        0x2 
  .rodata.pow.str1.4
-                0x0000000000044e48        0x4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_pow.o)
+                0x0000000000044de0        0x4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_pow.o)
  .rodata.sqrt.str1.4
-                0x0000000000044e4c        0x8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_sqrt.o)
+                0x0000000000044de4        0x8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-w_sqrt.o)
                                           0x5 (size before relaxing)
  .rodata.__ieee754_pow.str1.4
-                0x0000000000044e54        0x1 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_pow.o)
- *fill*         0x0000000000044e54        0x4 
- .rodata.TWO52  0x0000000000044e58       0x10 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_rint.o)
-                0x0000000000044e68                . = ALIGN (0x4)
-                0x0000000000044e68                _etext = .
+                0x0000000000044dec        0x1 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-e_pow.o)
+ *fill*         0x0000000000044dec        0x4 
+ .rodata.TWO52  0x0000000000044df0       0x10 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a(lib_a-s_rint.o)
+                0x0000000000044e00                . = ALIGN (0x4)
+                0x0000000000044e00                _etext = .
 
-.glue_7         0x0000000000044e68        0x0
- .glue_7        0x0000000000044e68        0x0 linker stubs
+.glue_7         0x0000000000044e00        0x0
+ .glue_7        0x0000000000044e00        0x0 linker stubs
 
-.glue_7t        0x0000000000044e68        0x0
- .glue_7t       0x0000000000044e68        0x0 linker stubs
+.glue_7t        0x0000000000044e00        0x0
+ .glue_7t       0x0000000000044e00        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000044e68        0x0
- .vfp11_veneer  0x0000000000044e68        0x0 linker stubs
+.vfp11_veneer   0x0000000000044e00        0x0
+ .vfp11_veneer  0x0000000000044e00        0x0 linker stubs
 
-.v4_bx          0x0000000000044e68        0x0
- .v4_bx         0x0000000000044e68        0x0 linker stubs
+.v4_bx          0x0000000000044e00        0x0
+ .v4_bx         0x0000000000044e00        0x0 linker stubs
 
-.iplt           0x0000000000044e68        0x0
- .iplt          0x0000000000044e68        0x0 bin/main.o
+.iplt           0x0000000000044e00        0x0
+ .iplt          0x0000000000044e00        0x0 bin/main.o
 
-.rel.dyn        0x0000000000044e68        0x0
- .rel.iplt      0x0000000000044e68        0x0 bin/main.o
+.rel.dyn        0x0000000000044e00        0x0
+ .rel.iplt      0x0000000000044e00        0x0 bin/main.o
 
 .ARM.exidx.text.__udivmoddi4
-                0x0000000000044e68        0x8
+                0x0000000000044e00        0x8
  .ARM.exidx.text.__udivmoddi4
-                0x0000000000044e68        0x8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
+                0x0000000000044e00        0x8 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
 
 .stack          0x0000000010000000     0x2b00
                 0x0000000010000000                . = ALIGN (0x8)
@@ -3788,7 +3787,7 @@ Linker script and memory map
  *(.stack*)
                 0x0000000010002b00                . = ALIGN (0x8)
 
-.data           0x0000000010002b00      0x4f8 load address 0x0000000000044e70
+.data           0x0000000010002b00      0x4f8 load address 0x0000000000044e08
                 0x0000000010002b00                . = ALIGN (0x4)
                 0x0000000010002b00                _sdata = .
  *(.data)
@@ -3837,12 +3836,12 @@ Linker script and memory map
                 0x0000000010002bd0      0x428 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
                 0x0000000010002ff8                . = ALIGN (0x4)
                 0x0000000010002ff8                _edata = .
-                0x0000000000044e70                _init_data = LOADADDR (.data)
+                0x0000000000044e08                _init_data = LOADADDR (.data)
 
-.igot.plt       0x0000000010002ff8        0x0 load address 0x0000000000045368
+.igot.plt       0x0000000010002ff8        0x0 load address 0x0000000000045300
  .igot.plt      0x0000000010002ff8        0x0 bin/main.o
 
-.bss            0x0000000010002ff8    0x237dc load address 0x0000000000045368
+.bss            0x0000000010002ff8    0x237dc load address 0x0000000000045300
                 0x0000000010002ff8                . = ALIGN (0x4)
                 0x0000000010002ff8                _sbss = .
  *(.bss)
@@ -4534,7 +4533,7 @@ LOAD /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/b
 END GROUP
 OUTPUT(bin/rtos_audio_experiment_platform.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000    0xb6a49
+.debug_info     0x0000000000000000    0xb6a27
  .debug_info    0x0000000000000000     0x17a4 bin/main.o
  .debug_info    0x00000000000017a4      0xaaa bin/list.o
  .debug_info    0x000000000000224e     0x23b1 bin/queue.o
@@ -4663,11 +4662,11 @@ OUTPUT(bin/rtos_audio_experiment_platform.axf elf32-littlearm)
  .debug_info    0x00000000000acd49      0x123 bin/mlp_data.o
  .debug_info    0x00000000000ace6c      0xcd2 bin/rtos_AEP_hook.o
  .debug_info    0x00000000000adb3e     0x1e2e bin/am_AEP_init.o
- .debug_info    0x00000000000af96c     0x229d bin/am_AEP_board_setup.o
- .debug_info    0x00000000000b1c09     0x1b72 bin/am_AEP_task.o
- .debug_info    0x00000000000b377b     0x206b bin/am_AEP_isr_handler.o
- .debug_info    0x00000000000b57e6     0x10cb bin/am_opus.o
- .debug_info    0x00000000000b68b1      0x198 bin/startup_gcc.o
+ .debug_info    0x00000000000af96c     0x227b bin/am_AEP_board_setup.o
+ .debug_info    0x00000000000b1be7     0x1b72 bin/am_AEP_task.o
+ .debug_info    0x00000000000b3759     0x206b bin/am_AEP_isr_handler.o
+ .debug_info    0x00000000000b57c4     0x10cb bin/am_opus.o
+ .debug_info    0x00000000000b688f      0x198 bin/startup_gcc.o
 
 .debug_abbrev   0x0000000000000000    0x166ac
  .debug_abbrev  0x0000000000000000      0x240 bin/main.o
@@ -5196,7 +5195,7 @@ OUTPUT(bin/rtos_audio_experiment_platform.axf elf32-littlearm)
  .debug_ranges  0x000000000000ca40       0x10 bin/am_opus.o
  .debug_ranges  0x000000000000ca50       0x28 bin/startup_gcc.o
 
-.debug_line     0x0000000000000000    0x29de8
+.debug_line     0x0000000000000000    0x29de5
  .debug_line    0x0000000000000000      0x58a bin/main.o
  .debug_line    0x000000000000058a      0x356 bin/list.o
  .debug_line    0x00000000000008e0      0x891 bin/queue.o
@@ -5325,13 +5324,13 @@ OUTPUT(bin/rtos_audio_experiment_platform.axf elf32-littlearm)
  .debug_line    0x0000000000027aad       0x57 bin/mlp_data.o
  .debug_line    0x0000000000027b04      0x446 bin/rtos_AEP_hook.o
  .debug_line    0x0000000000027f4a      0x682 bin/am_AEP_init.o
- .debug_line    0x00000000000285cc      0x59e bin/am_AEP_board_setup.o
- .debug_line    0x0000000000028b6a      0x6ae bin/am_AEP_task.o
- .debug_line    0x0000000000029218      0x643 bin/am_AEP_isr_handler.o
- .debug_line    0x000000000002985b      0x425 bin/am_opus.o
- .debug_line    0x0000000000029c80      0x168 bin/startup_gcc.o
+ .debug_line    0x00000000000285cc      0x59b bin/am_AEP_board_setup.o
+ .debug_line    0x0000000000028b67      0x6ae bin/am_AEP_task.o
+ .debug_line    0x0000000000029215      0x643 bin/am_AEP_isr_handler.o
+ .debug_line    0x0000000000029858      0x425 bin/am_opus.o
+ .debug_line    0x0000000000029c7d      0x168 bin/startup_gcc.o
 
-.debug_str      0x0000000000000000    0x1106c
+.debug_str      0x0000000000000000    0x11053
  .debug_str     0x0000000000000000     0x1894 bin/main.o
                                        0x195b (size before relaxing)
  .debug_str     0x0000000000001894      0x17c bin/list.o
@@ -5588,15 +5587,15 @@ OUTPUT(bin/rtos_audio_experiment_platform.axf elf32-littlearm)
                                        0x1296 (size before relaxing)
  .debug_str     0x00000000000109c2      0x2ba bin/am_AEP_init.o
                                        0x234c (size before relaxing)
- .debug_str     0x0000000000010c7c      0x1e3 bin/am_AEP_board_setup.o
-                                       0x2cb7 (size before relaxing)
- .debug_str     0x0000000000010e5f      0x13a bin/am_AEP_task.o
+ .debug_str     0x0000000000010c7c      0x1ca bin/am_AEP_board_setup.o
+                                       0x2c9e (size before relaxing)
+ .debug_str     0x0000000000010e46      0x13a bin/am_AEP_task.o
                                        0x1bfa (size before relaxing)
- .debug_str     0x0000000000010f99       0x41 bin/am_AEP_isr_handler.o
+ .debug_str     0x0000000000010f80       0x41 bin/am_AEP_isr_handler.o
                                        0x1cda (size before relaxing)
- .debug_str     0x0000000000010fda       0x11 bin/am_opus.o
+ .debug_str     0x0000000000010fc1       0x11 bin/am_opus.o
                                        0x19d2 (size before relaxing)
- .debug_str     0x0000000000010feb       0x81 bin/startup_gcc.o
+ .debug_str     0x0000000000010fd2       0x81 bin/startup_gcc.o
                                         0x22b (size before relaxing)
 
 .comment        0x0000000000000000       0xdf

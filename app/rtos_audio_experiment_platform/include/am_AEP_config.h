@@ -19,7 +19,7 @@
 #define configUSE_RTT_LOGGER                        0
 
 // CPU runs at 96MHZ or 48MHZ
-#define configUSE_BURST_ALWAYS_ON                   1
+#define configUSE_BURST_ALWAYS_ON                   0
 
 
 // Parameters configuration
