@@ -9,12 +9,13 @@
 // Platform main objective definitionn
 //
 
-#define AM_AEP_OPUS_TEST                    1
+#define AM_AEP_OPUS_TEST                    0
 
 #define AM_AEP_MEMCPY_TEST                  0
 
 #define AM_AEP_ALLOC_FREE_TEST              0
 
+#define AM_AEP_SCNR_TEST                    1
 //
 // Platform support function configuration
 //

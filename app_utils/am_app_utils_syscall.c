@@ -29,3 +29,28 @@ void * _sbrk(int32_t incr)
 
     return (void *) prev_heap_end;
 }
+
+#if APP_IN_FreeRTOS
+
+void* am_alloc(size_t size)
+{
+    return pvPortMalloc(size);
+}
+
+void* am_free(void* ptr)
+{
+    vPortFree(ptr);
+}
+
+#else
+void* am_alloc(size_t size)
+{
+    return malloc(size);
+}
+
+void am_free(void* ptr)
+{
+    free(ptr);
+}
+
+#endif // APP_IN_FreeRTOS

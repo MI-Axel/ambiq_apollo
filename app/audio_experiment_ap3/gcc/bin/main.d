@@ -91,15 +91,12 @@ bin/main.o: ../src/main.c \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
  ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
- ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h \
- ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h \
+ ../../../math/CMSIS_5/Include/arm_math.h \
+ ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h \
  ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h \
  ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h \
  ../../../tools/segger/SystemView_Src_V252d/Config/Global.h \
- ../include/am_opus.h ../include/board_setup.h ../include/audio_driver.h \
- ../../../tools/opus/opus-1.2.1/include/opus.h \
- ../../../tools/opus/opus-1.2.1/include/opus_types.h \
- ../../../tools/opus/opus-1.2.1/include/opus_defines.h
+ ../src/scnr/stft.h ../../../app_utils/am_app_utils_syscall.h
 
 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -289,9 +286,9 @@ bin/main.o: ../src/main.c \
 
 ../include/audio_driver.h:
 
-../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/arm_math.h:
+../../../math/CMSIS_5/Include/arm_math.h:
 
-../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/core_cm4.h:
+../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h:
 
 ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h:
 
@@ -299,14 +296,6 @@ bin/main.o: ../src/main.c \
 
 ../../../tools/segger/SystemView_Src_V252d/Config/Global.h:
 
-../include/am_opus.h:
+../src/scnr/stft.h:
 
-../include/board_setup.h:
-
-../include/audio_driver.h:
-
-../../../tools/opus/opus-1.2.1/include/opus.h:
-
-../../../tools/opus/opus-1.2.1/include/opus_types.h:
-
-../../../tools/opus/opus-1.2.1/include/opus_defines.h:
+../../../app_utils/am_app_utils_syscall.h:

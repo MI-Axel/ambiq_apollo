@@ -97,15 +97,15 @@ else
 # HAVE_LRINTF: Use C99 intrinsics to speed up float-to-int conversion
 #EXTRA_CFLAGS := -DHAVE_LRINTF $(EXTRA_CFLAGS)
 
-include ${AM_OpusRoot}/silk_sources.mk
-include ${AM_OpusRoot}/celt_sources.mk
-include ${AM_OpusRoot}/opus_sources.mk
+#include ${AM_OpusRoot}/silk_sources.mk
+#include ${AM_OpusRoot}/celt_sources.mk
+#include ${AM_OpusRoot}/opus_sources.mk
 
 #ifdef FIXED_POINT
-SILK_SOURCES += $(SILK_SOURCES_FIXED)
+#SILK_SOURCES += $(SILK_SOURCES_FIXED)
 #else
 #SILK_SOURCES += $(SILK_SOURCES_FLOAT)
-OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
+#OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
 #endif
 
 ###################### END OF OPUS PART ######################
@@ -125,9 +125,10 @@ DEFINES = -DPART_$(PART)
 DEFINES += -DAM_PACKAGE_BGA
 DEFINES += -DAM_PART_APOLLO3
 DEFINES += -DARM_MATH_CM4
+DEFINES += -D__FPU_PRESENT
 
 # opus pre-definition
-DEFINES += -DHAVE_CONFIG_H
+#DEFINES += -DHAVE_CONFIG_H
 #DEFINES += -DCUSTOM_SUPPORT
 
 INCLUDES = -I../src
@@ -140,8 +141,13 @@ INCLUDES += -I${AM_SoftwareRoot}/CMSIS/ARM/Include
 INCLUDES += -I${AM_SoftwareRoot}/CMSIS/AmbiqMicro/Include
 INCLUDES += -I${AM_SoftwareRoot}/devices
 INCLUDES += -I${AM_SoftwareRoot}/utils
+
+# ARM math lib includes
+INCLUDES += -I${AM_FolderRoot}/math/CMSIS_5/Include
+
 # SEGGER tools include
 INCLUDES += ${SEGGER_SYSVIEW_INC}
+
 # OPUS INCLUDES
 INCLUDES += -I${AM_OpusRoot}/include
 INCLUDES += -I${AM_OpusRoot}/src
@@ -151,6 +157,9 @@ INCLUDES += -I${AM_OpusRoot}/silk
 INCLUDES += -I${AM_OpusRoot}/silk/arm
 INCLUDES += -I${AM_OpusRoot}/silk/fixed
 INCLUDES += -I${AM_OpusRoot}
+
+# STFT INCLUDES
+INCLUDES += -I../src/scnr
 
 VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
@@ -172,6 +181,8 @@ VPATH +=:${AM_OpusRoot}/silk/float
 # OPUS SOURCE FILES
 OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
 
+# STFT folders
+VPATH +=:../src/scnr
 
 SRC = main.c
 SRC += am_hal_pdm.c
@@ -184,12 +195,16 @@ SRC += am_devices_led.c
 SRC += startup_gcc.c
 SRC += board_setup.c
 #SRC += audio_driver.c
-SRC += am_opus.c
+#SRC += am_opus.c
 #SRC += am_memcpy_ringbuff_test.c
 SRC += am_app_USP1602_mono_array.c
 #SRC += am_alloc_free_test.c
-SRC += ${OPUS_SRC}
+#SRC += ${OPUS_SRC}
 SRC += ${SEGGER_SYSVIEW_SRC}
+
+# STFT test code 
+SRC += stft.c
+
 
 CSRC = $(filter %.c,$(SRC))
 ASRC = $(filter %.s,$(SRC))
@@ -202,6 +217,7 @@ DEPS+= $(ASRC:%.s=$(CONFIG)/%.d)
 
 LIBS = ${AM_SoftwareRoot}/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a
 LIBS += ${AM_SoftwareRoot}/mcu/apollo3/hal/gcc/bin/libam_hal.a
+LIBS += ${AM_FolderRoot}/math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a
 
 INCS = 
 INCS += ${AM_SoftwareRoot}/mcu/apollo3/hal/am_hal_pin.h

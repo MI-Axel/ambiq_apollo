@@ -63,10 +63,9 @@
 #endif
 
 
-
 /* Define to trap errors during development. */
 #define configASSERT(x)     if (( x ) == 0) while(1);
 
-
+#define APP_IN_FreeRTOS                 0
 
 #endif

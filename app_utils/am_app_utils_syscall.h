@@ -19,9 +19,10 @@
 extern void * _sbrk(int32_t incr);
 
 
+extern void* am_alloc(size_t size);
 
 
-
+extern void am_free(void* ptr);
 
 
 

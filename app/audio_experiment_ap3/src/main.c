@@ -51,6 +51,10 @@ limitations under the License.
 #include "am_alloc_free_test.h"
 #endif // AM_AEP_ALLOC_FREE_TEST
 
+#if AM_AEP_SCNR_TEST
+#include "stft.h"
+#endif // AM_AEP_SCNR_TEST
+
 int main(void)
 {
     am_app_AEP_sys_init();
@@ -87,6 +91,20 @@ int main(void)
     am_opus_encoder_init(g_opusEnc);
 
 #endif // AM_AEP_OPUS_TEST
+
+#if AM_AEP_SCNR_TEST
+am_app_stft_instance_f32 g_Stft;
+uint16_t g_ui16FftLen = 128;
+uint16_t g_ui16Channels = 1;
+uint16_t g_ui16HopSize = 80;
+float g_fTest = 3.1415926789;
+
+am_app_stft_init_f32(&g_Stft, g_ui16FftLen, g_ui16Channels, g_ui16HopSize, true);
+
+DebugLog("STFT instance initialization is finished!\r\n");
+
+DebugLogFloat(g_fTest);
+#endif // AM_AEP_SCNR_TEST
 
     while (1)
     {
