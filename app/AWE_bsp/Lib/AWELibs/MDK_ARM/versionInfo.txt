@@ -1,0 +1,7 @@
+AWE Core for M4
+Built on:     Mon Oct 09 21:41:15 EDT 2017
+Build name:   pipeline.release.stm32f407-53
+Built from:   awe
+Version:      master
+SHA:          950bb7b
+

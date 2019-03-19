@@ -1,0 +1,517 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:10
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_wdt.c
+#    Command line =  
+#        -f C:\temp\EW8E02.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_wdt.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_wdt.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_wdt.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_wdt.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_hal_wdt.c
+      4          //! @file
+      5          //!
+      6          //! @brief Hardware abstraction layer for the Watchdog Timer module.
+      7          //!
+      8          //! @addtogroup wdt2 Watchdog Timer (WDT)
+      9          //! @ingroup apollo2hal
+     10          //! @{
+     11          //
+     12          //*****************************************************************************
+     13          
+     14          //*****************************************************************************
+     15          //
+     16          // Copyright (c) 2019, Ambiq Micro
+     17          // All rights reserved.
+     18          // 
+     19          // Redistribution and use in source and binary forms, with or without
+     20          // modification, are permitted provided that the following conditions are met:
+     21          // 
+     22          // 1. Redistributions of source code must retain the above copyright notice,
+     23          // this list of conditions and the following disclaimer.
+     24          // 
+     25          // 2. Redistributions in binary form must reproduce the above copyright
+     26          // notice, this list of conditions and the following disclaimer in the
+     27          // documentation and/or other materials provided with the distribution.
+     28          // 
+     29          // 3. Neither the name of the copyright holder nor the names of its
+     30          // contributors may be used to endorse or promote products derived from this
+     31          // software without specific prior written permission.
+     32          // 
+     33          // Third party software included in this distribution is subject to the
+     34          // additional license terms as defined in the /docs/licenses directory.
+     35          // 
+     36          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     37          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     38          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     39          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     40          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     41          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     42          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     43          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     44          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     45          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     46          // POSSIBILITY OF SUCH DAMAGE.
+     47          //
+     48          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     49          //
+     50          //*****************************************************************************
+     51          
+     52          #include <stdint.h>
+     53          #include <stdbool.h>
+     54          #include "am_mcu_apollo.h"
+     55          
+     56          //*****************************************************************************
+     57          //
+     58          // Adjacency check
+     59          //
+     60          // This is related to the timer read workaround. This macro checks to see if
+     61          // the two supplied count values are within one "tick" of eachother. It should
+     62          // still pass in the event of a timer rollover. The "B" read is assumed to
+     63          // follow the "A" read.  The macro returns "TRUE" when the adjacent timer reads
+     64          // can be used.
+     65          //
+     66          //*****************************************************************************
+     67          #define adjacent(A, B)      (((A) == (B)) || (((A) + 1) == (B)) || ((B) == 0))
+     68          
+     69          //*****************************************************************************
+     70          //
+     71          //! @brief Configure the watchdog timer.
+     72          //!
+     73          //! @param psConfig - pointer to a configuration structure containing the
+     74          //! desired watchdog settings.
+     75          //!
+     76          //! This function will set the watchdog configuration register based on the
+     77          //! user's desired settings listed in the structure referenced by psConfig. If
+     78          //! the structure indicates that watchdog interrupts are desired, this function
+     79          //! will also set the interrupt enable bit in the configuration register.
+     80          //!
+     81          //! @note In order to actually receive watchdog interrupt and/or watchdog reset
+     82          //! events, the caller will also need to make sure that the watchdog interrupt
+     83          //! vector is enabled in the ARM NVIC, and that watchdog resets are enabled in
+     84          //! the reset generator module. Otherwise, the watchdog-generated interrupt and
+     85          //! reset events will have no effect.
+     86          //!
+     87          //! @return None.
+     88          //
+     89          //*****************************************************************************
+     90          void
+     91          am_hal_wdt_init(const am_hal_wdt_config_t *psConfig)
+     92          {
+     93              uint32_t ui32ConfigVal;
+     94              uint16_t ui16IntCount, ui16ResetCount;
+     95              bool bResetEnabled = psConfig->ui32Config & AM_HAL_WDT_ENABLE_RESET;
+     96              bool bInterruptEnabled = psConfig->ui32Config & AM_HAL_WDT_ENABLE_INTERRUPT;
+     97          
+     98              //
+     99              // Read the desired settings from the psConfig structure.
+    100              //
+    101              ui16IntCount = psConfig->ui16InterruptCount;
+    102              ui16ResetCount = psConfig->ui16ResetCount;
+    103          
+    104              //
+    105              // Write the interrupt and reset count values to a temporary variable.
+    106              //
+    107              // Accept the passed Config value, but clear the Counts that we are about to set.
+    108              ui32ConfigVal = psConfig->ui32Config & ~(WDT_CFG_INTVAL_Msk | WDT_CFG_RESVAL_Msk);
+    109              ui32ConfigVal |= _VAL2FLD(WDT_CFG_INTVAL, ui16IntCount);
+    110              ui32ConfigVal |= _VAL2FLD(WDT_CFG_RESVAL, ui16ResetCount);
+    111          
+    112              //
+    113              // If interrupts should be enabled, set the appropriate bit in the
+    114              // temporary variable. Also, enable the interrupt in INTEN register in the
+    115              // watchdog module.
+    116              //
+    117              if ( bInterruptEnabled )
+    118              {
+    119                  //
+    120                  // Enable the watchdog interrupt if the configuration calls for them.
+    121                  //
+    122                  WDT->INTEN |= WDT_INTEN_WDTINT_Msk;
+    123              }
+    124              else
+    125              {
+    126                  //
+    127                  // Disable the watchdog interrupt if the configuration doesn't call for
+    128                  // watchdog interrupts.
+    129                  //
+    130                  WDT->INTEN &= ~WDT_INTEN_WDTINT_Msk;
+    131              }
+    132          
+    133              //
+    134              // If resets should be enabled, set the appropriate bit in the temporary
+    135              // variable.
+    136              //
+    137              if ( bResetEnabled )
+    138              {
+    139                  //
+    140                  // Also enable watchdog resets in the reset module.
+    141                  //
+    142                  RSTGEN->CFG |= RSTGEN_CFG_WDREN_Msk;
+    143              }
+    144              else
+    145              {
+    146                  //
+    147                  // Disable watchdog resets in the reset module.
+    148                  //
+    149                  RSTGEN->CFG &= ~RSTGEN_CFG_WDREN_Msk;
+    150              }
+    151          
+    152              //
+    153              // Check for a user specified clock select. If none specified then
+    154              // set 128Hz.
+    155              //
+    156              if ( !(psConfig->ui32Config & WDT_CFG_CLKSEL_Msk) )
+    157              {
+    158                  ui32ConfigVal |= _VAL2FLD(WDT_CFG_CLKSEL, WDT_CFG_CLKSEL_128HZ);
+    159              }
+    160          
+    161              //
+    162              // Write the saved value to the watchdog configuration register.
+    163              //
+    164              WDT->CFG = ui32ConfigVal;
+    165          } // am_hal_wdt_init()
+    166          
+    167          //*****************************************************************************
+    168          //
+    169          //! @brief Starts the watchdog timer.
+    170          //!
+    171          //! Enables the watchdog timer tick using the 'enable' bit in the watchdog
+    172          //! configuration register.  This function does not perform any locking of the
+    173          //! watchdog timer, so it can be disabled or reconfigured later.
+    174          //!
+    175          //! @return None.
+    176          //
+    177          //*****************************************************************************
+    178          void
+    179          am_hal_wdt_start(void)
+    180          {
+    181              //
+    182              // Make sure the watchdog timer is in the "reset" state, and then set the
+    183              // enable bit to start counting.
+    184              //
+    185              WDT->CFG   |= WDT_CFG_WDTEN_Msk;
+    186              WDT->RSTRT  = WDT_RSTRT_RSTRT_KEYVALUE;
+    187          } // am_hal_wdt_start()
+    188          
+    189          //*****************************************************************************
+    190          //
+    191          //! @brief Stops the watchdog timer.
+    192          //!
+    193          //! Disables the watchdog timer tick by clearing the 'enable' bit in the
+    194          //! watchdog configuration register.
+    195          //!
+    196          //! @return None.
+    197          //
+    198          //*****************************************************************************
+    199          void
+    200          am_hal_wdt_halt(void)
+    201          {
+    202              //
+    203              // Clear the watchdog enable bit.
+    204              //
+    205              WDT->CFG &= ~WDT_CFG_WDTEN_Msk;
+    206          } // am_hal_wdt_halt()
+    207          
+    208          //*****************************************************************************
+    209          //
+    210          //! @brief Locks the watchdog configuration and starts the watchdog timer.
+    211          //!
+    212          //! This function sets the watchdog "lock" register, which prevents software
+    213          //! from re-configuring the watchdog. This action will also set the enable bit
+    214          //! for the watchdog timer, so it will start counting immediately.
+    215          //!
+    216          //! @return None.
+    217          //
+    218          //*****************************************************************************
+    219          void
+    220          am_hal_wdt_lock_and_start(void)
+    221          {
+    222              //
+    223              // Write the 'key' value to the watchdog lock register.
+    224              //
+    225              WDT->LOCK = WDT_LOCK_LOCK_KEYVALUE;
+    226          } // am_hal_wdt_lock_and_start()
+    227          
+    228          //*****************************************************************************
+    229          //
+    230          //! @brief Read the state of the wdt interrupt status.
+    231          //!
+    232          //! @param bEnabledOnly - return the status of only the enabled interrupts.
+    233          //!
+    234          //! This function extracts the interrupt status bits and returns the enabled or
+    235          //! raw based on bEnabledOnly.
+    236          //!
+    237          //! @return WDT interrupt status.
+    238          //
+    239          //*****************************************************************************
+    240          uint32_t
+    241          am_hal_wdt_int_status_get(bool bEnabledOnly)
+    242          {
+    243              if ( bEnabledOnly )
+    244              {
+    245                  uint32_t ui32RetVal;
+    246                  AM_CRITICAL_BEGIN
+    247                  ui32RetVal = WDT->INTSTAT;
+    248                  ui32RetVal &= WDT->INTEN;
+    249                  AM_CRITICAL_END
+    250                  return ui32RetVal;
+    251              }
+    252              else
+    253              {
+    254                  return WDT->INTSTAT;
+    255              }
+    256          } // am_hal_wdt_int_status_get()
+    257          
+    258          //*****************************************************************************
+    259          //
+    260          //! @brief Set the state of the wdt interrupt status bit.
+    261          //!
+    262          //! This function sets the interrupt bit.
+    263          //!
+    264          //! @return None
+    265          //
+    266          //*****************************************************************************
+    267          void
+    268          am_hal_wdt_int_set(void)
+    269          {
+    270              WDT->INTSET = WDT_INTSET_WDTINT_Msk;
+    271          } // am_hal_wdt_int_set()
+    272          
+    273          //*****************************************************************************
+    274          //
+    275          //! @brief Clear the state of the wdt interrupt status bit.
+    276          //!
+    277          //! This function clear the interrupt bit.
+    278          //!
+    279          //! @return None
+    280          //
+    281          //*****************************************************************************
+    282          void
+    283          am_hal_wdt_int_clear(void)
+    284          {
+    285              WDT->INTCLR = WDT_INTCLR_WDTINT_Msk;
+    286          } // am_hal_wdt_int_clear()
+    287          
+    288          //*****************************************************************************
+    289          //
+    290          //! @brief Enable the wdt interrupt.
+    291          //!
+    292          //! This function enable the interrupt.
+    293          //!
+    294          //! @return None
+    295          //
+    296          //*****************************************************************************
+    297          void
+    298          am_hal_wdt_int_enable(void)
+    299          {
+    300              WDT->INTEN |= WDT_INTEN_WDTINT_Msk;
+    301          } // am_hal_wdt_int_enable()
+    302          
+    303          //*****************************************************************************
+    304          //
+    305          //! @brief Return the enabled WDT interrupts.
+    306          //!
+    307          //! This function returns the enabled WDT interrupts.
+    308          //!
+    309          //! @return enabled WDT interrupts.
+    310          //
+    311          //*****************************************************************************
+    312          uint32_t
+    313          am_hal_wdt_int_enable_get(void)
+    314          {
+    315              return WDT->INTEN;
+    316          } // am_hal_wdt_int_enable_get()
+    317          
+    318          //*****************************************************************************
+    319          //
+    320          //! @brief Disable the wdt interrupt.
+    321          //!
+    322          //! This function disablee the interrupt.
+    323          //!
+    324          //! @return None
+    325          //
+    326          //*****************************************************************************
+    327          void
+    328          am_hal_wdt_int_disable(void)
+    329          {
+    330              WDT->INTEN &= ~WDT_INTEN_WDTINT_Msk;
+    331          } // am_hal_wdt_int_disable()
+    332          
+    333          //*****************************************************************************
+    334          //
+    335          //! @brief Get the wdt counter value.
+    336          //!
+    337          //! This function reads the current value of watch dog timer counter register.
+    338          //!
+    339          //! WARNING caller is responsible for masking interrutps before calling this
+    340          //! function.
+    341          //!
+    342          //! @return None
+    343          //
+    344          //*****************************************************************************
+    345          uint32_t
+    346          am_hal_wdt_counter_get(void)
+    347          {
+    348              uint32_t ui32Values[3] = {0};
+    349              uint32_t ui32Value;
+    350          
+    351              //
+    352              // First, go read the value from the counter register 3 times
+    353              // back to back in assembly language.
+    354              //
+    355              am_hal_triple_read( AM_REGADDR(WDT, COUNT), ui32Values );
+    356          
+    357              //
+    358              // Mask out the COUNT field from the 3 read values.
+    359              //
+    360              ui32Values[0] = _VAL2FLD(WDT_COUNT_COUNT, ui32Values[0]);
+    361              ui32Values[1] = _VAL2FLD(WDT_COUNT_COUNT, ui32Values[1]);
+    362              ui32Values[2] = _VAL2FLD(WDT_COUNT_COUNT, ui32Values[2]);
+    363          
+    364              //
+    365              // Now, we'll figure out which of the three values is the correct time.
+    366              //
+    367              if (ui32Values[0] == ui32Values[1])
+    368              {
+    369                  //
+    370                  // If the first two values match, then neither one was a bad read.
+    371                  // We'll take this as the current time.
+    372                  //
+    373                  ui32Value = ui32Values[1];
+    374              }
+    375              else
+    376              {
+    377                  //
+    378                  // If the first two values didn't match, then one of them might be bad.
+    379                  // If one of the first two values is bad, then the third one should
+    380                  // always be correct. We'll take the third value as the correct count.
+    381                  //
+    382                  ui32Value = ui32Values[2];
+    383          
+    384                  //
+    385                  // If all of the statements about the architecture are true, the third
+    386                  // value should be correct, and it should always be within one count of
+    387                  // either the first or the second value.
+    388                  //
+    389                  // Just in case, we'll check against the previous two values to make
+    390                  // sure that our final answer was reasonable. If it isn't, we will
+    391                  // flag it as a "bad read", and fail this assert statement.
+    392                  //
+    393                  // This shouldn't ever happen, and it hasn't ever happened in any of
+    394                  // our tests so far.
+    395                  //
+    396                  am_hal_debug_assert_msg((adjacent(ui32Values[1], ui32Values[2]) ||
+    397                                           adjacent(ui32Values[0], ui32Values[2])),
+    398                                          "Bad CDT read");
+    399              }
+    400          
+    401              return ui32Value;
+    402          } // am_hal_wdt_counter_get()
+    403          
+    404          //*****************************************************************************
+    405          //
+    406          // End Doxygen group.
+    407          //! @}
+    408          //
+    409          //*****************************************************************************
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      24   am_hal_wdt_counter_get
+        24   -> am_hal_debug_error
+        24   -> am_hal_triple_read
+       0   am_hal_wdt_halt
+      16   am_hal_wdt_init
+       0   am_hal_wdt_int_clear
+       0   am_hal_wdt_int_disable
+       0   am_hal_wdt_int_enable
+       0   am_hal_wdt_int_enable_get
+       0   am_hal_wdt_int_set
+      16   am_hal_wdt_int_status_get
+        16   -> am_hal_interrupt_master_disable
+        16   -> am_hal_interrupt_master_set
+       0   am_hal_wdt_lock_and_start
+       0   am_hal_wdt_start
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable10
+       4  ??DataTable10_1
+       4  ??DataTable10_2
+       4  ??DataTable10_3
+       4  ??DataTable10_4
+       4  ??DataTable10_5
+       4  ??DataTable10_6
+       4  ??DataTable10_7
+       4  ??DataTable10_8
+       4  ??DataTable10_9
+      12  ?_0
+      84  ?_1
+      16  ?_2
+     128  am_hal_wdt_counter_get
+      12  am_hal_wdt_halt
+     136  am_hal_wdt_init
+       8  am_hal_wdt_int_clear
+      12  am_hal_wdt_int_disable
+      12  am_hal_wdt_int_enable
+       6  am_hal_wdt_int_enable_get
+       8  am_hal_wdt_int_set
+      44  am_hal_wdt_int_status_get
+       8  am_hal_wdt_lock_and_start
+      18  am_hal_wdt_start
+
+ 
+ 112 bytes in section .rodata
+ 432 bytes in section .text
+ 
+ 432 bytes of CODE  memory
+ 112 bytes of CONST memory
+
+Errors: none
+Warnings: none

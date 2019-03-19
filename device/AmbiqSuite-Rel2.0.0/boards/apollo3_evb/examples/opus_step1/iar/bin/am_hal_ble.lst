@@ -1,0 +1,3514 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:07
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ble.c
+#    Command line =  
+#        -f C:\temp\EW7D99.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ble.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_ble.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_ble.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ble.c
+      1          //*****************************************************************************
+      2          //
+      3          //! @file am_hal_ble.c
+      4          //!
+      5          //! @brief HAL functions for the BLE interface.
+      6          //!
+      7          //! @addtogroup
+      8          //! @ingroup
+      9          //! @{
+     10          //
+     11          //*****************************************************************************
+     12          
+     13          //*****************************************************************************
+     14          //
+     15          // Copyright (c) 2019, Ambiq Micro
+     16          // All rights reserved.
+     17          // 
+     18          // Redistribution and use in source and binary forms, with or without
+     19          // modification, are permitted provided that the following conditions are met:
+     20          // 
+     21          // 1. Redistributions of source code must retain the above copyright notice,
+     22          // this list of conditions and the following disclaimer.
+     23          // 
+     24          // 2. Redistributions in binary form must reproduce the above copyright
+     25          // notice, this list of conditions and the following disclaimer in the
+     26          // documentation and/or other materials provided with the distribution.
+     27          // 
+     28          // 3. Neither the name of the copyright holder nor the names of its
+     29          // contributors may be used to endorse or promote products derived from this
+     30          // software without specific prior written permission.
+     31          // 
+     32          // Third party software included in this distribution is subject to the
+     33          // additional license terms as defined in the /docs/licenses directory.
+     34          // 
+     35          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     36          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     37          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     38          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     39          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     40          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     41          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     42          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     43          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     44          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     45          // POSSIBILITY OF SUCH DAMAGE.
+     46          //
+     47          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     48          //
+     49          //*****************************************************************************
+     50          
+     51          #include <stdint.h>
+     52          #include <stdbool.h>
+     53          #include <string.h>
+     54          #include "am_mcu_apollo.h"
+     55          #include "am_hal_ble_patch.h"
+     56          #include "am_hal_ble_patch_b0.h"
+     57          
+     58          //*****************************************************************************
+     59          //
+     60          // Globals
+     61          //
+     62          //*****************************************************************************
+     63          am_hal_ble_state_t g_sBLEState[AM_REG_BLEIF_NUM_MODULES];
+     64          
+     65          //*****************************************************************************
+     66          //
+     67          // Helper macros for rev B0 parts.
+     68          //
+     69          //*****************************************************************************
+     70          #define BLEIF_INTSTAT_BLECSSTATN_Msk    BLEIF_INTSTAT_B2MSHUTDN_Msk
+     71          #define BLEIF_INTSTAT_BLECIRQN_Msk      BLEIF_INTSTAT_B2MACTIVE_Msk
+     72          
+     73          //*****************************************************************************
+     74          //
+     75          // SPI "options"
+     76          //
+     77          // These values affect the behavior of the BLE HAL in regards to the SPI bus,
+     78          // but end users aren't likely to need to modify them. They are collected here
+     79          // for testing and debugging purposes.
+     80          //
+     81          //*****************************************************************************
+     82          // The amount of extra delay to add between successive SPI TX packets (in
+     83          // microseconds).
+     84          #define AM_BLE_TX_PACKET_SPACING_US     1
+     85          
+     86          // The BLE core takes a little while to wake up from a fresh boot, which means
+     87          // that the patch_apply function might time-out on the first few tries. Set
+     88          // this variable to let it try again for a finite number of trials.
+     89          #define AM_BLE_NUM_PATCH_TRIALS         5000
+     90          
+     91          // Patch complete can also take some time.
+     92          #define AM_BLE_NUM_PATCH_CMP_TRIALS     5000
+     93          
+     94          // How long the MCU should wait for SPI_STATUS before assuming the BLE core is
+     95          // busy (measured in 10 us increments).
+     96          #define AM_BLE_STATUS_TIMEOUT           300
+     97          
+     98          //*****************************************************************************
+     99          //
+    100          // Private types.
+    101          //
+    102          //*****************************************************************************
+    103          #define AM_HAL_MAGIC_BLE        0x775230
+    104          
+    105          #define AM_HAL_BLE_CHK_HANDLE(h)                                              \
+    106              ((h) && ((am_hal_handle_prefix_t *)(h))->s.bInit                          \
+    107               && (((am_hal_handle_prefix_t *)(h))->s.magic == AM_HAL_MAGIC_BLE))
+    108          
+    109          //*****************************************************************************
+    110          //
+    111          // BLE Core maximum patch packet size.
+    112          //
+    113          // Specified as part of the protocol.
+    114          //
+    115          //*****************************************************************************
+    116          #define MAX_PATCH_PACKET_LEN    0x80
+    117          
+    118          //*****************************************************************************
+    119          //
+    120          // Static function prototypes.
+    121          //
+    122          //*****************************************************************************
+    123          #if 0
+    124          static void am_hal_ble_fifo_write(void *pHandle, uint32_t *pui32Data, uint32_t ui32NumBytes);
+    125          static uint32_t am_hal_ble_fifo_fill(void *pHandle);
+    126          static bool am_hal_ble_lock_and_check_status(am_hal_ble_state_t *pBle);
+    127          #endif
+    128          static bool am_hal_ble_bus_lock(am_hal_ble_state_t *pBle);
+    129          static void am_hal_ble_bus_release(am_hal_ble_state_t *pBle);
+    130          static uint32_t am_hal_ble_fifo_drain(void *pHandle);
+    131          static void am_hal_ble_fifo_read(void *pHandle, uint32_t *pui32Data, uint32_t ui32NumBytes);
+    132          static bool am_hal_ble_check_status(am_hal_ble_state_t *pBle);
+    133          static bool am_hal_ble_check_irq(am_hal_ble_state_t *pBle);
+    134          static uint32_t am_hal_ble_cmd_write(void *pHandle, am_hal_ble_transfer_t *psTransfer);
+    135          static uint32_t am_hal_ble_load_modex_trim_set(void *pHandle);
+    136          static uint32_t nonblocking_write(am_hal_ble_state_t *pBle, am_hal_ble_transfer_t *psTransfer);
+    137          static uint32_t nonblocking_read(am_hal_ble_state_t *pBle, am_hal_ble_transfer_t *psTransfer);
+    138          static uint8_t am_hal_ble_read_trimdata_from_info1(void);
+    139          
+    140          //*****************************************************************************
+    141          //
+    142          // Look up Table for NZ CRC16 generation
+    143          //
+    144          //*****************************************************************************
+    145          static const uint16_t ccitt_table[] =
+    146          {
+    147              0x0000, 0x8005, 0x800F, 0x000A, 0x801B, 0x001E, 0x0014, 0x8011,
+    148              0x8033, 0x0036, 0x003C, 0x8039, 0x0028, 0x802D, 0x8027, 0x0022,
+    149              0x8063, 0x0066, 0x006C, 0x8069, 0x0078, 0x807D, 0x8077, 0x0072,
+    150              0x0050, 0x8055, 0x805F, 0x005A, 0x804B, 0x004E, 0x0044, 0x8041,
+    151              0x80C3, 0x00C6, 0x00CC, 0x80C9, 0x00D8, 0x80DD, 0x80D7, 0x00D2,
+    152              0x00F0, 0x80F5, 0x80FF, 0x00FA, 0x80EB, 0x00EE, 0x00E4, 0x80E1,
+    153              0x00A0, 0x80A5, 0x80AF, 0x00AA, 0x80BB, 0x00BE, 0x00B4, 0x80B1,
+    154              0x8093, 0x0096, 0x009C, 0x8099, 0x0088, 0x808D, 0x8087, 0x0082,
+    155              0x8183, 0x0186, 0x018C, 0x8189, 0x0198, 0x819D, 0x8197, 0x0192,
+    156              0x01B0, 0x81B5, 0x81BF, 0x01BA, 0x81AB, 0x01AE, 0x01A4, 0x81A1,
+    157              0x01E0, 0x81E5, 0x81EF, 0x01EA, 0x81FB, 0x01FE, 0x01F4, 0x81F1,
+    158              0x81D3, 0x01D6, 0x01DC, 0x81D9, 0x01C8, 0x81CD, 0x81C7, 0x01C2,
+    159              0x0140, 0x8145, 0x814F, 0x014A, 0x815B, 0x015E, 0x0154, 0x8151,
+    160              0x8173, 0x0176, 0x017C, 0x8179, 0x0168, 0x816D, 0x8167, 0x0162,
+    161              0x8123, 0x0126, 0x012C, 0x8129, 0x0138, 0x813D, 0x8137, 0x0132,
+    162              0x0110, 0x8115, 0x811F, 0x011A, 0x810B, 0x010E, 0x0104, 0x8101,
+    163              0x8303, 0x0306, 0x030C, 0x8309, 0x0318, 0x831D, 0x8317, 0x0312,
+    164              0x0330, 0x8335, 0x833F, 0x033A, 0x832B, 0x032E, 0x0324, 0x8321,
+    165              0x0360, 0x8365, 0x836F, 0x036A, 0x837B, 0x037E, 0x0374, 0x8371,
+    166              0x8353, 0x0356, 0x035C, 0x8359, 0x0348, 0x834D, 0x8347, 0x0342,
+    167              0x03C0, 0x83C5, 0x83CF, 0x03CA, 0x83DB, 0x03DE, 0x03D4, 0x83D1,
+    168              0x83F3, 0x03F6, 0x03FC, 0x83F9, 0x03E8, 0x83ED, 0x83E7, 0x03E2,
+    169              0x83A3, 0x03A6, 0x03AC, 0x83A9, 0x03B8, 0x83BD, 0x83B7, 0x03B2,
+    170              0x0390, 0x8395, 0x839F, 0x039A, 0x838B, 0x038E, 0x0384, 0x8381,
+    171              0x0280, 0x8285, 0x828F, 0x028A, 0x829B, 0x029E, 0x0294, 0x8291,
+    172              0x82B3, 0x02B6, 0x02BC, 0x82B9, 0x02A8, 0x82AD, 0x82A7, 0x02A2,
+    173              0x82E3, 0x02E6, 0x02EC, 0x82E9, 0x02F8, 0x82FD, 0x82F7, 0x02F2,
+    174              0x02D0, 0x82D5, 0x82DF, 0x02DA, 0x82CB, 0x02CE, 0x02C4, 0x82C1,
+    175              0x8243, 0x0246, 0x024C, 0x8249, 0x0258, 0x825D, 0x8257, 0x0252,
+    176              0x0270, 0x8275, 0x827F, 0x027A, 0x826B, 0x026E, 0x0264, 0x8261,
+    177              0x0220, 0x8225, 0x822F, 0x022A, 0x823B, 0x023E, 0x0234, 0x8231,
+    178              0x8213, 0x0216, 0x021C, 0x8219, 0x0208, 0x820D, 0x8207, 0x0202
+    179          };
+    180          
+    181          //*****************************************************************************
+    182          //
+    183          // Helper macros for delays.
+    184          //
+    185          //*****************************************************************************
+    186          #define delay_ms(ms)        am_hal_flash_delay(FLASH_CYCLES_US(1000 * (ms)))
+    187          #define delay_us(us)        am_hal_flash_delay(FLASH_CYCLES_US(us))
+    188          
+    189          #define WHILE_TIMEOUT_MS(expr, timeout, error)                                \
+    190              {                                                                         \
+    191                  uint32_t ui32Timeout = 0;                                             \
+    192                  while (expr)                                                          \
+    193                  {                                                                     \
+    194                      if (ui32Timeout == (timeout * 1000))                              \
+    195                      {                                                                 \
+    196                          return error;                                                 \
+    197                      }                                                                 \
+    198                                                                                        \
+    199                      delay_us(1);                                                      \
+    200                      ui32Timeout++;                                                    \
+    201                  }                                                                     \
+    202              }
+    203          
+    204          //*****************************************************************************
+    205          //
+    206          // Helper function for checking BLE data.
+    207          //
+    208          //*****************************************************************************
+    209          static bool
+    210          buffer_compare(void *b1, void *b2, uint32_t len)
+    211          {
+    212              uint8_t *p1 = b1;
+    213              uint8_t *p2 = b2;
+    214          
+    215              for (uint32_t i = 0; i < len; i++)
+    216              {
+    217                  if (p1[i] != p2[i])
+    218                  {
+    219                      return false;
+    220                  }
+    221              }
+    222          
+    223              return true;
+    224          }
+    225          
+    226          //*****************************************************************************
+    227          //
+    228          // Helper function for CRC caculation of BLE patch.
+    229          //
+    230          //*****************************************************************************
+    231          static uint16_t
+    232          am_hal_ble_crc_nz(uint8_t *pui8Data, uint32_t len)
+    233          {
+    234              uint16_t ui16CurValue = 0;
+    235              uint32_t i;
+    236          
+    237              for (i = 0; i < len; i++)
+    238              {
+    239                  ui16CurValue = ccitt_table[(((uint8_t)(ui16CurValue >> 8)) ^ pui8Data[i]) & 0xFF] ^ (ui16CurValue << 8);
+    240              }
+    241          
+    242              return ((ui16CurValue ^ 0) & ((1 << 16) - 1));
+    243          }
+    244          
+    245          //*****************************************************************************
+    246          //
+    247          // Default options for the BLE module.
+    248          //
+    249          //*****************************************************************************
+    250          const am_hal_ble_config_t am_hal_ble_default_config =
+    251          {
+    252              // Configure the HCI interface clock for 6 MHz
+    253              .ui32SpiClkCfg = AM_HAL_BLE_HCI_CLK_DIV8,
+    254          
+    255              // Set HCI read and write thresholds to 32 bytes each.
+    256              .ui32ReadThreshold = 32,
+    257              .ui32WriteThreshold = 32,
+    258          
+    259              // The MCU will supply the clock to the BLE core.
+    260              .ui32BleClockConfig = AM_HAL_BLE_CORE_MCU_CLK,
+    261          
+    262              // Default settings for expected BLE clock drift.
+    263              .ui32ClockDrift = 0x01F4,        // 0x01F4 is 500 PPM
+    264              .ui32SleepClockDrift = 0x01F4,   // 0x01F4 is 500 PPM
+    265              // Default setting - AGC Enabled
+    266              .bAgcEnabled = true,
+    267              // Default setting - Sleep Algo enabled
+    268              .bSleepEnabled = true,
+    269          
+    270              // Apply the default patches when am_hal_ble_boot() is called.
+    271              .bUseDefaultPatches = true,
+    272          };
+    273          
+    274          //*****************************************************************************
+    275          //
+    276          // Function for controlling the WAKE signal.
+    277          //
+    278          //*****************************************************************************
+    279          uint32_t
+    280          am_hal_ble_wakeup_set(void *pHandle, uint32_t ui32Mode)
+    281          {
+    282              am_hal_ble_state_t *pBle = pHandle;
+    283          
+    284              //
+    285              // Check the handle.
+    286              //
+    287              if ( !AM_HAL_BLE_CHK_HANDLE(pHandle) )
+    288              {
+    289                  return AM_HAL_STATUS_INVALID_HANDLE;
+    290              }
+    291          
+    292          //    am_hal_debug_gpio_set(BLE_DEBUG_TRACE_08);
+    293          
+    294              if ( ui32Mode )
+    295              {
+    296                  BLEIFn(pBle->ui32Module)->BLECFG_b.WAKEUPCTL = BLEIF_BLECFG_WAKEUPCTL_ON;
+    297                  am_hal_debug_gpio_set(BLE_DEBUG_TRACE_08);
+    298              }
+    299              else
+    300              {
+    301          #ifndef AM_DISABLE_BLE_SLEEP
+    302                  BLEIFn(pBle->ui32Module)->BLECFG_b.WAKEUPCTL = BLEIF_BLECFG_WAKEUPCTL_OFF;
+    303                  am_hal_debug_gpio_clear(BLE_DEBUG_TRACE_08);
+    304          #endif
+    305              }
+    306          
+    307              return AM_HAL_STATUS_SUCCESS;
+    308          
+    309          //    am_hal_debug_gpio_clear(BLE_DEBUG_TRACE_08);
+    310          }
+    311          
+    312          //*****************************************************************************
+    313          //
+    314          // Buffer for patch data.
+    315          //
+    316          //*****************************************************************************
+    317          am_hal_ble_buffer(128 + 4) g_psPatchBuffer;
+    318          
+    319          //*****************************************************************************
+    320          //
+    321          // Initialize the global variables associated with a BLE module, and return its
+    322          // handle.
+    323          //
+    324          //*****************************************************************************
+    325          uint32_t
+    326          am_hal_ble_initialize(uint32_t ui32Module, void **ppHandle)
+    327          {
+    328              //
+    329              // Check the arguments.
+    330              //
+    331              if (ui32Module >= AM_REG_BLEIF_NUM_MODULES)
+    332              {
+    333                  return AM_HAL_STATUS_OUT_OF_RANGE;
+    334              }
+    335          
+    336              if (!ppHandle)
+    337              {
+    338                  return AM_HAL_STATUS_INVALID_ARG;
+    339              }
+    340          
+    341              //
+    342              // Check if the handle is unallocated.
+    343              //
+    344              if (g_sBLEState[ui32Module].prefix.s.bInit)
+    345              {
+    346                  return AM_HAL_STATUS_INVALID_OPERATION;
+    347              }
+    348          
+    349              //
+    350              // Initialize the handle.
+    351              //
+    352              memset(&g_sBLEState[ui32Module].sCurrentTransfer, 0, sizeof(am_hal_ble_transfer_t));
+    353              memset(&g_sBLEState[ui32Module].sSavedTransfer, 0, sizeof(am_hal_ble_transfer_t));
+    354          
+    355              g_sBLEState[ui32Module].prefix.s.bInit = true;
+    356              g_sBLEState[ui32Module].prefix.s.magic = AM_HAL_MAGIC_BLE;
+    357              g_sBLEState[ui32Module].ui32Module = ui32Module;
+    358              g_sBLEState[ui32Module].ui32TransferIndex = 0;
+    359              g_sBLEState[ui32Module].bPatchComplete = 0;
+    360              g_sBLEState[ui32Module].bContinuePacket = 0;
+    361              g_sBLEState[ui32Module].bSavedPacket = 0;
+    362              g_sBLEState[ui32Module].bBusy = 0;
+    363              g_sBLEState[ui32Module].bCmdComplete = 0;
+    364              g_sBLEState[ui32Module].bDmaComplete = 0;
+    365              g_sBLEState[ui32Module].bFlowControlComplete = 0;
+    366              g_sBLEState[ui32Module].bUseDefaultPatches = false;
+    367          
+    368              //
+    369              // Pass the handle back to the caller.
+    370              //
+    371              *ppHandle = &g_sBLEState[ui32Module];
+    372          
+    373              //
+    374              // Return the status.
+    375              //
+    376              return AM_HAL_STATUS_SUCCESS;
+    377          }
+    378          
+    379          //*****************************************************************************
+    380          //
+    381          // Initialize the global variables associated with a BLE module, and return its
+    382          // handle.
+    383          //
+    384          //*****************************************************************************
+    385          uint32_t
+    386          am_hal_ble_deinitialize(void *pHandle)
+    387          {
+    388              am_hal_ble_state_t *pBLE = (am_hal_ble_state_t *)pHandle;
+    389          
+    390              //
+    391              // Check the handle.
+    392              //
+    393              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+    394              {
+    395                  return AM_HAL_STATUS_INVALID_HANDLE;
+    396              }
+    397          
+    398              //
+    399              // Initialize the handle.
+    400              //
+    401              memset(&(pBLE->sCurrentTransfer), 0, sizeof(am_hal_ble_transfer_t));
+    402          
+    403              pBLE->prefix.s.bInit = false;
+    404              pBLE->prefix.s.magic = 0;
+    405              pBLE->ui32Module = 0;
+    406              pBLE->ui32TransferIndex = 0;
+    407              pBLE->bPatchComplete = 0;
+    408              pBLE->bContinuePacket = 0;
+    409              pBLE->bSavedPacket = 0;
+    410              pBLE->bBusy = 0;
+    411              pBLE->bCmdComplete = 0;
+    412              pBLE->bDmaComplete = 0;
+    413              pBLE->bFlowControlComplete = 0;
+    414          
+    415              //
+    416              // Return the status.
+    417              //
+    418              return AM_HAL_STATUS_SUCCESS;
+    419          }
+    420          
+    421          //*****************************************************************************
+    422          //
+    423          // Configuration function.
+    424          //
+    425          //*****************************************************************************
+    426          uint32_t
+    427          am_hal_ble_config(void *pHandle, const am_hal_ble_config_t *psConfig)
+    428          {
+    429              uint32_t ui32Module;
+    430              uint32_t ui32BleClkConfig;
+    431          
+    432              //
+    433              // Check the handle.
+    434              //
+    435              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+    436              {
+    437                  return AM_HAL_STATUS_INVALID_HANDLE;
+    438              }
+    439          
+    440              //
+    441              // Handle is good, so get the module number.
+    442              //
+    443              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+    444          
+    445              //
+    446              // Configure the SPI.
+    447              //
+    448              BLEIFn(ui32Module)->MSPICFG = 0x3;
+    449              BLEIFn(ui32Module)->MSPICFG_b.RDFC = 0;
+    450              BLEIFn(ui32Module)->MSPICFG_b.WTFC = 0;
+    451              BLEIFn(ui32Module)->MSPICFG_b.WTFCPOL = 1;
+    452              BLEIFn(ui32Module)->FIFOTHR_b.FIFOWTHR = psConfig->ui32WriteThreshold;
+    453              BLEIFn(ui32Module)->FIFOTHR_b.FIFORTHR = psConfig->ui32ReadThreshold;
+    454              BLEIFn(ui32Module)->FIFOCTRL |= BLEIF_FIFOCTRL_POPWR_Msk;
+    455          
+    456              //
+    457              // Clock configuration register writes need to be combined to a single
+    458              // operation.
+    459              //
+    460              ui32BleClkConfig =  _VAL2FLD(BLEIF_CLKCFG_FSEL, psConfig->ui32SpiClkCfg);
+    461              ui32BleClkConfig |= _VAL2FLD(BLEIF_CLKCFG_IOCLKEN, 1);
+    462          
+    463              if (psConfig->ui32BleClockConfig == AM_HAL_BLE_CORE_MCU_CLK)
+    464              {
+    465                  ui32BleClkConfig |= _VAL2FLD(BLEIF_CLKCFG_CLK32KEN, 1);
+    466              }
+    467          
+    468              BLEIFn(ui32Module)->CLKCFG = ui32BleClkConfig;
+    469          
+    470              //
+    471              // Modify the BLE core's NVDS settings to match our configuration.
+    472              //
+    473              uint8_t *pui8NVDSData = (uint8_t *) am_ble_nvds_patch.pui32Data;
+    474          
+    475              //
+    476              // Set the clock source.
+    477              //
+    478              pui8NVDSData[AM_HAL_BLE_NVDS_CLOCKSOURCE_OFFSET + 3] =
+    479                  (psConfig->ui32BleClockConfig & 0xFF);
+    480          
+    481              //
+    482              // Set the expected BLE clock drift PPM
+    483              //
+    484              pui8NVDSData[AM_HAL_BLE_NVDS_CLOCKDRIFT_OFFSET + 3] =
+    485                  (psConfig->ui32ClockDrift & 0x00FF);
+    486          
+    487              pui8NVDSData[AM_HAL_BLE_NVDS_CLOCKDRIFT_OFFSET + 4] =
+    488                  (psConfig->ui32ClockDrift & 0xFF00) >> 8;
+    489          
+    490              //
+    491              // Set the sleep clock drift PPM.
+    492              //
+    493              pui8NVDSData[AM_HAL_BLE_NVDS_SLEEPCLOCKDRIFT_OFFSET + 3] =
+    494                  (psConfig->ui32SleepClockDrift & 0x00FF);
+    495          
+    496              pui8NVDSData[AM_HAL_BLE_NVDS_SLEEPCLOCKDRIFT_OFFSET + 4] =
+    497                  (psConfig->ui32SleepClockDrift & 0xFF00) >> 8;
+    498          
+    499              //
+    500              // Configure Sleep mode.
+    501              //
+    502              pui8NVDSData[AM_HAL_BLE_NVDS_SLEEPENABLE_OFFSET + 3] = (psConfig->bSleepEnabled == true) ? 1 : 0;
+    503              //
+    504              // Configure AGC.
+    505              //
+    506              pui8NVDSData[AM_HAL_BLE_NVDS_AGC_OFFSET + 3] = (psConfig->bAgcEnabled == true) ? 1 : 0;
+    507          
+    508              //
+    509              // Update the CRC.
+    510              //
+    511              am_ble_nvds_patch.ui32CRC = am_hal_ble_crc_nz(pui8NVDSData,
+    512                                                            am_ble_nvds_patch.ui32Length);
+    513          
+    514              //
+    515              // Save the addresses to the patches we intend to use.
+    516              //
+    517              g_sBLEState[ui32Module].bUseDefaultPatches = psConfig->bUseDefaultPatches;
+    518          
+    519              //
+    520              // Return the status.
+    521              //
+    522              return AM_HAL_STATUS_SUCCESS;
+    523          }
+    524          
+    525          //*****************************************************************************
+    526          //
+    527          // Enable BLE
+    528          //
+    529          //*****************************************************************************
+    530          uint32_t
+    531          am_hal_ble_power_control(void *pHandle, uint32_t ui32PowerState)
+    532          {
+    533              uint32_t ui32Module;
+    534          
+    535              //
+    536              // Enable the BLE buck trim values
+    537              //
+    538              if ( APOLLO3_GE_A1 )
+    539              {
+    540                  CLKGEN->BLEBUCKTONADJ =
+    541                      _VAL2FLD(CLKGEN_BLEBUCKTONADJ_ZEROLENDETECTEN, CLKGEN_BLEBUCKTONADJ_ZEROLENDETECTEN_EN)         |
+    542                      _VAL2FLD(CLKGEN_BLEBUCKTONADJ_ZEROLENDETECTTRIM, CLKGEN_BLEBUCKTONADJ_ZEROLENDETECTTRIM_SetF)   |
+    543                      _VAL2FLD(CLKGEN_BLEBUCKTONADJ_TONADJUSTEN, CLKGEN_BLEBUCKTONADJ_TONADJUSTEN_EN)                 |
+    544                      _VAL2FLD(CLKGEN_BLEBUCKTONADJ_TONADJUSTPERIOD, CLKGEN_BLEBUCKTONADJ_TONADJUSTPERIOD_HFRC_94KHz) |
+    545                      _VAL2FLD(CLKGEN_BLEBUCKTONADJ_TONHIGHTHRESHOLD, 0x10)                                           |
+    546                      _VAL2FLD(CLKGEN_BLEBUCKTONADJ_TONLOWTHRESHOLD, 0xF);
+    547              }
+    548          
+    549              //
+    550              // Check the handle.
+    551              //
+    552              if ( !AM_HAL_BLE_CHK_HANDLE(pHandle) )
+    553              {
+    554                  return AM_HAL_STATUS_INVALID_HANDLE;
+    555              }
+    556          
+    557              //
+    558              // Handle is good, so get the module number.
+    559              //
+    560              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+    561          
+    562              if (ui32PowerState == AM_HAL_BLE_POWER_ACTIVE)
+    563              {
+    564                  //
+    565                  // Don't run this initialization if the BLE is already enabled.
+    566                  //
+    567                  if ( PWRCTRL->DEVPWRSTATUS_b.BLEL == 0)
+    568                  {
+    569                      MCUCTRL->FEATUREENABLE |= 1;
+    570                      WHILE_TIMEOUT_MS ( ((MCUCTRL->FEATUREENABLE & 0x7) != 0x7), 100,
+    571                                         AM_HAL_BLE_FEATURE_DISABLED );
+    572          
+    573                      //
+    574                      // Enable the BLE module.
+    575                      //
+    576                      if (am_hal_pwrctrl_periph_enable(AM_HAL_PWRCTRL_PERIPH_BLEL) !=
+    577                          AM_HAL_STATUS_SUCCESS)
+    578                      {
+    579                          return AM_HAL_BLE_REGULATOR_FAILED;
+    580                      }
+    581          
+    582                      //
+    583                      // Release the BLE module RESET, start the "power state machine", and
+    584                      // enable the clocks.
+    585                      //
+    586                      BLEIFn(ui32Module)->CLKCFG = _VAL2FLD(BLEIF_CLKCFG_CLK32KEN, 1);
+    587                      BLEIFn(ui32Module)->BLEDBG_b.DBGDATA = 1 << 14;
+    588          
+    589                      //
+    590                      // The reset bit is different between A0 and subsequent revisions.
+    591                      //
+    592                      if ( APOLLO3_GE_A1 )
+    593                      {
+    594                          MCUCTRL->MISCCTRL_b.BLE_RESETN = 1;
+    595                      }
+    596                      else
+    597                      {
+    598                          AM_REGVAL(0x40020198) = 0x1 << 2;
+    599                      }
+    600          
+    601                      delay_ms(5);
+    602                      BLEIFn(ui32Module)->BLECFG_b.PWRSMEN = 1;
+    603          
+    604                      //
+    605                      // Wait for indication that the power is on.
+    606                      //
+    607                      WHILE_TIMEOUT_MS ( BLEIFn(ui32Module)->BSTATUS_b.PWRST != 3, 1000,
+    608                                         AM_HAL_BLE_POWERUP_INCOMPLETE );
+    609                  }
+    610              }
+    611              else if (ui32PowerState == AM_HAL_BLE_POWER_OFF)
+    612              {
+    613                  //
+    614                  // Reverse of power-up. Disable clocks, set reset, then disable power.
+    615                  //
+    616                  BLEIFn(ui32Module)->CLKCFG = 0;
+    617                  BLEIF->BLEDBG_b.DBGDATA = 0;
+    618          
+    619                  if ( APOLLO3_GE_A1 )
+    620                  {
+    621                      MCUCTRL->MISCCTRL_b.BLE_RESETN = 0;
+    622                  }
+    623                  else
+    624                  {
+    625                      AM_REGVAL(0x40020198) &= ~(0x1 << 2);
+    626                  }
+    627          
+    628                  BLEIF->BLECFG_b.PWRSMEN = 0;
+    629          
+    630                  if (am_hal_pwrctrl_periph_disable(AM_HAL_PWRCTRL_PERIPH_BLEL) !=
+    631                      AM_HAL_STATUS_SUCCESS)
+    632                  {
+    633                      return AM_HAL_BLE_SHUTDOWN_FAILED;
+    634                  }
+    635          
+    636                  delay_us(100);
+    637              }
+    638              else
+    639              {
+    640                  return AM_HAL_STATUS_INVALID_OPERATION;
+    641              }
+    642          
+    643              //
+    644              // Return the status.
+    645              //
+    646              return AM_HAL_STATUS_SUCCESS;
+    647          }
+    648          
+    649          //*****************************************************************************
+    650          //
+    651          // Perform all of the operations necessary to prepare  the BLE controller for
+    652          // HCI operation.
+    653          //
+    654          //*****************************************************************************
+    655          uint32_t
+    656          am_hal_ble_boot(void *pHandle)
+    657          {
+    658              uint32_t ui32Status;
+    659          
+    660              //
+    661              // Check the handle.
+    662              //
+    663              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+    664              {
+    665                  return AM_HAL_STATUS_INVALID_HANDLE;
+    666              }
+    667          
+    668              //
+    669              // The handle is good, so we can access it as a structure.
+    670              //
+    671              am_hal_ble_state_t *pBLE = pHandle;
+    672          
+    673              if (pBLE->bUseDefaultPatches)
+    674              {
+    675                  if (APOLLO3_B0)
+    676                  {
+    677                      ui32Status = am_hal_ble_patch_complete(pHandle);
+    678                      if (ui32Status != AM_HAL_STATUS_SUCCESS)
+    679                      {
+    680                          return ui32Status;
+    681                      }
+    682                  }
+    683                  else if (APOLLO3_A0 || APOLLO3_A1)
+    684                  {
+    685                      ui32Status = am_hal_ble_default_copy_patch_apply(pHandle);
+    686                      if (ui32Status != AM_HAL_STATUS_SUCCESS)
+    687                      {
+    688                          return ui32Status;
+    689                      }
+    690          
+    691                      ui32Status = am_hal_ble_default_trim_set_ramcode(pHandle);
+    692                      if (ui32Status != AM_HAL_STATUS_SUCCESS)
+    693                      {
+    694                          return ui32Status;
+    695                      }
+    696          
+    697                      ui32Status = am_hal_ble_default_patch_apply(pHandle);
+    698                      if (ui32Status != AM_HAL_STATUS_SUCCESS)
+    699                      {
+    700                          return ui32Status;
+    701                      }
+    702          
+    703                      ui32Status = am_hal_ble_patch_complete(pHandle);
+    704                      if (ui32Status != AM_HAL_STATUS_SUCCESS)
+    705                      {
+    706                          return ui32Status;
+    707                      }
+    708                  }
+    709              }
+    710          
+    711              if (am_hal_ble_check_32k_clock(pBLE) == AM_HAL_STATUS_FAIL)
+    712              {
+    713                  return AM_HAL_BLE_32K_CLOCK_UNSTABLE;
+    714              }
+    715              else
+    716              {
+    717                  return AM_HAL_STATUS_SUCCESS;
+    718              }
+    719          }
+    720          
+    721          //*****************************************************************************
+    722          //
+    723          // Apply a patch.
+    724          //
+    725          // Returns 0 for success or a numerical error code for failures.
+    726          //
+    727          //*****************************************************************************
+    728          uint32_t
+    729          am_hal_ble_patch_apply(void *pHandle, am_hal_ble_patch_t *psPatch)
+    730          {
+    731              uint8_t pui8ExpectedResponse[32];
+    732              uint32_t ui32ErrorStatus;
+    733              uint32_t ui32Trial;
+    734          
+    735              //
+    736              // Check the handle.
+    737              //
+    738              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+    739              {
+    740                  return AM_HAL_STATUS_INVALID_HANDLE;
+    741              }
+    742          
+    743              uint32_t ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+    744              am_hal_ble_transfer_t sTransfer;
+    745              am_hal_ble_buffer(16) psPatchBuffer;
+    746          
+    747              //
+    748              // Send a header packet.
+    749              //
+    750              psPatchBuffer.bytes[0] = 0x01;
+    751              psPatchBuffer.bytes[1] = psPatch->ui32Type;
+    752              psPatchBuffer.bytes[2] = 0xF1;
+    753              psPatchBuffer.bytes[3] = 0x02;
+    754              psPatchBuffer.bytes[4] = (psPatch->ui32Length & 0xFF);
+    755              psPatchBuffer.bytes[5] = ((psPatch->ui32Length >> 8) & 0xFF);
+    756          
+    757              //
+    758              // This first packet might take a few tries.
+    759              //
+    760              for ( ui32Trial = 0; ui32Trial < AM_BLE_NUM_PATCH_TRIALS; ui32Trial++)
+    761              {
+    762                  ui32ErrorStatus = am_hal_ble_blocking_hci_write(pHandle,
+    763                                                                  AM_HAL_BLE_RAW,
+    764                                                                  psPatchBuffer.words,
+    765                                                                  6);
+    766          
+    767                  if ( ui32ErrorStatus == AM_HAL_STATUS_SUCCESS )
+    768                  {
+    769                      break;
+    770                  }
+    771              }
+    772          
+    773              if (ui32ErrorStatus != AM_HAL_STATUS_SUCCESS)
+    774              {
+    775                  return ui32ErrorStatus;
+    776              }
+    777          
+    778              //
+    779              // Wait for the header response. It should be 5 bytes long.
+    780              //
+    781              WHILE_TIMEOUT_MS ( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 1000,
+    782                                 AM_HAL_BLE_NO_HCI_RESPONSE );
+    783          
+    784              memset(&sTransfer, 0, sizeof(am_hal_ble_transfer_t));
+    785              sTransfer.ui8Command = AM_HAL_BLE_READ;
+    786              sTransfer.pui32Data = psPatchBuffer.words;
+    787              sTransfer.ui16Length = 5;
+    788          
+    789              ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+    790              if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+    791              {
+    792                  return ui32ErrorStatus;
+    793              }
+    794          
+    795              pui8ExpectedResponse[0] = 0x04;
+    796              pui8ExpectedResponse[1] = psPatch->ui32Type;
+    797              pui8ExpectedResponse[2] = 0xF1;
+    798              pui8ExpectedResponse[3] = 0x01;
+    799              pui8ExpectedResponse[4] = 0x00;
+    800          
+    801              if (!buffer_compare(psPatchBuffer.words, pui8ExpectedResponse, 5))
+    802              {
+    803                  return AM_HAL_STATUS_FAIL;
+    804              }
+    805          
+    806              //
+    807              // Send all of the data, including the acknowledgements.
+    808              //
+    809              uint32_t ui32RemainingBytes = psPatch->ui32Length;
+    810              uint32_t ui32Index = 0;
+    811          
+    812              while (ui32RemainingBytes)
+    813              {
+    814                  //
+    815                  // Figure out how many bytes to send in the next packet.
+    816                  //
+    817                  uint32_t ui32TransferSize = (ui32RemainingBytes > MAX_PATCH_PACKET_LEN ?
+    818                                               MAX_PATCH_PACKET_LEN : ui32RemainingBytes);
+    819          
+    820                  //
+    821                  // Send a data header.
+    822                  //
+    823                  memset(&sTransfer, 0, sizeof(am_hal_ble_transfer_t));
+    824                  sTransfer.ui8Command = AM_HAL_BLE_WRITE;
+    825                  sTransfer.pui32Data = g_psPatchBuffer.words;
+    826                  sTransfer.ui16Length = ui32TransferSize + 4;
+    827                  sTransfer.bContinue = false;
+    828          
+    829                  g_psPatchBuffer.bytes[0] = 0x01;
+    830                  g_psPatchBuffer.bytes[1] = psPatch->ui32Type;
+    831                  g_psPatchBuffer.bytes[2] = 0xF2;
+    832                  g_psPatchBuffer.bytes[3] = ui32TransferSize;
+    833          
+    834                  // copy data into buffer
+    835                  memcpy(&g_psPatchBuffer.bytes[4], (uint8_t *)&(psPatch->pui32Data[ui32Index / 4]), ui32TransferSize);
+    836          
+    837                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+    838                  if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+    839                  {
+    840                      return ui32ErrorStatus;
+    841                  }
+    842          
+    843                  //
+    844                  // Read the acknowledgement.
+    845                  //
+    846                  WHILE_TIMEOUT_MS( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 1000,
+    847                                    AM_HAL_BLE_NO_HCI_RESPONSE);
+    848          
+    849                  memset(&sTransfer, 0, sizeof(am_hal_ble_transfer_t));
+    850                  sTransfer.ui8Command = AM_HAL_BLE_READ;
+    851                  sTransfer.pui32Data = psPatchBuffer.words;
+    852                  sTransfer.ui16Length = 5;
+    853          
+    854                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+    855                  if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+    856                  {
+    857                      return ui32ErrorStatus;
+    858                  }
+    859          
+    860                  pui8ExpectedResponse[0] = 0x04;
+    861                  pui8ExpectedResponse[1] = psPatch->ui32Type;
+    862                  pui8ExpectedResponse[2] = 0xF2;
+    863                  pui8ExpectedResponse[3] = 0x01;
+    864                  pui8ExpectedResponse[4] = 0x00;
+    865          
+    866                  if (!buffer_compare(psPatchBuffer.words, pui8ExpectedResponse, 5))
+    867                  {
+    868                      return AM_HAL_STATUS_FAIL;
+    869                  }
+    870          
+    871                  //
+    872                  // Update the tracking variables
+    873                  //
+    874                  ui32RemainingBytes -= ui32TransferSize;
+    875                  ui32Index += ui32TransferSize;
+    876              }
+    877          
+    878              //
+    879              // Send the CRC, and make sure we got it right.
+    880              //
+    881              psPatchBuffer.bytes[0] = 0x01;
+    882              psPatchBuffer.bytes[1] = psPatch->ui32Type;
+    883              psPatchBuffer.bytes[2] = 0xF3;
+    884              psPatchBuffer.bytes[3] = 0x02;
+    885              psPatchBuffer.bytes[4] = (psPatch->ui32CRC & 0xFF);
+    886              psPatchBuffer.bytes[5] = ((psPatch->ui32CRC >> 8) & 0xFF);
+    887          
+    888              if (am_hal_ble_blocking_hci_write(pHandle, AM_HAL_BLE_RAW, psPatchBuffer.words, 6) !=
+    889                  AM_HAL_STATUS_SUCCESS)
+    890              {
+    891                  return AM_HAL_STATUS_FAIL;
+    892              }
+    893          
+    894              //
+    895              // Wait for the header response. It should be 5 bytes long.
+    896              //
+    897              WHILE_TIMEOUT_MS( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 1000,
+    898                                AM_HAL_BLE_NO_HCI_RESPONSE );
+    899          
+    900              memset(&sTransfer, 0, sizeof(am_hal_ble_transfer_t));
+    901              sTransfer.ui8Command = AM_HAL_BLE_READ;
+    902              sTransfer.pui32Data = psPatchBuffer.words;
+    903              sTransfer.ui16Length = 5;
+    904          
+    905              ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+    906              if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+    907              {
+    908                  return ui32ErrorStatus;
+    909              }
+    910          
+    911              pui8ExpectedResponse[0] = 0x04;
+    912              pui8ExpectedResponse[1] = psPatch->ui32Type;
+    913              pui8ExpectedResponse[2] = 0xF3;
+    914              pui8ExpectedResponse[3] = 0x01;
+    915              pui8ExpectedResponse[4] = 0x00;
+    916          
+    917              if (!buffer_compare(psPatchBuffer.words, pui8ExpectedResponse, 5))
+    918              {
+    919                  return AM_HAL_STATUS_FAIL;
+    920              }
+    921              else
+    922              {
+    923                  return AM_HAL_STATUS_SUCCESS;
+    924              }
+    925          }
+    926          
+    927          uint32_t
+    928          am_hal_ble_patch_copy_end_apply(void *pHandle)
+    929          {
+    930              uint8_t pui8ExpectedResponse[32];
+    931              uint32_t ui32ErrorStatus;
+    932              uint32_t ui32Trial;
+    933          
+    934              //
+    935              // Check the handle.
+    936              //
+    937              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+    938              {
+    939                  return AM_HAL_STATUS_INVALID_HANDLE;
+    940              }
+    941          
+    942              uint32_t ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+    943              am_hal_ble_transfer_t sTransfer;
+    944              am_hal_ble_buffer(16) psPatchBuffer;
+    945          
+    946              //
+    947              // Send a header packet.
+    948              //
+    949              psPatchBuffer.bytes[0] = 0x01;
+    950              psPatchBuffer.bytes[1] = 0xEE;
+    951              psPatchBuffer.bytes[2] = 0xF1;
+    952              psPatchBuffer.bytes[3] = 0x02;
+    953              psPatchBuffer.bytes[4] = 0x00;
+    954              psPatchBuffer.bytes[5] = 0x00;
+    955          
+    956              //
+    957              // This first packet might take a few tries.
+    958              //
+    959              for ( ui32Trial = 0; ui32Trial < AM_BLE_NUM_PATCH_TRIALS; ui32Trial++)
+    960              {
+    961                  ui32ErrorStatus = am_hal_ble_blocking_hci_write(pHandle,
+    962                                                                  AM_HAL_BLE_RAW,
+    963                                                                  psPatchBuffer.words,
+    964                                                                  6);
+    965          
+    966                  if ( ui32ErrorStatus == AM_HAL_STATUS_SUCCESS )
+    967                  {
+    968          
+    969                      break;
+    970                  }
+    971              }
+    972          
+    973              if (ui32ErrorStatus != AM_HAL_STATUS_SUCCESS)
+    974              {
+    975          
+    976                  return ui32ErrorStatus;
+    977              }
+    978          
+    979              //
+    980              // Wait for the header response. It should be 5 bytes long.
+    981              //
+    982              WHILE_TIMEOUT_MS( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 1000, AM_HAL_BLE_NO_HCI_RESPONSE);
+    983          
+    984              memset(&sTransfer, 0, sizeof(am_hal_ble_transfer_t));
+    985              sTransfer.ui8Command = AM_HAL_BLE_READ;
+    986              sTransfer.pui32Data = psPatchBuffer.words;
+    987              sTransfer.ui16Length = 5;
+    988          
+    989              ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+    990              if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+    991              {
+    992          
+    993                  return ui32ErrorStatus;
+    994              }
+    995          
+    996              pui8ExpectedResponse[0] = 0x04;
+    997              pui8ExpectedResponse[1] = 0xEE;
+    998              pui8ExpectedResponse[2] = 0xF1;
+    999              pui8ExpectedResponse[3] = 0x01;
+   1000              pui8ExpectedResponse[4] = 0x00;
+   1001          
+   1002              if (!buffer_compare(psPatchBuffer.words, pui8ExpectedResponse, 5))
+   1003              {
+   1004          
+   1005                  return AM_HAL_STATUS_FAIL;
+   1006              }
+   1007              return 0;
+   1008          }
+   1009          
+   1010          //*****************************************************************************
+   1011          //
+   1012          // Apply the default copy patch.
+   1013          //
+   1014          // Returns 0 for success or a numerical error code for failures.
+   1015          //
+   1016          //*****************************************************************************
+   1017          uint32_t
+   1018          am_hal_ble_default_copy_patch_apply(void *pHandle)
+   1019          {
+   1020              uint32_t ui32Status, i = 0;
+   1021              uint16_t ui16Crc;
+   1022          
+   1023              ui16Crc = am_hal_ble_crc_nz((uint8_t*)(am_hal_ble_default_copy_patches[0]->pui32Data), am_hal_ble_default_copy_patches[0]->ui32Length);
+   1024              am_hal_ble_default_copy_patches[i]->ui32CRC = ui16Crc;
+   1025              ui32Status = am_hal_ble_patch_apply(pHandle, am_hal_ble_default_copy_patches[0]);
+   1026              if (ui32Status != AM_HAL_STATUS_SUCCESS)
+   1027              {
+   1028                  return ui32Status;
+   1029              }
+   1030          
+   1031              ui32Status = am_hal_ble_patch_copy_end_apply(pHandle);
+   1032              if ( ui32Status != AM_HAL_STATUS_SUCCESS )
+   1033              {
+   1034                  return ui32Status;
+   1035              }
+   1036          
+   1037              return AM_HAL_STATUS_SUCCESS;
+   1038          }
+   1039          
+   1040          //*****************************************************************************
+   1041          //
+   1042          // Apply the default patch.
+   1043          //
+   1044          // Returns 0 for success or a numerical error code for failures.
+   1045          //
+   1046          //*****************************************************************************
+   1047          uint32_t
+   1048          am_hal_ble_default_patch_apply(void *pHandle)
+   1049          {
+   1050              uint32_t ui32Status, i = 0;
+   1051              uint16_t ui16Crc;
+   1052          
+   1053              if (APOLLO3_A0 || APOLLO3_A1)
+   1054              {
+   1055                  for ( i = 0; i < am_hal_ble_num_default_patches; i++ )
+   1056                  {
+   1057                      ui16Crc = am_hal_ble_crc_nz((uint8_t*)(am_hal_ble_default_patches[i]->pui32Data), am_hal_ble_default_patches[i]->ui32Length);
+   1058                      am_hal_ble_default_patches[i]->ui32CRC = ui16Crc;
+   1059                      ui32Status = am_hal_ble_patch_apply(pHandle, am_hal_ble_default_patches[i]);
+   1060                      if (ui32Status != AM_HAL_STATUS_SUCCESS)
+   1061                      {
+   1062                          return ui32Status;
+   1063                      }
+   1064                  }
+   1065              }
+   1066          
+   1067              return AM_HAL_STATUS_SUCCESS;
+   1068          }
+   1069          
+   1070          //*****************************************************************************
+   1071          //
+   1072          // Complete the patching process
+   1073          //
+   1074          //*****************************************************************************
+   1075          uint32_t
+   1076          am_hal_ble_patch_complete(void *pHandle)
+   1077          {
+   1078              uint32_t ui32ErrorStatus;
+   1079              am_hal_ble_transfer_t sTransfer;
+   1080              am_hal_ble_buffer(12) sTxBuffer;
+   1081              am_hal_ble_buffer(12) sRxBuffer;
+   1082              uint32_t ui32Trial;
+   1083          
+   1084              am_hal_ble_state_t *pBLE = pHandle;
+   1085          
+   1086              //
+   1087              // Check the handle.
+   1088              //
+   1089              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   1090              {
+   1091                  return AM_HAL_STATUS_INVALID_HANDLE;
+   1092              }
+   1093          
+   1094              uint32_t ui32Module = pBLE->ui32Module;
+   1095          
+   1096              //
+   1097              // Write the "patch complete" command.
+   1098              //
+   1099              memset(&sTransfer, 0, sizeof(am_hal_ble_transfer_t));
+   1100              sTransfer.ui8Command = AM_HAL_BLE_WRITE;
+   1101              sTransfer.pui32Data = sTxBuffer.words;
+   1102              sTransfer.ui16Length = 6;
+   1103          
+   1104              sTxBuffer.bytes[0] = 0x01;
+   1105              sTxBuffer.bytes[1] = 0xEE;
+   1106              sTxBuffer.bytes[2] = 0xF1;
+   1107              sTxBuffer.bytes[3] = 0x02;
+   1108              sTxBuffer.bytes[4] = 0x00;
+   1109              sTxBuffer.bytes[5] = 0x00;
+   1110          
+   1111              for ( ui32Trial = 0; ui32Trial < AM_BLE_NUM_PATCH_CMP_TRIALS; ui32Trial++)
+   1112              {
+   1113                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+   1114                  if ( ui32ErrorStatus == AM_HAL_STATUS_SUCCESS )
+   1115                  {
+   1116                      break;
+   1117                  }
+   1118              }
+   1119          
+   1120              WHILE_TIMEOUT_MS ( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 100,
+   1121                                 AM_HAL_BLE_NO_HCI_RESPONSE );
+   1122          
+   1123              //
+   1124              // Read back the response.
+   1125              //
+   1126              sTransfer.ui8Command = AM_HAL_BLE_READ;
+   1127              sTransfer.pui32Data = sRxBuffer.words;
+   1128              sTransfer.ui16Length = 2;
+   1129              ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+   1130              if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+   1131              {
+   1132                  return ui32ErrorStatus;
+   1133              }
+   1134          
+   1135              //
+   1136              // Check to see which format the response came back in. If it doesn't have
+   1137              // a 2-byte length header, we need to manually override the length, and
+   1138              // continue on to adjust the HCI format in the next packet. Otherwise, we
+   1139              // can just return from here.
+   1140              //
+   1141              if ( sRxBuffer.bytes[1] == 0xEE )
+   1142              {
+   1143                  sTransfer.ui16Length = 3;
+   1144                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+   1145                  if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+   1146                  {
+   1147                      return ui32ErrorStatus;
+   1148                  }
+   1149              }
+   1150              else
+   1151              {
+   1152                  sTransfer.ui16Length = (sRxBuffer.bytes[0] + (sRxBuffer.bytes[1] << 8));
+   1153                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+   1154                  if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+   1155                  {
+   1156                      return ui32ErrorStatus;
+   1157                  }
+   1158          
+   1159                  //
+   1160                  // Make sure to remember that we've sent the "patch complete" packet.
+   1161                  //
+   1162                  pBLE->bPatchComplete = true;
+   1163          
+   1164                  return AM_HAL_STATUS_SUCCESS;
+   1165              }
+   1166          
+   1167              //
+   1168              // If we made it here, we need to tell the radio that we need two-byte
+   1169              // headers prepended to each HCI packet it sends us.
+   1170              //
+   1171              memset(&sTransfer, 0, sizeof(am_hal_ble_transfer_t));
+   1172              sTransfer.ui8Command = AM_HAL_BLE_WRITE;
+   1173              sTransfer.pui32Data = sTxBuffer.words;
+   1174              sTransfer.ui16Length = 5;
+   1175          
+   1176              sTxBuffer.bytes[0] = 0x01;
+   1177              sTxBuffer.bytes[1] = 0x04;
+   1178              sTxBuffer.bytes[2] = 0xFD;
+   1179              sTxBuffer.bytes[3] = 0x01;
+   1180              sTxBuffer.bytes[4] = 0x01;
+   1181          
+   1182              for ( ui32Trial = 0; ui32Trial < AM_BLE_NUM_PATCH_CMP_TRIALS; ui32Trial++)
+   1183              {
+   1184                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+   1185                  if ( ui32ErrorStatus == AM_HAL_STATUS_SUCCESS )
+   1186                  {
+   1187                      break;
+   1188                  }
+   1189              }
+   1190          
+   1191              if (ui32ErrorStatus != AM_HAL_STATUS_SUCCESS)
+   1192              {
+   1193                  return ui32ErrorStatus;
+   1194              }
+   1195          
+   1196              WHILE_TIMEOUT_MS ( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 100,
+   1197                                 AM_HAL_BLE_NO_HCI_RESPONSE );
+   1198          
+   1199              sTransfer.ui8Command = AM_HAL_BLE_READ;
+   1200              sTransfer.pui32Data = sRxBuffer.words;
+   1201              sTransfer.ui16Length = 9;
+   1202              ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &sTransfer);
+   1203              if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS )
+   1204              {
+   1205                  return ui32ErrorStatus;
+   1206              }
+   1207          
+   1208              //
+   1209              // Now that we're done patching, we can let the radio sleep.
+   1210              //
+   1211              am_hal_ble_wakeup_set(pBLE, 0);
+   1212          
+   1213              //
+   1214              // Make sure to remember that we've sent the "patch complete" packet.
+   1215              //
+   1216              pBLE->bPatchComplete = true;
+   1217          
+   1218              //
+   1219              // Delay to give the BLE core time to take the patch (assuming a patch was sent).
+   1220              //
+   1221              delay_ms(500);
+   1222          
+   1223              //
+   1224              // Load the modex trim data to the BLE controller.
+   1225              //
+   1226              am_hal_ble_load_modex_trim_set(pBLE);
+   1227          
+   1228              //
+   1229              // Return the status.
+   1230              //
+   1231              return AM_HAL_STATUS_SUCCESS;
+   1232          }
+   1233          
+   1234          //*****************************************************************************
+   1235          //
+   1236          // Set one of the trim values for the BLE core.
+   1237          //
+   1238          //*****************************************************************************
+   1239          uint32_t
+   1240          am_hal_ble_trim_set(void *pHandle, uint32_t ui32BleCoreAddress, uint32_t ui32TrimValue, uint32_t ui32TrimMask)
+   1241          {
+   1242              am_hal_ble_state_t *pBLE = pHandle;
+   1243              uint32_t ui32TrimValueSwapped, ui32LockValue, ui32ReadVal, ui32WriteVal;
+   1244          
+   1245              ui32TrimValueSwapped = (((ui32TrimValue & 0x000000FF) << 24) |
+   1246                                      ((ui32TrimValue & 0x0000FF00) << 8) |
+   1247                                      ((ui32TrimValue & 0x00FF0000) >> 8) |
+   1248                                      ((ui32TrimValue & 0xFF000000) >> 24));
+   1249          
+   1250              if (ui32TrimValue != 0xFFFFFFFF)
+   1251              {
+   1252                  //
+   1253                  // Unlock the BLE registers and save the "lock register" value.
+   1254                  //
+   1255                  am_hal_ble_plf_reg_read(pBLE, 0x43000004, &ui32LockValue);
+   1256                  am_hal_ble_plf_reg_write(pBLE, 0x43000004, 0xFFFFFFFF);
+   1257          
+   1258                  //
+   1259                  // Check to see if we need a bitfield mask. If not, we can just write
+   1260                  // directly.
+   1261                  //
+   1262                  if (ui32TrimMask == 0xFFFFFFFF)
+   1263                  {
+   1264                      am_hal_ble_plf_reg_write(pBLE, ui32BleCoreAddress, ui32TrimValueSwapped);
+   1265                  }
+   1266                  else
+   1267                  {
+   1268                      //
+   1269                      // If we do need a mask, read the register, mask out the old bits,
+   1270                      // OR in the new, and write the new value back.
+   1271                      //
+   1272                      am_hal_ble_plf_reg_read(pBLE, ui32BleCoreAddress, &ui32ReadVal);
+   1273                      ui32WriteVal = ((ui32ReadVal & (~ui32TrimMask)) | ui32TrimValueSwapped);
+   1274          
+   1275                      am_hal_ble_plf_reg_write(pBLE, ui32BleCoreAddress, ui32WriteVal);
+   1276                  }
+   1277          
+   1278                  //
+   1279                  // Unlock the BLE register.
+   1280                  //
+   1281                  am_hal_ble_plf_reg_write(pBLE, 0x43000004, ui32LockValue);
+   1282              }
+   1283          
+   1284              return AM_HAL_STATUS_SUCCESS;
+   1285          }
+   1286          
+   1287          //*****************************************************************************
+   1288          //
+   1289          // Set the bandgap voltage, bandgap current, and retention LDO output values
+   1290          // based on the tested values stored in non-volatile memory.
+   1291          //
+   1292          //*****************************************************************************
+   1293          uint32_t
+   1294          am_hal_ble_default_trim_set_ramcode(void *pHandle)
+   1295          {
+   1296              uint32_t ui32TrimValue;
+   1297              uint32_t ui32TrimValueSwapped;
+   1298              uint32_t *pRamCode = (uint32_t *) (am_ble_performance_patch.pui32Data);
+   1299          
+   1300              //
+   1301              // Set the bandgap voltage and current.
+   1302              //
+   1303              //ui32TrimValue = (AM_REGVAL(0x50023800) | (0x0F000000)) & (0xEFFFFFFF);
+   1304              ui32TrimValue = AM_REGVAL(0x50023800);
+   1305              ui32TrimValueSwapped = (((ui32TrimValue & 0x000000FF) << 24) |
+   1306                                      ((ui32TrimValue & 0x0000FF00) << 8) |
+   1307                                      ((ui32TrimValue & 0x00FF0000) >> 8) |
+   1308                                      ((ui32TrimValue & 0xFF000000) >> 24));
+   1309          
+   1310              if (ui32TrimValueSwapped != 0xFFFFFFFF)
+   1311              {
+   1312                  pRamCode[2] = ui32TrimValueSwapped;
+   1313              }
+   1314          
+   1315              //
+   1316              // Set the retention LDO voltage.
+   1317              //
+   1318              ui32TrimValue = AM_REGVAL(0x50023804);
+   1319              if (ui32TrimValue != 0xFFFFFFFF)
+   1320              {
+   1321                  // 0xFFFFFFFF means the part has not been trimed.
+   1322                  ui32TrimValue += 0x40000000;  // Increase the retention voltage to > 0.75v
+   1323              }
+   1324              ui32TrimValueSwapped = (((ui32TrimValue & 0x000000FF) << 24) |
+   1325                                      ((ui32TrimValue & 0x0000FF00) << 8) |
+   1326                                      ((ui32TrimValue & 0x00FF0000) >> 8) |
+   1327                                      ((ui32TrimValue & 0xFF000000) >> 24));
+   1328          
+   1329              if ( ui32TrimValueSwapped != 0xFFFFFFFF )
+   1330              {
+   1331                  pRamCode[3] = ((pRamCode[3] & (~0x1F0)) | ui32TrimValueSwapped);
+   1332              }
+   1333          
+   1334              return AM_HAL_STATUS_SUCCESS;
+   1335          }
+   1336          
+   1337          //*****************************************************************************
+   1338          //
+   1339          // Builds a vendor-specific BLE command.
+   1340          //
+   1341          //*****************************************************************************
+   1342          uint32_t
+   1343          am_hal_ble_vs_command_build(uint32_t *pui32Command, uint32_t ui32OpCode,
+   1344                                      uint32_t ui32TotalLength, uint8_t *pui8Parameters)
+   1345          {
+   1346              uint8_t *pui8Dest = (uint8_t *) pui32Command;
+   1347          
+   1348              //
+   1349              // Build the header portion of the command from the given argments.
+   1350              //
+   1351              pui8Dest[0] = 0x01;
+   1352              pui8Dest[1] = ui32OpCode & 0xFF;
+   1353              pui8Dest[2] = (ui32OpCode >> 8) & 0xFF;
+   1354              pui8Dest[3] = (ui32TotalLength - 4) & 0xFF;
+   1355          
+   1356              //
+   1357              // Finish filling the array with any parameters that may be required.
+   1358              //
+   1359              for (uint32_t i = 4; i < ui32TotalLength; i++)
+   1360              {
+   1361                  pui8Dest[i] = pui8Parameters[i - 4];
+   1362              }
+   1363          
+   1364              //
+   1365              // Return the status.
+   1366              //
+   1367              return AM_HAL_STATUS_SUCCESS;
+   1368          }
+   1369          
+   1370          //*****************************************************************************
+   1371          //
+   1372          // Returns the number of bytes written.
+   1373          //
+   1374          //*****************************************************************************
+   1375          uint32_t
+   1376          am_hal_ble_blocking_hci_write(void *pHandle, uint8_t ui8Type,
+   1377                                        uint32_t *pui32Data, uint32_t ui32NumBytes)
+   1378          {
+   1379              uint32_t ui32ErrorStatus;
+   1380          
+   1381              am_hal_ble_transfer_t HciWrite =
+   1382              {
+   1383                  .pui32Data = pui32Data,
+   1384                  .pui8Offset = {ui8Type, 0x0, 0x0},
+   1385                  .ui8OffsetLen = 0,
+   1386                  .ui16Length = ui32NumBytes,
+   1387                  .ui8Command = AM_HAL_BLE_WRITE,
+   1388                  .ui8RepeatCount = 0,
+   1389                  .bContinue = false,
+   1390                  .pfnTransferCompleteCB = 0x0,
+   1391                  .pvContext = 0x0,
+   1392              };
+   1393          
+   1394              //
+   1395              // Check the handle.
+   1396              //
+   1397              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   1398              {
+   1399                  return 0;
+   1400              }
+   1401          
+   1402              //
+   1403              // Fix up the offset length based on the packet type, and send the bytes.
+   1404              //
+   1405              if (ui8Type != AM_HAL_BLE_RAW)
+   1406              {
+   1407                  HciWrite.ui8OffsetLen = 1;
+   1408              }
+   1409          
+   1410              ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &HciWrite);
+   1411              if (ui32ErrorStatus != AM_HAL_STATUS_SUCCESS)
+   1412              {
+   1413                  return ui32ErrorStatus;
+   1414              }
+   1415          
+   1416              return AM_HAL_STATUS_SUCCESS;
+   1417          }
+   1418          
+   1419          //*****************************************************************************
+   1420          //
+   1421          // Returns the number of bytes received.
+   1422          //
+   1423          //*****************************************************************************
+   1424          uint32_t
+   1425          am_hal_ble_blocking_hci_read(void *pHandle, uint32_t *pui32Data, uint32_t *pui32BytesReceived)
+   1426          {
+   1427              uint32_t ui32Module, ui32NumBytes, ui32ErrorStatus;
+   1428          
+   1429              am_hal_ble_buffer(2) sLengthBytes;
+   1430          
+   1431              am_hal_ble_transfer_t HciRead =
+   1432              {
+   1433                  .pui32Data = sLengthBytes.words,
+   1434                  .pui8Offset = {0x0, 0x0, 0x0},
+   1435                  .ui8OffsetLen = 0,
+   1436                  .ui16Length = 2,
+   1437                  .ui8Command = AM_HAL_BLE_READ,
+   1438                  .ui8RepeatCount = 0,
+   1439                  .bContinue = false,
+   1440                  .pfnTransferCompleteCB = 0x0,
+   1441                  .pvContext = 0x0,
+   1442              };
+   1443          
+   1444              //
+   1445              // Check the handle.
+   1446              //
+   1447              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   1448              {
+   1449                  return 0;
+   1450              }
+   1451          
+   1452              //
+   1453              // Handle is good, so get the module number.
+   1454              //
+   1455              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   1456          
+   1457              //
+   1458              // Make sure the IRQ signal is set.
+   1459              //
+   1460              if ( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ )
+   1461              {
+   1462                  //
+   1463                  // Read the length bytes.
+   1464                  //
+   1465                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &HciRead);
+   1466                  if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS)
+   1467                  {
+   1468                      return ui32ErrorStatus;
+   1469                  }
+   1470          
+   1471                  //
+   1472                  // Read the rest of the packet.
+   1473                  //
+   1474                  HciRead.pui32Data = pui32Data;
+   1475                  HciRead.ui16Length = (sLengthBytes.bytes[0] +
+   1476                                        (sLengthBytes.bytes[1] << 8));
+   1477          
+   1478                  //
+   1479                  // Check if the length is not out of the boundary
+   1480                  //
+   1481                  // Fixme: it is assumed here all the sizes of the buffer are 256
+   1482                  if (HciRead.ui16Length > 256)
+   1483                  {
+   1484                      return AM_HAL_STATUS_OUT_OF_RANGE;
+   1485                  }
+   1486          
+   1487                  ui32ErrorStatus = am_hal_ble_blocking_transfer(pHandle, &HciRead);
+   1488                  if ( ui32ErrorStatus != AM_HAL_STATUS_SUCCESS)
+   1489                  {
+   1490                      return ui32ErrorStatus;
+   1491                  }
+   1492          
+   1493                  ui32NumBytes =  HciRead.ui16Length;
+   1494              }
+   1495              else
+   1496              {
+   1497                  ui32NumBytes = 0;
+   1498              }
+   1499          
+   1500              if (pui32BytesReceived)
+   1501              {
+   1502                  *pui32BytesReceived = ui32NumBytes;
+   1503              }
+   1504          
+   1505              return AM_HAL_STATUS_SUCCESS;
+   1506          }
+   1507          
+   1508          //*****************************************************************************
+   1509          //
+   1510          // Returns the number of bytes written.
+   1511          //
+   1512          //*****************************************************************************
+   1513          uint32_t
+   1514          am_hal_ble_nonblocking_hci_write(void *pHandle, uint8_t ui8Type,
+   1515                                           uint32_t *pui32Data, uint32_t ui32NumBytes,
+   1516                                           am_hal_ble_transfer_complete_cb_t pfnCallback,
+   1517                                           void *pvContext)
+   1518          {
+   1519              //
+   1520              // Check the handle.
+   1521              //
+   1522              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   1523              {
+   1524                  return 0;
+   1525              }
+   1526          
+   1527              am_hal_ble_transfer_t HciWrite =
+   1528              {
+   1529                  .pui32Data = pui32Data,
+   1530                  .pui8Offset = {ui8Type, 0x0, 0x0},
+   1531                  .ui8OffsetLen = 0,
+   1532                  .ui16Length = ui32NumBytes,
+   1533                  .ui8Command = AM_HAL_BLE_WRITE,
+   1534                  .ui8RepeatCount = 0,
+   1535                  .bContinue = false,
+   1536                  .pfnTransferCompleteCB = pfnCallback,
+   1537                  .pvContext = pvContext,
+   1538              };
+   1539          
+   1540              //
+   1541              // Fix up the offset length based on the packet type, and send the bytes.
+   1542              //
+   1543              if (ui8Type != AM_HAL_BLE_RAW)
+   1544              {
+   1545                  HciWrite.ui8OffsetLen = 1;
+   1546              }
+   1547          
+   1548              uint32_t ui32Status = am_hal_ble_nonblocking_transfer(pHandle, &HciWrite);
+   1549          
+   1550              return ui32Status;
+   1551          }
+   1552          
+   1553          //*****************************************************************************
+   1554          //
+   1555          // Returns the number of bytes received.
+   1556          //
+   1557          //*****************************************************************************
+   1558          uint32_t
+   1559          am_hal_ble_nonblocking_hci_read(void *pHandle, uint32_t *pui32Data,
+   1560                                          am_hal_ble_transfer_complete_cb_t pfnCallback,
+   1561                                          void *pvContext)
+   1562          {
+   1563              uint32_t ui32Status;
+   1564              am_hal_ble_state_t *pBle = pHandle;
+   1565          
+   1566              am_hal_ble_buffer(2) sLengthBytes;
+   1567          
+   1568              am_hal_ble_transfer_t HciRead =
+   1569              {
+   1570                  .pui32Data = sLengthBytes.words,
+   1571                  .pui8Offset = {0x0, 0x0, 0x0},
+   1572                  .ui8OffsetLen = 0,
+   1573                  .ui16Length = 2,
+   1574                  .ui8Command = AM_HAL_BLE_READ,
+   1575                  .ui8RepeatCount = 0,
+   1576                  .bContinue = false,
+   1577                  .pfnTransferCompleteCB = pfnCallback,
+   1578                  .pvContext = pvContext,
+   1579              };
+   1580          
+   1581              //
+   1582              // Check the handle.
+   1583              //
+   1584              if ( !AM_HAL_BLE_CHK_HANDLE(pHandle) )
+   1585              {
+   1586                  return AM_HAL_STATUS_INVALID_HANDLE;
+   1587              }
+   1588          
+   1589              //
+   1590              // Make sure the IRQ signal is set.
+   1591              //
+   1592              if ( am_hal_ble_check_irq(pBle) )
+   1593              {
+   1594                  //
+   1595                  // Read the length bytes.
+   1596                  //
+   1597                  ui32Status = am_hal_ble_blocking_transfer(pHandle, &HciRead);
+   1598          
+   1599                  if ( ui32Status != AM_HAL_STATUS_SUCCESS )
+   1600                  {
+   1601                      return ui32Status;
+   1602                  }
+   1603          
+   1604                  //
+   1605                  // Read the rest of the packet.
+   1606                  //
+   1607                  HciRead.pfnTransferCompleteCB = pfnCallback;
+   1608                  HciRead.pui32Data = pui32Data;
+   1609                  HciRead.ui16Length = (sLengthBytes.bytes[0] +
+   1610                                        (sLengthBytes.bytes[1] << 8));
+   1611          
+   1612                  return am_hal_ble_nonblocking_transfer(pHandle, &HciRead);
+   1613              }
+   1614          
+   1615              //
+   1616              // If we get here, return fail.
+   1617              //
+   1618              return AM_HAL_STATUS_FAIL;
+   1619          }
+   1620          
+   1621          //*****************************************************************************
+   1622          //
+   1623          // Return true if BSTATUS is high.
+   1624          //
+   1625          //*****************************************************************************
+   1626          static bool
+   1627          am_hal_ble_check_status(am_hal_ble_state_t *pBle)
+   1628          {
+   1629              //
+   1630              // We need to make a special exception for "continue" packets, since the
+   1631              // BLE radio may deassert the STATUS signal mid-packet.
+   1632              //
+   1633              if (pBle->bContinuePacket)
+   1634              {
+   1635                  pBle->bContinuePacket = false;
+   1636                  return true;
+   1637              }
+   1638          
+   1639              if ( BLEIFn(0)->BSTATUS_b.SPISTATUS == 0)
+   1640              {
+   1641                  return false;
+   1642              }
+   1643          
+   1644              return true;
+   1645          }
+   1646          
+   1647          //*****************************************************************************
+   1648          //
+   1649          // Return true if IRQ is high.
+   1650          //
+   1651          //*****************************************************************************
+   1652          static bool
+   1653          am_hal_ble_check_irq(am_hal_ble_state_t *pBle)
+   1654          {
+   1655              if ( BLEIFn(pBle->ui32Module)->BSTATUS_b.BLEIRQ )
+   1656              {
+   1657                  return true;
+   1658              }
+   1659          
+   1660              return false;
+   1661          }
+   1662          
+   1663          //*****************************************************************************
+   1664          //
+   1665          // Return true if we recently received a BSTATUS edge.
+   1666          //
+   1667          //*****************************************************************************
+   1668          static bool
+   1669          am_hal_ble_check_status_edge(am_hal_ble_state_t *pBle)
+   1670          {
+   1671              //
+   1672              // We need to make a special exception for "continue" packets, since the
+   1673              // BLE radio may deassert the STATUS signal mid-packet.
+   1674              //
+   1675              if (pBle->bContinuePacket)
+   1676              {
+   1677                  pBle->bContinuePacket = false;
+   1678                  return true;
+   1679              }
+   1680          
+   1681              if (pBle->bPatchComplete == false)
+   1682              {
+   1683                  return am_hal_ble_check_status(pBle);
+   1684              }
+   1685          
+   1686              if ( BLEIFn(0)->INTSTAT_b.BLECSSTAT == 0)
+   1687              {
+   1688                  return false;
+   1689              }
+   1690          
+   1691              return true;
+   1692          }
+   1693          
+   1694          //*****************************************************************************
+   1695          //
+   1696          // Blocking write to the BLE module.
+   1697          //
+   1698          //*****************************************************************************
+   1699          uint32_t
+   1700          am_hal_ble_blocking_transfer(void *pHandle, am_hal_ble_transfer_t *psTransfer)
+   1701          {
+   1702              am_hal_ble_state_t *pBle = pHandle;
+   1703              uint32_t ui32IntEnable;
+   1704              uint32_t ui32Module;
+   1705          
+   1706              //
+   1707              // Check the handle.
+   1708              //
+   1709              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   1710              {
+   1711                  return AM_HAL_STATUS_INVALID_HANDLE;
+   1712              }
+   1713          
+   1714              //
+   1715              // Handle is good, so get the module number.
+   1716              //
+   1717              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   1718          
+   1719              //
+   1720              // If the transfer doesn't have any bytes in it, just return success.
+   1721              //
+   1722              if (psTransfer->ui16Length == 0)
+   1723              {
+   1724                  return AM_HAL_STATUS_SUCCESS;
+   1725              }
+   1726          
+   1727              //
+   1728              // Make sure we don't get any interrupts that might interfere with this
+   1729              // operation. We will save the interrupt enable register state so we can
+   1730              // restore it later. Also, make sure "command complete" is clear, so we can
+   1731              // detect the end of the transaction.
+   1732              //
+   1733              ui32IntEnable = BLEIFn(ui32Module)->INTEN;
+   1734              BLEIFn(ui32Module)->INTEN_b.BLECIRQ = 0;
+   1735              BLEIFn(ui32Module)->INTEN_b.BLECSSTAT = 0;
+   1736              BLEIFn(ui32Module)->INTEN_b.CMDCMP = 0;
+   1737              BLEIFn(ui32Module)->INTEN_b.THR = 0;
+   1738              BLEIFn(ui32Module)->INTCLR_b.CMDCMP = 1;
+   1739              BLEIFn(ui32Module)->INTCLR_b.BLECSSTAT = 1;
+   1740          
+   1741              //
+   1742              // If we're writing, we need to lock down the bus now. Set the wakeup
+   1743              // signal, and start monitoring STATUS. If STATUS isn't high within our
+   1744              // configured timeout, we have to assume that the BLE core is unresponsive
+   1745              // and report an error back to the caller.
+   1746              //
+   1747              if (psTransfer->ui8Command == AM_HAL_BLE_WRITE)
+   1748              {
+   1749                  uint32_t ui32SpiStatus = false;
+   1750          
+   1751                  if ( pBle->bLastPacketWasTX == true)
+   1752                  {
+   1753                      //
+   1754                      // wait some time to give the controller more time to consume
+   1755                      // the last TX packet
+   1756                      //
+   1757                      if (!pBle->bPatchComplete)
+   1758                      {
+   1759                          delay_ms(3);
+   1760                      }
+   1761                      pBle->bLastPacketWasTX = false;
+   1762                  }
+   1763          
+   1764                  if (pBle->bPatchComplete)
+   1765                  {
+   1766                      uint32_t statusTimeout = 0;
+   1767                      while (am_hal_ble_check_status(pBle) == true)
+   1768                      {
+   1769                          statusTimeout++;
+   1770                          delay_us(10);
+   1771                          if (statusTimeout > 300)
+   1772                          {
+   1773                              break;
+   1774                          }
+   1775                      }
+   1776                  }
+   1777          
+   1778                  //
+   1779                  // Make sure the IO clock for the STATUS signal is on.
+   1780                  //
+   1781                  BLEIFn(0)->BLEDBG_b.IOCLKON = 1;
+   1782                  delay_us(5);
+   1783          
+   1784                  //
+   1785                  // Set WAKE, and wait for a positive edge on the STATUS signal.
+   1786                  //
+   1787                  am_hal_ble_wakeup_set(pBle, 1);
+   1788          
+   1789                  //
+   1790                  // If we don't see an edge on STATUS in X ms, assume it's not coming
+   1791                  // and return with an AM_HAL_BLE_STATUS_SPI_NOT_READY error.
+   1792                  //
+   1793                  uint32_t ui32Timeout = 0;
+   1794                  uint32_t ui32TimeoutLimit = AM_BLE_STATUS_TIMEOUT;
+   1795          
+   1796                  while (1)
+   1797                  {
+   1798                      if (am_hal_ble_check_status_edge(pBle) == true)
+   1799                      {
+   1800                          if (am_hal_ble_bus_lock(pBle))
+   1801                          {
+   1802                              ui32SpiStatus = AM_HAL_STATUS_SUCCESS;
+   1803                              break;
+   1804                          }
+   1805                      }
+   1806                      else if ((ui32Timeout == ui32TimeoutLimit) ||
+   1807                               (BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ))
+   1808                      {
+   1809                          ui32SpiStatus = AM_HAL_BLE_STATUS_SPI_NOT_READY;
+   1810                          am_hal_ble_wakeup_set(pBle, 0);
+   1811                          break;
+   1812                      }
+   1813          
+   1814                      ui32Timeout++;
+   1815                      delay_us(10);
+   1816                  }
+   1817          
+   1818                  BLEIFn(0)->BLEDBG_b.IOCLKON = 0;
+   1819          
+   1820                  if (ui32SpiStatus != AM_HAL_STATUS_SUCCESS)
+   1821                  {
+   1822                      //
+   1823                      // Restore the interrupt state.
+   1824                      //
+   1825                      BLEIFn(ui32Module)->INTEN = ui32IntEnable;
+   1826                      return ui32SpiStatus;
+   1827                  }
+   1828              }
+   1829              else
+   1830              {
+   1831                  if (BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0)
+   1832                  {
+   1833                      //
+   1834                      // Restore the interrupt state.
+   1835                      //
+   1836                      BLEIFn(ui32Module)->INTEN = ui32IntEnable;
+   1837                      return AM_HAL_BLE_STATUS_IRQ_LOW;
+   1838                  }
+   1839          
+   1840                  if (!am_hal_ble_bus_lock(pBle))
+   1841                  {
+   1842                      //
+   1843                      // Restore the interrupt state.
+   1844                      //
+   1845                      BLEIFn(ui32Module)->INTEN = ui32IntEnable;
+   1846                      return AM_HAL_BLE_STATUS_BUS_BUSY;
+   1847                  }
+   1848              }
+   1849          
+   1850              if (psTransfer->bContinue)
+   1851              {
+   1852                  pBle->bContinuePacket = true;
+   1853              }
+   1854          
+   1855              //
+   1856              // Set the current transfer, and clear the command complete interrupt so we
+   1857              // can tell when the next command completes.
+   1858              //
+   1859              memcpy(&pBle->sCurrentTransfer, psTransfer, sizeof(am_hal_ble_transfer_t));
+   1860          
+   1861              //
+   1862              // Critical section to protect the gap between command and data.
+   1863              //
+   1864              AM_CRITICAL_BEGIN;
+   1865          
+   1866              //
+   1867              // Write the command word.
+   1868              //
+   1869              am_hal_ble_cmd_write(pHandle, psTransfer);
+   1870          
+   1871              //
+   1872              // Now we need to manage the fifos based on the type of transfer. In either
+   1873              // case, we will keep draining or refilling the FIFO until the full
+   1874              // transaction is complete.
+   1875              //
+   1876              if (psTransfer->ui8Command == AM_HAL_BLE_WRITE)
+   1877              {
+   1878          #if 0   // 0 for FIFO handling with IOM hal style
+   1879                  while (pBle->ui32TransferIndex < pBle->sCurrentTransfer.ui16Length)
+   1880                  {
+   1881                      am_hal_ble_fifo_fill(pHandle);
+   1882                  }
+   1883          #else   // 0 for FIFO handling with IOM hal style
+   1884                  bool bCmdCmp = false;
+   1885                  uint32_t numWait = 0;
+   1886                  // Adjust the byte count to be sent/received for repeat count
+   1887                  uint32_t ui32Bytes = pBle->sCurrentTransfer.ui16Length;
+   1888          
+   1889                  uint32_t ui32FifoRem;
+   1890                  uint32_t *pui32Buffer = pBle->sCurrentTransfer.pui32Data;
+   1891          
+   1892                  //
+   1893                  // Write the command word.
+   1894                  //
+   1895                  am_hal_ble_cmd_write(pHandle, psTransfer);
+   1896          
+   1897                  //
+   1898                  // Keep looping until we're out of bytes to send or command complete (error).
+   1899                  //
+   1900                  while (ui32Bytes)
+   1901                  {
+   1902                      //
+   1903                      // Limit the wait to reasonable limit - instead of blocking forever
+   1904                      //
+   1905                      numWait = 0;
+   1906                      while ((ui32FifoRem = BLEIFn(ui32Module)->FIFOPTR_b.FIFO0REM) < 4)
+   1907                      {
+   1908                          bCmdCmp = BLEIFn(ui32Module)->INTSTAT_b.CMDCMP;
+   1909                          if (bCmdCmp || (numWait++ >= AM_HAL_IOM_MAX_BLOCKING_WAIT))
+   1910                          {
+   1911                              //
+   1912                              // FIFO not expected to change any more - get out
+   1913                              //
+   1914                              break;
+   1915                          }
+   1916                          else
+   1917                          {
+   1918                              am_hal_flash_delay( FLASH_CYCLES_US(1) );
+   1919                          }
+   1920                      }
+   1921                      if (bCmdCmp || (ui32FifoRem < 4))
+   1922                      {
+   1923                          //
+   1924                          // Something went wrong - bail out
+   1925                          //
+   1926                          break;
+   1927                      }
+   1928          
+   1929                      while ((ui32FifoRem >= 4) && ui32Bytes)
+   1930                      {
+   1931                          BLEIFn(ui32Module)->FIFOPUSH = *pui32Buffer++;
+   1932                          ui32FifoRem -= 4;
+   1933                          if (ui32Bytes >= 4)
+   1934                          {
+   1935                              ui32Bytes -= 4;
+   1936                          }
+   1937                          else
+   1938                          {
+   1939                              ui32Bytes = 0;
+   1940                          }
+   1941                      }
+   1942                  }
+   1943          #endif //0 for FIFO handling with IOM hal style
+   1944              }
+   1945              else
+   1946              {
+   1947                  while (pBle->ui32TransferIndex < pBle->sCurrentTransfer.ui16Length)
+   1948                  {
+   1949                      am_hal_ble_fifo_drain(pHandle);
+   1950                  }
+   1951              }
+   1952          
+   1953              //
+   1954              // End the critical section.
+   1955              //
+   1956              AM_CRITICAL_END; //fixme moved further down to cover am_hal_ble_bus_release();
+   1957          
+   1958              //
+   1959              // Wait for the transaction to complete, and clear out any interrupts that
+   1960              // may have come up.
+   1961              //
+   1962              WHILE_TIMEOUT_MS ( BLEIFn(ui32Module)->INTSTAT_b.CMDCMP == 0, 10,
+   1963                                 AM_HAL_BLE_HCI_PACKET_INCOMPLETE );
+   1964              BLEIFn(ui32Module)->INTCLR_b.CMDCMP = 1;
+   1965              BLEIFn(ui32Module)->INTCLR_b.THR = 1;
+   1966          
+   1967              //
+   1968              // Clear out the current transfer. We're done.
+   1969              //
+   1970              memset(&pBle->sCurrentTransfer, 0, sizeof(am_hal_ble_transfer_t));
+   1971              pBle->ui32TransferIndex = 0;
+   1972          
+   1973              //
+   1974              // Let the radio go back to sleep.
+   1975              //
+   1976              if (psTransfer->ui8Command == AM_HAL_BLE_WRITE)
+   1977              {
+   1978                  am_hal_ble_wakeup_set(pBle, 0);
+   1979                  pBle->bLastPacketWasTX = true;
+   1980              }
+   1981          
+   1982              if ((psTransfer->ui8Command == AM_HAL_BLE_READ) &&
+   1983                  (pBle->bPatchComplete == true))
+   1984              {
+   1985                  pBle->bLastPacketWasTX = false;
+   1986              }
+   1987          
+   1988              //
+   1989              // Restore the interrupt state.
+   1990              //
+   1991              BLEIFn(ui32Module)->INTEN = ui32IntEnable;
+   1992          
+   1993              //
+   1994              // Release the bus.
+   1995              //
+   1996              am_hal_ble_bus_release(pBle);
+   1997          
+   1998              //
+   1999              // End the critical section.
+   2000              //
+   2001              // AM_CRITICAL_END;  //fixme moved further down to cover am_hal_ble_bus_release();
+   2002          
+   2003              //
+   2004              // Return the status.
+   2005              //
+   2006              return AM_HAL_STATUS_SUCCESS;
+   2007          }
+   2008          
+   2009          //*****************************************************************************
+   2010          //
+   2011          // Nonblocking write to the BLE module.
+   2012          //
+   2013          //*****************************************************************************
+   2014          uint32_t
+   2015          am_hal_ble_nonblocking_transfer(void *pHandle, am_hal_ble_transfer_t *psTransfer)
+   2016          {
+   2017              am_hal_ble_state_t *pBle = pHandle;
+   2018              uint32_t ui32Status;
+   2019          
+   2020              //
+   2021              // Check the handle.
+   2022              //
+   2023              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   2024              {
+   2025                  return AM_HAL_STATUS_INVALID_HANDLE;
+   2026              }
+   2027          
+   2028              //
+   2029              // Check to see if this is a write or a read.
+   2030              //
+   2031              if (psTransfer->ui8Command == AM_HAL_BLE_WRITE)
+   2032              {
+   2033                  ui32Status = nonblocking_write(pBle, psTransfer);
+   2034              }
+   2035              else  // AM_HAL_BLE_READ case.
+   2036              {
+   2037                  ui32Status = nonblocking_read(pBle, psTransfer);
+   2038              }
+   2039          
+   2040              return ui32Status;
+   2041          }
+   2042          
+   2043          //*****************************************************************************
+   2044          //
+   2045          // Function for performing non-blocking writes to the HCI interface.
+   2046          //
+   2047          // This function will start a BLE write on the physical bus. The caller should
+   2048          // have already set WAKEUP and received a STATUS interrupt before they call
+   2049          // this function. When the write operation is complete, the MCU will receive a
+   2050          // command complete interrupt.
+   2051          //
+   2052          // Before calling this function, the caller is responsible for ensuring that
+   2053          // STATUS is high, that BLEIRQ is low, and the the bus isn't already in use. If
+   2054          // any of these problems exists when this function is called, it will simply
+   2055          // return with an error status.
+   2056          //
+   2057          //*****************************************************************************
+   2058          static uint32_t
+   2059          nonblocking_write(am_hal_ble_state_t *pBle, am_hal_ble_transfer_t *psTransfer)
+   2060          {
+   2061              uint32_t ui32Status = AM_HAL_STATUS_SUCCESS;
+   2062              uint32_t ui32Module = pBle->ui32Module;
+   2063          
+   2064              //
+   2065              // This function goes in a critical section to make sure that the operation
+   2066              // isn't interrupted or started again.
+   2067              //
+   2068              AM_CRITICAL_BEGIN;
+   2069          
+   2070              do
+   2071              {
+   2072                  //
+   2073                  // Check for any of the various reasons that we might not be able to
+   2074                  // perform a write right now. If the bus is busy, if the BLE core requires
+   2075                  // a READ operation, or if the BLE core simply isn't ready yet, stop here
+   2076                  // and throw an error.
+   2077                  //
+   2078                  if ( pBle->bBusy )
+   2079                  {
+   2080                      ui32Status = AM_HAL_BLE_STATUS_BUS_BUSY;
+   2081                      break;
+   2082                  }
+   2083          
+   2084                  if ( am_hal_ble_check_irq(pBle) )
+   2085                  {
+   2086                      ui32Status = AM_HAL_BLE_REQUESTING_READ;
+   2087                      break;
+   2088                  }
+   2089          
+   2090                  if ( !am_hal_ble_check_status(pBle) )
+   2091                  {
+   2092                      ui32Status = AM_HAL_BLE_STATUS_SPI_NOT_READY;
+   2093                      break;
+   2094                  }
+   2095          
+   2096                  if (psTransfer->ui16Length == 0)
+   2097                  {
+   2098                      ui32Status = AM_HAL_STATUS_SUCCESS;
+   2099                      break;
+   2100                  }
+   2101          
+   2102                  //
+   2103                  // With the obvious error cases out of the way, we can claim the bus and
+   2104                  // start the transaction.
+   2105                  //
+   2106                  if ( pBle->bLastPacketWasTX == true )
+   2107                  {
+   2108                      delay_us(AM_BLE_TX_PACKET_SPACING_US);
+   2109                  }
+   2110          
+   2111                  pBle->bBusy = true;
+   2112                  pBle->bLastPacketWasTX = true;
+   2113          
+   2114                  //
+   2115                  // Save the current transfer.
+   2116                  //
+   2117                  memcpy(&pBle->sCurrentTransfer, psTransfer, sizeof(am_hal_ble_transfer_t));
+   2118          
+   2119                  //
+   2120                  // Prepare the DMA.
+   2121                  //
+   2122                  BLEIFn(ui32Module)->DMATARGADDR = (uint32_t)pBle->sCurrentTransfer.pui32Data;
+   2123                  BLEIFn(ui32Module)->DMATOTCOUNT = pBle->sCurrentTransfer.ui16Length;
+   2124                  BLEIFn(ui32Module)->DMATRIGEN = BLEIF_DMATRIGEN_DTHREN_Msk;
+   2125                  BLEIFn(ui32Module)->DMACFG =
+   2126                      (_VAL2FLD(BLEIF_DMACFG_DMADIR, BLEIF_DMACFG_DMADIR_M2P) |
+   2127                       _VAL2FLD(BLEIF_DMACFG_DMAPRI, BLEIF_DMACFG_DMAPRI_HIGH));
+   2128          
+   2129                  //
+   2130                  // Write the command word, and enable the DMA.
+   2131                  //
+   2132                  ui32Status = am_hal_ble_cmd_write(pBle, &pBle->sCurrentTransfer);
+   2133          
+   2134                  BLEIFn(ui32Module)->DMACFG |= _VAL2FLD(BLEIF_DMACFG_DMAEN, BLEIF_DMACFG_DMAEN_EN);
+   2135          
+   2136                  //
+   2137                  // Make sure WAKE goes low as quickly as possible after starting the write.
+   2138                  //
+   2139                  if (ui32Status == AM_HAL_STATUS_SUCCESS)
+   2140                  {
+   2141                      am_hal_ble_wakeup_set(pBle, 0);
+   2142                  }
+   2143              }
+   2144              while (0);
+   2145          
+   2146              //
+   2147              // No matter what happened above, the function should end here. We'll end
+   2148              // the critical section and alert the caller of our status.
+   2149              //
+   2150              AM_CRITICAL_END;
+   2151              return ui32Status;
+   2152          }
+   2153          
+   2154          //*****************************************************************************
+   2155          //
+   2156          // This function performs a nonblocking read from the BLE core.
+   2157          //
+   2158          //*****************************************************************************
+   2159          static uint32_t
+   2160          nonblocking_read(am_hal_ble_state_t *pBle, am_hal_ble_transfer_t *psTransfer)
+   2161          {
+   2162              uint32_t ui32Status = AM_HAL_STATUS_SUCCESS;
+   2163              uint32_t ui32Module = pBle->ui32Module;
+   2164          
+   2165              //
+   2166              // This function goes in a critical section to make sure that the operation
+   2167              // isn't interrupted or started again.
+   2168              //
+   2169              AM_CRITICAL_BEGIN;
+   2170          
+   2171              do
+   2172              {
+   2173                  if ( pBle->bBusy )
+   2174                  {
+   2175                      ui32Status = AM_HAL_BLE_STATUS_BUS_BUSY;
+   2176                      break;
+   2177                  }
+   2178          
+   2179                  if ( !am_hal_ble_check_irq(pBle) )
+   2180                  {
+   2181                      ui32Status = AM_HAL_BLE_STATUS_IRQ_LOW;
+   2182                      break;
+   2183                  }
+   2184          
+   2185                  if (psTransfer->ui16Length == 0)
+   2186                  {
+   2187                      ui32Status = AM_HAL_STATUS_SUCCESS;
+   2188                      break;
+   2189                  }
+   2190          
+   2191                  //
+   2192                  // With the obvious error cases out of the way, we can claim the bus and
+   2193                  // start the transaction.
+   2194                  //
+   2195                  if ( pBle->bLastPacketWasTX == true )
+   2196                  {
+   2197                      delay_us(AM_BLE_TX_PACKET_SPACING_US);
+   2198                  }
+   2199          
+   2200                  pBle->bBusy = true;
+   2201                  pBle->bLastPacketWasTX = false;
+   2202          
+   2203                  //
+   2204                  // Set the current transfer.
+   2205                  //
+   2206                  memcpy(&pBle->sCurrentTransfer, psTransfer, sizeof(am_hal_ble_transfer_t));
+   2207          
+   2208                  BLEIFn(ui32Module)->DMATARGADDR = (uint32_t) pBle->sCurrentTransfer.pui32Data;
+   2209                  BLEIFn(ui32Module)->DMATOTCOUNT = pBle->sCurrentTransfer.ui16Length;
+   2210                  BLEIFn(ui32Module)->DMATRIGEN = (BLEIF_DMATRIGEN_DTHREN_Msk | BLEIF_INTCLR_CMDCMP_Msk);
+   2211                  BLEIFn(ui32Module)->DMACFG =
+   2212                      (_VAL2FLD(BLEIF_DMACFG_DMADIR, BLEIF_DMACFG_DMADIR_P2M) |
+   2213                       _VAL2FLD(BLEIF_DMACFG_DMAPRI, BLEIF_DMACFG_DMAPRI_HIGH));
+   2214          
+   2215                  //
+   2216                  // Write the command word, and enable the DMA.
+   2217                  //
+   2218                  ui32Status = am_hal_ble_cmd_write(pBle, &pBle->sCurrentTransfer);
+   2219                  BLEIFn(ui32Module)->DMACFG |= _VAL2FLD(BLEIF_DMACFG_DMAEN, BLEIF_DMACFG_DMAEN_EN);
+   2220              }
+   2221              while (0);
+   2222          
+   2223              //
+   2224              // No matter what happened above, the function should end here. We'll end
+   2225              // the critical section and alert the caller of our status.
+   2226              //
+   2227              AM_CRITICAL_END;
+   2228              return ui32Status;
+   2229          }
+   2230          
+   2231          #if 0
+   2232          //*****************************************************************************
+   2233          //
+   2234          // Write ui32NumBytes to the TX FIFO.
+   2235          //
+   2236          //*****************************************************************************
+   2237          static void
+   2238          am_hal_ble_fifo_write(void *pHandle, uint32_t *pui32Data, uint32_t ui32NumBytes)
+   2239          {
+   2240              uint32_t ui32Index;
+   2241              uint32_t ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2242          
+   2243              for (ui32Index = 0; (ui32Index * 4) < ui32NumBytes; ui32Index++)
+   2244              {
+   2245                  BLEIFn(ui32Module)->FIFOPUSH = pui32Data[ui32Index];
+   2246              }
+   2247          
+   2248              // we need to have 10us delay to not overwrite FIFO.
+   2249              delay_us(10);
+   2250          }
+   2251          
+   2252          //*****************************************************************************
+   2253          //
+   2254          // Refill the fifo for transmit.
+   2255          //
+   2256          //*****************************************************************************
+   2257          static uint32_t
+   2258          am_hal_ble_fifo_fill(void *pHandle)
+   2259          {
+   2260              uint32_t ui32Module;
+   2261              uint32_t ui32FifoFillSize, ui32Space, ui32BytesLeft;
+   2262              uint32_t *pSrc;
+   2263          
+   2264              //
+   2265              // Check the handle.
+   2266              //
+   2267              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   2268              {
+   2269                  return 0;
+   2270              }
+   2271          
+   2272              //
+   2273              // Handle is good, so get the module number.
+   2274              //
+   2275              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2276          
+   2277              //
+   2278              // Rename some pointers for convenience.
+   2279              //
+   2280              am_hal_ble_state_t *pBle = pHandle;
+   2281              am_hal_ble_transfer_t *pTransfer = &pBle->sCurrentTransfer;
+   2282          
+   2283              //
+   2284              // Check to see how much space there is in the FIFO, and also how many
+   2285              // bytes are remaining in the transfer.
+   2286              //
+   2287              ui32Space = BLEIFn(ui32Module)->FIFOPTR_b.FIFO0REM;
+   2288              ui32BytesLeft = (pTransfer->ui16Length - pBle->ui32TransferIndex);
+   2289          
+   2290              //
+   2291              // Calculate how much we can fill the fifo. If our data doesn't all fit
+   2292              // right now, fill up the fifo as much as we can, up to the closest
+   2293              // multiple of 4.
+   2294              //
+   2295              if (ui32Space == 0)
+   2296              {
+   2297                  return 0;
+   2298              }
+   2299              else if (ui32Space >= ui32BytesLeft)
+   2300              {
+   2301                  ui32FifoFillSize = ui32BytesLeft;
+   2302              }
+   2303              else
+   2304              {
+   2305                  ui32FifoFillSize = ui32Space & (~0x3);
+   2306              }
+   2307          
+   2308              //
+   2309              // Calculate the place where we last left off, feed the FIFO starting from
+   2310              // that location, and update the index to match.
+   2311              //
+   2312              pSrc = &pTransfer->pui32Data[pBle->ui32TransferIndex / 4];
+   2313          
+   2314              am_hal_ble_fifo_write(pHandle, pSrc, ui32FifoFillSize);
+   2315          
+   2316              pBle->ui32TransferIndex += ui32FifoFillSize;
+   2317          
+   2318              //
+   2319              // Return the number of bytes we wrote.
+   2320              //
+   2321              return ui32FifoFillSize;
+   2322          }
+   2323          
+   2324          //*****************************************************************************
+   2325          //
+   2326          // Mark the BLE interface busy so it doesn't get used by more than one
+   2327          // interface.
+   2328          //
+   2329          //*****************************************************************************
+   2330          static bool
+   2331          am_hal_ble_lock_and_check_status(am_hal_ble_state_t *pBle)
+   2332          {
+   2333              bool bLockObtained = false;
+   2334          
+   2335              //
+   2336              // In one atomic sweep, check to see if the bus is busy, and reserve it if
+   2337              // it isn't.
+   2338              //
+   2339              AM_CRITICAL_BEGIN;
+   2340          
+   2341              BLEIFn(0)->BLEDBG_b.IOCLKON = 1;
+   2342              delay_us(5);
+   2343          
+   2344              if ( am_hal_ble_check_status(pBle) && am_hal_ble_bus_lock(pBle) )
+   2345              {
+   2346                  bLockObtained = true;
+   2347              }
+   2348          
+   2349              BLEIFn(0)->BLEDBG_b.IOCLKON = 0;
+   2350          
+   2351              AM_CRITICAL_END;
+   2352          
+   2353              //
+   2354              // Tell the caller if we successfully locked the bus.
+   2355              //
+   2356              return bLockObtained;
+   2357          }
+   2358          #endif
+   2359          
+   2360          //*****************************************************************************
+   2361          //
+   2362          // Mark the BLE interface busy so it doesn't get used by more than one
+   2363          // interface.
+   2364          //
+   2365          //*****************************************************************************
+   2366          static bool
+   2367          am_hal_ble_bus_lock(am_hal_ble_state_t *pBle)
+   2368          {
+   2369              bool bLockObtained;
+   2370          
+   2371              //
+   2372              // In one atomic sweep, check to see if the bus is busy, and reserve it if
+   2373              // it isn't.
+   2374              //
+   2375              AM_CRITICAL_BEGIN;
+   2376          
+   2377              if (pBle->bBusy == false)
+   2378              {
+   2379                  am_hal_debug_gpio_set(BLE_DEBUG_TRACE_11);
+   2380                  pBle->bBusy = true;
+   2381                  bLockObtained = true;
+   2382                  pBle->bCmdComplete = 0;
+   2383                  pBle->bDmaComplete = 0;
+   2384                  pBle->bFlowControlComplete = 0;
+   2385              }
+   2386              else
+   2387              {
+   2388                  bLockObtained = false;
+   2389              }
+   2390          
+   2391              AM_CRITICAL_END;
+   2392          
+   2393              //
+   2394              // Tell the caller if we successfully locked the bus.
+   2395              //
+   2396              return bLockObtained;
+   2397          }
+   2398          
+   2399          //*****************************************************************************
+   2400          //
+   2401          // Release the bus so someone else can use it.
+   2402          //
+   2403          //*****************************************************************************
+   2404          static void
+   2405          am_hal_ble_bus_release(am_hal_ble_state_t *pBle)
+   2406          {
+   2407              pBle->bBusy = false;
+   2408              am_hal_debug_gpio_clear(BLE_DEBUG_TRACE_11);
+   2409          }
+   2410          
+   2411          //*****************************************************************************
+   2412          //
+   2413          // Pull data out of the fifo for reads.
+   2414          //
+   2415          //*****************************************************************************
+   2416          static uint32_t
+   2417          am_hal_ble_fifo_drain(void *pHandle)
+   2418          {
+   2419              uint32_t ui32Module;
+   2420              uint32_t ui32ReadSize, ui32RxDataLen, ui32BytesLeft;
+   2421              uint32_t *pDest;
+   2422          
+   2423              //
+   2424              // Check the handle.
+   2425              //
+   2426              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   2427              {
+   2428                  return 0;
+   2429              }
+   2430          
+   2431              //
+   2432              // Handle is good, so get the module number.
+   2433              //
+   2434              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2435          
+   2436              //
+   2437              // Rename some pointers for convenience.
+   2438              //
+   2439              am_hal_ble_state_t *pBle = pHandle;
+   2440              am_hal_ble_transfer_t *pTransfer = &pBle->sCurrentTransfer;
+   2441          
+   2442              //
+   2443              // Check to see how much data there is in the FIFO, and also how many
+   2444              // bytes are remaining in the transfer.
+   2445              //
+   2446              ui32RxDataLen = BLEIFn(ui32Module)->FIFOPTR_b.FIFO1SIZ;
+   2447              ui32BytesLeft = (pTransfer->ui16Length - pBle->ui32TransferIndex);
+   2448          
+   2449              //
+   2450              // Calculate how much we can drain the fifo.
+   2451              //
+   2452              if (ui32RxDataLen < 4)
+   2453              {
+   2454                  return 0;
+   2455              }
+   2456              else if (ui32RxDataLen >= pTransfer->ui16Length)
+   2457              {
+   2458                  ui32ReadSize = ui32BytesLeft;
+   2459              }
+   2460              else
+   2461              {
+   2462                  ui32ReadSize = ui32RxDataLen & (~0x3);
+   2463              }
+   2464          
+   2465              //
+   2466              // Calculate the place where we last left off, feed the FIFO starting from
+   2467              // that location, and update the index to match.
+   2468              //
+   2469              pDest = &pTransfer->pui32Data[pBle->ui32TransferIndex / 4];
+   2470          
+   2471              am_hal_ble_fifo_read(pHandle, pDest, ui32ReadSize);
+   2472          
+   2473              pBle->ui32TransferIndex += ui32ReadSize;
+   2474          
+   2475              //
+   2476              // Return the number of bytes we wrote.
+   2477              //
+   2478              return ui32ReadSize;
+   2479          }
+   2480          
+   2481          //*****************************************************************************
+   2482          //
+   2483          // Write the command word for a BLE transfer.
+   2484          //
+   2485          //*****************************************************************************
+   2486          uint32_t
+   2487          am_hal_ble_cmd_write(void *pHandle, am_hal_ble_transfer_t *psTransfer)
+   2488          {
+   2489              uint32_t ui32CmdWord, ui32OffsetHigh;
+   2490              uint32_t ui32Module;
+   2491          
+   2492              //
+   2493              // Check the handle.
+   2494              //
+   2495              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   2496              {
+   2497                  return AM_HAL_STATUS_INVALID_HANDLE;
+   2498              }
+   2499          
+   2500              //
+   2501              // Handle is good, so get the module number.
+   2502              //
+   2503              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2504          
+   2505              //
+   2506              // Figure out the command word and the offset register. Then write them.
+   2507              //
+   2508              switch (psTransfer->ui8OffsetLen)
+   2509              {
+   2510                  case 0:
+   2511                      ui32CmdWord = 0;
+   2512                      ui32OffsetHigh = 0;
+   2513                      break;
+   2514          
+   2515                  case 1:
+   2516                      ui32CmdWord = _VAL2FLD(BLEIF_CMD_OFFSETLO, psTransfer->pui8Offset[0]);
+   2517                      ui32OffsetHigh = 0;
+   2518                      break;
+   2519          
+   2520                  case 2:
+   2521                      ui32CmdWord = _VAL2FLD(BLEIF_CMD_OFFSETLO, psTransfer->pui8Offset[1]);
+   2522                      ui32OffsetHigh = psTransfer->pui8Offset[0];
+   2523                      break;
+   2524          
+   2525                  case 3:
+   2526                      ui32CmdWord = _VAL2FLD(BLEIF_CMD_OFFSETLO, psTransfer->pui8Offset[2]);
+   2527                      ui32OffsetHigh = ((psTransfer->pui8Offset[1]) |
+   2528                                        (psTransfer->pui8Offset[0] << 8));
+   2529                      break;
+   2530          
+   2531                  default:
+   2532                      // Offset length was incorrect.
+   2533                      return AM_HAL_STATUS_INVALID_ARG;
+   2534              }
+   2535          
+   2536              ui32CmdWord |= (_VAL2FLD(BLEIF_CMD_OFFSETCNT, psTransfer->ui8OffsetLen) |
+   2537                              _VAL2FLD(BLEIF_CMD_TSIZE, psTransfer->ui16Length)       |
+   2538                              _VAL2FLD(BLEIF_CMD_CONT, psTransfer->bContinue)         |
+   2539                              psTransfer->ui8Command);
+   2540          
+   2541              BLEIFn(ui32Module)->OFFSETHI = ui32OffsetHigh;
+   2542              BLEIFn(ui32Module)->CMD = ui32CmdWord;
+   2543          
+   2544              //
+   2545              // Return the status.
+   2546              //
+   2547              return AM_HAL_STATUS_SUCCESS;
+   2548          }
+   2549          
+   2550          //*****************************************************************************
+   2551          //
+   2552          // Read ui32NumBytes from the RX FIFO.
+   2553          //
+   2554          //*****************************************************************************
+   2555          static void
+   2556          am_hal_ble_fifo_read(void *pHandle, uint32_t *pui32Data, uint32_t ui32NumBytes)
+   2557          {
+   2558              uint32_t ui32Index;
+   2559              uint32_t ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2560          
+   2561              for (ui32Index = 0; (ui32Index * 4) < ui32NumBytes; ui32Index++)
+   2562              {
+   2563                  pui32Data[ui32Index] = BLEIFn(ui32Module)->FIFOPOP;
+   2564          
+   2565          #ifndef AM_HAL_BLE_NO_FIFO_PROTECTION
+   2566                  BLEIFn(ui32Module)->FIFOPOP = 0;
+   2567          #endif
+   2568          
+   2569              }
+   2570          }
+   2571          
+   2572          //*****************************************************************************
+   2573          //
+   2574          // Call the appropriate callbacks when DMA transfers complete.
+   2575          //
+   2576          //*****************************************************************************
+   2577          uint32_t
+   2578          am_hal_ble_int_service(void *pHandle, uint32_t ui32Status)
+   2579          {
+   2580              am_hal_ble_state_t *pBle = pHandle;
+   2581              uint32_t ui32Module;
+   2582          
+   2583              //
+   2584              // Check the handle.
+   2585              //
+   2586              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   2587              {
+   2588                  return AM_HAL_STATUS_INVALID_HANDLE;
+   2589              }
+   2590          
+   2591              //
+   2592              // The handle is good, so get the module number.
+   2593              //
+   2594              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2595          
+   2596              //
+   2597              // Track each of the interrupts signaling the end of an HCI transfer.
+   2598              //
+   2599              if ( ui32Status & BLEIF_INTSTAT_CMDCMP_Msk )
+   2600              {
+   2601                  pBle->bCmdComplete = true;
+   2602              }
+   2603          
+   2604              if ( ui32Status & BLEIF_INTSTAT_DCMP_Msk )
+   2605              {
+   2606                  pBle->bDmaComplete = true;
+   2607              }
+   2608          
+   2609              //
+   2610              // For B0 parts, we can detect when key flow control signals from the BLE
+   2611              // core are de-asserted.
+   2612              //
+   2613              if (APOLLO3_GE_B0)
+   2614              {
+   2615                  //
+   2616                  // Check for falling IRQ
+   2617                  //
+   2618                  if ( (ui32Status & BLEIF_INTSTAT_BLECIRQN_Msk)  &&
+   2619                       (pBle->sCurrentTransfer.ui8Command == AM_HAL_BLE_READ) )
+   2620                  {
+   2621                      pBle->bFlowControlComplete = true;
+   2622                  }
+   2623          
+   2624                  //
+   2625                  // Check for falling status.
+   2626                  //
+   2627                  if ( (ui32Status & BLEIF_INTSTAT_BLECSSTATN_Msk ) &&
+   2628                       (pBle->sCurrentTransfer.ui8Command == AM_HAL_BLE_WRITE) )
+   2629                  {
+   2630                      pBle->bFlowControlComplete = true;
+   2631                  }
+   2632              }
+   2633          
+   2634              //
+   2635              // If we get a command complete, we need to release the wake signal,
+   2636              // disable the DMA, release the bus, and call any callback that might
+   2637              // exist.
+   2638              //
+   2639              // For revision A parts, "command complete" means that the DMA operation
+   2640              // and the BLE SPI interface have both finished their operations. For rev B
+   2641              // parts, we will also wait for the flow control signal (either STATUS or
+   2642              // IRQ) to be removed.
+   2643              //
+   2644              if ( pBle->bCmdComplete && pBle->bDmaComplete &&
+   2645                   ((pBle->bFlowControlComplete) || (!APOLLO3_GE_B0)) )
+   2646              {
+   2647                  //
+   2648                  // Clean up our state flags.
+   2649                  //
+   2650                  pBle->bCmdComplete = false;
+   2651                  pBle->bDmaComplete = false;
+   2652                  pBle->bFlowControlComplete = false;
+   2653          
+   2654                  //
+   2655                  // If our FIFOs aren't empty right now, either the DMA didn't finish,
+   2656                  // or this interrupt handler is somehow being called incorrectly.
+   2657                  //
+   2658                  if ( BLEIFn(ui32Module)->FIFOPTR != 0x20002000 )
+   2659                  {
+   2660                      return AM_HAL_BLE_FIFO_ERROR;
+   2661                  }
+   2662          
+   2663                  //
+   2664                  // Drop the wake request if we had one, and make sure we remember if
+   2665                  // the last packet was a transmit packet.
+   2666                  //
+   2667                  if ((pBle->sCurrentTransfer.ui8Command == AM_HAL_BLE_WRITE) &&
+   2668                      (pBle->bPatchComplete == true))
+   2669                  {
+   2670                      pBle->bLastPacketWasTX = true;
+   2671                      am_hal_ble_wakeup_set(pBle, 0);
+   2672                  }
+   2673          
+   2674                  //
+   2675                  // If this was a read packet, remember that it wasn't a TX packet.
+   2676                  //
+   2677                  if (pBle->sCurrentTransfer.ui8Command == AM_HAL_BLE_READ)
+   2678                  {
+   2679                      pBle->bLastPacketWasTX = false;
+   2680                  }
+   2681          
+   2682                  //
+   2683                  // Disable the DMA
+   2684                  //
+   2685                  BLEIFn(ui32Module)->DMACFG = 0;
+   2686          
+   2687                  am_hal_ble_bus_release(pBle);
+   2688          
+   2689                  if ( pBle->sCurrentTransfer.pfnTransferCompleteCB )
+   2690                  {
+   2691                      am_hal_ble_transfer_complete_cb_t pfnCallback;
+   2692                      uint32_t ui32Length;
+   2693                      uint8_t *pui8Data;
+   2694                      void *pvContext;
+   2695          
+   2696                      pfnCallback = pBle->sCurrentTransfer.pfnTransferCompleteCB;
+   2697                      pui8Data = (uint8_t * ) pBle->sCurrentTransfer.pui32Data;
+   2698                      ui32Length = pBle->sCurrentTransfer.ui16Length;
+   2699                      pvContext = pBle->sCurrentTransfer.pvContext;
+   2700          
+   2701                      pfnCallback(pui8Data, ui32Length, pvContext);
+   2702                  }
+   2703              }
+   2704          
+   2705              //
+   2706              // Return the status.
+   2707              //
+   2708              return AM_HAL_STATUS_SUCCESS;
+   2709          }
+   2710          
+   2711          //*****************************************************************************
+   2712          //
+   2713          // Interrupt Enable
+   2714          //
+   2715          //*****************************************************************************
+   2716          uint32_t
+   2717          am_hal_ble_int_enable(void *pHandle, uint32_t ui32InterruptMask)
+   2718          {
+   2719              uint32_t ui32Module;
+   2720          
+   2721              //
+   2722              // Check the handle.
+   2723              //
+   2724              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   2725              {
+   2726                  return AM_HAL_STATUS_INVALID_HANDLE;
+   2727              }
+   2728          
+   2729              //
+   2730              // Handle is good, so get the module number.
+   2731              //
+   2732              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2733          
+   2734              AM_CRITICAL_BEGIN
+   2735              BLEIFn(ui32Module)->INTEN |= ui32InterruptMask;
+   2736              AM_CRITICAL_END
+   2737          
+   2738              //
+   2739              // Return the status.
+   2740              //
+   2741              return AM_HAL_STATUS_SUCCESS;
+   2742          }
+   2743          
+   2744          //*****************************************************************************
+   2745          //
+   2746          // Interrupt Enable
+   2747          //
+   2748          //*****************************************************************************
+   2749          uint32_t
+   2750          am_hal_ble_int_disable(void *pHandle, uint32_t ui32InterruptMask)
+   2751          {
+   2752              uint32_t ui32Module;
+   2753          
+   2754              //
+   2755              // Check the handle.
+   2756              //
+   2757              if (!AM_HAL_BLE_CHK_HANDLE(pHandle))
+   2758              {
+   2759                  return AM_HAL_STATUS_INVALID_HANDLE;
+   2760              }
+   2761          
+   2762              //
+   2763              // Handle is good, so get the module number.
+   2764              //
+   2765              ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2766          
+   2767              AM_CRITICAL_BEGIN
+   2768              BLEIFn(ui32Module)->INTEN &= ~ui32InterruptMask;
+   2769              AM_CRITICAL_END
+   2770          
+   2771              //
+   2772              // Return the status.
+   2773              //
+   2774              return AM_HAL_STATUS_SUCCESS;
+   2775          }
+   2776          
+   2777          //*****************************************************************************
+   2778          //
+   2779          // Check the status of the interrupts.
+   2780          //
+   2781          //*****************************************************************************
+   2782          uint32_t
+   2783          am_hal_ble_int_status(void *pHandle, bool bEnabledOnly)
+   2784          {
+   2785              uint32_t ui32Module = ((am_hal_ble_state_t *) pHandle)->ui32Module;
+   2786          
+   2787              if (bEnabledOnly)
+   2788              {
+   2789                  uint32_t ui32IntEn = BLEIFn(ui32Module)->INTEN;
+   2790                  return ( BLEIFn(ui32Module)->INTSTAT & ui32IntEn );
+   2791              }
+   2792              else
+   2793              {
+   2794                  return BLEIFn(ui32Module)->INTSTAT;
+   2795              }
+   2796          }
+   2797          
+   2798          //*****************************************************************************
+   2799          //
+   2800          // Clear the interrupt status.
+   2801          //
+   2802          //*****************************************************************************
+   2803          uint32_t
+   2804          am_hal_ble_int_clear(void *pHandle, uint32_t ui32InterruptMask)
+   2805          {
+   2806              uint32_t ui32Module;
+   2807          
+   2808              //
+   2809              // Check the handle.
+   2810              //
+   2811              if ( !AM_HAL_BLE_CHK_HANDLE(pHandle) )
+   2812              {
+   2813                  return AM_HAL_STATUS_INVALID_HANDLE;
+   2814              }
+   2815          
+   2816              //
+   2817              // Handle is good, so get the module number.
+   2818              //
+   2819              ui32Module = ((am_hal_ble_state_t *)pHandle)->ui32Module;
+   2820          
+   2821              BLEIFn(ui32Module)->INTCLR = ui32InterruptMask;
+   2822          
+   2823              //
+   2824              // Return the status.
+   2825              //
+   2826              return AM_HAL_STATUS_SUCCESS;
+   2827          }
+   2828          
+   2829          //*****************************************************************************
+   2830          //
+   2831          // check 32768Hz clock is ready.
+   2832          //
+   2833          //*****************************************************************************
+   2834          uint32_t
+   2835          am_hal_ble_check_32k_clock(void *pHandle)
+   2836          {
+   2837              am_hal_ble_state_t *pBLE = pHandle;
+   2838              uint32_t rc32k_clock = 0xFFFFFFFF;
+   2839          
+   2840              am_hal_ble_plf_reg_read(pBLE, 0x20006054, &rc32k_clock);
+   2841          
+   2842              // Normal 32KHz clock is about 0x8000
+   2843              if ( (rc32k_clock > 0x8200) || (rc32k_clock < 0x7B00) )
+   2844              {
+   2845                  return AM_HAL_STATUS_FAIL;
+   2846              }
+   2847              else
+   2848              {
+   2849                  return AM_HAL_STATUS_SUCCESS;
+   2850              }
+   2851          }
+   2852          
+   2853          //*****************************************************************************
+   2854          //
+   2855          // Read a register value from the BLE core.
+   2856          //
+   2857          //*****************************************************************************
+   2858          uint32_t
+   2859          am_hal_ble_plf_reg_read(void *pHandle, uint32_t ui32Address, uint32_t *pui32Value)
+   2860          {
+   2861              am_hal_ble_state_t *pBLE = pHandle;
+   2862              uint8_t pui8Parameter[4];
+   2863              uint32_t ui32IntEnable;
+   2864          
+   2865              uint32_t ui32Module = pBLE->ui32Module;
+   2866          
+   2867              //
+   2868              // Make a buffer big enough to hold the register write command, and a
+   2869              // second one big enough to hold the response.
+   2870              //
+   2871              am_hal_ble_buffer(AM_HAL_BLE_PLF_REGISTER_READ_LENGTH) sWriteCommand;
+   2872              am_hal_ble_buffer(32) sResponse;
+   2873          
+   2874              //
+   2875              // Prepare our register write value.
+   2876              //
+   2877              pui8Parameter[0] = ui32Address;
+   2878              pui8Parameter[1] = (ui32Address >> 8);
+   2879              pui8Parameter[2] = (ui32Address >> 16);
+   2880              pui8Parameter[3] = (ui32Address >> 24);
+   2881          
+   2882              sResponse.words[0] = 0;
+   2883              sResponse.words[1] = 0;
+   2884              sResponse.words[2] = 0;
+   2885          
+   2886              //
+   2887              // Fill the buffer with the specific command we want to write, and send it.
+   2888              //
+   2889              am_hal_ble_vs_command_build(sWriteCommand.words,
+   2890                                          AM_HAL_BLE_PLF_REGISTER_READ_OPCODE,
+   2891                                          AM_HAL_BLE_PLF_REGISTER_READ_LENGTH,
+   2892                                          pui8Parameter);
+   2893          
+   2894              //
+   2895              // Temporarily disable BLE interrupts.
+   2896              //
+   2897              ui32IntEnable = BLEIFn(ui32Module)->INTEN;
+   2898              BLEIFn(ui32Module)->INTEN = 0;
+   2899          
+   2900              am_hal_ble_blocking_hci_write(pBLE,
+   2901                                            AM_HAL_BLE_RAW,
+   2902                                            sWriteCommand.words,
+   2903                                            AM_HAL_BLE_PLF_REGISTER_READ_LENGTH);
+   2904          
+   2905              BLEIFn(ui32Module)->BLEDBG_b.IOCLKON = 1;
+   2906          
+   2907              //
+   2908              // Wait for the response, and return it to the caller via our variable.
+   2909              //
+   2910              WHILE_TIMEOUT_MS ( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 500,
+   2911                                 AM_HAL_BLE_NO_HCI_RESPONSE );
+   2912          
+   2913              am_hal_ble_blocking_hci_read(pBLE, sResponse.words, 0);
+   2914          
+   2915              *pui32Value = (((sResponse.words[1] & 0xFF000000) >> 24) |
+   2916                             ((sResponse.words[2] & 0x00FFFFFF) << 8));
+   2917              //
+   2918              // Re-enable BLE interrupts.
+   2919              //
+   2920              BLEIFn(ui32Module)->INTCLR = ui32IntEnable;
+   2921              BLEIFn(ui32Module)->INTEN = ui32IntEnable;
+   2922          
+   2923              return AM_HAL_STATUS_SUCCESS;
+   2924          }
+   2925          
+   2926          //*****************************************************************************
+   2927          //
+   2928          // Write a register value to the BLE core.
+   2929          //
+   2930          //*****************************************************************************
+   2931          uint32_t
+   2932          am_hal_ble_plf_reg_write(void *pHandle, uint32_t ui32Address, uint32_t ui32Value)
+   2933          {
+   2934              am_hal_ble_state_t *pBLE = pHandle;
+   2935              uint8_t pui8Parameter[8];
+   2936              uint32_t ui32IntEnable;
+   2937          
+   2938              uint32_t ui32Module = pBLE->ui32Module;
+   2939          
+   2940              //
+   2941              // Make a buffer big enough to hold the register write command, and a
+   2942              // second one big enough to hold the response.
+   2943              //
+   2944              am_hal_ble_buffer(AM_HAL_BLE_PLF_REGISTER_WRITE_LENGTH) sWriteCommand;
+   2945              am_hal_ble_buffer(16) sResponse;
+   2946          
+   2947              //
+   2948              // Prepare our register write value.
+   2949              //
+   2950              pui8Parameter[0] = ui32Address;
+   2951              pui8Parameter[1] = (ui32Address >> 8);
+   2952              pui8Parameter[2] = (ui32Address >> 16);
+   2953              pui8Parameter[3] = (ui32Address >> 24);
+   2954              pui8Parameter[4] = ui32Value;
+   2955              pui8Parameter[5] = (ui32Value >> 8);
+   2956              pui8Parameter[6] = (ui32Value >> 16);
+   2957              pui8Parameter[7] = (ui32Value >> 24);
+   2958          
+   2959              //
+   2960              // Fill the buffer with the specific command we want to write, and send it.
+   2961              //
+   2962              am_hal_ble_vs_command_build(sWriteCommand.words,
+   2963                                          AM_HAL_BLE_PLF_REGISTER_WRITE_OPCODE,
+   2964                                          AM_HAL_BLE_PLF_REGISTER_WRITE_LENGTH,
+   2965                                          pui8Parameter);
+   2966          
+   2967              //
+   2968              // Temporarily disable BLE interrupts.
+   2969              //
+   2970              ui32IntEnable = BLEIFn(ui32Module)->INTEN;
+   2971              BLEIFn(ui32Module)->INTEN = 0;
+   2972          
+   2973              am_hal_ble_blocking_hci_write(pBLE,
+   2974                                            AM_HAL_BLE_RAW,
+   2975                                            sWriteCommand.words,
+   2976                                            AM_HAL_BLE_PLF_REGISTER_WRITE_LENGTH);
+   2977          
+   2978              BLEIFn(ui32Module)->BLEDBG_b.IOCLKON = 1;
+   2979          
+   2980              //
+   2981              // Wait for the response.
+   2982              //
+   2983              WHILE_TIMEOUT_MS ( BLEIFn(ui32Module)->BSTATUS_b.BLEIRQ == 0, 50,
+   2984                                 AM_HAL_BLE_NO_HCI_RESPONSE );
+   2985          
+   2986              am_hal_ble_blocking_hci_read(pBLE, sResponse.words, 0);
+   2987          
+   2988              //
+   2989              // Re-enable BLE interrupts.
+   2990              //
+   2991              BLEIFn(ui32Module)->INTCLR = ui32IntEnable;
+   2992              BLEIFn(ui32Module)->INTEN = ui32IntEnable;
+   2993          
+   2994              return AM_HAL_STATUS_SUCCESS;
+   2995          }
+   2996          
+   2997          //*****************************************************************************
+   2998          //
+   2999          // Set the modulation frequency offset from INFO1,
+   3000          // based on the tested values stored in non-volatile memory.
+   3001          //
+   3002          //*****************************************************************************
+   3003          uint32_t
+   3004          am_hal_ble_load_modex_trim_set(void *pHandle)
+   3005          {
+   3006              uint8_t ui8TrimValue;
+   3007              //
+   3008              // load the modex trim data from info1.
+   3009              //
+   3010              ui8TrimValue = am_hal_ble_read_trimdata_from_info1();
+   3011              if ( ui8TrimValue )
+   3012              {
+   3013                  am_hal_ble_transmitter_modex_set(pHandle, ui8TrimValue);
+   3014                  return AM_HAL_STATUS_SUCCESS;
+   3015              }
+   3016              else
+   3017              {
+   3018                  return AM_HAL_STATUS_FAIL;
+   3019              }
+   3020          }
+   3021          
+   3022          //*****************************************************************************
+   3023          //
+   3024          // Load the modulation frequency offset from INFO1,
+   3025          // based on the tested values stored in non-volatile memory.
+   3026          //
+   3027          //*****************************************************************************
+   3028          uint8_t
+   3029          am_hal_ble_read_trimdata_from_info1(void)
+   3030          {
+   3031              uint32_t ui32TrimValue = 0, temp = 0;
+   3032              uint8_t TrimData = 0;
+   3033          
+   3034              temp = ui32TrimValue = AM_REGVAL(0x50023808);
+   3035              temp &= 0xffffff00;
+   3036          
+   3037              if ( temp == 0x18240600 )
+   3038              {
+   3039                  TrimData = ui32TrimValue & 0xFF;
+   3040              }
+   3041              else
+   3042              {
+   3043                  TrimData = 0;
+   3044              }
+   3045          
+   3046              if ( (TrimData > 0x40) && (TrimData < 0x20) )
+   3047              {
+   3048                  TrimData = 0;
+   3049              }
+   3050          
+   3051              return TrimData;
+   3052          }
+   3053          
+   3054          //*****************************************************************************
+   3055          //
+   3056          // Manually set modulation characteristic
+   3057          // based on the tested values at customer side.
+   3058          // manually set frequency offset for 10101010 or 01010101 pattern
+   3059          // parameter default value is 0x34, increase to get larger frequency offset
+   3060          //
+   3061          //*****************************************************************************
+   3062          uint32_t
+   3063          am_hal_ble_transmitter_modex_set(void *pHandle, uint8_t ui8ModFrqOffset)
+   3064          {
+   3065              am_hal_ble_state_t *pBLE = pHandle;
+   3066              uint32_t RegValueMCGR, RegValueBACKCR, RegValueSTCR, RegValueDACSPICR, temp = 0;
+   3067          
+   3068              ui8ModFrqOffset &= 0x7F;
+   3069          
+   3070              am_hal_ble_plf_reg_read(pBLE, 0x43000004, &RegValueMCGR);
+   3071          
+   3072              //
+   3073              // Unlock the BLE registers.
+   3074              //
+   3075              am_hal_ble_plf_reg_write(pBLE, 0x43000004, 0xFFFFFFFF);
+   3076              am_hal_ble_plf_reg_read(pBLE, 0x52000008, &temp);
+   3077              temp |= 0x08;
+   3078              am_hal_ble_plf_reg_read(pBLE, 0x52000000, &RegValueSTCR);
+   3079              RegValueSTCR |= (1 << 10);
+   3080              am_hal_ble_plf_reg_write(pBLE, 0x52000000, RegValueSTCR);
+   3081          
+   3082              am_hal_ble_plf_reg_read(pBLE, 0x45800070, &RegValueBACKCR);
+   3083              am_hal_ble_plf_reg_write(pBLE, 0x45800070, (RegValueBACKCR | 0x8));
+   3084              RegValueDACSPICR = (ui8ModFrqOffset << 1) | 0x1;
+   3085              am_hal_ble_plf_reg_write(pBLE, 0x52000014, RegValueDACSPICR);
+   3086          
+   3087              am_hal_ble_plf_reg_write(pBLE, 0x52000008, temp);
+   3088          
+   3089              am_hal_ble_plf_reg_write(pBLE, 0x20006070, ui8ModFrqOffset);
+   3090              am_hal_ble_plf_reg_write(pBLE, 0x43000004, RegValueMCGR);
+   3091          
+   3092              return AM_HAL_STATUS_SUCCESS;
+   3093          }
+   3094          
+   3095          //*****************************************************************************
+   3096          //
+   3097          // Set BLE sleep enable/disable for the BLE core.
+   3098          // enable = 'true' set sleep enable, enable = 'false' set sleep disable
+   3099          //
+   3100          //*****************************************************************************
+   3101          uint32_t
+   3102          am_hal_ble_sleep_set(void *pHandle, bool enable)
+   3103          {
+   3104              am_hal_ble_state_t *pBLE = pHandle;
+   3105              uint32_t sleepenable = 0;
+   3106          
+   3107              am_hal_ble_plf_reg_read(pBLE, 0x200067c4, &sleepenable);
+   3108          
+   3109              sleepenable &= 0xffff0100;
+   3110          
+   3111              if ( enable )
+   3112              {
+   3113                  sleepenable |= 0x0101;
+   3114              }
+   3115              am_hal_ble_plf_reg_write(pBLE, 0x200067c4, sleepenable);
+   3116          
+   3117              return AM_HAL_STATUS_SUCCESS;
+   3118          }
+   3119          
+   3120          //*****************************************************************************
+   3121          //
+   3122          // Get current sleep enable status
+   3123          // return 'true'  = sleep enable , 'false' =  sleep disable
+   3124          //
+   3125          //*****************************************************************************
+   3126          bool
+   3127          am_hal_ble_sleep_get(void *pHandle)
+   3128          {
+   3129              am_hal_ble_state_t *pBLE = pHandle;
+   3130              uint32_t sleepenable = 0;
+   3131          
+   3132              am_hal_ble_plf_reg_read(pBLE, 0x200067c4, &sleepenable);
+   3133              if ( (sleepenable & 0xFFFF) > 0 )
+   3134              {
+   3135                  return true;
+   3136              }
+   3137          
+   3138              return false;
+   3139          }
+   3140          
+   3141          //*****************************************************************************
+   3142          //
+   3143          // set the tx power of BLE
+   3144          // values.
+   3145          // ui32TxPower: 0x03->-20dBm 0x04->-10dBm 0x05->-5dBm 0x08->0dBm 0x0F->4dBm
+   3146          //
+   3147          //*****************************************************************************
+   3148          uint32_t
+   3149          am_hal_ble_tx_power_set(void *pHandle, uint8_t ui32TxPower)
+   3150          {
+   3151              am_hal_ble_state_t *pBLE = pHandle;
+   3152              uint32_t RegValueMCGR, tempreg = 0;
+   3153              uint32_t ui32PowerValue = 0x00000008;
+   3154              ui32PowerValue |= (ui32TxPower & 0xF) << 16;
+   3155          
+   3156              am_hal_ble_plf_reg_read(pBLE, 0x43000004, &RegValueMCGR);
+   3157          
+   3158              //
+   3159              // Unlock the BLE registers.
+   3160              //
+   3161              am_hal_ble_plf_reg_write(pBLE, 0x43000004, 0xFFFFFFFF);
+   3162              am_hal_ble_plf_reg_read(pBLE, 0x20006038, &tempreg);
+   3163              tempreg &= 0xffffff00;
+   3164              tempreg |= ui32TxPower;
+   3165              am_hal_ble_plf_reg_write(pBLE, 0x52400018, ui32PowerValue);
+   3166              am_hal_ble_plf_reg_write(pBLE, 0x20006038, tempreg);
+   3167              am_hal_ble_plf_reg_write(pBLE, 0x43000004, RegValueMCGR);
+   3168          
+   3169              return AM_HAL_STATUS_SUCCESS;
+   3170          }
+   3171          
+   3172          //*****************************************************************************
+   3173          //
+   3174          // End Doxygen group.
+   3175          //! @}
+   3176          //
+   3177          //*****************************************************************************
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      56   am_hal_ble_blocking_hci_read
+        56   -> __aeabi_memcpy4
+        56   -> am_hal_ble_blocking_transfer
+      48   am_hal_ble_blocking_hci_write
+        48   -> __aeabi_memcpy4
+        48   -> am_hal_ble_blocking_transfer
+      56   am_hal_ble_blocking_transfer
+        56   -> __aeabi_memcpy
+        56   -> __aeabi_memset
+        56   -> am_hal_ble_bus_lock
+        56   -> am_hal_ble_bus_release
+        56   -> am_hal_ble_check_status
+        56   -> am_hal_ble_check_status_edge
+        56   -> am_hal_ble_cmd_write
+        56   -> am_hal_ble_fifo_drain
+        56   -> am_hal_ble_wakeup_set
+        56   -> am_hal_flash_delay
+        56   -> am_hal_interrupt_master_disable
+        56   -> am_hal_interrupt_master_set
+      24   am_hal_ble_boot
+        24   -> am_hal_ble_check_32k_clock
+        24   -> am_hal_ble_default_copy_patch_apply
+        24   -> am_hal_ble_default_patch_apply
+        24   -> am_hal_ble_default_trim_set_ramcode
+        24   -> am_hal_ble_patch_complete
+      16   am_hal_ble_bus_lock
+        16   -> am_hal_interrupt_master_disable
+        16   -> am_hal_interrupt_master_set
+       0   am_hal_ble_bus_release
+      16   am_hal_ble_check_32k_clock
+        16   -> am_hal_ble_plf_reg_read
+       0   am_hal_ble_check_irq
+       0   am_hal_ble_check_status
+       8   am_hal_ble_check_status_edge
+         8   -> am_hal_ble_check_status
+      16   am_hal_ble_cmd_write
+      32   am_hal_ble_config
+        32   -> am_hal_ble_crc_nz
+      12   am_hal_ble_crc_nz
+      24   am_hal_ble_default_copy_patch_apply
+        24   -> am_hal_ble_crc_nz
+        24   -> am_hal_ble_patch_apply
+        24   -> am_hal_ble_patch_copy_end_apply
+      24   am_hal_ble_default_patch_apply
+        24   -> am_hal_ble_crc_nz
+        24   -> am_hal_ble_patch_apply
+       8   am_hal_ble_default_trim_set_ramcode
+      24   am_hal_ble_deinitialize
+        24   -> __aeabi_memset
+      40   am_hal_ble_fifo_drain
+        40   -> am_hal_ble_fifo_read
+      16   am_hal_ble_fifo_read
+      40   am_hal_ble_initialize
+        40   -> __aeabi_memset
+       4   am_hal_ble_int_clear
+      24   am_hal_ble_int_disable
+        24   -> am_hal_interrupt_master_disable
+        24   -> am_hal_interrupt_master_set
+      24   am_hal_ble_int_enable
+        24   -> am_hal_interrupt_master_disable
+        24   -> am_hal_interrupt_master_set
+      40   am_hal_ble_int_service
+        40   -- Indirect call
+        40   -> am_hal_ble_bus_release
+        40   -> am_hal_ble_wakeup_set
+       8   am_hal_ble_int_status
+      16   am_hal_ble_load_modex_trim_set
+        16   -> am_hal_ble_read_trimdata_from_info1
+        16   -> am_hal_ble_transmitter_modex_set
+      56   am_hal_ble_nonblocking_hci_read
+        56   -> __aeabi_memcpy4
+        56   -> am_hal_ble_blocking_transfer
+        56   -> am_hal_ble_check_irq
+        56   -> am_hal_ble_nonblocking_transfer
+      56   am_hal_ble_nonblocking_hci_write
+        56   -> __aeabi_memcpy4
+        56   -> am_hal_ble_nonblocking_transfer
+      16   am_hal_ble_nonblocking_transfer
+        16   -> nonblocking_read
+        16   -> nonblocking_write
+     136   am_hal_ble_patch_apply
+       136   -> __aeabi_memcpy
+       136   -> __aeabi_memset
+       136   -> am_hal_ble_blocking_hci_write
+       136   -> am_hal_ble_blocking_transfer
+       136   -> am_hal_flash_delay
+       136   -> buffer_compare
+      96   am_hal_ble_patch_complete
+        96   -> __aeabi_memset
+        96   -> am_hal_ble_blocking_transfer
+        96   -> am_hal_ble_load_modex_trim_set
+        96   -> am_hal_ble_wakeup_set
+        96   -> am_hal_flash_delay
+     104   am_hal_ble_patch_copy_end_apply
+       104   -> __aeabi_memset
+       104   -> am_hal_ble_blocking_hci_write
+       104   -> am_hal_ble_blocking_transfer
+       104   -> am_hal_flash_delay
+       104   -> buffer_compare
+      88   am_hal_ble_plf_reg_read
+        88   -> am_hal_ble_blocking_hci_read
+        88   -> am_hal_ble_blocking_hci_write
+        88   -> am_hal_ble_vs_command_build
+        88   -> am_hal_flash_delay
+      80   am_hal_ble_plf_reg_write
+        80   -> am_hal_ble_blocking_hci_read
+        80   -> am_hal_ble_blocking_hci_write
+        80   -> am_hal_ble_vs_command_build
+        80   -> am_hal_flash_delay
+      32   am_hal_ble_power_control
+        32   -> am_hal_flash_delay
+        32   -> am_hal_pwrctrl_periph_disable
+        32   -> am_hal_pwrctrl_periph_enable
+       8   am_hal_ble_read_trimdata_from_info1
+      16   am_hal_ble_sleep_get
+        16   -> am_hal_ble_plf_reg_read
+      24   am_hal_ble_sleep_set
+        24   -> am_hal_ble_plf_reg_read
+        24   -> am_hal_ble_plf_reg_write
+      48   am_hal_ble_transmitter_modex_set
+        48   -> am_hal_ble_plf_reg_read
+        48   -> am_hal_ble_plf_reg_write
+      48   am_hal_ble_trim_set
+        48   -> am_hal_ble_plf_reg_read
+        48   -> am_hal_ble_plf_reg_write
+      40   am_hal_ble_tx_power_set
+        40   -> am_hal_ble_plf_reg_read
+        40   -> am_hal_ble_plf_reg_write
+      12   am_hal_ble_vs_command_build
+      16   am_hal_ble_wakeup_set
+      16   buffer_compare
+      48   nonblocking_read
+        48   -> __aeabi_memcpy
+        48   -> am_hal_ble_check_irq
+        48   -> am_hal_ble_cmd_write
+        48   -> am_hal_flash_delay
+        48   -> am_hal_interrupt_master_disable
+        48   -> am_hal_interrupt_master_set
+      48   nonblocking_write
+        48   -> __aeabi_memcpy
+        48   -> am_hal_ble_check_irq
+        48   -> am_hal_ble_check_status
+        48   -> am_hal_ble_cmd_write
+        48   -> am_hal_ble_wakeup_set
+        48   -> am_hal_flash_delay
+        48   -> am_hal_interrupt_master_disable
+        48   -> am_hal_interrupt_master_set
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable11
+       4  ??DataTable12
+       4  ??DataTable12_1
+       4  ??DataTable13
+       4  ??DataTable14
+       4  ??DataTable16
+       4  ??DataTable17
+       4  ??DataTable17_1
+       4  ??DataTable17_2
+       4  ??DataTable17_3
+       4  ??DataTable18
+       4  ??DataTable18_1
+       4  ??DataTable19
+       4  ??DataTable20
+       4  ??DataTable21
+       4  ??DataTable21_1
+       4  ??DataTable21_2
+       4  ??DataTable21_3
+       4  ??DataTable21_4
+       4  ??DataTable21_5
+       4  ??DataTable21_6
+       4  ??DataTable21_7
+       4  ??DataTable21_8
+       4  ??DataTable21_9
+       4  ??DataTable26
+       4  ??DataTable26_1
+       4  ??DataTable26_2
+       4  ??DataTable28
+       4  ??DataTable32
+       4  ??DataTable33
+       4  ??DataTable33_1
+       4  ??DataTable33_2
+       4  ??DataTable34
+       4  ??DataTable34_1
+       4  ??DataTable35
+       4  ??DataTable35_1
+       4  ??DataTable35_2
+       4  ??DataTable37
+       4  ??DataTable37_1
+       4  ??DataTable38
+       4  ??DataTable39
+       4  ??DataTable40
+       4  ??DataTable41
+       4  ??DataTable41_1
+       4  ??DataTable41_10
+       4  ??DataTable41_11
+       4  ??DataTable41_12
+       4  ??DataTable41_13
+       4  ??DataTable41_14
+       4  ??DataTable41_15
+       4  ??DataTable41_16
+       4  ??DataTable41_17
+       4  ??DataTable41_18
+       4  ??DataTable41_19
+       4  ??DataTable41_2
+       4  ??DataTable41_20
+       4  ??DataTable41_21
+       4  ??DataTable41_22
+       4  ??DataTable41_3
+       4  ??DataTable41_4
+       4  ??DataTable41_5
+       4  ??DataTable41_6
+       4  ??DataTable41_7
+       4  ??DataTable41_8
+       4  ??DataTable41_9
+      24  ?_0
+      24  ?_1
+      24  ?_2
+      24  ?_3
+     172  am_hal_ble_blocking_hci_read
+      96  am_hal_ble_blocking_hci_write
+     866  am_hal_ble_blocking_transfer
+     168  am_hal_ble_boot
+      60  am_hal_ble_bus_lock
+       8  am_hal_ble_bus_release
+      50  am_hal_ble_check_32k_clock
+      34  am_hal_ble_check_irq
+      42  am_hal_ble_check_status
+      60  am_hal_ble_check_status_edge
+     144  am_hal_ble_cmd_write
+     312  am_hal_ble_config
+      46  am_hal_ble_crc_nz
+      28  am_hal_ble_default_config
+      80  am_hal_ble_default_copy_patch_apply
+     124  am_hal_ble_default_patch_apply
+     110  am_hal_ble_default_trim_set_ramcode
+     120  am_hal_ble_deinitialize
+     124  am_hal_ble_fifo_drain
+      46  am_hal_ble_fifo_read
+     270  am_hal_ble_initialize
+      46  am_hal_ble_int_clear
+      68  am_hal_ble_int_disable
+      68  am_hal_ble_int_enable
+     270  am_hal_ble_int_service
+      58  am_hal_ble_int_status
+      36  am_hal_ble_load_modex_trim_set
+     128  am_hal_ble_nonblocking_hci_read
+     104  am_hal_ble_nonblocking_hci_write
+      56  am_hal_ble_nonblocking_transfer
+     796  am_hal_ble_patch_apply
+     534  am_hal_ble_patch_complete
+     262  am_hal_ble_patch_copy_end_apply
+     218  am_hal_ble_plf_reg_read
+     222  am_hal_ble_plf_reg_write
+     412  am_hal_ble_power_control
+      56  am_hal_ble_read_trimdata_from_info1
+      34  am_hal_ble_sleep_get
+      64  am_hal_ble_sleep_set
+     190  am_hal_ble_transmitter_modex_set
+     140  am_hal_ble_trim_set
+     124  am_hal_ble_tx_power_set
+      50  am_hal_ble_vs_command_build
+     102  am_hal_ble_wakeup_set
+      36  buffer_compare
+     512  ccitt_table
+     132  g_psPatchBuffer
+      72  g_sBLEState
+     200  nonblocking_read
+     228  nonblocking_write
+
+ 
+   204 bytes in section .bss
+   636 bytes in section .rodata
+ 7 694 bytes in section .text
+ 
+ 7 694 bytes of CODE  memory
+   636 bytes of CONST memory
+   204 bytes of DATA  memory
+
+Errors: none
+Warnings: none

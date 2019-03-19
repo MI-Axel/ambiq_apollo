@@ -1,0 +1,549 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  16:42:01
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\src\opus_step1.c
+#    Command line =  
+#        -f C:\temp\EW8DC.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\src\opus_step1.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\opus_step1.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\opus_step1.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\src\opus_step1.c
+      1          //*****************************************************************************
+      2          //
+      3          //! @file opus_step1.c
+      4          //!
+      5          //! @brief This example is the step 1 for opus optimization progress.
+      6          //! The project loads a pre-recorded sound file into the flash 
+      7          //! and waiting for opus compression.
+      8          //! burst mode APIs and GPIO toggle APIs are added into the project for support.
+      9          //
+     10          //*****************************************************************************
+     11          
+     12          //*****************************************************************************
+     13          //
+     14          // Copyright (c) 2019, Ambiq Micro
+     15          // All rights reserved.
+     16          // 
+     17          // Redistribution and use in source and binary forms, with or without
+     18          // modification, are permitted provided that the following conditions are met:
+     19          // 
+     20          // 1. Redistributions of source code must retain the above copyright notice,
+     21          // this list of conditions and the following disclaimer.
+     22          // 
+     23          // 2. Redistributions in binary form must reproduce the above copyright
+     24          // notice, this list of conditions and the following disclaimer in the
+     25          // documentation and/or other materials provided with the distribution.
+     26          // 
+     27          // 3. Neither the name of the copyright holder nor the names of its
+     28          // contributors may be used to endorse or promote products derived from this
+     29          // software without specific prior written permission.
+     30          // 
+     31          // Third party software included in this distribution is subject to the
+     32          // additional license terms as defined in the /docs/licenses directory.
+     33          // 
+     34          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     35          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     36          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     37          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     38          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     39          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     40          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     41          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     42          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     43          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     44          // POSSIBILITY OF SUCH DAMAGE.
+     45          //
+     46          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     47          //
+     48          //*****************************************************************************
+     49          
+     50          #include "am_mcu_apollo.h"
+     51          #include "am_bsp.h"
+     52          #include "am_util.h"
+     53          
+     54          #include "ae_api.h"
+     55          #if 1  // supplied vector
+     56          #include "capture_usp0905.bin.h"
+     57          short *p_pcm_samples = (short*)&capture_usp0905_bin[0];
+     58          #define MAX_INPUT_SAMPLE (sizeof(capture_usp0905_bin)/2)
+     59          
+     60          #else   // 
+     61          short fre07_clip1 []= {
+     62          #include "fre07_clip1_c.h"
+     63          };
+     64          short *p_pcm_samples = &fre07_clip1[0];
+     65          
+     66          #define MAX_INPUT_SAMPLE (sizeof(fre07_clip1)/2)
+     67          #endif
+     68          //*****************************************************************************
+     69          //
+     70          // Macros
+     71          //
+     72          //*****************************************************************************
+     73          //
+     74          // The default is to use the LFRC as the clock source.
+     75          // Can  use the XTAL via the USE_XTAL define.
+     76          //
+     77          //#define USE_XTAL    1
+     78          #if USE_XTAL
+     79          #define BC_CLKSRC   "XTAL"
+     80          #else
+     81          #define BC_CLKSRC   "LFRC"
+     82          #endif
+     83          
+     84          #ifdef AM_BSP_NUM_LEDS
+     85          #define NUM_LEDS    AM_BSP_NUM_LEDS
+     86          #else
+     87          #define NUM_LEDS    5       // Make up an arbitrary number of LEDs
+     88          #endif
+     89          
+     90          //*****************************************************************************
+     91          //
+     92          // Globals
+     93          //
+     94          //*****************************************************************************
+     95          volatile uint32_t g_ui32TimerCount = 0;
+     96          
+     97          //**************************************
+     98          // Timer configuration.
+     99          //**************************************
+    100          am_hal_ctimer_config_t g_sTimer0 =
+    101          {
+    102              // Don't link timers.
+    103              0,
+    104          
+    105              // Set up Timer0A.
+    106              (AM_HAL_CTIMER_FN_REPEAT    |
+    107               AM_HAL_CTIMER_INT_ENABLE   |
+    108          #if USE_XTAL
+    109               AM_HAL_CTIMER_XT_256HZ),
+    110          #else
+    111               AM_HAL_CTIMER_LFRC_32HZ),
+    112          #endif
+    113          
+    114              // No configuration for Timer0B.
+    115              0,
+    116          };
+    117          
+    118          //*****************************************************************************
+    119          //
+    120          // Function to initialize Timer A0 to interrupt every 1/4 second.
+    121          //
+    122          //*****************************************************************************
+    123          void
+    124          timerA0_init(void)
+    125          {
+    126              uint32_t ui32Period;
+    127          
+    128              //
+    129              // Enable the LFRC.
+    130              //
+    131          #if USE_XTAL
+    132              am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_XTAL_START, 0);
+    133          #else
+    134              am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_LFRC_START, 0);
+    135          #endif
+    136          
+    137              //
+    138              // Set up timer A0.
+    139              //
+    140              am_hal_ctimer_clear(0, AM_HAL_CTIMER_TIMERA);
+    141              am_hal_ctimer_config(0, &g_sTimer0);
+    142          
+    143              //
+    144              // Set up timerA0 to 32Hz from LFRC divided to 1 second period.
+    145              //
+    146              ui32Period = 32;
+    147          #if USE_XTAL
+    148              ui32Period *= 8;
+    149          #endif
+    150              am_hal_ctimer_period_set(0, AM_HAL_CTIMER_TIMERA, ui32Period,
+    151                                       (ui32Period >> 1));
+    152          
+    153              //
+    154              // Clear the timer Interrupt
+    155              //
+    156              am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0);
+    157          }
+    158          
+    159          //*****************************************************************************
+    160          //
+    161          // Timer Interrupt Service Routine (ISR)
+    162          //
+    163          //*****************************************************************************
+    164          void
+    165          am_ctimer_isr(void)
+    166          {
+    167              //
+    168              // Increment count and set limit based on the number of LEDs available.
+    169              //
+    170              g_ui32TimerCount++;
+    171              if ( g_ui32TimerCount >= (1 << NUM_LEDS) )
+    172              {
+    173                  //
+    174                  // Reset the global.
+    175                  //
+    176                  g_ui32TimerCount = 0;
+    177              }
+    178          
+    179              //
+    180              // Clear TimerA0 Interrupt (write to clear).
+    181              //
+    182              am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0);
+    183          }
+    184          char encoded_buffer[50*1024];
+    185          
+    186          //*****************************************************************************
+    187          //
+    188          // Main function.
+    189          //
+    190          //*****************************************************************************
+    191          int
+    192          main(void)
+    193          {
+    194              am_hal_burst_avail_e          eBurstModeAvailable;
+    195              am_hal_burst_mode_e           eBurstMode;
+    196          
+    197              //
+    198              // Set the clock frequency.
+    199              //
+    200              am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_SYSCLK_MAX, 0);
+    201          
+    202              //
+    203              // Set the default cache configuration
+    204              //
+    205              am_hal_cachectrl_config(&am_hal_cachectrl_defaults);
+    206              am_hal_cachectrl_enable();
+    207          
+    208              //
+    209              // Configure the board for low power operation.
+    210              //
+    211              am_bsp_low_power_init();
+    212          
+    213          #ifdef AM_BSP_NUM_LEDS
+    214              //
+    215              // Initialize the LED array
+    216              //
+    217              am_devices_led_array_init(am_bsp_psLEDs, AM_BSP_NUM_LEDS);
+    218          #endif
+    219          
+    220              //
+    221              // Initialize the printf interface for ITM/SWO output.
+    222              //
+    223              am_bsp_itm_printf_enable();
+    224          
+    225              //
+    226              // Clear the terminal and print the banner.
+    227              //
+    228              am_util_stdio_terminal_clear();
+    229              am_util_stdio_printf("Binary Counter Example\n");
+    230              am_util_stdio_printf("  (Timer clock source is " BC_CLKSRC ")\n");
+    231          
+    232              //
+    233              // TimerA0 init.
+    234              //
+    235              timerA0_init();
+    236              
+    237          
+    238              // Check that the Burst Feature is available.
+    239              // example only, no need to print...
+    240              if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_initialize(&eBurstModeAvailable))
+    241              {
+    242                  if (AM_HAL_BURST_AVAIL == eBurstModeAvailable)
+    243                  {
+    244                      am_util_stdio_printf("Apollo3 Burst Mode is Available\n");
+    245                  }
+    246                  else
+    247                  {
+    248                      am_util_stdio_printf("Apollo3 Burst Mode is Not Available\n");
+    249                  }
+    250              }
+    251              else
+    252              {
+    253                  am_util_stdio_printf("Failed to Initialize for Burst Mode operation\n");
+    254              }
+    255          
+    256              // Make sure we are in "Normal" mode.
+    257              // example only, no need to print...
+    258              if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_disable(&eBurstMode))
+    259              {
+    260                  if (AM_HAL_NORMAL_MODE == eBurstMode)
+    261                  {
+    262                      am_util_stdio_printf("Apollo3 operating in Normal Mode (48MHz)\n");
+    263                  }
+    264              }
+    265              else
+    266              {
+    267                  am_util_stdio_printf("Failed to Disable Burst Mode operation\n");
+    268              }
+    269          
+    270          
+    271              // Put the MCU into "Burst" mode.
+    272              // example only, no need to print...
+    273              if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_enable(&eBurstMode))
+    274              {
+    275                  if (AM_HAL_BURST_MODE == eBurstMode)
+    276                  {
+    277                      am_util_stdio_printf("Apollo3 operating in Burst Mode (96MHz)\n");
+    278                  }
+    279              }
+    280              else
+    281              {
+    282                  am_util_stdio_printf("Failed to Enable Burst Mode operation\n");
+    283              }
+    284              // return to 48MHz operation
+    285              am_hal_burst_mode_disable(&eBurstMode); 
+    286          #ifdef    NRC
+    287              //
+    288              // Enable the timer Interrupt.
+    289              //
+    290              am_hal_ctimer_int_enable(AM_HAL_CTIMER_INT_TIMERA0);
+    291          
+    292              //
+    293              // Enable the timer interrupt in the NVIC.
+    294              //
+    295              NVIC_EnableIRQ(CTIMER_IRQn);
+    296              am_hal_interrupt_master_enable();
+    297          
+    298              //
+    299              // Start timer A0
+    300              //
+    301              am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
+    302              
+    303          #endif   
+    304          
+    305              //
+    306              // We are done printing. Disable debug printf messages on ITM.
+    307              //
+    308              am_bsp_debug_printf_disable();
+    309          
+    310              
+    311              /* initialize the audio encoder */
+    312              audio_enc_init();
+    313          
+    314              //
+    315              // Loop forever.
+    316              //
+    317              int frame_count = 0;
+    318              int framesize = 320;
+    319              int input_samples_processed = 0;
+    320              int encoded_bytes = 0;
+    321              int output_bytes_produced = 0;
+    322              short *p_input_samples = p_pcm_samples;
+    323              char *p_output_bytes = &encoded_buffer[0];
+    324              while (1)
+    325              {
+    326                  //
+    327                  // Go to Deep Sleep.
+    328                  //
+    329          #ifdef    NRC
+    330                  am_hal_sysctrl_sleep(AM_HAL_SYSCTRL_SLEEP_DEEP);
+    331          #endif        
+    332          
+    333          #ifdef AM_BSP_NUM_LEDS
+    334                  //
+    335                  // Set the LEDs.
+    336                  //
+    337                  am_devices_led_array_out(am_bsp_psLEDs, AM_BSP_NUM_LEDS,
+    338                                           g_ui32TimerCount);
+    339          #endif
+    340                  //
+    341                  // Enable debug printf messages using ITM on SWO pin
+    342                  //
+    343                  am_bsp_debug_printf_enable();
+    344          
+    345          
+    346                  encoded_bytes = audio_enc_encode_frame(p_input_samples, framesize, (unsigned char*)p_output_bytes);
+    347                  //prn_encoded_buffer(p_output_bytes, encoded_bytes);
+    348          #ifndef REPEAT_FIRST_FRAME   // repeat same freme for test purpose 
+    349                  p_input_samples += framesize;  
+    350          #endif
+    351                  p_output_bytes += encoded_bytes;
+    352                  
+    353                  output_bytes_produced += encoded_bytes;
+    354                  input_samples_processed += framesize;
+    355                  if(output_bytes_produced >= sizeof(encoded_buffer))
+    356                  {
+    357                    printf("encoded buffer space full, %d(0x%0X) bytes output saved at 0x%0X  to 0x%0X.  Exitting... \n", output_bytes_produced, output_bytes_produced, encoded_buffer, encoded_buffer + output_bytes_produced);
+    358                    break;
+    359                  }else if(input_samples_processed >= MAX_INPUT_SAMPLE )
+    360                  {
+    361                     printf("input buffer empty, %d(0x%0X) bytes output saved at 0x%0X  to 0x%0X.  Exitting... \n", output_bytes_produced, output_bytes_produced, encoded_buffer, encoded_buffer + output_bytes_produced);
+    362                     break;         
+    363                    
+    364                  }else
+    365                  {
+    366                    frame_count++;
+    367                    if((frame_count&63) == 0)
+    368                    {
+    369                      printf(".");
+    370                    }
+    371                  }
+    372                  am_util_stdio_printf("%d ", g_ui32TimerCount & 0x7);
+    373                  if ( (g_ui32TimerCount & ((1 << NUM_LEDS) - 1)) == 0 )
+    374                  {
+    375                      // example here, only to prevent data array from being optimized by linker
+    376                      if(p_pcm_samples[g_ui32TimerCount] != 0x00)
+    377                      {
+    378                          am_util_stdio_printf("\n");
+    379                      }
+    380                  }
+    381          
+    382                  //
+    383                  // example of gpio toggling
+    384                  //
+    385                  am_hal_gpio_pinconfig(35, g_AM_HAL_GPIO_OUTPUT);    // no need to call this in a loop... only for example
+    386                  am_hal_gpio_output_set(35);                         // set gpio35 to high
+    387                  am_util_delay_ms(2);                                // blocking delay 10ms
+    388                  am_hal_gpio_output_clear(35);                       // set gpio35 to low
+    389                  am_util_delay_us(200);                              // blocking delay for 200us
+    390                  am_hal_gpio_output_toggle(35);                      // toggle gpio35 output
+    391                  am_util_delay_us(500);                              // blocking delay for 500us
+    392                  am_hal_gpio_output_toggle(35);                      // toggle gpio35 output
+    393                  //
+    394                  // We are done printing. Disable debug printf messages on ITM.
+    395                  //
+    396                  am_bsp_debug_printf_disable();
+    397              }
+    398          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   am_ctimer_isr
+         8   -> am_hal_ctimer_int_clear
+      56   main
+        56   -> am_bsp_debug_printf_disable
+        56   -> am_bsp_debug_printf_enable
+        56   -> am_bsp_itm_printf_enable
+        56   -> am_bsp_low_power_init
+        56   -> am_devices_led_array_init
+        56   -> am_devices_led_array_out
+        56   -> am_hal_burst_mode_disable
+        56   -> am_hal_burst_mode_enable
+        56   -> am_hal_burst_mode_initialize
+        56   -> am_hal_cachectrl_config
+        56   -> am_hal_cachectrl_enable
+        56   -> am_hal_clkgen_control
+        56   -> am_hal_gpio_pinconfig
+        56   -> am_hal_interrupt_master_disable
+        56   -> am_hal_interrupt_master_set
+        56   -> am_util_delay_ms
+        56   -> am_util_delay_us
+        56   -> am_util_stdio_printf
+        56   -> am_util_stdio_terminal_clear
+        56   -> audio_enc_encode_frame
+        56   -> audio_enc_init
+        56   -> printf
+        56   -> timerA0_init
+      16   timerA0_init
+        16   -> am_hal_clkgen_control
+        16   -> am_hal_ctimer_clear
+        16   -> am_hal_ctimer_config
+        16   -> am_hal_ctimer_int_clear
+        16   -> am_hal_ctimer_period_set
+
+
+   Section sizes:
+
+   Bytes   Function/Label
+   -----   --------------
+        4  ??DataTable2
+        4  ??DataTable2_1
+        4  ??DataTable2_10
+        4  ??DataTable2_11
+        4  ??DataTable2_12
+        4  ??DataTable2_13
+        4  ??DataTable2_14
+        4  ??DataTable2_15
+        4  ??DataTable2_16
+        4  ??DataTable2_17
+        4  ??DataTable2_18
+        4  ??DataTable2_19
+        4  ??DataTable2_2
+        4  ??DataTable2_20
+        4  ??DataTable2_21
+        4  ??DataTable2_22
+        4  ??DataTable2_23
+        4  ??DataTable2_24
+        4  ??DataTable2_3
+        4  ??DataTable2_4
+        4  ??DataTable2_5
+        4  ??DataTable2_6
+        4  ??DataTable2_7
+        4  ??DataTable2_8
+        4  ??DataTable2_9
+       24  ?_0
+       32  ?_1
+       84  ?_10
+        2  ?_11
+        4  ?_12
+        2  ?_13
+       36  ?_2
+       40  ?_3
+       48  ?_4
+       44  ?_5
+       40  ?_6
+       44  ?_7
+       40  ?_8
+       92  ?_9
+       28  am_ctimer_isr
+   193600  capture_usp0905_bin
+    51200  encoded_buffer
+       12  g_sTimer0
+        4  g_ui32TimerCount
+      478  main
+        4  p_pcm_samples
+       54  timerA0_init
+
+ 
+  51 204 bytes in section .bss
+      16 bytes in section .data
+ 194 132 bytes in section .rodata
+     660 bytes in section .text
+ 
+     660 bytes of CODE  memory
+ 194 132 bytes of CONST memory
+  51 220 bytes of DATA  memory
+
+Errors: none
+Warnings: 3

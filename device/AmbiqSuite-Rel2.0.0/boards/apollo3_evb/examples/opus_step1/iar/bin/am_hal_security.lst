@@ -1,0 +1,538 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:09
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_security.c
+#    Command line =  
+#        -f C:\temp\EW8A62.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_security.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_security.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_security.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_security.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_hal_security.c
+      4          //! @file
+      5          //!
+      6          //! @brief Functions for on-chip security features
+      7          //!
+      8          //! @addtogroup
+      9          //! @ingroup apollo3hal
+     10          //! @{
+     11          //
+     12          //*****************************************************************************
+     13          
+     14          //*****************************************************************************
+     15          //
+     16          // Copyright (c) 2019, Ambiq Micro
+     17          // All rights reserved.
+     18          // 
+     19          // Redistribution and use in source and binary forms, with or without
+     20          // modification, are permitted provided that the following conditions are met:
+     21          // 
+     22          // 1. Redistributions of source code must retain the above copyright notice,
+     23          // this list of conditions and the following disclaimer.
+     24          // 
+     25          // 2. Redistributions in binary form must reproduce the above copyright
+     26          // notice, this list of conditions and the following disclaimer in the
+     27          // documentation and/or other materials provided with the distribution.
+     28          // 
+     29          // 3. Neither the name of the copyright holder nor the names of its
+     30          // contributors may be used to endorse or promote products derived from this
+     31          // software without specific prior written permission.
+     32          // 
+     33          // Third party software included in this distribution is subject to the
+     34          // additional license terms as defined in the /docs/licenses directory.
+     35          // 
+     36          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     37          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     38          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     39          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     40          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     41          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     42          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     43          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     44          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     45          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     46          // POSSIBILITY OF SUCH DAMAGE.
+     47          //
+     48          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     49          //
+     50          //*****************************************************************************
+     51          #include <stdint.h>
+     52          #include <stdbool.h>
+     53          #include "am_mcu_apollo.h"
+     54          
+     55          // Local defines
+     56          // Maximum iterations for hardware CRC to finish
+     57          #define MAX_CRC_WAIT        100000
+     58          
+     59          #define AM_HAL_SECURITY_LOCKSTAT_CUSTOMER       0x1
+     60          #define AM_HAL_SECURITY_LOCKSTAT_RECOVERY       0x40000000
+     61          
+     62          //*****************************************************************************
+     63          //
+     64          //! @brief  Hardcoded function - to Run supplied main program
+     65          //!
+     66          //! @param  r0 = vtor - address of the vector table
+     67          //!
+     68          //! @return Returns None
+     69          //
+     70          //*****************************************************************************
+     71          #if (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION <  6000000)
+     72          static __asm void
+     73          bl_run_main(uint32_t *vtor)
+     74          {
+     75              //
+     76              // Store the vector table pointer of the new image into VTOR.
+     77              //
+     78              movw    r3, #0xED08
+     79              movt    r3, #0xE000
+     80              str     r0, [r3, #0]
+     81          
+     82              //
+     83              // Load the new stack pointer into R1 and the new reset vector into R2.
+     84              //
+     85              ldr     r3, [r0, #0]
+     86              ldr     r2, [r0, #4]
+     87          
+     88              //
+     89              // Set the stack pointer for the new image.
+     90              //
+     91              mov     sp, r3
+     92          
+     93              //
+     94              // Jump to the new reset vector.
+     95              //
+     96              bx      r2
+     97          }
+     98          #elif (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION >= 6000000)
+     99          __attribute__((naked))
+    100          static void
+    101          bl_run_main(uint32_t *vtor)
+    102          {
+    103              __asm
+    104              (
+    105                  "   movw    r3, #0xED08\n\t"    // Store the vector table pointer of the new image into VTOR.
+    106                  "   movt    r3, #0xE000\n\t"
+    107                  "   str     r0, [r3, #0]\n\t"
+    108                  "   ldr     r3, [r0, #0]\n\t"   // Load the new stack pointer into R1 and the new reset vector into R2.
+    109                  "   ldr     r2, [r0, #4]\n\t"
+    110                  "   mov     sp, r3\n\t"         // Set the stack pointer for the new image.
+    111                  "   bx      r2\n\t"            // Jump to the new reset vector.
+    112              );
+    113          }
+    114          #elif defined(__GNUC_STDC_INLINE__)
+    115          __attribute__((naked))
+    116          static void
+    117          bl_run_main(uint32_t *vtor)
+    118          {
+    119              __asm
+    120              (
+    121                  "   movw    r3, #0xED08\n\t"    // Store the vector table pointer of the new image into VTOR.
+    122                  "   movt    r3, #0xE000\n\t"
+    123                  "   str     r0, [r3, #0]\n\t"
+    124                  "   ldr     r3, [r0, #0]\n\t"   // Load the new stack pointer into R1 and the new reset vector into R2.
+    125                  "   ldr     r2, [r0, #4]\n\t"
+    126                  "   mov     sp, r3\n\t"         // Set the stack pointer for the new image.
+    127                  "   bx      r2\n\t"            // Jump to the new reset vector.
+    128              );
+    129          }
+    130          #elif defined(__IAR_SYSTEMS_ICC__)
+    131          __stackless static inline void
+    132          bl_run_main(uint32_t *vtor)
+    133          {
+    134              __asm volatile (
+    135                    "    movw    r3, #0xED08\n"    // Store the vector table pointer of the new image into VTOR.
+    136                    "    movt    r3, #0xE000\n"
+    137                    "    str     r0, [r3, #0]\n"
+    138                    "    ldr     r3, [r0, #0]\n"   // Load the new stack pointer into R1 and the new reset vector into R2.
+    139                    "    ldr     r2, [r0, #4]\n"
+    140                    "    mov     sp, r3\n"         // Set the stack pointer for the new image.
+    141                    "    bx      r2\n"            // Jump to the new reset vector.
+    142                    );
+    143          }
+    144          #else
+    145          #error Compiler is unknown, please contact Ambiq support team
+    146          #endif
+    147          
+    148          // Pre- SBLv2 known versions that do not support callback
+    149          static uint32_t sblPreV2[][4] = {
+    150              // flash0, flash4, sblVersion, sblVersionAddInfo
+    151              {0xA3007860, 0x2E2638FB, 0 , 0},
+    152              {0xA3007E14, 0x5EE4E461, 1 , 0},
+    153              {0xA3008290, 0xB49CECD5, 2 , 0},
+    154          };
+    155          
+    156          //*****************************************************************************
+    157          //
+    158          //! @brief  Get Device Security Info
+    159          //!
+    160          //! @param  pSecInfo -  Pointer to structure for returned security info
+    161          //!
+    162          //! This will retrieve the security information for the device
+    163          //!
+    164          //! @return Returns AM_HAL_STATUS_SUCCESS on success
+    165          //
+    166          //*****************************************************************************
+    167          uint32_t am_hal_security_get_info(am_hal_security_info_t *pSecInfo)
+    168          {
+    169              uint32_t flash0;
+    170              uint32_t flash4;
+    171              uint32_t i;
+    172              bool     bSbl;
+    173              if (!pSecInfo)
+    174              {
+    175                  return AM_HAL_STATUS_INVALID_ARG;
+    176              }
+    177          
+    178              pSecInfo->info0Version = AM_REGVAL(0x50020040);
+    179              pSecInfo->bInfo0Valid = MCUCTRL->SHADOWVALID_b.INFO0_VALID;
+    180              bSbl = MCUCTRL->BOOTLOADER_b.SECBOOTFEATURE;
+    181          
+    182              if (bSbl)
+    183              {
+    184                  // Check if we're running pre-SBLv2
+    185                  flash0 = AM_REGVAL(AM_HAL_SBL_ADDRESS);
+    186                  flash4 = AM_REGVAL(AM_HAL_SBL_ADDRESS + 4);
+    187                  // Check if SBL is installed
+    188                  if ((flash0 >> 24) != AM_IMAGE_MAGIC_SBL)
+    189                  {
+    190                      return AM_HAL_STATUS_FAIL;
+    191                  }
+    192                  for ( i = 0; i < sizeof(sblPreV2) / sizeof(sblPreV2[0]); i++ )
+    193                  {
+    194                      if ((sblPreV2[i][0] == flash0) && (sblPreV2[i][1] == flash4))
+    195                      {
+    196                          // This is a device prior to SBLv2
+    197                          pSecInfo->sblVersion = sblPreV2[i][2];
+    198                          pSecInfo->sblVersionAddInfo = sblPreV2[i][3];
+    199                          break;
+    200                      }
+    201                  }
+    202          
+    203                  if ( i == sizeof(sblPreV2) / sizeof(sblPreV2[0]) )
+    204                  {
+    205                      // SBLv2 or beyond
+    206                      // Use SBL jump table function
+    207                      uint32_t status;
+    208                      uint32_t sblVersion;
+    209                      uint32_t (*pFuncVersion)(uint32_t *) = (uint32_t (*)(uint32_t *))(AM_HAL_SBL_ADDRESS + 0x1D1);
+    210                      status = pFuncVersion(&sblVersion);
+    211                      if (status != AM_HAL_STATUS_SUCCESS)
+    212                      {
+    213                          return status;
+    214                      }
+    215                      pSecInfo->sblVersion = sblVersion & 0x7FFF;
+    216                      pSecInfo->sblVersionAddInfo = sblVersion >> 15;
+    217                  }
+    218              }
+    219              else
+    220              {
+    221                  return AM_HAL_STATUS_FAIL;
+    222              }
+    223              return AM_HAL_STATUS_SUCCESS;
+    224          }
+    225          
+    226          //*****************************************************************************
+    227          //
+    228          //! @brief  Set the key for specified lock
+    229          //!
+    230          //! @param  lockType - The lock type to be operated upon
+    231          //! @param  pKey -  Pointer to 128b key value
+    232          //!
+    233          //! This will program the lock registers for the specified lock and key
+    234          //!
+    235          //! @return Returns AM_HAL_STATUS_SUCCESS on success
+    236          //
+    237          //*****************************************************************************
+    238          uint32_t am_hal_security_set_key(am_hal_security_locktype_t lockType, am_hal_security_128bkey_t *pKey)
+    239          {
+    240          #ifndef AM_HAL_DISABLE_API_VALIDATION
+    241              if (pKey == NULL)
+    242              {
+    243                  return AM_HAL_STATUS_INVALID_ARG;
+    244              }
+    245              switch (lockType)
+    246              {
+    247                  case AM_HAL_SECURITY_LOCKTYPE_CUSTOMER:
+    248                  case AM_HAL_SECURITY_LOCKTYPE_RECOVERY:
+    249                      break;
+    250                  default:
+    251                      return AM_HAL_STATUS_INVALID_ARG;
+    252              }
+    253          #endif
+    254          
+    255              SECURITY->LOCKCTRL = lockType;
+    256              SECURITY->KEY0 = pKey->keys.key0;
+    257              SECURITY->KEY1 = pKey->keys.key1;
+    258              SECURITY->KEY2 = pKey->keys.key2;
+    259              SECURITY->KEY3 = pKey->keys.key3;
+    260          
+    261              return AM_HAL_STATUS_SUCCESS;
+    262          }
+    263          
+    264          //*****************************************************************************
+    265          //
+    266          //! @brief  Get the current status of the specified lock
+    267          //!
+    268          //! @param  lockType - The lock type to be operated upon
+    269          //! @param  pbUnlockStatus -  Pointer to return variable with lock status
+    270          //!
+    271          //! This will get the lock status for specified lock - true implies unlocked
+    272          //! Note that except for customer lock, other locks are self-locking on status read
+    273          //!
+    274          //! @return Returns AM_HAL_STATUS_SUCCESS on success
+    275          //
+    276          //*****************************************************************************
+    277          uint32_t am_hal_security_get_lock_status(am_hal_security_locktype_t lockType, bool *pbUnlockStatus)
+    278          {
+    279              uint32_t unlockMask;
+    280          #ifndef AM_HAL_DISABLE_API_VALIDATION
+    281              if (pbUnlockStatus == NULL)
+    282              {
+    283                  return AM_HAL_STATUS_INVALID_ARG;
+    284              }
+    285          #endif
+    286              switch (lockType)
+    287              {
+    288                  case AM_HAL_SECURITY_LOCKTYPE_CUSTOMER:
+    289                      unlockMask = AM_HAL_SECURITY_LOCKSTAT_CUSTOMER;
+    290                      break;
+    291                  case AM_HAL_SECURITY_LOCKTYPE_RECOVERY:
+    292                      unlockMask = AM_HAL_SECURITY_LOCKSTAT_RECOVERY;
+    293                      break;
+    294                  default:
+    295                      return AM_HAL_STATUS_INVALID_ARG;
+    296              }
+    297              *pbUnlockStatus = SECURITY->LOCKSTAT & unlockMask;
+    298              return AM_HAL_STATUS_SUCCESS;
+    299          }
+    300          
+    301          //*****************************************************************************
+    302          //
+    303          //! @brief  Compute CRC32 for a specified payload
+    304          //!
+    305          //! @param  startAddr - The start address of the payload
+    306          //! @param  sizeBytes - The length of payload in bytes
+    307          //! @param  pCrc -  Pointer to return computed CRC
+    308          //!
+    309          //! This will use the hardware engine to compute CRC32 on an arbitrary data payload
+    310          //!
+    311          //! @return Returns AM_HAL_STATUS_SUCCESS on success
+    312          //
+    313          //*****************************************************************************
+    314          uint32_t am_hal_crc32(uint32_t startAddr, uint32_t sizeBytes, uint32_t *pCrc)
+    315          {
+    316              uint32_t status;
+    317          
+    318          #ifndef AM_HAL_DISABLE_API_VALIDATION
+    319              if (pCrc == NULL)
+    320              {
+    321                  return AM_HAL_STATUS_INVALID_ARG;
+    322              }
+    323          
+    324              // Make sure size is multiple of 4 bytes
+    325              if (sizeBytes & 0x3)
+    326              {
+    327                  return AM_HAL_STATUS_INVALID_ARG;
+    328              }
+    329              // TODO - check the address
+    330          #endif
+    331          
+    332              //
+    333              // Program the CRC engine to compute the crc
+    334              //
+    335              SECURITY->RESULT = 0xFFFFFFFF;
+    336              SECURITY->SRCADDR = startAddr;
+    337              SECURITY->LEN_b.LEN = (sizeBytes >> SECURITY_LEN_LEN_Pos);
+    338              SECURITY->CTRL_b.FUNCTION = SECURITY_CTRL_FUNCTION_CRC32;
+    339              // Start the CRC
+    340              SECURITY->CTRL_b.ENABLE = 1;
+    341          
+    342              //
+    343              // Wait for CRC to finish
+    344              //
+    345              status = am_hal_flash_delay_status_change(MAX_CRC_WAIT,
+    346                  (uint32_t)&SECURITY->CTRL, SECURITY_CTRL_ENABLE_Msk, 0);
+    347          
+    348              if (status == AM_HAL_STATUS_SUCCESS)
+    349              {
+    350                  *pCrc = SECURITY->RESULT;
+    351              }
+    352          
+    353              return status;
+    354          }
+    355          
+    356          //*****************************************************************************
+    357          //
+    358          //! @brief  Helper function to Perform exit operations for a secondary bootloader
+    359          //!
+    360          //! @param  pImage - The address of the image to give control to
+    361          //!
+    362          //! This function does the necessary security operations while exiting from a
+    363          //! a secondary bootloader program. If still open, it locks the info0 key region,
+    364          //! as well as further updates to the flash protection register.
+    365          //! It also checks if it needs to halt to honor a debugger request.
+    366          //! If an image address is specified, control is transferred to the same on exit.
+    367          //!
+    368          //! @return Returns AM_HAL_STATUS_SUCCESS on success, if no image address specified
+    369          //! If an image address is provided, a successful execution results in transfer to
+    370          //! the image - and this function does not return.
+    371          //
+    372          //*****************************************************************************
+    373          uint32_t am_hal_bootloader_exit(uint32_t *pImage)
+    374          {
+    375              uint32_t status = AM_HAL_STATUS_SUCCESS;
+    376          
+    377              //
+    378              // Lock the assets
+    379              //
+    380              if ( MCUCTRL->SHADOWVALID_b.INFO0_VALID  &&
+    381                   MCUCTRL->BOOTLOADER_b.PROTLOCK )
+    382              {
+    383                  am_hal_security_128bkey_t keyVal;
+    384                  uint32_t *pCustKey = (uint32_t *)0x50021A00;
+    385                  bool bLockStatus;
+    386          
+    387                  //
+    388                  // PROTLOCK Open
+    389                  // This should also mean that Customer key is accessible
+    390                  // Now lock the key by writing an incorrect value
+    391                  //
+    392                  keyVal.keyword[0] = ~pCustKey[0];
+    393                  am_hal_security_set_key(AM_HAL_SECURITY_LOCKTYPE_CUSTOMER, &keyVal);
+    394          
+    395                  status = am_hal_security_get_lock_status(AM_HAL_SECURITY_LOCKTYPE_CUSTOMER, &bLockStatus);
+    396          
+    397                  if ((status != AM_HAL_STATUS_SUCCESS) || (bLockStatus))
+    398                  {
+    399                      return AM_HAL_STATUS_FAIL;
+    400                  }
+    401          
+    402                  //
+    403                  // Lock the protection register to prevent further region locking
+    404                  // CAUTION!!! - Can not do AM_BFW on BOOTLOADER register as all writable bits in this register are Write 1 to clear
+    405                  //
+    406                  MCUCTRL->BOOTLOADER = _VAL2FLD(MCUCTRL_BOOTLOADER_PROTLOCK, 1);
+    407          
+    408                  //
+    409                  // Check if we need to halt (debugger request)
+    410                  //
+    411                  if (MCUCTRL->SCRATCH0 & 0x1)
+    412                  {
+    413                      // Debugger wants to halt
+    414                      uint32_t dhcsr = AM_REGVAL(0xE000EDF0);
+    415                      // Clear the flag in Scratch register
+    416                      MCUCTRL->SCRATCH0 &= ~0x1;
+    417                      // Halt the core
+    418                      dhcsr = ((uint32_t)0xA05F << 16) | (dhcsr & 0xFFFF) | 0x3;
+    419                      AM_REGVAL(0xE000EDF0) = dhcsr;
+    420                      // Resume from halt
+    421                  }
+    422              }
+    423          
+    424              // Give control to supplied image
+    425              if (pImage)
+    426              {
+    427                  bl_run_main(pImage);
+    428                  // Does not return
+    429              }
+    430          
+    431              return status;
+    432          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      40   am_hal_bootloader_exit
+        40   -> am_hal_security_get_lock_status
+        40   -> am_hal_security_set_key
+        40   -> bl_run_main
+      24   am_hal_crc32
+        24   -> am_hal_flash_delay_status_change
+      32   am_hal_security_get_info
+        32   -- Indirect call
+       0   am_hal_security_get_lock_status
+       0   am_hal_security_set_key
+       0   bl_run_main
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable5
+       4  ??DataTable5_1
+       4  ??DataTable5_10
+       4  ??DataTable5_11
+       4  ??DataTable5_12
+       4  ??DataTable5_13
+       4  ??DataTable5_14
+       4  ??DataTable5_15
+       4  ??DataTable5_16
+       4  ??DataTable5_17
+       4  ??DataTable5_18
+       4  ??DataTable5_2
+       4  ??DataTable5_3
+       4  ??DataTable5_4
+       4  ??DataTable5_5
+       4  ??DataTable5_6
+       4  ??DataTable5_7
+       4  ??DataTable5_8
+       4  ??DataTable5_9
+     122  am_hal_bootloader_exit
+      92  am_hal_crc32
+     182  am_hal_security_get_info
+      58  am_hal_security_get_lock_status
+      62  am_hal_security_set_key
+      20  bl_run_main
+      48  sblPreV2
+
+ 
+  48 bytes in section .data
+ 612 bytes in section .text
+ 
+ 612 bytes of CODE memory
+  48 bytes of DATA memory
+
+Errors: none
+Warnings: none

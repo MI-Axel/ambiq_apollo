@@ -1,0 +1,307 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:09
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_secure_ota.c
+#    Command line =  
+#        -f C:\temp\EW89D5.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_secure_ota.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_secure_ota.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_secure_ota.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_secure_ota.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_hal_secure_ota.c
+      4          //! @file
+      5          //!
+      6          //! @brief Functions for secure over-the-air.
+      7          //!
+      8          //! @addtogroup
+      9          //! @ingroup apollo3hal
+     10          //! @{
+     11          //
+     12          //*****************************************************************************
+     13          
+     14          //*****************************************************************************
+     15          //
+     16          // Copyright (c) 2019, Ambiq Micro
+     17          // All rights reserved.
+     18          // 
+     19          // Redistribution and use in source and binary forms, with or without
+     20          // modification, are permitted provided that the following conditions are met:
+     21          // 
+     22          // 1. Redistributions of source code must retain the above copyright notice,
+     23          // this list of conditions and the following disclaimer.
+     24          // 
+     25          // 2. Redistributions in binary form must reproduce the above copyright
+     26          // notice, this list of conditions and the following disclaimer in the
+     27          // documentation and/or other materials provided with the distribution.
+     28          // 
+     29          // 3. Neither the name of the copyright holder nor the names of its
+     30          // contributors may be used to endorse or promote products derived from this
+     31          // software without specific prior written permission.
+     32          // 
+     33          // Third party software included in this distribution is subject to the
+     34          // additional license terms as defined in the /docs/licenses directory.
+     35          // 
+     36          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     37          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     38          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     39          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     40          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     41          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     42          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     43          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     44          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     45          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     46          // POSSIBILITY OF SUCH DAMAGE.
+     47          //
+     48          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     49          //
+     50          //*****************************************************************************
+     51          #include <stdint.h>
+     52          #include <stdbool.h>
+     53          #include "am_mcu_apollo.h"
+     54          
+     55          // Local defines
+     56          #define FLASH_INVALID               0xFFFFFFFF
+     57          
+     58          // Internal OTA state information
+     59          typedef struct
+     60          {
+     61              uint32_t flashSize;
+     62              uint32_t otaDescAddr;
+     63              uint32_t numOta;
+     64          } am_hal_secure_ota_state_t;
+     65          
+     66          static am_hal_secure_ota_state_t gSOtaState;
+     67          
+     68          // Erase a flash page
+     69          static void
+     70          erase_flash_page(uint32_t ui32ProgamKey, uint32_t ui32Addr)
+     71          {
+     72              uint32_t ui32CurrentPage, ui32CurrentBlock;
+     73          
+     74              //
+     75              // Figure out what page and block we're working on.
+     76              //
+     77              ui32CurrentPage =  AM_HAL_FLASH_ADDR2PAGE(ui32Addr);
+     78              ui32CurrentBlock = AM_HAL_FLASH_ADDR2INST(ui32Addr);
+     79          
+     80              //
+     81              // Start a critical section.
+     82              //
+     83              AM_CRITICAL_BEGIN
+     84              am_hal_flash_page_erase(ui32ProgamKey,
+     85                                      ui32CurrentBlock, ui32CurrentPage);
+     86              //
+     87              // Exit the critical section.
+     88              //
+     89              AM_CRITICAL_END
+     90          }
+     91          
+     92          
+     93          //*****************************************************************************
+     94          //
+     95          //! @brief  Initialize OTA state
+     96          //!
+     97          //! Initializes the OTA state. This should be called before doing any other operation
+     98          //!
+     99          //! @param  ui32ProgamKey - The Flash programming key
+    100          //! @param  pOtaDesc should be start of a flash page designated for OTA Descriptor
+    101          //!
+    102          //! This call will erase the flash page, which will then be incrementally
+    103          //! populated as OTA's are added.  It will also initialize the OTAPOINTER to point
+    104          //! to this descriptor, marking it as invalid at the same time
+    105          //!
+    106          //! @return Returns AM_HAL_STATUS_SUCCESS on success
+    107          //
+    108          //*****************************************************************************
+    109          uint32_t am_hal_ota_init(uint32_t ui32ProgamKey, uint32_t *pOtaDesc)
+    110          {
+    111              am_hal_mcuctrl_device_t sDevice;
+    112              uint32_t otaDescAddr = (uint32_t)pOtaDesc;
+    113          
+    114              //
+    115              // Get chip specific info
+    116              //
+    117              am_hal_mcuctrl_info_get(AM_HAL_MCUCTRL_INFO_DEVICEID, &sDevice);
+    118              gSOtaState.flashSize = sDevice.ui32FlashSize;
+    119          
+    120              // Validate the flash page
+    121              if ((otaDescAddr >= gSOtaState.flashSize) ||
+    122                  (otaDescAddr & (AM_HAL_FLASH_PAGE_SIZE - 1)))
+    123              {
+    124                  return AM_HAL_STATUS_INVALID_ARG;
+    125              }
+    126              // TODO - check against protected pages
+    127              // Erase the page
+    128              erase_flash_page(ui32ProgamKey, otaDescAddr);
+    129              // Initialize the OTA Pointer
+    130              MCUCTRL->OTAPOINTER = otaDescAddr;
+    131              gSOtaState.numOta = 0;
+    132              gSOtaState.otaDescAddr = otaDescAddr;
+    133          
+    134              return AM_HAL_STATUS_SUCCESS;
+    135          }
+    136          
+    137          // Add a new OTA to descriptor
+    138          //*****************************************************************************
+    139          //
+    140          //! @brief  Add a new image for OTA
+    141          //!
+    142          //! Adds a new image to the OTA Descriptor.
+    143          //!
+    144          //! @param  ui32ProgamKey - The Flash programming key
+    145          //! @param  imageMagic image magic# identifying type of image being added to OTA descr
+    146          //! @param  pImage should point to the start of new image to be added to descr
+    147          //!
+    148          //! This will program the next available entry in OTA descriptor. It will also set
+    149          //! appropriate state in the OTA pointer register
+    150          //!
+    151          //! @return Returns AM_HAL_STATUS_SUCCESS on success
+    152          //
+    153          //*****************************************************************************
+    154          uint32_t am_hal_ota_add(uint32_t ui32ProgamKey, uint8_t imageMagic, uint32_t *pImage)
+    155          {
+    156              uint32_t imageAddr = (uint32_t)pImage;
+    157              // Validate the Image Pointer
+    158              if ((imageAddr >= gSOtaState.flashSize) ||
+    159                  (imageAddr & (AM_HAL_FLASH_PAGE_SIZE - 1)))
+    160              {
+    161                  return AM_HAL_STATUS_INVALID_ARG;
+    162              }
+    163              if (gSOtaState.numOta == AM_HAL_SECURE_OTA_MAX_OTA)
+    164              {
+    165                  return AM_HAL_STATUS_OUT_OF_RANGE;
+    166              }
+    167          
+    168              imageAddr |= AM_HAL_OTA_STATUS_PENDING;
+    169              // Program the OTA Descriptor word
+    170              am_hal_flash_program_main(ui32ProgamKey,
+    171                  &imageAddr,
+    172                  ((uint32_t *)gSOtaState.otaDescAddr + gSOtaState.numOta++),
+    173                  1);
+    174          
+    175              // Set appropriate OTA Pointer bits
+    176              MCUCTRL->OTAPOINTER_b.OTAVALID = 1;
+    177              if (imageMagic == AM_IMAGE_MAGIC_SBL)
+    178              {
+    179                  MCUCTRL->OTAPOINTER_b.OTASBLUPDATE = 1;
+    180              }
+    181          
+    182              return AM_HAL_STATUS_SUCCESS;
+    183          }
+    184          
+    185          // Get OTA Status
+    186          // Can be called anytime (generally after coming back from reset to check the status of OTA
+    187          // Will be also used by sbl_main to identify list of OTA's left for it (would show up as PENDING)
+    188          //*****************************************************************************
+    189          //
+    190          //! @brief  Get Current OTA Descriptor state
+    191          //!
+    192          //! @param  pOtaDesc should be start of a flash page designated for OTA Descriptor
+    193          //! @param  maxOta Determines the size of the following buffer
+    194          //! @param  pStatus - Return Parameter - populated by this function indicating the OTA
+    195          //! status of various OTA's
+    196          //!
+    197          //! This will retrieve the current OTA status of various images added to the OTA descr
+    198          //!
+    199          //! @return Returns AM_HAL_STATUS_SUCCESS on success
+    200          //
+    201          //*****************************************************************************
+    202          uint32_t am_hal_get_ota_status(uint32_t *pOtaDesc, uint32_t maxOta, am_hal_ota_status_t *pStatus)
+    203          {
+    204              uint32_t numOta = 0;
+    205              // Fill up the return structure
+    206              while (maxOta--)
+    207              {
+    208                  if (pOtaDesc[numOta] == FLASH_INVALID)
+    209                  {
+    210                      pStatus[numOta].pImage = (uint32_t *)pOtaDesc[numOta];
+    211                      break;
+    212                  }
+    213                  else
+    214                  {
+    215                      pStatus[numOta].pImage = (uint32_t *)(pOtaDesc[numOta] & ~0x3);
+    216                      pStatus[numOta].status = (am_hal_ota_status_e)(pOtaDesc[numOta] & 0x3);
+    217                  }
+    218                  numOta++;
+    219              }
+    220              return AM_HAL_STATUS_SUCCESS;
+    221          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   am_hal_get_ota_status
+      24   am_hal_ota_add
+        24   -> am_hal_flash_program_main
+      72   am_hal_ota_init
+        72   -> am_hal_mcuctrl_info_get
+        72   -> erase_flash_page
+      24   erase_flash_page
+        24   -> am_hal_flash_page_erase
+        24   -> am_hal_interrupt_master_disable
+        24   -> am_hal_interrupt_master_set
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+      70  am_hal_get_ota_status
+     100  am_hal_ota_add
+      62  am_hal_ota_init
+      38  erase_flash_page
+      12  gSOtaState
+
+ 
+  12 bytes in section .bss
+ 278 bytes in section .text
+ 
+ 278 bytes of CODE memory
+  12 bytes of DATA memory
+
+Errors: none
+Warnings: none

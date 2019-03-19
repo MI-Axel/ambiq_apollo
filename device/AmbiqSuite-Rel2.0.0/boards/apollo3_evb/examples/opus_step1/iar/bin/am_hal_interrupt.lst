@@ -1,0 +1,297 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:08
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_interrupt.c
+#    Command line =  
+#        -f C:\temp\EW8371.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_interrupt.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_interrupt.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_interrupt.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_interrupt.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_hal_interrupt.c
+      4          //! @file
+      5          //!
+      6          //! @brief Helper functions supporting interrupts and NVIC operation.
+      7          //!
+      8          //! These functions may be used for NVIC-level interrupt configuration.
+      9          //!
+     10          //! @addtogroup interrupt3 Interrupt (ARM NVIC support functions)
+     11          //! @ingroup apollo3hal
+     12          //! @{
+     13          //
+     14          //*****************************************************************************
+     15          
+     16          //*****************************************************************************
+     17          //
+     18          // Copyright (c) 2019, Ambiq Micro
+     19          // All rights reserved.
+     20          // 
+     21          // Redistribution and use in source and binary forms, with or without
+     22          // modification, are permitted provided that the following conditions are met:
+     23          // 
+     24          // 1. Redistributions of source code must retain the above copyright notice,
+     25          // this list of conditions and the following disclaimer.
+     26          // 
+     27          // 2. Redistributions in binary form must reproduce the above copyright
+     28          // notice, this list of conditions and the following disclaimer in the
+     29          // documentation and/or other materials provided with the distribution.
+     30          // 
+     31          // 3. Neither the name of the copyright holder nor the names of its
+     32          // contributors may be used to endorse or promote products derived from this
+     33          // software without specific prior written permission.
+     34          // 
+     35          // Third party software included in this distribution is subject to the
+     36          // additional license terms as defined in the /docs/licenses directory.
+     37          // 
+     38          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     39          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     40          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     41          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     42          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     43          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     44          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     45          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     46          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     47          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     48          // POSSIBILITY OF SUCH DAMAGE.
+     49          //
+     50          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     51          //
+     52          //*****************************************************************************
+     53          
+     54          #include <stdint.h>
+     55          #include <stdbool.h>
+     56          #include "am_mcu_apollo.h"
+     57          
+     58          //*****************************************************************************
+     59          //
+     60          //! @brief Globally enable interrupt service routines
+     61          //!
+     62          //! This function allows interrupt signals from the NVIC to trigger ISR entry
+     63          //! in the CPU. This function must be called if interrupts are to be serviced
+     64          //! in software.
+     65          //!
+     66          //! @return 1 if interrupts were previously disabled, 0 otherwise.
+     67          //
+     68          //*****************************************************************************
+     69          #if (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION < 6000000)
+     70          __asm uint32_t
+     71          am_hal_interrupt_master_enable(void)
+     72          {
+     73              mrs     r0, PRIMASK
+     74              cpsie   i
+     75              bx      lr
+     76          }
+     77          #elif (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION >= 6000000)
+     78          uint32_t __attribute__((naked))
+     79          am_hal_interrupt_master_enable(void)
+     80          {
+     81              __asm("    mrs     r0, PRIMASK");
+     82              __asm("    cpsie i");
+     83              __asm("    bx lr");
+     84          }
+     85          #elif defined(__GNUC_STDC_INLINE__)
+     86          uint32_t __attribute__((naked))
+     87          am_hal_interrupt_master_enable(void)
+     88          {
+     89              __asm("    mrs     r0, PRIMASK");
+     90              __asm("    cpsie i");
+     91              __asm("    bx lr");
+     92          }
+     93          #elif defined(__IAR_SYSTEMS_ICC__)
+     94          #pragma diag_suppress = Pe940   // Suppress IAR compiler warning about missing
+     95                                          // return statement on a non-void function
+     96          __stackless uint32_t
+     97          am_hal_interrupt_master_enable(void)
+     98          {
+     99              __asm("    mrs     r0, PRIMASK");
+    100              __asm("    cpsie i");
+    101              __asm("    bx lr");
+    102          }
+    103          #pragma diag_default = Pe940    // Restore IAR compiler warning
+    104          #else
+    105          #error Compiler is unknown, please contact Ambiq support team
+    106          #endif
+    107          
+    108          //*****************************************************************************
+    109          //
+    110          //! @brief Globally disable interrupt service routines
+    111          //!
+    112          //! This function prevents interrupt signals from the NVIC from triggering ISR
+    113          //! entry in the CPU. This will effectively stop incoming interrupt sources
+    114          //! from triggering their corresponding ISRs.
+    115          //!
+    116          //! @note Any external interrupt signal that occurs while the master interrupt
+    117          //! disable is active will still reach the "pending" state in the NVIC, but it
+    118          //! will not be allowed to reach the "active" state or trigger the
+    119          //! corresponding ISR. Instead, these interrupts are essentially "queued" until
+    120          //! the next time the master interrupt enable instruction is executed. At that
+    121          //! time, the interrupt handlers will be executed in order of decreasing
+    122          //! priority.
+    123          //!
+    124          //! @return 1 if interrupts were previously disabled, 0 otherwise.
+    125          //
+    126          //*****************************************************************************
+    127          #if (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION < 6000000)
+    128          __asm uint32_t
+    129          am_hal_interrupt_master_disable(void)
+    130          {
+    131              mrs     r0, PRIMASK
+    132              cpsid   i
+    133              bx      lr
+    134          }
+    135          #elif (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION >= 6000000)
+    136          uint32_t __attribute__((naked))
+    137          am_hal_interrupt_master_disable(void)
+    138          {
+    139              __asm("    mrs     r0, PRIMASK");
+    140              __asm("    cpsid i");
+    141              __asm("    bx lr");
+    142          }
+    143          #elif defined(__GNUC_STDC_INLINE__)
+    144          uint32_t __attribute__((naked))
+    145          am_hal_interrupt_master_disable(void)
+    146          {
+    147              __asm("    mrs     r0, PRIMASK");
+    148              __asm("    cpsid i");
+    149              __asm("    bx lr");
+    150          }
+    151          #elif defined(__IAR_SYSTEMS_ICC__)
+    152          #pragma diag_suppress = Pe940   // Suppress IAR compiler warning about missing
+    153                                          // return statement on a non-void function
+    154          __stackless uint32_t
+    155          am_hal_interrupt_master_disable(void)
+    156          {
+    157              __asm("    mrs     r0, PRIMASK");
+    158              __asm("    cpsid i");
+    159              __asm("    bx lr");
+    160          }
+    161          #pragma diag_default = Pe940    // Restore IAR compiler warning
+    162          #else
+    163          #error Compiler is unknown, please contact Ambiq support team
+    164          #endif
+    165          
+    166          //*****************************************************************************
+    167          //
+    168          //! @brief Sets the master interrupt state based on the input.
+    169          //!
+    170          //! @param ui32InterruptState - Desired PRIMASK value.
+    171          //!
+    172          //! This function directly writes the PRIMASK register in the ARM core. A value
+    173          //! of 1 will disable interrupts, while a value of zero will enable them.
+    174          //!
+    175          //! This function may be used along with am_hal_interrupt_master_disable() to
+    176          //! implement a nesting critical section. To do this, call
+    177          //! am_hal_interrupt_master_disable() to start the critical section, and save
+    178          //! its return value. To complete the critical section, call
+    179          //! am_hal_interrupt_master_set() using the saved return value as \e
+    180          //! ui32InterruptState. This will safely restore PRIMASK to the value it
+    181          //! contained just before the start of the critical section.
+    182          //!
+    183          //! @return None.
+    184          //
+    185          //*****************************************************************************
+    186          #if (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION <  6000000)
+    187          __asm void
+    188          am_hal_interrupt_master_set(uint32_t ui32InterruptState)
+    189          {
+    190              msr     PRIMASK, r0
+    191              bx      lr
+    192          }
+    193          #elif (defined (__ARMCC_VERSION)) && (__ARMCC_VERSION >= 6000000)
+    194          void __attribute__((naked))
+    195          am_hal_interrupt_master_set(uint32_t ui32InterruptState)
+    196          {
+    197              __asm("    msr     PRIMASK, r0");
+    198              __asm("    bx lr");
+    199          }
+    200          #elif defined(__GNUC_STDC_INLINE__)
+    201          void __attribute__((naked))
+    202          am_hal_interrupt_master_set(uint32_t ui32InterruptState)
+    203          {
+    204              __asm("    msr     PRIMASK, r0");
+    205              __asm("    bx lr");
+    206          }
+    207          #elif defined(__IAR_SYSTEMS_ICC__)
+    208          #pragma diag_suppress = Pe940   // Suppress IAR compiler warning about missing
+    209                                          // return statement on a non-void function
+    210          __stackless void
+    211          am_hal_interrupt_master_set(uint32_t ui32InterruptState)
+    212          {
+    213              __asm("    msr     PRIMASK, r0");
+    214              __asm("    bx lr");
+    215          }
+    216          #pragma diag_default = Pe940    // Restore IAR compiler warning
+    217          #endif
+    218          
+    219          //*****************************************************************************
+    220          //
+    221          // End Doxygen group.
+    222          //! @}
+    223          //
+    224          //*****************************************************************************
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   am_hal_interrupt_master_disable
+       0   am_hal_interrupt_master_enable
+       0   am_hal_interrupt_master_set
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      10  am_hal_interrupt_master_disable
+      10  am_hal_interrupt_master_enable
+       8  am_hal_interrupt_master_set
+
+ 
+ 28 bytes in section .text
+ 
+ 28 bytes of CODE memory
+
+Errors: none
+Warnings: none

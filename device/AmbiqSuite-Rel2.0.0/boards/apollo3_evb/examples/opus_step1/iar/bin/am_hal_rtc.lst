@@ -1,0 +1,775 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:09
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_rtc.c
+#    Command line =  
+#        -f C:\temp\EW8995.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_rtc.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_rtc.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_rtc.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_rtc.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_hal_rtc.c
+      4          //! @file
+      5          //!
+      6          //! @brief Functions for interfacing with the Real-Time Clock (RTC).
+      7          //!
+      8          //! @addtogroup rtc3 Real-Time Clock (RTC)
+      9          //! @ingroup apollo3hal
+     10          //! @{
+     11          //
+     12          //*****************************************************************************
+     13          
+     14          //*****************************************************************************
+     15          //
+     16          // Copyright (c) 2019, Ambiq Micro
+     17          // All rights reserved.
+     18          // 
+     19          // Redistribution and use in source and binary forms, with or without
+     20          // modification, are permitted provided that the following conditions are met:
+     21          // 
+     22          // 1. Redistributions of source code must retain the above copyright notice,
+     23          // this list of conditions and the following disclaimer.
+     24          // 
+     25          // 2. Redistributions in binary form must reproduce the above copyright
+     26          // notice, this list of conditions and the following disclaimer in the
+     27          // documentation and/or other materials provided with the distribution.
+     28          // 
+     29          // 3. Neither the name of the copyright holder nor the names of its
+     30          // contributors may be used to endorse or promote products derived from this
+     31          // software without specific prior written permission.
+     32          // 
+     33          // Third party software included in this distribution is subject to the
+     34          // additional license terms as defined in the /docs/licenses directory.
+     35          // 
+     36          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     37          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     38          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     39          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     40          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     41          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     42          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     43          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     44          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     45          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     46          // POSSIBILITY OF SUCH DAMAGE.
+     47          //
+     48          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     49          //
+     50          //*****************************************************************************
+     51          
+     52          #include <stdint.h>
+     53          #include <stdbool.h>
+     54          #include "am_mcu_apollo.h"
+     55          
+     56          //*****************************************************************************
+     57          //
+     58          // Converts a Binary Coded Decimal (BCD) byte to its Decimal form.
+     59          //
+     60          //*****************************************************************************
+     61          static uint8_t
+     62          bcd_to_dec(uint8_t ui8BCDByte)
+     63          {
+     64              return (((ui8BCDByte & 0xF0) >> 4) * 10) + (ui8BCDByte & 0x0F);
+     65          }
+     66          
+     67          //*****************************************************************************
+     68          //
+     69          // Converts a Decimal byte to its Binary Coded Decimal (BCD) form.
+     70          //
+     71          //*****************************************************************************
+     72          static uint8_t
+     73          dec_to_bcd(uint8_t ui8DecimalByte)
+     74          {
+     75              return (((ui8DecimalByte / 10) << 4) | (ui8DecimalByte % 10));
+     76          }
+     77          
+     78          //*****************************************************************************
+     79          //
+     80          //! @brief Selects the clock source for the RTC.
+     81          //!
+     82          //! @param ui32OSC the clock source for the RTC.
+     83          //!
+     84          //! This function selects the clock source for the RTC.
+     85          //!
+     86          //! Valid values for ui32OSC are:
+     87          //!
+     88          //!     AM_HAL_RTC_OSC_LFRC
+     89          //!     AM_HAL_RTC_OSC_XT
+     90          //!
+     91          //! @return None
+     92          //!
+     93          //! @note After selection of the RTC oscillator, a 2 second delay occurs before
+     94          //! the new setting is reflected in status. Therefore the CLKGEN.STATUS.OMODE
+     95          //! bit will not reflect the new status until after the 2s wait period.
+     96          //!
+     97          //
+     98          //*****************************************************************************
+     99          void
+    100          am_hal_rtc_osc_select(uint32_t ui32OSC)
+    101          {
+    102              //
+    103              // Set LFRC if flag is set.
+    104              // Otherwise configure for LFRC.
+    105              //
+    106              if ( ui32OSC == AM_HAL_RTC_OSC_LFRC )
+    107              {
+    108                  // Set bit to 1 for LFRC
+    109                  CLKGEN->OCTRL |= CLKGEN_OCTRL_OSEL_Msk;
+    110              }
+    111              else
+    112              {
+    113                  // Clear bit to 0 for XTAL
+    114                  CLKGEN->OCTRL &= ~CLKGEN_OCTRL_OSEL_Msk;
+    115              }
+    116          }
+    117          
+    118          //*****************************************************************************
+    119          //
+    120          //! @brief Enable/Start the RTC oscillator.
+    121          //!
+    122          //! Starts the RTC oscillator.
+    123          //!
+    124          //! @return None.
+    125          //
+    126          //*****************************************************************************
+    127          void
+    128          am_hal_rtc_osc_enable(void)
+    129          {
+    130              //
+    131              // Start the RTC Oscillator.
+    132              //
+    133              RTC->RTCCTL_b.RSTOP = 0;
+    134          
+    135          }
+    136          
+    137          //*****************************************************************************
+    138          //
+    139          //! @brief Disable/Stop the RTC oscillator.
+    140          //!
+    141          //! Stops the RTC oscillator.
+    142          //!
+    143          //! @return None.
+    144          //
+    145          //*****************************************************************************
+    146          void
+    147          am_hal_rtc_osc_disable(void)
+    148          {
+    149              //
+    150              // Stop the RTC Oscillator.
+    151              //
+    152              RTC->RTCCTL_b.RSTOP = 1;
+    153          }
+    154          
+    155          //*****************************************************************************
+    156          //
+    157          //! @brief Configures the RTC for 12 or 24 hour time keeping.
+    158          //!
+    159          //! @param b12Hour - A 'true' configures the RTC for 12 hour time keeping.
+    160          //!
+    161          //! Configures the RTC for 12 (true) or 24 (false) hour time keeping.
+    162          //!
+    163          //! @return None.
+    164          //
+    165          //*****************************************************************************
+    166          void
+    167          am_hal_rtc_time_12hour(bool b12Hour)
+    168          {
+    169              //
+    170              // Set the 12/24 hour bit.
+    171              //
+    172              RTC->RTCCTL_b.HR1224 = b12Hour;
+    173          }
+    174          
+    175          //*****************************************************************************
+    176          //
+    177          //! @brief Enable selected RTC interrupts.
+    178          //!
+    179          //! @param ui32Interrupt - desired interrupts
+    180          //!
+    181          //! Enables the RTC interrupts.
+    182          //!
+    183          //! ui32Interrupt should be the following:
+    184          //!
+    185          //!     AM_HAL_RTC_INT_ALM
+    186          //!
+    187          //! @return None.
+    188          //
+    189          //*****************************************************************************
+    190          void
+    191          am_hal_rtc_int_enable(uint32_t ui32Interrupt)
+    192          {
+    193              //
+    194              // Enable the interrupts.
+    195              //
+    196              RTC->INTEN |= ui32Interrupt;
+    197          }
+    198          
+    199          //*****************************************************************************
+    200          //
+    201          //! @brief Return the enabled RTC interrupts.
+    202          //!
+    203          //! Returns the enabled RTC interrupts.
+    204          //!
+    205          //! @return enabled RTC interrupts. Return is 0 or:
+    206          //!
+    207          //!     AM_HAL_RTC_INT_ALM
+    208          //
+    209          //*****************************************************************************
+    210          uint32_t
+    211          am_hal_rtc_int_enable_get(void)
+    212          {
+    213              //
+    214              // Read the RTC interrupt enable register, and return its contents.
+    215              //
+    216              return RTC->INTEN;
+    217          }
+    218          
+    219          //*****************************************************************************
+    220          //
+    221          //! @brief Disable selected RTC interrupts.
+    222          //!
+    223          //! @param ui32Interrupt - desired interrupts
+    224          //!
+    225          //! Disables the RTC interrupts.
+    226          //!
+    227          //! ui32Interrupt should be the following:
+    228          //!
+    229          //!     AM_HAL_RTC_INT_ALM
+    230          //!
+    231          //! @return None.
+    232          //
+    233          //*****************************************************************************
+    234          void
+    235          am_hal_rtc_int_disable(uint32_t ui32Interrupt)
+    236          {
+    237              //
+    238              // Disable the interrupts.
+    239              //
+    240              RTC->INTEN &= ~ui32Interrupt;
+    241          
+    242          }
+    243          
+    244          //*****************************************************************************
+    245          //
+    246          //! @brief Sets the selected RTC interrupts.
+    247          //!
+    248          //! @param ui32Interrupt - desired interrupts
+    249          //!
+    250          //! Sets the RTC interrupts causing them to immediately trigger.
+    251          //!
+    252          //! ui32Interrupt should be the following:
+    253          //!
+    254          //!     AM_HAL_RTC_INT_ALM
+    255          //!
+    256          //! @return None.
+    257          //
+    258          //*****************************************************************************
+    259          void
+    260          am_hal_rtc_int_set(uint32_t ui32Interrupt)
+    261          {
+    262              //
+    263              // Set the interrupts.
+    264              //
+    265              RTC->INTSET = ui32Interrupt;
+    266          }
+    267          
+    268          //*****************************************************************************
+    269          //
+    270          //! @brief Clear selected RTC interrupts.
+    271          //!
+    272          //! @param ui32Interrupt - desired interrupts
+    273          //!
+    274          //! Clears the RTC interrupts.
+    275          //!
+    276          //! ui32Interrupt should be the following:
+    277          //!
+    278          //!     AM_HAL_RTC_INT_ALM
+    279          //!
+    280          //! @return None.
+    281          //
+    282          //*****************************************************************************
+    283          void
+    284          am_hal_rtc_int_clear(uint32_t ui32Interrupt)
+    285          {
+    286              //
+    287              // Clear the interrupts.
+    288              //
+    289              RTC->INTCLR = ui32Interrupt;
+    290          }
+    291          
+    292          //*****************************************************************************
+    293          //
+    294          //! @brief Returns the RTC interrupt status.
+    295          //!
+    296          //! @param bEnabledOnly - return the status of only the enabled interrupts.
+    297          //!
+    298          //! Returns the RTC interrupt status.
+    299          //!
+    300          //! @return Bitwise representation of the current interrupt status.
+    301          //!
+    302          //! The return value will be 0 or the following:
+    303          //!
+    304          //!     AM_HAL_RTC_INT_ALM
+    305          //
+    306          //*****************************************************************************
+    307          uint32_t
+    308          am_hal_rtc_int_status_get(bool bEnabledOnly)
+    309          {
+    310              //
+    311              // Get the interrupt status.
+    312              //
+    313              if ( bEnabledOnly )
+    314              {
+    315                  uint32_t u32RetVal;
+    316                  u32RetVal  = RTC->INTSTAT;
+    317                  u32RetVal &= RTC->INTEN;
+    318                  return u32RetVal & (AM_HAL_RTC_INT_ALM);
+    319              }
+    320              else
+    321              {
+    322                  return RTC->INTSTAT & (AM_HAL_RTC_INT_ALM);
+    323              }
+    324          }
+    325          
+    326          //*****************************************************************************
+    327          //
+    328          //! @brief Set the Real Time Clock counter registers.
+    329          //!
+    330          //! @param *pTime - A pointer to the time structure.
+    331          //!
+    332          //! Sets the RTC counter registers to the supplied values.
+    333          //!
+    334          //! @return None.
+    335          //
+    336          //*****************************************************************************
+    337          void
+    338          am_hal_rtc_time_set(am_hal_rtc_time_t *pTime)
+    339          {
+    340              //
+    341              // Enable writing to the counters.
+    342              //
+    343              RTC->RTCCTL_b.WRTC = RTC_RTCCTL_WRTC_EN;
+    344          
+    345              //
+    346              // Write the RTCLOW register.
+    347              //
+    348              RTC->CTRLOW =
+    349                  _VAL2FLD(RTC_CTRLOW_CTRHR,  dec_to_bcd(pTime->ui32Hour))         |
+    350                  _VAL2FLD(RTC_CTRLOW_CTRMIN, dec_to_bcd(pTime->ui32Minute))       |
+    351                  _VAL2FLD(RTC_CTRLOW_CTRSEC, dec_to_bcd(pTime->ui32Second))       |
+    352                  _VAL2FLD(RTC_CTRLOW_CTR100, dec_to_bcd(pTime->ui32Hundredths));
+    353          
+    354              //
+    355              // Write the RTCUP register.
+    356              //
+    357              RTC->CTRUP =
+    358                  _VAL2FLD(RTC_CTRUP_CEB,     (pTime->ui32CenturyEnable))          |
+    359                  _VAL2FLD(RTC_CTRUP_CB,      (pTime->ui32Century))                |
+    360                  _VAL2FLD(RTC_CTRUP_CTRWKDY, (pTime->ui32Weekday))                |
+    361                  _VAL2FLD(RTC_CTRUP_CTRYR,   dec_to_bcd((pTime->ui32Year)))       |
+    362                  _VAL2FLD(RTC_CTRUP_CTRMO,   dec_to_bcd((pTime->ui32Month)))      |
+    363                  _VAL2FLD(RTC_CTRUP_CTRDATE, dec_to_bcd((pTime->ui32DayOfMonth)));
+    364          
+    365              //
+    366              // Disable writing to the counters.
+    367              //
+    368              RTC->RTCCTL_b.WRTC = RTC_RTCCTL_WRTC_DIS;
+    369          }
+    370          
+    371          //*****************************************************************************
+    372          //
+    373          //! @brief Get the Real Time Clock current time.
+    374          //!
+    375          //! @param *pTime - A pointer to the time structure to store the current time.
+    376          //!
+    377          //! Gets the RTC's current time
+    378          //!
+    379          //! @return 0 for success and 1 for error.
+    380          //
+    381          //*****************************************************************************
+    382          uint32_t
+    383          am_hal_rtc_time_get(am_hal_rtc_time_t *pTime)
+    384          {
+    385              uint32_t ui32RTCLow, ui32RTCUp, ui32Value;
+    386          
+    387              //
+    388              // Read the upper and lower RTC registers.
+    389              //
+    390              ui32RTCLow = RTC->CTRLOW;
+    391              ui32RTCUp  = RTC->CTRUP;
+    392          
+    393              //
+    394              // Break out the lower word.
+    395              //
+    396              ui32Value =
+    397                  ((ui32RTCLow & RTC_CTRLOW_CTRHR_Msk) >> RTC_CTRLOW_CTRHR_Pos);
+    398              pTime->ui32Hour = bcd_to_dec(ui32Value);
+    399          
+    400              ui32Value =
+    401                  ((ui32RTCLow & RTC_CTRLOW_CTRMIN_Msk) >> RTC_CTRLOW_CTRMIN_Pos);
+    402              pTime->ui32Minute = bcd_to_dec(ui32Value);
+    403          
+    404              ui32Value =
+    405                  ((ui32RTCLow & RTC_CTRLOW_CTRSEC_Msk) >> RTC_CTRLOW_CTRSEC_Pos);
+    406              pTime->ui32Second = bcd_to_dec(ui32Value);
+    407          
+    408              ui32Value =
+    409                  ((ui32RTCLow & RTC_CTRLOW_CTR100_Msk) >> RTC_CTRLOW_CTR100_Pos);
+    410              pTime->ui32Hundredths = bcd_to_dec(ui32Value);
+    411          
+    412              //
+    413              // Break out the upper word.
+    414              //
+    415              pTime->ui32ReadError =
+    416                  ((ui32RTCUp & RTC_CTRUP_CTERR_Msk) >> RTC_CTRUP_CTERR_Pos);
+    417          
+    418              pTime->ui32CenturyEnable =
+    419                  ((ui32RTCUp & RTC_CTRUP_CEB_Msk) >> RTC_CTRUP_CEB_Pos);
+    420          
+    421              pTime->ui32Century =
+    422                  ((ui32RTCUp & RTC_CTRUP_CB_Msk) >> RTC_CTRUP_CB_Pos);
+    423          
+    424              ui32Value =
+    425                  ((ui32RTCUp & RTC_CTRUP_CTRWKDY_Msk) >> RTC_CTRUP_CTRWKDY_Pos);
+    426              pTime->ui32Weekday = bcd_to_dec(ui32Value);
+    427          
+    428              ui32Value =
+    429                  ((ui32RTCUp & RTC_CTRUP_CTRYR_Msk) >> RTC_CTRUP_CTRYR_Pos);
+    430              pTime->ui32Year = bcd_to_dec(ui32Value);
+    431          
+    432              ui32Value =
+    433                  ((ui32RTCUp & RTC_CTRUP_CTRMO_Msk) >> RTC_CTRUP_CTRMO_Pos);
+    434              pTime->ui32Month = bcd_to_dec(ui32Value);
+    435          
+    436              ui32Value =
+    437                  ((ui32RTCUp & RTC_CTRUP_CTRDATE_Msk) >> RTC_CTRUP_CTRDATE_Pos);
+    438          
+    439              pTime->ui32DayOfMonth = bcd_to_dec(ui32Value);
+    440          
+    441              //
+    442              // Was there a read error?
+    443              //
+    444              if (pTime->ui32ReadError)
+    445              {
+    446                  return 1;
+    447              }
+    448              else
+    449              {
+    450                  return 0;
+    451              }
+    452          }
+    453          
+    454          //*****************************************************************************
+    455          //
+    456          //! @brief Sets the alarm repeat interval.
+    457          //!
+    458          //! @param ui32RepeatInterval the desired repeat interval.
+    459          //!
+    460          //! Sets the alarm repeat interval.
+    461          //!
+    462          //! Valid values for ui32RepeatInterval:
+    463          //!
+    464          //!     AM_HAL_RTC_ALM_RPT_DIS
+    465          //!     AM_HAL_RTC_ALM_RPT_YR
+    466          //!     AM_HAL_RTC_ALM_RPT_MTH
+    467          //!     AM_HAL_RTC_ALM_RPT_WK
+    468          //!     AM_HAL_RTC_ALM_RPT_DAY
+    469          //!     AM_HAL_RTC_ALM_RPT_HR
+    470          //!     AM_HAL_RTC_ALM_RPT_MIN
+    471          //!     AM_HAL_RTC_ALM_RPT_SEC
+    472          //!     AM_HAL_RTC_ALM_RPT_10TH
+    473          //!     AM_HAL_RTC_ALM_RPT_100TH
+    474          //!
+    475          //! @return None.
+    476          //
+    477          //*****************************************************************************
+    478          void
+    479          am_hal_rtc_alarm_interval_set(uint32_t ui32RepeatInterval)
+    480          {
+    481              uint32_t ui32RptInt, ui32Alm100, ui32Value;
+    482          
+    483              switch(ui32RepeatInterval)
+    484              {
+    485                  //
+    486                  // If repeat every 10th set RPT and ALM100 field accordinly
+    487                  //
+    488                  case AM_HAL_RTC_ALM_RPT_10TH:
+    489                      ui32RptInt = AM_HAL_RTC_ALM_RPT_SEC;
+    490                      ui32Alm100 = AM_HAL_RTC_ALM100_10TH;
+    491                      break;
+    492                  //
+    493                  // If repeat every 100th set RPT and ALM100 field accordinly
+    494                  //
+    495                  case AM_HAL_RTC_ALM_RPT_100TH:
+    496                      ui32RptInt = AM_HAL_RTC_ALM_RPT_SEC;
+    497                      ui32Alm100 = AM_HAL_RTC_ALM100_100TH;
+    498                      break;
+    499                  //
+    500                  // Otherwise set RPT as value passed.  ALM100 values need to be 0xnn
+    501                  // in this setting where n = 0-9.
+    502                  //
+    503                  default:
+    504                      //
+    505                      // Get the current value of the ALM100 field.
+    506                      //
+    507                      ui32Value = RTC->ALMLOW_b.ALM100;
+    508          
+    509                      //
+    510                      // If ALM100 was previous EVERY_10TH or EVERY_100TH reset to zero
+    511                      // otherwise keep previous setting.
+    512                      //
+    513                      ui32Alm100 = ui32Value >= 0xF0 ? 0 : ui32Value;
+    514          
+    515                      //
+    516                      // Set RPT value to value passed.
+    517                      //
+    518                      ui32RptInt = ui32RepeatInterval;
+    519                      break;
+    520              }
+    521          
+    522          
+    523              //
+    524              // Write the interval to the register.
+    525              //
+    526              RTC->RTCCTL_b.RPT = ui32RptInt;
+    527          
+    528              //
+    529              // Write the Alarm 100 bits in the ALM100 register.
+    530              //
+    531              RTC->ALMLOW_b.ALM100 = ui32Alm100;
+    532          }
+    533          
+    534          //*****************************************************************************
+    535          //
+    536          //! @brief Sets the RTC's Alarm.
+    537          //!
+    538          //! @param *pTime - A pointer to the time structure.
+    539          //! @param ui32RepeatInterval - the desired alarm repeat interval.
+    540          //!
+    541          //! Set the Real Time Clock Alarm Parameters.
+    542          //!
+    543          //! Valid values for ui32RepeatInterval:
+    544          //!
+    545          //!     AM_HAL_RTC_ALM_RPT_DIS
+    546          //!     AM_HAL_RTC_ALM_RPT_YR
+    547          //!     AM_HAL_RTC_ALM_RPT_MTH
+    548          //!     AM_HAL_RTC_ALM_RPT_WK
+    549          //!     AM_HAL_RTC_ALM_RPT_DAY
+    550          //!     AM_HAL_RTC_ALM_RPT_HR
+    551          //!     AM_HAL_RTC_ALM_RPT_MIN
+    552          //!     AM_HAL_RTC_ALM_RPT_SEC
+    553          //!     AM_HAL_RTC_ALM_RPT_10TH
+    554          //!     AM_HAL_RTC_ALM_RPT_EVERY_100TH
+    555          //!
+    556          //! @return None.
+    557          //
+    558          //*****************************************************************************
+    559          void
+    560          am_hal_rtc_alarm_set(am_hal_rtc_time_t *pTime, uint32_t ui32RepeatInterval)
+    561          {
+    562              uint8_t ui8Value = 0;
+    563          
+    564              //
+    565              // Write the interval to the register.
+    566              //
+    567              RTC->RTCCTL |= _VAL2FLD(RTC_RTCCTL_RPT, (ui32RepeatInterval > 0x7 ? 0x7 : ui32RepeatInterval));
+    568          
+    569              //
+    570              // Check if the interval is 10th or every 100th and track it in ui8Value.
+    571              //
+    572              if (ui32RepeatInterval == AM_HAL_RTC_ALM_RPT_10TH)
+    573              {
+    574                  ui8Value = 0xF0;
+    575              }
+    576              else if (ui32RepeatInterval == AM_HAL_RTC_ALM_RPT_100TH)
+    577              {
+    578                  ui8Value = 0xFF;
+    579              }
+    580          
+    581              //
+    582              // Write the ALMUP register.
+    583              //
+    584              RTC->ALMUP =
+    585                  _VAL2FLD(RTC_ALMUP_ALMWKDY, (pTime->ui32Weekday))                   |
+    586                  _VAL2FLD(RTC_ALMUP_ALMMO,   dec_to_bcd((pTime->ui32Month)))         |
+    587                  _VAL2FLD(RTC_ALMUP_ALMDATE, dec_to_bcd((pTime->ui32DayOfMonth)));
+    588          
+    589              //
+    590              // Write the ALMLOW register.
+    591              //
+    592              RTC->ALMLOW =
+    593                  _VAL2FLD(RTC_ALMLOW_ALMHR,  dec_to_bcd(pTime->ui32Hour))            |
+    594                  _VAL2FLD(RTC_ALMLOW_ALMMIN, dec_to_bcd(pTime->ui32Minute))          |
+    595                  _VAL2FLD(RTC_ALMLOW_ALMSEC, dec_to_bcd(pTime->ui32Second))          |
+    596                  _VAL2FLD(RTC_ALMLOW_ALM100, dec_to_bcd(pTime->ui32Hundredths) | ui8Value);
+    597          }
+    598          
+    599          //*****************************************************************************
+    600          //
+    601          //! @brief Get the Real Time Clock Alarm Parameters
+    602          //!
+    603          //! @param *pTime - A pointer to the time structure to store the current alarm.
+    604          //!
+    605          //! Gets the RTC's Alarm time
+    606          //!
+    607          //! @return None.
+    608          //
+    609          //*****************************************************************************
+    610          void
+    611          am_hal_rtc_alarm_get(am_hal_rtc_time_t *pTime)
+    612          {
+    613              uint32_t ui32ALMLow, ui32ALMUp, ui32Value;
+    614          
+    615              //
+    616              // Read the upper and lower RTC registers.
+    617              //
+    618              ui32ALMLow = RTC->ALMLOW;
+    619              ui32ALMUp  = RTC->ALMUP;
+    620          
+    621              //
+    622              // Break out the lower word.
+    623              //
+    624              ui32Value = ((ui32ALMLow & RTC_ALMLOW_ALMHR_Msk) >> RTC_ALMLOW_ALMHR_Pos);
+    625              pTime->ui32Hour = bcd_to_dec(ui32Value);
+    626          
+    627              ui32Value = ((ui32ALMLow & RTC_ALMLOW_ALMMIN_Msk) >> RTC_ALMLOW_ALMMIN_Pos);
+    628              pTime->ui32Minute = bcd_to_dec(ui32Value);
+    629          
+    630              ui32Value = ((ui32ALMLow & RTC_ALMLOW_ALMSEC_Msk) >> RTC_ALMLOW_ALMSEC_Pos);
+    631              pTime->ui32Second = bcd_to_dec(ui32Value);
+    632          
+    633              ui32Value = ((ui32ALMLow & RTC_ALMLOW_ALM100_Msk) >> RTC_ALMLOW_ALM100_Pos);
+    634              pTime->ui32Hundredths = bcd_to_dec(ui32Value);
+    635          
+    636              //
+    637              // Break out the upper word.
+    638              //
+    639              pTime->ui32ReadError = 0;
+    640              pTime->ui32CenturyEnable = 0;
+    641              pTime->ui32Century = 0;
+    642          
+    643              ui32Value = ((ui32ALMUp & RTC_ALMUP_ALMWKDY_Msk) >> RTC_ALMUP_ALMWKDY_Pos);
+    644              pTime->ui32Weekday = bcd_to_dec(ui32Value);
+    645          
+    646              pTime->ui32Year = 0;
+    647          
+    648              ui32Value = ((ui32ALMUp & RTC_ALMUP_ALMMO_Msk) >> RTC_ALMUP_ALMMO_Pos);
+    649              pTime->ui32Month = bcd_to_dec(ui32Value);
+    650          
+    651              ui32Value = ((ui32ALMUp & RTC_ALMUP_ALMDATE_Msk) >> RTC_ALMUP_ALMDATE_Pos);
+    652              pTime->ui32DayOfMonth = bcd_to_dec(ui32Value);
+    653          }
+    654          
+    655          //*****************************************************************************
+    656          //
+    657          // End Doxygen group.
+    658          //! @}
+    659          //
+    660          //*****************************************************************************
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      40   am_hal_rtc_alarm_get
+        40   -> bcd_to_dec
+       8   am_hal_rtc_alarm_interval_set
+      24   am_hal_rtc_alarm_set
+        24   -> dec_to_bcd
+       0   am_hal_rtc_int_clear
+       0   am_hal_rtc_int_disable
+       0   am_hal_rtc_int_enable
+       0   am_hal_rtc_int_enable_get
+       0   am_hal_rtc_int_set
+       0   am_hal_rtc_int_status_get
+       0   am_hal_rtc_osc_disable
+       0   am_hal_rtc_osc_enable
+       0   am_hal_rtc_osc_select
+       0   am_hal_rtc_time_12hour
+      40   am_hal_rtc_time_get
+        40   -> bcd_to_dec
+      24   am_hal_rtc_time_set
+        24   -> dec_to_bcd
+       0   bcd_to_dec
+       0   dec_to_bcd
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable15
+       4  ??DataTable15_1
+       4  ??DataTable15_2
+       4  ??DataTable15_3
+       4  ??DataTable15_4
+       4  ??DataTable15_5
+       4  ??DataTable15_6
+       4  ??DataTable15_7
+       4  ??DataTable15_8
+       4  ??DataTable15_9
+     136  am_hal_rtc_alarm_get
+      72  am_hal_rtc_alarm_interval_set
+     186  am_hal_rtc_alarm_set
+       6  am_hal_rtc_int_clear
+      10  am_hal_rtc_int_disable
+      10  am_hal_rtc_int_enable
+       6  am_hal_rtc_int_enable_get
+       6  am_hal_rtc_int_set
+      36  am_hal_rtc_int_status_get
+      12  am_hal_rtc_osc_disable
+      12  am_hal_rtc_osc_enable
+      28  am_hal_rtc_osc_select
+      16  am_hal_rtc_time_12hour
+     166  am_hal_rtc_time_get
+     178  am_hal_rtc_time_set
+      24  bcd_to_dec
+      32  dec_to_bcd
+
+ 
+ 976 bytes in section .text
+ 
+ 976 bytes of CODE memory
+
+Errors: none
+Warnings: none

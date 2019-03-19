@@ -1,0 +1,487 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:10
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_tpiu.c
+#    Command line =  
+#        -f C:\temp\EW8C4B.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_tpiu.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_tpiu.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_tpiu.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_tpiu.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_hal_tpiu.c
+      4          //! @file
+      5          //!
+      6          //! @brief Support functions for the ARM TPIU module
+      7          //!
+      8          //! Provides support functions for configuring the ARM TPIU module
+      9          //!
+     10          //! @addtogroup tpiu3 Trace Port Interface Unit (TPIU)
+     11          //! @ingroup apollo3hal
+     12          //! @{
+     13          //
+     14          //*****************************************************************************
+     15          
+     16          //*****************************************************************************
+     17          //
+     18          // Copyright (c) 2019, Ambiq Micro
+     19          // All rights reserved.
+     20          // 
+     21          // Redistribution and use in source and binary forms, with or without
+     22          // modification, are permitted provided that the following conditions are met:
+     23          // 
+     24          // 1. Redistributions of source code must retain the above copyright notice,
+     25          // this list of conditions and the following disclaimer.
+     26          // 
+     27          // 2. Redistributions in binary form must reproduce the above copyright
+     28          // notice, this list of conditions and the following disclaimer in the
+     29          // documentation and/or other materials provided with the distribution.
+     30          // 
+     31          // 3. Neither the name of the copyright holder nor the names of its
+     32          // contributors may be used to endorse or promote products derived from this
+     33          // software without specific prior written permission.
+     34          // 
+     35          // Third party software included in this distribution is subject to the
+     36          // additional license terms as defined in the /docs/licenses directory.
+     37          // 
+     38          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     39          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     40          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     41          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     42          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     43          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     44          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     45          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     46          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     47          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     48          // POSSIBILITY OF SUCH DAMAGE.
+     49          //
+     50          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     51          //
+     52          //*****************************************************************************
+     53          
+     54          #include <stdint.h>
+     55          #include <stdbool.h>
+     56          #include "am_mcu_apollo.h"
+     57          
+     58          //*****************************************************************************
+     59          //
+     60          //! @brief Enable the clock to the TPIU module.
+     61          //!
+     62          //! This function enables the clock to the TPIU module.
+     63          //!
+     64          //! @return None.
+     65          //
+     66          //*****************************************************************************
+     67          void
+     68          am_hal_tpiu_clock_enable(void)
+     69          {
+     70              //
+     71              // Enable the TPIU clock
+     72              //
+     73              MCUCTRL->TPIUCTRL |= MCUCTRL_TPIUCTRL_ENABLE_Msk;
+     74          }
+     75          
+     76          //*****************************************************************************
+     77          //
+     78          //! @brief Disable the clock to the TPIU module.
+     79          //!
+     80          //! This function disables the clock to the TPIU module.
+     81          //!
+     82          //! @return None.
+     83          //
+     84          //*****************************************************************************
+     85          void
+     86          am_hal_tpiu_clock_disable(void)
+     87          {
+     88              //
+     89              // Disable the TPIU clock
+     90              //
+     91              MCUCTRL->TPIUCTRL &= ~MCUCTRL_TPIUCTRL_ENABLE_Msk;
+     92          }
+     93          
+     94          //*****************************************************************************
+     95          //
+     96          //! @brief Set the output port width of the TPIU
+     97          //!
+     98          //! @param ui32PortWidth - The desired port width (in bits)
+     99          //!
+    100          //! This function uses the TPIU_CSPSR register to set the desired output port
+    101          //! width of the TPIU.
+    102          //!
+    103          //! @return None.
+    104          //
+    105          //*****************************************************************************
+    106          void
+    107          am_hal_tpiu_port_width_set(uint32_t ui32PortWidth)
+    108          {
+    109              TPI->CSPSR = 1 << (ui32PortWidth - 1);
+    110          }
+    111          
+    112          //*****************************************************************************
+    113          //
+    114          //! @brief Read the supported_output port width of the TPIU
+    115          //!
+    116          //! This function uses the \e TPIU_SSPSR register to set the supported output
+    117          //! port widths of the TPIU.
+    118          //!
+    119          //! @return Current width of the TPIU output port
+    120          //
+    121          //*****************************************************************************
+    122          uint32_t
+    123          am_hal_tpiu_supported_port_width_get(void)
+    124          {
+    125              uint32_t i, ui32WidthValue;
+    126          
+    127              //
+    128              // Read the supported width register.
+    129              //
+    130              ui32WidthValue = TPI->SSPSR;
+    131          
+    132              //
+    133              // The register value is encoded in a one-hot format, so the position of
+    134              // the single set bit determines the actual width of the port.
+    135              //
+    136              for (i = 1; i < 32; i++)
+    137              {
+    138                  //
+    139                  // Check each bit for a '1'. When we find it, our current loop index
+    140                  // will be equal to the port width.
+    141                  //
+    142                  if (ui32WidthValue == (0x1 << (i - 1)))
+    143                  {
+    144                      return i;
+    145                  }
+    146              }
+    147          
+    148              //
+    149              // We should never get here, but if we do, just return the smallest
+    150              // possible value for a supported trace port width.
+    151              //
+    152              return 1;
+    153          }
+    154          
+    155          //*****************************************************************************
+    156          //
+    157          //! @brief Read the output port width of the TPIU
+    158          //!
+    159          //! This function uses the \e TPIU_CSPSR register to set the desired output
+    160          //! port width of the TPIU.
+    161          //!
+    162          //! @return Current width of the TPIU output port
+    163          //
+    164          //*****************************************************************************
+    165          uint32_t
+    166          am_hal_tpiu_port_width_get(void)
+    167          {
+    168              uint32_t ui32Temp;
+    169              uint32_t ui32Width;
+    170          
+    171              ui32Width = 1;
+    172              ui32Temp = TPI->CSPSR;
+    173          
+    174              while ( !(ui32Temp & 1) )
+    175              {
+    176                  ui32Temp = ui32Temp >> 1;
+    177                  ui32Width++;
+    178          
+    179                  if (ui32Width > 32)
+    180                  {
+    181                      ui32Width = 0;
+    182                      break;
+    183                  }
+    184              }
+    185          
+    186              //
+    187              // Current width of the TPIU output port.
+    188              //
+    189              return ui32Width;
+    190          }
+    191          
+    192          //*****************************************************************************
+    193          //
+    194          //! @brief Configure the TPIU based on the values in the configuration struct.
+    195          //!
+    196          //! @param psConfig - pointer to an am_hal_tpiu_config_t structure containing
+    197          //! the desired configuration information.
+    198          //!
+    199          //! This function reads the provided configuration structure, and sets the
+    200          //! relevant TPIU registers to achieve the desired configuration.
+    201          //!
+    202          //! @return None.
+    203          //
+    204          //*****************************************************************************
+    205          void
+    206          am_hal_tpiu_configure(am_hal_tpiu_config_t *psConfig)
+    207          {
+    208              //
+    209              // Set the clock freq in the MCUCTRL register.
+    210              //
+    211              MCUCTRL->TPIUCTRL |= psConfig->ui32TraceClkIn;
+    212          
+    213              //
+    214              // Set the desired protocol.
+    215              //
+    216              TPI->SPPR = psConfig->ui32PinProtocol;
+    217          
+    218              //
+    219              // Set the parallel port width. This may be redundant if the user has
+    220              // selected a serial protocol, but we'll set it anyway.
+    221              //
+    222              TPI->CSPSR = (1 << (psConfig->ui32ParallelPortSize - 1));
+    223          
+    224              //
+    225              // Set the clock prescaler.
+    226              //
+    227              TPI->ACPR = psConfig->ui32ClockPrescaler;
+    228          }
+    229          
+    230          //*****************************************************************************
+    231          //
+    232          //! @brief Enables the TPIU
+    233          //!
+    234          //! This function enables the ARM TPIU by setting the TPIU registers and then
+    235          //! enabling the TPIU clock source in MCU control register.
+    236          //!
+    237          //! @param psConfig - structure for configuration.
+    238          //!     If ui32SetItmBaud, the other structure members are used to set the
+    239          //!      TPIU configuration.
+    240          //!     But for simplicity, ui32SetItmBaud can be set to one of the
+    241          //!      following, in which case all other structure members are ignored.
+    242          //!      In this case, the given BAUD rate is based on a div-by-8 HFRC clock.
+    243          //!         AM_HAL_TPIU_BAUD_57600
+    244          //!         AM_HAL_TPIU_BAUD_115200
+    245          //!         AM_HAL_TPIU_BAUD_230400
+    246          //!         AM_HAL_TPIU_BAUD_460800
+    247          //!         AM_HAL_TPIU_BAUD_500000
+    248          //!         AM_HAL_TPIU_BAUD_1M
+    249          //!
+    250          //! @return None.
+    251          //
+    252          //*****************************************************************************
+    253          void
+    254          am_hal_tpiu_enable(am_hal_tpiu_config_t *psConfig)
+    255          {
+    256              am_hal_clkgen_status_t sClkGenStatus;
+    257              uint32_t ui32HFRC, ui32SWOscaler, ui32ITMbitrate;
+    258          
+    259              ui32ITMbitrate = psConfig->ui32SetItmBaud;
+    260          
+    261              //
+    262              // TPIU formatter & flush control register.
+    263              //
+    264              TPI->FFCR = 0;
+    265          
+    266              if ( ui32ITMbitrate )
+    267              {
+    268                  //
+    269                  // Set the Current Parallel Port Size (note - only 1 bit can be set).
+    270                  //
+    271                  TPI->CSPSR = TPI_CSPSR_CWIDTH_1BIT;
+    272          
+    273                  //
+    274                  // Use some default assumptions to set the ITM frequency.
+    275                  //
+    276                  if ( (ui32ITMbitrate < AM_HAL_TPIU_BAUD_57600 )  ||
+    277                       (ui32ITMbitrate > AM_HAL_TPIU_BAUD_2M ) )
+    278                  {
+    279                      ui32ITMbitrate = AM_HAL_TPIU_BAUD_DEFAULT;
+    280                  }
+    281          
+    282                  //
+    283                  // Get the current HFRC frequency.
+    284                  //
+    285                  am_hal_clkgen_status_get(&sClkGenStatus);
+    286                  ui32HFRC = sClkGenStatus.ui32SysclkFreq;
+    287          
+    288                  //
+    289                  // Compute the SWO scaler value.
+    290                  //
+    291                  if ( ui32HFRC != 0xFFFFFFFF )
+    292                  {
+    293                      ui32SWOscaler = ((ui32HFRC / 8) / ui32ITMbitrate) - 1;
+    294                  }
+    295                  else
+    296                  {
+    297                      ui32SWOscaler = ( (AM_HAL_CLKGEN_FREQ_MAX_HZ / 8) /
+    298                                        AM_HAL_TPIU_BAUD_DEFAULT ) - 1;
+    299                  }
+    300          
+    301                  //
+    302                  // Set the scaler value.
+    303                  //
+    304                  TPI->ACPR = _VAL2FLD(TPI_ACPR_SWOSCALER, ui32SWOscaler);
+    305          
+    306                  //
+    307                  // Set for UART mode
+    308                  //
+    309                  TPI->SPPR = _VAL2FLD( TPI_SPPR_TXMODE, TPI_SPPR_TXMODE_UART);
+    310          
+    311                  //
+    312                  // Make sure we are not in test mode (important for proper deep sleep
+    313                  // operation).
+    314                  //
+    315                  TPI->ITCTRL = _VAL2FLD(TPI_ITCTRL_Mode, TPI_ITCTRL_Mode_NORMAL);
+    316          
+    317                  //
+    318                  // Enable the TPIU clock source in MCU control.
+    319                  // Set TPIU clock for HFRC/8 (6MHz) operation.
+    320                  //
+    321                  MCUCTRL->TPIUCTRL =
+    322                      _VAL2FLD(MCUCTRL_TPIUCTRL_CLKSEL, MCUCTRL_TPIUCTRL_CLKSEL_HFRCDIV8) |
+    323                      _VAL2FLD(MCUCTRL_TPIUCTRL_ENABLE, MCUCTRL_TPIUCTRL_ENABLE_EN);
+    324              }
+    325              else
+    326              {
+    327                  //
+    328                  // Set the configuration according to the structure values.
+    329                  //
+    330          
+    331                  //
+    332                  // Set the Asynchronous Clock Prescaler Register.
+    333                  //
+    334                  TPI->ACPR = psConfig->ui32ClockPrescaler;
+    335          
+    336                  //
+    337                  // Set the Selected Pin Protocol Register.
+    338                  //  e.g. AM_REG_TPIU_SPPR_TXMODE_UART
+    339                  //
+    340                  TPI->SPPR = psConfig->ui32PinProtocol;
+    341          
+    342                  //
+    343                  // Set the Current Parallel Port Size (note - only 1 bit can be set).
+    344                  // This may be redundant if the user has selected a serial protocol,
+    345                  // but we'll set it anyway.
+    346                  //
+    347                  TPI->CSPSR = (1 << (psConfig->ui32ParallelPortSize - 1));
+    348          
+    349                  //
+    350                  // Make sure we are not in test mode (important for proper deep sleep
+    351                  // operation).
+    352                  //
+    353                  TPI->ITCTRL = _VAL2FLD(TPI_ITCTRL_Mode, TPI_ITCTRL_Mode_NORMAL);
+    354          
+    355                  //
+    356                  // Set the clock freq and enable fields in the MCUCTRL register.
+    357                  //
+    358                  MCUCTRL->TPIUCTRL = psConfig->ui32TraceClkIn;
+    359              }
+    360          
+    361              //
+    362              // Wait for 50us for the data to flush out.
+    363              //
+    364              am_hal_flash_delay(FLASH_CYCLES_US(50));
+    365          }
+    366          
+    367          //*****************************************************************************
+    368          //
+    369          //! @brief Disables the TPIU
+    370          //!
+    371          //! This function disables the ARM TPIU by disabling the TPIU clock source
+    372          //! in MCU control register.
+    373          //!
+    374          //! @return None.
+    375          //
+    376          //*****************************************************************************
+    377          void
+    378          am_hal_tpiu_disable(void)
+    379          {
+    380              //
+    381              // Disable the TPIU clock source in MCU control.
+    382              //
+    383              MCUCTRL->TPIUCTRL =
+    384                  _VAL2FLD(MCUCTRL_TPIUCTRL_CLKSEL, MCUCTRL_TPIUCTRL_CLKSEL_LOWPWR) |
+    385                  _VAL2FLD(MCUCTRL_TPIUCTRL_ENABLE, MCUCTRL_TPIUCTRL_ENABLE_DIS);
+    386          }
+    387          
+    388          //*****************************************************************************
+    389          //
+    390          // End Doxygen group.
+    391          //! @}
+    392          //
+    393          //*****************************************************************************
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   am_hal_tpiu_clock_disable
+       0   am_hal_tpiu_clock_enable
+       0   am_hal_tpiu_configure
+       0   am_hal_tpiu_disable
+      32   am_hal_tpiu_enable
+        32   -> am_hal_clkgen_status_get
+        32   -> am_hal_flash_delay
+       0   am_hal_tpiu_port_width_get
+       0   am_hal_tpiu_port_width_set
+       0   am_hal_tpiu_supported_port_width_get
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable7
+       4  ??DataTable7_1
+       4  ??DataTable7_2
+       4  ??DataTable7_3
+       4  ??DataTable7_4
+       4  ??DataTable7_5
+       4  ??DataTable7_6
+       4  ??DataTable7_7
+       4  ??DataTable7_8
+      12  am_hal_tpiu_clock_disable
+      12  am_hal_tpiu_clock_enable
+      36  am_hal_tpiu_configure
+       8  am_hal_tpiu_disable
+     146  am_hal_tpiu_enable
+      24  am_hal_tpiu_port_width_get
+      14  am_hal_tpiu_port_width_set
+      34  am_hal_tpiu_supported_port_width_get
+
+ 
+ 322 bytes in section .text
+ 
+ 322 bytes of CODE memory
+
+Errors: none
+Warnings: none

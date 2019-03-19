@@ -1,0 +1,11 @@
+lutus library
+=============
+ver 0.0
+
+install :
+--------
+1. extract the compressed file to a folder.
+2. replace the opus_step1 folder with the folder from the above
+3. follow instructions in readme.xlsx
+
+

@@ -15,12 +15,7 @@ volatile uint8_t g_ui8DebounceFlag = 0;
 
 volatile uint32_t g_ui32DebounceTimerCount = 0;
 
-volatile  am_app_AEP_key_value_enum_t g_sysKeyValue = AM_APP_KEY_NONE;
 
-#if configUSE_RTT_DATA_OUTPUT
-uint8_t g_rttRecorderBuff[RTT_BUFFER_LENGTH];
-volatile uint8_t g_rttRecordingFlag = 0; 
-#endif
 //******************************************************************************
 //Global data buffers used by ring buffers
 //*****************************************************************************
@@ -33,17 +28,6 @@ volatile uint8_t g_rttRecordingFlag = 0;
 //    {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
 //};
 //#define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
-
-
-//*****************************************************************************
-// The stdio function for debug usage
-//*****************************************************************************
-
-void DebugLog(const char* s) { am_util_stdio_printf("%s", s); }
-void DebugLogInt32(int32_t i) { am_util_stdio_printf("%d", i); }
-void DebugLogUInt32(uint32_t i) { am_util_stdio_printf("%d", i); }
-void DebugLogHex(uint32_t i) { am_util_stdio_printf("0x%8x", i); }
-void DebugLogFloat(float i) { am_util_stdio_printf("%f", i); }
 
 //*****************************************************************************
 // BUTTON pins configuration settings.
@@ -65,8 +49,8 @@ am_hal_ctimer_config_t g_sTimer0 =
     // Set up Timer0A.
     (AM_HAL_CTIMER_FN_REPEAT    |
      AM_HAL_CTIMER_INT_ENABLE   |
-    AM_HAL_CTIMER_XT_32_768KHZ),
-     //    AM_HAL_CTIMER_HFRC_12MHZ), 
+//    AM_HAL_CTIMER_XT_32_768KHZ),
+    AM_HAL_CTIMER_HFRC_12MHZ), 
     // No configuration for Timer0B.
     0,
 };
@@ -102,7 +86,7 @@ timerA0_init(void)
     //
     // Set up timerA0 to 32Hz from LFRC divided to 1 second period.
     //
-    ui32Period = 33;
+    ui32Period = 12000;
     am_hal_ctimer_period_set(0, AM_HAL_CTIMER_TIMERA, ui32Period,
                              (ui32Period >> 1));
 

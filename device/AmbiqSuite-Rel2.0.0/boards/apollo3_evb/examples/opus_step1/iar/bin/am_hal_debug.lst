@@ -1,0 +1,164 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:07
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_debug.c
+#    Command line =  
+#        -f C:\temp\EW8188.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_debug.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_debug.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_hal_debug.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_debug.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_hal_debug.c
+      4          //! @file
+      5          //!
+      6          //! @brief Useful functions for debugging.
+      7          //!
+      8          //! These functions and macros were created to assist with debugging. They are
+      9          //! intended to be as unintrusive as possible and designed to be removed from
+     10          //! the compilation of a project when they are no longer needed.
+     11          //!
+     12          //! @addtogroup haldebug3 HAL Debug/Assert Utilities
+     13          //! @ingroup apollo3hal
+     14          //! @{
+     15          //
+     16          //*****************************************************************************
+     17          
+     18          //*****************************************************************************
+     19          //
+     20          // Copyright (c) 2019, Ambiq Micro
+     21          // All rights reserved.
+     22          // 
+     23          // Redistribution and use in source and binary forms, with or without
+     24          // modification, are permitted provided that the following conditions are met:
+     25          // 
+     26          // 1. Redistributions of source code must retain the above copyright notice,
+     27          // this list of conditions and the following disclaimer.
+     28          // 
+     29          // 2. Redistributions in binary form must reproduce the above copyright
+     30          // notice, this list of conditions and the following disclaimer in the
+     31          // documentation and/or other materials provided with the distribution.
+     32          // 
+     33          // 3. Neither the name of the copyright holder nor the names of its
+     34          // contributors may be used to endorse or promote products derived from this
+     35          // software without specific prior written permission.
+     36          // 
+     37          // Third party software included in this distribution is subject to the
+     38          // additional license terms as defined in the /docs/licenses directory.
+     39          // 
+     40          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     41          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     42          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     43          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     44          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     45          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     46          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     47          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     48          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     49          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     50          // POSSIBILITY OF SUCH DAMAGE.
+     51          //
+     52          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     53          //
+     54          //*****************************************************************************
+     55          
+     56          #include <stdint.h>
+     57          #include <stdbool.h>
+     58          #include "am_mcu_apollo.h"
+     59          
+     60          //*****************************************************************************
+     61          //
+     62          //! @brief Default implementation of a failed ASSERT statement.
+     63          //!
+     64          //! @param pcFile is the name of the source file where the error occurred.
+     65          //! @param ui32Line is the line number where the error occurred.
+     66          //! @param pcMessage is an optional message describing the failure.
+     67          //!
+     68          //! This function is called by am_hal_debug_assert() macro when the supplied
+     69          //! condition is not true. The implementation here simply halts the application
+     70          //! for further analysis. Individual applications may define their own
+     71          //! implementations of am_hal_debug_error() to provide more detailed feedback
+     72          //! about the failed am_hal_debug_assert() statement.
+     73          //!
+     74          //! @return Never.
+     75          //
+     76          //*****************************************************************************
+     77          #if defined (__IAR_SYSTEMS_ICC__)
+     78          __weak void
+     79          #else
+     80          void __attribute__((weak))
+     81          #endif
+     82          am_hal_debug_error(const char *pcFile, uint32_t ui32Line, const char *pcMessage)
+     83          {
+     84              //
+     85              // Halt for analysis.
+     86              //
+     87              while(1);
+     88          }
+     89          
+     90          //*****************************************************************************
+     91          //
+     92          // End Doxygen group.
+     93          //! @}
+     94          //
+     95          //*****************************************************************************
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   am_hal_debug_error
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  am_hal_debug_error
+
+ 
+ 2 bytes in section .text
+ 
+ 0 bytes of CODE memory (+ 2 bytes shared)
+
+Errors: none
+Warnings: none

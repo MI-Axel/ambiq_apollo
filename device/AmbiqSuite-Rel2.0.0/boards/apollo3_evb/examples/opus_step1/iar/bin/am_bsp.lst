@@ -1,0 +1,1248 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         12/Mar/2019  10:07:06
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\bsp\am_bsp.c
+#    Command line =  
+#        -f C:\temp\EW7AE9.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\bsp\am_bsp.c
+#        -D iar -D AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --diag_suppress Pa050 -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\utils\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\devices\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\bsp\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\..\..\..\..\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\
+#        -I
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\..\src\sound\
+#        -On)
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_bsp.lst
+#    Object file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\bin\am_bsp.o
+#
+###############################################################################
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\bsp\am_bsp.c
+      1          //*****************************************************************************
+      2          //
+      3          //  am_bsp.c
+      4          //! @file
+      5          //!
+      6          //! @brief Top level functions for performing board initialization.
+      7          //!
+      8          //! @addtogroup BSP Board Support Package (BSP)
+      9          //! @addtogroup apollo3_eb_bsp BSP for the Apollo3 Engineering Board
+     10          //! @ingroup BSP
+     11          //! @{
+     12          //
+     13          //*****************************************************************************
+     14          
+     15          //*****************************************************************************
+     16          //
+     17          // Copyright (c) 2019, Ambiq Micro
+     18          // All rights reserved.
+     19          // 
+     20          // Redistribution and use in source and binary forms, with or without
+     21          // modification, are permitted provided that the following conditions are met:
+     22          // 
+     23          // 1. Redistributions of source code must retain the above copyright notice,
+     24          // this list of conditions and the following disclaimer.
+     25          // 
+     26          // 2. Redistributions in binary form must reproduce the above copyright
+     27          // notice, this list of conditions and the following disclaimer in the
+     28          // documentation and/or other materials provided with the distribution.
+     29          // 
+     30          // 3. Neither the name of the copyright holder nor the names of its
+     31          // contributors may be used to endorse or promote products derived from this
+     32          // software without specific prior written permission.
+     33          // 
+     34          // Third party software included in this distribution is subject to the
+     35          // additional license terms as defined in the /docs/licenses directory.
+     36          // 
+     37          // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     38          // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     39          // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     40          // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+     41          // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     42          // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     43          // SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     44          // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     45          // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     46          // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     47          // POSSIBILITY OF SUCH DAMAGE.
+     48          //
+     49          // This is part of revision v2.0.0 of the AmbiqSuite Development Package.
+     50          //
+     51          //*****************************************************************************
+     52          
+     53          #include "am_bsp.h"
+     54          #include "am_util.h"
+     55          
+     56          //*****************************************************************************
+     57          //
+     58          // Power tracking structures for IOM and UART
+     59          //
+     60          //*****************************************************************************
+     61          am_bsp_uart_pwrsave_t am_bsp_uart_pwrsave[AM_REG_UART_NUM_MODULES];
+     62          
+     63          //*****************************************************************************
+     64          //
+     65          // LEDs
+     66          //
+     67          //*****************************************************************************
+     68          #ifdef AM_BSP_NUM_LEDS
+     69          am_devices_led_t am_bsp_psLEDs[AM_BSP_NUM_LEDS] =
+     70          {
+     71              {AM_BSP_GPIO_LED0, AM_DEVICES_LED_ON_HIGH | AM_DEVICES_LED_POL_DIRECT_DRIVE_M},
+     72              {AM_BSP_GPIO_LED1, AM_DEVICES_LED_ON_HIGH | AM_DEVICES_LED_POL_DIRECT_DRIVE_M},
+     73              {AM_BSP_GPIO_LED2, AM_DEVICES_LED_ON_HIGH | AM_DEVICES_LED_POL_DIRECT_DRIVE_M},
+     74              {AM_BSP_GPIO_LED3, AM_DEVICES_LED_ON_HIGH | AM_DEVICES_LED_POL_DIRECT_DRIVE_M},
+     75              {AM_BSP_GPIO_LED4, AM_DEVICES_LED_ON_HIGH | AM_DEVICES_LED_POL_DIRECT_DRIVE_M}
+     76          };
+     77          #endif
+     78          
+     79          #ifdef AM_BSP_NUM_BUTTONS
+     80          //*****************************************************************************
+     81          //
+     82          // Buttons.
+     83          //
+     84          //*****************************************************************************
+     85          am_devices_button_t am_bsp_psButtons[AM_BSP_NUM_BUTTONS] =
+     86          {
+     87              AM_DEVICES_BUTTON(AM_BSP_GPIO_BUTTON0, AM_DEVICES_BUTTON_NORMAL_HIGH),
+     88              AM_DEVICES_BUTTON(AM_BSP_GPIO_BUTTON1, AM_DEVICES_BUTTON_NORMAL_HIGH),
+     89              AM_DEVICES_BUTTON(AM_BSP_GPIO_BUTTON2, AM_DEVICES_BUTTON_NORMAL_HIGH),
+     90          };
+     91          #endif
+     92          
+     93          //*****************************************************************************
+     94          //
+     95          // Print interface tracking variable.
+     96          //
+     97          //*****************************************************************************
+     98          static uint32_t g_ui32PrintInterface = AM_BSP_PRINT_INFC_NONE;
+     99          
+    100          //*****************************************************************************
+    101          //
+    102          // Default UART configuration settings.
+    103          //
+    104          //*****************************************************************************
+    105          static void *g_sCOMUART;
+    106          
+    107          static const am_hal_uart_config_t g_sBspUartConfig =
+    108          {
+    109              //
+    110              // Standard UART settings: 115200-8-N-1
+    111              //
+    112              .ui32BaudRate = 115200,
+    113              .ui32DataBits = AM_HAL_UART_DATA_BITS_8,
+    114              .ui32Parity = AM_HAL_UART_PARITY_NONE,
+    115              .ui32StopBits = AM_HAL_UART_ONE_STOP_BIT,
+    116              .ui32FlowControl = AM_HAL_UART_FLOW_CTRL_NONE,
+    117          
+    118              //
+    119              // Set TX and RX FIFOs to interrupt at half-full.
+    120              //
+    121              .ui32FifoLevels = (AM_HAL_UART_TX_FIFO_1_2 |
+    122                                 AM_HAL_UART_RX_FIFO_1_2),
+    123          
+    124              //
+    125              // The default interface will just use polling instead of buffers.
+    126              //
+    127              .pui8TxBuffer = 0,
+    128              .ui32TxBufferSize = 0,
+    129              .pui8RxBuffer = 0,
+    130              .ui32RxBufferSize = 0,
+    131          };
+    132          
+    133          #ifndef AM_BSP_DISABLE_BUFFERED_UART
+    134          //*****************************************************************************
+    135          //
+    136          // Default UART configuration settings if using buffers.
+    137          //
+    138          //*****************************************************************************
+    139          #define AM_BSP_UART_BUFFER_SIZE     1024
+    140          static uint8_t pui8UartTxBuffer[AM_BSP_UART_BUFFER_SIZE];
+    141          static uint8_t pui8UartRxBuffer[AM_BSP_UART_BUFFER_SIZE];
+    142          
+    143          static am_hal_uart_config_t g_sBspUartBufferedConfig =
+    144          {
+    145              //
+    146              // Standard UART settings: 115200-8-N-1
+    147              //
+    148              .ui32BaudRate = 115200,
+    149              .ui32DataBits = AM_HAL_UART_DATA_BITS_8,
+    150              .ui32Parity = AM_HAL_UART_PARITY_NONE,
+    151              .ui32StopBits = AM_HAL_UART_ONE_STOP_BIT,
+    152              .ui32FlowControl = AM_HAL_UART_FLOW_CTRL_NONE,
+    153          
+    154              //
+    155              // Set TX and RX FIFOs to interrupt at half-full.
+    156              //
+    157              .ui32FifoLevels = (AM_HAL_UART_TX_FIFO_1_2 |
+    158                                 AM_HAL_UART_RX_FIFO_1_2),
+    159          
+    160              //
+    161              // The default interface will just use polling instead of buffers.
+    162              //
+    163              .pui8TxBuffer = pui8UartTxBuffer,
+    164              .ui32TxBufferSize = sizeof(pui8UartTxBuffer),
+    165              .pui8RxBuffer = pui8UartRxBuffer,
+    166              .ui32RxBufferSize = sizeof(pui8UartRxBuffer),
+    167          };
+    168          #endif // AM_BSP_DISABLE_BUFFERED_UART
+    169          
+    170          //*****************************************************************************
+    171          //
+    172          //! @brief Prepare the MCU for low power operation.
+    173          //!
+    174          //! This function enables several power-saving features of the MCU, and
+    175          //! disables some of the less-frequently used peripherals. It also sets the
+    176          //! system clock to 24 MHz.
+    177          //!
+    178          //! @return None.
+    179          //
+    180          //*****************************************************************************
+    181          void
+    182          am_bsp_low_power_init(void)
+    183          {
+    184              //
+    185              // Make sure SWO/ITM/TPIU is disabled.
+    186              // SBL may not get it completely shut down.
+    187              //
+    188              am_bsp_itm_printf_disable();
+    189          
+    190              //
+    191              // Initialize for low power in the power control block
+    192              //
+    193              am_hal_pwrctrl_low_power_init();
+    194          
+    195              //
+    196              // Run the RTC off the LFRC.
+    197              //
+    198              am_hal_rtc_osc_select(AM_HAL_RTC_OSC_LFRC);
+    199          
+    200              //
+    201              // Stop the XTAL.
+    202              //
+    203              am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_XTAL_STOP, 0);
+    204          
+    205              //
+    206              // Disable the RTC.
+    207              //
+    208              am_hal_rtc_osc_disable();
+    209          
+    210          #ifdef AM_BSP_NUM_LEDS
+    211              //
+    212              // Initialize the LEDs.
+    213              // On the apollo3_evb, when the GPIO outputs are disabled (the default at
+    214              // power up), the FET gates are floating and partially illuminating the LEDs.
+    215              //
+    216              uint32_t ux, ui32GPIONumber;
+    217              for (ux = 0; ux < AM_BSP_NUM_LEDS; ux++)
+    218              {
+    219                  ui32GPIONumber = am_bsp_psLEDs[ux].ui32GPIONumber;
+    220          
+    221                  //
+    222                  // Configure the pin as a push-pull GPIO output
+    223                  // (aka AM_DEVICES_LED_POL_DIRECT_DRIVE_M).
+    224                  //
+    225                  am_hal_gpio_pinconfig(ui32GPIONumber, g_AM_HAL_GPIO_OUTPUT);
+    226          
+    227                  //
+    228                  // Turn off the LED.
+    229                  //
+    230                  am_hal_gpio_state_write(ui32GPIONumber, AM_HAL_GPIO_OUTPUT_TRISTATE_DISABLE);
+    231                  am_hal_gpio_state_write(ui32GPIONumber, AM_HAL_GPIO_OUTPUT_CLEAR);
+    232              }
+    233          #endif // AM_BSP_NUM_LEDS
+    234          
+    235          } // am_bsp_low_power_init()
+    236          
+    237          //*****************************************************************************
+    238          //
+    239          //! @brief Enable the TPIU and ITM for debug printf messages.
+    240          //!
+    241          //! This function enables TPIU registers for debug printf messages and enables
+    242          //! ITM GPIO pin to SWO mode. This function should be called after reset and
+    243          //! after waking up from deep sleep.
+    244          //!
+    245          //! @return None.
+    246          //
+    247          //*****************************************************************************
+    248          void
+    249          am_bsp_debug_printf_enable(void)
+    250          {
+    251              if (g_ui32PrintInterface == AM_BSP_PRINT_INFC_SWO)
+    252              {
+    253                  am_bsp_itm_printf_enable();
+    254              }
+    255              else if (g_ui32PrintInterface == AM_BSP_PRINT_INFC_UART0)
+    256              {
+    257                  am_bsp_uart_printf_enable();
+    258              }
+    259          #ifndef AM_BSP_DISABLE_BUFFERED_UART
+    260              else if (g_ui32PrintInterface == AM_BSP_PRINT_INFC_BUFFERED_UART0)
+    261              {
+    262                  am_bsp_buffered_uart_printf_enable();
+    263              }
+    264          #endif // AM_BSP_DISABLE_BUFFERED_UART
+    265          } // am_bsp_debug_printf_enable()
+    266          
+    267          //*****************************************************************************
+    268          //
+    269          //! @brief Enable the TPIU and ITM for debug printf messages.
+    270          //!
+    271          //! This function disables TPIU registers for debug printf messages and
+    272          //! enables ITM GPIO pin to GPIO mode and prepares the MCU to go to deep sleep.
+    273          //!
+    274          //! @return None.
+    275          //
+    276          //*****************************************************************************
+    277          void
+    278          am_bsp_debug_printf_disable(void)
+    279          {
+    280              if (g_ui32PrintInterface == AM_BSP_PRINT_INFC_SWO)
+    281              {
+    282                  am_bsp_itm_printf_disable();
+    283              }
+    284              else if (g_ui32PrintInterface == AM_BSP_PRINT_INFC_UART0)
+    285              {
+    286                  am_bsp_uart_printf_disable();
+    287              }
+    288          } // am_bsp_debug_printf_disable()
+    289          
+    290          //*****************************************************************************
+    291          //
+    292          // @brief Enable printing over ITM.
+    293          //
+    294          //*****************************************************************************
+    295          void
+    296          am_bsp_itm_printf_enable(void)
+    297          {
+    298              am_hal_tpiu_config_t TPIUcfg;
+    299          
+    300              //
+    301              // Set the global print interface.
+    302              //
+    303              g_ui32PrintInterface = AM_BSP_PRINT_INFC_SWO;
+    304          
+    305              //
+    306              // Enable the ITM interface and the SWO pin.
+    307              //
+    308              am_hal_itm_enable();
+    309          //  am_hal_gpio_pinconfig(AM_BSP_GPIO_ITM_SWO, g_AM_BSP_GPIO_ITM_SWO);
+    310          
+    311              //
+    312              // Enable the ITM and TPIU
+    313              // Set the BAUD clock for 1M
+    314              //
+    315              TPIUcfg.ui32SetItmBaud = AM_HAL_TPIU_BAUD_1M;
+    316              am_hal_tpiu_enable(&TPIUcfg);
+    317              am_hal_gpio_pinconfig(AM_BSP_GPIO_ITM_SWO, g_AM_BSP_GPIO_ITM_SWO);
+    318          
+    319              //
+    320              // Attach the ITM to the STDIO driver.
+    321              //
+    322              am_util_stdio_printf_init(am_hal_itm_print);
+    323          } // am_bsp_itm_printf_enable()
+    324          
+    325          //*****************************************************************************
+    326          //
+    327          // @brief Disable printing over ITM.
+    328          //
+    329          //*****************************************************************************
+    330          void
+    331          am_bsp_itm_printf_disable(void)
+    332          {
+    333              //
+    334              // Disable the ITM/TPIU
+    335              //
+    336              am_hal_itm_disable();
+    337          
+    338              //
+    339              // Detach the ITM interface from the STDIO driver.
+    340              //
+    341              am_util_stdio_printf_init(0);
+    342          
+    343              //
+    344              // Disconnect the SWO pin
+    345              //
+    346              am_hal_gpio_pinconfig(AM_BSP_GPIO_ITM_SWO, g_AM_HAL_GPIO_DISABLE);
+    347          } // am_bsp_itm_printf_disable()
+    348          
+    349          //*****************************************************************************
+    350          //
+    351          //! @brief Set up the IOM pins based on mode and module.
+    352          //!
+    353          //! This function configures up to 10-pins for MSPI serial, dual, quad,
+    354          //! dual-quad, and octal operation.
+    355          //!
+    356          //! @return None.
+    357          //
+    358          //*****************************************************************************
+    359          void
+    360          am_bsp_iom_pins_enable(uint32_t ui32Module, am_hal_iom_mode_e eIOMMode)
+    361          {
+    362              uint32_t ui32Combined;
+    363          
+    364              //
+    365              // Validate parameters
+    366              //
+    367              if ( ui32Module >= AM_REG_IOM_NUM_MODULES )
+    368              {
+    369                  //
+    370                  // FPGA supports only IOM0 and 1.
+    371                  //
+    372                  return;
+    373              }
+    374          
+    375              ui32Combined = ((ui32Module << 2) | eIOMMode);
+    376          
+    377              switch ( ui32Combined )
+    378              {
+    379                  case ((0 << 2) | AM_HAL_IOM_SPI_MODE):
+    380                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_SCK,  g_AM_BSP_GPIO_IOM0_SCK);
+    381                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_MISO, g_AM_BSP_GPIO_IOM0_MISO);
+    382                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_MOSI, g_AM_BSP_GPIO_IOM0_MOSI);
+    383                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_CS,   g_AM_BSP_GPIO_IOM0_CS);
+    384                      break;
+    385          
+    386                  case ((1 << 2) | AM_HAL_IOM_SPI_MODE):
+    387                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SCK,  g_AM_BSP_GPIO_IOM1_SCK);
+    388                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_MISO, g_AM_BSP_GPIO_IOM1_MISO);
+    389                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_MOSI, g_AM_BSP_GPIO_IOM1_MOSI);
+    390                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_CS,   g_AM_BSP_GPIO_IOM1_CS);
+    391                      break;
+    392          
+    393                  case ((2 << 2) | AM_HAL_IOM_SPI_MODE):
+    394                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_SCK,  g_AM_BSP_GPIO_IOM2_SCK);
+    395                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_MISO, g_AM_BSP_GPIO_IOM2_MISO);
+    396                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_MOSI, g_AM_BSP_GPIO_IOM2_MOSI);
+    397                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_CS,   g_AM_BSP_GPIO_IOM2_CS);
+    398                      break;
+    399          
+    400                  case ((3 << 2) | AM_HAL_IOM_SPI_MODE):
+    401                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_SCK,  g_AM_BSP_GPIO_IOM3_SCK);
+    402                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_MISO, g_AM_BSP_GPIO_IOM3_MISO);
+    403                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_MOSI, g_AM_BSP_GPIO_IOM3_MOSI);
+    404                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_CS,   g_AM_BSP_GPIO_IOM3_CS);
+    405                      break;
+    406          
+    407                  case ((4 << 2) | AM_HAL_IOM_SPI_MODE):
+    408                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_SCK,  g_AM_BSP_GPIO_IOM4_SCK);
+    409                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_MISO, g_AM_BSP_GPIO_IOM4_MISO);
+    410                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_MOSI, g_AM_BSP_GPIO_IOM4_MOSI);
+    411                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_CS,   g_AM_BSP_GPIO_IOM4_CS);
+    412                      break;
+    413          
+    414                  case ((5 << 2) | AM_HAL_IOM_SPI_MODE):
+    415                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_SCK,  g_AM_BSP_GPIO_IOM5_SCK);
+    416                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_MISO, g_AM_BSP_GPIO_IOM5_MISO);
+    417                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_MOSI, g_AM_BSP_GPIO_IOM5_MOSI);
+    418                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_CS,   g_AM_BSP_GPIO_IOM5_CS);
+    419                      break;
+    420          
+    421                  case ((0 << 2) | AM_HAL_IOM_I2C_MODE):
+    422                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_SCL,  g_AM_BSP_GPIO_IOM0_SCL);
+    423                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_SDA,  g_AM_BSP_GPIO_IOM0_SDA);
+    424                      break;
+    425          
+    426                  case ((1 << 2) | AM_HAL_IOM_I2C_MODE):
+    427                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SCL,  g_AM_BSP_GPIO_IOM1_SCL);
+    428                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SDA,  g_AM_BSP_GPIO_IOM1_SDA);
+    429                      break;
+    430          
+    431                  case ((2 << 2) | AM_HAL_IOM_I2C_MODE):
+    432                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_SCL,  g_AM_BSP_GPIO_IOM2_SCL);
+    433                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_SDA,  g_AM_BSP_GPIO_IOM2_SDA);
+    434                      break;
+    435          
+    436                  case ((3 << 2) | AM_HAL_IOM_I2C_MODE):
+    437                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_SCL,  g_AM_BSP_GPIO_IOM3_SCL);
+    438                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_SDA,  g_AM_BSP_GPIO_IOM3_SDA);
+    439                      break;
+    440          
+    441                  case ((4 << 2) | AM_HAL_IOM_I2C_MODE):
+    442                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_SCL,  g_AM_BSP_GPIO_IOM4_SCL);
+    443                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_SDA,  g_AM_BSP_GPIO_IOM4_SDA);
+    444                      break;
+    445          
+    446                  case ((5 << 2) | AM_HAL_IOM_I2C_MODE):
+    447                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_SCL,  g_AM_BSP_GPIO_IOM5_SCL);
+    448                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_SDA,  g_AM_BSP_GPIO_IOM5_SDA);
+    449                      break;
+    450          
+    451                  default:
+    452                      break;
+    453              }
+    454          } // am_bsp_iom_pins_enable()
+    455          
+    456          //*****************************************************************************
+    457          //
+    458          //! @brief Disable the IOM pins based on mode and module.
+    459          //!
+    460          //! @return None.
+    461          //
+    462          //*****************************************************************************
+    463          void
+    464          am_bsp_iom_pins_disable(uint32_t ui32Module, am_hal_iom_mode_e eIOMMode)
+    465          {
+    466              uint32_t ui32Combined;
+    467          
+    468              //
+    469              // Validate parameters
+    470              //
+    471              if ( ui32Module >= AM_REG_IOM_NUM_MODULES )
+    472              {
+    473                  //
+    474                  // FPGA supports only IOM0 and 1.
+    475                  //
+    476                  return;
+    477              }
+    478          
+    479              ui32Combined = ((ui32Module << 2) | eIOMMode);
+    480          
+    481              switch ( ui32Combined )
+    482              {
+    483                  case ((0 << 2) | AM_HAL_IOM_SPI_MODE):
+    484                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_SCK,  g_AM_HAL_GPIO_DISABLE);
+    485                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_MISO, g_AM_HAL_GPIO_DISABLE);
+    486                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_MOSI, g_AM_HAL_GPIO_DISABLE);
+    487                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_CS,   g_AM_HAL_GPIO_DISABLE);
+    488                      break;
+    489          
+    490                  case ((1 << 2) | AM_HAL_IOM_SPI_MODE):
+    491                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SCK,  g_AM_HAL_GPIO_DISABLE);
+    492                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_MISO, g_AM_HAL_GPIO_DISABLE);
+    493                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_MOSI, g_AM_HAL_GPIO_DISABLE);
+    494                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_CS,   g_AM_HAL_GPIO_DISABLE);
+    495                      break;
+    496          
+    497                  case ((2 << 2) | AM_HAL_IOM_SPI_MODE):
+    498                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_SCK,  g_AM_HAL_GPIO_DISABLE);
+    499                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_MISO, g_AM_HAL_GPIO_DISABLE);
+    500                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_MOSI, g_AM_HAL_GPIO_DISABLE);
+    501                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_CS,   g_AM_HAL_GPIO_DISABLE);
+    502                      break;
+    503          
+    504                  case ((3 << 2) | AM_HAL_IOM_SPI_MODE):
+    505                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_SCK,  g_AM_HAL_GPIO_DISABLE);
+    506                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_MISO, g_AM_HAL_GPIO_DISABLE);
+    507                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_MOSI, g_AM_HAL_GPIO_DISABLE);
+    508                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_CS,   g_AM_HAL_GPIO_DISABLE);
+    509                      break;
+    510          
+    511                  case ((4 << 2) | AM_HAL_IOM_SPI_MODE):
+    512                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_SCK,  g_AM_HAL_GPIO_DISABLE);
+    513                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_MISO, g_AM_HAL_GPIO_DISABLE);
+    514                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_MOSI, g_AM_HAL_GPIO_DISABLE);
+    515                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_CS,   g_AM_HAL_GPIO_DISABLE);
+    516                      break;
+    517          
+    518                  case ((5 << 2) | AM_HAL_IOM_SPI_MODE):
+    519                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_SCK,  g_AM_HAL_GPIO_DISABLE);
+    520                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_MISO, g_AM_HAL_GPIO_DISABLE);
+    521                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_MOSI, g_AM_HAL_GPIO_DISABLE);
+    522                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_CS,   g_AM_HAL_GPIO_DISABLE);
+    523                      break;
+    524          
+    525                  case ((0 << 2) | AM_HAL_IOM_I2C_MODE):
+    526                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_SCL,  g_AM_HAL_GPIO_DISABLE);
+    527                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM0_SDA,  g_AM_HAL_GPIO_DISABLE);
+    528                      break;
+    529          
+    530                  case ((1 << 2) | AM_HAL_IOM_I2C_MODE):
+    531                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SCL,  g_AM_HAL_GPIO_DISABLE);
+    532                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM1_SDA,  g_AM_HAL_GPIO_DISABLE);
+    533                      break;
+    534          
+    535                  case ((2 << 2) | AM_HAL_IOM_I2C_MODE):
+    536                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_SCL,  g_AM_HAL_GPIO_DISABLE);
+    537                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM2_SDA,  g_AM_HAL_GPIO_DISABLE);
+    538                      break;
+    539          
+    540                  case ((3 << 2) | AM_HAL_IOM_I2C_MODE):
+    541                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_SCL,  g_AM_HAL_GPIO_DISABLE);
+    542                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM3_SDA,  g_AM_HAL_GPIO_DISABLE);
+    543                      break;
+    544          
+    545                  case ((4 << 2) | AM_HAL_IOM_I2C_MODE):
+    546                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_SCL,  g_AM_HAL_GPIO_DISABLE);
+    547                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM4_SDA,  g_AM_HAL_GPIO_DISABLE);
+    548                      break;
+    549          
+    550                  case ((5 << 2) | AM_HAL_IOM_I2C_MODE):
+    551                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_SCL,  g_AM_HAL_GPIO_DISABLE);
+    552                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOM5_SDA,  g_AM_HAL_GPIO_DISABLE);
+    553                      break;
+    554                  default:
+    555                      break;
+    556              }
+    557          } // am_bsp_iom_pins_disable()
+    558          
+    559          //*****************************************************************************
+    560          //
+    561          //! @brief Set up the MSPI pins based on the external flash device type.
+    562          //!
+    563          //! This function configures up to 10-pins for MSPI serial, dual, quad,
+    564          //! dual-quad, and octal operation.
+    565          //!
+    566          //! @return None.
+    567          //
+    568          //*****************************************************************************
+    569          void
+    570          am_bsp_mspi_pins_enable(am_hal_mspi_device_e eMSPIDevice)
+    571          {
+    572              switch ( eMSPIDevice )
+    573              {
+    574                  case AM_HAL_MSPI_FLASH_SERIAL_CE0:
+    575                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_BSP_GPIO_MSPI_CE0);
+    576                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_BSP_GPIO_MSPI_D0);
+    577                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_BSP_GPIO_MSPI_D1);
+    578                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    579                      break;
+    580                  case AM_HAL_MSPI_FLASH_SERIAL_CE1:
+    581                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_BSP_GPIO_MSPI_CE1);
+    582                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_BSP_GPIO_MSPI_D4);
+    583                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_BSP_GPIO_MSPI_D5);
+    584                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    585                      break;
+    586                  case AM_HAL_MSPI_FLASH_DUAL_CE0:
+    587                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_BSP_GPIO_MSPI_CE0);
+    588                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_BSP_GPIO_MSPI_D0);
+    589                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_BSP_GPIO_MSPI_D1);
+    590                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    591                      break;
+    592                  case AM_HAL_MSPI_FLASH_DUAL_CE1:
+    593                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_BSP_GPIO_MSPI_CE1);
+    594                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_BSP_GPIO_MSPI_D4);
+    595                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_BSP_GPIO_MSPI_D5);
+    596                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    597                      break;
+    598                  case AM_HAL_MSPI_FLASH_QUAD_CE0:
+    599                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_BSP_GPIO_MSPI_CE0);
+    600                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_BSP_GPIO_MSPI_D0);
+    601                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_BSP_GPIO_MSPI_D1);
+    602                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_BSP_GPIO_MSPI_D2);
+    603                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_BSP_GPIO_MSPI_D3);
+    604                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    605                      break;
+    606                  case AM_HAL_MSPI_FLASH_QUAD_CE1:
+    607                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_BSP_GPIO_MSPI_CE1);
+    608                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_BSP_GPIO_MSPI_D4);
+    609                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_BSP_GPIO_MSPI_D5);
+    610                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_BSP_GPIO_MSPI_D6);
+    611                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_BSP_GPIO_MSPI_D7);
+    612                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    613                      break;
+    614                  case AM_HAL_MSPI_FLASH_OCTAL_CE0:
+    615                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_BSP_GPIO_MSPI_CE0);
+    616                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_BSP_GPIO_MSPI_D0);
+    617                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_BSP_GPIO_MSPI_D1);
+    618                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_BSP_GPIO_MSPI_D2);
+    619                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_BSP_GPIO_MSPI_D3);
+    620                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_BSP_GPIO_MSPI_D4);
+    621                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_BSP_GPIO_MSPI_D5);
+    622                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_BSP_GPIO_MSPI_D6);
+    623                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_BSP_GPIO_MSPI_D7);
+    624                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    625                      break;
+    626                  case AM_HAL_MSPI_FLASH_OCTAL_CE1:
+    627                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_BSP_GPIO_MSPI_CE1);
+    628                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_BSP_GPIO_MSPI_D0);
+    629                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_BSP_GPIO_MSPI_D1);
+    630                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_BSP_GPIO_MSPI_D2);
+    631                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_BSP_GPIO_MSPI_D3);
+    632                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_BSP_GPIO_MSPI_D4);
+    633                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_BSP_GPIO_MSPI_D5);
+    634                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_BSP_GPIO_MSPI_D6);
+    635                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_BSP_GPIO_MSPI_D7);
+    636                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    637                      break;
+    638                  case AM_HAL_MSPI_FLASH_QUADPAIRED:
+    639                  case AM_HAL_MSPI_FLASH_QUADPAIRED_SERIAL:
+    640                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_BSP_GPIO_MSPI_CE0);
+    641                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_BSP_GPIO_MSPI_CE1);
+    642                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_BSP_GPIO_MSPI_D0);
+    643                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_BSP_GPIO_MSPI_D1);
+    644                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_BSP_GPIO_MSPI_D2);
+    645                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_BSP_GPIO_MSPI_D3);
+    646                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_BSP_GPIO_MSPI_D4);
+    647                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_BSP_GPIO_MSPI_D5);
+    648                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_BSP_GPIO_MSPI_D6);
+    649                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_BSP_GPIO_MSPI_D7);
+    650                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_BSP_GPIO_MSPI_SCK);
+    651                      break;
+    652              }
+    653          } // am_bsp_mspi_pins_enable()
+    654          
+    655          //*****************************************************************************
+    656          //
+    657          //! @brief Disable the MSPI pins based on the external flash device type.
+    658          //!
+    659          //! This function configures up to 10-pins for MSPI serial, dual, quad,
+    660          //! dual-quad, and octal operation.
+    661          //!
+    662          //! @return None.
+    663          //
+    664          //*****************************************************************************
+    665          void
+    666          am_bsp_mspi_pins_disable(am_hal_mspi_device_e eMSPIDevice)
+    667          {
+    668              switch ( eMSPIDevice )
+    669              {
+    670                  case AM_HAL_MSPI_FLASH_SERIAL_CE0:
+    671                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_HAL_GPIO_DISABLE);
+    672                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_HAL_GPIO_DISABLE);
+    673                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_HAL_GPIO_DISABLE);
+    674                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    675                      break;
+    676                  case AM_HAL_MSPI_FLASH_SERIAL_CE1:
+    677                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_HAL_GPIO_DISABLE);
+    678                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_HAL_GPIO_DISABLE);
+    679                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_HAL_GPIO_DISABLE);
+    680                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    681                      break;
+    682                  case AM_HAL_MSPI_FLASH_DUAL_CE0:
+    683                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_HAL_GPIO_DISABLE);
+    684                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_HAL_GPIO_DISABLE);
+    685                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_HAL_GPIO_DISABLE);
+    686                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    687                      break;
+    688                  case AM_HAL_MSPI_FLASH_DUAL_CE1:
+    689                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_HAL_GPIO_DISABLE);
+    690                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_HAL_GPIO_DISABLE);
+    691                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_HAL_GPIO_DISABLE);
+    692                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    693                      break;
+    694                  case AM_HAL_MSPI_FLASH_QUAD_CE0:
+    695                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_HAL_GPIO_DISABLE);
+    696                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_HAL_GPIO_DISABLE);
+    697                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_HAL_GPIO_DISABLE);
+    698                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_HAL_GPIO_DISABLE);
+    699                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_HAL_GPIO_DISABLE);
+    700                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    701                      break;
+    702                  case AM_HAL_MSPI_FLASH_QUAD_CE1:
+    703                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_HAL_GPIO_DISABLE);
+    704                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_HAL_GPIO_DISABLE);
+    705                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_HAL_GPIO_DISABLE);
+    706                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_HAL_GPIO_DISABLE);
+    707                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_HAL_GPIO_DISABLE);
+    708                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    709                      break;
+    710                  case AM_HAL_MSPI_FLASH_OCTAL_CE0:
+    711                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_HAL_GPIO_DISABLE);
+    712                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_HAL_GPIO_DISABLE);
+    713                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_HAL_GPIO_DISABLE);
+    714                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_HAL_GPIO_DISABLE);
+    715                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_HAL_GPIO_DISABLE);
+    716                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_HAL_GPIO_DISABLE);
+    717                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_HAL_GPIO_DISABLE);
+    718                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_HAL_GPIO_DISABLE);
+    719                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_HAL_GPIO_DISABLE);
+    720                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    721                      break;
+    722                  case AM_HAL_MSPI_FLASH_OCTAL_CE1:
+    723                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_HAL_GPIO_DISABLE);
+    724                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_HAL_GPIO_DISABLE);
+    725                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_HAL_GPIO_DISABLE);
+    726                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_HAL_GPIO_DISABLE);
+    727                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_HAL_GPIO_DISABLE);
+    728                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_HAL_GPIO_DISABLE);
+    729                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_HAL_GPIO_DISABLE);
+    730                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_HAL_GPIO_DISABLE);
+    731                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_HAL_GPIO_DISABLE);
+    732                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    733                      break;
+    734                  case AM_HAL_MSPI_FLASH_QUADPAIRED:
+    735                  case AM_HAL_MSPI_FLASH_QUADPAIRED_SERIAL:
+    736                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE0, g_AM_HAL_GPIO_DISABLE);
+    737                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_CE1, g_AM_HAL_GPIO_DISABLE);
+    738                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D0,  g_AM_HAL_GPIO_DISABLE);
+    739                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D1,  g_AM_HAL_GPIO_DISABLE);
+    740                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D2,  g_AM_HAL_GPIO_DISABLE);
+    741                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D3,  g_AM_HAL_GPIO_DISABLE);
+    742                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D4,  g_AM_HAL_GPIO_DISABLE);
+    743                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D5,  g_AM_HAL_GPIO_DISABLE);
+    744                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D6,  g_AM_HAL_GPIO_DISABLE);
+    745                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_D7,  g_AM_HAL_GPIO_DISABLE);
+    746                      am_hal_gpio_pinconfig(AM_BSP_GPIO_MSPI_SCK, g_AM_HAL_GPIO_DISABLE);
+    747                      break;
+    748              }
+    749          } // am_bsp_mspi_pins_disable()
+    750          
+    751          //*****************************************************************************
+    752          //
+    753          //! @brief Set up the IOS pins based on mode and module.
+    754          //!
+    755          //! @return None.
+    756          //
+    757          //*****************************************************************************
+    758          void am_bsp_ios_pins_enable(uint32_t ui32Module, uint32_t ui32IOSMode)
+    759          {
+    760              uint32_t ui32Combined;
+    761          
+    762              //
+    763              // Validate parameters
+    764              //
+    765              if ( ui32Module >= AM_REG_IOSLAVE_NUM_MODULES )
+    766              {
+    767                  return;
+    768              }
+    769          
+    770              ui32Combined = ((ui32Module << 2) | ui32IOSMode);
+    771          
+    772              switch ( ui32Combined )
+    773              {
+    774                  case ((0 << 2) | AM_HAL_IOS_USE_SPI):
+    775                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_SCK,  g_AM_BSP_GPIO_IOS_SCK);
+    776                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_MISO, g_AM_BSP_GPIO_IOS_MISO);
+    777                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_MOSI, g_AM_BSP_GPIO_IOS_MOSI);
+    778                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_CE,   g_AM_BSP_GPIO_IOS_CE);
+    779                      break;
+    780          
+    781                  case ((0 << 2) | AM_HAL_IOS_USE_I2C):
+    782                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_SCL,  g_AM_BSP_GPIO_IOS_SCL);
+    783                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_SDA,  g_AM_BSP_GPIO_IOS_SDA);
+    784                      break;
+    785                  default:
+    786                      break;
+    787              }
+    788          } // am_bsp_iom_pins_enable()
+    789          
+    790          //*****************************************************************************
+    791          //
+    792          //! @brief Disable the IOS pins based on mode and module.
+    793          //!
+    794          //! @return None.
+    795          //
+    796          //*****************************************************************************
+    797          void am_bsp_ios_pins_disable(uint32_t ui32Module, uint32_t ui32IOSMode)
+    798          {
+    799              uint32_t ui32Combined;
+    800          
+    801              //
+    802              // Validate parameters
+    803              //
+    804              if ( ui32Module >= AM_REG_IOSLAVE_NUM_MODULES )
+    805              {
+    806                  return;
+    807              }
+    808          
+    809              ui32Combined = ((ui32Module << 2) | ui32IOSMode);
+    810          
+    811              switch ( ui32Combined )
+    812              {
+    813                  case ((0 << 2) | AM_HAL_IOS_USE_SPI):
+    814                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_SCK,  g_AM_HAL_GPIO_DISABLE);
+    815                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_MISO, g_AM_HAL_GPIO_DISABLE);
+    816                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_MOSI, g_AM_HAL_GPIO_DISABLE);
+    817                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_CE,   g_AM_HAL_GPIO_DISABLE);
+    818                      break;
+    819          
+    820                  case ((0 << 2) | AM_HAL_IOS_USE_I2C):
+    821                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_SCL,  g_AM_HAL_GPIO_DISABLE);
+    822                      am_hal_gpio_pinconfig(AM_BSP_GPIO_IOS_SDA,  g_AM_HAL_GPIO_DISABLE);
+    823                      break;
+    824                  default:
+    825                      break;
+    826              }
+    827          } // am_bsp_iom_pins_disable()
+    828          
+    829          //*****************************************************************************
+    830          //
+    831          //! @brief UART-based string print function.
+    832          //!
+    833          //! This function is used for printing a string via the UART, which for some
+    834          //! MCU devices may be multi-module.
+    835          //!
+    836          //! @return None.
+    837          //
+    838          //*****************************************************************************
+    839          void
+    840          am_bsp_uart_string_print(char *pcString)
+    841          {
+    842              uint32_t ui32StrLen = 0;
+    843              uint32_t ui32BytesWritten = 0;
+    844          
+    845              //
+    846              // Measure the length of the string.
+    847              //
+    848              while (pcString[ui32StrLen] != 0)
+    849              {
+    850                  ui32StrLen++;
+    851              }
+    852          
+    853              //
+    854              // Print the string via the UART.
+    855              //
+    856              const am_hal_uart_transfer_t sUartWrite =
+    857              {
+    858                  .ui32Direction = AM_HAL_UART_WRITE,
+    859                  .pui8Data = (uint8_t *) pcString,
+    860                  .ui32NumBytes = ui32StrLen,
+    861                  .ui32TimeoutMs = AM_HAL_UART_WAIT_FOREVER,
+    862                  .pui32BytesTransferred = &ui32BytesWritten,
+    863              };
+    864          
+    865              am_hal_uart_transfer(g_sCOMUART, &sUartWrite);
+    866          
+    867              if (ui32BytesWritten != ui32StrLen)
+    868              {
+    869                  //
+    870                  // Couldn't send the whole string!!
+    871                  //
+    872                  while(1);
+    873              }
+    874          } // am_bsp_uart_string_print()
+    875          
+    876          //*****************************************************************************
+    877          //
+    878          // Pass-through function to let applications access the COM UART.
+    879          //
+    880          //*****************************************************************************
+    881          uint32_t
+    882          am_bsp_com_uart_transfer(const am_hal_uart_transfer_t *psTransfer)
+    883          {
+    884              return am_hal_uart_transfer(g_sCOMUART, psTransfer);
+    885          } // am_bsp_com_uart_transfer()
+    886          
+    887          //*****************************************************************************
+    888          //
+    889          // Initialize and configure the UART
+    890          //
+    891          //*****************************************************************************
+    892          void
+    893          am_bsp_uart_printf_enable(void)
+    894          {
+    895              //
+    896              // Save the information that we're using the UART for printing.
+    897              //
+    898              g_ui32PrintInterface = AM_BSP_PRINT_INFC_UART0;
+    899          
+    900              //
+    901              // Initialize, power up, and configure the communication UART. Use the
+    902              // custom configuration if it was provided. Otherwise, just use the default
+    903              // configuration.
+    904              //
+    905              am_hal_uart_initialize(AM_BSP_UART_PRINT_INST, &g_sCOMUART);
+    906              am_hal_uart_power_control(g_sCOMUART, AM_HAL_SYSCTRL_WAKE, false);
+    907              am_hal_uart_configure(g_sCOMUART, &g_sBspUartConfig);
+    908          
+    909              //
+    910              // Enable the UART pins.
+    911              //
+    912              am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_TX, g_AM_BSP_GPIO_COM_UART_TX);
+    913              am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_RX, g_AM_BSP_GPIO_COM_UART_RX);
+    914          
+    915              //
+    916              // Register the BSP print function to the STDIO driver.
+    917              //
+    918              am_util_stdio_printf_init(am_bsp_uart_string_print);
+    919          } // am_bsp_uart_printf_enable()
+    920          
+    921          //*****************************************************************************
+    922          //
+    923          // Disable the UART
+    924          //
+    925          //*****************************************************************************
+    926          void
+    927          am_bsp_uart_printf_disable(void)
+    928          {
+    929              //
+    930              // Make sure the UART has finished sending everything it's going to send.
+    931              //
+    932              am_hal_uart_tx_flush(g_sCOMUART);
+    933          
+    934              //
+    935              // Detach the UART from the stdio driver.
+    936              //
+    937              am_util_stdio_printf_init(0);
+    938          
+    939              //
+    940              // Power down the UART, and surrender the handle.
+    941              //
+    942              am_hal_uart_power_control(g_sCOMUART, AM_HAL_SYSCTRL_DEEPSLEEP, false);
+    943              am_hal_uart_deinitialize(g_sCOMUART);
+    944          
+    945              //
+    946              // Disable the UART pins.
+    947              //
+    948              am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_TX, g_AM_HAL_GPIO_DISABLE);
+    949              am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_RX, g_AM_HAL_GPIO_DISABLE);
+    950          
+    951          } // am_bsp_uart_printf_disable()
+    952          
+    953          #ifndef AM_BSP_DISABLE_BUFFERED_UART
+    954          //*****************************************************************************
+    955          //
+    956          // Initialize and configure the UART
+    957          //
+    958          //*****************************************************************************
+    959          void
+    960          am_bsp_buffered_uart_printf_enable(void)
+    961          {
+    962              //
+    963              // Save the information that we're using the UART for printing.
+    964              //
+    965              g_ui32PrintInterface = AM_BSP_PRINT_INFC_UART0;
+    966          
+    967              //
+    968              // Initialize, power up, and configure the communication UART. Use the
+    969              // custom configuration if it was provided. Otherwise, just use the default
+    970              // configuration.
+    971              //
+    972              am_hal_uart_initialize(AM_BSP_UART_PRINT_INST, &g_sCOMUART);
+    973              am_hal_uart_power_control(g_sCOMUART, AM_HAL_SYSCTRL_WAKE, false);
+    974              am_hal_uart_configure(g_sCOMUART, &g_sBspUartBufferedConfig);
+    975          
+    976              //
+    977              // Enable the UART pins.
+    978              //
+    979              am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_TX, g_AM_BSP_GPIO_COM_UART_TX);
+    980              am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_RX, g_AM_BSP_GPIO_COM_UART_RX);
+    981          
+    982              //
+    983              // Register the BSP print function to the STDIO driver.
+    984              //
+    985              am_util_stdio_printf_init(am_bsp_uart_string_print);
+    986          
+    987              //
+    988              // Enable the interrupts for the UART.
+    989              //
+    990              NVIC_EnableIRQ((IRQn_Type)(UART0_IRQn + AM_BSP_UART_PRINT_INST));
+    991          } // am_bsp_buffered_uart_printf_enable()
+    992          
+    993          //*****************************************************************************
+    994          //
+    995          // Interrupt routine for the buffered UART interface.
+    996          //
+    997          //*****************************************************************************
+    998          void
+    999          am_bsp_buffered_uart_service(void)
+   1000          {
+   1001              uint32_t ui32Status, ui32Idle;
+   1002              am_hal_uart_interrupt_status_get(g_sCOMUART, &ui32Status, true);
+   1003              am_hal_uart_interrupt_clear(g_sCOMUART, ui32Status);
+   1004              am_hal_uart_interrupt_service(g_sCOMUART, ui32Status, &ui32Idle);
+   1005          } // am_bsp_buffered_uart_service()
+   1006          #endif // AM_BSP_DISABLE_BUFFERED_UART
+   1007          
+   1008          
+   1009          
+   1010          //*****************************************************************************
+   1011          //
+   1012          // End Doxygen group.
+   1013          //! @}
+   1014          //
+   1015          //*****************************************************************************
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   __NVIC_EnableIRQ
+       8   am_bsp_buffered_uart_printf_enable
+         8   -> __NVIC_EnableIRQ
+         8   -> am_hal_gpio_pinconfig
+         8   -> am_hal_uart_configure
+         8   -> am_hal_uart_initialize
+         8   -> am_hal_uart_power_control
+         8   -> am_util_stdio_printf_init
+      16   am_bsp_buffered_uart_service
+        16   -> am_hal_uart_interrupt_clear
+        16   -> am_hal_uart_interrupt_service
+        16   -> am_hal_uart_interrupt_status_get
+       8   am_bsp_com_uart_transfer
+         8   -> am_hal_uart_transfer
+       8   am_bsp_debug_printf_disable
+         8   -> am_bsp_itm_printf_disable
+         8   -> am_bsp_uart_printf_disable
+       8   am_bsp_debug_printf_enable
+         8   -> am_bsp_buffered_uart_printf_enable
+         8   -> am_bsp_itm_printf_enable
+         8   -> am_bsp_uart_printf_enable
+      24   am_bsp_iom_pins_disable
+        24   -> am_hal_gpio_pinconfig
+      16   am_bsp_iom_pins_enable
+        16   -> am_hal_gpio_pinconfig
+      24   am_bsp_ios_pins_disable
+        24   -> am_hal_gpio_pinconfig
+      16   am_bsp_ios_pins_enable
+        16   -> am_hal_gpio_pinconfig
+       8   am_bsp_itm_printf_disable
+         8   -> am_hal_gpio_pinconfig
+         8   -> am_hal_itm_disable
+         8   -> am_util_stdio_printf_init
+      24   am_bsp_itm_printf_enable
+        24   -> am_hal_gpio_pinconfig
+        24   -> am_hal_itm_enable
+        24   -> am_hal_tpiu_enable
+        24   -> am_util_stdio_printf_init
+      16   am_bsp_low_power_init
+        16   -> am_bsp_itm_printf_disable
+        16   -> am_hal_clkgen_control
+        16   -> am_hal_gpio_pinconfig
+        16   -> am_hal_gpio_state_write
+        16   -> am_hal_pwrctrl_low_power_init
+        16   -> am_hal_rtc_osc_disable
+        16   -> am_hal_rtc_osc_select
+      16   am_bsp_mspi_pins_disable
+        16   -> am_hal_gpio_pinconfig
+       8   am_bsp_mspi_pins_enable
+         8   -> am_hal_gpio_pinconfig
+       8   am_bsp_uart_printf_disable
+         8   -> am_hal_gpio_pinconfig
+         8   -> am_hal_uart_deinitialize
+         8   -> am_hal_uart_power_control
+         8   -> am_hal_uart_tx_flush
+         8   -> am_util_stdio_printf_init
+       8   am_bsp_uart_printf_enable
+         8   -> am_hal_gpio_pinconfig
+         8   -> am_hal_uart_configure
+         8   -> am_hal_uart_initialize
+         8   -> am_hal_uart_power_control
+         8   -> am_util_stdio_printf_init
+      40   am_bsp_uart_string_print
+        40   -> __aeabi_memcpy4
+        40   -> am_hal_uart_transfer
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable15
+       4  ??DataTable17
+       4  ??DataTable17_1
+       4  ??DataTable17_10
+       4  ??DataTable17_11
+       4  ??DataTable17_12
+       4  ??DataTable17_13
+       4  ??DataTable17_14
+       4  ??DataTable17_15
+       4  ??DataTable17_16
+       4  ??DataTable17_17
+       4  ??DataTable17_18
+       4  ??DataTable17_19
+       4  ??DataTable17_2
+       4  ??DataTable17_20
+       4  ??DataTable17_21
+       4  ??DataTable17_22
+       4  ??DataTable17_23
+       4  ??DataTable17_24
+       4  ??DataTable17_25
+       4  ??DataTable17_26
+       4  ??DataTable17_27
+       4  ??DataTable17_28
+       4  ??DataTable17_29
+       4  ??DataTable17_3
+       4  ??DataTable17_30
+       4  ??DataTable17_31
+       4  ??DataTable17_32
+       4  ??DataTable17_33
+       4  ??DataTable17_34
+       4  ??DataTable17_35
+       4  ??DataTable17_36
+       4  ??DataTable17_37
+       4  ??DataTable17_38
+       4  ??DataTable17_39
+       4  ??DataTable17_4
+       4  ??DataTable17_40
+       4  ??DataTable17_41
+       4  ??DataTable17_42
+       4  ??DataTable17_43
+       4  ??DataTable17_44
+       4  ??DataTable17_45
+       4  ??DataTable17_46
+       4  ??DataTable17_47
+       4  ??DataTable17_48
+       4  ??DataTable17_49
+       4  ??DataTable17_5
+       4  ??DataTable17_50
+       4  ??DataTable17_51
+       4  ??DataTable17_52
+       4  ??DataTable17_53
+       4  ??DataTable17_54
+       4  ??DataTable17_55
+       4  ??DataTable17_56
+       4  ??DataTable17_57
+       4  ??DataTable17_58
+       4  ??DataTable17_59
+       4  ??DataTable17_6
+       4  ??DataTable17_60
+       4  ??DataTable17_61
+       4  ??DataTable17_62
+       4  ??DataTable17_63
+       4  ??DataTable17_64
+       4  ??DataTable17_65
+       4  ??DataTable17_66
+       4  ??DataTable17_7
+       4  ??DataTable17_8
+       4  ??DataTable17_9
+      20  ?_0
+      32  __NVIC_EnableIRQ
+      70  am_bsp_buffered_uart_printf_enable
+      34  am_bsp_buffered_uart_service
+      16  am_bsp_com_uart_transfer
+      30  am_bsp_debug_printf_disable
+      42  am_bsp_debug_printf_enable
+     446  am_bsp_iom_pins_disable
+     544  am_bsp_iom_pins_enable
+      80  am_bsp_ios_pins_disable
+      88  am_bsp_ios_pins_enable
+      26  am_bsp_itm_printf_disable
+      52  am_bsp_itm_printf_enable
+      78  am_bsp_low_power_init
+     574  am_bsp_mspi_pins_disable
+     786  am_bsp_mspi_pins_enable
+      48  am_bsp_psButtons
+      40  am_bsp_psLEDs
+      52  am_bsp_uart_printf_disable
+      64  am_bsp_uart_printf_enable
+      24  am_bsp_uart_pwrsave
+      62  am_bsp_uart_string_print
+      40  g_sBspUartBufferedConfig
+      40  g_sBspUartConfig
+       4  g_sCOMUART
+       4  g_ui32PrintInterface
+    1024  pui8UartRxBuffer
+    1024  pui8UartTxBuffer
+
+ 
+ 2 080 bytes in section .bss
+   128 bytes in section .data
+    60 bytes in section .rodata
+ 3 348 bytes in section .text
+ 
+ 3 348 bytes of CODE  memory
+    60 bytes of CONST memory
+ 2 208 bytes of DATA  memory
+
+Errors: none
+Warnings: none
