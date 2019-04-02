@@ -1,10 +1,24 @@
 /* This file is the driver of PDM functions*/
 
+/* AEP config header file */ 
+#include "am_audio_platform_config.h"
+
 #include "audio_driver.h"
 #include "board_setup.h"
 #if configUSE_SYSVIEW
 #include "SEGGER_SYSVIEW.h"
 #endif
+
+#if AM_AEP_MIKRO_CALIBRATION
+#include "am_mikro_calibration.h"
+#endif // AM_AEP_MIKRO_CALIBRATION
+
+/* application layer utils header file */
+#include "am_app_utils_ring_buffer.h"
+#if configUSE_RTT_DATA_OUTPUT
+#include "am_app_utils_rtt_recorder.h"
+#endif
+
 //*****************************************************************************
 // GLOBALS
 //*****************************************************************************
@@ -49,15 +63,15 @@ void am_app_AEP_pdm_init(void)
         .eRightGain = AM_HAL_PDM_GAIN_P105DB,
         .ui32DecimationRate =
             24,  // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
-        .bHighPassEnable = 1,
-        .ui32HighPassCutoff = 0xB,
+        .bHighPassEnable = 0, // Enable high-pass filter
+        .ui32HighPassCutoff = 0x4, // high-pass filter register value
         .ePDMClkSpeed = AM_HAL_PDM_CLK_750KHZ,
         .bInvertI2SBCLK = 0,
         .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
         .bPDMSampleDelay = 0,
         .bDataPacking = 1,
         .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,
-        .bLRSwap = 0,
+        .bLRSwap = 1,
     };
     
 //
@@ -136,7 +150,7 @@ void pdm_trigger_dma(void)
 // PDM interrupt handler.
 //
 //*****************************************************************************
-void am_pdm_isr(void) 
+void am_pdm0_isr(void) 
 {
 #if configUSE_SYSVIEW    
     SEGGER_SYSVIEW_RecordEnterISR();
@@ -148,13 +162,20 @@ void am_pdm_isr(void)
     am_hal_pdm_interrupt_status_get(PDMHandle, &ui32Status, true);
     am_hal_pdm_interrupt_clear(PDMHandle, ui32Status);
     
-    g_DebugValue++;
     if (ui32Status & AM_HAL_PDM_INT_DCMP)
     {
         // trigger next traction
         PDMn(0)->DMATOTCOUNT = PCM_FRAME_SIZE*PCM_DATA_BYTES;  // FIFO unit in bytes
-
-        am_app_utils_ring_buffer_push_fast(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES);
+        
+        if((g_ui8MicCalFlag == 1) && (g_ui8PcmDataReadyFlag==0))
+        {
+            am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES);
+            g_ui32SampleNum += PCM_FRAME_SIZE;
+            if(g_ui32SampleNum >= g_ui32WindowLen)
+            {
+                g_ui8PcmDataReadyFlag = 1;
+            }
+        }
 
 #if configUSE_RTT_DATA_OUTPUT
         //

@@ -1,4 +1,5 @@
-bin/audio_driver.o: ../src/audio_driver.c ../include/audio_driver.h \
+bin/audio_driver.o: ../src/audio_driver.c \
+ ../include/am_audio_platform_config.h ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/am_bsp.h \
  ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/am_mcu_apollo.h \
  ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/am_mcu_cmsis.h \
@@ -85,12 +86,16 @@ bin/audio_driver.o: ../src/audio_driver.c ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_string.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_time.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_ble.h \
- ../include/am_audio_platform_config.h ../include/board_setup.h \
- ../../../app_utils/am_app_utils_ring_buffer.h \
+ ../include/board_setup.h ../../../app_utils/am_app_utils_ring_buffer.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
+ ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
  ../../../app_utils/am_app_utils.h \
- ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h \
- ../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h \
- ../../../tools/segger/SystemView_Src_V252d/Config/Global.h
+ ../src/mikro_cal/am_mikro_calibration.h \
+ ../../../math/CMSIS_5/Include/arm_math.h \
+ ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h \
+ ../../../app_utils/am_app_utils.h
+
+../include/am_audio_platform_config.h:
 
 ../include/audio_driver.h:
 
@@ -266,16 +271,20 @@ bin/audio_driver.o: ../src/audio_driver.c ../include/audio_driver.h \
 
 ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_ble.h:
 
-../include/am_audio_platform_config.h:
-
 ../include/board_setup.h:
 
 ../../../app_utils/am_app_utils_ring_buffer.h:
 
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
+
+../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
+
 ../../../app_utils/am_app_utils.h:
 
-../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER_SYSVIEW.h:
+../src/mikro_cal/am_mikro_calibration.h:
 
-../../../tools/segger/SystemView_Src_V252d/SEGGER/SEGGER.h:
+../../../math/CMSIS_5/Include/arm_math.h:
 
-../../../tools/segger/SystemView_Src_V252d/Config/Global.h:
+../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h:
+
+../../../app_utils/am_app_utils.h:

@@ -5,15 +5,7 @@
 #include "am_bsp.h"
 #include "am_mcu_apollo.h"  // Defines AM_CMSIS_REGS
 #include "am_util.h"
-/* AEP config header file */ 
-#include "am_audio_platform_config.h"
-
-/* application utils header files */
 #include "am_app_utils_ring_buffer.h"
-#if configUSE_RTT_DATA_OUTPUT
-#include "am_app_utils_rtt_recorder.h"
-#endif // configUSE_RTT_DATA_OUTPUT
-
 
 #ifdef AM_BSP_NUM_LEDS
 #define NUM_LEDS    AM_BSP_NUM_LEDS
@@ -47,7 +39,7 @@ typedef enum
 
 extern volatile  am_app_AEP_key_value_enum_t g_sysKeyValue;
 
-//extern am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
+extern am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
 
 extern const am_hal_gpio_pincfg_t g_deepsleep_button0;
 extern am_hal_ctimer_config_t g_sTimer0; 

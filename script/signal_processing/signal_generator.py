@@ -1,4 +1,5 @@
 import numpy as np
+import soundfile as sf
 from scipy import signal
 from scipy.io import wavfile
 
@@ -26,7 +27,7 @@ def create_noisy_signal(signal_fp, snr, noise_fp=None, offset=None):
     int
         Sampling rate in Hz.
     """
-    fs, clean_signal = wavfile.read(signal_fp)
+    clean_signal, fs = sf.read(signal_fp)
     clean_signal = to_float32(clean_signal)
 
     if offset is not None:
@@ -36,8 +37,8 @@ def create_noisy_signal(signal_fp, snr, noise_fp=None, offset=None):
     output_len = len(clean_signal) + offset_samp
 
     if noise_fp is not None:
-        fs_n, noise = wavfile.read(noise_fp)
-        noise = to_float32(noise)
+        noise, fs_n = sf.read(noise_fp)
+        noise = to_float32(noise[:, 0])
         if fs_n != fs:
             raise ValueError("Signal and noise WAV files should have same "
                              "sampling rate.")

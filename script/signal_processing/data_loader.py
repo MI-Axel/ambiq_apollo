@@ -3,15 +3,15 @@ Usage:
     data_loader.py <input_format> [options] <input_file> [<output_file>]
 
 Arguments:
-    <input_format>                          Load data format: pcm, wav, encode, raw
+    <input_format>                          Load data format: pcm, wav, encode
 Options:
     -h, --help                              Show this screen
     -f <fs>, --frequency=<fs>               Audio recorder sample rate.[default: 16000]
     -b <bs>, --bits_sample=<bs>             Bits number per input sample.[default: 16]
     --channels=<cn>                         Input audio channels.[default: 2]
     --wav                                   Output data as WAV file.
+    --swap                                  Whether swap the left channel and right channel data.
     -n, --norm                              Output WAV file is normlized.
-    -v <nb>, --verbose=<nb>                 Print out the first <nb> bytes of the input file.[default: 320]
     --raw_view_format=<form>                Raw data viewing format: INT16, INT32, UINT16, UINT32.[default: INT16]
     --endian=<BOL>                          Endian of raw data print out.[default: LITTLE]
     -s, --save                              Save the new format raw data or not. 
@@ -49,7 +49,7 @@ class DataLoader(object):
 
     def stream_input_parse(self, input_file):
         if self.format == 'pcm': 
-            binStream = open(arguments['<input_file>'], 'rb').read()
+            binStream = open(input_file, 'rb').read()
             print("read input file of {} bytes...".format(len(binStream)))
             if (self.channels == 2) and (self.sample_bits == 16):
                 parseData = struct.unpack('<'+'h'*(len(binStream)//2), binStream)
@@ -67,44 +67,39 @@ class DataLoader(object):
             elif (self.channels == 1) and (self.sample_bits == 16):
                 parseData = struct.unpack('<'+'h'*(len(binStream)//2), binStream)
                 self.pcmMonoStream = np.array(parseData, dtype=int)
-        if self.format == 'raw':
-            readBytes = np.int(arguments['--verbose'])
-            binStream = open(arguments['<input_file>'], 'rb').read(readBytes)
-            print("read input file of {} bytes...\n".format(len(binStream)))
-
-            if arguments['--endian'] == 'LITTLE':
-                rawOutFormat = '<'  
-            elif arguments['--endian'] == 'BIG':
-                rawOutFormat = '>'
-            
-            if arguments['--raw_view_format'] == 'INT16':
-                rawOutFormat += 'h' * (len(binStream)//2)
-            elif arguments['--raw_view_format'] == 'INT32':
-                rawOutFormat += 'i' * (len(binStream)//4)
-            elif arguments['--raw_view_format'] == 'UINT16':
-                rawOutFormat += 'H' * (len(binStream)//2)
-            elif arguments['--raw_view_format'] == 'UINT32':
-                rawOutFormat += 'I' * (len(binStream)//4)
-            rawParse = struct.unpack(rawOutFormat, binStream)
-            print('First {} bytes raw data are listed as following:\n {}\n'.format(len(binStream), rawParse))
 
         if self.format == 'wav':
             self.wavStream, self.sample_frequency = sf.read(input_file)
 
 
-    def wav_output(self, output_file,  Norm=False):
+    def wav_output(self, output_file, Norm=False):
         if self.channels == 2:
-            wavStream = (self.pcmLeftStream + self.pcmRightStream) * 0.5 / (2**(self.sample_bits))
+            wavLeftStream = self.pcmLeftStream / (2**(self.sample_bits))
+            wavRightStream = self.pcmRightStream / (2**(self.sample_bits))
+            if Norm:
+                wavLeftStream = wavLeftStream - np.mean(wavLeftStream)
+                wavLeftStream = wavLeftStream / np.max(np.abs(wavLeftStream))
+                wavRightStream = wavRightStream - np.mean(wavRightStream)
+                wavRightStream = wavRightStream / np.max(np.abs(wavRightStream))
+                left_fn = 'left_norm_' + output_file
+                right_fn = 'right_norm_' + output_file
+            else:
+                left_fn = 'left_' + output_file
+                right_fn = 'right_' + output_file
+
+            sf.write(left_fn, wavLeftStream, self.sample_frequency)
+            sf.write(right_fn, wavRightStream, self.sample_frequency)
+            print("output left and right channel wav files of {duration:8.3f} seconds with {freq:8.1f} HZ sample rate.\n"\
+                    .format(duration=len(wavLeftStream)/self.sample_frequency, freq=self.sample_frequency))
+
         elif self.channels == 1:
             wavStream = self.pcmMonoStream / np.float(2.**(self.sample_bits))
-        
-        if Norm:
-            wavStream = wavStream - np.mean(wavStream)
-            wavStream = wavStream / np.max(np.abs(wavStream))
-
-        sf.write(output_file, wavStream, self.sample_frequency)	
-        print("output wav file of {duration:8.3f} seconds with {freq:8.1f} HZ sample rate.\n"\
-                .format(duration=len(wavStream)/self.sample_frequency, freq=self.sample_frequency))
+            if Norm:
+                wavStream = wavStream - np.mean(wavStream)
+                wavStream = wavStream / np.max(np.abs(wavStream))
+            sf.write(output_file, wavStream, self.sample_frequency)	
+            print("output wav file of {duration:8.3f} seconds with {freq:8.1f} HZ sample rate.\n"\
+                    .format(duration=len(wavStream)/self.sample_frequency, freq=self.sample_frequency))
 
     def mSBC_data_to_wav_float(self, msbc_bin_fn):
         exe_name = 'ia_msbc_dec_test.exe'
@@ -139,9 +134,15 @@ if __name__ == '__main__':
     
     InBits = np.int(arguments['--bits_sample'])
 
+    InSwap = arguments['--swap']
+    if arguments['--swap']:
+        InSwap = True
+    else:
+        InSwap = False
+
     InFormat = arguments['<input_format>']
 
-    AudioIn = DataLoader(data_format=InFormat, bits_per_sample=InBits, sample_frequency=InFs, audio_channels=InChannels)
+    AudioIn = DataLoader(data_format=InFormat, bits_per_sample=InBits, sample_frequency=InFs, audio_channels=InChannels, LRswap=InSwap)
     
     AudioIn.stream_input_parse(arguments['<input_file>'])
 

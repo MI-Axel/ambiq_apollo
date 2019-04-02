@@ -41,7 +41,6 @@ TARGET := audio_experiment
 COMPILERNAME := gcc
 PROJECT := audio_experiment_gcc
 CONFIG := bin
-#AM_SoftwareRoot ?= ../../../device/Apollo3-SDK-2018.08.13
 AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
 AM_FolderRoot ?= ../../..
 AM_OpusRoot ?= ../../../tools/opus/opus-1.2.1
@@ -83,30 +82,12 @@ all clean:
 else
 #################### OPUS PART #######################
 
-# Uncomment this for fixed-point build
-#FIXED_POINT=1
+include ${AM_OpusRoot}/silk_sources.mk
+include ${AM_OpusRoot}/celt_sources.mk
+include ${AM_OpusRoot}/opus_sources.mk
 
-# It is strongly recommended to uncomment one of these
-# VAR_ARRAYS: Use C99 variable-length arrays for stack allocation
-# USE_ALLOCA: Use alloca() for stack allocation
-# If none is defined, then the fallback is a non-threadsafe global array
-#EXTRA_CFLAGS := -DUSE_ALLOCA $(EXTRA_CFLAGS)
-#EXTRA_CFLAGS := -DVAR_ARRAYS $(EXTRA_CFLAGS)
-
-# These options affect performance
-# HAVE_LRINTF: Use C99 intrinsics to speed up float-to-int conversion
-#EXTRA_CFLAGS := -DHAVE_LRINTF $(EXTRA_CFLAGS)
-
-#include ${AM_OpusRoot}/silk_sources.mk
-#include ${AM_OpusRoot}/celt_sources.mk
-#include ${AM_OpusRoot}/opus_sources.mk
-
-#ifdef FIXED_POINT
-#SILK_SOURCES += $(SILK_SOURCES_FIXED)
-#else
-#SILK_SOURCES += $(SILK_SOURCES_FLOAT)
-#OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
-#endif
+SILK_SOURCES += $(SILK_SOURCES_FIXED)
+OPUS_SOURCES += $(OPUS_SOURCES_FLOAT)
 
 ###################### END OF OPUS PART ######################
 
@@ -161,6 +142,9 @@ INCLUDES += -I${AM_OpusRoot}
 # STFT INCLUDES
 INCLUDES += -I../src/scnr
 
+# Microphone calibration INCLUDES
+INCLUDES += -I../src/mikro_cal
+
 VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
 VPATH +=:${AM_SoftwareRoot}/mcu/apollo3/hal
@@ -178,11 +162,14 @@ VPATH +=:${AM_OpusRoot}/celt/arm
 VPATH +=:${AM_OpusRoot}/silk/fixed
 VPATH +=:${AM_OpusRoot}/silk/float
 
-# OPUS SOURCE FILES
-OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
-
 # STFT folders
 VPATH +=:../src/scnr
+
+# mikro calibration folder
+VPATH +=:../src/mikro_cal
+
+# OPUS SOURCE FILES
+OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
 
 SRC = main.c
 SRC += am_hal_pdm.c
@@ -194,16 +181,26 @@ SRC += ${AM_APP_UTILS_SRC}
 SRC += am_devices_led.c
 SRC += startup_gcc.c
 SRC += board_setup.c
-#SRC += audio_driver.c
-#SRC += am_opus.c
+SRC += audio_driver.c
+# ring buffer test
 #SRC += am_memcpy_ringbuff_test.c
-SRC += am_app_USP1602_mono_array.c
+
+# malloc and free test
 #SRC += am_alloc_free_test.c
+
+# OPUS code
+#SRC += am_opus.c
+#SRC += am_app_USP1602_mono_array.c
 #SRC += ${OPUS_SRC}
+
+# SEGGER sysview tool
 SRC += ${SEGGER_SYSVIEW_SRC}
 
 # STFT test code 
-SRC += stft.c
+#SRC += stft.c
+
+# Mikro calibration code
+SRC += am_mikro_calibration.c
 
 
 CSRC = $(filter %.c,$(SRC))

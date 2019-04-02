@@ -1,4 +1,5 @@
-bin/board_setup.o: ../src/board_setup.c ../include/board_setup.h \
+bin/board_setup.o: ../src/board_setup.c \
+ ../include/am_audio_platform_config.h ../include/board_setup.h \
  ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/am_bsp.h \
  ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/am_mcu_apollo.h \
  ../../../device/AmbiqSuite-Rel2.0.0/mcu/apollo3/am_mcu_cmsis.h \
@@ -85,11 +86,16 @@ bin/board_setup.o: ../src/board_setup.c ../include/board_setup.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_string.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_time.h \
  ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_ble.h \
- ../include/am_audio_platform_config.h \
  ../../../app_utils/am_app_utils_ring_buffer.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
- ../../../app_utils/am_app_utils.h ../include/audio_driver.h
+ ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
+ ../src/mikro_cal/am_mikro_calibration.h \
+ ../../../math/CMSIS_5/Include/arm_math.h \
+ ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h \
+ ../../../app_utils/am_app_utils.h
+
+../include/am_audio_platform_config.h:
 
 ../include/board_setup.h:
 
@@ -265,8 +271,6 @@ bin/board_setup.o: ../src/board_setup.c ../include/board_setup.h \
 
 ../../../device/AmbiqSuite-Rel2.0.0/utils/am_util_ble.h:
 
-../include/am_audio_platform_config.h:
-
 ../../../app_utils/am_app_utils_ring_buffer.h:
 
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
@@ -276,3 +280,11 @@ bin/board_setup.o: ../src/board_setup.c ../include/board_setup.h \
 ../../../app_utils/am_app_utils.h:
 
 ../include/audio_driver.h:
+
+../src/mikro_cal/am_mikro_calibration.h:
+
+../../../math/CMSIS_5/Include/arm_math.h:
+
+../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h:
+
+../../../app_utils/am_app_utils.h:

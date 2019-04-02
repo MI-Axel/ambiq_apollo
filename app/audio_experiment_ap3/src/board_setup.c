@@ -1,8 +1,20 @@
 
 /* This file is the seyup code of ap3blue evb for the audio experiment platform. */
+/* AEP config header file */ 
+#include "am_audio_platform_config.h"
 
 #include "board_setup.h"
 #include "audio_driver.h"
+
+#if AM_AEP_MIKRO_CALIBRATION
+#include "am_mikro_calibration.h"
+#endif // AM_AEP_MIKRO_CALIBRATION
+
+/* application utils header files */
+#include "am_app_utils_ring_buffer.h"
+#if configUSE_RTT_DATA_OUTPUT
+#include "am_app_utils_rtt_recorder.h"
+#endif // configUSE_RTT_DATA_OUTPUT
 
 //*****************************************************************************
 //
@@ -15,20 +27,42 @@ volatile uint8_t g_ui8DebounceFlag = 0;
 
 volatile uint32_t g_ui32DebounceTimerCount = 0;
 
+volatile  am_app_AEP_key_value_enum_t g_sysKeyValue = AM_APP_KEY_NONE;
+
+#if configUSE_RTT_DATA_OUTPUT
+uint8_t g_rttRecorderBuff[RTT_BUFFER_LENGTH];
+volatile uint8_t g_rttRecordingFlag = 0; 
+#endif
 
 //******************************************************************************
 //Global data buffers used by ring buffers
 //*****************************************************************************
-//volatile uint8_t g_ui8PCMDataRingBuff[PCM_FRAME_SIZE*PCM_DATA_BYTES*NUM_PCM_FRAMES];
+#if AM_AEP_MIKRO_CALIBRATION
+volatile uint8_t g_ui8PCMDataRingBuff[PCM_DATA_BYTES*AVERAGE_WINDOW_LENGTH];
+#else
+volatile uint8_t g_ui8PCMDataRingBuff[PCM_FRAME_SIZE*PCM_DATA_BYTES*NUM_PCM_FRAMES];
+#endif // AM_AEP_MIKRO_CALIBRATION
+am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
 
-//am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
+static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] = 
+{
+#if AM_AEP_MIKRO_CALIBRATION
+    {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, AVERAGE_WINDOW_LENGTH*PCM_DATA_BYTES}
+#else
+    {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
+#endif
+};
+#define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
 
-//static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] = 
-//{
-//    {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
-//};
-//#define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
+//*****************************************************************************
+// The stdio function for debug usage
+//*****************************************************************************
 
+void DebugLog(const char* s) { am_util_stdio_printf("%s", s); }
+void DebugLogInt32(int32_t i) { am_util_stdio_printf("%d", i); }
+void DebugLogUInt32(uint32_t i) { am_util_stdio_printf("%d", i); }
+void DebugLogHex(uint32_t i) { am_util_stdio_printf("0x%8x", i); }
+void DebugLogFloat(float i) { am_util_stdio_printf("%f", i); }
 //*****************************************************************************
 // BUTTON pins configuration settings.
 //*****************************************************************************
@@ -163,7 +197,7 @@ void am_app_AEP_sys_init(void)
 #endif  // defined(AM_BSP_NUM_BUTTONS)  &&  defined(AM_BSP_NUM_LEDS)
 
     // Turn on PDM
-//    am_app_AEP_pdm_init();
+    am_app_AEP_pdm_init();
  
 #if AM_CMSIS_REGS
     NVIC_EnableIRQ(GPIO_IRQn);
@@ -223,7 +257,7 @@ void am_app_AEP_sys_init(void)
 
     am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
 
-//    am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);
+    am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);
 
 }
 
@@ -277,5 +311,4 @@ void am_gpio_isr(void)
     am_hal_gpio_interrupt_clear(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
 
 }
-
 
