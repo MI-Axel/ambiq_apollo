@@ -166,7 +166,8 @@ void am_pdm0_isr(void)
     {
         // trigger next traction
         PDMn(0)->DMATOTCOUNT = PCM_FRAME_SIZE*PCM_DATA_BYTES;  // FIFO unit in bytes
-        
+ 
+#if AM_AEP_MIKRO_CALIBRATION
         if((g_ui8MicCalFlag == 1) && (g_ui8PcmDataReadyFlag==0))
         {
             am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES);
@@ -176,6 +177,7 @@ void am_pdm0_isr(void)
                 g_ui8PcmDataReadyFlag = 1;
             }
         }
+#endif // AM_AEP_MIKRO_CALIBRATION
 
 #if configUSE_RTT_DATA_OUTPUT
         //

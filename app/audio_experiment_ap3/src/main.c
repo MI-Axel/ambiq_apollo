@@ -59,6 +59,12 @@ limitations under the License.
 #include "am_mikro_calibration.h"
 #endif // AM_AEP_MIKRO_CALIBRATION
 
+#if AM_AEP_MIKRO_THD_CALC
+#include "am_mikro_thd.h"
+#include "am_AEP_fft_data.h"
+
+#endif // AM_AEP_MIKRO_THD_CALC
+
 int main(void)
 {
     am_app_AEP_sys_init();
@@ -106,6 +112,19 @@ DebugLog("STFT instance initialization is finished!\r\n");
 DebugLogFloat(g_fTest);
 #endif // AM_AEP_SCNR_TEST
 
+#if AM_AEP_MIKRO_THD_CALC
+#define THD_FFT_SIZE                1024
+#define THD_FFT_BYTES               (THD_FFT_SIZE * 2)
+
+uint32_t g_ui32THDDataBuffer[THD_FFT_SIZE];
+float g_fTHDTimeDomain[THD_FFT_SIZE*2];
+float g_fTHDFrequencyDomain[THD_FFT_SIZE*2];
+float g_fTHDMagnitudes[THD_FFT_SIZE];
+float g_fFrequencyUnits = 0;
+float g_fTHDResult = 0;
+uint8_t g_ui8THDTestStartFlag = 1;              // 1: test start; 0: test stop.
+
+#endif // AM_AEP_MIKRO_THD_CALC
     //
     // Print the banner.
     //
@@ -211,6 +230,19 @@ DebugLogFloat(g_fTest);
         
         }
 #endif // AM_AEP_MIKRO_CALIBRATION
+
+#if AM_AEP_MIKRO_THD_CALC
+        
+        if(g_ui8THDTestStartFlag == 1)
+        {
+            g_ui8THDTestStartFlag = 0;
+            am_pcm_fft(g_in16TestInput_2KHZ_SR16K, g_fTHDMagnitudes, THD_FFT_SIZE);
+            g_fTHDResult = am_thd_calc(128, g_fTHDMagnitudes, THD_FFT_SIZE, 16000);
+
+            am_util_stdio_printf("THD result: %0.6f.\r\n", g_fTHDResult);
+        }
+
+#endif // AM_AEP_MIKRO_THD_CALC
 //
 // Board key interface for debug using
 //

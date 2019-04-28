@@ -92,8 +92,12 @@ bin/main.o: ../src/main.c \
  ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
  ../../../math/CMSIS_5/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h \
- ../src/mikro_cal/am_mikro_calibration.h \
- ../../../app_utils/am_app_utils.h
+ ../src/mikro_thd/am_mikro_thd.h \
+ ../../../math/CMSIS_5/Include/arm_const_structs.h \
+ ../../../math/CMSIS_5/Include/arm_math.h \
+ ../../../math/CMSIS_5/Include/arm_common_tables.h \
+ ../../../app_utils/am_app_utils.h \
+ ../src/local_test_data/am_AEP_fft_data.h
 
 ../../../device/AmbiqSuite-Rel2.0.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -285,6 +289,14 @@ bin/main.o: ../src/main.c \
 
 ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h:
 
-../src/mikro_cal/am_mikro_calibration.h:
+../src/mikro_thd/am_mikro_thd.h:
+
+../../../math/CMSIS_5/Include/arm_const_structs.h:
+
+../../../math/CMSIS_5/Include/arm_math.h:
+
+../../../math/CMSIS_5/Include/arm_common_tables.h:
 
 ../../../app_utils/am_app_utils.h:
+
+../src/local_test_data/am_AEP_fft_data.h:

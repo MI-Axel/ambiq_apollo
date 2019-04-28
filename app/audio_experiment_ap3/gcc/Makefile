@@ -145,6 +145,10 @@ INCLUDES += -I../src/scnr
 # Microphone calibration INCLUDES
 INCLUDES += -I../src/mikro_cal
 
+# Microphone THD calculator INCLUDES
+INCLUDES += -I../src/mikro_thd
+INCLUDES += -I../src/local_test_data
+
 VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
 VPATH +=:${AM_SoftwareRoot}/mcu/apollo3/hal
@@ -167,6 +171,10 @@ VPATH +=:../src/scnr
 
 # mikro calibration folder
 VPATH +=:../src/mikro_cal
+
+# mikro THD calculator folder
+VPATH +=:../src/mikro_thd
+VPATH +=:../src/local_test_data/
 
 # OPUS SOURCE FILES
 OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
@@ -202,6 +210,9 @@ SRC += ${SEGGER_SYSVIEW_SRC}
 # Mikro calibration code
 SRC += am_mikro_calibration.c
 
+# Mikro THD calculator
+SRC += am_mikro_thd.c
+SRC += am_AEP_fft_data.c
 
 CSRC = $(filter %.c,$(SRC))
 ASRC = $(filter %.s,$(SRC))

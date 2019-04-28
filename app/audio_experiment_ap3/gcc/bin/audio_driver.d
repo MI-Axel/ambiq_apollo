@@ -89,10 +89,6 @@ bin/audio_driver.o: ../src/audio_driver.c \
  ../include/board_setup.h ../../../app_utils/am_app_utils_ring_buffer.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
- ../../../app_utils/am_app_utils.h \
- ../src/mikro_cal/am_mikro_calibration.h \
- ../../../math/CMSIS_5/Include/arm_math.h \
- ../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h \
  ../../../app_utils/am_app_utils.h
 
 ../include/am_audio_platform_config.h:
@@ -278,13 +274,5 @@ bin/audio_driver.o: ../src/audio_driver.c \
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
 
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
-
-../../../app_utils/am_app_utils.h:
-
-../src/mikro_cal/am_mikro_calibration.h:
-
-../../../math/CMSIS_5/Include/arm_math.h:
-
-../../../device/AmbiqSuite-Rel2.0.0/CMSIS/ARM/Include/cmsis_compiler.h:
 
 ../../../app_utils/am_app_utils.h:

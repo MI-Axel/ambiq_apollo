@@ -17,7 +17,10 @@
 
 #define AM_AEP_SCNR_TEST                    0
 
-#define AM_AEP_MIKRO_CALIBRATION            1
+#define AM_AEP_MIKRO_CALIBRATION            0
+
+#define AM_AEP_MIKRO_THD_CALC               1
+
 //
 // Platform support function configuration
 //
@@ -37,7 +40,8 @@
 /* Burst mode always on */
 #define configUSE_BURST_ALWAYS_ON           1
 
-
+/* Data processing verbose */ 
+#define configUSE_DATA_VERBOSE              1
 
 
 
