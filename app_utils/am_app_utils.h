@@ -68,4 +68,7 @@
 
 #define APP_IN_FreeRTOS                 0
 
+/* turn on/off print out data for debug */
+#define DEBUG_VERBOSE                   1
+
 #endif
