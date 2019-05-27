@@ -120,7 +120,7 @@ void am_AEP_codec_task(void *pvParameters)
         if(g_ui8RttRecordFlag == 1)
             am_app_utils_rtt_record(g_opusOutputBuff, g_ui32EncOutputBytes); 
 #endif /* configUSE_RTT_LOGGER && configUSE_RTT_PCM */ 
-
+        
     }
 }
 

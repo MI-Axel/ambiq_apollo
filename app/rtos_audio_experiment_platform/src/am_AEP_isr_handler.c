@@ -90,7 +90,10 @@ void am_gpio_isr(void)
     uint64_t ui64IntStatus = 0;
     uint32_t ui32KeyValue = 0;
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    
+#if configUSE_SYSVIEWER    
+    SEGGER_SYSVIEW_RecordEnterISR();
+#endif // configUSE_SYSVIEWER
+   
     //
     // Read and clear the GPIO interrupt status.
     //
@@ -114,6 +117,11 @@ void am_gpio_isr(void)
         }  
 
     }
+    am_util_delay_us(200);
+#if configUSE_SYSVIEWER
+    SEGGER_SYSVIEW_RecordExitISR(); //emit Exit ISR signal
+#endif // configUSE_SYSVIEWER
+
     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 
 }

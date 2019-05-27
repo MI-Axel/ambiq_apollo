@@ -161,7 +161,7 @@ void am_AEP_board_setup(void)
     //
     // Enable the GPIO/button interrupt.
     //
-//    am_hal_gpio_interrupt_enable(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
+    am_hal_gpio_interrupt_enable(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
     
     //
     // Configure the LEDs.
@@ -185,10 +185,10 @@ void am_AEP_board_setup(void)
 
 
 #if AM_CMSIS_REGS
-//    NVIC_SetPriority(GPIO_IRQn, 4);     // if you want to use API in this isr, you can't set higher than 4.
-//    NVIC_EnableIRQ(GPIO_IRQn);
+    NVIC_SetPriority(GPIO_IRQn, 4);     // if you want to use API in this isr, you can't set higher than 4.
+    NVIC_EnableIRQ(GPIO_IRQn);
 #else   // AM_CMSIS_REGS
-//    am_hal_interrupt_enable(AM_HAL_INTERRUPT_GPIO);
+    am_hal_interrupt_enable(AM_HAL_INTERRUPT_GPIO);
 #endif  // AM_CMSIS_REGS
 
     

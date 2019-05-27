@@ -28,4 +28,5 @@ tags
 key_word_detection_ota.dep
 .DS_Store
 *.exe
-
+*.bin
+*.axf

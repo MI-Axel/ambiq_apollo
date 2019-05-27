@@ -182,20 +182,19 @@ void am_app_mic_verif_pdm_init(void)
 
 
     am_hal_pdm_config_t g_sPdmConfig = {
-        .eClkDivider = AM_HAL_PDM_MCLKDIV_1,
-        .eLeftGain = AM_HAL_PDM_GAIN_P105DB,
-        .eRightGain = AM_HAL_PDM_GAIN_P105DB,
-        .ui32DecimationRate =
-            24,  // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
-        .bHighPassEnable = 0, // Enable high-pass filter
-        .ui32HighPassCutoff = 0x4, // high-pass filter register value
-        .ePDMClkSpeed = AM_HAL_PDM_CLK_750KHZ,
-        .bInvertI2SBCLK = 0,
-        .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
-        .bPDMSampleDelay = 0,
-        .bDataPacking = 1,
-        .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,
-        .bLRSwap = 1,
+        .eClkDivider = AM_HAL_PDM_MCLKDIV_1,                            // PDM clock divider
+        .eLeftGain = AM_HAL_PDM_GAIN_P105DB,                            // Left channel PCM data gain 
+        .eRightGain = AM_HAL_PDM_GAIN_P105DB,                           // Right channel PCM data gain
+        .ui32DecimationRate = 24,                                       // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
+        .bHighPassEnable = 0,                                           // Enable high-pass filter
+        .ui32HighPassCutoff = 0x8,                                      // high-pass filter register value
+        .ePDMClkSpeed = AM_HAL_PDM_CLK_750KHZ,                          // PDM clock frequency 
+        .bInvertI2SBCLK = 0,                                            
+        .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,                       // PDM clock source selection
+        .bPDMSampleDelay = 0,                                           // PDM delayed samples number
+        .bDataPacking = 1,                                              // make PCM data packed
+        .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,                      // using 2 channels: right and left
+        .bLRSwap = 0,                                                   // not swap the left and right channel data 
     };
     
 //
@@ -206,17 +205,19 @@ void am_app_mic_verif_pdm_init(void)
     am_hal_pdm_configure(PDMHandle, &g_sPdmConfig);
     am_hal_pdm_fifo_flush(PDMHandle);
 
+    am_util_stdio_printf("PDM Settings:\r\n");
+    am_util_stdio_printf("PDM Clock (Hz):         %12d\r\n", 750000);
+    am_util_stdio_printf("Effective Sample Freq.: %12d\r\n\n", 16000);
 
-  am_hal_pdm_enable(PDMHandle);
+    am_hal_pdm_enable(PDMHandle);
 
-
-  //
-  // Configure and enable PDM interrupts (set up to trigger on DMA
-  // completion).
-  //
-  am_hal_pdm_interrupt_enable(PDMHandle,
-                              (AM_HAL_PDM_INT_DERR | AM_HAL_PDM_INT_DCMP |
-                               AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF));
+    //
+    // Configure and enable PDM interrupts (set up to trigger on DMA
+    // completion).
+    //
+    am_hal_pdm_interrupt_enable(PDMHandle,
+                                (AM_HAL_PDM_INT_DERR | AM_HAL_PDM_INT_DCMP |
+                                AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF));
 
 #if AM_CMSIS_REGS
     NVIC_SetPriority(PDM_IRQn, 4);
@@ -303,9 +304,6 @@ void am_app_mic_verif_sys_init(void)
     am_hal_ctimer_int_enable(AM_HAL_CTIMER_INT_TIMERA0);
 
 #endif  // defined(AM_BSP_NUM_BUTTONS)  &&  defined(AM_BSP_NUM_LEDS)
-
-    // Turn on PDM
-    am_app_mic_verif_pdm_init();
  
 #if AM_CMSIS_REGS
     NVIC_EnableIRQ(GPIO_IRQn);
@@ -326,39 +324,26 @@ void am_app_mic_verif_sys_init(void)
     am_bsp_uart_printf_enable();
 
     //
-    // Configure of burst mode
+    // Configure and enable burst mode
     //
     if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_initialize(&eBurstModeAvailable))
     {
         if (AM_HAL_BURST_AVAIL == eBurstModeAvailable)
         {
-            am_util_stdio_printf("Apollo3 Burst Mode is Available\r\n");
+            // Put the MCU into "Burst" mode.
+            if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_enable(&eBurstMode))
+            {
+                if (AM_HAL_BURST_MODE == eBurstMode)
+                {
+                    am_util_stdio_printf("Apollo3 operating in Burst Mode (96MHz)\r\n\n");
+                }
+            }
+
         }
-        else
-        {
-            am_util_stdio_printf("Apollo3 Burst Mode is Not Available\r\n");
-        }
-    }
-    else
-    {
-        am_util_stdio_printf("Failed to Initialize for Burst Mode operation\r\n");
     }
 
-#if configUSE_BURST_ALWAYS_ON
-    // Put the MCU into "Burst" mode.
-    if (AM_HAL_STATUS_SUCCESS == am_hal_burst_mode_enable(&eBurstMode))
-    {
-        if (AM_HAL_BURST_MODE == eBurstMode)
-        {
-            am_util_stdio_printf("Apollo3 operating in Burst Mode (96MHz)\r\n");
-        }
-    }
-    else
-    {
-        am_util_stdio_printf("Failed to Enable Burst Mode operation\r\n");
-    }
-
-#endif // configUSE_BURST_ALWAYS_ON
+    // Turn on PDM
+    am_app_mic_verif_pdm_init();
 
     am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
 

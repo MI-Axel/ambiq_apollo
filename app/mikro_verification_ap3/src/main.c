@@ -85,33 +85,33 @@ int main(void)
             am_devices_led_toggle(am_bsp_psLEDs, 0);
         }
 #if AM_APP_MIC_CALIBRATION
-//        if(g_ui8MicCalStatus == 1)
-//        {
-//            DebugLog("Enter into microphone calibration status.\n\r");
-//
-//            am_util_delay_ms(2000);
-//
-//            g_ui8MicCalFlag = 1;
-//
-//            while(g_ui8PcmDataReadyFlag == 0);
-//            if(g_ui8PcmDataReadyFlag == 1)
-//            {
-//                am_audio_mikro_balance(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], g_ui32WindowLen, 
-//                                        true, 1, 30, g_pfMicScalar);
-//                g_ui8MicCalStatus = 0;
-//                
-//                g_ui8PcmDataReadyFlag = 0;
-//
-//                g_ui8MicCalFlag = 0;
-//                
-//                g_ui32SampleNum = 0;
-//
-//                am_devices_led_off(am_bsp_psLEDs, 1);
-//
-//                DebugLog("Exit from microphone calibration status.\n\n\r");
-//            }
-//        
-//        }
+        if(g_ui8MicCalStatus == 1)
+        {
+            DebugLog("Enter into microphone calibration status.\n\r");
+
+            am_util_delay_ms(2000);
+
+            g_ui8MicCalFlag = 1;
+
+            while(g_ui8PcmDataReadyFlag == 0);
+            if(g_ui8PcmDataReadyFlag == 1)
+            {
+                am_audio_mikro_balance(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], g_ui32WindowLen, 
+                                        true, 1, 30, g_pfMicScalar);
+                g_ui8MicCalStatus = 0;
+                
+                g_ui8PcmDataReadyFlag = 0;
+
+                g_ui8MicCalFlag = 0;
+                
+                g_ui32SampleNum = 0;
+
+                am_devices_led_off(am_bsp_psLEDs, 1);
+
+                DebugLog("Exit from microphone calibration status.\n\n\r");
+            }
+        
+        }
 #endif // AM_AEP_MIKRO_CALIBRATION
 
 #if AM_APP_MIC_THD
