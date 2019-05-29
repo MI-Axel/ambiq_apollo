@@ -19,7 +19,9 @@
 
 #define AM_AEP_MIKRO_CALIBRATION            0
 
-#define AM_AEP_MIKRO_THD_CALC               1
+#define AM_AEP_MIKRO_THD_CALC               0
+
+#define AM_AEP_AUDIO_BUFFER_TEST            1
 
 //
 // Platform support function configuration

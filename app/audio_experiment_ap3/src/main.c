@@ -65,6 +65,10 @@ limitations under the License.
 
 #endif // AM_AEP_MIKRO_THD_CALC
 
+#if AM_AEP_AUDIO_BUFFER_TEST
+#include "am_audio_buffer.h"
+#endif // AM_AEP_AUDIO_BUFFER_TEST
+
 int main(void)
 {
     am_app_AEP_sys_init();

@@ -64,14 +64,14 @@ void am_app_AEP_pdm_init(void)
         .ui32DecimationRate =
             24,  // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
         .bHighPassEnable = 0, // Enable high-pass filter
-        .ui32HighPassCutoff = 0x4, // high-pass filter register value
+        .ui32HighPassCutoff = 0x8, // high-pass filter register value
         .ePDMClkSpeed = AM_HAL_PDM_CLK_750KHZ,
         .bInvertI2SBCLK = 0,
         .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
         .bPDMSampleDelay = 0,
         .bDataPacking = 1,
         .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,
-        .bLRSwap = 1,
+        .bLRSwap = 0,
     };
     
 //

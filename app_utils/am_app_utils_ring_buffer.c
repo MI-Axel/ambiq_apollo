@@ -96,7 +96,18 @@ am_app_utils_ring_buffer_init_all(am_app_utils_ring_buffer_t* ring_buffs, const 
 }
 
 
-uint32_t am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer, void *pvSource, uint32_t ui32Bytes)
+//*****************************************************************************
+// Function: ring buffer push function  
+// Paras:
+//      psBuffer: the target ring buffer needs to be pushed
+//      pvSource: the data source
+//      ui32Bytes: target transfer data length
+//      bFullCheck: whether checking the target ring buffer full or not. If true, data can't be pushed when buffer is full. 
+//                  If false, data could be pushed no matter buffer is full or not.
+// Return:
+//      bytes pushed into the ring buffer
+//*****************************************************************************
+uint32_t am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer, void *pvSource, uint32_t ui32Bytes, bool bFullCheck)
 {
     uint32_t ui32CopyLen = 0;
     uint32_t ui32ReturnPushLen = 0;
@@ -106,51 +117,89 @@ uint32_t am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer, voi
     ui32CopyLen = ui32Bytes;
     pui8Source = (uint8_t*)pvSource;
 
-    // won't push any data if buffer is full
-    if(am_app_utils_ring_buffer_full(psBuffer))
+    if(bFullCheck == true)
     {
-        ui32CopyLen = 0;
-        ui32ReturnPushLen =0;
+        // won't push any data if buffer is full
+        if(am_app_utils_ring_buffer_full(psBuffer))
+        {
+            ui32CopyLen = 0;
+            ui32ReturnPushLen =0;
+            return ui32ReturnPushLen;
+        }
+    
+        // push data until the buffer is full
+        if(am_app_utils_ring_buffer_empty(psBuffer))
+        {
+            if(ui32CopyLen >= psBuffer->ui32Capacity)
+            {      
+                psBuffer->ui32OverWriting = 1;
+                ui32CopyLen = psBuffer->ui32Capacity;
+            }
+        }
+        else
+        {
+            if(((psBuffer->ui32BufferHead_read + psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write) 
+                % psBuffer->ui32Capacity) <= ui32CopyLen)
+            {    
+                psBuffer->ui32OverWriting = 1;
+                ui32CopyLen = ((psBuffer->ui32BufferHead_read + psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write) 
+                % psBuffer->ui32Capacity);
+            }
+    
+        }        
+            
+        ui32ReturnPushLen = ui32CopyLen;
+    
+        while((psBuffer->ui32BufferTail_write + ui32CopyLen) >= psBuffer->ui32Capacity)
+        {
+            ui32TempLen = psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write;
+            memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], pui8Source, ui32TempLen);
+            psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32TempLen) % psBuffer->ui32Capacity);
+            ui32CopyLen -= ui32TempLen;
+        }
+        configASSERT((psBuffer->ui32BufferTail_write + ui32CopyLen) < psBuffer->ui32Capacity);
+        
+        memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], &pui8Source[ui32TempLen], ui32CopyLen);
+        psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32CopyLen) % psBuffer->ui32Capacity);
+        
         return ui32ReturnPushLen;
     }
-
-    // push data until the buffer is full
-    if(am_app_utils_ring_buffer_empty(psBuffer))
+    else        // if no full check, the return bytes are always ui32Bytes.
     {
-        if(ui32CopyLen >= psBuffer->ui32Capacity)
-        {      
-            psBuffer->ui32OverWriting = 1;
-            ui32CopyLen = psBuffer->ui32Capacity;
+        // push data until the buffer is full
+        if(am_app_utils_ring_buffer_empty(psBuffer))
+        {
+            if(ui32CopyLen >= psBuffer->ui32Capacity)
+            {      
+                psBuffer->ui32OverWriting = 1;
+            }
         }
-    }
-    else
-    {
-        if(((psBuffer->ui32BufferHead_read + psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write) 
-            % psBuffer->ui32Capacity) <= ui32CopyLen)
-        {    
-            psBuffer->ui32OverWriting = 1;
-            ui32CopyLen = ((psBuffer->ui32BufferHead_read + psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write) 
-            % psBuffer->ui32Capacity);
-        }
+        else
+        {
+            if(((psBuffer->ui32BufferHead_read + psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write) 
+                % psBuffer->ui32Capacity) <= ui32CopyLen)
+            {    
+                psBuffer->ui32OverWriting = 1;
+            }
+        }        
 
-    }        
+        ui32ReturnPushLen = ui32CopyLen;
+    
+        while((psBuffer->ui32BufferTail_write + ui32CopyLen) >= psBuffer->ui32Capacity)
+        {
+            ui32TempLen = psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write;
+            memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], pui8Source, ui32TempLen);
+            psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32TempLen) % psBuffer->ui32Capacity);
+            ui32CopyLen -= ui32TempLen;
+        }MaMaMa
+        configAMaSSERT((psBuffer->ui32BufferTail_write + ui32CopyLen) < psBuffer->ui32Capacity);
         
-    ui32ReturnPushLen = ui32CopyLen;
-
-    while((psBuffer->ui32BufferTail_write + ui32CopyLen) >= psBuffer->ui32Capacity)
-    {
-        ui32TempLen = psBuffer->ui32Capacity - psBuffer->ui32BufferTail_write;
-        memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], pui8Source, ui32TempLen);
-        psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32TempLen) % psBuffer->ui32Capacity);
-        ui32CopyLen -= ui32TempLen;
+        memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], &pui8Source[ui32TempLen], ui32CopyLen);
+        psBuffer-Ma>ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32CopyLen) % psBuffer->ui32Capacity);
+        
+        return ui32ReturnPushLen;
+    Ma
     }
-    configASSERT((psBuffer->ui32BufferTail_write + ui32CopyLen) < psBuffer->ui32Capacity);
-    
-    memcpy((void*)&psBuffer->pui8Data[psBuffer->ui32BufferTail_write], &pui8Source[ui32TempLen], ui32CopyLen);
-    psBuffer->ui32BufferTail_write = ((psBuffer->ui32BufferTail_write + ui32CopyLen) % psBuffer->ui32Capacity);
-    
-    return ui32ReturnPushLen;
-
 }
 
 

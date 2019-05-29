@@ -108,7 +108,7 @@ void am_app_utils_ring_buffer_init(am_app_utils_ring_buffer_t* ring_buffs, am_ap
 void am_app_utils_ring_buffer_init_all(am_app_utils_ring_buffer_t* ring_buffs, const am_app_utils_ringbuff_setup_t* setup_array, uint32_t ui32BufferCount);
 
 
-uint32_t am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer, void *pvSource, uint32_t ui32Bytes);
+uint32_t am_app_utils_ring_buffer_push(am_app_utils_ring_buffer_t *psBuffer, void *pvSource, uint32_t ui32Bytes, bool bFullCheck);
 
 
 uint32_t am_app_utils_ring_buffer_pop(am_app_utils_ring_buffer_t *psBuffer, void *pvDest,

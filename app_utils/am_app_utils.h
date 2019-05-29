@@ -66,6 +66,16 @@
 /* Define to trap errors during development. */
 #define configASSERT(x)     if (( x ) == 0) while(1);
 
+#define AM_APP_CRITICAL_BEGIN                                               \
+    if ( 1 )                                                                \
+    {                                                                       \
+        volatile uint32_t ui32Primask_04172010;                             \
+        ui32Primask_04172010 = am_hal_interrupt_master_disable();
+
+#define AM_APP_CRITICAL_END                                                 \
+        am_hal_interrupt_master_set(ui32Primask_04172010);                  \
+    }
+
 #define APP_IN_FreeRTOS                 0
 
 /* turn on/off print out data for debug */
