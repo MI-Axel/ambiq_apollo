@@ -25,6 +25,7 @@ void am_pdm0_isr(void)
     SEGGER_SYSVIEW_RecordEnterISR();
 #endif
     uint32_t ui32Status;
+    uint32_t ui32PushRet;
     //
     // Read the interrupt status.
     //
@@ -51,8 +52,8 @@ void am_pdm0_isr(void)
 #if AM_APP_ANALOG_MIC
         if((g_bPDMDataReady == false) && (g_bAMicEvalFlag == true))
         {
-            am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES, true);
-            g_ui32PCMDataSumBytes += PCM_FRAME_SIZE * PCM_DATA_BYTES;
+            ui32PushRet = am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES, true);
+            g_ui32PCMDataSumBytes += ui32PushRet;
             if (am_app_utils_ring_buffer_full(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM]))
             {
                 g_bPDMDataReady = true;

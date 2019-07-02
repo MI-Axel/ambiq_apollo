@@ -148,6 +148,12 @@ int main(void)
             am_util_stdio_printf("Get PDM audio data %d bytes!\n\r", g_ui32PCMDataSumBytes);
 
             am_util_stdio_printf("Audio data collection ended....");
+            
+            //
+            // zero clear the counter 
+            //
+            g_ui32AMicDataSumBytes = 0;
+            g_ui32PCMDataSumBytes = 0;
         }
 
         if((g_bPDMDataReady == true) && (g_bAMicDataReady == true))
