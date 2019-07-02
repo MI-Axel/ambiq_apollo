@@ -702,7 +702,7 @@ extern uint32_t am_hal_gpio_interrupt_service(uint64_t ui64Status);
 
 
 #ifdef __cplusplus
-}
+//}
 #endif
 
 #endif  // AM_HAL_GPIO_H

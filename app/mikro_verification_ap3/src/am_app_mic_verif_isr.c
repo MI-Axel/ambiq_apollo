@@ -47,6 +47,18 @@ void am_pdm0_isr(void)
             }
         }
 #endif // AM_AEP_MIKRO_CALIBRATION
+
+#if AM_APP_ANALOG_MIC
+        if((g_bPDMDataReady == false) && (g_bAMicEvalFlag == true))
+        {
+            am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES, true);
+            g_ui32PCMDataSumBytes += PCM_FRAME_SIZE * PCM_DATA_BYTES;
+            if (am_app_utils_ring_buffer_full(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM]))
+            {
+                g_bPDMDataReady = true;
+            }
+        }
+#endif // AM_APP_ANALOG_MIC
     }
     else if(ui32Status & (AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF))
     {
@@ -122,4 +134,58 @@ void am_gpio_isr(void)
     am_hal_gpio_interrupt_clear(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
 
 }
+//*****************************************************************************
+//
+// Interrupt handler for the ADC.
+//
+//*****************************************************************************
+#if AM_APP_ANALOG_MIC
+void
+am_adc_isr(void)
+{
+    uint32_t ui32IntMask;
 
+    //
+    // Read the interrupt status.
+    //
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_interrupt_status(g_ADCHandle, &ui32IntMask, false))
+    {
+        am_util_stdio_printf("Error reading ADC interrupt status\n");
+    }
+
+    //
+    // Clear the ADC interrupt.
+    //
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_interrupt_clear(g_ADCHandle, ui32IntMask))
+    {
+        am_util_stdio_printf("Error clearing ADC interrupt status\n");
+    }
+
+    //
+    // If we got a DMA complete, set the flag.
+    //
+    if (ui32IntMask & AM_HAL_ADC_INT_DCMP)
+    {
+        g_bADCDMAComplete = true;
+        if((g_bAMicDataReady == false) && (g_bAMicEvalFlag == true))
+        {
+            am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_ANA], (void*)g_ui32ADCSampleBuffer, ADC_SAMPLE_COUNT*ANALOG_MIC_DATA_BYTES, true);
+            g_ui32AMicDataSumBytes += ADC_SAMPLE_COUNT * ANALOG_MIC_DATA_BYTES;
+            if (am_app_utils_ring_buffer_full(&am_sys_ring_buffers[AM_APP_RINGBUFF_ANA]))
+            {
+                g_bAMicDataReady = true;
+            }
+        }
+
+    }
+
+    //
+    // If we got a DMA error, set the flag.
+    //
+    if (ui32IntMask & AM_HAL_ADC_INT_DERR)
+    {
+        g_bADCDMAError = true;
+    }
+}
+
+#endif // AM_APP_ANALOG_MIC

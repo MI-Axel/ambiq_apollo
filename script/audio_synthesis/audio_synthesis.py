@@ -1,15 +1,16 @@
 """
 Scripts to combine the short .WAV files to a long test-useing .WAV file.
+update: could add response in the long .WAV file in order to answering the potential questions from APP
 
 Usage:
-    audio_synthesis.py [--input_path=<audio_path>] [--audio_file=<file_name>] [--silent_ms=<silent_duration_ms>] [--output_path=<target_path>]
+    audio_synthesis.py [options]
 
 Options: 
-    -h --help                                   Show this screen.
-    --input_path=<audio_path>                   Input path of audio file.[default: ./../KWS certification/AVS Certification/Audio test files _ NEW/Silence_Test/Silence_Test/utts/]
-    --audio_file=<file_name>                    The names of files need to be synthesised.[default: ALL] 
-    --silent_ms=<silent_duration_ms>            The duration of silent between 2 RAR commands.[default: 5000]
-    --output_path=<target_path>                 the path of the output file.[default: ./all_Utterances_xsDelay.wav]
+    -h --help                                                       Show this screen.
+    -r, --with_response                                             add no-response at the 2/3 of silent interval
+    -i <audio_path>, --input_path=<audio_path>                      Input path of audio file.[default: /Users/axel/KWS/audio/Audio_test_files_NEW/Silence_Test/Silence_Test/utts/]
+    -o <output_file>, --out_file=<output_file>                      Output file of the synthesis audio.[default: ./All_Utterances_xs_Delay.wav]
+    --silent_ms=<silent_duration_ms>                                The duration of silent between 2 RAR commands.[default: 15000]
 """
 
 from docopt import docopt
@@ -23,48 +24,37 @@ import glob
 
 args = docopt(__doc__)
 
-
 audioInputPath = args['--input_path']
 silencePeriod_ms = np.float(args['--silent_ms'])
-audioOutputPath = args['--output_path']
-print(silencePeriod_ms)
+outFile = args['--out_file']
+print(args)
 
-if args['--audio_file'] == 'ALL':
-    fileList = glob.glob(audioInputPath + '*.wav')   
+fileList = glob.glob(audioInputPath + '*.wav')   
 
-silenceInterval = AudioSegment.silent(duration=silencePeriod_ms, frame_rate=16000) 
+
+silenceStartInterval = AudioSegment.silent(duration=10000, frame_rate=16000) 
 
 comboAudio = AudioSegment.empty()
 
-comboAudio = comboAudio + silenceInterval
+comboAudio = comboAudio + silenceStartInterval
 
-for filename in fileList:
-    audio = AudioSegment.from_wav(filename)
-    comboAudio = comboAudio + audio
-    comboAudio = comboAudio + silenceInterval
+if args['--with_response']:
+    no_res_audio = AudioSegment.from_wav("no_response.wav")
+    silenceInterval_1 = AudioSegment.silent(duration=(silencePeriod_ms*2/3), frame_rate=16000) 
+    silenceInterval_2 = AudioSegment.silent(duration=(silencePeriod_ms*1/3), frame_rate=16000) 
+    for filename in fileList:
+        audio = AudioSegment.from_wav(filename)
+        comboAudio = comboAudio + audio
+        comboAudio = comboAudio + silenceInterval_1
+        comboAudio = comboAudio + no_res_audio
+        comboAudio = comboAudio + silenceInterval_2
+else:
+    silenceInterval = AudioSegment.silent(duration=silencePeriod_ms, frame_rate=16000) 
+    for filename in fileList:
+        audio = AudioSegment.from_wav(filename)
+        comboAudio = comboAudio + audio
+        comboAudio = comboAudio + silenceInterval
 
-comboAudio.export(audioOutputPath, format='wav')
+comboAudio.export(outFile, format='wav')
 
-#    previous_segments = []
-#    alexa_segments = []
-#    alexa_insert_list = []
-#    negatives_insert_list = []
-#
-#    background_data = AudioSegment.from_wav(background[0])
-#
-#    for alexa_sample in alexa_sample_list:
-#        alexa_insert_list.append(AudioSegment.from_wav(alexa_sample))
-#
-#    for negatives_sample in negatives_sample_list:
-#        negatives_insert_list.append(AudioSegment.from_wav(negatives_sample))
-#
-#    new_clip = background_data
-#
-#    for audio in alexa_insert_list:
-#        new_clip, previous_segments = insert_audio_clip(new_clip, audio, previous_segments)
-#    alexa_segments = alexa_segments + previous_segments
-#    for audio in negatives_insert_list:
-#        new_clip, previous_segments = insert_audio_clip(new_clip, audio, previous_segments)
-#
-#    return new_clip, previous_segments, alexa_segments
-#
+

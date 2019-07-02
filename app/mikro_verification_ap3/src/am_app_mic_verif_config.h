@@ -12,9 +12,11 @@
 // BTN0, LED1, press BTN0, LED1 on means microphone calibration on-going; LED1 off means microphone cal ends.
 // BTN1, LED2, press BTN1, LED2 on means microphone THD measuing; LED2 off means THD measurement ends.
 
-#define AM_APP_MIC_CALIBRATION              1
+#define AM_APP_MIC_CALIBRATION              0
 
-#define AM_APP_MIC_THD                      1
+#define AM_APP_MIC_THD                      0
+
+#define AM_APP_ANALOG_MIC                   1
 
 //
 // Platform support function configuration

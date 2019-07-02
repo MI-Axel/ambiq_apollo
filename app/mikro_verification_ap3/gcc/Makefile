@@ -180,7 +180,7 @@ INCS += ${AM_SoftwareRoot}/mcu/apollo3/hal/am_hal_pin.h
 
 CFLAGS = -mthumb -mcpu=$(CPU) -mfpu=$(FPU) -mfloat-abi=$(FABI)
 CFLAGS+= -ffunction-sections -fdata-sections
-CFLAGS+= -MMD -MP -std=c99 -Wall -g
+CFLAGS+= -MMD -MP -std=c99 -Wall -ggdb
 CFLAGS+= -O0
 CFLAGS+= $(DEFINES)
 CFLAGS+= $(INCLUDES)

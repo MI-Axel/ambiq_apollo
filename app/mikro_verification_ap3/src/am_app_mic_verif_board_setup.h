@@ -18,10 +18,22 @@
 //
 // Total number of bytes transferred = 320*50*2 = 32000
 //*****************************************************************************
-
 #define PCM_FRAME_SIZE          320  // Capture one 320-sample (20-ms) frame at a time
 #define NUM_PCM_FRAMES          50   // Number of frames in 1 second
 #define PCM_DATA_BYTES          4
+
+//
+// SR = 16000
+// AUDIO_DATA_LENGTH = SR * TIME = 16000 * x
+//
+#define AUDIO_DATA_LENGTH       16000
+
+//
+// Analog microphone ADC Sample buffer.
+// 160*2 = 320 bytes, 14-bit data (2-byte), 1 channel, 10 ms audio signal of 16000 SR 
+//
+#define ANALOG_MIC_DATA_BYTES   4
+#define ADC_SAMPLE_COUNT        160
 
 //*****************************************************************************
 //
@@ -33,6 +45,9 @@
 typedef enum
 {
     AM_APP_RINGBUFF_NONE = 0, // The enum must begin with this value as named.
+#if AM_APP_ANALOG_MIC
+    AM_APP_RINGBUFF_ANA,
+#endif // AM_APP_ANALOG_MIC
     AM_APP_RINGBUFF_PCM,
     AM_APP_RINGBUFF_MAX // The enum must end with this value as named.
 } am_app_utils_ring_buffer_enum_t;
@@ -79,12 +94,35 @@ extern volatile uint8_t g_ui8PcmDataReadyFlag;
 
 extern volatile uint8_t g_ui8ButtonPushedFlag;
 
+extern volatile uint32_t g_ui32PCMDataSumBytes;
+
+#if AM_APP_ANALOG_MIC
+
+extern uint32_t g_ui32ADCSampleBuffer[ADC_SAMPLE_COUNT];
+
+extern am_hal_adc_sample_t SampleBuffer[ADC_SAMPLE_COUNT];
+
+extern void *g_ADCHandle;
+
+extern volatile bool g_bADCDMAComplete;
+
+extern volatile bool g_bADCDMAError;
+
+extern volatile uint32_t g_ui32AMicDataSumBytes;
+
+extern volatile bool g_bAMicDataReady;
+
+extern volatile bool g_bAMicEvalFlag;
+
+#endif // AM_APP_ANALOG_MIC
+
 extern void DebugLog(const char* s);
 extern void DebugLogInt32(int32_t i);
 extern void DebugLogUInt32(uint32_t i);
 extern void DebugLogHex(uint32_t i);
 extern void DebugLogFloat(float i);
 
+extern void adc_config_dma(void);
 extern void am_app_mic_verif_sys_init(void);
 extern void timerA0_init(void);
 
