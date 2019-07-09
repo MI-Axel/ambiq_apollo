@@ -167,7 +167,7 @@ int main(void)
             {
                 uint8_t indx = 0;
                 uint32_t ringbuff_ret = 0;
-                for(indx==0; indx<16; indx++)
+                for(indx=0; indx<16; indx++)
                 {
                     ringbuff_ret = am_app_utils_ring_buffer_pop(&am_sys_ring_buffers[AM_APP_RINGBUFF_ANA], &g_ui32AD_Val, 4);
                     if(ringbuff_ret == 4)

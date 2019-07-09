@@ -33,7 +33,7 @@
 // 160*2 = 320 bytes, 14-bit data (2-byte), 1 channel, 10 ms audio signal of 16000 SR 
 //
 #define ANALOG_MIC_DATA_BYTES   4
-#define ADC_SAMPLE_COUNT        160
+#define ADC_SAMPLE_COUNT        80
 
 //*****************************************************************************
 //

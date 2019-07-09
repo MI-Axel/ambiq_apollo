@@ -1,0 +1,21 @@
+[2019-07-09 14:54:21.281] Recognition***** wordID = 1, score = 269
+[2019-07-09 14:54:21.282] [AM-VoS] g_delayedSample = 9840, g_endingSampleCnt = 1680 
+[2019-07-09 14:54:21.282] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-07-09 14:54:21.282] [AM-VoS] Keyword Detected! 
+[2019-07-09 14:54:21.282] ---- Not connected to Alexa App.----
+[2019-07-09 14:54:25.822] Recognition***** wordID = 1, score = 42
+[2019-07-09 14:54:25.844] [AM-VoS] g_delayedSample = 11280, g_endingSampleCnt = 1680 
+[2019-07-09 14:54:25.855] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-07-09 14:54:25.855] [AM-VoS] Keyword Detected! 
+[2019-07-09 14:54:25.855] ---- Not connected to Alexa App.----
+[2019-07-09 14:54:31.711] Recognition***** wordID = 1, score = 985
+[2019-07-09 14:54:31.734] [AM-VoS] g_delayedSample = 11760, g_endingSampleCnt = 1680 
+[2019-07-09 14:54:31.744] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-07-09 14:54:31.744] [AM-VoS] Keyword Detected! 
+[2019-07-09 14:54:31.755] ---- Not connected to Alexa App.----
+[2019-07-09 15:00:32.902] Recognition***** wordID = 1, score = 480
+[2019-07-09 15:00:32.925] [AM-VoS] g_delayedSample = 8880, g_endingSampleCnt = 1680 
+[2019-07-09 15:00:32.947] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-07-09 15:00:32.947] [AM-VoS] Keyword Detected! 
+[2019-07-09 15:00:32.947] ---- Not connected to Alexa App.----
+

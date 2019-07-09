@@ -41,7 +41,7 @@ TARGET := mikro_verification
 COMPILERNAME := gcc
 PROJECT := mikro_verification_gcc
 CONFIG := bin
-AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
+AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.2.0
 AM_FolderRoot ?= ../../..
 
 SHELL:=/bin/bash

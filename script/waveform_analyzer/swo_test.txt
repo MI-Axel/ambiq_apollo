@@ -1,0 +1,66 @@
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] Ambiq Secure BootLoader!
+[2019-07-09 14:33:45] 
+[2019-07-09 14:33:45] SecureBoot SBL_v2 ver:0x3(0x93e8) running with VTOR @ 0x100
+[2019-07-09 14:33:45] Current Reset Stat 0x1
+[2019-07-09 14:33:45] Info1 Version 0x1
+[2019-07-09 14:33:45] Info0 Version 0x0
+[2019-07-09 14:33:45] ChipID = 0x1c4aca06:0x87522da8
+[2019-07-09 14:33:45] Flash Size = 0x100000, SRAM Size = 0x60000
+[2019-07-09 14:33:45] Scratch = 0x0
+[2019-07-09 14:33:45] INFO1-Sec = 0xff2da3ff
+[2019-07-09 14:33:45] SBL version 0x3 installed at 0x0
+[2019-07-09 14:33:45] Previous Boot was Successful:81
+[2019-07-09 14:33:45] INFO0-Sec = 0x55fff
+[2019-07-09 14:33:45] Info0 Valid
+[2019-07-09 14:33:45] OTA State: activeIdx=8 otaDesc = 0xfe000
+[2019-07-09 14:33:45] Initialization done
+[2019-07-09 14:33:45] Proceeding to Validate the Images
+[2019-07-09 14:33:45] SecureBoot disabled
+[2019-07-09 14:33:45] Valid Main image in flash SP=0x10002300, RV=0x78d79
+[2019-07-09 14:33:45] Validation Status 0x0
+[2019-07-09 14:33:45] Will transfer to Main@0xc000
+[2019-07-09 14:33:45] Proceeding to lock all security gates
+[2019-07-09 14:33:48] Apollo3 Burst Mode is Available
+[2019-07-09 14:33:48] Apollo3 operating in Normal Mode (48MHz)
+[2019-07-09 14:33:48] 
+[2019-07-09 14:33:48] AMKWD VoS SDK running...
+[2019-07-09 14:33:48] Firmware version: 1.00.12
+[2019-07-09 14:33:48] System reset reason: 0x00000001 
+[2019-07-09 14:33:48] Example: Use AM_APP_LOG_DEBUG(); for Debug log print on RTT. 
+[2019-07-09 14:33:48] Example: Use AM_APP_LOG_INFO(); for Info log print on RTT. 
+[2019-07-09 14:33:48] Example: Use AM_APP_LOG_WARNING(); for Warning log print on RTT. 
+[2019-07-09 14:33:48] AmVosHandlerInitreset sequence
+[2019-07-09 14:33:48] Local Device BD Address: 0605044ACA06
+[2019-07-09 14:33:48] >>> Reset complete <<<
+[2019-07-09 14:33:49] >>> Advertising started <<<
+[2019-07-09 14:33:57] Recognition***** wordID = 1, score = 515
+[2019-07-09 14:33:57] [AM-VoS] g_delayedSample = 10080, g_endingSampleCnt = 1680 
+[2019-07-09 14:33:57] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-07-09 14:33:57] [AM-VoS] Keyword Detected! 
+[2019-07-09 14:33:57] ---- Not connected to Alexa App.----
+[2019-07-09 14:34:14] Recognition***** wordID = 1, score = 364
+[2019-07-09 14:34:14] [AM-VoS] g_delayedSample = 9120, g_endingSampleCnt = 1680 
+[2019-07-09 14:34:14] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-07-09 14:34:14] [AM-VoS] Keyword Detected! 
+[2019-07-09 14:34:14] ---- Not connected to Alexa App.----
+[2019-07-09 14:34:20] >>> Advertising stopped <<<
+[2019-07-09 14:34:20] >>> Advertising started <<<
+

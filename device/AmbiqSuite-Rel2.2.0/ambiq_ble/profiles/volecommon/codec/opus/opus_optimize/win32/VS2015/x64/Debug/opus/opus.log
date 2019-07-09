@@ -1,0 +1,37 @@
+﻿  Generating version.h
+  Git cannot be found, nor can package_version. Generating unknown version.
+  ae_api.c
+c:\temp\ambiqsuite-rel2.0.0\boards\apollo3_evb\examples\opus_step1\lib\ae_api.c(20): warning C4311: 'type cast': pointer truncation from 'char *' to 'int'
+c:\temp\ambiqsuite-rel2.0.0\boards\apollo3_evb\examples\opus_step1\lib\ae_api.c(39): warning C4312: 'type cast': conversion from 'int' to 'void *' of greater size
+c:\temp\ambiqsuite-rel2.0.0\boards\apollo3_evb\examples\opus_step1\lib\ae_api.c(41): warning C4311: 'type cast': pointer truncation from 'void *' to 'int'
+c:\temp\ambiqsuite-rel2.0.0\boards\apollo3_evb\examples\opus_step1\lib\ae_api.c(42): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
+c:\temp\ambiqsuite-rel2.0.0\boards\apollo3_evb\examples\opus_step1\lib\ae_api.c(59): warning C4312: 'type cast': conversion from 'int' to 'void *' of greater size
+  bands.c
+  celt.c
+  celt_encoder.c
+  celt_lpc.c
+  cwrs.c
+  entcode.c
+  entdec.c
+  entenc.c
+  kiss_fft.c
+  laplace.c
+  mathops.c
+  mdct.c
+  modes.c
+  pitch.c
+  quant_bands.c
+  rate.c
+  vq.c
+  mlp.c
+  mlp_data.c
+  Generating Code...
+  Compiling...
+  oct_opus_encoder.c
+  opus.c
+  repacketizer.c
+  tst_octopus.c
+c:\temp\ambiqsuite-rel2.0.0\boards\apollo3_evb\examples\opus_step1\src\opus\win32\tst_octopus\tst_octopus.c(74): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\temp\ambiqsuite-rel2.0.0\boards\apollo3_evb\examples\opus_step1\src\opus\win32\tst_octopus\tst_octopus.c(99): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  opus.vcxproj -> C:\temp\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\src\opus\win32\VS2015\x64\Debug\opus.exe
