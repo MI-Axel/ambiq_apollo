@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\..\src\opus\iar\libopus.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\opus_step1.ewp</path>
+    </project>
+    <batchBuild />
+</workspace>

@@ -217,6 +217,8 @@ def serial_wire_viewer(device, path="", jlink_serial=None):
                     sys.stdout.flush()
                     f.flush()
                     log_line = []
+#                else:
+#                    log_line.append(item)
     except KeyboardInterrupt:
         pass
 

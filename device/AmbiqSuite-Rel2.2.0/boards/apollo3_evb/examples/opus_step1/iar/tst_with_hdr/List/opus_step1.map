@@ -1,0 +1,966 @@
+###############################################################################
+#
+# IAR ELF Linker V8.32.2.178/W32 for ARM                  10/Jun/2019  11:28:55
+# Copyright 2007-2018 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Exe\opus_step1.out
+#    Map file     =  
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\List\opus_step1.map
+#    Command line =  
+#        -f C:\temp\EW929A.tmp
+#        (C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\ae_api.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_bsp.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_bsp_pins.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_devices_led.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_adc.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_ble.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_ble_patch.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_burst.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_cachectrl.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_clkgen.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_cmdq.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_ctimer.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_debug.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_flash.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_global.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_gpio.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_interrupt.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_iom.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_ios.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_itm.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_mcuctrl.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_mspi.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_pdm.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_pwrctrl.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_queue.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_reset.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_rtc.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_secure_ota.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_security.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_stimer.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_sysctrl.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_systick.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_tpiu.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_uart.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_hal_wdt.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_util_delay.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_util_faultisr.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\am_util_stdio.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\lib\libopus.a
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\opus_step1.o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj\startup_iar.o
+#        --no_out_extension -o
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Exe\opus_step1.out
+#        --map
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\List\opus_step1.map
+#        --log libraries,initialization,modules,redirects,sections --log_file
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\List\opus_step1.log
+#        --config
+#        C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\opus_step1.icf
+#        --semihosting --entry __iar_program_start --no_vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__Heap_Handler  = DLMalloc
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The advanced heap was selected because the application calls memory
+allocation functions outside of system library functions, and there
+are calls to deallocation functions in the application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+define block FLASHBASE
+   with fixed order { ro section .intvec, ro section .patch };
+"A0":  place at start of [from 0xc000 to 0xf'c000] { block FLASHBASE };
+"P1":  place in [from 0xc000 to 0xf'c000] { ro };
+define block CSTACK with size = 1K, alignment = 8 { };
+"A1":  place at start of [from 0x1000'0000 to 0x1006'0000] {
+          block CSTACK, section .noinit };
+define block HEAP with size = 0M, alignment = 8 { };
+"P2":  place in [from 0x1000'0000 to 0x1006'0000] { block HEAP, rw };
+do not initialize { section .noinit };
+initialize by copy { rw };
+
+  Section            Kind         Address     Size  Object
+  -------            ----         -------     ----  ------
+"A0":                                        0x100
+  FLASHBASE                        0xc000    0x100  <Block>
+    .intvec          const         0xc000     0xc0  startup_iar.o [1]
+    .patch           const         0xc0c0     0x40  startup_iar.o [1]
+                                 - 0xc100    0x100
+
+"P1":                                      0x31de0
+  .text              ro code       0xc100   0x5200  celt_encoder.o [3]
+  .text              ro code     0x1'1300     0x84  modes.o [3]
+  .text              ro code     0x1'1384      0x6  ABImemclr.o [5]
+  .text              ro code     0x1'138a     0x7a  lz77_init_single.o [5]
+  .text              ro code     0x1'1404    0x35c  celt.o [3]
+  .text              ro code     0x1'1760    0x1b8  ae_api.o [1]
+  .text              ro code     0x1'1918     0x48  FltToDbl.o [4]
+  .text              ro code     0x1'1960    0x1a2  DblMul.o [4]
+  .text              ro code     0x1'1b02     0x3a  zero_init3.o [5]
+  .text              ro code     0x1'1b3c     0x22  S32ToDbl.o [4]
+  .rodata            const       0x1'1b5e      0x2  opus_step1.o [1]
+  .text              ro code     0x1'1b60    0x102  sqrt.o [4]
+  .text              ro code     0x1'1c62      0x2  startup_iar.o [1]
+  .text              ro code     0x1'1c64     0x68  DblToFlt.o [4]
+  .text              ro code     0x1'1ccc    0x17a  DblAdd.o [4]
+  .text              ro code     0x1'1e48     0x2e  DblCmpLe.o [4]
+  .text              ro code     0x1'1e78    0x538  mdct.o [3]
+  .text              ro code     0x1'23b0      0x6  ABImemclr4.o [5]
+  .text              ro code     0x1'23b8     0x76  ABImemcpy_unaligned.o [5]
+  .text              ro code     0x1'2430   0x299c  bands.o [3]
+  .text              ro code     0x1'4dcc    0x456  entenc.o [3]
+  .text              ro code     0x1'5224    0xfa8  pitch.o [3]
+  .text              ro code     0x1'61cc     0x78  ABImemmove_unaligned.o [5]
+  .text              ro code     0x1'6244     0x54  entcode.o [3]
+  .text              ro code     0x1'6298    0x9f0  quant_bands.o [3]
+  .text              ro code     0x1'6c88    0xaec  rate.o [3]
+  .text              ro code     0x1'7774     0x66  ABImemset.o [5]
+  .text              ro code     0x1'77dc     0x28  printf.o [2]
+  .text              ro code     0x1'7804    0x744  oct_opus_encoder.o [3]
+  .text              ro code     0x1'7f48     0xe2  DblSub.o [4]
+  .text              ro code     0x1'802c    0x930  kiss_fft.o [3]
+  .text              ro code     0x1'895c     0x32  ABImemset48.o [5]
+  .text              ro code     0x1'8990    0xbe4  vq.o [3]
+  .text              ro code     0x1'9574    0x17e  entdec.o [3]
+  .text              ro code     0x1'96f4     0x2e  mathops.o [3]
+  .text              ro code     0x1'9724    0x440  celt_lpc.o [3]
+  .text              ro code     0x1'9b64     0x84  laplace.o [3]
+  .text              ro code     0x1'9be8    0xdf2  xprintffull_nomb.o [2]
+  .text              ro code     0x1'a9dc    0x3f2  repacketizer.o [3]
+  .text              ro code     0x1'add0     0x12  math_wrappers64.o [4]
+  .text              ro code     0x1'ade4    0x25c  cwrs.o [3]
+  .text              ro code     0x1'b040     0x16  strchr.o [5]
+  .text              ro code     0x1'b058     0x40  xfail_s.o [2]
+  .text              ro code     0x1'b098     0x36  strlen.o [5]
+  .text              ro code     0x1'b0d0     0x58  memchr.o [5]
+  .text              ro code     0x1'b128    0x230  I64DivMod.o [5]
+  .text              ro code     0x1'b358     0x70  frexp.o [4]
+  .text              ro code     0x1'b3c8     0x2e  DblCmpGe.o [4]
+  .text              ro code     0x1'b3f8    0x13a  ldexp.o [4]
+  .text              ro code     0x1'b534     0x3a  DblToS32.o [4]
+  .text              ro code     0x1'b570    0x246  DblDiv.o [4]
+  .text              ro code     0x1'b7b8     0x28  DblToU32.o [4]
+  .text              ro code     0x1'b7e0     0x1a  U32ToDbl.o [4]
+  .text              ro code     0x1'b7fc    0x3e8  opus.o [3]
+  .text              ro code     0x1'bbe4    0x440  cos_sin64.o [4]
+  .text              ro code     0x1'c024      0x6  abort.o [2]
+  .text              ro code     0x1'c02c      0x2  I64DivZer.o [5]
+  .text              ro code     0x1'c030     0x14  exit.o [6]
+  .text              ro code     0x1'c044     0x80  iarttio.o [6]
+  .text              ro code     0x1'c0c4     0x3c  XShttio.o [2]
+  .rodata            const       0x1'c100   0x1c20  modes.o [3]
+  .rodata            const       0x1'dd20   0x13e0  cwrs.o [3]
+  .rodata            const       0x1'f100    0xf00  modes.o [3]
+  .text              ro code     0x2'0000    0x9f0  am_hal_uart.o [1]
+  .text              ro code     0x2'09f0    0x17c  am_hal_pwrctrl.o [1]
+  .text              ro code     0x2'0b6c     0x14  am_hal_interrupt.o [1]
+  .text              ro code     0x2'0b80     0xec  am_hal_queue.o [1]
+  .text              ro code     0x2'0c6c     0x80  am_hal_flash.o [1]
+  .text              ro code     0x2'0cec    0x8a8  am_util_stdio.o [1]
+  .rodata            const       0x2'1594    0x3c0  modes.o [3]
+  .text              ro code     0x2'1954    0x3a8  am_hal_gpio.o [1]
+  .text              ro code     0x2'1cfc    0x2a4  opus_step1.o [1]
+  .text              ro code     0x2'1fa0    0x128  am_hal_clkgen.o [1]
+  .text              ro code     0x2'20c8    0x158  am_hal_ctimer.o [1]
+  .text              ro code     0x2'2220     0x5c  am_hal_cachectrl.o [1]
+  .text              ro code     0x2'227c    0x23c  am_bsp.o [1]
+  .text              ro code     0x2'24b8    0x13c  am_devices_led.o [1]
+  .text              ro code     0x2'25f4    0x194  am_hal_burst.o [1]
+  .text              ro code     0x2'2788     0x44  am_util_delay.o [1]
+  .text              ro code     0x2'27cc     0x30  am_hal_rtc.o [1]
+  .text              ro code     0x2'27fc     0xe8  am_hal_itm.o [1]
+  .text              ro code     0x2'28e4     0xb4  am_hal_tpiu.o [1]
+  .rodata            const       0x2'2998    0x1e0  modes.o [3]
+  .rodata            const       0x2'2b78    0x1e0  modes.o [3]
+  .text              ro code     0x2'2d58    0x1d4  am_hal_mcuctrl.o [1]
+  .rodata            const       0x2'2f2c    0x188  modes.o [3]
+  .rodata            const       0x2'30b4    0x150  quant_bands.o [3]
+  .rodata            const       0x2'3204     0xf0  modes.o [3]
+  .rodata            const       0x2'32f4     0xe8  modes.o [3]
+  .text              ro code     0x2'33dc     0xd8  am_util_faultisr.o [1]
+  .rodata            const       0x2'34b4     0xd4  modes.o [3]
+  .rodata            const       0x2'3588     0xc8  am_hal_gpio.o [1]
+  .rodata            const       0x2'3650     0xb4  am_hal_pwrctrl.o [1]
+  .rodata            const       0x2'3704     0xa8  celt_encoder.o [3]
+  .rodata            const       0x2'37ac     0xa8  modes.o [3]
+  .rodata            const       0x2'3854     0x80  celt_encoder.o [3]
+  .rodata            const       0x2'38d4     0x78  bands.o [3]
+  .rodata            const       0x2'394c     0x78  modes.o [3]
+  .rodata            const       0x2'39c4     0x6c  modes.o [3]
+  .rodata            const       0x2'3a30     0x64  quant_bands.o [3]
+  .rodata            const       0x2'3a94     0x60  am_hal_flash.o [1]
+  .rodata            const       0x2'3af4     0x5c  opus_step1.o [1]
+  .rodata            const       0x2'3b50     0x54  opus_step1.o [1]
+  .rodata            const       0x2'3ba4     0x40  am_hal_mcuctrl.o [1]
+  .rodata            const       0x2'3be4     0x40  am_hal_mcuctrl.o [1]
+  .rodata            const       0x2'3c24     0x40  pitch.o [3]
+  .rodata            const       0x2'3c64     0x3c  cwrs.o [3]
+  .rodata            const       0x2'3ca0     0x38  modes.o [3]
+  .rodata            const       0x2'3cd8     0x38  modes.o [3]
+  .rodata            const       0x2'3d10     0x38  modes.o [3]
+  .rodata            const       0x2'3d48     0x38  modes.o [3]
+  .rodata            const       0x2'3d80     0x34  am_hal_gpio.o [1]
+  .rodata            const       0x2'3db4     0x34  am_hal_gpio.o [1]
+  .rodata            const       0x2'3de8     0x34  am_hal_gpio.o [1]
+  .rodata            const       0x2'3e1c     0x30  ae_api.o [1]
+  .rodata            const       0x2'3e4c     0x30  opus_step1.o [1]
+  .rodata            const       0x2'3e7c     0x2c  opus_step1.o [1]
+  .rodata            const       0x2'3ea8     0x2c  opus_step1.o [1]
+  .rodata            const       0x2'3ed4     0x2c  modes.o [3]
+  .rodata            const       0x2'3f00     0x2c  modes.o [3]
+  .rodata            const       0x2'3f2c     0x28  am_bsp.o [1]
+  .rodata            const       0x2'3f54     0x28  opus_step1.o [1]
+  .rodata            const       0x2'3f7c     0x28  opus_step1.o [1]
+  .rodata            const       0x2'3fa4     0x28  opus_step1.o [1]
+  .text              ro code     0x2'3fcc     0x28  data_init.o [5]
+  .rodata            const       0x2'3ff4     0x24  opus_step1.o [1]
+  .rodata            const       0x2'4018     0x24  celt.o [3]
+  .text              ro code     0x2'403c     0x22  fpinit_M.o [4]
+  .text              ro code     0x2'405e     0x22  iarwrite.o [6]
+  .iar.init_table    const       0x2'4080     0x20  - Linker created -
+  .rodata            const       0x2'40a0     0x20  opus_step1.o [1]
+  .rodata            const       0x2'40c0     0x20  celt.o [3]
+  .text              ro code     0x2'40e0     0x20  putchar.o [2]
+  .text              ro code     0x2'4100     0x10  write.o [6]
+  .text              ro code     0x2'4110     0x1e  dwrite.o [6]
+  .text              ro code     0x2'412e     0x20  iarwstd.o [6]
+  .text              ro code     0x2'4150     0x1e  startup_iar.o [1]
+  .text              ro code     0x2'416e      0xc  cstartup_M.o [5]
+  .text              ro code     0x2'417c     0x1e  cmain.o [5]
+  .text              ro code     0x2'419a      0x4  exit.o [2]
+  .text              ro code     0x2'41a0      0xa  cexit.o [5]
+  .rodata            const       0x2'41ac     0x18  opus_step1.o [1]
+  .text              ro code     0x2'41c4     0x16  xprout.o [2]
+  .rodata            const       0x2'41dc     0x14  am_bsp.o [1]
+  .rodata            const       0x2'41f0     0x14  am_util_stdio.o [1]
+  .rodata            const       0x2'4204      0xc  am_hal_flash.o [1]
+  .rodata            const       0x2'4210      0x4  am_bsp_pins.o [1]
+  .rodata            const       0x2'4214      0x4  am_bsp_pins.o [1]
+  .rodata            const       0x2'4218      0x4  am_bsp_pins.o [1]
+  .rodata            const       0x2'421c      0x4  am_hal_cachectrl.o [1]
+  .rodata            const       0x2'4220      0x4  am_hal_gpio.o [1]
+  .rodata            const       0x2'4224      0x4  am_hal_gpio.o [1]
+  .rodata            const       0x2'4228      0x4  am_hal_gpio.o [1]
+  .rodata            const       0x2'422c      0x4  opus_step1.o [1]
+  .rodata            const       0x2'4230      0x4  celt_encoder.o [3]
+  .rodata            const       0x2'4234      0x0  zero_init3.o [5]
+  .rodata            const       0x2'4234      0x0  lz77_init_single.o [5]
+  Initializer bytes  const       0x2'4234  0x19cac  <for P2-1>
+                               - 0x3'dee0  0x31de0
+
+"A1":                                       0x1000
+  .noinit            uninit   0x1000'0000   0x1000  startup_iar.o [1]
+                            - 0x1000'1000   0x1000
+
+"P2", part 1 of 2:                         0x2b2cc
+  P2-1                        0x1000'1000  0x2b2cc  <Init block>
+    .data            inited   0x1000'1000     0xe8  ae_api.o [1]
+    .data            inited   0x1000'10e8     0x28  am_bsp.o [1]
+    .data            inited   0x1000'1110     0x28  am_bsp.o [1]
+    .data            inited   0x1000'1138     0x10  am_hal_ctimer.o [1]
+    .data            inited   0x1000'1148  0x2b16c  opus_step1.o [1]
+    .data            inited   0x1002'c2b4      0x4  opus_step1.o [1]
+    .data            inited   0x1002'c2b8      0xc  opus_step1.o [1]
+    .data            inited   0x1002'c2c4      0x8  XShttio.o [2]
+                            - 0x1002'c2cc  0x2b2cc
+
+"P2", part 2 of 2:                         0x14dcc
+  .bss               zero     0x1002'c2cc   0xc800  opus_step1.o [1]
+  .bss               zero     0x1003'8acc   0x5020  ae_api.o [1]
+  .bss               zero     0x1003'daec   0x1770  celt_encoder.o [3]
+  .bss               zero     0x1003'f25c    0xf30  oct_opus_encoder.o [3]
+  .bss               zero     0x1004'018c    0x400  am_bsp.o [1]
+  .bss               zero     0x1004'058c    0x400  am_bsp.o [1]
+  .bss               zero     0x1004'098c    0x320  vq.o [3]
+  .bss               zero     0x1004'0cac    0x190  vq.o [3]
+  .bss               zero     0x1004'0e3c    0x100  am_util_stdio.o [1]
+  .bss               zero     0x1004'0f3c     0xc8  am_hal_uart.o [1]
+  .bss               zero     0x1004'1004     0x78  kiss_fft.o [3]
+  .bss               zero     0x1004'107c      0x4  am_bsp.o [1]
+  .bss               zero     0x1004'1080      0x4  am_bsp.o [1]
+  .bss               zero     0x1004'1084      0x4  am_hal_reset.o [1]
+  .bss               zero     0x1004'1088      0x4  am_util_stdio.o [1]
+  .bss               zero     0x1004'108c      0x4  opus_step1.o [1]
+  .bss               zero     0x1004'1090      0x4  xfail_s.o [2]
+  .bss               zero     0x1004'1094      0x1  am_hal_burst.o [1]
+  .bss               zero     0x1004'1095      0x1  am_util_stdio.o [1]
+  .bss               zero     0x1004'1096      0x1  XShttio.o [2]
+                            - 0x1004'1097  0x14dcb
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+     0x3'dee0     0xf'c000  0xb'e121
+  0x1004'1098  0x1006'0000  0x1'ef69
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x14dcb:
+          0x1002'c2cc  0x14dcb
+
+Copy/lz77 (__iar_lz77_init_single3)
+    1 source range, total size 0x19cac (59% of destination):
+             0x2'4234  0x19cac
+    1 destination range, total size 0x2b2cc:
+          0x1000'1000  0x2b2cc
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+command line/config:
+    -------------------------------------------------
+    Total:
+
+C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj: [1]
+    ae_api.o                    440      186   20 744
+    am_bsp.o                    572      108    2 136
+    am_bsp_pins.o                         12
+    am_devices_led.o            316
+    am_hal_burst.o              404                 1
+    am_hal_cachectrl.o           92        4
+    am_hal_clkgen.o             296
+    am_hal_ctimer.o             344        9       16
+    am_hal_flash.o              128      108
+    am_hal_gpio.o               936      368
+    am_hal_interrupt.o           20
+    am_hal_itm.o                232
+    am_hal_mcuctrl.o            468      128
+    am_hal_pwrctrl.o            380      180
+    am_hal_queue.o              236
+    am_hal_reset.o                                  4
+    am_hal_rtc.o                 48
+    am_hal_tpiu.o               180
+    am_hal_uart.o             2 544               200
+    am_util_delay.o              68
+    am_util_faultisr.o          216
+    am_util_stdio.o           2 216       20      261
+    opus_step1.o                676  105 974  227 712
+    startup_iar.o                32      256    4 096
+    -------------------------------------------------
+    Total:                   10 844  107 353  255 170
+
+dl7M_tln.a: [2]
+    XShttio.o                    60        4        9
+    abort.o                       6
+    exit.o                        4
+    printf.o                     40
+    putchar.o                    32
+    xfail_s.o                    64                 4
+    xprintffull_nomb.o        3 570
+    xprout.o                     22
+    -------------------------------------------------
+    Total:                    3 798        4       13
+
+libopus.a: [3]
+    bands.o                  10 652      120
+    celt.o                      860       68
+    celt_encoder.o           20 992      300    6 000
+    celt_lpc.o                1 088
+    cwrs.o                      604    5 148
+    entcode.o                    84
+    entdec.o                    382
+    entenc.o                  1 110
+    kiss_fft.o                2 352               120
+    laplace.o                   132
+    mathops.o                    46
+    mdct.o                    1 336
+    modes.o                     132   14 744
+    oct_opus_encoder.o        1 860             3 888
+    opus.o                    1 000
+    pitch.o                   4 008       64
+    quant_bands.o             2 544      436
+    rate.o                    2 796
+    repacketizer.o            1 010
+    vq.o                      3 044             1 200
+    -------------------------------------------------
+    Total:                   56 032   20 880   11 208
+
+m7M_tls.a: [4]
+    DblAdd.o                    378
+    DblCmpGe.o                   46
+    DblCmpLe.o                   46
+    DblDiv.o                    582
+    DblMul.o                    418
+    DblSub.o                    226
+    DblToFlt.o                  104
+    DblToS32.o                   58
+    DblToU32.o                   40
+    FltToDbl.o                   72
+    S32ToDbl.o                   34
+    U32ToDbl.o                   26
+    cos_sin64.o               1 088
+    fpinit_M.o                   34
+    frexp.o                     112
+    ldexp.o                     314
+    math_wrappers64.o            18
+    sqrt.o                      258
+    -------------------------------------------------
+    Total:                    3 854
+
+rt7M_tl.a: [5]
+    ABImemclr.o                   6
+    ABImemclr4.o                  6
+    ABImemcpy_unaligned.o       118
+    ABImemmove_unaligned.o      120
+    ABImemset.o                 102
+    ABImemset48.o                50
+    I64DivMod.o                 560
+    I64DivZer.o                   2
+    cexit.o                      10
+    cmain.o                      30
+    cstartup_M.o                 12
+    data_init.o                  40
+    lz77_init_single.o          122
+    memchr.o                     88
+    strchr.o                     22
+    strlen.o                     54
+    zero_init3.o                 58
+    -------------------------------------------------
+    Total:                    1 400
+
+shb_l.a: [6]
+    dwrite.o                     30
+    exit.o                       20
+    iarttio.o                   128
+    iarwrite.o                   34
+    iarwstd.o                    32
+    write.o                      16
+    -------------------------------------------------
+    Total:                      260
+
+    Gaps                         50        4
+    Linker created                        33
+-----------------------------------------------------
+    Grand Total:             76 238  128 274  266 391
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address     Size  Type      Object
+-----                       -------     ----  ----      ------
+.iar.init_table$$Base      0x2'4080            --   Gb  - Linker created -
+.iar.init_table$$Limit     0x2'40a0            --   Gb  - Linker created -
+?main                      0x2'417d           Code  Gb  cmain.o [5]
+CELT_PVQ_U_DATA            0x1'dd20   0x13e0  Data  Lc  cwrs.o [3]
+CELT_PVQ_U_ROW             0x2'3c64     0x3c  Data  Lc  cwrs.o [3]
+DWT_CONTROL             0x1003'8ae0      0x4  Data  Gb  ae_api.o [1]
+DWT_CYCCNT              0x1003'8adc      0x4  Data  Gb  ae_api.o [1]
+FLASHBASE$$Base              0xc000            --   Gb  - Linker created -
+FLASHBASE$$Limit             0xc100            --   Gb  - Linker created -
+HardFault_Handler          0x2'33dd     0x1c  Code  Gb  am_util_faultisr.o [1]
+LOG2_FRAC_TABLE            0x1'775c     0x18  Data  Lc  rate.o [3]
+LoadInt                    0x1'9d97     0x7a  Code  Lc  xprintffull_nomb.o [2]
+Region$$Table$$Base        0x2'4080            --   Gb  - Linker created -
+Region$$Table$$Limit       0x2'40a0            --   Gb  - Linker created -
+Reset_Handler              0x2'4165      0x6  Code  Gb  startup_iar.o [1]
+SCB_DEMCR               0x1003'8ae4      0x4  Data  Gb  ae_api.o [1]
+_GenldFullNoMb             0x1'a6d9    0x274  Code  Lc  xprintffull_nomb.o [2]
+_LdtobFullNoMb             0x1'a2d5    0x3d6  Code  Lc  xprintffull_nomb.o [2]
+_LitobFullNoMb             0x1'a185    0x10a  Code  Lc  xprintffull_nomb.o [2]
+_PrintfFullNoMb            0x1'9be9    0x19e  Code  Gb  xprintffull_nomb.o [2]
+_Prout                     0x2'41c5     0x16  Code  Gb  xprout.o [2]
+_PutcharsFullNoMb          0x1'a94d     0x2e  Code  Lc  xprintffull_nomb.o [2]
+_PutfldFullNoMb            0x1'9e11    0x268  Code  Lc  xprintffull_nomb.o [2]
+_PuttxtFullNoMb            0x1'a079    0x10c  Code  Lc  xprintffull_nomb.o [2]
+__NVIC_EnableIRQ           0x2'227d     0x20  Code  Lc  am_bsp.o [1]
+__Patchable                  0xc0c0     0x40  Data  Gb  startup_iar.o [1]
+__aeabi_cdcmple            0x1'1e49           Code  Gb  DblCmpLe.o [4]
+__aeabi_cdrcmple           0x1'b3c9           Code  Gb  DblCmpGe.o [4]
+__aeabi_d2f                0x1'1c65           Code  Gb  DblToFlt.o [4]
+__aeabi_d2iz               0x1'b535           Code  Gb  DblToS32.o [4]
+__aeabi_d2uiz              0x1'b7b9           Code  Gb  DblToU32.o [4]
+__aeabi_dadd               0x1'1ccd           Code  Gb  DblAdd.o [4]
+__aeabi_ddiv               0x1'b571           Code  Gb  DblDiv.o [4]
+__aeabi_dmul               0x1'1961           Code  Gb  DblMul.o [4]
+__aeabi_dsub               0x1'7f49           Code  Gb  DblSub.o [4]
+__aeabi_f2d                0x1'1919           Code  Gb  FltToDbl.o [4]
+__aeabi_i2d                0x1'1b3d           Code  Gb  S32ToDbl.o [4]
+__aeabi_ldiv0              0x1'c02d           Code  Gb  I64DivZer.o [5]
+__aeabi_memclr             0x1'1385           Code  Gb  ABImemclr.o [5]
+__aeabi_memclr4            0x1'23b1           Code  Gb  ABImemclr4.o [5]
+__aeabi_memset             0x1'7775           Code  Gb  ABImemset.o [5]
+__aeabi_ui2d               0x1'b7e1           Code  Gb  U32ToDbl.o [4]
+__aeabi_uldivmod           0x1'b129           Code  Gb  I64DivMod.o [5]
+__cmain                    0x2'417d           Code  Gb  cmain.o [5]
+__dwrite                   0x2'4111     0x1e  Code  Gb  dwrite.o [6]
+__exit                     0x1'c031     0x14  Code  Gb  exit.o [6]
+__iar_Fail_s               0x1'b059     0x1c  Code  Gb  xfail_s.o [2]
+__iar_Memchr               0x1'b0d1           Code  Gb  memchr.o [5]
+__iar_Memset               0x1'7775           Code  Gb  ABImemset.o [5]
+__iar_Memset4_word         0x1'895d           Code  Gb  ABImemset48.o [5]
+__iar_Memset8_word         0x1'895d           Code  Gb  ABImemset48.o [5]
+__iar_Memset_word          0x1'777d           Code  Gb  ABImemset.o [5]
+__iar_Sin64                0x1'bbe5    0x3aa  Code  Lc  cos_sin64.o [4]
+__iar_Strchr               0x1'b041           Code  Gb  strchr.o [5]
+__iar_close_ttio           0x1'c045     0x2e  Code  Gb  iarttio.o [6]
+__iar_cos64                0x1'c021      0x4  Code  Gb  cos_sin64.o [4]
+__iar_cos_medium           0x1'c021      0x4  Code  Gb  cos_sin64.o [4]
+__iar_cos_medium64         0x1'c021      0x4  Code  Gb  cos_sin64.o [4]
+__iar_cos_mediuml          0x1'c021      0x4  Code  Gb  cos_sin64.o [4]
+__iar_dadd                 0x1'7f59           Code  Gb  DblSub.o [4]
+__iar_data_init3           0x2'3fcd     0x28  Code  Gb  data_init.o [5]
+__iar_dsub                 0x1'1cdd           Code  Gb  DblAdd.o [4]
+__iar_dsubStart            0x1'1cef           Code  Gb  DblAdd.o [4]
+__iar_frexp                0x1'b365           Code  Gb  frexp.o [4]
+__iar_frexpl               0x1'b365           Code  Gb  frexp.o [4]
+__iar_get_ttio             0x1'c075     0x4c  Code  Gb  iarttio.o [6]
+__iar_init_vfp             0x2'403d           Code  Gb  fpinit_M.o [4]
+__iar_ldexp64              0x1'b3f9           Code  Gb  ldexp.o [4]
+__iar_lookup_ttioh         0x1'c0f3      0x4  Code  Gb  XShttio.o [2]
+__iar_lz77_init_single3
+                           0x1'138b     0x7a  Code  Gb  lz77_init_single.o [5]
+__iar_program_start        0x2'416f           Code  Gb  cstartup_M.o [5]
+__iar_scalbln64            0x1'b3f9           Code  Gb  ldexp.o [4]
+__iar_scalbn64             0x1'b3f9           Code  Gb  ldexp.o [4]
+__iar_sh_stdout            0x2'412f     0x20  Code  Gb  iarwstd.o [6]
+__iar_sh_write             0x2'405f     0x22  Code  Gb  iarwrite.o [6]
+__iar_softfp___iar_frexp64
+                           0x1'b359           Code  Gb  frexp.o [4]
+__iar_softfp_frexp         0x1'b359           Code  Gb  frexp.o [4]
+__iar_softfp_frexpl        0x1'b359           Code  Gb  frexp.o [4]
+__iar_sqrt64               0x1'1b71           Code  Gb  sqrt.o [4]
+__iar_ttio_guard_lock      0x1'c0c5     0x1e  Code  Gb  XShttio.o [2]
+__iar_ttio_guard_unlock
+                           0x1'c0e3     0x10  Code  Gb  XShttio.o [2]
+__iar_ttio_handles      0x1002'c2c4      0x8  Data  Lc  XShttio.o [2]
+__iar_unaligned_memcpy     0x1'23b9           Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned_memcpy4
+                           0x1'23d9           Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned_memcpy8
+                           0x1'23d9           Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned_memmove
+                           0x1'61cd           Code  Gb  ABImemmove_unaligned.o [5]
+__iar_unaligned_memmove4
+                           0x1'61cd           Code  Gb  ABImemmove_unaligned.o [5]
+__iar_unaligned_memmove8
+                           0x1'61cd           Code  Gb  ABImemmove_unaligned.o [5]
+__iar_vfp___iar_sqrt64     0x1'1b61           Code  Gb  sqrt.o [4]
+__iar_vfp_cos              0x1'add7      0xc  Code  Gb  math_wrappers64.o [4]
+__iar_vfp_sqrt             0x1'1b61           Code  Gb  sqrt.o [4]
+__iar_vfp_sqrtl            0x1'1b61           Code  Gb  sqrt.o [4]
+__iar_zero_init3           0x1'1b03     0x3a  Code  Gb  zero_init3.o [5]
+__low_level_init           0x2'4151      0xa  Code  Gb  startup_iar.o [1]
+__vector_table               0xc000     0xc0  Data  Gb  startup_iar.o [1]
+__write                    0x2'4101     0x10  Code  Gb  write.o [6]
+_call_main                 0x2'4189           Code  Gb  cmain.o [5]
+_celt_autocorr             0x1'9901    0x260  Code  Gb  celt_lpc.o [3]
+_celt_lpc                  0x1'9725    0x1d4  Code  Gb  celt_lpc.o [3]
+_exit                      0x2'41a1           Code  Gb  cexit.o [5]
+_main                      0x2'4197           Code  Gb  cmain.o [5]
+abort                      0x1'c025      0x6  Code  Gb  abort.o [2]
+alg_quant                  0x1'9271     0x88  Code  Gb  vq.o [3]
+alg_unquant                0x1'9305     0x64  Code  Gb  vq.o [3]
+alloc_stack                0x1'17a5      0x4  Code  Gb  ae_api.o [1]
+alloc_trim_analysis          0xd49d    0x476  Code  Lc  celt_encoder.o [3]
+alloca                     0x1'1761     0x2c  Code  Gb  ae_api.o [1]
+am_bsp_buffered_uart_printf_enable
+                           0x2'2439     0x46  Code  Gb  am_bsp.o [1]
+am_bsp_debug_printf_disable
+                           0x2'2315     0x1e  Code  Gb  am_bsp.o [1]
+am_bsp_debug_printf_enable
+                           0x2'22eb     0x2a  Code  Gb  am_bsp.o [1]
+am_bsp_itm_printf_disable
+                           0x2'2367     0x1a  Code  Gb  am_bsp.o [1]
+am_bsp_itm_printf_enable
+                           0x2'2333     0x34  Code  Gb  am_bsp.o [1]
+am_bsp_low_power_init      0x2'229d     0x4e  Code  Gb  am_bsp.o [1]
+am_bsp_psLEDs           0x1000'10e8     0x28  Data  Gb  am_bsp.o [1]
+am_bsp_uart_printf_disable
+                           0x2'23ff     0x34  Code  Gb  am_bsp.o [1]
+am_bsp_uart_printf_enable
+                           0x2'23bf     0x40  Code  Gb  am_bsp.o [1]
+am_bsp_uart_string_print
+                           0x2'2381     0x3e  Code  Gb  am_bsp.o [1]
+am_ctimer_isr              0x2'1d33     0x1c  Code  Gb  opus_step1.o [1]
+am_default_isr             0x2'416b      0x2  Code  Lc  startup_iar.o [1]
+am_devices_led_array_init
+                           0x2'2519     0x24  Code  Gb  am_devices_led.o [1]
+am_devices_led_array_out
+                           0x2'25c7     0x2e  Code  Gb  am_devices_led.o [1]
+am_devices_led_init        0x2'24b9     0x56  Code  Gb  am_devices_led.o [1]
+am_devices_led_off         0x2'257f     0x48  Code  Gb  am_devices_led.o [1]
+am_devices_led_on          0x2'253d     0x42  Code  Gb  am_devices_led.o [1]
+am_hal_burst_mode_disable
+                           0x2'2709     0x5c  Code  Gb  am_hal_burst.o [1]
+am_hal_burst_mode_enable
+                           0x2'26a1     0x68  Code  Gb  am_hal_burst.o [1]
+am_hal_burst_mode_initialize
+                           0x2'25f5     0xac  Code  Gb  am_hal_burst.o [1]
+am_hal_cachectrl_config
+                           0x2'2221     0x4a  Code  Gb  am_hal_cachectrl.o [1]
+am_hal_cachectrl_defaults
+                           0x2'421c      0x4  Data  Gb  am_hal_cachectrl.o [1]
+am_hal_cachectrl_enable
+                           0x2'226b      0xe  Code  Gb  am_hal_cachectrl.o [1]
+am_hal_clkgen_control      0x2'1fa1     0xcc  Code  Gb  am_hal_clkgen.o [1]
+am_hal_clkgen_status_get
+                           0x2'206d     0x32  Code  Gb  am_hal_clkgen.o [1]
+am_hal_ctimer_clear        0x2'2133     0x28  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_config       0x2'20c9     0x6a  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_int_clear
+                           0x2'21f1     0x16  Code  Gb  am_hal_ctimer.o [1]
+am_hal_ctimer_period_set
+                           0x2'215b     0x96  Code  Gb  am_hal_ctimer.o [1]
+am_hal_flash_delay         0x2'0c6d     0x10  Code  Gb  am_hal_flash.o [1]
+am_hal_flash_delay_status_check
+                           0x2'0c7d     0x44  Code  Gb  am_hal_flash.o [1]
+am_hal_flash_store_ui32
+                           0x2'0cc1     0x22  Code  Gb  am_hal_flash.o [1]
+am_hal_gpio_pinconfig      0x2'1967    0x2a2  Code  Gb  am_hal_gpio.o [1]
+am_hal_gpio_state_write
+                           0x2'1c09     0xa2  Code  Gb  am_hal_gpio.o [1]
+am_hal_interrupt_master_disable
+                           0x2'0b6d      0xa  Code  Gb  am_hal_interrupt.o [1]
+am_hal_interrupt_master_set
+                           0x2'0b79      0x8  Code  Gb  am_hal_interrupt.o [1]
+am_hal_itm_disable         0x2'2829     0x50  Code  Gb  am_hal_itm.o [1]
+am_hal_itm_enable          0x2'27fd     0x2c  Code  Gb  am_hal_itm.o [1]
+am_hal_itm_not_busy        0x2'2879     0x14  Code  Gb  am_hal_itm.o [1]
+am_hal_itm_print           0x2'28c1     0x24  Code  Gb  am_hal_itm.o [1]
+am_hal_itm_stimulus_reg_byte_write
+                           0x2'28b1     0x10  Code  Gb  am_hal_itm.o [1]
+am_hal_mcuctrl_info_get
+                           0x2'2e5d     0x76  Code  Gb  am_hal_mcuctrl.o [1]
+am_hal_pwrctrl_low_power_init
+                           0x2'0ab9     0x86  Code  Gb  am_hal_pwrctrl.o [1]
+am_hal_pwrctrl_periph_disable
+                           0x2'0a55     0x64  Code  Gb  am_hal_pwrctrl.o [1]
+am_hal_pwrctrl_periph_enable
+                           0x2'09f1     0x64  Code  Gb  am_hal_pwrctrl.o [1]
+am_hal_pwrctrl_peripheral_control
+                           0x2'3650     0xb4  Data  Gb  am_hal_pwrctrl.o [1]
+am_hal_queue_init          0x2'0b81     0x18  Code  Gb  am_hal_queue.o [1]
+am_hal_queue_item_add      0x2'0b99     0x6c  Code  Gb  am_hal_queue.o [1]
+am_hal_queue_item_get      0x2'0c05     0x68  Code  Gb  am_hal_queue.o [1]
+am_hal_rtc_osc_disable     0x2'27e9      0xc  Code  Gb  am_hal_rtc.o [1]
+am_hal_rtc_osc_select      0x2'27cd     0x1c  Code  Gb  am_hal_rtc.o [1]
+am_hal_tpiu_enable         0x2'28e5     0x92  Code  Gb  am_hal_tpiu.o [1]
+am_hal_uart_configure      0x2'0201    0x1b4  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_deinitialize
+                           0x2'007f     0x2e  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_initialize     0x2'0001     0x7e  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_interrupt_clear
+                           0x2'0997     0x2e  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_interrupt_disable
+                           0x2'095d     0x3a  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_interrupt_enable
+                           0x2'0923     0x3a  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_power_control
+                           0x2'00ad    0x154  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_transfer       0x2'07e5     0x3a  Code  Gb  am_hal_uart.o [1]
+am_hal_uart_tx_flush       0x2'081f     0x72  Code  Gb  am_hal_uart.o [1]
+am_util_delay_ms           0x2'2789     0x20  Code  Gb  am_util_delay.o [1]
+am_util_delay_us           0x2'27a9     0x1e  Code  Gb  am_util_delay.o [1]
+am_util_faultisr_collect_data
+                           0x2'3403     0xa8  Code  Gb  am_util_faultisr.o [1]
+am_util_stdio_printf       0x2'1535     0x36  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_printf_init
+                           0x2'0ced      0x8  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_terminal_clear
+                           0x2'156b      0xa  Code  Gb  am_util_stdio.o [1]
+am_util_stdio_vsprintf     0x2'1113    0x422  Code  Gb  am_util_stdio.o [1]
+amp2Log2                   0x1'6b55     0xf6  Code  Gb  quant_bands.o [3]
+audio_enc_encode_frame     0x1'1891     0x48  Code  Gb  ae_api.o [1]
+audio_enc_init             0x1'1883      0xe  Code  Gb  ae_api.o [1]
+band_allocation            0x2'32f4     0xe8  Data  Lc  modes.o [3]
+beta_coef                  0x1'6c74     0x10  Data  Lc  quant_bands.o [3]
+bitexact_cos               0x1'24ff     0x48  Code  Gb  bands.o [3]
+bitexact_log2tan           0x1'2549     0x62  Code  Gb  bands.o [3]
+buffer_configure           0x2'03b5     0xbe  Code  Lc  am_hal_uart.o [1]
+cache_bits50               0x2'2f2c    0x188  Data  Lc  modes.o [3]
+cache_caps50               0x2'37ac     0xa8  Data  Lc  modes.o [3]
+cache_index50              0x2'34b4     0xd4  Data  Lc  modes.o [3]
+celt_encode_with_ec          0xf1b5   0x1de2  Code  Gb  celt_encoder.o [3]
+celt_encode_with_ec{75}{76}::intensity_histeresis
+                           0x2'3758     0x54  Data  Lc  celt_encoder.o [3]
+celt_encode_with_ec{75}{76}::intensity_thresholds
+                           0x2'3704     0x54  Data  Lc  celt_encoder.o [3]
+celt_encoder_init            0xc1e9     0x98  Code  Gb  celt_encoder.o [3]
+celt_inner_prod_c          0x1'8a59     0x64  Code  Lc  vq.o [3]
+celt_maxabs16                0xc101     0xdc  Code  Lc  celt_encoder.o [3]
+celt_pitch_xcorr_c         0x1'5689    0x1d6  Code  Gb  pitch.o [3]
+celt_preemphasis             0xcb55    0x2aa  Code  Gb  celt_encoder.o [3]
+clt_compute_allocation     0x1'740d    0x350  Code  Gb  rate.o [3]
+clt_mdct_forward_c         0x1'1e79    0x536  Code  Gb  mdct.o [3]
+comb_filter                0x1'1441    0x294  Code  Gb  celt.o [3]
+comb_filter::gains         0x2'4018     0x24  Data  Lc  celt.o [3]
+compute_band_energies      0x1'25ad     0xe6  Code  Gb  bands.o [3]
+compute_mdcts                0xc955    0x1fe  Code  Lc  celt_encoder.o [3]
+compute_qn::exp2_table8
+                           0x1'35dc     0x10  Data  Lc  bands.o [3]
+compute_theta              0x1'30b1    0x522  Code  Lc  bands.o [3]
+compute_vbr                  0xefd1    0x1be  Code  Lc  celt_encoder.o [3]
+config_baudrate            0x2'0473     0xb8  Code  Lc  am_hal_uart.o [1]
+cos                        0x1'c021      0x4  Code  Gb  cos_sin64.o [4]
+cosl                       0x1'c021      0x4  Code  Gb  cos_sin64.o [4]
+cwrsi                      0x1'aea9    0x13c  Code  Lc  cwrs.o [3]
+dc_reject                  0x1'78ad    0x1b0  Code  Lc  oct_opus_encoder.o [3]
+decode_pulses              0x1'afe5     0x54  Code  Gb  cwrs.o [3]
+decstr_to_int              0x2'0e25     0x48  Code  Lc  am_util_stdio.o [1]
+deinterleave_hadamard      0x1'2da1    0x154  Code  Lc  bands.o [3]
+device_info_get            0x2'2d59     0xca  Code  Lc  am_hal_mcuctrl.o [1]
+divu64_10                  0x2'0cf5     0xbe  Code  Lc  am_util_stdio.o [1]
+dynalloc_analysis            0xda39   0x119c  Code  Lc  celt_encoder.o [3]
+eMeans                     0x2'3a30     0x64  Data  Gb  quant_bands.o [3]
+e_prob_model               0x2'30b4    0x150  Data  Lc  quant_bands.o [3]
+eband5ms                   0x2'3ed4     0x2c  Data  Lc  modes.o [3]
+ec_dec_bit_logp            0x1'9611     0x2a  Code  Gb  entdec.o [3]
+ec_dec_bits                0x1'96a9     0x4a  Code  Gb  entdec.o [3]
+ec_dec_normalize           0x1'9575     0x52  Code  Lc  entdec.o [3]
+ec_dec_uint                0x1'963d     0x6c  Code  Gb  entdec.o [3]
+ec_dec_update              0x1'95f1     0x20  Code  Gb  entdec.o [3]
+ec_decode                  0x1'95cd     0x24  Code  Gb  entdec.o [3]
+ec_enc_bit_logp            0x1'4ef7     0x1e  Code  Gb  entenc.o [3]
+ec_enc_bits                0x1'4f97     0x4c  Code  Gb  entenc.o [3]
+ec_enc_done                0x1'5005    0x21e  Code  Gb  entenc.o [3]
+ec_enc_icdf                0x1'4f15     0x3a  Code  Gb  entenc.o [3]
+ec_enc_init                0x1'4e71     0x28  Code  Gb  entenc.o [3]
+ec_enc_normalize           0x1'4dcd     0xa0  Code  Lc  entenc.o [3]
+ec_enc_shrink              0x1'4fe3     0x22  Code  Gb  entenc.o [3]
+ec_enc_uint                0x1'4f51     0x46  Code  Gb  entenc.o [3]
+ec_encode                  0x1'4e99     0x2c  Code  Gb  entenc.o [3]
+ec_encode_bin              0x1'4ec5     0x32  Code  Gb  entenc.o [3]
+ec_laplace_encode          0x1'9b65     0x84  Code  Gb  laplace.o [3]
+ec_tell_frac               0x1'6245     0x34  Code  Gb  entcode.o [3]
+ec_tell_frac::correction
+                           0x1'6278     0x20  Data  Lc  entcode.o [3]
+encode_pulses              0x1'ae51     0x56  Code  Gb  cwrs.o [3]
+encode_size                0x1'b7fd     0x1e  Code  Gb  opus.o [3]
+encoded_buffer          0x1002'c2cc   0xc800  Data  Gb  opus_step1.o [1]
+exit                       0x2'419b      0x4  Code  Gb  exit.o [2]
+exp_rotation               0x1'8ba9    0x2a8  Code  Gb  vq.o [3]
+exp_rotation1              0x1'8ad9     0xce  Code  Lc  vq.o [3]
+exp_rotation::SPREAD_FACTOR
+                           0x1'9568      0xc  Data  Lc  vq.o [3]
+extract_collapse_mask      0x1'8f1d     0x72  Code  Lc  vq.o [3]
+fast_atan2f                0x1'8991     0xc8  Code  Lc  vq.o [3]
+fft_bitrev120              0x2'3204     0xf0  Data  Lc  modes.o [3]
+fft_bitrev240              0x2'2b78    0x1e0  Data  Lc  modes.o [3]
+fft_bitrev480              0x2'1594    0x3c0  Data  Lc  modes.o [3]
+fft_bitrev60               0x2'394c     0x78  Data  Lc  modes.o [3]
+fft_state48000_960_0       0x2'3ca0     0x38  Data  Lc  modes.o [3]
+fft_state48000_960_1       0x2'3cd8     0x38  Data  Lc  modes.o [3]
+fft_state48000_960_2       0x2'3d10     0x38  Data  Lc  modes.o [3]
+fft_state48000_960_3       0x2'3d48     0x38  Data  Lc  modes.o [3]
+fft_twiddles48000_960      0x1'f100    0xf00  Data  Lc  modes.o [3]
+fre07_clip1             0x1000'1148  0x2b16c  Data  Gb  opus_step1.o [1]
+ftoa                       0x2'0f9d    0x176  Code  Lc  am_util_stdio.o [1]
+gAmHalResetStatus       0x1004'1084      0x4  Data  Gb  am_hal_reset.o [1]
+g_AM_BSP_GPIO_COM_UART_RX
+                           0x2'4214      0x4  Data  Gb  am_bsp_pins.o [1]
+g_AM_BSP_GPIO_COM_UART_TX
+                           0x2'4210      0x4  Data  Gb  am_bsp_pins.o [1]
+g_AM_BSP_GPIO_ITM_SWO      0x2'4218      0x4  Data  Gb  am_bsp_pins.o [1]
+g_AM_HAL_GPIO_DISABLE      0x2'4220      0x4  Data  Gb  am_hal_gpio.o [1]
+g_AM_HAL_GPIO_OUTPUT       0x2'4224      0x4  Data  Gb  am_hal_gpio.o [1]
+g_AM_HAL_GPIO_TRISTATE     0x2'4228      0x4  Data  Gb  am_hal_gpio.o [1]
+g_am_hal_burst_mode_available
+                        0x1004'1094      0x1  Data  Gb  am_hal_burst.o [1]
+g_am_hal_flash             0x2'3a94     0x60  Data  Gb  am_hal_flash.o [1]
+g_am_hal_mcuctrl_flash_size
+                           0x2'3ba4     0x40  Data  Gb  am_hal_mcuctrl.o [1]
+g_am_hal_mcuctrl_sram_size
+                           0x2'3be4     0x40  Data  Gb  am_hal_mcuctrl.o [1]
+g_am_hal_uart_states    0x1004'0f3c     0xc8  Data  Gb  am_hal_uart.o [1]
+g_bTxtXlate             0x1004'1095      0x1  Data  Lc  am_util_stdio.o [1]
+g_pfnCharPrint          0x1004'1088      0x4  Data  Gb  am_util_stdio.o [1]
+g_prfbuf                0x1004'0e3c    0x100  Data  Lc  am_util_stdio.o [1]
+g_sBspUartBufferedConfig
+                        0x1000'1110     0x28  Data  Lc  am_bsp.o [1]
+g_sBspUartConfig           0x2'3f2c     0x28  Data  Lc  am_bsp.o [1]
+g_sCOMUART              0x1004'1080      0x4  Data  Lc  am_bsp.o [1]
+g_sTimer0               0x1002'c2b8      0xc  Data  Gb  opus_step1.o [1]
+g_ui32PrintInterface    0x1004'107c      0x4  Data  Lc  am_bsp.o [1]
+g_ui32TimerCount        0x1004'108c      0x4  Data  Gb  opus_step1.o [1]
+g_ui8Bit76Capabilities     0x2'3db4     0x34  Data  Lc  am_hal_gpio.o [1]
+g_ui8ClkSrc             0x1000'1138     0x10  Data  Lc  am_hal_ctimer.o [1]
+g_ui8Inpen                 0x2'3d80     0x34  Data  Lc  am_hal_gpio.o [1]
+g_ui8NCEtable              0x2'3588     0xc8  Data  Lc  am_hal_gpio.o [1]
+g_ui8nCEpins               0x2'3de8     0x34  Data  Lc  am_hal_gpio.o [1]
+gain_fade                  0x1'7a65    0x216  Code  Lc  oct_opus_encoder.o [3]
+getStackedReg              0x2'33f9      0xa  Code  Gb  am_util_faultisr.o [1]
+get_celt_handle              0xc1dd      0x6  Code  Gb  celt_encoder.o [3]
+haar1                      0x1'3045     0x66  Code  Gb  bands.o [3]
+hysteresis_decision        0x1'2453     0xac  Code  Gb  bands.o [3]
+icwrs                      0x1'ade5     0x6c  Code  Lc  cwrs.o [3]
+init_caps                  0x1'16d9     0x86  Code  Gb  celt.o [3]
+intensity_stereo           0x1'279d    0x10e  Code  Lc  bands.o [3]
+interleave_hadamard        0x1'2ef5    0x14e  Code  Lc  bands.o [3]
+interp_bits2pulses         0x1'6c89    0x782  Code  Lc  rate.o [3]
+isqrt32                    0x1'96f5     0x2e  Code  Gb  mathops.o [3]
+iy                      0x1004'0cac    0x190  Data  Gb  vq.o [3]
+kf_bfly2                   0x1'802d    0x11e  Code  Lc  kiss_fft.o [3]
+kf_bfly3                   0x1'83b9    0x194  Code  Lc  kiss_fft.o [3]
+kf_bfly4                   0x1'8155    0x264  Code  Lc  kiss_fft.o [3]
+kf_bfly5                   0x1'854d    0x34c  Code  Lc  kiss_fft.o [3]
+l1_metric                    0xce01     0xaa  Code  Lc  celt_encoder.o [3]
+ldexp                      0x1'b3f9           Code  Gb  ldexp.o [4]
+ldexpl                     0x1'b3f9           Code  Gb  ldexp.o [4]
+logN400                    0x2'3f00     0x2c  Data  Lc  modes.o [3]
+main                       0x2'1d55    0x1e8  Code  Gb  opus_step1.o [1]
+mcuctrl_fault_status       0x2'2e23     0x3a  Code  Lc  am_hal_mcuctrl.o [1]
+mdct_twiddles960           0x1'c100   0x1c20  Data  Lc  modes.o [3]
+median_of_3                  0xd9f5     0x42  Code  Lc  celt_encoder.o [3]
+memchr                     0x1'b0d1           Code  Gb  memchr.o [5]
+mips_update                0x1'17c9     0xba  Code  Gb  ae_api.o [1]
+mode48000_960_120          0x2'39c4     0x6c  Data  Lc  modes.o [3]
+ndigits_in_hex             0x2'0dfd     0x28  Code  Lc  am_util_stdio.o [1]
+ndigits_in_i64             0x2'0de3     0x1a  Code  Lc  am_util_stdio.o [1]
+ndigits_in_u64             0x2'0db3     0x30  Code  Lc  am_util_stdio.o [1]
+normalise_bands            0x1'2695    0x100  Code  Gb  bands.o [3]
+normalise_residual         0x1'8e55     0xc8  Code  Lc  vq.o [3]
+oCELTEncoder_mem        0x1003'daec   0x1770  Data  Gb  celt_encoder.o [3]
+o_mips_info             0x1000'1000     0xe8  Data  Gb  ae_api.o [1]
+o_spl_opus_encoder      0x1003'f25c    0xf30  Data  Gb  oct_opus_encoder.o [3]
+octopus_encode             0x1'7c7d    0x2c0  Code  Gb  oct_opus_encoder.o [3]
+octopus_encoder_create     0x1'7839     0x72  Code  Gb  oct_opus_encoder.o [3]
+op_pvq_search_c            0x1'8f91    0x2e0  Code  Gb  vq.o [3]
+opus_custom_encoder_ctl
+                           0x1'0fad    0x348  Code  Gb  celt_encoder.o [3]
+opus_custom_mode_create
+                           0x1'1301     0x7e  Code  Gb  modes.o [3]
+opus_fft_impl              0x1'889d     0xbe  Code  Gb  kiss_fft.o [3]
+opus_mem_ram1           0x1003'8aec   0x5000  Data  Gb  ae_api.o [1]
+opus_packet_get_nb_frames
+                           0x1'7805     0x30  Code  Gb  oct_opus_encoder.o [3]
+opus_packet_get_samples_per_frame
+                           0x1'b81b     0x78  Code  Gb  opus.o [3]
+opus_packet_pad            0x1'ad71     0x5e  Code  Gb  repacketizer.o [3]
+opus_packet_parse_impl     0x1'b895    0x346  Code  Gb  opus.o [3]
+opus_ram_count          0x1003'8ad4      0x4  Data  Gb  ae_api.o [1]
+opus_ram_count_save     0x1003'8ad8      0x4  Data  Gb  ae_api.o [1]
+opus_ram_ptr            0x1003'8acc      0x4  Data  Gb  ae_api.o [1]
+opus_ram_ptr_save       0x1003'8ad0      0x4  Data  Gb  ae_api.o [1]
+opus_repacketizer_cat_impl
+                           0x1'a9dd     0x9a  Code  Lc  repacketizer.o [3]
+opus_repacketizer_out_range_impl
+                           0x1'aa79    0x2f2  Code  Gb  repacketizer.o [3]
+ordery_table               0x2'38d4     0x78  Data  Lc  bands.o [3]
+p_pcm_samples           0x1002'c2b4      0x4  Data  Gb  opus_step1.o [1]
+p_spl_opus_encoder      0x1003'8ae8      0x4  Data  Gb  ae_api.o [1]
+padbuffer                  0x2'0f7b     0x22  Code  Lc  am_util_stdio.o [1]
+patch_transient_decision
+                             0xc635    0x318  Code  Lc  celt_encoder.o [3]
+pincfg_equ                 0x2'1955     0x12  Code  Lc  am_hal_gpio.o [1]
+pitch_downsample           0x1'5225    0x456  Code  Gb  pitch.o [3]
+pitch_search               0x1'5881    0x43c  Code  Gb  pitch.o [3]
+pred_coef                  0x1'6c64     0x10  Data  Lc  quant_bands.o [3]
+printf                     0x1'77dd     0x28  Code  Gb  printf.o [2]
+prn_encoded_buffer         0x2'1d4f      0x6  Code  Gb  opus_step1.o [1]
+pui32Stack              0x1000'0000   0x1000  Data  Lc  startup_iar.o [1]
+pui8UartRxBuffer        0x1004'058c    0x400  Data  Lc  am_bsp.o [1]
+pui8UartTxBuffer        0x1004'018c    0x400  Data  Lc  am_bsp.o [1]
+pulses2bits                0x1'2431     0x22  Code  Lc  bands.o [3]
+putchar                    0x2'40e1     0x20  Code  Gb  putchar.o [2]
+quant_all_bands            0x1'4269    0xb5e  Code  Gb  bands.o [3]
+quant_band                 0x1'3bed    0x2a2  Code  Lc  bands.o [3]
+quant_band_n1              0x1'35ed     0x92  Code  Lc  bands.o [3]
+quant_band_stereo          0x1'3eb1    0x35e  Code  Lc  bands.o [3]
+quant_band{3}{4}::bit_interleave_table
+                           0x1'3e90     0x10  Data  Lc  bands.o [3]
+quant_band{7}{8}{10}{11}::bit_deinterleave_table
+                           0x1'3ea0     0x10  Data  Lc  bands.o [3]
+quant_coarse_energy        0x1'6555    0x3ae  Code  Gb  quant_bands.o [3]
+quant_coarse_energy_impl
+                           0x1'6299    0x2b6  Code  Lc  quant_bands.o [3]
+quant_energy_finalise      0x1'6a2d    0x11a  Code  Gb  quant_bands.o [3]
+quant_fine_energy          0x1'6909    0x11a  Code  Gb  quant_bands.o [3]
+quant_partition            0x1'3681    0x550  Code  Lc  bands.o [3]
+read_nonblocking           0x2'05c3     0x8c  Code  Lc  am_hal_uart.o [1]
+read_timeout               0x2'06d9     0x86  Code  Lc  am_hal_uart.o [1]
+remove_doubling            0x1'5cc5    0x4ea  Code  Gb  pitch.o [3]
+renormalise_vector         0x1'9369     0xaa  Code  Gb  vq.o [3]
+resampling_factor          0x1'1405     0x3c  Code  Gb  celt.o [3]
+reset_timer                0x1'17a9     0x1e  Code  Gb  ae_api.o [1]
+restore_stack              0x1'1799      0xc  Code  Gb  ae_api.o [1]
+run_prefilter                0xebd5    0x3d2  Code  Lc  celt_encoder.o [3]
+rx_queue_update            0x2'0891     0x40  Code  Lc  am_hal_uart.o [1]
+save_stack                 0x1'178d      0xc  Code  Gb  ae_api.o [1]
+scalbln                    0x1'b3f9           Code  Gb  ldexp.o [4]
+scalblnl                   0x1'b3f9           Code  Gb  ldexp.o [4]
+scalbn                     0x1'b3f9           Code  Gb  ldexp.o [4]
+scalbnl                    0x1'b3f9           Code  Gb  ldexp.o [4]
+scale                      0x1'a28f     0x46  Code  Lc  xprintffull_nomb.o [2]
+scratch                 0x1004'1004     0x78  Data  Gb  kiss_fft.o [3]
+sec_hand                0x1004'1090      0x4  Data  Lc  xfail_s.o [2]
+second_check               0x2'3c24     0x40  Data  Lc  pitch.o [3]
+signx                   0x1004'0b1c    0x190  Data  Gb  vq.o [3]
+simple_strlen              0x2'0f63     0x18  Code  Lc  am_util_stdio.o [1]
+small_energy_icdf          0x1'6c84      0x4  Data  Lc  quant_bands.o [3]
+special_hybrid_folding     0x1'420f     0x58  Code  Lc  bands.o [3]
+spread_icdf                0x1'0f9c      0x4  Data  Lc  celt_encoder.o [3]
+spreading_decision         0x1'2ab1    0x2e0  Code  Gb  bands.o [3]
+sqrt                       0x1'1b71           Code  Gb  sqrt.o [4]
+sqrtl                      0x1'1b71           Code  Gb  sqrt.o [4]
+static_mode_list           0x1'1380      0x4  Data  Lc  modes.o [3]
+stereo_analysis              0xd915     0xb8  Code  Lc  celt_encoder.o [3]
+stereo_itheta              0x1'9419    0x140  Code  Gb  vq.o [3]
+stereo_merge               0x1'28ad    0x1f8  Code  Lc  bands.o [3]
+strchr                     0x1'b041           Code  Gb  strchr.o [5]
+strlen                     0x1'b099           Code  Gb  strlen.o [5]
+tapset_icdf                0x2'4230      0x4  Data  Lc  celt_encoder.o [3]
+tf_analysis                  0xcecd    0x492  Code  Lc  celt_encoder.o [3]
+tf_encode                    0xd369    0x134  Code  Lc  celt_encoder.o [3]
+tf_select_table            0x2'40c0     0x20  Data  Gb  celt.o [3]
+timerA0_init               0x2'1cfd     0x36  Code  Gb  opus_step1.o [1]
+transient_analysis           0xc281    0x384  Code  Lc  celt_encoder.o [3]
+transient_analysis::inv_table
+                           0x2'3854     0x80  Data  Lc  celt_encoder.o [3]
+trim_icdf                  0x1'0fa0      0xc  Data  Lc  celt_encoder.o [3]
+ttio_guard              0x1004'1096      0x1  Data  Lc  XShttio.o [2]
+tx_queue_update            0x2'08d1     0x52  Code  Lc  am_hal_uart.o [1]
+uart_fifo_read             0x2'052b     0x58  Code  Lc  am_hal_uart.o [1]
+uart_fifo_write            0x2'0583     0x40  Code  Lc  am_hal_uart.o [1]
+uint64_to_hexstr           0x2'0eeb     0x78  Code  Lc  am_util_stdio.o [1]
+uint64_to_str              0x2'0e6d     0x7e  Code  Lc  am_util_stdio.o [1]
+window120                  0x2'2998    0x1e0  Data  Lc  modes.o [3]
+write_nonblocking          0x2'064f     0x8a  Code  Lc  am_hal_uart.o [1]
+write_timeout              0x2'075f     0x86  Code  Lc  am_hal_uart.o [1]
+y                       0x1004'098c    0x190  Data  Gb  vq.o [3]
+
+
+[1] = C:\Users\agao\ambiq_apollo\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\examples\opus_step1\iar\tst_with_hdr\Obj
+[2] = dl7M_tln.a
+[3] = libopus.a
+[4] = m7M_tls.a
+[5] = rt7M_tl.a
+[6] = shb_l.a
+
+   76 238 bytes of readonly  code memory
+  128 274 bytes of readonly  data memory
+  266 391 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,352 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM         20/Apr/2019  19:00:00
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  
+#    Endian       =  little
+#    Source file  =  D:\try\Frm_MC_del_20_04\opus_step1\lib\ae_api.c
+#    Command line =  
+#        -f C:\Users\Nilanjan\AppData\Local\Temp\EWE711.tmp
+#        (D:\try\Frm_MC_del_20_04\opus_step1\lib\ae_api.c -D iar -D
+#        AM_PART_APOLLO3 -D AM_PACKAGE_BGA -lcN
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\tst_with_hdr\List
+#        --diag_suppress Pa050 -o
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\tst_with_hdr\Obj --debug
+#        --endian=little --cpu=Cortex-M4 -e --fpu=VFPv4_sp --dlib_config
+#        "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.2\arm\inc\c\DLib_Config_Normal.h" -I
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\..\..\..\..\..\utils\ -I
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\..\..\..\..\..\CMSIS\ARM\Include\
+#        -I
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\..\..\..\..\..\CMSIS\AmbiqMicro\Include\
+#        -I D:\try\Frm_MC_del_20_04\opus_step1\iar\..\..\..\..\..\mcu\apollo3\
+#        -I D:\try\Frm_MC_del_20_04\opus_step1\iar\..\..\..\..\..\devices\ -I
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\..\..\..\bsp\ -I
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\..\..\..\..\..\ -I
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\..\src\ -I
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\..\src\sound\ -Oh)
+#    Locale       =  C
+#    List file    =  
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\tst_with_hdr\List\ae_api.lst
+#    Object file  =  
+#        D:\try\Frm_MC_del_20_04\opus_step1\iar\tst_with_hdr\Obj\ae_api.o
+#
+###############################################################################
+
+D:\try\Frm_MC_del_20_04\opus_step1\lib\ae_api.c
+      1          // tst_octopus.cpp : This file contains the 'main' function. Program execution begins and ends there.
+      2          //
+      3          
+      4          #include <stdio.h>
+      5          #include "opusenc.h"
+      6          #define OPUS_MEM_RAM1_SIZE (20*1024)
+      7          char opus_mem_ram1[OPUS_MEM_RAM1_SIZE];
+      8          
+      9           int    opus_ram_ptr;
+     10           int    opus_ram_ptr_save = 0;   
+     11           int    opus_ram_count = 0;   
+     12           int    opus_ram_count_save = 0;   
+     13          
+     14          int spl_stack_init(int option)
+     15          {
+     16            int ret  = 0;
+     17            switch(option)
+     18            {
+     19            case 0:
+     20               opus_ram_ptr = (int)&opus_mem_ram1[0];
+     21               opus_ram_ptr_save = 0;   
+     22               opus_ram_count = 0;   
+     23               opus_ram_count_save = 0;   
+     24              
+     25              ret = OPUS_MEM_RAM1_SIZE;
+     26              break;
+     27            default:
+     28              break;
+     29            }
+     30            return ret;
+     31          }
+     32          int spl_stack_check()
+     33          {
+     34            
+     35            return opus_ram_count;
+     36          }
+     37          void* alloca(int size)
+     38          {
+     39            void* p = (void*)opus_ram_ptr;
+     40            int size1 = ((size>>2)<<2) + 4;
+     41            int t = (int)p;
+     42            if(t&3==0)
+     43              t = size1 ;
+     44            if(size1&3)
+     45            {
+     46              size1= size;
+     47            }
+     48             opus_ram_ptr+= size1;
+     49             opus_ram_count += size1;
+     50             if(opus_ram_count > OPUS_MEM_RAM1_SIZE)
+     51             {
+     52               printf("ERROR : stack allocation failed %d max = %d\n", opus_ram_count, OPUS_MEM_RAM1_SIZE);
+     53               return 0;
+     54             }
+     55            return p;
+     56          }
+     57          void* spl_free(int size)
+     58          {
+     59            void* p = (void*)opus_ram_ptr;
+     60            int size1 = ((size>>2)<<2) + 4;
+     61              if(size1&3)
+     62              {
+     63                size1= size;
+     64              }
+     65          
+     66             opus_ram_ptr-= size1;
+     67             opus_ram_count -= size1;
+     68             if(opus_ram_count <=0)
+     69             {
+     70               printf("ERROR : free allocation failed %d max = %d\n", opus_ram_count, OPUS_MEM_RAM1_SIZE);
+     71               return 0;
+     72             }
+     73            return p;
+     74          }
+     75          int save_stack(void)
+     76          {
+     77            opus_ram_ptr_save = opus_ram_ptr;
+     78            opus_ram_count_save = opus_ram_count;
+     79            return opus_ram_ptr;
+     80          }
+     81          int restore_stack(void)
+     82          {
+     83            opus_ram_ptr = opus_ram_ptr_save;
+     84            opus_ram_count = opus_ram_count_save;
+     85            return opus_ram_ptr; 
+     86          }
+     87          int alloc_stack()
+     88          {
+     89            return 0;
+     90          }
+     91          int spl_memcpy(void* dst, void* src, int n)
+     92          {
+     93            for(int i = 0; i<n; i++)
+     94            {
+     95              ((char*)dst)[i] = ((char*)src)[i];
+     96            }
+     97            return 0;
+     98          }
+     99          #ifndef WIN32
+    100          #define MEASURE_MIPS
+    101          #endif
+    102          #ifdef MEASURE_MIPS
+    103          volatile unsigned int *DWT_CYCCNT  ;
+    104          volatile unsigned int *DWT_CONTROL ;
+    105          volatile unsigned int *SCB_DEMCR   ;
+    106          
+    107          void reset_timer(){
+    108              DWT_CYCCNT   = (unsigned int volatile *)0xE0001004; //address of the register
+    109              DWT_CONTROL  = (unsigned int volatile *)0xE0001000; //address of the register
+    110              SCB_DEMCR    = (unsigned int volatile *)0xE000EDFC; //address of the register
+    111              *SCB_DEMCR   = *SCB_DEMCR | 0x01000000;
+    112              *DWT_CYCCNT  = 0; // reset the counter
+    113              *DWT_CONTROL = 0; 
+    114          }
+    115          
+    116          void start_timer(){
+    117              *DWT_CONTROL = *DWT_CONTROL | 1 ; // enable the counter
+    118          }
+    119          
+    120          void stop_timer(){
+    121              *DWT_CONTROL = *DWT_CONTROL | 0 ; // disable the counter    
+    122          }
+    123          
+    124          unsigned int getCycles(){
+    125              return *DWT_CYCCNT;
+    126          }
+    127          #define SAMPLING_RATE     (16000)
+    128          #define MIPS_DURATION_SEC (1)
+    129          #define FRAME_RATE        (320)
+    130          #define MIPS_BUFFER_LEN       (MIPS_DURATION_SEC*SAMPLING_RATE)/FRAME_RATE
+    131          
+    132          struct t_mips_info
+    133          {
+    134            int mips_mips[MIPS_BUFFER_LEN];
+    135            int ptr_w;
+    136            int ptr_r;
+    137            int len;
+    138            float ave;
+    139            int min;
+    140            int max;
+    141            int stackmin;
+    142            int stackmax;
+    143          } o_mips_info = {
+    144            .ptr_w = 0,
+    145            .ptr_r = 0,
+    146            .len = MIPS_BUFFER_LEN,
+    147            .ave = 0.0,
+    148            .min = 100000000,
+    149            .max = 0,
+    150            .stackmin = 10000000,
+    151            .stackmax = 0
+    152          };
+    153          float mips_update()
+    154          {
+    155            int c = getCycles();
+    156            o_mips_info.mips_mips[o_mips_info.ptr_w++] = c;
+    157            if(c < o_mips_info.min)
+    158            {
+    159              o_mips_info.min = c;
+    160            }
+    161            else if(c > o_mips_info.max)
+    162            {
+    163              o_mips_info.max = c;
+    164            }
+    165            if(o_mips_info.ptr_w == o_mips_info.len)
+    166            {
+    167              float sum = 0;
+    168              for(int i = 0; i < o_mips_info.len; i++)
+    169              {
+    170                sum += o_mips_info.mips_mips[i];
+    171              }
+    172              o_mips_info.ave = sum/o_mips_info.len;
+    173              o_mips_info.ptr_w = 0;
+    174              o_mips_info.min = 100000000;
+    175              o_mips_info.max = 0;
+    176              printf("mips = %f, stack = (%d-%d)\n", o_mips_info.ave*16000.0f/(320.0f*1000000.0f), o_mips_info.stackmin, o_mips_info.stackmax);
+    177              o_mips_info.stackmin = 100000000;
+    178              o_mips_info.stackmax = 0;
+    179            }
+    180             int m = spl_stack_check();
+    181              if(m < o_mips_info.stackmin)
+    182            {
+    183              o_mips_info.stackmin = m;
+    184            }
+    185            else if(m > o_mips_info.stackmax)
+    186            {
+    187              o_mips_info.stackmax = m;
+    188            }
+    189            
+    190            return o_mips_info.ave;
+    191          }
+    192          
+    193          #endif /* MEASURE_MIPS */
+    194          spl_opus_encoder_h *p_spl_opus_encoder;
+    195          
+    196          int audio_enc_init(int option)
+    197          {
+    198            p_spl_opus_encoder = octopus_encoder_create(option);
+    199            return 0;
+    200          }
+    201          
+    202          int audio_enc_encode_frame(short *p_pcm_buffer, int n_pcm_samples, unsigned char *p_encoded_buffer)
+    203          {
+    204            int n = 0;
+    205            int size = 1500; //todo
+    206                spl_stack_init(0);
+    207          #ifdef MEASURE_MIPS  
+    208            reset_timer(); //reset timer
+    209            start_timer(); //reset timer
+    210          #endif
+    211                n = octopus_encode(p_spl_opus_encoder, p_pcm_buffer, n_pcm_samples, p_encoded_buffer, size);
+    212          #ifdef MEASURE_MIPS  
+    213            stop_timer(); //reset timer
+    214            mips_update(); //read number of cycles 
+    215          #endif 
+    216                spl_stack_check();
+    217                //printf("   stack usage = %d\n", m);
+    218                
+    219                return n;
+    220          }
+    221          // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+    222          // Debug program: F5 or Debug > Start Debugging menu
+    223          
+    224          // Tips for Getting Started: 
+    225          //   1. Use the Solution Explorer window to add/manage files
+    226          //   2. Use the Team Explorer window to connect to source control
+    227          //   3. Use the Output window to see build output and other messages
+    228          //   4. Use the Error List window to view errors
+    229          //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+    230          //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   alloc_stack
+       8   alloca
+         8   -> printf
+      24   audio_enc_encode_frame
+        24   -> mips_update
+        24   -> octopus_encode
+        24   -> reset_timer
+       8   audio_enc_init
+         8   -> octopus_encoder_create
+       0   getCycles
+      32   mips_update
+        32   -> __aeabi_f2d
+        32   -> printf
+       0   reset_timer
+       0   restore_stack
+       0   save_stack
+       8   spl_free
+         8   -> printf
+       0   spl_memcpy
+       0   spl_stack_check
+       0   spl_stack_init
+       0   start_timer
+       0   stop_timer
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable13
+       4  ??DataTable13_1
+       4  ??DataTable13_2
+       4  ??DataTable13_3
+       4  ??DataTable13_4
+       4  ??DataTable13_5
+       4  ??DataTable13_6
+       4  ??DataTable13_7
+       4  ??DataTable13_8
+       4  ??DataTable13_9
+      48  ?_0
+      44  ?_1
+      28  ?_2
+       4  alloc_stack
+      44  alloca
+      72  audio_enc_encode_frame
+      14  audio_enc_init
+       8  getCycles
+     186  mips_update
+     232  o_mips_info
+   20512  opus_ram_ptr
+          opus_ram_ptr_save
+          opus_ram_count
+          opus_ram_count_save
+          DWT_CYCCNT
+          DWT_CONTROL
+          SCB_DEMCR
+          p_spl_opus_encoder
+          opus_mem_ram1
+      30  reset_timer
+      12  restore_stack
+      12  save_stack
+      42  spl_free
+      20  spl_memcpy
+       6  spl_stack_check
+      28  spl_stack_init
+      14  start_timer
+      10  stop_timer
+
+ 
+ 20 512 bytes in section .bss
+    232 bytes in section .data
+     92 bytes in section .rodata
+    570 bytes in section .text
+ 
+    570 bytes of CODE  memory
+     92 bytes of CONST memory
+ 20 744 bytes of DATA  memory
+
+Errors: none
+Warnings: none

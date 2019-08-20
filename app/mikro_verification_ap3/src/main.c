@@ -193,7 +193,7 @@ int main(void)
             }
             am_util_stdio_printf("Send out ALL AMic data! There're totally %d samples\n\n\r", g_ui32OutSamples); 
             g_ui32OutSamples = 0;
-#if 0
+#if 1
             am_util_stdio_printf("PCM data register values as following: \n\r");
             while(!(am_app_utils_ring_buffer_empty(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM])))
             {
@@ -227,7 +227,7 @@ int main(void)
             }
             am_util_stdio_printf("Send out ALL DMic data! There're totally %d samples\n\r", g_ui32OutSamples); 
             g_ui32OutSamples = 0;
-#endif // 0
+#endif // 1
             am_util_stdio_printf("All data were sended out...\n\n\n\r");
         }
 #endif // AM_APP_ANALOG_MIC

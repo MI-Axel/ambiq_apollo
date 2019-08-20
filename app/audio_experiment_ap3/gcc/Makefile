@@ -41,7 +41,7 @@ TARGET := audio_experiment
 COMPILERNAME := gcc
 PROJECT := audio_experiment_gcc
 CONFIG := bin
-AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
+AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.2.0
 AM_FolderRoot ?= ../../..
 AM_OpusRoot ?= ../../../tools/opus/opus-1.2.1
 
@@ -140,7 +140,7 @@ INCLUDES += -I${AM_OpusRoot}/silk/fixed
 INCLUDES += -I${AM_OpusRoot}
 
 # STFT INCLUDES
-INCLUDES += -I../src/scnr
+INCLUDES += -I../src/audio_preprocess
 
 # Microphone calibration INCLUDES
 INCLUDES += -I../src/mikro_cal
@@ -167,7 +167,7 @@ VPATH +=:${AM_OpusRoot}/silk/fixed
 VPATH +=:${AM_OpusRoot}/silk/float
 
 # STFT folders
-VPATH +=:../src/scnr
+VPATH +=:../src/audio_preprocess
 
 # mikro calibration folder
 VPATH +=:../src/mikro_cal
@@ -180,8 +180,8 @@ VPATH +=:../src/local_test_data/
 OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
 
 SRC = main.c
-SRC += am_hal_pdm.c
-SRC += am_hal_gpio.c
+#SRC += am_hal_pdm.c
+#SRC += am_hal_gpio.c
 SRC += am_util_delay.c
 SRC += am_util_faultisr.c
 SRC += am_util_stdio.c
@@ -205,14 +205,15 @@ SRC += audio_driver.c
 SRC += ${SEGGER_SYSVIEW_SRC}
 
 # STFT test code 
-#SRC += stft.c
-
+SRC += stft.c
+SRC += am_AEP_local_test_data.c
+SRC += hanning_window.c
+SRC += digital_filter.c
 # Mikro calibration code
-SRC += am_mikro_calibration.c
+#SRC += am_mikro_calibration.c
 
 # Mikro THD calculator
-SRC += am_mikro_thd.c
-SRC += am_AEP_fft_data.c
+#SRC += am_mikro_thd.c
 
 CSRC = $(filter %.c,$(SRC))
 ASRC = $(filter %.s,$(SRC))

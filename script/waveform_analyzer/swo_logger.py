@@ -9,7 +9,8 @@ import time
 import subprocess
 from jlinkhelper import *
 
-device_choice = input("Please select connected device:\n1. Apollo\n2.Apollo2 or Apollo2Blue\n3.Apollo3\n")
+print("SWO Logger - Voice-On-SPOT, Ambiq Micro\nwww.ambiqmicro.com\n")
+device_choice = input("Please select connected device:\n1.Apollo\n2.Apollo2 or Apollo2Blue\n3.Apollo3Blue\n")
 
 if device_choice == "1":
     device = "APOLLO512-KBR"

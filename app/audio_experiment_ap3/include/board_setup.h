@@ -54,6 +54,22 @@ extern uint8_t g_rttRecorderBuff[RTT_BUFFER_LENGTH];
 extern volatile uint8_t g_rttRecordingFlag; 
 #endif // configUSE_RTT_DATA_OUTPUT
 
+#if configUSE_MEASURE_MIPS
+
+#define SAMPLING_RATE               (16000)
+#define MIPS_DURATION_SEC           (1)
+#define FRAME_RATE                  (1024)
+#define MIPS_BUFFER_LEN             (1)
+//#define MIPS_BUFFER_LEN             (MIPS_DURATION_SEC*SAMPLING_RATE)/FRAME_RATE
+
+extern void reset_timer();
+extern void start_timer();
+extern void stop_timer();
+extern unsigned int getCycles();
+extern struct t_mips_info o_mips_info;
+extern float mips_update();
+#endif // configUSE_MEASURE_MIPS
+
 extern void DebugLog(const char* s);
 extern void DebugLogInt32(int32_t i);
 extern void DebugLogUInt32(uint32_t i);

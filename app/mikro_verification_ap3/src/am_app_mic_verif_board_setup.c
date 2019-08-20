@@ -351,12 +351,10 @@ void adc_config(void)
     //
     // Try to calibrate ADC. It seems useless...
     //
-    am_util_stdio_printf("Start ADC calibration...\r\n");
-    am_util_stdio_printf("ADCCAL reg value is originally %x ...\r\n", *(uint32_t*)0x4002010c);
-    *(uint32_t*)0x4002010c |= 0x00;
-    am_util_stdio_printf("ADCCAL reg value now is %x ...\r\n", *(uint32_t*)0x4002010c);
-    while(!(*(uint32_t*)0x4002010c & 0x02));
-    am_util_stdio_printf("ADC calibration is finished...\n\r");
+//    am_util_stdio_printf("Start ADC calibration...\r\n");
+//    am_util_stdio_printf("ADCCAL reg value is originally %x ...\r\n", *(uint32_t*)0x4002010c);
+//    *(uint32_t*)0x4002010c |= 0x00;
+//    am_util_stdio_printf("ADC calibration is finished...\n\r");
     //
     // Set up an ADC slot
     //
@@ -604,6 +602,8 @@ void am_app_mic_verif_sys_init(void)
     {
         am_util_stdio_printf("Error - triggering the ADC failed.\n");
     }
+    while(!(*(uint32_t*)0x4002010c & 0x02));
+    am_util_stdio_printf("ADCCAL reg value now is %x ...\r\n", *(uint32_t*)0x4002010c);
 #endif // AM_APP_ANALOG_MIC
 
 }

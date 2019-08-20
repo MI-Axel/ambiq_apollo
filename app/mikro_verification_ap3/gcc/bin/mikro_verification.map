@@ -151,8 +151,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 bin/main.o
  .data          0x0000000000000000        0x0 bin/main.o
  .bss           0x0000000000000000        0x0 bin/main.o
- .bss.g_ui32PCM_RegVal
-                0x0000000000000000        0x4 bin/main.o
  .bss.g_ui8PcmDataReadyFlag
                 0x0000000000000000        0x1 bin/main.o
  .text          0x0000000000000000        0x0 bin/am_hal_pdm.o
@@ -1404,7 +1402,7 @@ Linker script and memory map
 
                 0x0000000000000400                _heap_size = 0x400
 
-.text           0x000000000000c000     0x5368
+.text           0x000000000000c000     0x544c
                 0x000000000000c000                . = ALIGN (0x4)
  *(.isr_vector)
  .isr_vector    0x000000000000c000       0xc0 bin/startup_gcc.o
@@ -1419,437 +1417,438 @@ Linker script and memory map
                 0x000000000000c234                __aeabi_d2f
                 0x000000000000c234                __truncdfsf2
  *(.text*)
- .text.main     0x000000000000c2d4      0x284 bin/main.o
+ .text.main     0x000000000000c2d4      0x32c bin/main.o
                 0x000000000000c2d4                main
  .text.am_hal_pdm_initialize
-                0x000000000000c558       0xbc bin/am_hal_pdm.o
-                0x000000000000c558                am_hal_pdm_initialize
+                0x000000000000c600       0xbc bin/am_hal_pdm.o
+                0x000000000000c600                am_hal_pdm_initialize
  .text.am_hal_pdm_power_control
-                0x000000000000c614       0xd0 bin/am_hal_pdm.o
-                0x000000000000c614                am_hal_pdm_power_control
+                0x000000000000c6bc       0xd0 bin/am_hal_pdm.o
+                0x000000000000c6bc                am_hal_pdm_power_control
  .text.am_hal_pdm_configure
-                0x000000000000c6e4      0x1b8 bin/am_hal_pdm.o
-                0x000000000000c6e4                am_hal_pdm_configure
+                0x000000000000c78c      0x1b8 bin/am_hal_pdm.o
+                0x000000000000c78c                am_hal_pdm_configure
  .text.am_hal_pdm_enable
-                0x000000000000c89c       0x64 bin/am_hal_pdm.o
-                0x000000000000c89c                am_hal_pdm_enable
+                0x000000000000c944       0x64 bin/am_hal_pdm.o
+                0x000000000000c944                am_hal_pdm_enable
  .text.am_hal_pdm_dma_start
-                0x000000000000c900      0x108 bin/am_hal_pdm.o
-                0x000000000000c900                am_hal_pdm_dma_start
+                0x000000000000c9a8      0x108 bin/am_hal_pdm.o
+                0x000000000000c9a8                am_hal_pdm_dma_start
  .text.am_hal_pdm_fifo_flush
-                0x000000000000ca08       0x54 bin/am_hal_pdm.o
-                0x000000000000ca08                am_hal_pdm_fifo_flush
+                0x000000000000cab0       0x54 bin/am_hal_pdm.o
+                0x000000000000cab0                am_hal_pdm_fifo_flush
  .text.am_hal_pdm_interrupt_enable
-                0x000000000000ca5c       0x60 bin/am_hal_pdm.o
-                0x000000000000ca5c                am_hal_pdm_interrupt_enable
+                0x000000000000cb04       0x60 bin/am_hal_pdm.o
+                0x000000000000cb04                am_hal_pdm_interrupt_enable
  .text.am_hal_pdm_interrupt_clear
-                0x000000000000cabc       0x58 bin/am_hal_pdm.o
-                0x000000000000cabc                am_hal_pdm_interrupt_clear
+                0x000000000000cb64       0x58 bin/am_hal_pdm.o
+                0x000000000000cb64                am_hal_pdm_interrupt_clear
  .text.am_hal_pdm_interrupt_status_get
-                0x000000000000cb14       0x80 bin/am_hal_pdm.o
-                0x000000000000cb14                am_hal_pdm_interrupt_status_get
+                0x000000000000cbbc       0x80 bin/am_hal_pdm.o
+                0x000000000000cbbc                am_hal_pdm_interrupt_status_get
  .text.pincfg_equ
-                0x000000000000cb94       0x30 bin/am_hal_gpio.o
+                0x000000000000cc3c       0x30 bin/am_hal_gpio.o
  .text.am_hal_gpio_pinconfig
-                0x000000000000cbc4      0x3a8 bin/am_hal_gpio.o
-                0x000000000000cbc4                am_hal_gpio_pinconfig
+                0x000000000000cc6c      0x3a8 bin/am_hal_gpio.o
+                0x000000000000cc6c                am_hal_gpio_pinconfig
  .text.am_hal_gpio_state_read
-                0x000000000000cf6c       0xc0 bin/am_hal_gpio.o
-                0x000000000000cf6c                am_hal_gpio_state_read
+                0x000000000000d014       0xc0 bin/am_hal_gpio.o
+                0x000000000000d014                am_hal_gpio_state_read
  .text.am_hal_gpio_state_write
-                0x000000000000d02c       0xfc bin/am_hal_gpio.o
-                0x000000000000d02c                am_hal_gpio_state_write
+                0x000000000000d0d4       0xfc bin/am_hal_gpio.o
+                0x000000000000d0d4                am_hal_gpio_state_write
  .text.am_hal_gpio_interrupt_enable
-                0x000000000000d128       0x7c bin/am_hal_gpio.o
-                0x000000000000d128                am_hal_gpio_interrupt_enable
+                0x000000000000d1d0       0x7c bin/am_hal_gpio.o
+                0x000000000000d1d0                am_hal_gpio_interrupt_enable
  .text.am_hal_gpio_interrupt_clear
-                0x000000000000d1a4       0x6c bin/am_hal_gpio.o
-                0x000000000000d1a4                am_hal_gpio_interrupt_clear
+                0x000000000000d24c       0x6c bin/am_hal_gpio.o
+                0x000000000000d24c                am_hal_gpio_interrupt_clear
  .text.am_hal_gpio_interrupt_status_get
-                0x000000000000d210       0xd8 bin/am_hal_gpio.o
-                0x000000000000d210                am_hal_gpio_interrupt_status_get
+                0x000000000000d2b8       0xd8 bin/am_hal_gpio.o
+                0x000000000000d2b8                am_hal_gpio_interrupt_status_get
  .text.am_util_delay_ms
-                0x000000000000d2e8       0x3c bin/am_util_delay.o
-                0x000000000000d2e8                am_util_delay_ms
+                0x000000000000d390       0x3c bin/am_util_delay.o
+                0x000000000000d390                am_util_delay_ms
  .text.HardFault_Handler
-                0x000000000000d324       0x1e bin/am_util_faultisr.o
-                0x000000000000d324                HardFault_Handler
+                0x000000000000d3cc       0x1e bin/am_util_faultisr.o
+                0x000000000000d3cc                HardFault_Handler
  .text.getStackedReg
-                0x000000000000d342        0xc bin/am_util_faultisr.o
-                0x000000000000d342                getStackedReg
- *fill*         0x000000000000d34e        0x2 
+                0x000000000000d3ea        0xc bin/am_util_faultisr.o
+                0x000000000000d3ea                getStackedReg
+ *fill*         0x000000000000d3f6        0x2 
  .text.am_util_faultisr_collect_data
-                0x000000000000d350       0xe4 bin/am_util_faultisr.o
-                0x000000000000d350                am_util_faultisr_collect_data
+                0x000000000000d3f8       0xe4 bin/am_util_faultisr.o
+                0x000000000000d3f8                am_util_faultisr_collect_data
  .text.am_util_stdio_printf_init
-                0x000000000000d434       0x20 bin/am_util_stdio.o
-                0x000000000000d434                am_util_stdio_printf_init
+                0x000000000000d4dc       0x20 bin/am_util_stdio.o
+                0x000000000000d4dc                am_util_stdio_printf_init
  .text.divu64_10
-                0x000000000000d454      0x1be bin/am_util_stdio.o
+                0x000000000000d4fc      0x1be bin/am_util_stdio.o
  .text.ndigits_in_u64
-                0x000000000000d612       0x42 bin/am_util_stdio.o
+                0x000000000000d6ba       0x42 bin/am_util_stdio.o
  .text.ndigits_in_i64
-                0x000000000000d654       0x3a bin/am_util_stdio.o
+                0x000000000000d6fc       0x3a bin/am_util_stdio.o
  .text.ndigits_in_hex
-                0x000000000000d68e       0x50 bin/am_util_stdio.o
+                0x000000000000d736       0x50 bin/am_util_stdio.o
  .text.decstr_to_int
-                0x000000000000d6de       0x8c bin/am_util_stdio.o
+                0x000000000000d786       0x8c bin/am_util_stdio.o
  .text.uint64_to_str
-                0x000000000000d76a       0x90 bin/am_util_stdio.o
+                0x000000000000d812       0x90 bin/am_util_stdio.o
  .text.uint64_to_hexstr
-                0x000000000000d7fa       0xc8 bin/am_util_stdio.o
+                0x000000000000d8a2       0xc8 bin/am_util_stdio.o
  .text.simple_strlen
-                0x000000000000d8c2       0x36 bin/am_util_stdio.o
+                0x000000000000d96a       0x36 bin/am_util_stdio.o
  .text.padbuffer
-                0x000000000000d8f8       0x4a bin/am_util_stdio.o
- *fill*         0x000000000000d942        0x2 
- .text.ftoa     0x000000000000d944      0x1fc bin/am_util_stdio.o
+                0x000000000000d9a0       0x4a bin/am_util_stdio.o
+ *fill*         0x000000000000d9ea        0x2 
+ .text.ftoa     0x000000000000d9ec      0x1fc bin/am_util_stdio.o
  .text.am_util_stdio_vsprintf
-                0x000000000000db40      0x614 bin/am_util_stdio.o
-                0x000000000000db40                am_util_stdio_vsprintf
+                0x000000000000dbe8      0x614 bin/am_util_stdio.o
+                0x000000000000dbe8                am_util_stdio_vsprintf
  .text.am_util_stdio_printf
-                0x000000000000e154       0x48 bin/am_util_stdio.o
-                0x000000000000e154                am_util_stdio_printf
+                0x000000000000e1fc       0x48 bin/am_util_stdio.o
+                0x000000000000e1fc                am_util_stdio_printf
  .text.am_app_utils_ring_buffer_init
-                0x000000000000e19c       0x88 bin/am_app_utils_ring_buffer.o
-                0x000000000000e19c                am_app_utils_ring_buffer_init
+                0x000000000000e244       0x88 bin/am_app_utils_ring_buffer.o
+                0x000000000000e244                am_app_utils_ring_buffer_init
  .text.am_app_utils_ring_buffer_init_all
-                0x000000000000e224       0x44 bin/am_app_utils_ring_buffer.o
-                0x000000000000e224                am_app_utils_ring_buffer_init_all
+                0x000000000000e2cc       0x44 bin/am_app_utils_ring_buffer.o
+                0x000000000000e2cc                am_app_utils_ring_buffer_init_all
  .text.am_app_utils_ring_buffer_push
-                0x000000000000e268      0x242 bin/am_app_utils_ring_buffer.o
-                0x000000000000e268                am_app_utils_ring_buffer_push
+                0x000000000000e310      0x242 bin/am_app_utils_ring_buffer.o
+                0x000000000000e310                am_app_utils_ring_buffer_push
  .text.am_app_utils_ring_buffer_pop
-                0x000000000000e4aa       0xea bin/am_app_utils_ring_buffer.o
-                0x000000000000e4aa                am_app_utils_ring_buffer_pop
+                0x000000000000e552       0xea bin/am_app_utils_ring_buffer.o
+                0x000000000000e552                am_app_utils_ring_buffer_pop
  .text.am_app_utils_get_ring_buffer_status
-                0x000000000000e594       0x6c bin/am_app_utils_ring_buffer.o
-                0x000000000000e594                am_app_utils_get_ring_buffer_status
+                0x000000000000e63c       0x6c bin/am_app_utils_ring_buffer.o
+                0x000000000000e63c                am_app_utils_get_ring_buffer_status
  .text.am_devices_led_init
-                0x000000000000e600       0x9c bin/am_devices_led.o
-                0x000000000000e600                am_devices_led_init
+                0x000000000000e6a8       0x9c bin/am_devices_led.o
+                0x000000000000e6a8                am_devices_led_init
  .text.am_devices_led_array_init
-                0x000000000000e69c       0x42 bin/am_devices_led.o
-                0x000000000000e69c                am_devices_led_array_init
+                0x000000000000e744       0x42 bin/am_devices_led.o
+                0x000000000000e744                am_devices_led_array_init
  .text.am_devices_led_on
-                0x000000000000e6de       0x76 bin/am_devices_led.o
-                0x000000000000e6de                am_devices_led_on
+                0x000000000000e786       0x76 bin/am_devices_led.o
+                0x000000000000e786                am_devices_led_on
  .text.am_devices_led_off
-                0x000000000000e754       0x7c bin/am_devices_led.o
-                0x000000000000e754                am_devices_led_off
+                0x000000000000e7fc       0x7c bin/am_devices_led.o
+                0x000000000000e7fc                am_devices_led_off
  .text.am_devices_led_toggle
-                0x000000000000e7d0       0x9e bin/am_devices_led.o
-                0x000000000000e7d0                am_devices_led_toggle
- *fill*         0x000000000000e86e        0x2 
+                0x000000000000e878       0x9e bin/am_devices_led.o
+                0x000000000000e878                am_devices_led_toggle
+ *fill*         0x000000000000e916        0x2 
  .text.Reset_Handler
-                0x000000000000e870       0x68 bin/startup_gcc.o
-                0x000000000000e870                Reset_Handler
+                0x000000000000e918       0x68 bin/startup_gcc.o
+                0x000000000000e918                Reset_Handler
  .text.NMI_Handler
-                0x000000000000e8d8        0x6 bin/startup_gcc.o
-                0x000000000000e8d8                NMI_Handler
+                0x000000000000e980        0x6 bin/startup_gcc.o
+                0x000000000000e980                NMI_Handler
  .text.am_default_isr
-                0x000000000000e8de        0x6 bin/startup_gcc.o
-                0x000000000000e8de                am_default_isr
-                0x000000000000e8de                am_iomaster4_isr
-                0x000000000000e8de                SysTick_Handler
-                0x000000000000e8de                PendSV_Handler
-                0x000000000000e8de                am_rtc_isr
-                0x000000000000e8de                am_stimer_cmpr3_isr
-                0x000000000000e8de                am_iomaster3_isr
-                0x000000000000e8de                am_clkgen_isr
-                0x000000000000e8de                am_stimer_isr
-                0x000000000000e8de                am_software0_isr
-                0x000000000000e8de                am_stimer_cmpr5_isr
-                0x000000000000e8de                am_iomaster5_isr
-                0x000000000000e8de                am_uart_isr
-                0x000000000000e8de                am_ioslave_acc_isr
-                0x000000000000e8de                am_mspi0_isr
-                0x000000000000e8de                am_stimer_cmpr6_isr
-                0x000000000000e8de                am_iomaster1_isr
-                0x000000000000e8de                am_brownout_isr
-                0x000000000000e8de                am_vcomp_isr
-                0x000000000000e8de                am_stimer_cmpr1_isr
-                0x000000000000e8de                am_iomaster2_isr
-                0x000000000000e8de                SVC_Handler
-                0x000000000000e8de                am_stimer_cmpr2_isr
-                0x000000000000e8de                am_ioslave_ios_isr
-                0x000000000000e8de                am_uart1_isr
-                0x000000000000e8de                am_stimer_cmpr7_isr
-                0x000000000000e8de                am_scard_isr
-                0x000000000000e8de                am_watchdog_isr
-                0x000000000000e8de                am_stimer_cmpr0_isr
-                0x000000000000e8de                am_iomaster0_isr
-                0x000000000000e8de                am_ble_isr
-                0x000000000000e8de                am_stimer_cmpr4_isr
-                0x000000000000e8de                DebugMon_Handler
+                0x000000000000e986        0x6 bin/startup_gcc.o
+                0x000000000000e986                am_default_isr
+                0x000000000000e986                am_iomaster4_isr
+                0x000000000000e986                SysTick_Handler
+                0x000000000000e986                PendSV_Handler
+                0x000000000000e986                am_rtc_isr
+                0x000000000000e986                am_stimer_cmpr3_isr
+                0x000000000000e986                am_iomaster3_isr
+                0x000000000000e986                am_clkgen_isr
+                0x000000000000e986                am_stimer_isr
+                0x000000000000e986                am_software0_isr
+                0x000000000000e986                am_stimer_cmpr5_isr
+                0x000000000000e986                am_iomaster5_isr
+                0x000000000000e986                am_uart_isr
+                0x000000000000e986                am_ioslave_acc_isr
+                0x000000000000e986                am_mspi0_isr
+                0x000000000000e986                am_stimer_cmpr6_isr
+                0x000000000000e986                am_iomaster1_isr
+                0x000000000000e986                am_brownout_isr
+                0x000000000000e986                am_vcomp_isr
+                0x000000000000e986                am_stimer_cmpr1_isr
+                0x000000000000e986                am_iomaster2_isr
+                0x000000000000e986                SVC_Handler
+                0x000000000000e986                am_stimer_cmpr2_isr
+                0x000000000000e986                am_ioslave_ios_isr
+                0x000000000000e986                am_uart1_isr
+                0x000000000000e986                am_stimer_cmpr7_isr
+                0x000000000000e986                am_scard_isr
+                0x000000000000e986                am_watchdog_isr
+                0x000000000000e986                am_stimer_cmpr0_isr
+                0x000000000000e986                am_iomaster0_isr
+                0x000000000000e986                am_ble_isr
+                0x000000000000e986                am_stimer_cmpr4_isr
+                0x000000000000e986                DebugMon_Handler
  .text.__NVIC_EnableIRQ
-                0x000000000000e8e4       0x3c bin/am_app_mic_verif_board_setup.o
+                0x000000000000e98c       0x3c bin/am_app_mic_verif_board_setup.o
  .text.__NVIC_SetPriority
-                0x000000000000e920       0x54 bin/am_app_mic_verif_board_setup.o
+                0x000000000000e9c8       0x54 bin/am_app_mic_verif_board_setup.o
  .text.DebugLog
-                0x000000000000e974       0x1c bin/am_app_mic_verif_board_setup.o
-                0x000000000000e974                DebugLog
+                0x000000000000ea1c       0x1c bin/am_app_mic_verif_board_setup.o
+                0x000000000000ea1c                DebugLog
  .text.DebugLogUInt32
-                0x000000000000e990       0x1c bin/am_app_mic_verif_board_setup.o
-                0x000000000000e990                DebugLogUInt32
+                0x000000000000ea38       0x1c bin/am_app_mic_verif_board_setup.o
+                0x000000000000ea38                DebugLogUInt32
  .text.timerA0_init
-                0x000000000000e9ac       0x40 bin/am_app_mic_verif_board_setup.o
-                0x000000000000e9ac                timerA0_init
+                0x000000000000ea54       0x40 bin/am_app_mic_verif_board_setup.o
+                0x000000000000ea54                timerA0_init
  .text.pdm_trigger_dma
-                0x000000000000e9ec       0x30 bin/am_app_mic_verif_board_setup.o
-                0x000000000000e9ec                pdm_trigger_dma
+                0x000000000000ea94       0x30 bin/am_app_mic_verif_board_setup.o
+                0x000000000000ea94                pdm_trigger_dma
  .text.am_app_mic_verif_pdm_init
-                0x000000000000ea1c       0xe4 bin/am_app_mic_verif_board_setup.o
-                0x000000000000ea1c                am_app_mic_verif_pdm_init
+                0x000000000000eac4       0xe4 bin/am_app_mic_verif_board_setup.o
+                0x000000000000eac4                am_app_mic_verif_pdm_init
  .text.adc_config_dma
-                0x000000000000eb00       0x5c bin/am_app_mic_verif_board_setup.o
-                0x000000000000eb00                adc_config_dma
+                0x000000000000eba8       0x5c bin/am_app_mic_verif_board_setup.o
+                0x000000000000eba8                adc_config_dma
  .text.adc_config
-                0x000000000000eb5c      0x130 bin/am_app_mic_verif_board_setup.o
-                0x000000000000eb5c                adc_config
+                0x000000000000ec04       0xe0 bin/am_app_mic_verif_board_setup.o
+                0x000000000000ec04                adc_config
  .text.init_timerA3_for_ADC
-                0x000000000000ec8c       0x34 bin/am_app_mic_verif_board_setup.o
-                0x000000000000ec8c                init_timerA3_for_ADC
+                0x000000000000ece4       0x34 bin/am_app_mic_verif_board_setup.o
+                0x000000000000ece4                init_timerA3_for_ADC
  .text.am_app_mic_verif_sys_init
-                0x000000000000ecc0      0x1b4 bin/am_app_mic_verif_board_setup.o
-                0x000000000000ecc0                am_app_mic_verif_sys_init
+                0x000000000000ed18      0x1d4 bin/am_app_mic_verif_board_setup.o
+                0x000000000000ed18                am_app_mic_verif_sys_init
  .text.am_pdm0_isr
-                0x000000000000ee74       0xc4 bin/am_app_mic_verif_isr.o
-                0x000000000000ee74                am_pdm0_isr
+                0x000000000000eeec       0xc4 bin/am_app_mic_verif_isr.o
+                0x000000000000eeec                am_pdm0_isr
  .text.am_ctimer_isr
-                0x000000000000ef38       0x54 bin/am_app_mic_verif_isr.o
-                0x000000000000ef38                am_ctimer_isr
+                0x000000000000efb0       0x54 bin/am_app_mic_verif_isr.o
+                0x000000000000efb0                am_ctimer_isr
  .text.am_gpio_isr
-                0x000000000000ef8c       0xb4 bin/am_app_mic_verif_isr.o
-                0x000000000000ef8c                am_gpio_isr
+                0x000000000000f004       0xb4 bin/am_app_mic_verif_isr.o
+                0x000000000000f004                am_gpio_isr
  .text.am_adc_isr
-                0x000000000000f040       0xdc bin/am_app_mic_verif_isr.o
-                0x000000000000f040                am_adc_isr
+                0x000000000000f0b8       0xdc bin/am_app_mic_verif_isr.o
+                0x000000000000f0b8                am_adc_isr
  .text.am_bsp_uart_string_print
-                0x000000000000f11c       0x48 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000000f11c                am_bsp_uart_string_print
+                0x000000000000f194       0x48 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000000f194                am_bsp_uart_string_print
  .text.am_bsp_low_power_init
-                0x000000000000f164       0x40 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000000f164                am_bsp_low_power_init
+                0x000000000000f1dc       0x40 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000000f1dc                am_bsp_low_power_init
  .text.am_bsp_uart_printf_enable
-                0x000000000000f1a4       0x5c ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000000f1a4                am_bsp_uart_printf_enable
+                0x000000000000f21c       0x5c ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000000f21c                am_bsp_uart_printf_enable
  .text.am_hal_adc_initialize
-                0x000000000000f200       0xa0 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f200                am_hal_adc_initialize
+                0x000000000000f278       0xa0 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f278                am_hal_adc_initialize
  .text.am_hal_adc_configure
-                0x000000000000f2a0       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f2a0                am_hal_adc_configure
+                0x000000000000f318       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f318                am_hal_adc_configure
  .text.am_hal_adc_configure_slot
-                0x000000000000f310       0x6c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f310                am_hal_adc_configure_slot
+                0x000000000000f388       0x6c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f388                am_hal_adc_configure_slot
  .text.am_hal_adc_configure_dma
-                0x000000000000f37c       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f37c                am_hal_adc_configure_dma
+                0x000000000000f3f4       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f3f4                am_hal_adc_configure_dma
  .text.am_hal_adc_enable
-                0x000000000000f3ec       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f3ec                am_hal_adc_enable
+                0x000000000000f464       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f464                am_hal_adc_enable
  .text.am_hal_adc_interrupt_enable
-                0x000000000000f42c       0x2c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f42c                am_hal_adc_interrupt_enable
+                0x000000000000f4a4       0x2c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f4a4                am_hal_adc_interrupt_enable
  .text.am_hal_adc_interrupt_status
-                0x000000000000f458       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f458                am_hal_adc_interrupt_status
+                0x000000000000f4d0       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f4d0                am_hal_adc_interrupt_status
  .text.am_hal_adc_interrupt_clear
-                0x000000000000f494       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f494                am_hal_adc_interrupt_clear
+                0x000000000000f50c       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f50c                am_hal_adc_interrupt_clear
  .text.am_hal_adc_sw_trigger
-                0x000000000000f4b8       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f4b8                am_hal_adc_sw_trigger
+                0x000000000000f530       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f530                am_hal_adc_sw_trigger
  .text.am_hal_adc_power_control
-                0x000000000000f4dc       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000000000f4dc                am_hal_adc_power_control
+                0x000000000000f554       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000000000f554                am_hal_adc_power_control
  .text.am_hal_burst_mode_initialize
-                0x000000000000f5a4       0x90 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
-                0x000000000000f5a4                am_hal_burst_mode_initialize
+                0x000000000000f61c       0x90 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+                0x000000000000f61c                am_hal_burst_mode_initialize
  .text.am_hal_burst_mode_enable
-                0x000000000000f634       0x5c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
-                0x000000000000f634                am_hal_burst_mode_enable
+                0x000000000000f6ac       0x5c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+                0x000000000000f6ac                am_hal_burst_mode_enable
  .text.am_hal_cachectrl_config
-                0x000000000000f690       0x4c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000000f690                am_hal_cachectrl_config
+                0x000000000000f708       0x4c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000000f708                am_hal_cachectrl_config
  .text.am_hal_cachectrl_enable
-                0x000000000000f6dc       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000000f6dc                am_hal_cachectrl_enable
+                0x000000000000f754       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000000f754                am_hal_cachectrl_enable
  .text.am_hal_cachectrl_control
-                0x000000000000f6f0      0x2e4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000000f6f0                am_hal_cachectrl_control
+                0x000000000000f768      0x2e4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000000f768                am_hal_cachectrl_control
  .text.am_hal_clkgen_control
-                0x000000000000f9d4      0x118 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
-                0x000000000000f9d4                am_hal_clkgen_control
+                0x000000000000fa4c      0x118 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
+                0x000000000000fa4c                am_hal_clkgen_control
  .text.am_hal_clkgen_status_get
-                0x000000000000faec       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
-                0x000000000000faec                am_hal_clkgen_status_get
+                0x000000000000fb64       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
+                0x000000000000fb64                am_hal_clkgen_status_get
  .text.am_hal_ctimer_config
-                0x000000000000fb28       0x60 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fb28                am_hal_ctimer_config
+                0x000000000000fba0       0x60 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fba0                am_hal_ctimer_config
  .text.am_hal_ctimer_config_single
-                0x000000000000fb88       0x80 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fb88                am_hal_ctimer_config_single
+                0x000000000000fc00       0x80 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fc00                am_hal_ctimer_config_single
  .text.am_hal_ctimer_start
-                0x000000000000fc08       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fc08                am_hal_ctimer_start
+                0x000000000000fc80       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fc80                am_hal_ctimer_start
  .text.am_hal_ctimer_clear
-                0x000000000000fc5c       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fc5c                am_hal_ctimer_clear
+                0x000000000000fcd4       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fcd4                am_hal_ctimer_clear
  .text.am_hal_ctimer_period_set
-                0x000000000000fc84       0xac ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fc84                am_hal_ctimer_period_set
+                0x000000000000fcfc       0xac ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fcfc                am_hal_ctimer_period_set
  .text.am_hal_ctimer_adc_trigger_enable
-                0x000000000000fd30       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fd30                am_hal_ctimer_adc_trigger_enable
+                0x000000000000fda8       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fda8                am_hal_ctimer_adc_trigger_enable
  .text.am_hal_ctimer_int_enable
-                0x000000000000fd54       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fd54                am_hal_ctimer_int_enable
+                0x000000000000fdcc       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fdcc                am_hal_ctimer_int_enable
  .text.am_hal_ctimer_int_clear
-                0x000000000000fd7c       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000fd7c                am_hal_ctimer_int_clear
+                0x000000000000fdf4       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fdf4                am_hal_ctimer_int_clear
  .text.am_hal_flash_delay
-                0x000000000000fd9c       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000fd9c                am_hal_flash_delay
+                0x000000000000fe14       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000fe14                am_hal_flash_delay
  .text.am_hal_flash_delay_status_check
-                0x000000000000fdbc       0x74 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000fdbc                am_hal_flash_delay_status_check
+                0x000000000000fe34       0x74 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000fe34                am_hal_flash_delay_status_check
  .text.am_hal_flash_load_ui32
-                0x000000000000fe30        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000fe30                am_hal_flash_load_ui32
+                0x000000000000fea8        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000fea8                am_hal_flash_load_ui32
  .text.am_hal_flash_store_ui32
-                0x000000000000fe38        0xc ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000fe38                am_hal_flash_store_ui32
+                0x000000000000feb0        0xc ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000feb0                am_hal_flash_store_ui32
  .text.am_hal_interrupt_master_enable
-                0x000000000000fe44        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000000fe44                am_hal_interrupt_master_enable
+                0x000000000000febc        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000000febc                am_hal_interrupt_master_enable
  .text.am_hal_interrupt_master_disable
-                0x000000000000fe4c        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000000fe4c                am_hal_interrupt_master_disable
+                0x000000000000fec4        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000000fec4                am_hal_interrupt_master_disable
  .text.am_hal_interrupt_master_set
-                0x000000000000fe54        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000000fe54                am_hal_interrupt_master_set
+                0x000000000000fecc        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000000fecc                am_hal_interrupt_master_set
  .text.am_hal_mcuctrl_info_get
-                0x000000000000fe5c      0x12c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x000000000000fe5c                am_hal_mcuctrl_info_get
+                0x000000000000fed4      0x12c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x000000000000fed4                am_hal_mcuctrl_info_get
  .text.am_hal_pwrctrl_periph_enable
-                0x000000000000ff88       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x000000000000ff88                am_hal_pwrctrl_periph_enable
+                0x0000000000010000       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x0000000000010000                am_hal_pwrctrl_periph_enable
  .text.am_hal_pwrctrl_periph_disable
-                0x000000000000ffdc       0x58 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x000000000000ffdc                am_hal_pwrctrl_periph_disable
+                0x0000000000010054       0x58 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x0000000000010054                am_hal_pwrctrl_periph_disable
  .text.am_hal_pwrctrl_low_power_init
-                0x0000000000010034       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x0000000000010034                am_hal_pwrctrl_low_power_init
+                0x00000000000100ac       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x00000000000100ac                am_hal_pwrctrl_low_power_init
  .text.am_hal_rtc_osc_disable
-                0x0000000000010118       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
-                0x0000000000010118                am_hal_rtc_osc_disable
+                0x0000000000010190       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
+                0x0000000000010190                am_hal_rtc_osc_disable
  .text.am_hal_uart_initialize
-                0x000000000001012c       0x50 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000000001012c                am_hal_uart_initialize
+                0x00000000000101a4       0x50 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x00000000000101a4                am_hal_uart_initialize
  .text.am_hal_uart_power_control
-                0x000000000001017c       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000000001017c                am_hal_uart_power_control
+                0x00000000000101f4       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x00000000000101f4                am_hal_uart_power_control
  .text.am_hal_uart_configure
-                0x0000000000010260      0x248 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x0000000000010260                am_hal_uart_configure
+                0x00000000000102d8      0x248 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x00000000000102d8                am_hal_uart_configure
  .text.am_hal_uart_transfer
-                0x00000000000104a8      0x474 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x00000000000104a8                am_hal_uart_transfer
+                0x0000000000010520      0x474 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x0000000000010520                am_hal_uart_transfer
  .text.am_hal_queue_init
-                0x000000000001091c       0x18 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x000000000001091c                am_hal_queue_init
+                0x0000000000010994       0x18 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x0000000000010994                am_hal_queue_init
  .text.am_hal_queue_item_add
-                0x0000000000010934       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x0000000000010934                am_hal_queue_item_add
+                0x00000000000109ac       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x00000000000109ac                am_hal_queue_item_add
  .text.am_hal_queue_item_get
-                0x00000000000109a4       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x00000000000109a4                am_hal_queue_item_get
- .text.memset   0x0000000000010a14       0x94 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
-                0x0000000000010a14                memset
+                0x0000000000010a1c       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x0000000000010a1c                am_hal_queue_item_get
+ .text.memset   0x0000000000010a8c       0x94 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
+                0x0000000000010a8c                memset
  *(.rodata)
- .rodata        0x0000000000010aa8      0x23d bin/main.o
- *fill*         0x0000000000010ce5        0x3 
- .rodata        0x0000000000010ce8      0x334 bin/am_app_mic_verif_board_setup.o
- .rodata        0x000000000001101c       0x49 bin/am_app_mic_verif_isr.o
+ .rodata        0x0000000000010b20      0x311 bin/main.o
+ *fill*         0x0000000000010e31        0x3 
+ .rodata        0x0000000000010e34      0x2c9 bin/am_app_mic_verif_board_setup.o
+ *fill*         0x00000000000110fd        0x3 
+ .rodata        0x0000000000011100       0x49 bin/am_app_mic_verif_isr.o
  *(.rodata*)
- *fill*         0x0000000000011065        0x3 
+ *fill*         0x0000000000011149        0x3 
  .rodata.g_AM_HAL_GPIO_DISABLE
-                0x0000000000011068        0x4 bin/am_hal_gpio.o
-                0x0000000000011068                g_AM_HAL_GPIO_DISABLE
+                0x000000000001114c        0x4 bin/am_hal_gpio.o
+                0x000000000001114c                g_AM_HAL_GPIO_DISABLE
  .rodata.g_AM_HAL_GPIO_TRISTATE
-                0x000000000001106c        0x4 bin/am_hal_gpio.o
-                0x000000000001106c                g_AM_HAL_GPIO_TRISTATE
+                0x0000000000011150        0x4 bin/am_hal_gpio.o
+                0x0000000000011150                g_AM_HAL_GPIO_TRISTATE
  .rodata.g_AM_HAL_GPIO_OUTPUT
-                0x0000000000011070        0x4 bin/am_hal_gpio.o
-                0x0000000000011070                g_AM_HAL_GPIO_OUTPUT
+                0x0000000000011154        0x4 bin/am_hal_gpio.o
+                0x0000000000011154                g_AM_HAL_GPIO_OUTPUT
  .rodata.g_ui8Inpen
-                0x0000000000011074       0x32 bin/am_hal_gpio.o
- *fill*         0x00000000000110a6        0x2 
+                0x0000000000011158       0x32 bin/am_hal_gpio.o
+ *fill*         0x000000000001118a        0x2 
  .rodata.g_ui8Bit76Capabilities
-                0x00000000000110a8       0x32 bin/am_hal_gpio.o
- *fill*         0x00000000000110da        0x2 
+                0x000000000001118c       0x32 bin/am_hal_gpio.o
+ *fill*         0x00000000000111be        0x2 
  .rodata.g_ui8nCEpins
-                0x00000000000110dc       0x32 bin/am_hal_gpio.o
- *fill*         0x000000000001110e        0x2 
+                0x00000000000111c0       0x32 bin/am_hal_gpio.o
+ *fill*         0x00000000000111f2        0x2 
  .rodata.g_ui8NCEtable
-                0x0000000000011110       0xc8 bin/am_hal_gpio.o
+                0x00000000000111f4       0xc8 bin/am_hal_gpio.o
  .rodata.g_SysRingBuffSetup
-                0x00000000000111d8       0x18 bin/am_app_mic_verif_board_setup.o
+                0x00000000000112bc       0x18 bin/am_app_mic_verif_board_setup.o
  .rodata.g_switch_button0
-                0x00000000000111f0        0x4 bin/am_app_mic_verif_board_setup.o
-                0x00000000000111f0                g_switch_button0
+                0x00000000000112d4        0x4 bin/am_app_mic_verif_board_setup.o
+                0x00000000000112d4                g_switch_button0
  .rodata.g_switch_button1
-                0x00000000000111f4        0x4 bin/am_app_mic_verif_board_setup.o
-                0x00000000000111f4                g_switch_button1
+                0x00000000000112d8        0x4 bin/am_app_mic_verif_board_setup.o
+                0x00000000000112d8                g_switch_button1
  .rodata.g_switch_button2
-                0x00000000000111f8        0x4 bin/am_app_mic_verif_board_setup.o
-                0x00000000000111f8                g_switch_button2
+                0x00000000000112dc        0x4 bin/am_app_mic_verif_board_setup.o
+                0x00000000000112dc                g_switch_button2
  .rodata.g_AM_PIN_33_ADCSE5
-                0x00000000000111fc        0x4 bin/am_app_mic_verif_board_setup.o
-                0x00000000000111fc                g_AM_PIN_33_ADCSE5
+                0x00000000000112e0        0x4 bin/am_app_mic_verif_board_setup.o
+                0x00000000000112e0                g_AM_PIN_33_ADCSE5
  .rodata.g_sBspUartConfig
-                0x0000000000011200       0x28 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x00000000000112e4       0x28 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
  .rodata.g_AM_BSP_GPIO_COM_UART_TX
-                0x0000000000011228        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
-                0x0000000000011228                g_AM_BSP_GPIO_COM_UART_TX
+                0x000000000001130c        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
+                0x000000000001130c                g_AM_BSP_GPIO_COM_UART_TX
  .rodata.g_AM_BSP_GPIO_COM_UART_RX
-                0x000000000001122c        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
-                0x000000000001122c                g_AM_BSP_GPIO_COM_UART_RX
+                0x0000000000011310        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
+                0x0000000000011310                g_AM_BSP_GPIO_COM_UART_RX
  .rodata.am_hal_cachectrl_defaults
-                0x0000000000011230        0x3 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x0000000000011230                am_hal_cachectrl_defaults
- *fill*         0x0000000000011233        0x1 
+                0x0000000000011314        0x3 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x0000000000011314                am_hal_cachectrl_defaults
+ *fill*         0x0000000000011317        0x1 
  .rodata.g_am_hal_mcuctrl_flash_size
-                0x0000000000011234       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x0000000000011234                g_am_hal_mcuctrl_flash_size
+                0x0000000000011318       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x0000000000011318                g_am_hal_mcuctrl_flash_size
  .rodata.g_am_hal_mcuctrl_sram_size
-                0x0000000000011274       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x0000000000011274                g_am_hal_mcuctrl_sram_size
+                0x0000000000011358       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x0000000000011358                g_am_hal_mcuctrl_sram_size
  .rodata.am_hal_pwrctrl_peripheral_control
-                0x00000000000112b4       0xb4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x00000000000112b4                am_hal_pwrctrl_peripheral_control
-                0x0000000000011368                . = ALIGN (0x4)
-                0x0000000000011368                _etext = .
+                0x0000000000011398       0xb4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x0000000000011398                am_hal_pwrctrl_peripheral_control
+                0x000000000001144c                . = ALIGN (0x4)
+                0x000000000001144c                _etext = .
 
-.glue_7         0x0000000000011368        0x0
- .glue_7        0x0000000000011368        0x0 linker stubs
+.glue_7         0x000000000001144c        0x0
+ .glue_7        0x000000000001144c        0x0 linker stubs
 
-.glue_7t        0x0000000000011368        0x0
- .glue_7t       0x0000000000011368        0x0 linker stubs
+.glue_7t        0x000000000001144c        0x0
+ .glue_7t       0x000000000001144c        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000011368        0x0
- .vfp11_veneer  0x0000000000011368        0x0 linker stubs
+.vfp11_veneer   0x000000000001144c        0x0
+ .vfp11_veneer  0x000000000001144c        0x0 linker stubs
 
-.v4_bx          0x0000000000011368        0x0
- .v4_bx         0x0000000000011368        0x0 linker stubs
+.v4_bx          0x000000000001144c        0x0
+ .v4_bx         0x000000000001144c        0x0 linker stubs
 
-.iplt           0x0000000000011368        0x0
- .iplt          0x0000000000011368        0x0 bin/main.o
+.iplt           0x000000000001144c        0x0
+ .iplt          0x000000000001144c        0x0 bin/main.o
 
-.rel.dyn        0x0000000000011368        0x0
- .rel.iplt      0x0000000000011368        0x0 bin/main.o
+.rel.dyn        0x000000000001144c        0x0
+ .rel.iplt      0x000000000001144c        0x0 bin/main.o
 
 .stack          0x0000000010000000     0xc000
                 0x0000000010000000                . = ALIGN (0x8)
@@ -1858,7 +1857,7 @@ Linker script and memory map
  *(.stack*)
                 0x000000001000c000                . = ALIGN (0x8)
 
-.data           0x000000001000c000       0x50 load address 0x0000000000011368
+.data           0x000000001000c000       0x50 load address 0x000000000001144c
                 0x000000001000c000                . = ALIGN (0x4)
                 0x000000001000c000                _sdata = .
  *(.data)
@@ -1876,12 +1875,12 @@ Linker script and memory map
                 0x000000001000c044                SRAM_write_ui32
                 0x000000001000c050                . = ALIGN (0x4)
                 0x000000001000c050                _edata = .
-                0x0000000000011368                _init_data = LOADADDR (.data)
+                0x000000000001144c                _init_data = LOADADDR (.data)
 
-.igot.plt       0x000000001000c050        0x0 load address 0x00000000000113b8
+.igot.plt       0x000000001000c050        0x0 load address 0x000000000001149c
  .igot.plt      0x000000001000c050        0x0 bin/main.o
 
-.bss            0x000000001000c050    0x1ff74 load address 0x00000000000113b8
+.bss            0x000000001000c050    0x1ff78 load address 0x000000000001149c
                 0x000000001000c050                . = ALIGN (0x4)
                 0x000000001000c050                _sbss = .
  *(.bss)
@@ -1889,89 +1888,91 @@ Linker script and memory map
  .bss.g_ui32AD_Val
                 0x000000001000c050        0x4 bin/main.o
                 0x000000001000c050                g_ui32AD_Val
- .bss.g_ui32OutSamples
+ .bss.g_ui32PCM_RegVal
                 0x000000001000c054        0x4 bin/main.o
-                0x000000001000c054                g_ui32OutSamples
- .bss.g_prfbuf  0x000000001000c058      0x100 bin/am_util_stdio.o
+                0x000000001000c054                g_ui32PCM_RegVal
+ .bss.g_ui32OutSamples
+                0x000000001000c058        0x4 bin/main.o
+                0x000000001000c058                g_ui32OutSamples
+ .bss.g_prfbuf  0x000000001000c05c      0x100 bin/am_util_stdio.o
  .bss.g_bTxtXlate
-                0x000000001000c158        0x1 bin/am_util_stdio.o
- *fill*         0x000000001000c159        0x3 
+                0x000000001000c15c        0x1 bin/am_util_stdio.o
+ *fill*         0x000000001000c15d        0x3 
  .bss.g_ui32TimerCount
-                0x000000001000c15c        0x4 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c15c                g_ui32TimerCount
+                0x000000001000c160        0x4 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c160                g_ui32TimerCount
  .bss.g_ui8DebounceFlag
-                0x000000001000c160        0x1 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c160                g_ui8DebounceFlag
- *fill*         0x000000001000c161        0x3 
+                0x000000001000c164        0x1 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c164                g_ui8DebounceFlag
+ *fill*         0x000000001000c165        0x3 
  .bss.g_ui32DebounceTimerCount
-                0x000000001000c164        0x4 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c164                g_ui32DebounceTimerCount
+                0x000000001000c168        0x4 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c168                g_ui32DebounceTimerCount
  .bss.g_sysKeyValue
-                0x000000001000c168        0x1 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c168                g_sysKeyValue
+                0x000000001000c16c        0x1 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c16c                g_sysKeyValue
  .bss.g_ui8ButtonPushedFlag
-                0x000000001000c169        0x1 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c169                g_ui8ButtonPushedFlag
+                0x000000001000c16d        0x1 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c16d                g_ui8ButtonPushedFlag
  .bss.g_bPDMDataReady
-                0x000000001000c16a        0x1 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c16a                g_bPDMDataReady
- *fill*         0x000000001000c16b        0x1 
+                0x000000001000c16e        0x1 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c16e                g_bPDMDataReady
+ *fill*         0x000000001000c16f        0x1 
  .bss.g_ui32PCMDataSumBytes
-                0x000000001000c16c        0x4 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c16c                g_ui32PCMDataSumBytes
- .bss.g_ui32AMicDataSumBytes
                 0x000000001000c170        0x4 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c170                g_ui32AMicDataSumBytes
+                0x000000001000c170                g_ui32PCMDataSumBytes
+ .bss.g_ui32AMicDataSumBytes
+                0x000000001000c174        0x4 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c174                g_ui32AMicDataSumBytes
  .bss.g_bAMicDataReady
-                0x000000001000c174        0x1 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c174                g_bAMicDataReady
+                0x000000001000c178        0x1 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c178                g_bAMicDataReady
  .bss.g_bAMicEvalFlag
-                0x000000001000c175        0x1 bin/am_app_mic_verif_board_setup.o
-                0x000000001000c175                g_bAMicEvalFlag
- *fill*         0x000000001000c176        0x2 
+                0x000000001000c179        0x1 bin/am_app_mic_verif_board_setup.o
+                0x000000001000c179                g_bAMicEvalFlag
+ *fill*         0x000000001000c17a        0x2 
  .bss.g_ui32PrintInterface
-                0x000000001000c178        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
- .bss.g_sCOMUART
                 0x000000001000c17c        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+ .bss.g_sCOMUART
+                0x000000001000c180        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
  .bss.priv_temp_trims
-                0x000000001000c180       0x10 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000001000c184       0x10 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
  .bss.g_am_hal_burst_mode_available
-                0x000000001000c190        0x1 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
-                0x000000001000c190                g_am_hal_burst_mode_available
- *fill*         0x000000001000c191        0x3 
+                0x000000001000c194        0x1 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+                0x000000001000c194                g_am_hal_burst_mode_available
+ *fill*         0x000000001000c195        0x3 
  .bss.gAmHalResetStatus
-                0x000000001000c194        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_reset.o)
-                0x000000001000c194                gAmHalResetStatus
+                0x000000001000c198        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_reset.o)
+                0x000000001000c198                gAmHalResetStatus
  *(COMMON)
- COMMON         0x000000001000c198        0xc bin/am_hal_pdm.o
-                0x000000001000c198                g_am_hal_pdm_states
- COMMON         0x000000001000c1a4        0x4 bin/am_util_stdio.o
-                0x000000001000c1a4                g_pfnCharPrint
- COMMON         0x000000001000c1a8    0x1fd0d bin/am_app_mic_verif_board_setup.o
-                0x000000001000c1a8                g_ui32PCMDataBuff
-                0x000000001000c6a8                eBurstMode
-                0x000000001000c6ac                g_ui32ADCSampleBuffer
-                0x000000001000c7ec                SampleBuffer
-                0x000000001000ca6c                g_ADCHandle
-                0x000000001000ca70                eBurstModeAvailable
-                0x000000001000ca71                g_bADCDMAComplete
-                0x000000001000ca74                PDMHandle
-                0x000000001000ca78                g_ui8AMicDataRingBuff
-                0x000000001001c478                g_ui8PCMDataRingBuff
-                0x000000001002be78                am_sys_ring_buffers
-                0x000000001002beb4                g_bADCDMAError
- *fill*         0x000000001002beb5        0x3 
- COMMON         0x000000001002beb8       0x44 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
-                0x000000001002beb8                g_ADCSlotsConfigured
-                0x000000001002bebc                g_ADCState
- COMMON         0x000000001002befc       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000001002befc                g_am_hal_uart_states
-                0x000000001002bfc4                . = ALIGN (0x4)
-                0x000000001002bfc4                _ebss = .
+ COMMON         0x000000001000c19c        0xc bin/am_hal_pdm.o
+                0x000000001000c19c                g_am_hal_pdm_states
+ COMMON         0x000000001000c1a8        0x4 bin/am_util_stdio.o
+                0x000000001000c1a8                g_pfnCharPrint
+ COMMON         0x000000001000c1ac    0x1fd0d bin/am_app_mic_verif_board_setup.o
+                0x000000001000c1ac                g_ui32PCMDataBuff
+                0x000000001000c6ac                eBurstMode
+                0x000000001000c6b0                g_ui32ADCSampleBuffer
+                0x000000001000c7f0                SampleBuffer
+                0x000000001000ca70                g_ADCHandle
+                0x000000001000ca74                eBurstModeAvailable
+                0x000000001000ca75                g_bADCDMAComplete
+                0x000000001000ca78                PDMHandle
+                0x000000001000ca7c                g_ui8AMicDataRingBuff
+                0x000000001001c47c                g_ui8PCMDataRingBuff
+                0x000000001002be7c                am_sys_ring_buffers
+                0x000000001002beb8                g_bADCDMAError
+ *fill*         0x000000001002beb9        0x3 
+ COMMON         0x000000001002bebc       0x44 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_adc.o)
+                0x000000001002bebc                g_ADCSlotsConfigured
+                0x000000001002bec0                g_ADCState
+ COMMON         0x000000001002bf00       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x000000001002bf00                g_am_hal_uart_states
+                0x000000001002bfc8                . = ALIGN (0x4)
+                0x000000001002bfc8                _ebss = .
 
-.heap           0x000000001002bfc4      0x404 load address 0x00000000000113b8
+.heap           0x000000001002bfc8      0x400 load address 0x000000000001149c
                 0x000000001002bfc8                . = ALIGN (0x8)
- *fill*         0x000000001002bfc4        0x4 
                 [!provide]                        PROVIDE (__end__ = .)
                 0x000000001002bfc8                PROVIDE (end = .)
                 [!provide]                        PROVIDE (_heap_start = end)
@@ -2071,31 +2072,31 @@ LOAD /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/b
 END GROUP
 OUTPUT(bin/mikro_verification.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0xffc1
- .debug_info    0x0000000000000000     0x1a8c bin/main.o
- .debug_info    0x0000000000001a8c     0x1b4f bin/am_hal_pdm.o
- .debug_info    0x00000000000035db     0x4d7d bin/am_hal_gpio.o
- .debug_info    0x0000000000008358      0x843 bin/am_util_delay.o
- .debug_info    0x0000000000008b9b      0x94a bin/am_util_faultisr.o
- .debug_info    0x00000000000094e5      0x8a3 bin/am_util_stdio.o
- .debug_info    0x0000000000009d88      0xcbd bin/am_app_utils_ring_buffer.o
- .debug_info    0x000000000000aa45      0xa52 bin/am_devices_led.o
- .debug_info    0x000000000000b497      0x17f bin/startup_gcc.o
- .debug_info    0x000000000000b616     0x2989 bin/am_app_mic_verif_board_setup.o
- .debug_info    0x000000000000df9f     0x2022 bin/am_app_mic_verif_isr.o
+.debug_info     0x0000000000000000     0xffeb
+ .debug_info    0x0000000000000000     0x1ab6 bin/main.o
+ .debug_info    0x0000000000001ab6     0x1b4f bin/am_hal_pdm.o
+ .debug_info    0x0000000000003605     0x4d7d bin/am_hal_gpio.o
+ .debug_info    0x0000000000008382      0x843 bin/am_util_delay.o
+ .debug_info    0x0000000000008bc5      0x94a bin/am_util_faultisr.o
+ .debug_info    0x000000000000950f      0x8a3 bin/am_util_stdio.o
+ .debug_info    0x0000000000009db2      0xcbd bin/am_app_utils_ring_buffer.o
+ .debug_info    0x000000000000aa6f      0xa52 bin/am_devices_led.o
+ .debug_info    0x000000000000b4c1      0x17f bin/startup_gcc.o
+ .debug_info    0x000000000000b640     0x2989 bin/am_app_mic_verif_board_setup.o
+ .debug_info    0x000000000000dfc9     0x2022 bin/am_app_mic_verif_isr.o
 
-.debug_abbrev   0x0000000000000000     0x18a6
- .debug_abbrev  0x0000000000000000      0x268 bin/main.o
- .debug_abbrev  0x0000000000000268      0x2b3 bin/am_hal_pdm.o
- .debug_abbrev  0x000000000000051b      0x2c9 bin/am_hal_gpio.o
- .debug_abbrev  0x00000000000007e4      0x1b4 bin/am_util_delay.o
- .debug_abbrev  0x0000000000000998      0x1e1 bin/am_util_faultisr.o
- .debug_abbrev  0x0000000000000b79      0x20d bin/am_util_stdio.o
- .debug_abbrev  0x0000000000000d86      0x256 bin/am_app_utils_ring_buffer.o
- .debug_abbrev  0x0000000000000fdc      0x229 bin/am_devices_led.o
- .debug_abbrev  0x0000000000001205       0xca bin/startup_gcc.o
- .debug_abbrev  0x00000000000012cf      0x343 bin/am_app_mic_verif_board_setup.o
- .debug_abbrev  0x0000000000001612      0x294 bin/am_app_mic_verif_isr.o
+.debug_abbrev   0x0000000000000000     0x18b1
+ .debug_abbrev  0x0000000000000000      0x273 bin/main.o
+ .debug_abbrev  0x0000000000000273      0x2b3 bin/am_hal_pdm.o
+ .debug_abbrev  0x0000000000000526      0x2c9 bin/am_hal_gpio.o
+ .debug_abbrev  0x00000000000007ef      0x1b4 bin/am_util_delay.o
+ .debug_abbrev  0x00000000000009a3      0x1e1 bin/am_util_faultisr.o
+ .debug_abbrev  0x0000000000000b84      0x20d bin/am_util_stdio.o
+ .debug_abbrev  0x0000000000000d91      0x256 bin/am_app_utils_ring_buffer.o
+ .debug_abbrev  0x0000000000000fe7      0x229 bin/am_devices_led.o
+ .debug_abbrev  0x0000000000001210       0xca bin/startup_gcc.o
+ .debug_abbrev  0x00000000000012da      0x343 bin/am_app_mic_verif_board_setup.o
+ .debug_abbrev  0x000000000000161d      0x294 bin/am_app_mic_verif_isr.o
 
 .debug_aranges  0x0000000000000000      0x3c0
  .debug_aranges
@@ -2134,18 +2135,18 @@ OUTPUT(bin/mikro_verification.axf elf32-littlearm)
  .debug_ranges  0x0000000000000268       0x80 bin/am_app_mic_verif_board_setup.o
  .debug_ranges  0x00000000000002e8       0x28 bin/am_app_mic_verif_isr.o
 
-.debug_line     0x0000000000000000     0x31e5
- .debug_line    0x0000000000000000      0x581 bin/main.o
- .debug_line    0x0000000000000581      0x58c bin/am_hal_pdm.o
- .debug_line    0x0000000000000b0d      0x4e8 bin/am_hal_gpio.o
- .debug_line    0x0000000000000ff5      0x303 bin/am_util_delay.o
- .debug_line    0x00000000000012f8      0x35f bin/am_util_faultisr.o
- .debug_line    0x0000000000001657      0x60f bin/am_util_stdio.o
- .debug_line    0x0000000000001c66      0x331 bin/am_app_utils_ring_buffer.o
- .debug_line    0x0000000000001f97      0x44e bin/am_devices_led.o
- .debug_line    0x00000000000023e5      0x177 bin/startup_gcc.o
- .debug_line    0x000000000000255c      0x704 bin/am_app_mic_verif_board_setup.o
- .debug_line    0x0000000000002c60      0x585 bin/am_app_mic_verif_isr.o
+.debug_line     0x0000000000000000     0x320a
+ .debug_line    0x0000000000000000      0x5a8 bin/main.o
+ .debug_line    0x00000000000005a8      0x58c bin/am_hal_pdm.o
+ .debug_line    0x0000000000000b34      0x4e8 bin/am_hal_gpio.o
+ .debug_line    0x000000000000101c      0x303 bin/am_util_delay.o
+ .debug_line    0x000000000000131f      0x35f bin/am_util_faultisr.o
+ .debug_line    0x000000000000167e      0x60f bin/am_util_stdio.o
+ .debug_line    0x0000000000001c8d      0x331 bin/am_app_utils_ring_buffer.o
+ .debug_line    0x0000000000001fbe      0x44e bin/am_devices_led.o
+ .debug_line    0x000000000000240c      0x177 bin/startup_gcc.o
+ .debug_line    0x0000000000002583      0x702 bin/am_app_mic_verif_board_setup.o
+ .debug_line    0x0000000000002c85      0x585 bin/am_app_mic_verif_isr.o
 
 .debug_str      0x0000000000000000     0x6936
  .debug_str     0x0000000000000000     0x2059 bin/main.o

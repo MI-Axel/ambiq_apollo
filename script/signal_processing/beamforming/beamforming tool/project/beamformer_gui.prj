@@ -1,0 +1,195 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="1350309782" file="C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\project\beamformer_gui.prj" location="C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\project" name="beamformer_gui" preferred-package-location="C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\project\beamformer_gui\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>beamformer</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>\beamformer\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\beamformer_gui\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\beamformer_gui\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\beamformer_gui\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\beamformer_gui</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.embed.ctf>true</param.embed.ctf>
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>false</param.web.mcr>
+    <param.package.mcr>true</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>beamforming_tool_installer</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.summary />
+      <param.description />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.embed.ctf />
+      <param.target.type />
+      <param.support.packages />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+    </unset>
+    <fileset.main>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\standalone_gui\beamformer_gui.m</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\check_valid_ordering.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\compute_weights_1.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\compute_weights_2.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\load_array_1.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\load_array_2.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\load_beamformer_1_struct.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\load_beamformer_2_struct.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\prepare_beamformer_1_struct.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\prepare_beamformer_2_struct.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\save_array_1_struct.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\save_array_2_struct.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\update_mic_positions_1.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\gui_utils\update_mic_positions_2.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compare_evals.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_beam_pattern.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_beam_width.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_fir_coefficients.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_freq_resp.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_post_window.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_snr.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_snr_gain.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_snr_gain_180.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\compute_steering_vectors.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\create_beam_movie.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\create_beamformer.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\create_mic_array.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\empirical_vs_theoretical_snr_gain.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\evaluate_beamformer.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\octave_smoothing.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\plot_eval.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\plot_polar_plots.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\plot_snr_gain.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\post_processing.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\real_vect.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\utils\visualize_filters.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\weight_computation\compute_das.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\weight_computation\compute_max_snr.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\weight_computation\compute_mvdr.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\inspect\weight_computation\cvx_approach.m</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\standalone_gui\beamformer_gui.fig</file>
+      <file>C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\standalone_gui\beamformer_gui.m</file>
+    </fileset.resources>
+    <fileset.package />
+    <fileset.depfun>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\check_valid_ordering.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\compute_weights_1.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\compute_weights_2.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\load_array_1.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\load_array_2.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\load_beamformer_1_struct.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\load_beamformer_2_struct.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\prepare_beamformer_1_struct.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\prepare_beamformer_2_struct.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\save_array_1_struct.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\save_array_2_struct.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\update_mic_positions_1.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\gui_utils\update_mic_positions_2.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\compare_evals.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\compute_beam_width.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\compute_post_window.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\compute_snr.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\compute_snr_gain.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\compute_steering_vectors.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\create_beamformer.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\create_mic_array.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\evaluate_beamformer.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\utils\plot_eval.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\weight_computation\compute_das.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\weight_computation\compute_max_snr.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\weight_computation\compute_mvdr.m</file>
+      <file>C:\DSP Concepts\Audio Weaver Ambiq standard 01162018 Standard\Modules\DSPC-Beamformer\matlab\standalone_gui\..\inspect\weight_computation\cvx_approach.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\beamformer_gui\for_testing" name="beamformer.exe" optional="false">C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\project\beamformer_gui\for_testing\beamformer.exe</file>
+      <file location="${PROJECT_ROOT}\beamformer_gui\for_testing" name="splash.png" optional="false">C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\project\beamformer_gui\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\beamformer_gui\for_testing" name="readme.txt" optional="true">C:\Users\agao\work\KWS\PyScript\signal_processing\beamforming tool\project\beamformer_gui\for_testing\readme.txt</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2016a</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

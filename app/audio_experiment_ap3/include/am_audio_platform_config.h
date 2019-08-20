@@ -21,8 +21,11 @@
 
 #define AM_AEP_MIKRO_THD_CALC               0
 
-#define AM_AEP_AUDIO_BUFFER_TEST            1
+#define AM_AEP_AUDIO_BUFFER_TEST            0
 
+#define AM_AEP_STFT_TEST                    1
+
+#define AM_AEP_DIGITAL_FILTER_TEST          0
 //
 // Platform support function configuration
 //
@@ -32,7 +35,8 @@
 #define configUSE_SWO_PRINTF                0
 #define configUSE_RTT_PRINTF                0
 
-
+/* MIPS measurement */
+#define configUSE_MEASURE_MIPS              1
 /* Data Block Output configuration */
 #define configUSE_RTT_DATA_OUTPUT           0
 

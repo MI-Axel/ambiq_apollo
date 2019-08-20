@@ -6,5 +6,8 @@
 #
 # Connect to the J-Link gdb server
 target remote localhost:2331
-monitor speed 2000
+monitor speed 1000
 monitor flash download = 1
+monitor reset init
+load ./bin/audio_experiment.axf
+monitor reset halt

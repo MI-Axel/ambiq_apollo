@@ -12,6 +12,7 @@ Options:
 
 from docopt import docopt
 import numpy as np
+from scipy import signal
 
 arguments = docopt(__doc__)
 
@@ -22,7 +23,8 @@ windowLength = np.int(arguments['<window_length>'])
 savedPath = arguments['<output_path>']
 
 if windowName == 'hanning':
-    windowArray = np.hanning(windowLength)
+    # unsymmetrical window needed for reconstruction 
+    windowArray = signal.windows.hann(windowLength, sym=False)
 elif windowName == 'hamming':
     windowArray = np.hamming(windowLength)
 elif windowName == 'bartlett':

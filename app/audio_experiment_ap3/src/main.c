@@ -61,13 +61,25 @@ limitations under the License.
 
 #if AM_AEP_MIKRO_THD_CALC
 #include "am_mikro_thd.h"
-#include "am_AEP_fft_data.h"
+#include "am_AEP_local_test_data.h"
 
 #endif // AM_AEP_MIKRO_THD_CALC
 
 #if AM_AEP_AUDIO_BUFFER_TEST
 #include "am_audio_buffer.h"
 #endif // AM_AEP_AUDIO_BUFFER_TEST
+
+#if AM_AEP_STFT_TEST
+#include "stft.h"
+#include "am_AEP_local_test_data.h"
+#include "hanning_window.h"
+#endif // AM_AEP_STFT_TEST
+
+#if AM_AEP_DIGITAL_FILTER_TEST
+#include "digital_filter.h"
+#include "am_AEP_local_test_data.h"
+#endif // AM_AEP_DIGITAL_FILTER_TEST
+
 
 int main(void)
 {
@@ -102,41 +114,173 @@ int main(void)
 
 #endif // AM_AEP_OPUS_TEST
 
-#if AM_AEP_SCNR_TEST
-am_app_stft_instance_f32 g_Stft;
-uint16_t g_ui16FftLen = 128;
-uint16_t g_ui16Channels = 1;
-uint16_t g_ui16HopSize = 80;
-float g_fTest = 3.1415926789;
+#if AM_AEP_STFT_TEST
+#define PRINT_PCM_DATA                              0
+#define PRINT_STFT_DATA                             0
+#define PRINT_MAGNITUDE_DATA                        0
+#define PRINT_ISTFT_DATA                            1
+#define LOCAL_DATA_TEST                             1
 
-am_app_stft_init_f32(&g_Stft, g_ui16FftLen, g_ui16Channels, g_ui16HopSize, true);
+#define AUDIO_PREPROCESS_FFT_SIZE                   128
+#define AUDIO_HOP_SIZE                              80
+#define AUDIO_ROLLING_FRAMES                        3
+#define AUDIO_BUFF_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE+(AUDIO_ROLLING_FRAMES-1)*AUDIO_HOP_SIZE)
+#define AUDIO_STFT_LENGTH                           ((AUDIO_PREPROCESS_FFT_SIZE/2+1)*AUDIO_ROLLING_FRAMES)
+int16_t g_pin16PCMDataBuffer[AUDIO_BUFF_LENGTH];
+float g_pfWindowedPcmDataBuff[AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES];
+float g_fFftOutBuff[AUDIO_STFT_LENGTH];
+float g_pfIstftOutBuff[AUDIO_BUFF_LENGTH];
+float g_fFftMagnitudes[AUDIO_PREPROCESS_FFT_SIZE];
+int16_t g_pin16SynPCMOutput[AUDIO_BUFF_LENGTH];
+#endif // AM_AEP_STFT_TEST
 
-DebugLog("STFT instance initialization is finished!\r\n");
+#if AM_AEP_DIGITAL_FILTER_TEST
+#define LOCAL_DATA_TEST                             1
+#define LOCAL_TEST_LENGTH                           1024
+high_pass_filterType* PCM_HP_filter; 
+PCM_HP_filter = high_pass_filter_create();
+#endif // AM_AEP_DIGITAL_FILTER_TEST
 
-DebugLogFloat(g_fTest);
-#endif // AM_AEP_SCNR_TEST
-
-#if AM_AEP_MIKRO_THD_CALC
-#define THD_FFT_SIZE                1024
-#define THD_FFT_BYTES               (THD_FFT_SIZE * 2)
-
-uint32_t g_ui32THDDataBuffer[THD_FFT_SIZE];
-float g_fTHDTimeDomain[THD_FFT_SIZE*2];
-float g_fTHDFrequencyDomain[THD_FFT_SIZE*2];
-float g_fTHDMagnitudes[THD_FFT_SIZE];
-float g_fFrequencyUnits = 0;
-float g_fTHDResult = 0;
-uint8_t g_ui8THDTestStartFlag = 1;              // 1: test start; 0: test stop.
-
-#endif // AM_AEP_MIKRO_THD_CALC
     //
     // Print the banner.
     //
     DebugLog("Audio test starts!\r\n\n");
 
+#if AM_AEP_STFT_TEST
+    uint32_t indx = 0;
+    uint32_t k = 0;
+    float fMaxValue;
+    uint32_t ui32MaxIndex;
+    uint32_t ui32LoudestFrequency;
+    uint32_t g_ui32SampleFreq = 16000;
+    if(LOCAL_DATA_TEST)
+    {
+        DebugLog("Using local data to test STFT...\n\r");
+        for(indx=0; indx<AUDIO_BUFF_LENGTH;indx++)
+        {
+            g_pin16PCMDataBuffer[indx] = g_in16TestInput_2KHZ_SR16K[indx]; 
+        }
+    }
+    am_app_stft_instance_f32 Sf;
+//
+// rfft only calculate one side
+//
+    arm_rfft_fast_instance_f32 S_arm_fft;
+
+    stft_init_f32(&Sf, &S_arm_fft, AUDIO_PREPROCESS_FFT_SIZE, AUDIO_HOP_SIZE, AUDIO_ROLLING_FRAMES, g_f32HanningWindow);
+
+    for(indx=0; indx<AUDIO_ROLLING_FRAMES; indx++)
+    {
+        stft_window_apply_f32(&g_pin16PCMDataBuffer[indx*AUDIO_HOP_SIZE], &g_pfWindowedPcmDataBuff[indx*AUDIO_PREPROCESS_FFT_SIZE], &Sf);
+        stft_f32(&Sf, &g_pfWindowedPcmDataBuff[indx*AUDIO_PREPROCESS_FFT_SIZE], &g_fFftOutBuff[indx*(AUDIO_PREPROCESS_FFT_SIZE/2+1)]);
+    }
+    if(PRINT_PCM_DATA)
+    {
+        DebugLog("PCM data as following:\r\n");
+        for(k =0; k<AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES; k++)
+        {           
+            if((k%4)==0)
+                DebugLog("\n\r");
+            DebugLogFloat(g_pfWindowedPcmDataBuff[k]);
+            DebugLog(", ");
+        }
+        DebugLog("The End...\n\n\r");
+  
+    }
+
+//    if(PRINT_STFT_DATA)
+//    {
+//        DebugLog("STFT result of 1 local frame:\r\n");
+//        for(indx =0; indx<AUDIO_PREPROCESS_FFT_SIZE; indx++)
+//        {
+//            if((indx%4)==0)
+//                DebugLog("\n\r");
+//            DebugLogFloat(Sf.pfStftBuffer[indx]);
+//            DebugLog(", ");
+//        }
+//        DebugLog("The End...\n\r");
+//    }
+   istft_f32(&Sf, AUDIO_ROLLING_FRAMES, g_fFftOutBuff, g_pin16SynPCMOutput); 
+    if(PRINT_ISTFT_DATA)
+    {
+        DebugLog("ISTFT result of 1 local frame:\r\n");
+        for(indx =0; indx<AUDIO_BUFF_LENGTH; indx++)
+        {
+            if((indx%4)==0)
+                DebugLog("\n\r");
+            DebugLogFloat(g_pin16SynPCMOutput[indx]);
+            DebugLog(", ");
+        }
+        DebugLog("The End...\n\r");
+    }
+    
+//    arm_cmplx_mag_f32(Sf.pfStftBuffer, g_fFftMagnitudes, Sf.ui16FftLen);
+    //
+    // Find the frequency bin with the largest magnitude.
+    //
+//    arm_max_f32(g_fFftMagnitudes, Sf.ui16FftLen / 2, &fMaxValue, &ui32MaxIndex);
+
+//    ui32LoudestFrequency = (g_ui32SampleFreq * ui32MaxIndex) / Sf.ui16FftLen;
+
+//    am_util_stdio_printf("Loudest frequency: %d        \n\n\r", ui32LoudestFrequency);
+
+//    if(PRINT_MAGNITUDE_DATA)
+//    {
+//        DebugLog("STFT Magnitude result of 1 local frame:\r\n");
+//        for(indx =0; indx<AUDIO_PREPROCESS_FFT_SIZE; indx++)
+//        {
+//            if((indx%4)==0)
+//                DebugLog("\n\r");
+//            DebugLogFloat(g_fFftMagnitudes[indx]);
+//            DebugLog(", ");
+//        }
+//        DebugLog("The End...\n\r");
+//    }
+
+#endif // AM_AEP_STFT_TEST
+
+#if AM_AEP_DIGITAL_FILTER_TEST
+uint32_t indx = 0;
+float g_pfDigitalFilterTestInput[LOCAL_TEST_LENGTH];
+float g_pfDigitalFilterTestOutput[10+LOCAL_TEST_LENGTH];
+int32_t g_in32FilterRet;
+
+if(LOCAL_DATA_TEST)
+{
+    DebugLog("Using local data to test digital filter...\n\r");
+
+    for(indx=0; indx<LOCAL_TEST_LENGTH;indx++)
+    {
+        g_pfDigitalFilterTestInput[indx] = g_in16TestInput_2KHZ_SR16K[indx] / 1.0; 
+    }
+#if configUSE_MEASURE_MIPS
+    reset_timer(); //reset timer
+    start_timer(); //reset timer
+#endif // configUSE_MEASURE_MIPS
+
+    g_in32FilterRet = high_pass_filter_filterBlock(PCM_HP_filter, g_pfDigitalFilterTestInput, 
+            g_pfDigitalFilterTestOutput,LOCAL_TEST_LENGTH);
+
+#if configUSE_MEASURE_MIPS
+    stop_timer(); //reset timer
+    mips_update(); //read number of cycles 
+#endif // configUSE_MEASURE_MIPS
+//    DebugLog("Digital filter output...\n\r");
+//    for(indx =0; indx<LOCAL_TEST_LENGTH+10; indx++)
+//    {
+//            if((indx%8)==0)
+//                DebugLog("\n\r");
+//            DebugLogFloat(g_pfDigitalFilterTestOutput[indx]);
+//            DebugLog(", ");
+//    }
+//    DebugLog("The End...\n\r");
+
+}
+
+#endif // AM_AEP_DIGITAL_FILTER_TEST
+
     while (1)
     {
-
         /* breathing LED */
         if (g_ui32TimerCount >=1000)
         {

@@ -24,7 +24,7 @@ def freqEstimator(sig, fs):
     return fs * true_i / len(windowed)
 
 
-def THDN(sig, fs=16000, f0 = None):
+def THDN(sig, fs=16000, f0=None):
     """
     Measure THD+N  for signal
     AES-17 Spec defines THD+N as the ratio of RMS levels between signal and notched signal. 
@@ -32,7 +32,7 @@ def THDN(sig, fs=16000, f0 = None):
     
     Here we use two stages each with a Q = 2.5
     """
-    Q = 2.5  # Quality factor
+    Q = 2.5     #Quality Factor
 
     if f0 == None:
         f0 = freqEstimator(sig, fs)
@@ -47,7 +47,6 @@ def THDN(sig, fs=16000, f0 = None):
     fdata = signal.lfilter(b, a, fdata)
     
     return 20*np.log10(np.std(fdata[100:])/np.std(sig[100:]))
-
 
 def plotFFT(sig, fs, log=False):
     """

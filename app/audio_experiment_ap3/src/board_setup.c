@@ -54,6 +54,87 @@ static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] =
 };
 #define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
 
+//
+// MIPS Measurement
+//
+#if configUSE_MEASURE_MIPS
+volatile unsigned int *DWT_CYCCNT  ;
+volatile unsigned int *DWT_CONTROL ;
+volatile unsigned int *SCB_DEMCR   ;
+
+void reset_timer(){
+    DWT_CYCCNT   = (volatile unsigned int *)0xE0001004; //address of the register
+    DWT_CONTROL  = (volatile unsigned int *)0xE0001000; //address of the register
+    SCB_DEMCR    = (volatile unsigned int *)0xE000EDFC; //address of the register
+    *SCB_DEMCR   = *SCB_DEMCR | 0x01000000;
+    *DWT_CYCCNT  = 0; // reset the counter
+    *DWT_CONTROL = 0; 
+}
+
+void start_timer(){
+    *DWT_CONTROL = *DWT_CONTROL | 0x01 ; // enable the counter
+}
+
+void stop_timer(){
+    *DWT_CONTROL = *DWT_CONTROL  & 0x00 ; // disable the counter    
+}
+
+unsigned int getCycles(){
+    return *DWT_CYCCNT;
+}
+
+struct t_mips_info
+{
+  uint32_t  mips_mips[MIPS_BUFFER_LEN];
+  int ptr_w;
+  int ptr_r;
+  int len;
+  float ave;
+  int min;
+  int max;
+}; 
+struct t_mips_info o_mips_info = {
+    .ptr_w = 0,
+    .ptr_r = 0,
+    .len = MIPS_BUFFER_LEN,
+    .ave = 0.0,
+    .min = 100000000,
+    .max = 0,
+};
+float mips_update()
+{
+  int c = getCycles();
+  o_mips_info.mips_mips[o_mips_info.ptr_w++] = c;
+  if(c < o_mips_info.min)
+  {
+    o_mips_info.min = c;
+  }
+  else if(c > o_mips_info.max)
+  {
+    o_mips_info.max = c;
+  }
+  if(o_mips_info.ptr_w == o_mips_info.len)
+  {
+    float sum = 0;
+    for(int i = 0; i < o_mips_info.len; i++)
+    {
+      sum += o_mips_info.mips_mips[i];
+    }
+    o_mips_info.ave = sum/o_mips_info.len;
+    o_mips_info.ptr_w = 0;
+    o_mips_info.min = 100000000;
+    o_mips_info.max = 0;
+    DebugLogFloat(o_mips_info.ave);
+    am_util_stdio_printf("mips = %f\n\r", o_mips_info.ave*(float)SAMPLING_RATE/((float)FRAME_RATE*1000000.0f));
+    DebugLogUInt32(o_mips_info.mips_mips[0]);
+  }
+    
+  return o_mips_info.ave;
+}
+
+#endif /* configUSE_MEASURE_MIPS */
+
+
 //*****************************************************************************
 // The stdio function for debug usage
 //*****************************************************************************
