@@ -23,9 +23,11 @@
 
 #define AM_AEP_AUDIO_BUFFER_TEST            0
 
-#define AM_AEP_STFT_TEST                    1
+#define AM_AEP_STFT_TEST                    0
 
 #define AM_AEP_DIGITAL_FILTER_TEST          0
+
+#define AM_AEP_BEAMFORMING_TEST             1
 //
 // Platform support function configuration
 //

@@ -12,8 +12,8 @@
 // Total number of bytes transferred = 320*50*2 = 32000
 //*****************************************************************************
 
-#define PCM_FRAME_SIZE          320  // Capture one 320-sample (20-ms) frame at a time
-#define NUM_PCM_FRAMES          50   // Number of frames in 1 second
+#define PCM_FRAME_SIZE          80  // Capture one 80-sample (5-ms) frame at a time
+#define NUM_PCM_FRAMES          600   // Number of frames in 3 seconds
 #define PCM_DATA_BYTES          4
 
 //*****************************************************************************
@@ -29,6 +29,7 @@ extern volatile bool g_audioRunningFlag;
 
 extern volatile uint8_t g_ui8PcmDataReadyFlag;
 
+extern volatile uint32_t g_ui32AudioFrameSum;
 extern void am_app_AEP_pdm_init(void);
 
 extern void pdm_data_get(void);

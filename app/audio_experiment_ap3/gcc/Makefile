@@ -209,6 +209,7 @@ SRC += stft.c
 SRC += am_AEP_local_test_data.c
 SRC += hanning_window.c
 SRC += digital_filter.c
+SRC += audio_preprocessor.c
 # Mikro calibration code
 #SRC += am_mikro_calibration.c
 

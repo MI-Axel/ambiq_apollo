@@ -14,6 +14,7 @@
 #endif // AM_AEP_MIKRO_CALIBRATION
 
 /* application layer utils header file */
+#include "am_app_utils.h"
 #include "am_app_utils_ring_buffer.h"
 #if configUSE_RTT_DATA_OUTPUT
 #include "am_app_utils_rtt_recorder.h"
@@ -24,12 +25,14 @@
 //*****************************************************************************
 
 volatile int32_t g_DebugValue = 0;
-volatile bool g_bPDMDataReady = false;
 volatile uint32_t 
             g_ui32PCMDataBuff[PCM_FRAME_SIZE];  // Location of 1-second data buffer
 
 volatile bool g_audioRunningFlag = 0;    
 
+volatile uint32_t g_ui32AudioFrameSum = 0;
+
+volatile uint8_t g_ui8PcmDataReadyFlag = 0;
 //*****************************************************************************
 // PDM configuration information.
 //*****************************************************************************
@@ -64,7 +67,7 @@ void am_app_AEP_pdm_init(void)
         .ui32DecimationRate =
             24,  // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
         .bHighPassEnable = 0, // Enable high-pass filter
-        .ui32HighPassCutoff = 0x8, // high-pass filter register value
+        .ui32HighPassCutoff = 0xB, // high-pass filter register value
         .ePDMClkSpeed = AM_HAL_PDM_CLK_750KHZ,
         .bInvertI2SBCLK = 0,
         .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
@@ -156,6 +159,7 @@ void am_pdm0_isr(void)
     SEGGER_SYSVIEW_RecordEnterISR();
 #endif
     uint32_t ui32Status;
+    uint32_t ringbuff_push_ret;
     //
     // Read the interrupt status.
     //
@@ -187,6 +191,18 @@ void am_pdm0_isr(void)
 //            am_app_utils_rtt_record((void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES); 
 #endif /* USE_RTT_DATA_OUTPUT */ 
 
+#if AM_AEP_BEAMFORMING_TEST
+        if((g_audioRunningFlag == 1) && (g_ui8PcmDataReadyFlag==0))
+        {
+            ringbuff_push_ret = am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES, true);
+            configASSERT(ringbuff_push_ret == PCM_FRAME_SIZE*PCM_DATA_BYTES);
+            g_ui32AudioFrameSum ++;
+            if(g_ui32AudioFrameSum >= NUM_PCM_FRAMES)
+            {
+                g_ui8PcmDataReadyFlag = 1;
+            }
+        }
+#endif // AM_AEP_BEAMFORMING_TEST
 //        am_util_debug_printf("PDM DCMP interrupt, pick g_ui32PDMDataBuffer[5] = 0x%8x\n", g_ui32PDMDataBuffer[5]);
     }
     else if(ui32Status & (AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF))

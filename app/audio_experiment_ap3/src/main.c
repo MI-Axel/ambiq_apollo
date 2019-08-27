@@ -75,6 +75,15 @@ limitations under the License.
 #include "hanning_window.h"
 #endif // AM_AEP_STFT_TEST
 
+#if AM_AEP_BEAMFORMING_TEST
+#include "hanning_window.h"
+#include "stft.h"
+#include "audio_preprocessor.h"
+#include "am_AEP_local_test_data.h"
+uint32_t g_ui32DMicDataCollectFlag = 0;
+
+#endif // AM_AEP_BEAMFORMING_TEST
+
 #if AM_AEP_DIGITAL_FILTER_TEST
 #include "digital_filter.h"
 #include "am_AEP_local_test_data.h"
@@ -116,19 +125,19 @@ int main(void)
 
 #if AM_AEP_STFT_TEST
 #define PRINT_PCM_DATA                              0
-#define PRINT_STFT_DATA                             0
+#define PRINT_STFT_DATA                             1
 #define PRINT_MAGNITUDE_DATA                        0
-#define PRINT_ISTFT_DATA                            1
+#define PRINT_ISTFT_DATA                            0
 #define LOCAL_DATA_TEST                             1
 
 #define AUDIO_PREPROCESS_FFT_SIZE                   128
 #define AUDIO_HOP_SIZE                              80
 #define AUDIO_ROLLING_FRAMES                        3
 #define AUDIO_BUFF_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE+(AUDIO_ROLLING_FRAMES-1)*AUDIO_HOP_SIZE)
-#define AUDIO_STFT_LENGTH                           ((AUDIO_PREPROCESS_FFT_SIZE/2+1)*AUDIO_ROLLING_FRAMES)
+#define AUDIO_STFT_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES)
 int16_t g_pin16PCMDataBuffer[AUDIO_BUFF_LENGTH];
 float g_pfWindowedPcmDataBuff[AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES];
-float g_fFftOutBuff[AUDIO_STFT_LENGTH];
+float g_fFftOutBuff[AUDIO_STFT_LENGTH+10];
 float g_pfIstftOutBuff[AUDIO_BUFF_LENGTH];
 float g_fFftMagnitudes[AUDIO_PREPROCESS_FFT_SIZE];
 int16_t g_pin16SynPCMOutput[AUDIO_BUFF_LENGTH];
@@ -140,6 +149,8 @@ int16_t g_pin16SynPCMOutput[AUDIO_BUFF_LENGTH];
 high_pass_filterType* PCM_HP_filter; 
 PCM_HP_filter = high_pass_filter_create();
 #endif // AM_AEP_DIGITAL_FILTER_TEST
+
+
 
     //
     // Print the banner.
@@ -172,7 +183,7 @@ PCM_HP_filter = high_pass_filter_create();
     for(indx=0; indx<AUDIO_ROLLING_FRAMES; indx++)
     {
         stft_window_apply_f32(&g_pin16PCMDataBuffer[indx*AUDIO_HOP_SIZE], &g_pfWindowedPcmDataBuff[indx*AUDIO_PREPROCESS_FFT_SIZE], &Sf);
-        stft_f32(&Sf, &g_pfWindowedPcmDataBuff[indx*AUDIO_PREPROCESS_FFT_SIZE], &g_fFftOutBuff[indx*(AUDIO_PREPROCESS_FFT_SIZE/2+1)]);
+        stft_f32(&Sf, &g_pfWindowedPcmDataBuff[indx*AUDIO_PREPROCESS_FFT_SIZE], &g_fFftOutBuff[indx*(AUDIO_PREPROCESS_FFT_SIZE)]);
     }
     if(PRINT_PCM_DATA)
     {
@@ -188,18 +199,18 @@ PCM_HP_filter = high_pass_filter_create();
   
     }
 
-//    if(PRINT_STFT_DATA)
-//    {
-//        DebugLog("STFT result of 1 local frame:\r\n");
-//        for(indx =0; indx<AUDIO_PREPROCESS_FFT_SIZE; indx++)
-//        {
-//            if((indx%4)==0)
-//                DebugLog("\n\r");
-//            DebugLogFloat(Sf.pfStftBuffer[indx]);
-//            DebugLog(", ");
-//        }
-//        DebugLog("The End...\n\r");
-//    }
+    if(PRINT_STFT_DATA)
+    {
+        DebugLog("STFT result of 1 local frame:\r\n");
+        for(indx =0; indx<AUDIO_STFT_LENGTH; indx++)
+        {
+            if((indx%4)==0)
+                DebugLog("\n\r");
+            DebugLogFloat(g_fFftOutBuff[indx]);
+            DebugLog(", ");
+        }
+        DebugLog("The End...\n\r");
+    }
    istft_f32(&Sf, AUDIO_ROLLING_FRAMES, g_fFftOutBuff, g_pin16SynPCMOutput); 
     if(PRINT_ISTFT_DATA)
     {
@@ -278,6 +289,45 @@ if(LOCAL_DATA_TEST)
 }
 
 #endif // AM_AEP_DIGITAL_FILTER_TEST
+
+#if AM_AEP_BEAMFORMING_TEST
+#define AUDIO_PREPROCESS_FFT_SIZE                   128
+#define AUDIO_HOP_SIZE                              80
+#define AUDIO_ROLLING_FRAMES                        3
+#define AUDIO_BUFF_LENGTH                           (AUDIO_HOP_SIZE*AUDIO_ROLLING_FRAMES)
+#define AUDIO_STFT_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES)
+
+#define PRINT_PCM_DATA                              0
+#define PRINT_STFT_DATA                             0
+#define PRINT_ISTFT_DATA                            1
+
+uint32_t indx, k, i, idx;
+
+uint32_t g_pui32AudioProBuff[AUDIO_HOP_SIZE];
+int16_t* g_pin16PcmPtr;
+
+int16_t g_pin16LeftChPrev[AUDIO_PREPROCESS_FFT_SIZE-AUDIO_HOP_SIZE]={0};
+int16_t g_pin16RightChPrev[AUDIO_PREPROCESS_FFT_SIZE-AUDIO_HOP_SIZE]={0};
+int16_t g_pin16LeftChBuff[AUDIO_HOP_SIZE];
+int16_t g_pin16RightChBuff[AUDIO_HOP_SIZE];
+int16_t g_pin16LeftConcaBuff[AUDIO_PREPROCESS_FFT_SIZE];
+float32_t g_pfFftInBuff[AUDIO_PREPROCESS_FFT_SIZE];
+float32_t g_pfFftOutBuff[AUDIO_STFT_LENGTH];
+float32_t g_pfFftOutCopy[AUDIO_STFT_LENGTH];
+int16_t g_pin16SynAudioBuff[AUDIO_BUFF_LENGTH];
+float32_t g_pfIfftTest[AUDIO_PREPROCESS_FFT_SIZE];
+am_app_stft_instance_f32 Sf;
+//
+// rfft only calculate one side
+//
+arm_rfft_fast_instance_f32 S_arm_fft;
+
+stft_init_f32(&Sf, &S_arm_fft, AUDIO_PREPROCESS_FFT_SIZE, AUDIO_HOP_SIZE, AUDIO_ROLLING_FRAMES, g_f32HanningWindow);
+
+
+am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue);
+
+#endif // AM_AEP_BEAMFORMING_TEST
 
     while (1)
     {
@@ -391,6 +441,139 @@ if(LOCAL_DATA_TEST)
         }
 
 #endif // AM_AEP_MIKRO_THD_CALC
+
+#if AM_AEP_BEAMFORMING_TEST
+    if(g_ui32DMicDataCollectFlag == 1)
+    {
+        DebugLog("Start to record audio in 2 secs...\n\r");
+
+        am_util_delay_ms(2000);
+
+        g_audioRunningFlag = 1;
+
+        while(g_ui8PcmDataReadyFlag == 0);
+//
+// This part is used to upload microphone data to jupyter notebook
+//
+//        if(g_ui8PcmDataReadyFlag == 1)
+//        {
+//            g_audioRunningFlag = 0;
+//            g_ui32DMicDataCollectFlag = 0;
+//            g_ui8PcmDataReadyFlag = 0;
+//            g_ui32AudioFrameSum = 0;
+//            am_devices_led_off(am_bsp_psLEDs, 3);
+//            DebugLog("Audio recording is terminated and data starts to upload:\n\r");
+//
+//            while(!am_app_utils_ring_buffer_empty(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM]))
+//            {
+//                am_app_utils_ring_buffer_pop(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], g_pui32AudioProBuff, AUDIO_BUFF_LENGTH*PCM_DATA_BYTES);
+//                g_pin16PcmPtr = g_pui32AudioProBuff;
+//                for(uint32_t indx =0; indx<AUDIO_BUFF_LENGTH*2; indx++)
+//                {
+//                    DebugLogInt16(g_pin16PcmPtr[indx]);
+//                    DebugLog(" ");
+////                  DebugLog(", ");
+//                    if((indx%8)==0)
+//                        DebugLog("\n\r");
+//
+//                }
+//            }
+//            DebugLog("The end of data transfer...\n\r");
+//        }
+        if(g_ui8PcmDataReadyFlag ==1)
+        {
+            g_audioRunningFlag = 0;
+            g_ui32DMicDataCollectFlag = 0;
+            g_ui8PcmDataReadyFlag = 0;
+            g_ui32AudioFrameSum = 0;
+            am_devices_led_off(am_bsp_psLEDs, 3);
+            DebugLog("Audio recording is terminated and data starts to upload:\n\r");
+            while(!am_app_utils_ring_buffer_empty(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM]))
+//            for(uint32_t frame=0; frame<2; frame++)
+            {
+                for(idx=0; idx<AUDIO_ROLLING_FRAMES; idx++)
+                {
+                    am_app_utils_ring_buffer_pop(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], g_pui32AudioProBuff, AUDIO_HOP_SIZE*PCM_DATA_BYTES);
+                    for(k=0; k<AUDIO_HOP_SIZE; k++)
+                    {
+                        g_pin16LeftChBuff[k] = g_pui32AudioProBuff[k] & 0x0000FFFF; 
+
+//                        g_pin16LeftChBuff[k] = g_in16TestInput_2KHZ_SR16K[k]; 
+//                        g_pin16RightChBuff[k] = (g_pui32AudioProBuff[k]>>16) & 0x0000FFFF;
+                        if(PRINT_PCM_DATA)
+                        {
+                            DebugLogInt16(g_pin16LeftChBuff[k]);
+                            DebugLog(" ");
+//                    DebugLog(", ");
+                            if((k+1)%8==0)
+                                DebugLog("\n\r");
+                        }
+                    }
+                    audio_fft_frame_concatenate(g_pin16LeftChPrev, g_pin16LeftChBuff, g_pin16LeftConcaBuff, AUDIO_HOP_SIZE, AUDIO_PREPROCESS_FFT_SIZE);
+
+                    stft_window_apply_f32(g_pin16LeftConcaBuff, g_pfFftInBuff, &Sf);
+                    stft_f32(&Sf, g_pfFftInBuff, &g_pfFftOutBuff[idx*AUDIO_PREPROCESS_FFT_SIZE]);
+//                    for(k=0; k<Sf.ui16FftLen; k++)
+//                    {
+//                        am_util_stdio_printf("%f, ", g_pfFftOutBuff[k+idx*AUDIO_PREPROCESS_FFT_SIZE]);
+//                        if((k+1)%8==0)
+//                        {
+//                            am_util_stdio_printf("\n\r");
+//                        }
+//                    }
+                  
+                    if(PRINT_STFT_DATA)
+                    {
+                        for(k=0; k<AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES;k++)
+                        {
+                            DebugLogFloat(g_pfFftOutBuff[k]);
+                            DebugLog(" ");
+//                          DebugLog(", ");
+                            if((k+1)%8==0)
+                                DebugLog("\n\r");
+                        }
+                    }
+
+                }
+//                for(i=0; i < AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES; i++)
+//                {
+//                    g_pfFftOutCopy[i] = g_pfFftOutBuff[i];                
+//                }
+                istft_f32(&Sf, AUDIO_ROLLING_FRAMES, g_pfFftOutBuff, g_pin16SynAudioBuff);
+//                for(i=0; i<AUDIO_ROLLING_FRAMES; i++)
+//                {
+//                    arm_rfft_fast_f32(Sf.p_armfft, &g_pfFftOutBuff[i*Sf.ui16FftLen], g_pfIfftTest, 1);
+//                    for(k=0; k<Sf.ui16FftLen; k++)
+//                    {
+//                        DebugLogFloat(g_pfIfftTest[k]);
+////                        DebugLog(" ");
+//                        DebugLog(", ");
+//                        if((k+1)%8==0)
+//                            DebugLog("\n\r");
+//                    }
+                   
+
+//                }
+                if(PRINT_ISTFT_DATA)
+                {
+                    for(indx =0; indx<AUDIO_BUFF_LENGTH; indx++)
+                    {
+                        DebugLogInt16(g_pin16SynAudioBuff[indx]);
+//                        DebugLogFloat(g_pfIfftTest[indx]);
+                        DebugLog(" ");
+//                      DebugLog(", ");
+                        if((indx+1)%8==0)
+                            DebugLog("\n\r");
+                    }
+                }
+            }
+            DebugLog("The end of data transfer...\n\r");
+        }
+    }
+#endif // AM_AEP_BEAMFORMING_TEST
+
+
+        
 //
 // Board key interface for debug using
 //
@@ -434,6 +617,15 @@ if(LOCAL_DATA_TEST)
                 am_devices_led_on(am_bsp_psLEDs, 1);
             }
 #endif // AM_AEP_MIKRO_CALIBRATION
+
+#if AM_AEP_BEAMFORMING_TEST
+    if(g_ui32DMicDataCollectFlag == 0)
+    {
+        g_ui32DMicDataCollectFlag = 1;
+        am_devices_led_on(am_bsp_psLEDs, 3);
+    }
+#endif // AM_AEP_BEAMFORMING_TEST
+
 
         }
 

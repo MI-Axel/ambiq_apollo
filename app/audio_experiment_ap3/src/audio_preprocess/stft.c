@@ -68,38 +68,47 @@ void stft_f32(am_app_stft_instance_f32* Sf, float32_t* windowed_sig, float32_t* 
 
 void istft_f32(am_app_stft_instance_f32* Sf, uint32_t syn_frame, float* input_buff, int16_t* output_pcm)
 {
-    uint32_t indx = 0;
+    uint32_t i = 0;
     uint32_t k = 0;
     uint32_t syn_audio_len = 0;
-    uint32_t input_audio_len = 0;
-    uint32_t rfft_len = Sf->ui16FftLen/2 + 1; 
-    float input_dummy_buff[rfft_len];
-    input_audio_len = 3 * syn_frame;
+    uint32_t coinciden_len = 0;
+    // array length concludes real and image
+    float32_t input_dummy_buff[Sf->ui16FftLen];
     syn_audio_len = Sf->ui16FftLen + (syn_frame-1) * Sf->ui16HopSize;
-    float ifft_result[Sf->ui16FftLen];
-    float window_sum[syn_audio_len];
-    float syn_audio_buff[syn_audio_len];
-    for(indx=0; indx<syn_frame; indx++)
+    coinciden_len = Sf->ui16FftLen - Sf->ui16HopSize;
+    float32_t ifft_result[Sf->ui16FftLen];
+    float32_t window_sum[syn_audio_len];
+    float32_t syn_audio_buff[syn_audio_len];
+    memset(window_sum, 0, syn_audio_len*sizeof(float32_t));
+    memset(syn_audio_buff, 0, syn_audio_len*sizeof(float32_t));
+
+    for(i=0; i<syn_frame; i++)
     {
-        memcpy(input_dummy_buff, &input_buff[indx*rfft_len], rfft_len*sizeof(float32_t));    
+        memcpy(input_dummy_buff, &input_buff[i*Sf->ui16FftLen], Sf->ui16FftLen*sizeof(float32_t));    
         arm_rfft_fast_f32(Sf->p_armfft, input_dummy_buff, ifft_result, 1);
-        
         for(k=0; k<Sf->ui16FftLen; k++)
         {
-            syn_audio_buff[k+indx*Sf->ui16HopSize] += ifft_result[k]*Sf->pfWindowBuffer[k];
-            window_sum[k+indx*Sf->ui16HopSize]  += Sf->pfWindowBuffer[k]*Sf->pfWindowBuffer[k]; 
+            syn_audio_buff[k+i*Sf->ui16HopSize] += ifft_result[k]*Sf->pfWindowBuffer[k];
+            window_sum[k+i*Sf->ui16HopSize]  += Sf->pfWindowBuffer[k]*Sf->pfWindowBuffer[k]; 
         }
+    
     }
+
     //
     // Divide with window sum to re-construct the signal. NOLA needed.
     //
-    for(indx=0; indx<syn_audio_len; indx++)
+    for(i=coinciden_len; i<syn_audio_len; i++)
     {
-        if(window_sum[indx]!=0)
+
+        if(window_sum[i]>=0.000001)
         {
-            syn_audio_buff[indx] = syn_audio_buff[indx]/window_sum[indx];
+            syn_audio_buff[i] = syn_audio_buff[i]/window_sum[i];
         }
-        output_pcm[indx] = (int16_t)syn_audio_buff[indx];
+        else
+        {
+            syn_audio_buff[i] = syn_audio_buff[i]/0.000001;
+        }
+        output_pcm[i-coinciden_len] = (int16_t)syn_audio_buff[i];
     }
        
 }

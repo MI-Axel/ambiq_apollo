@@ -51,6 +51,10 @@ static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] =
 #else
     {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
 #endif
+
+#if AM_AEP_BEAMFORMING_TEST
+#endif // AM_AEP_BEAMFORMING_TEST
+
 };
 #define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
 
@@ -140,6 +144,7 @@ float mips_update()
 //*****************************************************************************
 
 void DebugLog(const char* s) { am_util_stdio_printf("%s", s); }
+void DebugLogInt16(int16_t i) { am_util_stdio_printf("%d", i); }
 void DebugLogInt32(int32_t i) { am_util_stdio_printf("%d", i); }
 void DebugLogUInt32(uint32_t i) { am_util_stdio_printf("%d", i); }
 void DebugLogHex(uint32_t i) { am_util_stdio_printf("0x%8x", i); }

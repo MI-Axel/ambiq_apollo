@@ -70,10 +70,11 @@ bin/main.o: ../src/main.c \
  ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h \
- ../src/audio_preprocess/stft.h ../../../app_utils/am_app_utils_syscall.h \
+ ../src/audio_preprocess/hanning_window.h ../src/audio_preprocess/stft.h \
+ ../../../app_utils/am_app_utils_syscall.h \
  ../../../app_utils/am_app_utils.h \
- ../src/local_test_data/am_AEP_local_test_data.h \
- ../src/audio_preprocess/hanning_window.h
+ ../src/audio_preprocess/audio_preprocessor.h \
+ ../src/local_test_data/am_AEP_local_test_data.h
 
 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -219,12 +220,14 @@ bin/main.o: ../src/main.c \
 
 ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h:
 
+../src/audio_preprocess/hanning_window.h:
+
 ../src/audio_preprocess/stft.h:
 
 ../../../app_utils/am_app_utils_syscall.h:
 
 ../../../app_utils/am_app_utils.h:
 
-../src/local_test_data/am_AEP_local_test_data.h:
+../src/audio_preprocess/audio_preprocessor.h:
 
-../src/audio_preprocess/hanning_window.h:
+../src/local_test_data/am_AEP_local_test_data.h:

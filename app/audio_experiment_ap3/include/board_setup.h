@@ -71,6 +71,7 @@ extern float mips_update();
 #endif // configUSE_MEASURE_MIPS
 
 extern void DebugLog(const char* s);
+extern void DebugLogInt16(int16_t i);
 extern void DebugLogInt32(int32_t i);
 extern void DebugLogUInt32(uint32_t i);
 extern void DebugLogHex(uint32_t i);
