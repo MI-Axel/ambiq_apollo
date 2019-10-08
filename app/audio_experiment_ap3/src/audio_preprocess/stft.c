@@ -26,31 +26,6 @@ void stft_window_apply_f32(int16_t* input_signal, float* windowed_signal, am_app
     }
 }
 
-//void stft_buffer_update_f32(float* fft_in_buffer, float* prev_sample, float* new_sample, uint16_t fft_len, uint16_t hop)
-//{
-//    uint16_t indx = 0;
-//    uint16_t copyBytes = 0;
-//    configASSERT((fft_len >= hop));
-//    // old sample data rolling    
-//    for(indx=0; indx<(fft_len-hop); indx++)
-//    {
-//        fft_in_buffer[2*indx] = prev_sample[indx];
-//        fft_in_buffer[2*indx+1] = 0;
-//    }
-//
-//    // new sample data update
-//    for(indx=(fft_len-hop); indx<fft_len; indx++)
-//    {
-//        fft_in_buffer[2*indx] = new_sample[indx-(fft_len-hop)];
-//        fft_in_buffer[2*indx+1] = 0;
-//    }
-//
-//    // update the old sample buffer
-//    for(indx=2*hop; indx<2*fft_len; indx+=2)
-//    {
-//        prev_sample[indx/2-hop] = fft_in_buffer[indx];
-//    }
-//}
 
 void stft_f32(am_app_stft_instance_f32* Sf, float32_t* windowed_sig, float32_t* stft_result)
 {
@@ -88,27 +63,72 @@ void istft_f32(am_app_stft_instance_f32* Sf, uint32_t syn_frame, float* input_bu
         arm_rfft_fast_f32(Sf->p_armfft, input_dummy_buff, ifft_result, 1);
         for(k=0; k<Sf->ui16FftLen; k++)
         {
+//            if ((ifft_result[k] < 0.01) && (ifft_result[k] > -0.01))
+//            {
+//                ifft_result[k] = 0;
+//            }
             syn_audio_buff[k+i*Sf->ui16HopSize] += ifft_result[k]*Sf->pfWindowBuffer[k];
             window_sum[k+i*Sf->ui16HopSize]  += Sf->pfWindowBuffer[k]*Sf->pfWindowBuffer[k]; 
         }
-    
+        memset(input_dummy_buff, 0, Sf->ui16FftLen*sizeof(float32_t));
+        if(0)
+        {
+            for(uint32_t indx =0; indx<Sf->ui16FftLen; indx++)
+            {
+                  DebugLogFloat(ifft_result[indx]);
+//                  DebugLogFloat(window_sum[indx]);
+                  DebugLog(" ");
+//                DebugLog(", ");
+                  if((indx+1)%8==0)
+                      DebugLog("\n\r");
+            }
+
+        }
+
     }
+        if(0)
+        {
+//            for(uint32_t indx =0; indx<syn_audio_len; indx++)
+//            {
+////                  DebugLogFloat(ifft_result[indx]);
+//                  DebugLogFloat(syn_audio_buff[indx]);
+//                  DebugLog(" ");
+////                DebugLog(", ");
+//                  if((indx+1)%8==0)
+//                      DebugLog("\n\r");
+//            }
+            for(uint32_t indx =0; indx<syn_audio_len; indx++)
+            {
+                  DebugLogFloat(ifft_result[indx]);
+//                  DebugLogFloat(window_sum[indx]);
+                  DebugLog(" ");
+//                DebugLog(", ");
+                  if((indx+1)%8==0)
+                      DebugLog("\n\r");
+            }
+
+        }
 
     //
     // Divide with window sum to re-construct the signal. NOLA needed.
     //
-    for(i=coinciden_len; i<syn_audio_len; i++)
+    for(i=coinciden_len; i<Sf->ui16HopSize+coinciden_len; i++)
+//    for(i=0; i<syn_audio_len-coinciden_len; i++)
     {
 
-        if(window_sum[i]>=0.000001)
+        if(window_sum[i] > 0.000001)
         {
             syn_audio_buff[i] = syn_audio_buff[i]/window_sum[i];
         }
         else
         {
             syn_audio_buff[i] = syn_audio_buff[i]/0.000001;
+//            DebugLogUInt32(i);
         }
         output_pcm[i-coinciden_len] = (int16_t)syn_audio_buff[i];
+//        output_pcm[i] = (int16_t)syn_audio_buff[i];
     }
        
 }
+
+

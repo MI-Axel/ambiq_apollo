@@ -64,10 +64,15 @@ bin/audio_driver.o: ../src/audio_driver.c \
  ../../../device/AmbiqSuite-Rel2.2.0/utils/am_util_string.h \
  ../../../device/AmbiqSuite-Rel2.2.0/utils/am_util_time.h \
  ../../../device/AmbiqSuite-Rel2.2.0/utils/am_util_ble.h \
- ../include/board_setup.h ../../../app_utils/am_app_utils_ring_buffer.h \
+ ../include/board_setup.h ../include/am_audio_platform_config.h \
+ ../../../app_utils/am_app_utils_ring_buffer.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
- ../../../app_utils/am_app_utils.h
+ ../src/audio_preprocess/audio_preprocessor.h \
+ ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h \
+ ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h \
+ ../src/audio_preprocess/stft.h ../../../app_utils/am_app_utils_syscall.h \
+ ../../../app_utils/am_app_utils.h ../../../app_utils/am_app_utils.h
 
 ../include/am_audio_platform_config.h:
 
@@ -203,10 +208,24 @@ bin/audio_driver.o: ../src/audio_driver.c \
 
 ../include/board_setup.h:
 
+../include/am_audio_platform_config.h:
+
 ../../../app_utils/am_app_utils_ring_buffer.h:
 
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
 
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
+
+../src/audio_preprocess/audio_preprocessor.h:
+
+../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h:
+
+../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h:
+
+../src/audio_preprocess/stft.h:
+
+../../../app_utils/am_app_utils_syscall.h:
+
+../../../app_utils/am_app_utils.h:
 
 ../../../app_utils/am_app_utils.h:

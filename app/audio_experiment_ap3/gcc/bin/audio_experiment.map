@@ -38,24 +38,26 @@ Archive member included to satisfy reference by file (symbol)
                               ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o) (am_hal_uart_initialize)
 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
                               ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o) (am_hal_queue_init)
-../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
                               bin/stft.o (arm_rfft_fast_init_f32)
-../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
                               bin/stft.o (arm_rfft_fast_f32)
-../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
-                              ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o) (arm_cfft_f32)
-../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                              ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o) (twiddleCoef_rfft_4096)
-../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
-                              ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o) (arm_bitreversal_32)
-../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
-                              ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o) (arm_radix8_butterfly_f32)
+../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+                              ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o) (arm_cfft_f32)
+../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+                              bin/audio_preprocessor.o (arm_cmplx_mult_cmplx_f32)
+../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                              ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o) (twiddleCoef_rfft_4096)
+../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+                              ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o) (arm_bitreversal_32)
+../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+                              ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o) (arm_radix8_butterfly_f32)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
                               bin/am_app_utils_syscall.o (malloc)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
                               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o) (_malloc_r)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memcpy.o)
-                              bin/am_app_utils_ring_buffer.o (memcpy)
+                              bin/main.o (memcpy)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
                               bin/main.o (memset)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
@@ -77,7 +79,7 @@ Archive member included to satisfy reference by file (symbol)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_muldivdf3.o)
                               bin/stft.o (__aeabi_ddiv)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_cmpdf2.o)
-                              bin/stft.o (__aeabi_dcmpge)
+                              bin/stft.o (__aeabi_dcmpgt)
 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_truncdfsf2.o)
                               bin/am_util_stdio.o (__aeabi_d2f)
 
@@ -94,6 +96,8 @@ am_bsp_uart_pwrsave
                     0x18              ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
 g_pfnCharPrint      0x4               bin/am_util_stdio.o
 errno               0x4               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+g_ui8AudioPreprocessBuff
+                    0x3c0             bin/board_setup.o
 g_am_hal_pdm_states
                     0xc               ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
 __lock___env_recursive_mutex
@@ -102,11 +106,9 @@ __lock___sinit_recursive_mutex
                     0x1               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
 __lock___malloc_recursive_mutex
                     0x1               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
-SCB_DEMCR           0x4               bin/board_setup.o
 eBurstModeAvailable
                     0x1               bin/board_setup.o
 PDMHandle           0x4               bin/audio_driver.o
-DWT_CONTROL         0x4               bin/board_setup.o
 __lock___at_quick_exit_mutex
                     0x1               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
 g_ui8PCMDataRingBuff
@@ -118,10 +120,9 @@ __lock___dd_hash_mutex
                     0x1               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
 __lock___tz_mutex   0x1               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
 am_sys_ring_buffers
-                    0x28              bin/board_setup.o
+                    0x3c              bin/board_setup.o
 __lock___sfp_recursive_mutex
                     0x1               /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
-DWT_CYCCNT          0x4               bin/board_setup.o
 
 Discarded input sections
 
@@ -228,18 +229,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 bin/board_setup.o
  .data          0x0000000000000000        0x0 bin/board_setup.o
  .bss           0x0000000000000000        0x0 bin/board_setup.o
- .text.reset_timer
-                0x0000000000000000       0x58 bin/board_setup.o
- .text.start_timer
-                0x0000000000000000       0x24 bin/board_setup.o
- .text.stop_timer
-                0x0000000000000000       0x20 bin/board_setup.o
- .text.getCycles
-                0x0000000000000000       0x18 bin/board_setup.o
- .data.o_mips_info
-                0x0000000000000000       0x1c bin/board_setup.o
- .text.mips_update
-                0x0000000000000000      0x11c bin/board_setup.o
  .text.DebugLogInt32
                 0x0000000000000000       0x1c bin/board_setup.o
  .text.DebugLogUInt32
@@ -559,6 +548,8 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 bin/hanning_window.o
  .rodata.g_ui32HanningWindowSize
                 0x0000000000000000        0x4 bin/hanning_window.o
+ .rodata.g_f32HanningWindowSum
+                0x0000000000000000      0x200 bin/hanning_window.o
  .text          0x0000000000000000        0x0 bin/digital_filter.o
  .data          0x0000000000000000        0x0 bin/digital_filter.o
  .bss           0x0000000000000000        0x0 bin/digital_filter.o
@@ -594,6 +585,9 @@ Discarded input sections
  .text          0x0000000000000000        0x0 bin/audio_preprocessor.o
  .data          0x0000000000000000        0x0 bin/audio_preprocessor.o
  .bss           0x0000000000000000        0x0 bin/audio_preprocessor.o
+ .text          0x0000000000000000        0x0 bin/beamforming_weights.o
+ .data          0x0000000000000000        0x0 bin/beamforming_weights.o
+ .bss           0x0000000000000000        0x0 bin/beamforming_weights.o
  .text          0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
  .data          0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
  .bss           0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
@@ -1121,97 +1115,100 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
  .data          0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
  .bss           0x0000000000000000        0x0 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
- .text          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .data          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .bss           0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .text          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .data          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .bss           0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .text          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .data          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .bss           0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .text          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .data          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .bss           0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
  .text.stage_rfft_f32
-                0x0000000000000000       0xb4 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+                0x0000000000000000       0xb4 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
  .text.merge_rfft_f32
-                0x0000000000000000       0xac ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .text          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .data          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .bss           0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .text          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
- .data          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
- .bss           0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0xac ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .text          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .data          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .bss           0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .text          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .data          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .bss           0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .text          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .data          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .bss           0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_128
-                0x0000000000000000       0xe0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0xe0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_2048
-                0x0000000000000000      0xf80 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0xf80 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_32_q31
-                0x0000000000000000       0xc0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0xc0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_4096
-                0x0000000000000000     0x1f80 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x1f80 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_1024
-                0x0000000000000000      0x7c0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x7c0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_1024_q15
-                0x0000000000000000      0xc00 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0xc00 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_1024_q31
-                0x0000000000000000     0x1800 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x1800 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_32_q15
-                0x0000000000000000       0x60 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0x60 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_4096_q15
-                0x0000000000000000     0x3000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x3000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_4096_q31
-                0x0000000000000000     0x6000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x6000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.sinTable_q15
-                0x0000000000000000      0x402 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x402 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.sinTable_q31
-                0x0000000000000000      0x804 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x804 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_16_q15
-                0x0000000000000000       0x30 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0x30 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_16_q31
-                0x0000000000000000       0x60 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0x60 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevTable
-                0x0000000000000000      0x800 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x800 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.sinTable_f32
-                0x0000000000000000      0x804 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x804 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_64_q15
-                0x0000000000000000       0xc0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0xc0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_2048_q15
-                0x0000000000000000     0x1800 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x1800 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_64_q31
-                0x0000000000000000      0x180 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x180 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_2048_q31
-                0x0000000000000000     0x3000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x3000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_256_q15
-                0x0000000000000000      0x300 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x300 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_512_q15
-                0x0000000000000000      0x600 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x600 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_256_q31
-                0x0000000000000000      0x600 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x600 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_512_q31
-                0x0000000000000000      0xc00 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0xc00 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armRecipTableQ15
-                0x0000000000000000       0x80 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0x80 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable4096
-                0x0000000000000000     0x1f80 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x1f80 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armRecipTableQ31
-                0x0000000000000000      0x100 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x100 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_512
-                0x0000000000000000      0x3c0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x3c0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_16
-                0x0000000000000000       0x18 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0x18 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_128_q15
-                0x0000000000000000      0x180 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x180 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_32
-                0x0000000000000000       0x30 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0x30 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_256
-                0x0000000000000000      0x1e0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000      0x1e0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.armBitRevIndexTable_fixed_64
-                0x0000000000000000       0x70 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000       0x70 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_4096
-                0x0000000000000000     0x8000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000000     0x8000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .rodata.twiddleCoef_128_q31
-                0x0000000000000000      0x300 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
- .data          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
- .bss           0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
- .text          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
- .data          0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
- .bss           0x0000000000000000        0x0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+                0x0000000000000000      0x300 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .data          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .bss           0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .text          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+ .data          0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+ .bss           0x0000000000000000        0x0 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
  .text          0x0000000000000000        0x0 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
  .data          0x0000000000000000        0x0 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
  .bss           0x0000000000000000        0x0 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
@@ -1347,7 +1344,7 @@ Linker script and memory map
 
                 0x0000000000000400                _heap_size = 0x400
 
-.text           0x000000000000c000    0x195b4
+.text           0x000000000000c000    0x19f6c
                 0x000000000000c000                . = ALIGN (0x4)
  *(.isr_vector)
  .isr_vector    0x000000000000c000       0xc0 bin/startup_gcc.o
@@ -1356,7 +1353,7 @@ Linker script and memory map
  .patch         0x000000000000c0c0       0x40 bin/startup_gcc.o
                 0x000000000000c0c0                __Patchable
  *(.text)
- .text          0x000000000000c100       0xc0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .text          0x000000000000c100       0xc0 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
                 0x000000000000c100                arm_bitreversal_32
                 0x000000000000c16a                arm_bitreversal_16
  .text          0x000000000000c1c0      0x134 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memcpy.o)
@@ -1402,484 +1399,498 @@ Linker script and memory map
                 0x000000000000cba0                __aeabi_d2f
                 0x000000000000cba0                __truncdfsf2
  *(.text*)
- .text.main     0x000000000000cc40      0x2f0 bin/main.o
+ .text.main     0x000000000000cc40      0x494 bin/main.o
                 0x000000000000cc40                main
  .text.am_util_delay_ms
-                0x000000000000cf30       0x3c bin/am_util_delay.o
-                0x000000000000cf30                am_util_delay_ms
+                0x000000000000d0d4       0x3c bin/am_util_delay.o
+                0x000000000000d0d4                am_util_delay_ms
  .text.HardFault_Handler
-                0x000000000000cf6c       0x1e bin/am_util_faultisr.o
-                0x000000000000cf6c                HardFault_Handler
+                0x000000000000d110       0x1e bin/am_util_faultisr.o
+                0x000000000000d110                HardFault_Handler
  .text.getStackedReg
-                0x000000000000cf8a        0xc bin/am_util_faultisr.o
-                0x000000000000cf8a                getStackedReg
- *fill*         0x000000000000cf96        0x2 
+                0x000000000000d12e        0xc bin/am_util_faultisr.o
+                0x000000000000d12e                getStackedReg
+ *fill*         0x000000000000d13a        0x2 
  .text.am_util_faultisr_collect_data
-                0x000000000000cf98       0xe4 bin/am_util_faultisr.o
-                0x000000000000cf98                am_util_faultisr_collect_data
+                0x000000000000d13c       0xe4 bin/am_util_faultisr.o
+                0x000000000000d13c                am_util_faultisr_collect_data
  .text.am_util_stdio_printf_init
-                0x000000000000d07c       0x20 bin/am_util_stdio.o
-                0x000000000000d07c                am_util_stdio_printf_init
+                0x000000000000d220       0x20 bin/am_util_stdio.o
+                0x000000000000d220                am_util_stdio_printf_init
  .text.divu64_10
-                0x000000000000d09c      0x1be bin/am_util_stdio.o
+                0x000000000000d240      0x1be bin/am_util_stdio.o
  .text.ndigits_in_u64
-                0x000000000000d25a       0x42 bin/am_util_stdio.o
+                0x000000000000d3fe       0x42 bin/am_util_stdio.o
  .text.ndigits_in_i64
-                0x000000000000d29c       0x3a bin/am_util_stdio.o
+                0x000000000000d440       0x3a bin/am_util_stdio.o
  .text.ndigits_in_hex
-                0x000000000000d2d6       0x50 bin/am_util_stdio.o
+                0x000000000000d47a       0x50 bin/am_util_stdio.o
  .text.decstr_to_int
-                0x000000000000d326       0x8c bin/am_util_stdio.o
+                0x000000000000d4ca       0x8c bin/am_util_stdio.o
  .text.uint64_to_str
-                0x000000000000d3b2       0x90 bin/am_util_stdio.o
+                0x000000000000d556       0x90 bin/am_util_stdio.o
  .text.uint64_to_hexstr
-                0x000000000000d442       0xc8 bin/am_util_stdio.o
+                0x000000000000d5e6       0xc8 bin/am_util_stdio.o
  .text.simple_strlen
-                0x000000000000d50a       0x36 bin/am_util_stdio.o
+                0x000000000000d6ae       0x36 bin/am_util_stdio.o
  .text.padbuffer
-                0x000000000000d540       0x4a bin/am_util_stdio.o
- *fill*         0x000000000000d58a        0x2 
- .text.ftoa     0x000000000000d58c      0x1fc bin/am_util_stdio.o
+                0x000000000000d6e4       0x4a bin/am_util_stdio.o
+ *fill*         0x000000000000d72e        0x2 
+ .text.ftoa     0x000000000000d730      0x1fc bin/am_util_stdio.o
  .text.am_util_stdio_vsprintf
-                0x000000000000d788      0x614 bin/am_util_stdio.o
-                0x000000000000d788                am_util_stdio_vsprintf
+                0x000000000000d92c      0x614 bin/am_util_stdio.o
+                0x000000000000d92c                am_util_stdio_vsprintf
  .text.am_util_stdio_printf
-                0x000000000000dd9c       0x48 bin/am_util_stdio.o
-                0x000000000000dd9c                am_util_stdio_printf
+                0x000000000000df40       0x48 bin/am_util_stdio.o
+                0x000000000000df40                am_util_stdio_printf
  .text.am_app_utils_ring_buffer_init
-                0x000000000000dde4       0x88 bin/am_app_utils_ring_buffer.o
-                0x000000000000dde4                am_app_utils_ring_buffer_init
+                0x000000000000df88       0x88 bin/am_app_utils_ring_buffer.o
+                0x000000000000df88                am_app_utils_ring_buffer_init
  .text.am_app_utils_ring_buffer_init_all
-                0x000000000000de6c       0x44 bin/am_app_utils_ring_buffer.o
-                0x000000000000de6c                am_app_utils_ring_buffer_init_all
+                0x000000000000e010       0x44 bin/am_app_utils_ring_buffer.o
+                0x000000000000e010                am_app_utils_ring_buffer_init_all
  .text.am_app_utils_ring_buffer_push
-                0x000000000000deb0      0x242 bin/am_app_utils_ring_buffer.o
-                0x000000000000deb0                am_app_utils_ring_buffer_push
+                0x000000000000e054      0x242 bin/am_app_utils_ring_buffer.o
+                0x000000000000e054                am_app_utils_ring_buffer_push
  .text.am_app_utils_ring_buffer_pop
-                0x000000000000e0f2       0xea bin/am_app_utils_ring_buffer.o
-                0x000000000000e0f2                am_app_utils_ring_buffer_pop
+                0x000000000000e296       0xea bin/am_app_utils_ring_buffer.o
+                0x000000000000e296                am_app_utils_ring_buffer_pop
  .text.am_app_utils_get_ring_buffer_status
-                0x000000000000e1dc       0x6c bin/am_app_utils_ring_buffer.o
-                0x000000000000e1dc                am_app_utils_get_ring_buffer_status
+                0x000000000000e380       0x6c bin/am_app_utils_ring_buffer.o
+                0x000000000000e380                am_app_utils_get_ring_buffer_status
  .text.am_devices_led_init
-                0x000000000000e248       0x9c bin/am_devices_led.o
-                0x000000000000e248                am_devices_led_init
+                0x000000000000e3ec       0x9c bin/am_devices_led.o
+                0x000000000000e3ec                am_devices_led_init
  .text.am_devices_led_array_init
-                0x000000000000e2e4       0x42 bin/am_devices_led.o
-                0x000000000000e2e4                am_devices_led_array_init
+                0x000000000000e488       0x42 bin/am_devices_led.o
+                0x000000000000e488                am_devices_led_array_init
  .text.am_devices_led_on
-                0x000000000000e326       0x76 bin/am_devices_led.o
-                0x000000000000e326                am_devices_led_on
+                0x000000000000e4ca       0x76 bin/am_devices_led.o
+                0x000000000000e4ca                am_devices_led_on
  .text.am_devices_led_off
-                0x000000000000e39c       0x7c bin/am_devices_led.o
-                0x000000000000e39c                am_devices_led_off
+                0x000000000000e540       0x7c bin/am_devices_led.o
+                0x000000000000e540                am_devices_led_off
  .text.am_devices_led_toggle
-                0x000000000000e418       0x9e bin/am_devices_led.o
-                0x000000000000e418                am_devices_led_toggle
- *fill*         0x000000000000e4b6        0x2 
+                0x000000000000e5bc       0x9e bin/am_devices_led.o
+                0x000000000000e5bc                am_devices_led_toggle
+ *fill*         0x000000000000e65a        0x2 
  .text.Reset_Handler
-                0x000000000000e4b8       0x68 bin/startup_gcc.o
-                0x000000000000e4b8                Reset_Handler
+                0x000000000000e65c       0x68 bin/startup_gcc.o
+                0x000000000000e65c                Reset_Handler
  .text.NMI_Handler
-                0x000000000000e520        0x6 bin/startup_gcc.o
-                0x000000000000e520                NMI_Handler
+                0x000000000000e6c4        0x6 bin/startup_gcc.o
+                0x000000000000e6c4                NMI_Handler
  .text.am_default_isr
-                0x000000000000e526        0x6 bin/startup_gcc.o
-                0x000000000000e526                am_default_isr
-                0x000000000000e526                am_iomaster4_isr
-                0x000000000000e526                SysTick_Handler
-                0x000000000000e526                PendSV_Handler
-                0x000000000000e526                am_rtc_isr
-                0x000000000000e526                am_stimer_cmpr3_isr
-                0x000000000000e526                am_adc_isr
-                0x000000000000e526                am_iomaster3_isr
-                0x000000000000e526                am_clkgen_isr
-                0x000000000000e526                am_stimer_isr
-                0x000000000000e526                am_software0_isr
-                0x000000000000e526                am_stimer_cmpr5_isr
-                0x000000000000e526                am_iomaster5_isr
-                0x000000000000e526                am_uart_isr
-                0x000000000000e526                am_ioslave_acc_isr
-                0x000000000000e526                am_mspi0_isr
-                0x000000000000e526                am_stimer_cmpr6_isr
-                0x000000000000e526                am_iomaster1_isr
-                0x000000000000e526                am_brownout_isr
-                0x000000000000e526                am_vcomp_isr
-                0x000000000000e526                am_stimer_cmpr1_isr
-                0x000000000000e526                am_iomaster2_isr
-                0x000000000000e526                SVC_Handler
-                0x000000000000e526                am_stimer_cmpr2_isr
-                0x000000000000e526                am_ioslave_ios_isr
-                0x000000000000e526                am_uart1_isr
-                0x000000000000e526                am_stimer_cmpr7_isr
-                0x000000000000e526                am_scard_isr
-                0x000000000000e526                am_watchdog_isr
-                0x000000000000e526                am_stimer_cmpr0_isr
-                0x000000000000e526                am_iomaster0_isr
-                0x000000000000e526                am_ble_isr
-                0x000000000000e526                am_stimer_cmpr4_isr
-                0x000000000000e526                DebugMon_Handler
+                0x000000000000e6ca        0x6 bin/startup_gcc.o
+                0x000000000000e6ca                am_default_isr
+                0x000000000000e6ca                am_iomaster4_isr
+                0x000000000000e6ca                SysTick_Handler
+                0x000000000000e6ca                PendSV_Handler
+                0x000000000000e6ca                am_rtc_isr
+                0x000000000000e6ca                am_stimer_cmpr3_isr
+                0x000000000000e6ca                am_adc_isr
+                0x000000000000e6ca                am_iomaster3_isr
+                0x000000000000e6ca                am_clkgen_isr
+                0x000000000000e6ca                am_stimer_isr
+                0x000000000000e6ca                am_software0_isr
+                0x000000000000e6ca                am_stimer_cmpr5_isr
+                0x000000000000e6ca                am_iomaster5_isr
+                0x000000000000e6ca                am_uart_isr
+                0x000000000000e6ca                am_ioslave_acc_isr
+                0x000000000000e6ca                am_mspi0_isr
+                0x000000000000e6ca                am_stimer_cmpr6_isr
+                0x000000000000e6ca                am_iomaster1_isr
+                0x000000000000e6ca                am_brownout_isr
+                0x000000000000e6ca                am_vcomp_isr
+                0x000000000000e6ca                am_stimer_cmpr1_isr
+                0x000000000000e6ca                am_iomaster2_isr
+                0x000000000000e6ca                SVC_Handler
+                0x000000000000e6ca                am_stimer_cmpr2_isr
+                0x000000000000e6ca                am_ioslave_ios_isr
+                0x000000000000e6ca                am_uart1_isr
+                0x000000000000e6ca                am_stimer_cmpr7_isr
+                0x000000000000e6ca                am_scard_isr
+                0x000000000000e6ca                am_watchdog_isr
+                0x000000000000e6ca                am_stimer_cmpr0_isr
+                0x000000000000e6ca                am_iomaster0_isr
+                0x000000000000e6ca                am_ble_isr
+                0x000000000000e6ca                am_stimer_cmpr4_isr
+                0x000000000000e6ca                DebugMon_Handler
  .text.__NVIC_EnableIRQ
-                0x000000000000e52c       0x3c bin/board_setup.o
+                0x000000000000e6d0       0x3c bin/board_setup.o
  .text.DebugLog
-                0x000000000000e568       0x1c bin/board_setup.o
-                0x000000000000e568                DebugLog
+                0x000000000000e70c       0x1c bin/board_setup.o
+                0x000000000000e70c                DebugLog
  .text.DebugLogInt16
-                0x000000000000e584       0x24 bin/board_setup.o
-                0x000000000000e584                DebugLogInt16
+                0x000000000000e728       0x24 bin/board_setup.o
+                0x000000000000e728                DebugLogInt16
  .text.timerA0_init
-                0x000000000000e5a8       0x48 bin/board_setup.o
-                0x000000000000e5a8                timerA0_init
+                0x000000000000e74c       0x48 bin/board_setup.o
+                0x000000000000e74c                timerA0_init
  .text.am_app_AEP_sys_init
-                0x000000000000e5f0      0x11c bin/board_setup.o
-                0x000000000000e5f0                am_app_AEP_sys_init
+                0x000000000000e794      0x11c bin/board_setup.o
+                0x000000000000e794                am_app_AEP_sys_init
  .text.am_ctimer_isr
-                0x000000000000e70c       0x54 bin/board_setup.o
-                0x000000000000e70c                am_ctimer_isr
+                0x000000000000e8b0       0x54 bin/board_setup.o
+                0x000000000000e8b0                am_ctimer_isr
  .text.am_gpio_isr
-                0x000000000000e760       0x34 bin/board_setup.o
-                0x000000000000e760                am_gpio_isr
+                0x000000000000e904       0x34 bin/board_setup.o
+                0x000000000000e904                am_gpio_isr
  .text.__NVIC_EnableIRQ
-                0x000000000000e794       0x3c bin/audio_driver.o
+                0x000000000000e938       0x3c bin/audio_driver.o
  .text.__NVIC_SetPriority
-                0x000000000000e7d0       0x54 bin/audio_driver.o
+                0x000000000000e974       0x54 bin/audio_driver.o
  .text.am_app_AEP_pdm_init
-                0x000000000000e824       0xc8 bin/audio_driver.o
-                0x000000000000e824                am_app_AEP_pdm_init
+                0x000000000000e9c8       0xc8 bin/audio_driver.o
+                0x000000000000e9c8                am_app_AEP_pdm_init
  .text.pdm_trigger_dma
-                0x000000000000e8ec       0x30 bin/audio_driver.o
-                0x000000000000e8ec                pdm_trigger_dma
+                0x000000000000ea90       0x30 bin/audio_driver.o
+                0x000000000000ea90                pdm_trigger_dma
  .text.am_pdm0_isr
-                0x000000000000e91c       0xb8 bin/audio_driver.o
-                0x000000000000e91c                am_pdm0_isr
+                0x000000000000eac0       0xb8 bin/audio_driver.o
+                0x000000000000eac0                am_pdm0_isr
  .text.stft_init_f32
-                0x000000000000e9d4       0x56 bin/stft.o
-                0x000000000000e9d4                stft_init_f32
+                0x000000000000eb78       0x56 bin/stft.o
+                0x000000000000eb78                stft_init_f32
  .text.stft_window_apply_f32
-                0x000000000000ea2a       0x64 bin/stft.o
-                0x000000000000ea2a                stft_window_apply_f32
+                0x000000000000ebce       0x64 bin/stft.o
+                0x000000000000ebce                stft_window_apply_f32
  .text.stft_f32
-                0x000000000000ea8e       0x22 bin/stft.o
-                0x000000000000ea8e                stft_f32
+                0x000000000000ec32       0x22 bin/stft.o
+                0x000000000000ec32                stft_f32
+ *fill*         0x000000000000ec54        0x4 
  .text.istft_f32
-                0x000000000000eab0      0x370 bin/stft.o
-                0x000000000000eab0                istft_f32
+                0x000000000000ec58      0x388 bin/stft.o
+                0x000000000000ec58                istft_f32
  .text.audio_fft_frame_concatenate
-                0x000000000000ee20       0x74 bin/audio_preprocessor.o
-                0x000000000000ee20                audio_fft_frame_concatenate
+                0x000000000000efe0       0x74 bin/audio_preprocessor.o
+                0x000000000000efe0                audio_fft_frame_concatenate
+ .text.audio_dual_ch_beamforming
+                0x000000000000f054      0x2be bin/audio_preprocessor.o
+                0x000000000000f054                audio_dual_ch_beamforming
+ *fill*         0x000000000000f312        0x2 
  .text.am_bsp_uart_string_print
-                0x000000000000ee94       0x48 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000000ee94                am_bsp_uart_string_print
+                0x000000000000f314       0x48 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000000f314                am_bsp_uart_string_print
  .text.am_bsp_low_power_init
-                0x000000000000eedc       0x40 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000000eedc                am_bsp_low_power_init
+                0x000000000000f35c       0x40 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000000f35c                am_bsp_low_power_init
  .text.am_bsp_uart_printf_enable
-                0x000000000000ef1c       0x5c ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
-                0x000000000000ef1c                am_bsp_uart_printf_enable
+                0x000000000000f39c       0x5c ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000000f39c                am_bsp_uart_printf_enable
  .text.am_hal_burst_mode_initialize
-                0x000000000000ef78       0x90 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
-                0x000000000000ef78                am_hal_burst_mode_initialize
+                0x000000000000f3f8       0x90 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+                0x000000000000f3f8                am_hal_burst_mode_initialize
  .text.am_hal_burst_mode_enable
-                0x000000000000f008       0x5c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
-                0x000000000000f008                am_hal_burst_mode_enable
+                0x000000000000f488       0x5c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+                0x000000000000f488                am_hal_burst_mode_enable
  .text.am_hal_cachectrl_config
-                0x000000000000f064       0x4c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000000f064                am_hal_cachectrl_config
+                0x000000000000f4e4       0x4c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000000f4e4                am_hal_cachectrl_config
  .text.am_hal_cachectrl_enable
-                0x000000000000f0b0       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000000f0b0                am_hal_cachectrl_enable
+                0x000000000000f530       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000000f530                am_hal_cachectrl_enable
  .text.am_hal_cachectrl_control
-                0x000000000000f0c4      0x2e4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x000000000000f0c4                am_hal_cachectrl_control
+                0x000000000000f544      0x2e4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000000f544                am_hal_cachectrl_control
  .text.am_hal_clkgen_control
-                0x000000000000f3a8      0x118 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
-                0x000000000000f3a8                am_hal_clkgen_control
+                0x000000000000f828      0x118 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
+                0x000000000000f828                am_hal_clkgen_control
  .text.am_hal_clkgen_status_get
-                0x000000000000f4c0       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
-                0x000000000000f4c0                am_hal_clkgen_status_get
+                0x000000000000f940       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
+                0x000000000000f940                am_hal_clkgen_status_get
  .text.am_hal_ctimer_config
-                0x000000000000f4fc       0x60 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000f4fc                am_hal_ctimer_config
+                0x000000000000f97c       0x60 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000f97c                am_hal_ctimer_config
  .text.am_hal_ctimer_start
-                0x000000000000f55c       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000f55c                am_hal_ctimer_start
+                0x000000000000f9dc       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000f9dc                am_hal_ctimer_start
  .text.am_hal_ctimer_clear
-                0x000000000000f5b0       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000f5b0                am_hal_ctimer_clear
+                0x000000000000fa30       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fa30                am_hal_ctimer_clear
  .text.am_hal_ctimer_period_set
-                0x000000000000f5d8       0xac ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000f5d8                am_hal_ctimer_period_set
+                0x000000000000fa58       0xac ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fa58                am_hal_ctimer_period_set
  .text.am_hal_ctimer_int_enable
-                0x000000000000f684       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000f684                am_hal_ctimer_int_enable
+                0x000000000000fb04       0x28 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fb04                am_hal_ctimer_int_enable
  .text.am_hal_ctimer_int_clear
-                0x000000000000f6ac       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
-                0x000000000000f6ac                am_hal_ctimer_int_clear
+                0x000000000000fb2c       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x000000000000fb2c                am_hal_ctimer_int_clear
  .text.am_hal_flash_delay
-                0x000000000000f6cc       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000f6cc                am_hal_flash_delay
+                0x000000000000fb4c       0x20 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000fb4c                am_hal_flash_delay
  .text.am_hal_flash_delay_status_check
-                0x000000000000f6ec       0x74 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000f6ec                am_hal_flash_delay_status_check
+                0x000000000000fb6c       0x74 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000fb6c                am_hal_flash_delay_status_check
  .text.am_hal_flash_load_ui32
-                0x000000000000f760        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000f760                am_hal_flash_load_ui32
+                0x000000000000fbe0        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000fbe0                am_hal_flash_load_ui32
  .text.am_hal_flash_store_ui32
-                0x000000000000f768        0xc ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
-                0x000000000000f768                am_hal_flash_store_ui32
+                0x000000000000fbe8        0xc ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x000000000000fbe8                am_hal_flash_store_ui32
  .text.am_hal_gpio_pinconfig
-                0x000000000000f774      0x278 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x000000000000f774                am_hal_gpio_pinconfig
+                0x000000000000fbf4      0x278 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x000000000000fbf4                am_hal_gpio_pinconfig
  .text.am_hal_gpio_state_read
-                0x000000000000f9ec       0x64 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x000000000000f9ec                am_hal_gpio_state_read
+                0x000000000000fe6c       0x64 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x000000000000fe6c                am_hal_gpio_state_read
  .text.am_hal_gpio_state_write
-                0x000000000000fa50       0x88 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x000000000000fa50                am_hal_gpio_state_write
+                0x000000000000fed0       0x88 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x000000000000fed0                am_hal_gpio_state_write
  .text.am_hal_gpio_interrupt_enable
-                0x000000000000fad8       0x48 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x000000000000fad8                am_hal_gpio_interrupt_enable
+                0x000000000000ff58       0x48 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x000000000000ff58                am_hal_gpio_interrupt_enable
  .text.am_hal_gpio_interrupt_clear
-                0x000000000000fb20       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x000000000000fb20                am_hal_gpio_interrupt_clear
+                0x000000000000ffa0       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x000000000000ffa0                am_hal_gpio_interrupt_clear
  .text.am_hal_interrupt_master_enable
-                0x000000000000fb5c        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000000fb5c                am_hal_interrupt_master_enable
+                0x000000000000ffdc        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000000ffdc                am_hal_interrupt_master_enable
  .text.am_hal_interrupt_master_disable
-                0x000000000000fb64        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000000fb64                am_hal_interrupt_master_disable
+                0x000000000000ffe4        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000000ffe4                am_hal_interrupt_master_disable
  .text.am_hal_interrupt_master_set
-                0x000000000000fb6c        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
-                0x000000000000fb6c                am_hal_interrupt_master_set
+                0x000000000000ffec        0x8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x000000000000ffec                am_hal_interrupt_master_set
  .text.am_hal_mcuctrl_info_get
-                0x000000000000fb74      0x12c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x000000000000fb74                am_hal_mcuctrl_info_get
+                0x000000000000fff4      0x12c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x000000000000fff4                am_hal_mcuctrl_info_get
  .text.am_hal_pdm_initialize
-                0x000000000000fca0       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000fca0                am_hal_pdm_initialize
+                0x0000000000010120       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x0000000000010120                am_hal_pdm_initialize
  .text.am_hal_pdm_power_control
-                0x000000000000fce0       0x7c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000fce0                am_hal_pdm_power_control
+                0x0000000000010160       0x7c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x0000000000010160                am_hal_pdm_power_control
  .text.am_hal_pdm_configure
-                0x000000000000fd5c      0x10c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000fd5c                am_hal_pdm_configure
+                0x00000000000101dc      0x10c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x00000000000101dc                am_hal_pdm_configure
  .text.am_hal_pdm_enable
-                0x000000000000fe68       0x30 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000fe68                am_hal_pdm_enable
+                0x00000000000102e8       0x30 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x00000000000102e8                am_hal_pdm_enable
  .text.am_hal_pdm_dma_start
-                0x000000000000fe98       0x90 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000fe98                am_hal_pdm_dma_start
+                0x0000000000010318       0x90 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x0000000000010318                am_hal_pdm_dma_start
  .text.am_hal_pdm_fifo_flush
-                0x000000000000ff28       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000ff28                am_hal_pdm_fifo_flush
+                0x00000000000103a8       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x00000000000103a8                am_hal_pdm_fifo_flush
  .text.am_hal_pdm_interrupt_enable
-                0x000000000000ff4c       0x2c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000ff4c                am_hal_pdm_interrupt_enable
+                0x00000000000103cc       0x2c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x00000000000103cc                am_hal_pdm_interrupt_enable
  .text.am_hal_pdm_interrupt_clear
-                0x000000000000ff78       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000ff78                am_hal_pdm_interrupt_clear
+                0x00000000000103f8       0x24 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x00000000000103f8                am_hal_pdm_interrupt_clear
  .text.am_hal_pdm_interrupt_status_get
-                0x000000000000ff9c       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000000000ff9c                am_hal_pdm_interrupt_status_get
+                0x000000000001041c       0x3c ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x000000000001041c                am_hal_pdm_interrupt_status_get
  .text.am_hal_pwrctrl_periph_enable
-                0x000000000000ffd8       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x000000000000ffd8                am_hal_pwrctrl_periph_enable
+                0x0000000000010458       0x54 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x0000000000010458                am_hal_pwrctrl_periph_enable
  .text.am_hal_pwrctrl_periph_disable
-                0x000000000001002c       0x58 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x000000000001002c                am_hal_pwrctrl_periph_disable
+                0x00000000000104ac       0x58 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x00000000000104ac                am_hal_pwrctrl_periph_disable
  .text.am_hal_pwrctrl_low_power_init
-                0x0000000000010084       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x0000000000010084                am_hal_pwrctrl_low_power_init
+                0x0000000000010504       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x0000000000010504                am_hal_pwrctrl_low_power_init
  .text.am_hal_rtc_osc_disable
-                0x0000000000010168       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
-                0x0000000000010168                am_hal_rtc_osc_disable
+                0x00000000000105e8       0x14 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
+                0x00000000000105e8                am_hal_rtc_osc_disable
  .text.am_hal_uart_initialize
-                0x000000000001017c       0x50 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000000001017c                am_hal_uart_initialize
+                0x00000000000105fc       0x50 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x00000000000105fc                am_hal_uart_initialize
  .text.am_hal_uart_power_control
-                0x00000000000101cc       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x00000000000101cc                am_hal_uart_power_control
+                0x000000000001064c       0xe4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x000000000001064c                am_hal_uart_power_control
  .text.am_hal_uart_configure
-                0x00000000000102b0      0x248 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x00000000000102b0                am_hal_uart_configure
+                0x0000000000010730      0x248 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x0000000000010730                am_hal_uart_configure
  .text.am_hal_uart_transfer
-                0x00000000000104f8      0x474 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x00000000000104f8                am_hal_uart_transfer
+                0x0000000000010978      0x474 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x0000000000010978                am_hal_uart_transfer
  .text.am_hal_queue_init
-                0x000000000001096c       0x18 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x000000000001096c                am_hal_queue_init
+                0x0000000000010dec       0x18 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x0000000000010dec                am_hal_queue_init
  .text.am_hal_queue_item_add
-                0x0000000000010984       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x0000000000010984                am_hal_queue_item_add
+                0x0000000000010e04       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x0000000000010e04                am_hal_queue_item_add
  .text.am_hal_queue_item_get
-                0x00000000000109f4       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
-                0x00000000000109f4                am_hal_queue_item_get
+                0x0000000000010e74       0x70 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x0000000000010e74                am_hal_queue_item_get
  .text.arm_rfft_fast_init_f32
-                0x0000000000010a64      0x104 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
-                0x0000000000010a64                arm_rfft_fast_init_f32
+                0x0000000000010ee4      0x108 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+                0x0000000000010ee4                arm_rfft_fast_init_f32
  .text.arm_rfft_fast_f32
-                0x0000000000010b68      0x188 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
-                0x0000000000010b68                arm_rfft_fast_f32
+                0x0000000000010fec      0x188 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+                0x0000000000010fec                arm_rfft_fast_f32
  .text.arm_cfft_radix8by2_f32
-                0x0000000000010cf0      0x1a0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
-                0x0000000000010cf0                arm_cfft_radix8by2_f32
+                0x0000000000011174      0x1a4 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+                0x0000000000011174                arm_cfft_radix8by2_f32
  .text.arm_cfft_radix8by4_f32
-                0x0000000000010e90      0x4bc ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
-                0x0000000000010e90                arm_cfft_radix8by4_f32
+                0x0000000000011318      0x4bc ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+                0x0000000000011318                arm_cfft_radix8by4_f32
  .text.arm_cfft_f32
-                0x000000000001134c       0xf4 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
-                0x000000000001134c                arm_cfft_f32
+                0x00000000000117d4       0xf4 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+                0x00000000000117d4                arm_cfft_f32
+ .text.arm_cmplx_mult_cmplx_f32
+                0x00000000000118c8      0x140 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+                0x00000000000118c8                arm_cmplx_mult_cmplx_f32
  .text.arm_radix8_butterfly_f32
-                0x0000000000011440      0x5e4 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
-                0x0000000000011440                arm_radix8_butterfly_f32
- .text.memset   0x0000000000011a24       0x94 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
-                0x0000000000011a24                memset
+                0x0000000000011a08      0x5c4 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+                0x0000000000011a08                arm_radix8_butterfly_f32
+ .text.memset   0x0000000000011fcc       0x94 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
+                0x0000000000011fcc                memset
  *(.rodata)
- .rodata        0x0000000000011ab8       0xca bin/main.o
- *fill*         0x0000000000011b82        0x2 
- .rodata        0x0000000000011b84       0xf0 bin/board_setup.o
+ .rodata        0x0000000000012060       0xca bin/main.o
+ *fill*         0x000000000001212a        0x2 
+ .rodata        0x000000000001212c       0xe4 bin/board_setup.o
  *(.rodata*)
  .rodata.g_SysRingBuffSetup
-                0x0000000000011c74        0xc bin/board_setup.o
+                0x0000000000012210       0x18 bin/board_setup.o
  .rodata.g_deepsleep_button0
-                0x0000000000011c80        0x4 bin/board_setup.o
-                0x0000000000011c80                g_deepsleep_button0
+                0x0000000000012228        0x4 bin/board_setup.o
+                0x0000000000012228                g_deepsleep_button0
  .rodata.g_f32HanningWindow
-                0x0000000000011c84      0x200 bin/hanning_window.o
-                0x0000000000011c84                g_f32HanningWindow
+                0x000000000001222c      0x200 bin/hanning_window.o
+                0x000000000001222c                g_f32HanningWindow
+ .rodata.g_f32BeamformingWeightLeftChPara
+                0x000000000001242c      0x208 bin/beamforming_weights.o
+                0x000000000001242c                g_f32BeamformingWeightLeftChPara
+ .rodata.g_f32BeamformingWeightRightChPara
+                0x0000000000012634      0x208 bin/beamforming_weights.o
+                0x0000000000012634                g_f32BeamformingWeightRightChPara
  .rodata.g_sBspUartConfig
-                0x0000000000011e84       0x28 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x000000000001283c       0x28 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
  .rodata.g_AM_BSP_GPIO_COM_UART_TX
-                0x0000000000011eac        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
-                0x0000000000011eac                g_AM_BSP_GPIO_COM_UART_TX
+                0x0000000000012864        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
+                0x0000000000012864                g_AM_BSP_GPIO_COM_UART_TX
  .rodata.g_AM_BSP_GPIO_COM_UART_RX
-                0x0000000000011eb0        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
-                0x0000000000011eb0                g_AM_BSP_GPIO_COM_UART_RX
+                0x0000000000012868        0x4 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
+                0x0000000000012868                g_AM_BSP_GPIO_COM_UART_RX
  .rodata.am_hal_cachectrl_defaults
-                0x0000000000011eb4        0x3 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
-                0x0000000000011eb4                am_hal_cachectrl_defaults
- *fill*         0x0000000000011eb7        0x1 
+                0x000000000001286c        0x3 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x000000000001286c                am_hal_cachectrl_defaults
+ *fill*         0x000000000001286f        0x1 
  .rodata.g_AM_HAL_GPIO_TRISTATE
-                0x0000000000011eb8        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x0000000000011eb8                g_AM_HAL_GPIO_TRISTATE
+                0x0000000000012870        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x0000000000012870                g_AM_HAL_GPIO_TRISTATE
  .rodata.g_ui8Bit76Capabilities
-                0x0000000000011ebc       0x32 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
- *fill*         0x0000000000011eee        0x2 
+                0x0000000000012874       0x32 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+ *fill*         0x00000000000128a6        0x2 
  .rodata.g_ui8NCEtable
-                0x0000000000011ef0       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x00000000000128a8       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
  .rodata.g_ui8Inpen
-                0x0000000000011fb8       0x32 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
- *fill*         0x0000000000011fea        0x2 
+                0x0000000000012970       0x32 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+ *fill*         0x00000000000129a2        0x2 
  .rodata.g_AM_HAL_GPIO_DISABLE
-                0x0000000000011fec        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x0000000000011fec                g_AM_HAL_GPIO_DISABLE
+                0x00000000000129a4        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x00000000000129a4                g_AM_HAL_GPIO_DISABLE
  .rodata.g_AM_HAL_GPIO_OUTPUT
-                0x0000000000011ff0        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
-                0x0000000000011ff0                g_AM_HAL_GPIO_OUTPUT
+                0x00000000000129a8        0x4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x00000000000129a8                g_AM_HAL_GPIO_OUTPUT
  .rodata.g_ui8nCEpins
-                0x0000000000011ff4       0x32 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
- *fill*         0x0000000000012026        0x2 
+                0x00000000000129ac       0x32 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+ *fill*         0x00000000000129de        0x2 
  .rodata.g_am_hal_mcuctrl_flash_size
-                0x0000000000012028       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x0000000000012028                g_am_hal_mcuctrl_flash_size
+                0x00000000000129e0       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x00000000000129e0                g_am_hal_mcuctrl_flash_size
  .rodata.g_am_hal_mcuctrl_sram_size
-                0x0000000000012068       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
-                0x0000000000012068                g_am_hal_mcuctrl_sram_size
+                0x0000000000012a20       0x40 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x0000000000012a20                g_am_hal_mcuctrl_sram_size
  .rodata.am_hal_pwrctrl_peripheral_control
-                0x00000000000120a8       0xb4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
-                0x00000000000120a8                am_hal_pwrctrl_peripheral_control
+                0x0000000000012a60       0xb4 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x0000000000012a60                am_hal_pwrctrl_peripheral_control
  .rodata.twiddleCoef_2048
-                0x000000000001215c     0x4000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001215c                twiddleCoef_2048
+                0x0000000000012b14     0x4000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000012b14                twiddleCoef_2048
  .rodata.twiddleCoef_rfft_64
-                0x000000000001615c      0x100 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001615c                twiddleCoef_rfft_64
+                0x0000000000016b14      0x100 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000016b14                twiddleCoef_rfft_64
  .rodata.armBitRevIndexTable64
-                0x000000000001625c       0x70 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001625c                armBitRevIndexTable64
+                0x0000000000016c14       0x70 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000016c14                armBitRevIndexTable64
  .rodata.twiddleCoef_rfft_2048
-                0x00000000000162cc     0x2000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x00000000000162cc                twiddleCoef_rfft_2048
+                0x0000000000016c84     0x2000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000016c84                twiddleCoef_rfft_2048
  .rodata.twiddleCoef_rfft_4096
-                0x00000000000182cc     0x4000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x00000000000182cc                twiddleCoef_rfft_4096
+                0x0000000000018c84     0x4000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000018c84                twiddleCoef_rfft_4096
  .rodata.twiddleCoef_256
-                0x000000000001c2cc      0x800 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001c2cc                twiddleCoef_256
+                0x000000000001cc84      0x800 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000001cc84                twiddleCoef_256
  .rodata.twiddleCoef_16
-                0x000000000001cacc       0x80 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001cacc                twiddleCoef_16
+                0x000000000001d484       0x80 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000001d484                twiddleCoef_16
  .rodata.twiddleCoef_1024
-                0x000000000001cb4c     0x2000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001cb4c                twiddleCoef_1024
+                0x000000000001d504     0x2000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000001d504                twiddleCoef_1024
  .rodata.twiddleCoef_32
-                0x000000000001eb4c      0x100 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001eb4c                twiddleCoef_32
+                0x000000000001f504      0x100 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000001f504                twiddleCoef_32
  .rodata.armBitRevIndexTable1024
-                0x000000000001ec4c      0xe10 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001ec4c                armBitRevIndexTable1024
+                0x000000000001f604      0xe10 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000001f604                armBitRevIndexTable1024
  .rodata.armBitRevIndexTable16
-                0x000000000001fa5c       0x28 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001fa5c                armBitRevIndexTable16
+                0x0000000000020414       0x28 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000020414                armBitRevIndexTable16
  .rodata.twiddleCoef_rfft_32
-                0x000000000001fa84       0x80 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001fa84                twiddleCoef_rfft_32
+                0x000000000002043c       0x80 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000002043c                twiddleCoef_rfft_32
  .rodata.armBitRevIndexTable32
-                0x000000000001fb04       0x60 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001fb04                armBitRevIndexTable32
+                0x00000000000204bc       0x60 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x00000000000204bc                armBitRevIndexTable32
  .rodata.twiddleCoef_128
-                0x000000000001fb64      0x400 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001fb64                twiddleCoef_128
+                0x000000000002051c      0x400 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000002051c                twiddleCoef_128
  .rodata.twiddleCoef_512
-                0x000000000001ff64     0x1000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x000000000001ff64                twiddleCoef_512
+                0x000000000002091c     0x1000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000002091c                twiddleCoef_512
  .rodata.armBitRevIndexTable2048
-                0x0000000000020f64     0x1dc0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000020f64                armBitRevIndexTable2048
+                0x000000000002191c     0x1dc0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000002191c                armBitRevIndexTable2048
  .rodata.twiddleCoef_64
-                0x0000000000022d24      0x200 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000022d24                twiddleCoef_64
+                0x00000000000236dc      0x200 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x00000000000236dc                twiddleCoef_64
  .rodata.twiddleCoef_rfft_512
-                0x0000000000022f24      0x800 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000022f24                twiddleCoef_rfft_512
+                0x00000000000238dc      0x800 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x00000000000238dc                twiddleCoef_rfft_512
  .rodata.armBitRevIndexTable512
-                0x0000000000023724      0x380 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000023724                armBitRevIndexTable512
+                0x00000000000240dc      0x380 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x00000000000240dc                armBitRevIndexTable512
  .rodata.twiddleCoef_rfft_1024
-                0x0000000000023aa4     0x1000 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000023aa4                twiddleCoef_rfft_1024
+                0x000000000002445c     0x1000 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000002445c                twiddleCoef_rfft_1024
  .rodata.twiddleCoef_rfft_256
-                0x0000000000024aa4      0x400 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000024aa4                twiddleCoef_rfft_256
+                0x000000000002545c      0x400 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000002545c                twiddleCoef_rfft_256
  .rodata.armBitRevIndexTable256
-                0x0000000000024ea4      0x370 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000024ea4                armBitRevIndexTable256
+                0x000000000002585c      0x370 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x000000000002585c                armBitRevIndexTable256
  .rodata.twiddleCoef_rfft_128
-                0x0000000000025214      0x200 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000025214                twiddleCoef_rfft_128
+                0x0000000000025bcc      0x200 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000025bcc                twiddleCoef_rfft_128
  .rodata.armBitRevIndexTable128
-                0x0000000000025414      0x1a0 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0000000000025414                armBitRevIndexTable128
-                0x00000000000255b4                . = ALIGN (0x4)
-                0x00000000000255b4                _etext = .
+                0x0000000000025dcc      0x1a0 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000025dcc                armBitRevIndexTable128
+                0x0000000000025f6c                . = ALIGN (0x4)
+                0x0000000000025f6c                _etext = .
 
-.glue_7         0x00000000000255b4        0x0
- .glue_7        0x00000000000255b4        0x0 linker stubs
+.glue_7         0x0000000000025f6c        0x0
+ .glue_7        0x0000000000025f6c        0x0 linker stubs
 
-.glue_7t        0x00000000000255b4        0x0
- .glue_7t       0x00000000000255b4        0x0 linker stubs
+.glue_7t        0x0000000000025f6c        0x0
+ .glue_7t       0x0000000000025f6c        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000255b4        0x0
- .vfp11_veneer  0x00000000000255b4        0x0 linker stubs
+.vfp11_veneer   0x0000000000025f6c        0x0
+ .vfp11_veneer  0x0000000000025f6c        0x0 linker stubs
 
-.v4_bx          0x00000000000255b4        0x0
- .v4_bx         0x00000000000255b4        0x0 linker stubs
+.v4_bx          0x0000000000025f6c        0x0
+ .v4_bx         0x0000000000025f6c        0x0 linker stubs
 
-.iplt           0x00000000000255b4        0x0
- .iplt          0x00000000000255b4        0x0 bin/main.o
+.iplt           0x0000000000025f6c        0x0
+ .iplt          0x0000000000025f6c        0x0 bin/main.o
 
-.rel.dyn        0x00000000000255b4        0x0
- .rel.iplt      0x00000000000255b4        0x0 bin/main.o
+.rel.dyn        0x0000000000025f6c        0x0
+ .rel.iplt      0x0000000000025f6c        0x0 bin/main.o
 
 .stack          0x0000000010000000     0xc000
                 0x0000000010000000                . = ALIGN (0x8)
@@ -1888,7 +1899,7 @@ Linker script and memory map
  *(.stack*)
                 0x000000001000c000                . = ALIGN (0x8)
 
-.data           0x000000001000c000       0x50 load address 0x00000000000255b4
+.data           0x000000001000c000       0x50 load address 0x0000000000025f6c
                 0x000000001000c000                . = ALIGN (0x4)
                 0x000000001000c000                _sdata = .
  *(.data)
@@ -1906,12 +1917,12 @@ Linker script and memory map
                 0x000000001000c044                SRAM_write_ui32
                 0x000000001000c050                . = ALIGN (0x4)
                 0x000000001000c050                _edata = .
-                0x00000000000255b4                _init_data = LOADADDR (.data)
+                0x0000000000025f6c                _init_data = LOADADDR (.data)
 
-.igot.plt       0x000000001000c050        0x0 load address 0x0000000000025604
+.igot.plt       0x000000001000c050        0x0 load address 0x0000000000025fbc
  .igot.plt      0x000000001000c050        0x0 bin/main.o
 
-.bss            0x000000001000c050    0x2f188 load address 0x0000000000025604
+.bss            0x000000001000c050    0x2f550 load address 0x0000000000025fbc
                 0x000000001000c050                . = ALIGN (0x4)
                 0x000000001000c050                _sbss = .
  *(.bss)
@@ -1961,33 +1972,31 @@ Linker script and memory map
  *(COMMON)
  COMMON         0x000000001000c180        0x4 bin/am_util_stdio.o
                 0x000000001000c180                g_pfnCharPrint
- COMMON         0x000000001000c184    0x2ee3c bin/board_setup.o
+ COMMON         0x000000001000c184    0x2f204 bin/board_setup.o
                 0x000000001000c184                eBurstMode
-                0x000000001000c188                SCB_DEMCR
-                0x000000001000c18c                eBurstModeAvailable
-                0x000000001000c190                DWT_CONTROL
-                0x000000001000c194                g_ui8PCMDataRingBuff
-                0x000000001003af94                am_sys_ring_buffers
-                0x000000001003afbc                DWT_CYCCNT
- COMMON         0x000000001003afc0      0x144 bin/audio_driver.o
-                0x000000001003afc0                g_ui32PCMDataBuff
-                0x000000001003b100                PDMHandle
- COMMON         0x000000001003b104        0xc ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
-                0x000000001003b104                g_am_hal_pdm_states
- COMMON         0x000000001003b110       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
-                0x000000001003b110                g_am_hal_uart_states
-                0x000000001003b1d8                . = ALIGN (0x4)
-                0x000000001003b1d8                _ebss = .
+                0x000000001000c188                g_ui8AudioPreprocessBuff
+                0x000000001000c548                eBurstModeAvailable
+                0x000000001000c54c                g_ui8PCMDataRingBuff
+                0x000000001003b34c                am_sys_ring_buffers
+ COMMON         0x000000001003b388      0x144 bin/audio_driver.o
+                0x000000001003b388                g_ui32PCMDataBuff
+                0x000000001003b4c8                PDMHandle
+ COMMON         0x000000001003b4cc        0xc ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x000000001003b4cc                g_am_hal_pdm_states
+ COMMON         0x000000001003b4d8       0xc8 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x000000001003b4d8                g_am_hal_uart_states
+                0x000000001003b5a0                . = ALIGN (0x4)
+                0x000000001003b5a0                _ebss = .
 
-.heap           0x000000001003b1d8      0x400 load address 0x0000000000025604
-                0x000000001003b1d8                . = ALIGN (0x8)
+.heap           0x000000001003b5a0      0x400 load address 0x0000000000025fbc
+                0x000000001003b5a0                . = ALIGN (0x8)
                 [!provide]                        PROVIDE (__end__ = .)
-                0x000000001003b1d8                PROVIDE (end = .)
+                0x000000001003b5a0                PROVIDE (end = .)
                 [!provide]                        PROVIDE (_heap_start = end)
-                0x000000001003b5d8                . = (. + _heap_size)
- *fill*         0x000000001003b1d8      0x400 
+                0x000000001003b9a0                . = (. + _heap_size)
+ *fill*         0x000000001003b5a0      0x400 
                 [!provide]                        PROVIDE (_heap_end = .)
-                0x000000001003b5d8                . = ALIGN (0x8)
+                0x000000001003b9a0                . = ALIGN (0x8)
 
 .ARM.attributes
                 0x0000000000000000       0x37
@@ -2017,61 +2026,65 @@ Linker script and memory map
  .ARM.attributes
                 0x0000000000000273       0x39 bin/audio_preprocessor.o
  .ARM.attributes
-                0x00000000000002ac       0x39 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
+                0x00000000000002ac       0x39 bin/beamforming_weights.o
  .ARM.attributes
-                0x00000000000002e5       0x39 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
+                0x00000000000002e5       0x39 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
  .ARM.attributes
-                0x000000000000031e       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
+                0x000000000000031e       0x39 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
  .ARM.attributes
-                0x0000000000000357       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
+                0x0000000000000357       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_burst.o)
  .ARM.attributes
-                0x0000000000000390       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
+                0x0000000000000390       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_cachectrl.o)
  .ARM.attributes
-                0x00000000000003c9       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
+                0x00000000000003c9       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_clkgen.o)
  .ARM.attributes
-                0x0000000000000402       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
+                0x0000000000000402       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_ctimer.o)
  .ARM.attributes
-                0x000000000000043b       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
+                0x000000000000043b       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_flash.o)
  .ARM.attributes
-                0x0000000000000474       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
+                0x0000000000000474       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_gpio.o)
  .ARM.attributes
-                0x00000000000004ad       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
+                0x00000000000004ad       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_interrupt.o)
  .ARM.attributes
-                0x00000000000004e6       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
+                0x00000000000004e6       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_mcuctrl.o)
  .ARM.attributes
-                0x000000000000051f       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
+                0x000000000000051f       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pdm.o)
  .ARM.attributes
-                0x0000000000000558       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_reset.o)
+                0x0000000000000558       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_pwrctrl.o)
  .ARM.attributes
-                0x0000000000000591       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
+                0x0000000000000591       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_reset.o)
  .ARM.attributes
-                0x00000000000005ca       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
+                0x00000000000005ca       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
  .ARM.attributes
-                0x0000000000000603       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
+                0x0000000000000603       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
  .ARM.attributes
-                0x000000000000063c       0x39 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+                0x000000000000063c       0x39 ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
  .ARM.attributes
-                0x0000000000000675       0x39 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+                0x0000000000000675       0x39 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
  .ARM.attributes
-                0x00000000000006ae       0x39 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+                0x00000000000006ae       0x39 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
  .ARM.attributes
-                0x00000000000006e7       0x39 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x00000000000006e7       0x39 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
  .ARM.attributes
-                0x0000000000000720       0x25 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+                0x0000000000000720       0x39 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
  .ARM.attributes
-                0x0000000000000745       0x39 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+                0x0000000000000759       0x39 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
  .ARM.attributes
-                0x000000000000077e       0x20 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memcpy.o)
+                0x0000000000000792       0x25 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
  .ARM.attributes
-                0x000000000000079e       0x34 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
+                0x00000000000007b7       0x39 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
  .ARM.attributes
-                0x00000000000007d2       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_addsubdf3.o)
+                0x00000000000007f0       0x20 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memcpy.o)
  .ARM.attributes
-                0x00000000000007f4       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_muldivdf3.o)
+                0x0000000000000810       0x34 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
  .ARM.attributes
-                0x0000000000000816       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_cmpdf2.o)
+                0x0000000000000844       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x0000000000000838       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_truncdfsf2.o)
+                0x0000000000000866       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x0000000000000888       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_cmpdf2.o)
+ .ARM.attributes
+                0x00000000000008aa       0x22 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_truncdfsf2.o)
 LOAD bin/main.o
 LOAD bin/am_util_delay.o
 LOAD bin/am_util_faultisr.o
@@ -2092,9 +2105,10 @@ LOAD bin/am_AEP_local_test_data.o
 LOAD bin/hanning_window.o
 LOAD bin/digital_filter.o
 LOAD bin/audio_preprocessor.o
+LOAD bin/beamforming_weights.o
 LOAD ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a
 LOAD ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a
-LOAD ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a
+LOAD ../../../math/libarm_cortexM4lf_math.a
 START GROUP
 LOAD /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a
 LOAD /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a
@@ -2106,47 +2120,51 @@ LOAD /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/b
 END GROUP
 OUTPUT(bin/audio_experiment.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0xe4c9
- .debug_info    0x0000000000000000     0x1c79 bin/main.o
- .debug_info    0x0000000000001c79      0x843 bin/am_util_delay.o
- .debug_info    0x00000000000024bc      0x94a bin/am_util_faultisr.o
- .debug_info    0x0000000000002e06      0x8a3 bin/am_util_stdio.o
- .debug_info    0x00000000000036a9      0xcbd bin/am_app_utils_ring_buffer.o
- .debug_info    0x0000000000004366      0xa52 bin/am_devices_led.o
- .debug_info    0x0000000000004db8      0x17f bin/startup_gcc.o
- .debug_info    0x0000000000004f37     0x201a bin/board_setup.o
- .debug_info    0x0000000000006f51     0x2889 bin/audio_driver.o
- .debug_info    0x00000000000097da     0x2248 bin/stft.o
- .debug_info    0x000000000000ba22       0xd0 bin/hanning_window.o
- .debug_info    0x000000000000baf2      0x91c bin/audio_preprocessor.o
- .debug_info    0x000000000000c40e      0x4c7 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .debug_info    0x000000000000c8d5      0x70d ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .debug_info    0x000000000000cfe2      0x685 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .debug_info    0x000000000000d667      0x9b1 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
- .debug_info    0x000000000000e018       0x98 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
- .debug_info    0x000000000000e0b0      0x419 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+.debug_info     0x0000000000000000    0x100d7
+ .debug_info    0x0000000000000000     0x1d4c bin/main.o
+ .debug_info    0x0000000000001d4c      0x843 bin/am_util_delay.o
+ .debug_info    0x000000000000258f      0x94a bin/am_util_faultisr.o
+ .debug_info    0x0000000000002ed9      0x8a3 bin/am_util_stdio.o
+ .debug_info    0x000000000000377c      0xcbd bin/am_app_utils_ring_buffer.o
+ .debug_info    0x0000000000004439      0xa52 bin/am_devices_led.o
+ .debug_info    0x0000000000004e8b      0x17f bin/startup_gcc.o
+ .debug_info    0x000000000000500a     0x2031 bin/board_setup.o
+ .debug_info    0x000000000000703b     0x29c3 bin/audio_driver.o
+ .debug_info    0x00000000000099fe     0x227b bin/stft.o
+ .debug_info    0x000000000000bc79       0xe8 bin/hanning_window.o
+ .debug_info    0x000000000000bd61     0x17ed bin/audio_preprocessor.o
+ .debug_info    0x000000000000d54e      0x8dc bin/beamforming_weights.o
+ .debug_info    0x000000000000de2a      0x4c3 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_info    0x000000000000e2ed      0x72d ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_info    0x000000000000ea1a      0x6b9 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_info    0x000000000000f0d3      0x1c9 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_info    0x000000000000f29c      0x99d ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_info    0x000000000000fc39       0x85 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .debug_info    0x000000000000fcbe      0x419 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
-.debug_abbrev   0x0000000000000000     0x1d87
- .debug_abbrev  0x0000000000000000      0x284 bin/main.o
- .debug_abbrev  0x0000000000000284      0x1b4 bin/am_util_delay.o
- .debug_abbrev  0x0000000000000438      0x1e1 bin/am_util_faultisr.o
- .debug_abbrev  0x0000000000000619      0x20d bin/am_util_stdio.o
- .debug_abbrev  0x0000000000000826      0x256 bin/am_app_utils_ring_buffer.o
- .debug_abbrev  0x0000000000000a7c      0x229 bin/am_devices_led.o
- .debug_abbrev  0x0000000000000ca5       0xca bin/startup_gcc.o
- .debug_abbrev  0x0000000000000d6f      0x348 bin/board_setup.o
- .debug_abbrev  0x00000000000010b7      0x2f7 bin/audio_driver.o
- .debug_abbrev  0x00000000000013ae      0x277 bin/stft.o
- .debug_abbrev  0x0000000000001625       0x6a bin/hanning_window.o
- .debug_abbrev  0x000000000000168f      0x1b6 bin/audio_preprocessor.o
- .debug_abbrev  0x0000000000001845      0x108 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .debug_abbrev  0x000000000000194d      0x177 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .debug_abbrev  0x0000000000001ac4      0x183 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .debug_abbrev  0x0000000000001c47       0x84 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
- .debug_abbrev  0x0000000000001ccb       0x14 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
- .debug_abbrev  0x0000000000001cdf       0xa8 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+.debug_abbrev   0x0000000000000000     0x2072
+ .debug_abbrev  0x0000000000000000      0x295 bin/main.o
+ .debug_abbrev  0x0000000000000295      0x1b4 bin/am_util_delay.o
+ .debug_abbrev  0x0000000000000449      0x1e1 bin/am_util_faultisr.o
+ .debug_abbrev  0x000000000000062a      0x20d bin/am_util_stdio.o
+ .debug_abbrev  0x0000000000000837      0x256 bin/am_app_utils_ring_buffer.o
+ .debug_abbrev  0x0000000000000a8d      0x229 bin/am_devices_led.o
+ .debug_abbrev  0x0000000000000cb6       0xca bin/startup_gcc.o
+ .debug_abbrev  0x0000000000000d80      0x302 bin/board_setup.o
+ .debug_abbrev  0x0000000000001082      0x308 bin/audio_driver.o
+ .debug_abbrev  0x000000000000138a      0x2a1 bin/stft.o
+ .debug_abbrev  0x000000000000162b       0x6a bin/hanning_window.o
+ .debug_abbrev  0x0000000000001695      0x26e bin/audio_preprocessor.o
+ .debug_abbrev  0x0000000000001903      0x18b bin/beamforming_weights.o
+ .debug_abbrev  0x0000000000001a8e       0xfd ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_abbrev  0x0000000000001b8b      0x188 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_abbrev  0x0000000000001d13      0x18b ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_abbrev  0x0000000000001e9e       0x94 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_abbrev  0x0000000000001f32       0x84 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_abbrev  0x0000000000001fb6       0x14 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .debug_abbrev  0x0000000000001fca       0xa8 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
-.debug_aranges  0x0000000000000000      0x418
+.debug_aranges  0x0000000000000000      0x430
  .debug_aranges
                 0x0000000000000000       0x20 bin/main.o
  .debug_aranges
@@ -2162,29 +2180,33 @@ OUTPUT(bin/audio_experiment.axf elf32-littlearm)
  .debug_aranges
                 0x00000000000001c0       0x38 bin/startup_gcc.o
  .debug_aranges
-                0x00000000000001f8       0x98 bin/board_setup.o
+                0x00000000000001f8       0x70 bin/board_setup.o
  .debug_aranges
-                0x0000000000000290       0x40 bin/audio_driver.o
+                0x0000000000000268       0x40 bin/audio_driver.o
  .debug_aranges
-                0x00000000000002d0       0x38 bin/stft.o
+                0x00000000000002a8       0x38 bin/stft.o
  .debug_aranges
-                0x0000000000000308       0x18 bin/hanning_window.o
+                0x00000000000002e0       0x18 bin/hanning_window.o
  .debug_aranges
-                0x0000000000000320       0x20 bin/audio_preprocessor.o
+                0x00000000000002f8       0x28 bin/audio_preprocessor.o
  .debug_aranges
-                0x0000000000000340       0x20 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+                0x0000000000000320       0x18 bin/beamforming_weights.o
  .debug_aranges
-                0x0000000000000360       0x30 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+                0x0000000000000338       0x20 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
  .debug_aranges
-                0x0000000000000390       0x30 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+                0x0000000000000358       0x30 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
  .debug_aranges
-                0x00000000000003c0       0x18 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0000000000000388       0x30 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
  .debug_aranges
-                0x00000000000003d8       0x20 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+                0x00000000000003b8       0x20 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
  .debug_aranges
-                0x00000000000003f8       0x20 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+                0x00000000000003d8       0x18 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_aranges
+                0x00000000000003f0       0x20 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .debug_aranges
+                0x0000000000000410       0x20 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
-.debug_ranges   0x0000000000000000      0x2d8
+.debug_ranges   0x0000000000000000      0x2c8
  .debug_ranges  0x0000000000000000       0x10 bin/main.o
  .debug_ranges  0x0000000000000010       0x20 bin/am_util_delay.o
  .debug_ranges  0x0000000000000030       0x20 bin/am_util_faultisr.o
@@ -2192,72 +2214,79 @@ OUTPUT(bin/audio_experiment.axf elf32-littlearm)
  .debug_ranges  0x00000000000000e0       0x38 bin/am_app_utils_ring_buffer.o
  .debug_ranges  0x0000000000000118       0x48 bin/am_devices_led.o
  .debug_ranges  0x0000000000000160       0x28 bin/startup_gcc.o
- .debug_ranges  0x0000000000000188       0x88 bin/board_setup.o
- .debug_ranges  0x0000000000000210       0x30 bin/audio_driver.o
- .debug_ranges  0x0000000000000240       0x28 bin/stft.o
- .debug_ranges  0x0000000000000268       0x10 bin/audio_preprocessor.o
- .debug_ranges  0x0000000000000278       0x10 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .debug_ranges  0x0000000000000288       0x20 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .debug_ranges  0x00000000000002a8       0x20 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .debug_ranges  0x00000000000002c8       0x10 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+ .debug_ranges  0x0000000000000188       0x60 bin/board_setup.o
+ .debug_ranges  0x00000000000001e8       0x30 bin/audio_driver.o
+ .debug_ranges  0x0000000000000218       0x28 bin/stft.o
+ .debug_ranges  0x0000000000000240       0x18 bin/audio_preprocessor.o
+ .debug_ranges  0x0000000000000258       0x10 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_ranges  0x0000000000000268       0x20 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_ranges  0x0000000000000288       0x20 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_ranges  0x00000000000002a8       0x10 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_ranges  0x00000000000002b8       0x10 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
-.debug_line     0x0000000000000000     0x44a8
- .debug_line    0x0000000000000000      0x5de bin/main.o
- .debug_line    0x00000000000005de      0x303 bin/am_util_delay.o
- .debug_line    0x00000000000008e1      0x35f bin/am_util_faultisr.o
- .debug_line    0x0000000000000c40      0x60f bin/am_util_stdio.o
- .debug_line    0x000000000000124f      0x331 bin/am_app_utils_ring_buffer.o
- .debug_line    0x0000000000001580      0x44e bin/am_devices_led.o
- .debug_line    0x00000000000019ce      0x177 bin/startup_gcc.o
- .debug_line    0x0000000000001b45      0x6a1 bin/board_setup.o
- .debug_line    0x00000000000021e6      0x5a3 bin/audio_driver.o
- .debug_line    0x0000000000002789      0x5e2 bin/stft.o
- .debug_line    0x0000000000002d6b      0x14a bin/hanning_window.o
- .debug_line    0x0000000000002eb5      0x1f6 bin/audio_preprocessor.o
- .debug_line    0x00000000000030ab      0x1b5 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .debug_line    0x0000000000003260      0x2b2 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .debug_line    0x0000000000003512      0x73e ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .debug_line    0x0000000000003c50      0x135 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
- .debug_line    0x0000000000003d85       0xa2 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
- .debug_line    0x0000000000003e27      0x681 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+.debug_line     0x0000000000000000     0x4b85
+ .debug_line    0x0000000000000000      0x61e bin/main.o
+ .debug_line    0x000000000000061e      0x303 bin/am_util_delay.o
+ .debug_line    0x0000000000000921      0x35f bin/am_util_faultisr.o
+ .debug_line    0x0000000000000c80      0x60f bin/am_util_stdio.o
+ .debug_line    0x000000000000128f      0x331 bin/am_app_utils_ring_buffer.o
+ .debug_line    0x00000000000015c0      0x44e bin/am_devices_led.o
+ .debug_line    0x0000000000001a0e      0x177 bin/startup_gcc.o
+ .debug_line    0x0000000000001b85      0x65f bin/board_setup.o
+ .debug_line    0x00000000000021e4      0x5eb bin/audio_driver.o
+ .debug_line    0x00000000000027cf      0x5fc bin/stft.o
+ .debug_line    0x0000000000002dcb      0x14a bin/hanning_window.o
+ .debug_line    0x0000000000002f15      0x4fd bin/audio_preprocessor.o
+ .debug_line    0x0000000000003412      0x191 bin/beamforming_weights.o
+ .debug_line    0x00000000000035a3      0x1ab ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_line    0x000000000000374e      0x2c2 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_line    0x0000000000003a10      0x77e ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_line    0x000000000000418e      0x1b7 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_line    0x0000000000004345      0x12e ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_line    0x0000000000004473       0x98 ../../../math/libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .debug_line    0x000000000000450b      0x67a ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
-.debug_str      0x0000000000000000     0x4983
- .debug_str     0x0000000000000000     0x214d bin/main.o
-                                       0x21f6 (size before relaxing)
- .debug_str     0x000000000000214d       0xfe bin/am_util_delay.o
+.debug_str      0x0000000000000000     0x4b36
+ .debug_str     0x0000000000000000     0x2256 bin/main.o
+                                       0x22ff (size before relaxing)
+ .debug_str     0x0000000000002256       0xfe bin/am_util_delay.o
                                         0xaef (size before relaxing)
- .debug_str     0x000000000000224b      0x1c9 bin/am_util_faultisr.o
+ .debug_str     0x0000000000002354      0x1c9 bin/am_util_faultisr.o
                                         0xbce (size before relaxing)
- .debug_str     0x0000000000002414      0x35c bin/am_util_stdio.o
+ .debug_str     0x000000000000251d      0x35c bin/am_util_stdio.o
                                         0x566 (size before relaxing)
- .debug_str     0x0000000000002770      0x1eb bin/am_app_utils_ring_buffer.o
+ .debug_str     0x0000000000002879      0x1eb bin/am_app_utils_ring_buffer.o
                                         0x88b (size before relaxing)
- .debug_str     0x000000000000295b      0x23b bin/am_devices_led.o
+ .debug_str     0x0000000000002a64      0x23b bin/am_devices_led.o
                                         0xd75 (size before relaxing)
- .debug_str     0x0000000000002b96       0x81 bin/startup_gcc.o
+ .debug_str     0x0000000000002c9f       0x81 bin/startup_gcc.o
                                         0x219 (size before relaxing)
- .debug_str     0x0000000000002c17      0x6a0 bin/board_setup.o
-                                       0x26a2 (size before relaxing)
- .debug_str     0x00000000000032b7      0x98f bin/audio_driver.o
-                                       0x2c06 (size before relaxing)
- .debug_str     0x0000000000003c46      0x891 bin/stft.o
-                                       0x2101 (size before relaxing)
- .debug_str     0x00000000000044d7       0x29 bin/hanning_window.o
-                                        0x1e0 (size before relaxing)
- .debug_str     0x0000000000004500       0x57 bin/audio_preprocessor.o
-                                        0x5d8 (size before relaxing)
- .debug_str     0x0000000000004557      0x218 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
-                                        0x52a (size before relaxing)
- .debug_str     0x000000000000476f       0x86 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
-                                        0x307 (size before relaxing)
- .debug_str     0x00000000000047f5      0x113 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
-                                        0x372 (size before relaxing)
- .debug_str     0x0000000000004908       0x2e ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
-                                        0x717 (size before relaxing)
- .debug_str     0x0000000000004936       0x4d ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
-                                        0x269 (size before relaxing)
+ .debug_str     0x0000000000002d20      0x649 bin/board_setup.o
+                                       0x2745 (size before relaxing)
+ .debug_str     0x0000000000003369      0x98f bin/audio_driver.o
+                                       0x2d06 (size before relaxing)
+ .debug_str     0x0000000000003cf8      0x891 bin/stft.o
+                                       0x2110 (size before relaxing)
+ .debug_str     0x0000000000004589       0x29 bin/hanning_window.o
+                                        0x1f6 (size before relaxing)
+ .debug_str     0x00000000000045b2       0xe2 bin/audio_preprocessor.o
+                                       0x17d1 (size before relaxing)
+ .debug_str     0x0000000000004694       0x2e bin/beamforming_weights.o
+                                        0x5db (size before relaxing)
+ .debug_str     0x00000000000046c2      0x205 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+                                        0x517 (size before relaxing)
+ .debug_str     0x00000000000048c7       0x7c ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+                                        0x2f4 (size before relaxing)
+ .debug_str     0x0000000000004943      0x109 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+                                        0x35f (size before relaxing)
+ .debug_str     0x0000000000004a4c       0x83 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+                                        0x25d (size before relaxing)
+ .debug_str     0x0000000000004acf       0x24 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+                                        0x704 (size before relaxing)
+ .debug_str     0x0000000000004af3       0x43 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+                                        0x256 (size before relaxing)
 
-.comment        0x0000000000000000       0xdf
+.comment        0x0000000000000000      0x14f
  .comment       0x0000000000000000       0x71 bin/main.o
                                          0x72 (size before relaxing)
  .comment       0x0000000000000071       0x72 bin/am_util_delay.o
@@ -2271,6 +2300,7 @@ OUTPUT(bin/audio_experiment.axf elf32-littlearm)
  .comment       0x0000000000000071       0x72 bin/stft.o
  .comment       0x0000000000000071       0x72 bin/hanning_window.o
  .comment       0x0000000000000071       0x72 bin/audio_preprocessor.o
+ .comment       0x0000000000000071       0x72 bin/beamforming_weights.o
  .comment       0x0000000000000071       0x6e ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp.o)
                                          0x6f (size before relaxing)
  .comment       0x00000000000000df       0x6f ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a(am_bsp_pins.o)
@@ -2288,36 +2318,40 @@ OUTPUT(bin/audio_experiment.axf elf32-littlearm)
  .comment       0x00000000000000df       0x6f ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_rtc.o)
  .comment       0x00000000000000df       0x6f ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_uart.o)
  .comment       0x00000000000000df       0x6f ../../../device/AmbiqSuite-Rel2.2.0/mcu/apollo3/hal/gcc/bin/libam_hal.a(am_hal_queue.o)
- .comment       0x00000000000000df       0x6f ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .comment       0x00000000000000df       0x6f ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .comment       0x00000000000000df       0x6f ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .comment       0x00000000000000df       0x6f ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_common_tables.o)
- .comment       0x00000000000000df       0x6f ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+ .comment       0x00000000000000df       0x70 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+                                         0x71 (size before relaxing)
+ .comment       0x000000000000014f       0x71 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .comment       0x000000000000014f       0x71 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .comment       0x000000000000014f       0x71 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .comment       0x000000000000014f       0x71 ../../../math/libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .comment       0x000000000000014f       0x71 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
-.debug_frame    0x0000000000000000      0xea8
- .debug_frame   0x0000000000000000       0x30 bin/main.o
- .debug_frame   0x0000000000000030       0x7c bin/am_util_delay.o
- .debug_frame   0x00000000000000ac       0x50 bin/am_util_faultisr.o
- .debug_frame   0x00000000000000fc      0x2e0 bin/am_util_stdio.o
- .debug_frame   0x00000000000003dc       0xf8 bin/am_app_utils_ring_buffer.o
- .debug_frame   0x00000000000004d4      0x130 bin/am_devices_led.o
- .debug_frame   0x0000000000000604       0x68 bin/startup_gcc.o
- .debug_frame   0x000000000000066c      0x23c bin/board_setup.o
- .debug_frame   0x00000000000008a8       0xcc bin/audio_driver.o
- .debug_frame   0x0000000000000974       0xac bin/stft.o
- .debug_frame   0x0000000000000a20       0x34 bin/audio_preprocessor.o
- .debug_frame   0x0000000000000a54       0x34 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .debug_frame   0x0000000000000a88       0x74 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .debug_frame   0x0000000000000afc       0xfc ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .debug_frame   0x0000000000000bf8       0x94 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
- .debug_frame   0x0000000000000c8c       0x38 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
- .debug_frame   0x0000000000000cc4       0xac /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x0000000000000d70       0x50 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_muldivdf3.o)
- .debug_frame   0x0000000000000dc0       0xc4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_cmpdf2.o)
- .debug_frame   0x0000000000000e84       0x24 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_truncdfsf2.o)
+.debug_frame    0x0000000000000000      0xe64
+ .debug_frame   0x0000000000000000       0x34 bin/main.o
+ .debug_frame   0x0000000000000034       0x7c bin/am_util_delay.o
+ .debug_frame   0x00000000000000b0       0x50 bin/am_util_faultisr.o
+ .debug_frame   0x0000000000000100      0x2e0 bin/am_util_stdio.o
+ .debug_frame   0x00000000000003e0       0xf8 bin/am_app_utils_ring_buffer.o
+ .debug_frame   0x00000000000004d8      0x130 bin/am_devices_led.o
+ .debug_frame   0x0000000000000608       0x68 bin/startup_gcc.o
+ .debug_frame   0x0000000000000670      0x194 bin/board_setup.o
+ .debug_frame   0x0000000000000804       0xcc bin/audio_driver.o
+ .debug_frame   0x00000000000008d0       0xac bin/stft.o
+ .debug_frame   0x000000000000097c       0x64 bin/audio_preprocessor.o
+ .debug_frame   0x00000000000009e0       0x34 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_frame   0x0000000000000a14       0x74 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_frame   0x0000000000000a88       0xfc ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_frame   0x0000000000000b84       0x30 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_frame   0x0000000000000bb4       0x94 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+ .debug_frame   0x0000000000000c48       0x38 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000c80       0xac /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x0000000000000d2c       0x50 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x0000000000000d7c       0xc4 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_cmpdf2.o)
+ .debug_frame   0x0000000000000e40       0x24 /Users/axel/opt/gnu-mcu-eclipse/arm-none-eabi-gcc/7.3.1-1.1-20180724-0637/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_arm_truncdfsf2.o)
 
-.debug_loc      0x0000000000000000     0x2a9c
- .debug_loc     0x0000000000000000      0x1eb ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .debug_loc     0x00000000000001eb      0xfa9 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .debug_loc     0x0000000000001194     0x1067 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .debug_loc     0x00000000000021fb      0x8a1 ../../../math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+.debug_loc      0x0000000000000000     0x2e4b
+ .debug_loc     0x0000000000000000      0x1a6 ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_loc     0x00000000000001a6      0xf1a ../../../math/libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_loc     0x00000000000010c0     0x1053 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_loc     0x0000000000002113      0x3d2 ../../../math/libarm_cortexM4lf_math.a(arm_cmplx_mult_cmplx_f32.o)
+ .debug_loc     0x00000000000024e5      0x966 ../../../math/libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)

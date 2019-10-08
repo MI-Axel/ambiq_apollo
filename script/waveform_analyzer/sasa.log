@@ -1,0 +1,138 @@
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.636] Ambiq Secure BootLoader!
+[2019-09-20 11:03:02.636] 
+[2019-09-20 11:03:02.646] SecureBoot SBL_v4 ver:0x5(0x99a0) running with VTOR @ 0x100
+[2019-09-20 11:03:02.647] Current Reset Stat 0x1
+[2019-09-20 11:03:02.647] Info1 Version 0x1
+[2019-09-20 11:03:02.647] Info0 Version 0x0
+[2019-09-20 11:03:02.647] ChipID = 0x2592d403:0xbd33d0c2
+[2019-09-20 11:03:02.647] Flash Size = 0x100000, SRAM Size = 0x60000
+[2019-09-20 11:03:02.647] Scratch = 0x0
+[2019-09-20 11:03:02.647] INFO1-Sec = 0xff2da3ff
+[2019-09-20 11:03:02.647] SBL version 0x5 installed at 0x0
+[2019-09-20 11:03:02.647] Previous Boot was Successful:11
+[2019-09-20 11:03:02.647] INFO0-Sec = 0x55fff
+[2019-09-20 11:03:02.647] Info0 Valid
+[2019-09-20 11:03:02.647] OTA State: activeIdx=10 otaDesc = 0xfe000
+[2019-09-20 11:03:02.647] Initialization done
+[2019-09-20 11:03:02.647] Proceeding to Validate the Images
+[2019-09-20 11:03:02.647] SecureBoot disabled
+[2019-09-20 11:03:02.647] Valid Main image in flash SP=0x10002300, RV=0x7edfd
+[2019-09-20 11:03:02.647] Validation Status 0x0
+[2019-09-20 11:03:02.647] Will transfer to Main@0xc000
+[2019-09-20 11:03:02.657] Proceeding to lock all security gates
+[2019-09-20 11:03:06.472] Apollo3 Burst Mode is Available
+[2019-09-20 11:03:06.473] Apollo3 operating in Normal Mode (48MHz)
+[2019-09-20 11:03:06.473] 
+[2019-09-20 11:03:06.473] AMKWD VoS SDK running...
+[2019-09-20 11:03:06.473] Firmware version: 1.01.03
+[2019-09-20 11:03:06.473] Apollo3Blue silicon version: B0
+[2019-09-20 11:03:06.473] Device CHIPID0: 0x2592D403
+[2019-09-20 11:03:06.473]        CHIPID1: 0xBD33D0C2
+[2019-09-20 11:03:06.473] System reset reason: 0x00000001 
+[2019-09-20 11:03:06.473] Apollo3 operating in Burst Mode (96MHz)
+[2019-09-20 11:03:06.473] Example: Use AM_APP_LOG_DEBUG(); for Debug log print on RTT. 
+[2019-09-20 11:03:06.483] Example: Use AM_APP_LOG_INFO(); for Info log print on RTT. 
+[2019-09-20 11:03:06.483] Example: Use AM_APP_LOG_WARNING(); for Warning log print on RTT. 
+[2019-09-20 11:03:06.508] AmVosHandlerInitLocal Device BD Address: 06050492D403
+[2019-09-20 11:03:06.508] >>> Reset complete <<<
+[2019-09-20 11:03:07.720] >>> Advertising started <<<
+[2019-09-20 11:03:07.730] connection opened
+[2019-09-20 11:03:07.730] handle = 0x0
+[2019-09-20 11:03:07.730] role = 0x1
+[2019-09-20 11:03:07.730] addrMSB = e9832555f49100092ac100557fc
+[2019-09-20 11:03:07.730] addrLSB = 91f27a55f49100092ac100557fc
+[2019-09-20 11:03:07.730] connInterval = 24 x 1.25 ms
+[2019-09-20 11:03:07.731] connLatency = 0
+[2019-09-20 11:03:07.743] supTimeout = 720 ms
+[2019-09-20 11:03:07.743] [AMVOS] DmConnSetDataLen()
+[2019-09-20 11:03:07.743] >>> Connection opened <<<
+[2019-09-20 11:03:07.811] DM_CONN_DATA_LEN_CHANGE_IND: status = 0, max RX len = 251, max TX len = 251 
+[2019-09-20 11:03:08.218] connection update status = 0x0
+[2019-09-20 11:03:08.218] handle = 0x0
+[2019-09-20 11:03:08.218] connInterval = 12 x 1.25 ms
+[2019-09-20 11:03:08.218] connLatency = 0
+[2019-09-20 11:03:08.218] supTimeout = 4000 ms
+[2019-09-20 11:03:08.299] [AMVOS] DM_SEC_ENCRYPT_IND 
+[2019-09-20 11:03:08.299] AMVOS_TX_CCC_TIMER_START();
+[2019-09-20 11:03:08.309] >>> Connection encrypted <<<
+[2019-09-20 11:03:08.379] ATT_MTU_UPDATE_IND AttGetMtu(), return = 247 pMsg->att.mtu = 247
+[2019-09-20 11:03:08.379] ATT_MTU_UPDATE_IND retry_cnt = 0
+[2019-09-20 11:03:08.440] ccc state ind value:2 handle:19 idx:0
+[2019-09-20 11:03:08.440] ==== Service-changed enabled ====
+[2019-09-20 11:03:08.461] ccc state ind value:1 handle:2053 idx:1
+[2019-09-20 11:03:08.461] connId : 1
+[2019-09-20 11:03:08.461] [AMVOS] AMA TX CCC enabled.
+[2019-09-20 11:03:08.473] [AMA] version exchange sent.
+[2019-09-20 11:03:08.473] AMVOS_TX_CCC_TIMER_RESTART();
+[2019-09-20 11:03:08.498] [AMA] Cmd GET_DEVICE_INFORMATION recv
+[2019-09-20 11:03:08.498] [AMA Callback] VOS_AMA_EVT_GET_DEV_INFO
+[2019-09-20 11:03:08.520] [AMA] Cmd GET_DEVICE_CONFIGURATION recv
+[2019-09-20 11:03:08.554] [AMA] Cmd 90 recv
+[2019-09-20 11:03:08.586] [AMA] Cmd SYNCHRONIZE_SETTINGS recv
+[2019-09-20 11:03:08.619] [AMA] Cmd GET_STATE recv feature 0x131
+[2019-09-20 11:03:08.651] [AMA] Cmd GET_CENTRAL_INFORMATION Ack recv
+[2019-09-20 11:03:08.651] [AMA] Platform : 1 Name : âAxelâç iPhone
+[2019-09-20 11:03:08.651] [AMA Callback] VOS_AMA_EVT_GET_CENTRAL_INFO
+[2019-09-20 11:03:08.675] [AMA] Cmd GET_STATE recv feature 0x130
+[2019-09-20 11:03:18.809] Recognition***** wordID = 1, score = 1538
+[2019-09-20 11:03:18.809] NNPQ score= 32545, NNPQ threshold= 31625, NNPQ check pass= 1
+[2019-09-20 11:03:19.301] [AM-VoS] g_delayedSample = 10080, g_endingSampleCnt = 1920 
+[2019-09-20 11:03:19.301] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-09-20 11:03:19.301] [AM-VoS] Keyword Detected! 
+[2019-09-20 11:03:19.301] ---- AMVOS_RSP_TIMER_START(), tick = 12289
+[2019-09-20 11:03:19.301] [AMA] Command_START_SPEECH sent.
+[2019-09-20 11:03:19.301] ---- AMVOS_RSP_TIMER_RESTART(), tick = 12778
+[2019-09-20 11:03:19.356] ---- AMVOS_RSP_TIMER_STOP(), tick = 12835
+[2019-09-20 11:03:19.356] [AMA] Cmd START_SPEECH Ack recv
+[2019-09-20 11:03:20.100] [AMA] Cmd NOTIFY_SPEECH_STATE recv LISTENING
+[2019-09-20 11:03:20.100] [AMA Callback] VOS_AMA_EVT_LISTENING
+[2019-09-20 11:03:20.215] [AMA] Cmd GET_STATE Ack recv feature 0x203 value 0
+[2019-09-20 11:03:20.226] [AMA Callback] VOS_AMA_EVT_GET_STATE
+[2019-09-20 11:03:20.226] [AMA Callback] Network is in good condition
+[2019-09-20 11:03:22.321] [AMA] Cmd ENDPOINT_SPEECH dialog 0 recv
+[2019-09-20 11:03:22.387] [AMA] Cmd NOTIFY_SPEECH_STATE recv IDLE
+[2019-09-20 11:03:22.423] [AMA] Cmd NOTIFY_SPEECH_STATE recv PROCESSING
+[2019-09-20 11:03:22.990] [AMA] Cmd NOTIFY_SPEECH_STATE recv IDLE
+[2019-09-20 11:03:23.012] [AMA] Cmd NOTIFY_SPEECH_STATE recv SPEAKING
+[2019-09-20 11:03:24.830] [AMA] Cmd NOTIFY_SPEECH_STATE recv IDLE
+[2019-09-20 11:03:30.859] Not recognized
+[2019-09-20 11:03:34.376] Not recognized
+[2019-09-20 11:03:37.804] Recognition***** wordID = 1, score = 1426
+[2019-09-20 11:03:37.804] NNPQ score= 31987, NNPQ threshold= 31625, NNPQ check pass= 1
+[2019-09-20 11:03:38.302] [AM-VoS] g_delayedSample = 10560, g_endingSampleCnt = 1920 
+[2019-09-20 11:03:38.302] [AM-VoS] g_ui8KwdDetectedFlag = 1, g_ui8PushTalkFlag = 0 g_ui8ProvideSpeechFlag = 0
+[2019-09-20 11:03:38.302] [AM-VoS] Keyword Detected! 
+[2019-09-20 11:03:38.302] ---- AMVOS_RSP_TIMER_START(), tick = 31197
+[2019-09-20 11:03:38.302] [AMA] Command_START_SPEECH sent.
+[2019-09-20 11:03:38.302] ---- AMVOS_RSP_TIMER_RESTART(), tick = 31698
+[2019-09-20 11:03:38.366] ---- AMVOS_RSP_TIMER_STOP(), tick = 31758
+[2019-09-20 11:03:38.366] [AMA] Cmd START_SPEECH Ack recv
+[2019-09-20 11:03:38.509] [AMA] Cmd NOTIFY_SPEECH_STATE recv LISTENING
+[2019-09-20 11:03:38.510] [AMA Callback] VOS_AMA_EVT_LISTENING
+[2019-09-20 11:03:38.589] [AMA] Cmd GET_STATE Ack recv feature 0x203 value 0
+[2019-09-20 11:03:38.589] [AMA Callback] VOS_AMA_EVT_GET_STATE
+[2019-09-20 11:03:38.589] [AMA Callback] Network is in good condition
+[2019-09-20 11:03:41.944] [AMA] Cmd ENDPOINT_SPEECH dialog 0 recv
+[2019-09-20 11:03:42.101] [AMA] Cmd NOTIFY_SPEECH_STATE recv IDLE
+[2019-09-20 11:03:42.138] [AMA] Cmd NOTIFY_SPEECH_STATE recv PROCESSING
+[2019-09-20 11:03:42.569] [AMA] Cmd NOTIFY_SPEECH_STATE recv SPEAKING
+[2019-09-20 11:03:45.223] [AMA] Cmd NOTIFY_SPEECH_STATE recv IDLE
+

@@ -210,6 +210,7 @@ SRC += am_AEP_local_test_data.c
 SRC += hanning_window.c
 SRC += digital_filter.c
 SRC += audio_preprocessor.c
+SRC += beamforming_weights.c
 # Mikro calibration code
 #SRC += am_mikro_calibration.c
 
@@ -227,7 +228,8 @@ DEPS+= $(ASRC:%.s=$(CONFIG)/%.d)
 
 LIBS = ${AM_SoftwareRoot}/boards/apollo3_evb/bsp/gcc/bin/libam_bsp.a
 LIBS += ${AM_SoftwareRoot}/mcu/apollo3/hal/gcc/bin/libam_hal.a
-LIBS += ${AM_FolderRoot}/math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a
+#LIBS += ${AM_FolderRoot}/math/CMSIS_5/Lib/gcc/libarm_cortexM4lf_math.a
+LIBS += ${AM_FolderRoot}/math/libarm_cortexM4lf_math.a
 
 INCS = 
 INCS += ${AM_SoftwareRoot}/mcu/apollo3/hal/am_hal_pin.h

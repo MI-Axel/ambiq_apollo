@@ -64,17 +64,18 @@ bin/main.o: ../src/main.c \
  ../../../device/AmbiqSuite-Rel2.2.0/utils/am_util_time.h \
  ../../../device/AmbiqSuite-Rel2.2.0/utils/am_util_ble.h \
  ../include/am_audio_platform_config.h ../include/board_setup.h \
+ ../include/am_audio_platform_config.h \
  ../../../app_utils/am_app_utils_ring_buffer.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
- ../include/audio_driver.h \
+ ../src/audio_preprocess/audio_preprocessor.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h \
+ ../src/audio_preprocess/stft.h ../../../app_utils/am_app_utils_syscall.h \
+ ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
  ../src/audio_preprocess/hanning_window.h ../src/audio_preprocess/stft.h \
- ../../../app_utils/am_app_utils_syscall.h \
- ../../../app_utils/am_app_utils.h \
- ../src/audio_preprocess/audio_preprocessor.h \
- ../src/local_test_data/am_AEP_local_test_data.h
+ ../src/local_test_data/am_AEP_local_test_data.h \
+ ../src/audio_preprocess/beamforming_weights.h
 
 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -208,19 +209,19 @@ bin/main.o: ../src/main.c \
 
 ../include/board_setup.h:
 
+../include/am_audio_platform_config.h:
+
 ../../../app_utils/am_app_utils_ring_buffer.h:
 
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h:
 
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
 
-../include/audio_driver.h:
+../src/audio_preprocess/audio_preprocessor.h:
 
 ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h:
 
 ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h:
-
-../src/audio_preprocess/hanning_window.h:
 
 ../src/audio_preprocess/stft.h:
 
@@ -228,6 +229,12 @@ bin/main.o: ../src/main.c \
 
 ../../../app_utils/am_app_utils.h:
 
-../src/audio_preprocess/audio_preprocessor.h:
+../include/audio_driver.h:
+
+../src/audio_preprocess/hanning_window.h:
+
+../src/audio_preprocess/stft.h:
 
 ../src/local_test_data/am_AEP_local_test_data.h:
+
+../src/audio_preprocess/beamforming_weights.h:

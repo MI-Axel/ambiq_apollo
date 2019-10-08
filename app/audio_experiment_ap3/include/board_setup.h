@@ -1,11 +1,15 @@
 #ifndef BOARD_SETUP_H_
 #define BOARD_SETUP_H_
 
+#include "am_audio_platform_config.h"
 #include <stdint.h>
 #include "am_bsp.h"
 #include "am_mcu_apollo.h"  // Defines AM_CMSIS_REGS
 #include "am_util.h"
 #include "am_app_utils_ring_buffer.h"
+#if AM_AEP_BEAMFORMING_TEST 
+#include "audio_preprocessor.h"
+#endif // AM_AEP_BEAMFORMING_TEST
 
 #ifdef AM_BSP_NUM_LEDS
 #define NUM_LEDS    AM_BSP_NUM_LEDS
@@ -24,6 +28,9 @@ typedef enum
 {
     AM_APP_RINGBUFF_NONE = 0, // The enum must begin with this value as named.
     AM_APP_RINGBUFF_PCM,
+#if AM_AEP_BEAMFORMING_TEST
+    AM_APP_RINGBUFF_PREP,
+#endif // AM_AEP_BEAMFORMING_TEST
     AM_APP_RINGBUFF_MAX // The enum must end with this value as named.
 } am_app_utils_ring_buffer_enum_t;
 

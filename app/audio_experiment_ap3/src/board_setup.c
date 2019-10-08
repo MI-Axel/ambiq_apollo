@@ -16,6 +16,10 @@
 #include "am_app_utils_rtt_recorder.h"
 #endif // configUSE_RTT_DATA_OUTPUT
 
+#if AM_AEP_BEAMFORMING_TEST 
+#include "audio_preprocessor.h"
+#endif // AM_AEP_BEAMFORMING_TEST
+
 //*****************************************************************************
 //
 // Globals
@@ -42,18 +46,23 @@ volatile uint8_t g_ui8PCMDataRingBuff[PCM_DATA_BYTES*AVERAGE_WINDOW_LENGTH];
 #else
 volatile uint8_t g_ui8PCMDataRingBuff[PCM_FRAME_SIZE*PCM_DATA_BYTES*NUM_PCM_FRAMES];
 #endif // AM_AEP_MIKRO_CALIBRATION
+#if AM_AEP_BEAMFORMING_TEST
+uint8_t g_ui8AudioPreprocessBuff[AUDIO_ROLLING_FRAMES*AUDIO_HOP_SIZE*AUDIO_PCM_BYTES];
+#endif // AM_AEP_BEAMFORMING_TEST
 am_app_utils_ring_buffer_t am_sys_ring_buffers[AM_APP_RINGBUFF_MAX];
 
 static const am_app_utils_ringbuff_setup_t g_SysRingBuffSetup[] = 
 {
+
+#if AM_AEP_BEAMFORMING_TEST
+    {AM_APP_RINGBUFF_PREP, g_ui8AudioPreprocessBuff, AUDIO_ROLLING_FRAMES*AUDIO_HOP_SIZE*AUDIO_PCM_BYTES},
+#endif // AM_AEP_BEAMFORMING_TEST
+
 #if AM_AEP_MIKRO_CALIBRATION
     {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, AVERAGE_WINDOW_LENGTH*PCM_DATA_BYTES}
 #else
     {AM_APP_RINGBUFF_PCM, g_ui8PCMDataRingBuff, PCM_FRAME_SIZE*NUM_PCM_FRAMES*PCM_DATA_BYTES}
 #endif
-
-#if AM_AEP_BEAMFORMING_TEST
-#endif // AM_AEP_BEAMFORMING_TEST
 
 };
 #define SYS_RINGBUFF_INIT_COUNT     (sizeof(g_SysRingBuffSetup)/sizeof(am_app_utils_ringbuff_setup_t))
@@ -241,6 +250,7 @@ void am_app_AEP_sys_init(void)
     am_bsp_low_power_init();
 
 
+    am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);
 
 #if defined(AM_BSP_NUM_BUTTONS) && defined(AM_BSP_NUM_LEDS)
     //
@@ -343,7 +353,6 @@ void am_app_AEP_sys_init(void)
 
     am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
 
-    am_app_utils_ring_buffer_init_all(am_sys_ring_buffers, g_SysRingBuffSetup, SYS_RINGBUFF_INIT_COUNT);
 
 }
 

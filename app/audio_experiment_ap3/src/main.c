@@ -80,6 +80,7 @@ limitations under the License.
 #include "stft.h"
 #include "audio_preprocessor.h"
 #include "am_AEP_local_test_data.h"
+#include "beamforming_weights.h"
 uint32_t g_ui32DMicDataCollectFlag = 0;
 
 #endif // AM_AEP_BEAMFORMING_TEST
@@ -125,15 +126,15 @@ int main(void)
 
 #if AM_AEP_STFT_TEST
 #define PRINT_PCM_DATA                              0
-#define PRINT_STFT_DATA                             1
+#define PRINT_STFT_DATA                             0
 #define PRINT_MAGNITUDE_DATA                        0
-#define PRINT_ISTFT_DATA                            0
-#define LOCAL_DATA_TEST                             1
+#define PRINT_ISTFT_DATA                            1
+#define LOCAL_DATA_TEST                             0
 
 #define AUDIO_PREPROCESS_FFT_SIZE                   128
 #define AUDIO_HOP_SIZE                              80
 #define AUDIO_ROLLING_FRAMES                        3
-#define AUDIO_BUFF_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE+(AUDIO_ROLLING_FRAMES-1)*AUDIO_HOP_SIZE)
+#define AUDIO_BUFF_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE+(AUDIO_ROLLING_FRAMES-1)*AUDIO_HOP_SIZE
 #define AUDIO_STFT_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES)
 int16_t g_pin16PCMDataBuffer[AUDIO_BUFF_LENGTH];
 float g_pfWindowedPcmDataBuff[AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES];
@@ -291,18 +292,66 @@ if(LOCAL_DATA_TEST)
 #endif // AM_AEP_DIGITAL_FILTER_TEST
 
 #if AM_AEP_BEAMFORMING_TEST
-#define AUDIO_PREPROCESS_FFT_SIZE                   128
-#define AUDIO_HOP_SIZE                              80
-#define AUDIO_ROLLING_FRAMES                        3
-#define AUDIO_BUFF_LENGTH                           (AUDIO_HOP_SIZE*AUDIO_ROLLING_FRAMES)
-#define AUDIO_STFT_LENGTH                           (AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES)
 
 #define PRINT_PCM_DATA                              0
 #define PRINT_STFT_DATA                             0
+#define PRINT_BEAMFORM_DATA                         0
 #define PRINT_ISTFT_DATA                            1
+#define LOCAL_DATA_TEST                             0
+
+#if LOCAL_DATA_TEST
+const int16_t g_in16BeamformingLocalArray[240] = 
+{
+//    48,  49,  50,  51, 52,  53,  54,  55,  56,  57,  
+//    58,  59,  60,  61,  62,  63,  64, 65,  66,  67, 
+//    68,  69,  70,  71,  72,  73,  74,  75,  76, 77, 
+//    78,  79,  80,  81,  82,  83,  84,  85,  86, 87,  
+//    88,  89,  90, 91,  92,  93,  94,  95,  96,  97,
+//    98,  99, 100, 101, 102, 103, 104, 105, 106, 107, 
+//    108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 
+//    118, 119, 120, 121, 122, 123, 124, 125, 126, 127,  
+//    48,  49,  50,  51, 52,  53,  54,  55,  56,  57,  
+//    58,  59,  60,  61,  62,  63,  64, 65,  66,  67, 
+//    68,  69,  70,  71,  72,  73,  74,  75,  76, 77, 
+//    78,  79,  80,  81,  82,  83,  84,  85,  86, 87,  
+//    88,  89,  90, 91,  92,  93,  94,  95,  96,  97,
+//    98,  99, 100, 101, 102, 103, 104, 105, 106, 107, 
+//    108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 
+//    118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 
+//    48,  49,  50,  51, 52,  53,  54,  55,  56,  57,  
+//    58,  59,  60,  61,  62,  63,  64, 65,  66,  67, 
+//    68,  69,  70,  71,  72,  73,  74,  75,  76, 77, 
+//    78,  79,  80,  81,  82,  83,  84,  85,  86, 87,  
+//    88,  89,  90, 91,  92,  93,  94,  95,  96,  97,
+//    98,  99, 100, 101, 102, 103, 104, 105, 106, 107, 
+//    108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 
+//    118, 119, 120, 121, 122, 123, 124, 125, 126, 127 
+48,  49,  50,  51,
+        52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  62,  63,  64,
+        65,  66,  67,  68,  69,  70,  71,  72,  73,  74,  75,  76,  77,
+        78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,  89,  90,
+        91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102, 103,
+       104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116,
+       117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129,
+       130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142,
+       143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155,
+       156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168,
+       169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181,
+       182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194,
+       195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207,
+       208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220,
+       221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233,
+       234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246,
+       247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259,
+       260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272,
+       273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285,
+       286, 287
+
+};    
+#endif 
 
 uint32_t indx, k, i, idx;
-
+uint8_t frame_count = 0;
 uint32_t g_pui32AudioProBuff[AUDIO_HOP_SIZE];
 int16_t* g_pin16PcmPtr;
 
@@ -311,10 +360,21 @@ int16_t g_pin16RightChPrev[AUDIO_PREPROCESS_FFT_SIZE-AUDIO_HOP_SIZE]={0};
 int16_t g_pin16LeftChBuff[AUDIO_HOP_SIZE];
 int16_t g_pin16RightChBuff[AUDIO_HOP_SIZE];
 int16_t g_pin16LeftConcaBuff[AUDIO_PREPROCESS_FFT_SIZE];
-float32_t g_pfFftInBuff[AUDIO_PREPROCESS_FFT_SIZE];
-float32_t g_pfFftOutBuff[AUDIO_STFT_LENGTH];
-float32_t g_pfFftOutCopy[AUDIO_STFT_LENGTH];
-int16_t g_pin16SynAudioBuff[AUDIO_BUFF_LENGTH];
+int16_t g_pin16RightConcaBuff[AUDIO_PREPROCESS_FFT_SIZE];
+float32_t g_pfFftLeftInBuff[AUDIO_PREPROCESS_FFT_SIZE];
+float32_t g_pfFftRightInBuff[AUDIO_PREPROCESS_FFT_SIZE];
+
+float32_t g_pfBeamformedOut_1[AUDIO_PREPROCESS_FFT_SIZE]={0.};
+float32_t g_pfBeamformedOut_2[AUDIO_PREPROCESS_FFT_SIZE]={0.};
+float32_t g_pfBeamformedOut_3[AUDIO_PREPROCESS_FFT_SIZE]={0.};
+
+float32_t g_pfFftOut_L[AUDIO_PREPROCESS_FFT_SIZE]={0.};
+float32_t g_pfFftOut_R[AUDIO_PREPROCESS_FFT_SIZE]={0.};
+
+float32_t g_pfLeftChFftOutBuff[AUDIO_STFT_LENGTH];
+float32_t g_pfRightChFftOutBuff[AUDIO_STFT_LENGTH];
+float g_pfBeamformingOutBuff[AUDIO_STFT_LENGTH];
+int16_t g_pin16SynAudioBuff[AUDIO_HOP_SIZE];
 float32_t g_pfIfftTest[AUDIO_PREPROCESS_FFT_SIZE];
 am_app_stft_instance_f32 Sf;
 //
@@ -324,9 +384,14 @@ arm_rfft_fast_instance_f32 S_arm_fft;
 
 stft_init_f32(&Sf, &S_arm_fft, AUDIO_PREPROCESS_FFT_SIZE, AUDIO_HOP_SIZE, AUDIO_ROLLING_FRAMES, g_f32HanningWindow);
 
-
 am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue);
 
+//float32_t test2[6] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
+//float32_t test_result[6];
+
+//arm_cmplx_mult_cmplx_f32(test1, test2, test_result, 3);
+
+//am_util_stdio_printf("The calculated result: %f, %f, %f, %f, %f, %f\n\r", test_result[0], test_result[1], test_result[2], test_result[3], test_result[4], test_result[5]);
 #endif // AM_AEP_BEAMFORMING_TEST
 
     while (1)
@@ -488,45 +553,74 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
             g_ui32AudioFrameSum = 0;
             am_devices_led_off(am_bsp_psLEDs, 3);
             DebugLog("Audio recording is terminated and data starts to upload:\n\r");
+#if LOCAL_DATA_TEST
+            for(uint32_t frame=0; frame<1; frame++)
+#else
             while(!am_app_utils_ring_buffer_empty(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM]))
-//            for(uint32_t frame=0; frame<2; frame++)
+//            for(uint32_t frame=0; frame<1; frame++)
+#endif // LOCAL_DATA_TEST
             {
-                for(idx=0; idx<AUDIO_ROLLING_FRAMES; idx++)
-                {
+//                for(idx=0; idx<AUDIO_ROLLING_FRAMES; idx++)
+//                {
+#if LOCAL_DATA_TEST
+                    audio_fft_frame_concatenate(g_pin16LeftChPrev, &g_in16BeamformingLocalArray[idx*AUDIO_HOP_SIZE], g_pin16LeftConcaBuff, AUDIO_HOP_SIZE, AUDIO_PREPROCESS_FFT_SIZE);
+                    stft_window_apply_f32(g_pin16LeftConcaBuff, g_pfFftLeftInBuff, &Sf);
+                    stft_f32(&Sf, g_pfFftLeftInBuff, &g_pfLeftChFftOutBuff[idx*AUDIO_PREPROCESS_FFT_SIZE]);
+                    if(PRINT_STFT_DATA)
+                    {
+                        for(k=0; k<AUDIO_PREPROCESS_FFT_SIZE;k++)
+                        {
+                            DebugLogFloat(g_pfLeftChFftOutBuff[k+idx*AUDIO_PREPROCESS_FFT_SIZE]);
+                            DebugLog(" ");
+//                          DebugLog(", ");
+                            if((k+1)%8==0)
+                                DebugLog("\n\r");
+                        }
+                    }
+                    audio_dual_ch_beamforming(&g_pfLeftChFftOutBuff[idx*AUDIO_PREPROCESS_FFT_SIZE], &g_pfLeftChFftOutBuff[idx*AUDIO_PREPROCESS_FFT_SIZE], 
+                                            g_f32BeamformingWeightLeftChPara, g_f32BeamformingWeightRightChPara,
+                                            AUDIO_PREPROCESS_FFT_SIZE/2+1, &g_pfBeamformingOutBuff[idx*AUDIO_PREPROCESS_FFT_SIZE]);
+
+#else
                     am_app_utils_ring_buffer_pop(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], g_pui32AudioProBuff, AUDIO_HOP_SIZE*PCM_DATA_BYTES);
                     for(k=0; k<AUDIO_HOP_SIZE; k++)
                     {
                         g_pin16LeftChBuff[k] = g_pui32AudioProBuff[k] & 0x0000FFFF; 
-
-//                        g_pin16LeftChBuff[k] = g_in16TestInput_2KHZ_SR16K[k]; 
-//                        g_pin16RightChBuff[k] = (g_pui32AudioProBuff[k]>>16) & 0x0000FFFF;
+                        g_pin16RightChBuff[k] = (g_pui32AudioProBuff[k]>>16) & 0x0000FFFF;
                         if(PRINT_PCM_DATA)
                         {
                             DebugLogInt16(g_pin16LeftChBuff[k]);
-                            DebugLog(" ");
-//                    DebugLog(", ");
+//                            DebugLog(" ");
+                            DebugLog(", ");
+                            DebugLogInt16(g_pin16RightChBuff[k]);
+                            DebugLog(", ");
+//                            DebugLog(" ");
                             if((k+1)%8==0)
                                 DebugLog("\n\r");
                         }
                     }
                     audio_fft_frame_concatenate(g_pin16LeftChPrev, g_pin16LeftChBuff, g_pin16LeftConcaBuff, AUDIO_HOP_SIZE, AUDIO_PREPROCESS_FFT_SIZE);
+                    audio_fft_frame_concatenate(g_pin16RightChPrev, g_pin16RightChBuff, g_pin16RightConcaBuff, AUDIO_HOP_SIZE, AUDIO_PREPROCESS_FFT_SIZE);
+                    stft_window_apply_f32(g_pin16LeftConcaBuff, g_pfFftLeftInBuff, &Sf);
+                    stft_window_apply_f32(g_pin16RightConcaBuff, g_pfFftRightInBuff, &Sf);
+                   
+                    memcpy(g_pfBeamformedOut_1, g_pfBeamformedOut_2, sizeof(float32_t)*AUDIO_PREPROCESS_FFT_SIZE);
+                    memcpy(g_pfBeamformedOut_2, g_pfBeamformedOut_3, sizeof(float32_t)*AUDIO_PREPROCESS_FFT_SIZE);
 
-                    stft_window_apply_f32(g_pin16LeftConcaBuff, g_pfFftInBuff, &Sf);
-                    stft_f32(&Sf, g_pfFftInBuff, &g_pfFftOutBuff[idx*AUDIO_PREPROCESS_FFT_SIZE]);
-//                    for(k=0; k<Sf.ui16FftLen; k++)
-//                    {
-//                        am_util_stdio_printf("%f, ", g_pfFftOutBuff[k+idx*AUDIO_PREPROCESS_FFT_SIZE]);
-//                        if((k+1)%8==0)
-//                        {
-//                            am_util_stdio_printf("\n\r");
-//                        }
-//                    }
-                  
+                    stft_f32(&Sf, g_pfFftLeftInBuff, g_pfFftOut_L);
+                    stft_f32(&Sf, g_pfFftRightInBuff, g_pfFftOut_R);
+                   
+                    audio_dual_ch_beamforming(g_pfFftOut_L, g_pfFftOut_R, 
+                                            g_f32BeamformingWeightLeftChPara, g_f32BeamformingWeightRightChPara,
+                                            AUDIO_PREPROCESS_FFT_SIZE/2+1, &g_pfBeamformedOut_3);
+#endif // LOCAL_DATA_TEST
+//                }
+
                     if(PRINT_STFT_DATA)
                     {
                         for(k=0; k<AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES;k++)
                         {
-                            DebugLogFloat(g_pfFftOutBuff[k]);
+                            DebugLogFloat(g_pfLeftChFftOutBuff[k]);
                             DebugLog(" ");
 //                          DebugLog(", ");
                             if((k+1)%8==0)
@@ -534,12 +628,30 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
                         }
                     }
 
+                memcpy(g_pfBeamformingOutBuff, g_pfBeamformedOut_1, sizeof(float32_t)*AUDIO_PREPROCESS_FFT_SIZE);
+                memcpy(&g_pfBeamformingOutBuff[1*AUDIO_PREPROCESS_FFT_SIZE], g_pfBeamformedOut_2, sizeof(float32_t)*AUDIO_PREPROCESS_FFT_SIZE);
+                memcpy(&g_pfBeamformingOutBuff[2*AUDIO_PREPROCESS_FFT_SIZE], g_pfBeamformedOut_3, sizeof(float32_t)*AUDIO_PREPROCESS_FFT_SIZE);
+                
+                if(PRINT_BEAMFORM_DATA)
+                {
+                        for(k=0; k<AUDIO_STFT_LENGTH;k++)
+                        {
+                            DebugLogFloat(g_pfBeamformingOutBuff[k]);
+//                            DebugLog(" ");
+                          DebugLog(", ");
+                            if((k+1)%8==0)
+                                DebugLog("\n\r");
+                        }
                 }
+
 //                for(i=0; i < AUDIO_PREPROCESS_FFT_SIZE*AUDIO_ROLLING_FRAMES; i++)
 //                {
 //                    g_pfFftOutCopy[i] = g_pfFftOutBuff[i];                
 //                }
-                istft_f32(&Sf, AUDIO_ROLLING_FRAMES, g_pfFftOutBuff, g_pin16SynAudioBuff);
+//                istft_f32(&Sf, AUDIO_ROLLING_FRAMES, g_pfRightChFftOutBuff, g_pin16SynAudioBuff);
+
+
+                istft_f32(&Sf, AUDIO_ROLLING_FRAMES, g_pfBeamformingOutBuff, g_pin16SynAudioBuff);
 //                for(i=0; i<AUDIO_ROLLING_FRAMES; i++)
 //                {
 //                    arm_rfft_fast_f32(Sf.p_armfft, &g_pfFftOutBuff[i*Sf.ui16FftLen], g_pfIfftTest, 1);
@@ -556,10 +668,10 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
 //                }
                 if(PRINT_ISTFT_DATA)
                 {
-                    for(indx =0; indx<AUDIO_BUFF_LENGTH; indx++)
+                    for(indx =0; indx<AUDIO_HOP_SIZE; indx++)
                     {
                         DebugLogInt16(g_pin16SynAudioBuff[indx]);
-//                        DebugLogFloat(g_pfIfftTest[indx]);
+//                        DebugLogFloat(g_pin16SynAudioBuff[indx]);
                         DebugLog(" ");
 //                      DebugLog(", ");
                         if((indx+1)%8==0)

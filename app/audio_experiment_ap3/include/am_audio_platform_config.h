@@ -38,7 +38,7 @@
 #define configUSE_RTT_PRINTF                0
 
 /* MIPS measurement */
-#define configUSE_MEASURE_MIPS              1
+#define configUSE_MEASURE_MIPS              0
 /* Data Block Output configuration */
 #define configUSE_RTT_DATA_OUTPUT           0
 
@@ -49,7 +49,7 @@
 #define configUSE_BURST_ALWAYS_ON           1
 
 /* Data processing verbose */ 
-#define configUSE_DATA_VERBOSE              1
+#define configUSE_DATA_VERBOSE              0
 
 
 
