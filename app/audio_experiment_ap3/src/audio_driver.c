@@ -203,6 +203,20 @@ void am_pdm0_isr(void)
             }
         }
 #endif // AM_AEP_BEAMFORMING_TEST
+
+#if AM_AEP_PREPROCESS_EVAL
+        if((g_audioRunningFlag == 1) && (g_ui8PcmDataReadyFlag==0))
+        {
+            ringbuff_push_ret = am_app_utils_ring_buffer_push(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], (void*)g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES, true);
+//            configASSERT(ringbuff_push_ret == PCM_FRAME_SIZE*PCM_DATA_BYTES);
+            g_ui32AudioFrameSum ++;
+            if(g_ui32AudioFrameSum >= NUM_PCM_FRAMES)
+            {
+                g_ui8PcmDataReadyFlag = 1;
+            }
+        }
+#endif // AM_AEP_PREPROCESS_EVAL
+
 //        am_util_debug_printf("PDM DCMP interrupt, pick g_ui32PDMDataBuffer[5] = 0x%8x\n", g_ui32PDMDataBuffer[5]);
     }
     else if(ui32Status & (AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF))

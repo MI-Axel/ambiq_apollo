@@ -68,14 +68,19 @@ bin/main.o: ../src/main.c \
  ../../../app_utils/am_app_utils_ring_buffer.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT.h \
  ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h \
- ../src/audio_preprocess/audio_preprocessor.h \
+ ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h \
- ../src/audio_preprocess/stft.h ../../../app_utils/am_app_utils_syscall.h \
- ../../../app_utils/am_app_utils.h ../include/audio_driver.h \
- ../src/audio_preprocess/hanning_window.h ../src/audio_preprocess/stft.h \
- ../src/local_test_data/am_AEP_local_test_data.h \
- ../src/audio_preprocess/beamforming_weights.h
+ ../../../app_lib/audio_preprocess/audio_preprocessor.h \
+ ../../../app_lib/audio_preprocess/config.h \
+ ../../../app_lib/audio_preprocess/beamforming/beamforming.h \
+ ../../../app_lib/audio_preprocess/config.h \
+ ../../../app_lib/audio_preprocess/stft/stft.h \
+ ../../../app_utils/am_app_utils_syscall.h \
+ ../../../app_utils/am_app_utils.h \
+ ../../../app_lib/audio_preprocess/stft/hanning_window.h \
+ ../../../app_lib/audio_preprocess/beamforming/beamforming_weights.h \
+ ../../../app_lib/audio_preprocess/scnr/scnr.h
 
 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -217,24 +222,28 @@ bin/main.o: ../src/main.c \
 
 ../../../tools/segger/SEGGER_RTT_V640/RTT/SEGGER_RTT_Conf.h:
 
-../src/audio_preprocess/audio_preprocessor.h:
+../include/audio_driver.h:
 
 ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h:
 
 ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h:
 
-../src/audio_preprocess/stft.h:
+../../../app_lib/audio_preprocess/audio_preprocessor.h:
+
+../../../app_lib/audio_preprocess/config.h:
+
+../../../app_lib/audio_preprocess/beamforming/beamforming.h:
+
+../../../app_lib/audio_preprocess/config.h:
+
+../../../app_lib/audio_preprocess/stft/stft.h:
 
 ../../../app_utils/am_app_utils_syscall.h:
 
 ../../../app_utils/am_app_utils.h:
 
-../include/audio_driver.h:
+../../../app_lib/audio_preprocess/stft/hanning_window.h:
 
-../src/audio_preprocess/hanning_window.h:
+../../../app_lib/audio_preprocess/beamforming/beamforming_weights.h:
 
-../src/audio_preprocess/stft.h:
-
-../src/local_test_data/am_AEP_local_test_data.h:
-
-../src/audio_preprocess/beamforming_weights.h:
+../../../app_lib/audio_preprocess/scnr/scnr.h:

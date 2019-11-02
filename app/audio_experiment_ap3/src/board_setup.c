@@ -292,6 +292,12 @@ void am_app_AEP_sys_init(void)
 
 #endif  // defined(AM_BSP_NUM_BUTTONS)  &&  defined(AM_BSP_NUM_LEDS)
 
+//
+// config GPIO48 as MIPS measurement
+//
+    am_hal_gpio_pinconfig(48, g_AM_HAL_GPIO_OUTPUT);
+    am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_CLEAR);
+
     // Turn on PDM
     am_app_AEP_pdm_init();
  

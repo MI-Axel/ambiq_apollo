@@ -44,6 +44,7 @@ CONFIG := bin
 AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.2.0
 AM_FolderRoot ?= ../../..
 AM_OpusRoot ?= ../../../tools/opus/opus-1.2.1
+AM_APP_LIB ?= ../../../app_lib
 
 SHELL:=/bin/bash
 #### Setup ####
@@ -101,6 +102,10 @@ include ${AM_FolderRoot}/app_utils/am_app_utils.mk
 include SEGGER_SYSVIEW.mk
 ###################### END OF SEGGER TOOLS PART ######################
 
+#################### AMBIQ AUDIO PREPROCESS LIB #######################
+include ${AM_APP_LIB}/audio_preprocess/am_audio_preprocess.mk
+###################### END OF AMBIQ AUDIO PREPROCESS LIB ######################
+
 
 DEFINES = -DPART_$(PART)
 DEFINES += -DAM_PACKAGE_BGA
@@ -130,24 +135,31 @@ INCLUDES += -I${AM_FolderRoot}/math/CMSIS_5/Include
 INCLUDES += ${SEGGER_SYSVIEW_INC}
 
 # OPUS INCLUDES
-INCLUDES += -I${AM_OpusRoot}/include
-INCLUDES += -I${AM_OpusRoot}/src
-INCLUDES += -I${AM_OpusRoot}/celt
-INCLUDES += -I${AM_OpusRoot}/celt/arm
-INCLUDES += -I${AM_OpusRoot}/silk
-INCLUDES += -I${AM_OpusRoot}/silk/arm
-INCLUDES += -I${AM_OpusRoot}/silk/fixed
-INCLUDES += -I${AM_OpusRoot}
+#INCLUDES += -I${AM_OpusRoot}/include
+#INCLUDES += -I${AM_OpusRoot}/src
+#INCLUDES += -I${AM_OpusRoot}/celt
+#INCLUDES += -I${AM_OpusRoot}/celt/arm
+#INCLUDES += -I${AM_OpusRoot}/silk
+#INCLUDES += -I${AM_OpusRoot}/silk/arm
+#INCLUDES += -I${AM_OpusRoot}/silk/fixed
+#INCLUDES += -I${AM_OpusRoot}
 
 # STFT INCLUDES
-INCLUDES += -I../src/audio_preprocess
+#INCLUDES += -I../src/audio_preprocess
 
 # Microphone calibration INCLUDES
-INCLUDES += -I../src/mikro_cal
+#INCLUDES += -I../src/mikro_cal
 
 # Microphone THD calculator INCLUDES
-INCLUDES += -I../src/mikro_thd
-INCLUDES += -I../src/local_test_data
+#INCLUDES += -I../src/mikro_thd
+#INCLUDES += -I../src/local_test_data
+
+# am_app_lib includes
+INCLUDES += -I${AM_APP_LIB}/audio_preprocess/
+INCLUDES += -I${AM_APP_LIB}/audio_preprocess/beamforming
+INCLUDES += -I${AM_APP_LIB}/audio_preprocess/stft
+INCLUDES += -I${AM_APP_LIB}/audio_preprocess/scnr
+INCLUDES += -I${AM_APP_LIB}/audio_preprocess/filter
 
 VPATH = ${AM_SoftwareRoot}/utils
 VPATH +=:${AM_SoftwareRoot}/devices
@@ -167,17 +179,24 @@ VPATH +=:${AM_OpusRoot}/silk/fixed
 VPATH +=:${AM_OpusRoot}/silk/float
 
 # STFT folders
-VPATH +=:../src/audio_preprocess
+#VPATH +=:../src/audio_preprocess
 
 # mikro calibration folder
-VPATH +=:../src/mikro_cal
+#VPATH +=:../src/mikro_cal
 
 # mikro THD calculator folder
-VPATH +=:../src/mikro_thd
-VPATH +=:../src/local_test_data/
+#VPATH +=:../src/mikro_thd
+#VPATH +=:../src/local_test_data/
 
 # OPUS SOURCE FILES
 OPUS_SRC = $(notdir $(SILK_SOURCES) $(CELT_SOURCES) $(OPUS_SOURCES) $(CELT_SOURCES_ARM))
+
+# am_app_lib VPATH
+VPATH +=:${AM_APP_LIB}/audio_preprocess
+VPATH +=:${AM_APP_LIB}/audio_preprocess/beamforming
+VPATH +=:${AM_APP_LIB}/audio_preprocess/stft
+VPATH +=:${AM_APP_LIB}/audio_preprocess/filter
+VPATH +=:${AM_APP_LIB}/audio_preprocess/scnr
 
 SRC = main.c
 #SRC += am_hal_pdm.c
@@ -205,17 +224,20 @@ SRC += audio_driver.c
 SRC += ${SEGGER_SYSVIEW_SRC}
 
 # STFT test code 
-SRC += stft.c
-SRC += am_AEP_local_test_data.c
-SRC += hanning_window.c
-SRC += digital_filter.c
-SRC += audio_preprocessor.c
-SRC += beamforming_weights.c
+#SRC += stft.c
+#SRC += am_AEP_local_test_data.c
+#SRC += hanning_window.c
+#SRC += digital_filter.c
+#SRC += audio_preprocessor.c
+#SRC += beamforming_weights.c
 # Mikro calibration code
 #SRC += am_mikro_calibration.c
 
 # Mikro THD calculator
 #SRC += am_mikro_thd.c
+
+SRC += ${AM_AUDIO_PREPROCESS_SRC}
+
 
 CSRC = $(filter %.c,$(SRC))
 ASRC = $(filter %.s,$(SRC))

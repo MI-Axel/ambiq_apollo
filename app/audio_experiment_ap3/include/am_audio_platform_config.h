@@ -27,7 +27,9 @@
 
 #define AM_AEP_DIGITAL_FILTER_TEST          0
 
-#define AM_AEP_BEAMFORMING_TEST             1
+#define AM_AEP_BEAMFORMING_TEST             0
+
+#define AM_AEP_PREPROCESS_EVAL              1
 //
 // Platform support function configuration
 //

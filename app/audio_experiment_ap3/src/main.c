@@ -90,6 +90,21 @@ uint32_t g_ui32DMicDataCollectFlag = 0;
 #include "am_AEP_local_test_data.h"
 #endif // AM_AEP_DIGITAL_FILTER_TEST
 
+#if AM_AEP_PREPROCESS_EVAL
+#include "audio_preprocessor.h"
+#include <math.h>
+#define PREPROCESS_PRINT_OUT        1
+
+//
+// Instance of audio pre-process
+//
+am_AudioPrepro_Instance VOS_Instance;
+
+uint32_t g_ui32DMicDataCollectFlag = 0;
+
+float32_t val;
+
+#endif // AM_AEP_PREPROCESS_EVAL
 
 int main(void)
 {
@@ -293,10 +308,10 @@ if(LOCAL_DATA_TEST)
 
 #if AM_AEP_BEAMFORMING_TEST
 
-#define PRINT_PCM_DATA                              0
+#define PRINT_PCM_DATA                              1
 #define PRINT_STFT_DATA                             0
 #define PRINT_BEAMFORM_DATA                         0
-#define PRINT_ISTFT_DATA                            1
+#define PRINT_ISTFT_DATA                            0
 #define LOCAL_DATA_TEST                             0
 
 #if LOCAL_DATA_TEST
@@ -393,6 +408,11 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
 
 //am_util_stdio_printf("The calculated result: %f, %f, %f, %f, %f, %f\n\r", test_result[0], test_result[1], test_result[2], test_result[3], test_result[4], test_result[5]);
 #endif // AM_AEP_BEAMFORMING_TEST
+
+#if AM_AEP_PREPROCESS_EVAL
+    uint32_t g_pui32AudioProBuff[AUDIO_PREPROCESS_HOP_SIZE];
+    am_audio_preprocess_init(&VOS_Instance);
+#endif // AM_AEP_PREPROCESS_EVAL
 
     while (1)
     {
@@ -590,11 +610,11 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
                         if(PRINT_PCM_DATA)
                         {
                             DebugLogInt16(g_pin16LeftChBuff[k]);
-//                            DebugLog(" ");
-                            DebugLog(", ");
+                            DebugLog(" ");
+//                            DebugLog(", ");
                             DebugLogInt16(g_pin16RightChBuff[k]);
-                            DebugLog(", ");
-//                            DebugLog(" ");
+//                            DebugLog(", ");
+                            DebugLog(" ");
                             if((k+1)%8==0)
                                 DebugLog("\n\r");
                         }
@@ -684,6 +704,64 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
     }
 #endif // AM_AEP_BEAMFORMING_TEST
 
+#if AM_AEP_PREPROCESS_EVAL
+    if(g_ui32DMicDataCollectFlag == 1)
+    {
+        AM_APP_LOG_INFO("Start to record audio in 2 secs...\n\r");
+
+        am_util_delay_ms(2000);
+
+        g_audioRunningFlag = 1;
+
+        while(g_ui8PcmDataReadyFlag == 0);
+
+        if(g_ui8PcmDataReadyFlag ==1)
+        {
+            g_audioRunningFlag = 0;
+            g_ui32DMicDataCollectFlag = 0;
+            g_ui8PcmDataReadyFlag = 0;
+            g_ui32AudioFrameSum = 0;
+            am_devices_led_off(am_bsp_psLEDs, 3);
+            AM_APP_LOG_INFO("Audio recording is terminated and data starts to upload:\n\r");
+
+            while(!am_app_utils_ring_buffer_empty(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM]))
+            {
+                am_app_utils_ring_buffer_pop(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], g_pui32AudioProBuff, AUDIO_PREPROCESS_HOP_SIZE*PCM_DATA_BYTES);
+                for(uint32_t k=0; k<AUDIO_PREPROCESS_HOP_SIZE; k++)
+                {
+//                    g_pin16LeftChBuff[k] = g_pui32AudioProBuff[k] & 0x0000FFFF; 
+//                    g_pin16RightChBuff[k] = (g_pui32AudioProBuff[k]>>16) & 0x0000FFFF;
+                    VOS_Instance.audio_leftCh[k] = g_pui32AudioProBuff[k] & 0x0000FFFF; 
+                    VOS_Instance.audio_rightCh[k] = (g_pui32AudioProBuff[k]>>16) & 0x0000FFFF;
+                }
+
+                //
+                // toggle IO for mips measurement
+                //
+                am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_SET);
+
+                am_audio_preprocess_handler(&VOS_Instance);
+
+                am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_CLEAR);
+
+                if(PREPROCESS_PRINT_OUT)
+                {
+                    for(uint32_t indx =0; indx<AUDIO_PREPROCESS_HOP_SIZE; indx++)
+                    {
+                        DebugLogInt16(VOS_Instance.mono_out[indx]);
+                        DebugLog(" ");
+//                      DebugLog(", ");
+                        if((indx+1)%8==0)
+                            DebugLog("\n\r");
+                    }
+                }
+       
+            }
+            DebugLog("The end of data transfer...\n\r");
+        }
+    }
+#endif // AM_AEP_PREPROCESS_EVAL
+
 
         
 //
@@ -738,8 +816,15 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
     }
 #endif // AM_AEP_BEAMFORMING_TEST
 
+#if AM_AEP_PREPROCESS_EVAL
+    if(g_ui32DMicDataCollectFlag == 0)
+    {
+        g_ui32DMicDataCollectFlag = 1;
+        am_devices_led_on(am_bsp_psLEDs, 3);
+    }
+#endif // AM_AEP_BEAMFORMING_TEST
 
-        }
+        } 
 
     //
     // Go to Deep Sleep.
