@@ -102,7 +102,7 @@ am_AudioPrepro_Instance VOS_Instance;
 
 uint32_t g_ui32DMicDataCollectFlag = 0;
 
-float32_t val;
+uint32_t g_ui32ProcessedFrames = 0;
 
 #endif // AM_AEP_PREPROCESS_EVAL
 
@@ -727,6 +727,14 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
             while(!am_app_utils_ring_buffer_empty(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM]))
             {
                 am_app_utils_ring_buffer_pop(&am_sys_ring_buffers[AM_APP_RINGBUFF_PCM], g_pui32AudioProBuff, AUDIO_PREPROCESS_HOP_SIZE*PCM_DATA_BYTES);
+                
+                g_ui32ProcessedFrames ++;
+
+                if(g_ui32ProcessedFrames >= (NUM_PCM_FRAMES)/2)
+                {
+                    VOS_Instance.ui32ScnrEnable = 0;
+                }
+                
                 for(uint32_t k=0; k<AUDIO_PREPROCESS_HOP_SIZE; k++)
                 {
 //                    g_pin16LeftChBuff[k] = g_pui32AudioProBuff[k] & 0x0000FFFF; 

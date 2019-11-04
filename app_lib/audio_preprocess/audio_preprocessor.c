@@ -98,7 +98,7 @@ void am_audio_preprocess_init(am_AudioPrepro_Instance* p_vos)
     p_vos->ui32BuffFrames = AUDIO_PREPROCESS_ROLLING_FRAMES;
     
     p_vos->ui32BeamformingEnable = 1;
-    p_vos->ui32ScnrEnable = 0;
+    p_vos->ui32ScnrEnable = 1;
     p_vos->ui32HPfilterEnable = 1;
 
     stft_init_f32(&(p_vos->Sf), AUDIO_PREPROCESS_FFT_SIZE, AUDIO_PREPROCESS_HOP_SIZE, AUDIO_PREPROCESS_ROLLING_FRAMES, g_f32HanningWindow);
