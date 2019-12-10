@@ -52,7 +52,7 @@ typedef struct _awe_modDCSourceIntInstance
 } awe_modDCSourceIntInstance;
 
 #if !defined(NOREDEF)
-extern const ModClassModule awe_modDCSourceIntClass;
+extern const UINT32 awe_modDCSourceIntClass;
 #endif // #if !defined(NOREDEF)
 
 /* Dynamic instantiation is used by default.  When building for static

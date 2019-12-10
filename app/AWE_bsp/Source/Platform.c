@@ -13,7 +13,7 @@
 *******************************************************************************/
 #include "Platform.h"
 #include "am_util.h"
-#include "aweOptionalFeatures.h"
+//#include "aweOptionalFeatures.h"
 
 AWEInstance g_AWEInstance;
 CoreDescriptor g_Core[1];
@@ -55,13 +55,13 @@ AWE_FW_SLOW_ANY_CONST UINT32 g_fastb_heap_size = FASTB_HEAP_SIZE;
 Each item is the address of a module descriptor that we need linked in. The
 linker magic is such that only those modules referenced here will be in the
 final program. */
-const ModClassModule *g_module_descriptor_table[] =
-{
+//const ModClassModule *g_module_descriptor_table[] =
+//{
 	// The suitably cast pointers to the module descriptors.
-    LISTOFCLASSOBJECTS
-};
+//    LISTOFCLASSOBJECTS
+//};
 
-AWE_MOD_SLOW_DM_DATA UINT32 g_module_descriptor_table_size = sizeof(g_module_descriptor_table) / sizeof(g_module_descriptor_table[0]);
+//AWE_MOD_SLOW_DM_DATA UINT32 g_module_descriptor_table_size = sizeof(g_module_descriptor_table) / sizeof(g_module_descriptor_table[0]);
 
 // Audio Running Flag
 
@@ -215,8 +215,8 @@ void AWEInstanceInit()
     g_AWEInstance.m_pInterleavedOutputPin = s_OutputPin;
 
     // Point to the global module table.
-    g_AWEInstance.m_module_descriptor_table_size = sizeof(g_module_descriptor_table) >> 2;
-    g_AWEInstance.m_pModule_descriptor_table = g_module_descriptor_table;
+//    g_AWEInstance.m_module_descriptor_table_size = sizeof(g_module_descriptor_table) >> 2;
+//    g_AWEInstance.m_pModule_descriptor_table = g_module_descriptor_table;
 
     // This will be core ID 0.
     g_AWEInstance.m_coreID = CORE_ID;
@@ -268,28 +268,28 @@ void AWEInstanceInit()
 // PURPOSE: Initialize AWE
 //-----------------------------------------------------------------------------
 AWE_OPTIMIZE_FOR_SPACE
-AWE_FW_SLOW_CODE
-void awe_pltInit(void)
-{ 
-    // Setup processor clocks, signal routing, timers, etc.
-    CoreInit();
-    
-    // Initialize the target info    
-    AWEInstanceInit();
-    
-    // Setup board peripherals (CODECs, external memory, etc.)
-    BoardInit();
-    
-    // Setup audio DMA, interrupt priorities, etc.
-//    AudioInit();
-    
-    // Setup communication channel for monitoring and control
-    UARTMsgInit();
-    #ifdef USE_FLASH_FILE_SYSTEM
-        // Initialize the Flash File System
-        awe_pltInitFlashFileSystem();
-    #endif
-}   // End awe_pltInit
+//AWE_FW_SLOW_CODE
+//void awe_pltInit(void)
+//{ 
+//    // Setup processor clocks, signal routing, timers, etc.
+//    CoreInit();
+//    
+//    // Initialize the target info    
+//    AWEInstanceInit();
+//    
+//    // Setup board peripherals (CODECs, external memory, etc.)
+//    BoardInit();
+//    
+//    // Setup audio DMA, interrupt priorities, etc.
+////    AudioInit();
+//    
+//    // Setup communication channel for monitoring and control
+//    UARTMsgInit();
+//    #ifdef USE_FLASH_FILE_SYSTEM
+//        // Initialize the Flash File System
+//        awe_pltInitFlashFileSystem();
+//    #endif
+//}   // End awe_pltInit
 ///-----------------------------------------------------------------------------
 /// @name  void awe_pltTick(void)
 /// @brief Idle loop Platform Tick Processing

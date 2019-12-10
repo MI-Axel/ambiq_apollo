@@ -2372,148 +2372,52 @@
     <group>
         <name>am_bsp</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\bsp\am_bsp.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\boards\apollo3_evb\bsp\am_bsp_pins.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\boards\apollo3_evb\bsp\iar\bin\libam_bsp.a</name>
         </file>
     </group>
     <group>
         <name>am_devices</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\devices\am_devices_button.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\devices\am_devices_button.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\devices\am_devices_led.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\devices\am_devices_led.c</name>
         </file>
     </group>
     <group>
         <name>am_hal</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_adc.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ble.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ble_patch.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ble_patch_b0.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_burst.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_cachectrl.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_clkgen.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_cmdq.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ctimer.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_debug.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_flash.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_global.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_gpio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_interrupt.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_iom.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_ios.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_itm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_mcuctrl.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_mspi.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_pdm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_pwrctrl.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_queue.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_reset.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_rtc.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_secure_ota.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_security.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_stimer.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_sysctrl.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_systick.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_tpiu.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_uart.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\mcu\apollo3\hal\am_hal_wdt.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\mcu\apollo3\hal\iar\bin\libam_hal.a</name>
         </file>
     </group>
     <group>
         <name>am_util</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_ble.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_ble.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_debug.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_debug.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_delay.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_delay.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_faultisr.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_faultisr.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_id.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_id.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_regdump.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_regdump.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_stdio.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_stdio.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_string.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_string.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.0.0\utils\am_util_time.c</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\utils\am_util_time.c</name>
         </file>
     </group>
     <group>
@@ -2522,11 +2426,50 @@
             <name>$PROJ_DIR$\..\Source\AM_2cm_FBF_SCNR_THF_NTAWB.c</name>
         </file>
     </group>
+    <group>
+        <name>dspc_lib</name>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Advanced.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\AWECore-EVAL-CortexM4-cmake-build115\AWECore\Lib\EWARM\AWECore.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\CFramework.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Deprecated.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\dspc_qsd.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\dspc_scnr.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\FlashFileSystem.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\ModuleHelperLib.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Q15_Demo_ASRCLib.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\SensoryTHFCortexM.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Standard.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\TrulyHandsFreeV5.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\VectorLib.a</name>
+        </file>
+    </group>
     <file>
         <name>$PROJ_DIR$\..\Source\AudioDriver.c</name>
-    </file>
-    <file>
-        <name>$PROJ_DIR$\..\Source\AWEFlash.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\Source\BoardSetup.c</name>

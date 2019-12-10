@@ -1,0 +1,41 @@
+ 
+CortexM4 Build -- AWECore Source
+Built on:     Mon Dec 09 15:20:26 EST 2019
+Build name:   build.awecore.cortexm4-115
+Built from:   awecore-common
+Version:      cmake
+SHA:          4f54bc6
+
+CortexM4 Build -- Target Source
+Built on:     Mon Dec 09 15:20:28 EST 2019
+Build name:   build.awecore.cortexm4-115
+Built from:   awecore-cortexm
+Version:      cmake
+SHA:          369eb7b
+
+CortexM4 Build -- Toolchain Info: [mdk-arm-5.28, ewarm-8.3, sw4stm32-1.17]
+Built on:     Mon Dec 09 15:20:30 EST 2019
+Build name:   build.awecore.cortexm4-115
+Built from:   dspc-cmake-toolchains
+Version:      master
+SHA:          e6dbdb7
+
+CortexM4 Build -- Module Set: awe-mod-dspc-vui
+Built on:     Mon Dec 09 15:21:52 EST 2019
+Build name:   build.awecore.cortexm4-115
+Built from:   awe-mod-dspc-vui
+Version:      heads/master
+SHA:          6a25ea8
+
+  
+Includes 90000 second evaluation timeout 
+ 
+ 
+------ Sample Applications ------ 
+STM32F407 Sample Application
+Built on:     Mon Dec 09 15:24:17 EST 2019
+Build name:   build.awecore.cortexm4-115
+Built from:   awe8-bsp-stm32f407-discovery
+Version:      master
+SHA:          3a2187b
+

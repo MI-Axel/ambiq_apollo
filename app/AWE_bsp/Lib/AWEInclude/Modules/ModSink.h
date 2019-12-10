@@ -57,7 +57,7 @@ typedef struct _awe_modSinkInstance
 } awe_modSinkInstance;
 
 #if !defined(NOREDEF)
-extern const ModClassModule awe_modSinkClass;
+extern const UINT32 awe_modSinkClass;
 #endif // #if !defined(NOREDEF)
 
 /* Dynamic instantiation is used by default.  When building for static
