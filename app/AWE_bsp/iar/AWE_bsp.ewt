@@ -2423,7 +2423,7 @@
     <group>
         <name>dspc_layout</name>
         <file>
-            <name>$PROJ_DIR$\..\Source\AM_2cm_FBF_SCNR_THF_NTAWB.c</name>
+            <name>$PROJ_DIR$\..\demo_layout\vos_alexa_qual_InitAWB.c</name>
         </file>
     </group>
     <group>
@@ -2469,7 +2469,10 @@
         </file>
     </group>
     <file>
-        <name>$PROJ_DIR$\..\Source\AudioDriver.c</name>
+        <name>$PROJ_DIR$\..\Source\apollo_isr.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\..\Source\AWECoreUtils.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\Source\BoardSetup.c</name>
@@ -2491,8 +2494,5 @@
     </file>
     <file>
         <name>$PROJ_DIR$\..\Source\TuningDriver.c</name>
-    </file>
-    <file>
-        <name>$PROJ_DIR$\..\Source\TuningHandler.c</name>
     </file>
 </project>

@@ -11,13 +11,48 @@
 *    
 *
 *******************************************************************************/
-#include "Platform.h"
+//
+// standard C headers
+//
+#include <stdint.h>
+//
+// Ambiq apollo headers
+//
+#include "am_mcu_apollo.h"
+#include "am_bsp.h"
 #include "am_util.h"
-//#include "aweOptionalFeatures.h"
 
+#include "BoardSetup.h"
+#include "TargetInfo.h"
+#include "Platform.h"
+#include "TuningDriver.h"
+//
+// AWE include 
+//
+#include "AWECore.h"
+//
+// Layout related
+//
+#include "vos_alexa_qual_ControlInterface.h"
+
+/** This awe instance */
 AWEInstance g_AWEInstance;
-CoreDescriptor g_Core[1];
-volatile BOOL gReset = FALSE;
+
+/** The only input pin for this core. */
+static IOPinDescriptor s_InputPin = { 0 };
+
+/** The only output pin for this core. */
+static IOPinDescriptor s_OutputPin = { 0 };
+
+uint32_t g_packet_buffer[MAX_COMMAND_BUFFER_LEN] = {0};
+uint32_t g_packet_bytes = 0;
+
+/*
+ * Global variables used by AWE layout processing
+ * */
+volatile uint32_t g_ui32AudioDMAComplete = 0;
+
+
 /* ----------------------------------------------------------------------
 ** Memory heaps
 ** ------------------------------------------------------------------- */
@@ -50,101 +85,269 @@ AWE_FW_SLOW_ANY_CONST UINT32 g_fastb_heap_size = FASTB_HEAP_SIZE;
 /* ----------------------------------------------------------------------
 ** Module table
 ** ------------------------------------------------------------------- */
+const void * g_module_descriptor_table[] =
+{
+    // List of modules from ModuleList.h
+    (void *)LISTOFCLASSOBJECTS
+};
 
-/* Array of pointers to module descriptors. This is initialized at compile time.
-Each item is the address of a module descriptor that we need linked in. The
-linker magic is such that only those modules referenced here will be in the
-final program. */
-//const ModClassModule *g_module_descriptor_table[] =
-//{
-	// The suitably cast pointers to the module descriptors.
-//    LISTOFCLASSOBJECTS
-//};
-
-//AWE_MOD_SLOW_DM_DATA UINT32 g_module_descriptor_table_size = sizeof(g_module_descriptor_table) / sizeof(g_module_descriptor_table[0]);
-
-// Audio Running Flag
-
-volatile int32_t in32AudioRunningFlag = 0;
-
-volatile BOOL g_bReboot = FALSE;
-volatile BOOL g_bBlinkLED4ForBoardAlive = TRUE;
-
-/** The only input pin for this core. */
-static IOPinDescriptor s_InputPin[1];
-
-/** The only output pin for this core. */
-static IOPinDescriptor s_OutputPin[1];
-
+UINT32 g_module_descriptor_table_size = sizeof(g_module_descriptor_table) / sizeof(g_module_descriptor_table[0]);
+/* ----------------------------------------------------------------------
+** Global variables used by AWE
+** ------------------------------------------------------------------- */
 volatile BOOL g_bAudioPump1Active = FALSE;
+BOOL g_bDeferredProcessingRequired = FALSE;
 volatile BOOL g_bAudioPump2Active = FALSE;
-volatile UINT32 g_nPumpCount = 0;
 
-///-----------------------------------------------------------------------------
-/// @name  INT32 awe_pltAudioStart(void)
-/// @brief Start audio processing
-///-----------------------------------------------------------------------------
-AWE_OPTIMIZE_FOR_SPACE
-AWE_FW_SLOW_CODE
-INT32 awe_pltAudioStart(void)
+UINT32 g_TestElapsedTime = 0;
+
+INT16 g_pin16AudioBuffOutCh0[AWE_FRAME_SIZE];
+INT16 g_pin16AudioBuffOutCh1[AWE_FRAME_SIZE];
+//
+// Global variable used by sys
+//
+
+//-----------------------------------------------------------------------------
+// METHOD:  AWEInstanceInit
+// PURPOSE: Initialize AWE Instance with target details
+//-----------------------------------------------------------------------------
+void AWEInstanceInit()
 {
-	// At this point the model is fully instantiated and the control I/O can be setup
-    ControlInit();
-    in32AudioRunningFlag = 1;
-    return 0;
+    memset(&g_AWEInstance, 0, sizeof(AWEInstance) );
 
-}   // End awe_pltAudioStart
+    g_AWEInstance.pInputPin = &s_InputPin;
+    g_AWEInstance.pOutputPin = &s_OutputPin;
 
+    awe_initPin(&s_InputPin, INPUT_CHANNEL_COUNT, NULL);
+    awe_initPin(&s_OutputPin, OUTPUT_CHANNEL_COUNT, NULL);
 
-///-----------------------------------------------------------------------------
-/// @name  INT32 awe_pltAudioStop(void)
-/// @brief Stop audio processing
-///-----------------------------------------------------------------------------
-AWE_OPTIMIZE_FOR_SPACE
-AWE_FW_SLOW_CODE
-INT32 awe_pltAudioStop(void)
+    // User version word
+    g_AWEInstance.userVersion = USER_VER;
+
+    g_AWEInstance.instanceId = CORE_ID;
+    g_AWEInstance.coreSpeed = CORE_SPEED;
+    g_AWEInstance.profileSpeed = CORE_SPEED;
+    g_AWEInstance.pName = "APOLLO3";
+    g_AWEInstance.numThreads = NUM_AUDIO_THREADS;
+    g_AWEInstance.pModuleDescriptorTable = g_module_descriptor_table;
+    g_AWEInstance.numModules = g_module_descriptor_table_size;
+    g_AWEInstance.sampleRate = AUDIO_SAMPLE_RATE;
+    g_AWEInstance.fundamentalBlockSize = AUDIO_BLOCK_SIZE;
+
+    // Define the heap sizes
+    g_AWEInstance.fastHeapASize = MASTER_HEAP_SIZE;
+    g_AWEInstance.fastHeapBSize = FASTB_HEAP_SIZE;
+    g_AWEInstance.slowHeapSize  = SLOW_HEAP_SIZE;
+
+    // Point to the heaps on this target
+    g_AWEInstance.pFastHeapA = g_master_heap;
+    g_AWEInstance.pFastHeapB = g_fastb_heap;
+    g_AWEInstance.pSlowHeap  = g_slow_heap;
+
+    g_AWEInstance.pPacketBuffer = g_packet_buffer;
+    g_AWEInstance.pReplyBuffer = g_packet_buffer;
+    g_AWEInstance.packetBufferSize = MAX_COMMAND_BUFFER_LEN;
+
+    // Initialize AWE signal processing instance
+    awe_init(&g_AWEInstance);
+
+}   // End AWEInstanceInit
+
+//-----------------------------------------------------------------------------
+// METHOD:  AudioWeaver Pump Interrupt Handler
+// PURPOSE: Perform AudioWeaver Processing
+//-----------------------------------------------------------------------------
+void AudioWeaverPump_IRQHandler1(void)
 {
-    // Mark the audio as stopped
-    in32AudioRunningFlag = 0;
+    g_bAudioPump1Active = TRUE;
 
-    return 0;
+//    NVIC_ClearPendingIRQ(AudioWeaverPump_IRQ1);
 
-}   // End awe_pltAudioStop
+    g_bDeferredProcessingRequired = awe_audioPump(&g_AWEInstance, 0);
+
+    g_bAudioPump1Active = FALSE;
+
+}   // End AudioWeaverPump_IRQHandler
+
 
 //-----------------------------------------------------------------------------
-// METHOD:  awe_pltCoreSendCommand
-// PURPOSE: Send command and wait for reply
+// METHOD:  AudioWeaver Pump Interrupt Handler
+// PURPOSE: Perform AudioWeaver Processing
 //-----------------------------------------------------------------------------
-//INT32 awe_pltCoreSendCommand(void *pData, UINT32 * txBuffer, UINT32 * rxBuffer)
-//{
-//    return awe_fwPacketProcess(&g_AWEInstance);
-
-//}	// End awe_pltCoreSendCommand
-//-----------------------------------------------------------------------------
-// METHOD:  awe_pltGetCores
-// PURPOSE: Report number of cores in use on this target
-//-----------------------------------------------------------------------------
-int awe_pltGetCores()
+void AudioWeaverPump_IRQHandler2(void)
 {
-     return 1;
+    g_bAudioPump2Active = TRUE;
 
-}   // End awe_pltGetCores
+//    NVIC_ClearPendingIRQ(AudioWeaverPump_IRQ2);
 
+    g_bDeferredProcessingRequired = awe_audioPump(&g_AWEInstance, 1);
 
+    g_bAudioPump2Active = FALSE;
+
+}   // End AudioWeaverPump_IRQHandler
+
+//-----------------------------------------------------------------------------awe_audioImportSamples
+// METHOD:  AWEIdleLoop
+// PURPOSE: AWE Idle loop processing
 //-----------------------------------------------------------------------------
-// METHOD:  awe_pltDestroyAll
-// PURPOSE: Destroy all core instances
-//-----------------------------------------------------------------------------
-void awe_pltDestroyAll()
+INT32 packet_process_ret = 0;
+void AWEIdleLoop(void)
 {
-    awe_fwDestroy(&g_AWEInstance);
+    BOOL bMoreProcessingRequired = FALSE;
+//
+// Data IO variables
+//
+    UINT32  fwInCount=0; 
+    UINT32 fwOutCount=0;
+    UINT32  layoutMask;
+    int32_t nSample;
+    while(TRUE)
+    {
+            //
+            // Receive adn decode the received packet
+            //
+            CheckForUARTPacketReady();
+	    // Process the received packet
+            if(g_bPacketReceived)
+            {
+                packet_process_ret = awe_packetProcess(&g_AWEInstance);
+                g_bPacketReceived = FALSE;
+                //
+                // Encode and send the packet
+                //
+                UART0SendReply();
+            }
 
-}   // End awe_pltDestroyAll
+        if (awe_audioIsStarted(&g_AWEInstance) )
+        {
+            UINT32 classID;
+            INT32 nValue;
+
+	    // Perform any needed deferred processing
+            if (g_bDeferredProcessingRequired || bMoreProcessingRequired)
+            {
+                g_bDeferredProcessingRequired = FALSE;
+                bMoreProcessingRequired = awe_deferredSetCall(&g_AWEInstance);
+            }
+            
+            if(g_ui32AudioDMAComplete == 1)
+            {
+                g_ui32AudioDMAComplete = 0;
+                //
+                // PCM data to left channel and right channel
+                //
+                for (nSample = 0; nSample < AWE_FRAME_SIZE; nSample++)
+                {
+                    g_pi16LeftChBuff[nSample] = g_pi32PCMDataBuff[nSample] & 0xFFFF;
+                    g_pi16RightChBuff[nSample] = (g_pi32PCMDataBuff[nSample]>>16) & 0xFFFF;               
+                }
+                //
+                // Data IO of layout
+                // Get Current AWE layout number of channels
+                // layout has 1 input and 1 output
+                //
+                awe_layoutGetChannelCount(&g_AWEInstance, 0, &fwInCount, &fwOutCount);
+    
+                if (fwInCount > 0)
+                {
+                    //for (nSample = 0; nSample < AWE_FRAME_SIZE; nSample++)
+                    //{
+                        if (fwInCount >= 1)
+                        {
+                            awe_audioImportSamples(&g_AWEInstance, (void*)g_pi16LeftChBuff, 1, 0, Sample16bit);
+                        }
+    
+                        if (fwInCount >= 2)
+                        {
+                            awe_audioImportSamples(&g_AWEInstance, (void*)g_pi16RightChBuff, 1, 1, Sample16bit);
+                        }
+                    //}
+    
+                }
+    
+                if (fwOutCount > 0)
+                {
+                    //for (nSample = 0; nSample < AWE_FRAME_SIZE; nSample++)
+                    //{
+                        if (fwOutCount >= 1)
+                        {
+                            awe_audioExportSamples(&g_AWEInstance, (void*)g_pin16AudioBuffOutCh0, 1, 0, Sample16bit);
+                        }
+                    //}
+            
+                }
+                layoutMask = awe_audioGetPumpMask(&g_AWEInstance);
+                if(layoutMask & 1)
+                {
+                    if (!g_bAudioPump1Active)
+                    {
+                        g_bAudioPump1Active = TRUE;
+                        am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_SET);
+                        awe_audioPump(&g_AWEInstance, 0);
+                        am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_CLEAR);
+                        g_bAudioPump1Active = FALSE;
+                    }
+                }
+
+                if (layoutMask & 2)
+                {
+                    if (!g_bAudioPump2Active)
+                    {
+
+                        g_bAudioPump2Active = TRUE;
+
+                        awe_audioPump(&g_AWEInstance, 1);
+
+                        g_bAudioPump2Active = FALSE;
+                    }
+                }
+
+            }
+/*
+ * Control IO of layout
+ *
+ */
+//            // Does the current AWE model have a SinkInt module with this control object ID?
+//            if (awe_ctrlGetModuleClass(&g_AWEInstance, AWE_SinkInt1_value_HANDLE, &classID) == OBJECT_FOUND)
+//            {
+//                // Check that module assigned this object ID is of module class SinkInt
+//                if (classID == AWE_SinkInt1_classID)
+//                {
+//                    // SinkInt module (gets nValue from the running layout)
+//                    awe_ctrlGetValue(&g_AWEInstance, AWE_SinkInt1_value_HANDLE, &nValue, 0, 1);
+//
+//                }
+//            }
+//
+
+            // Does the current AWE model have a DCSourceInt module with this control object ID?
+            if (awe_ctrlGetModuleClass(&g_AWEInstance, AWE_DC1_value_HANDLE, &classID) == OBJECT_FOUND)
+            {
+                // Check that module assigned this object ID is of module class DCSourceInt
+                if (classID == AWE_DC1_classID)
+                {
+                    // DCSourceInt module (returns nValue to the running layout)
+                    awe_ctrlSetValue(&g_AWEInstance, AWE_DC1_value_HANDLE, &nValue, 0, 1);
+                }
+            }
+        }
+        
+        /* apollo3 related code: breathing LED */
+        if (g_ui32TimerCount >=1000)
+        {
+            g_ui32TimerCount = 0;
+            am_devices_led_toggle(am_bsp_psLEDs, 0);
+        }
+
+    }   // End while
+
+}   // End AWEIdleLoop
+
 //-----------------------------------------------------------------------------
 // METHOD:  awe_pltGetCycleCount
 // PURPOSE: Returns the current value in the counter
 //-----------------------------------------------------------------------------
-uint32_t awe_pltGetCycleCount(void)
+uint32_t aweuser_getCycleCount(void)
 {
 
 #if USE_PROFILING
@@ -154,13 +357,14 @@ uint32_t awe_pltGetCycleCount(void)
     nCycles = am_hal_ctimer_read(0, AM_HAL_CTIMER_BOTH);
 
     // calculate how many milliseconds elapsed
-    nElapsedCycles = nCycles << 2;  // (12Mhz clk source) multiply by 4
-
+//    nElapsedCycles = nCycles << 2;  // (12Mhz clk source) multiply by 4 at 48MHZ
+    nElapsedCycles = nCycles << 3;  // (12Mhz clk source) multiply by 8 at 96MHZ
     return nElapsedCycles;
-#else
+    return nCycles;
+#else    // USE_PROFILING
 
     return NULL;
-#endif
+#endif    // USE_PROFILING
 
 }   // End awe_pltGetCycleCount
 
@@ -169,7 +373,9 @@ uint32_t awe_pltGetCycleCount(void)
 // METHOD:  awe_pltElapsedCycles
 // PURPOSE: Returns the cycle count between start time and end time
 //-----------------------------------------------------------------------------
-UINT32 awe_pltElapsedCycles(UINT32 nStartTime, UINT32 nEndTime)
+
+
+UINT32 aweuser_getElapsedCycles(UINT32 nStartTime, UINT32 nEndTime)
 {
 #if USE_PROFILING
     UINT32 nElapsedTime;
@@ -183,142 +389,11 @@ UINT32 awe_pltElapsedCycles(UINT32 nStartTime, UINT32 nEndTime)
         // Wrap around occurred
         nElapsedTime = ((((UINT32)0xFFFFFFFF) - nStartTime) + nEndTime + 1);
     }
-
+g_TestElapsedTime = nElapsedTime;
 	return nElapsedTime;
- #else
+#else    // USE_PROFILING
 
     return NULL;
-#endif
+#endif    // USE_PROFILING
 
 }   // End awe_pltElapsedCycles
-
-void AWEInstanceInit()
-{
-    uint32_t nInputWireInfo = INFO1_PROPS(INPUT_CHANNEL_COUNT,
-                                          AWE_FRAME_SIZE,
-                                          IS_COMPLEX,
-                                          SAMPLE_SIZE_IN_BYTES);
-
-    uint32_t nOutputWireInfo = INFO1_PROPS(OUTPUT_CHANNEL_COUNT,
-                                         AWE_FRAME_SIZE,
-                                         IS_COMPLEX,
-                                         SAMPLE_SIZE_IN_BYTES);
-
-    memset(&g_AWEInstance, 0, sizeof(AWEInstance) );
-
-    // Point to the start and stop functions.
-    g_AWEInstance.m_pAwe_pltAudioStart = awe_pltAudioStart;
-    g_AWEInstance.m_pAwe_pltAudioStop = awe_pltAudioStop;
-
-    // Point to our private pins.
-    g_AWEInstance.m_pInterleavedInputPin = s_InputPin;
-    g_AWEInstance.m_pInterleavedOutputPin = s_OutputPin;
-
-    // Point to the global module table.
-//    g_AWEInstance.m_module_descriptor_table_size = sizeof(g_module_descriptor_table) >> 2;
-//    g_AWEInstance.m_pModule_descriptor_table = g_module_descriptor_table;
-
-    // This will be core ID 0.
-    g_AWEInstance.m_coreID = CORE_ID;
-
-    awe_fwInitTargetInfo(&g_AWEInstance,
-                     CORE_ID,
-                     CORE_SPEED,
-                     SAMPLE_SPEED,
-                     "Apollo3",
-                     PROCESSOR_TYPE_CORTEXM4,
-                     HAS_FLOAT_SUPPORT,
-                     HAS_FLASH_FILESYSTEM,
-                     NO_HW_INPUT_PINS,
-                     NO_HW_OUTPUT_PINS,
-                     IS_SMP,
-                     NO_THREADS_SUPPORTED,
-                     FIXED_SAMPLE_RATE,
-                     INPUT_CHANNEL_COUNT,
-                     OUTPUT_CHANNEL_COUNT,
-                     VER_DAY, VER_MONTH, VER_YEAR
-                     );
-
-    g_AWEInstance.m_target_info.m_base_block_size = MAKE_BLOCK_SIZE_PACKED(AWE_FRAME_SIZE, 1);
-
-    awe_fwInit_io_pins(&g_AWEInstance, 1);
-
-    s_InputPin[0].sampleRate = FIXED_SAMPLE_RATE;
-    s_InputPin[0].wireInfo1 = nInputWireInfo;
-    s_InputPin[0].wireInfo3 |= CLOCK_MASTER_BIT;
-    awe_SetPackedName(s_InputPin[0].m_pinName, "Input");
-
-    s_OutputPin[0].sampleRate = FIXED_SAMPLE_RATE;
-    s_OutputPin[0].wireInfo1 = nOutputWireInfo;
-    awe_SetPackedName(s_OutputPin[0].m_pinName, "Output");
-
-	// Allocate the heaps.
-    g_AWEInstance.m_master_heap_size = MASTER_HEAP_SIZE;
-    g_AWEInstance.m_slow_heap_size = SLOW_HEAP_SIZE;
-    g_AWEInstance.m_fastb_heap_size = FASTB_HEAP_SIZE;
-
-    g_AWEInstance.m_master_heap = g_master_heap;
-    g_AWEInstance.m_slow_heap = g_slow_heap;
-    g_AWEInstance.m_fastb_heap = g_fastb_heap;
-}   // End AWEInstanceInit
-
-
-//-----------------------------------------------------------------------------
-// METHOD:  awe_pltInit
-// PURPOSE: Initialize AWE
-//-----------------------------------------------------------------------------
-AWE_OPTIMIZE_FOR_SPACE
-//AWE_FW_SLOW_CODE
-//void awe_pltInit(void)
-//{ 
-//    // Setup processor clocks, signal routing, timers, etc.
-//    CoreInit();
-//    
-//    // Initialize the target info    
-//    AWEInstanceInit();
-//    
-//    // Setup board peripherals (CODECs, external memory, etc.)
-//    BoardInit();
-//    
-//    // Setup audio DMA, interrupt priorities, etc.
-////    AudioInit();
-//    
-//    // Setup communication channel for monitoring and control
-//    UARTMsgInit();
-//    #ifdef USE_FLASH_FILE_SYSTEM
-//        // Initialize the Flash File System
-//        awe_pltInitFlashFileSystem();
-//    #endif
-//}   // End awe_pltInit
-///-----------------------------------------------------------------------------
-/// @name  void awe_pltTick(void)
-/// @brief Idle loop Platform Tick Processing
-///-----------------------------------------------------------------------------
-AWE_OPTIMIZE_FOR_SPEED
-AWE_FW_SLOW_CODE
-void awe_pltTick(void)
-{
-    uint8_t bReplyReady;
-    // Indicate that this idle loop call is getting CPU attention
-    g_nPumpCount = 0;
-//#if USE_AWE
-    CheckForUARTPacketReady();
-//#endif
-    bReplyReady = awe_fwTuningTick(&g_AWEInstance);
-    if (bReplyReady == REPLY_READY)
-    {
-        UART0SendReply();
-        if (g_bReboot)
-        {
-            g_bReboot = FALSE;
-            am_util_delay_ms(500);
-            am_hal_sysctrl_aircr_reset();
-        }
-    }
-    
-    // Process any local controls 
- //   ProcessControlIO();
-		
-}	// End awe_pltTick
-
-

@@ -76,7 +76,7 @@ typedef enum
  *   Types
  * ------------------------------------------------------------------------- */
 #define INCOMPLETE_PACKET               0
-#define COMPLETE_NEW_PACKET	    		1
+#define COMPLETE_NEW_PACKET	    	1
 #define COMPLETE_REPEATED_PACKET    	2
 
 /**

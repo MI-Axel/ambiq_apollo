@@ -1,18 +1,16 @@
-// apollo mcu include
-#include <stdint.h>
-#include "am_mcu_apollo.h"
-#include "am_bsp.h"
-#include "am_util.h"
-
-#include "Platform.h"
+#include "BoardSetup.h"
+#include "TargetInfo.h"
+#include "TuningDriver.h"
 //*****************************************************************************
 // GLOBALS
 //*****************************************************************************
-
 volatile uint32_t g_ui32TimerCount = 0;
-volatile BOOL g_bPDMDataReady = false;
-int32_t g_pi32PCMDataBuff[AWE_FRAME_SIZE]; 
-
+volatile BOOL g_bPDMDataReady = FALSE;
+volatile BOOL g_bUARTPacketReceived = FALSE;
+volatile BOOL g_bPacketReceived = FALSE;
+volatile int32_t g_pi32PCMDataBuff[AWE_FRAME_SIZE];
+volatile int16_t g_pi16LeftChBuff[AWE_FRAME_SIZE];
+volatile int16_t g_pi16RightChBuff[AWE_FRAME_SIZE];
 //*****************************************************************************
 // PDM configuration information.
 //*****************************************************************************
@@ -92,47 +90,11 @@ am_hal_burst_mode_e           eBurstMode;
 //-----------------------------------------------------------------------------
 void uart_init(uint32_t ui32Module)
 {
-/*{{{*/
-#if defined (AM_PART_APOLLO2)
-static am_hal_uart_config_t g_sUart0Config =
-    {
-        .ui32BaudRate    = 460800,
-        .ui32DataBits    = AM_HAL_UART_DATA_BITS_8,
-        .ui32StopBits    = AM_HAL_UART_ONE_STOP_BIT,
-        .ui32Parity      = AM_HAL_UART_PARITY_NONE,
-        .ui32FlowControl = AM_HAL_UART_FLOW_CTRL_NONE,
-    };
-    //
-    // Enable the UART pins.
-    //
-    am_hal_gpio_pin_config(22, AM_HAL_PIN_22_UART0TX);
-    am_hal_gpio_pin_config(17, AM_HAL_PIN_17_UART0RX);
-#endif //#if defined (AM_PART_APOLLO2)
-
 #if defined (AM_PART_APOLLO3)
     am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_TX, g_AM_BSP_GPIO_COM_UART_TX);
     am_hal_gpio_pinconfig(AM_BSP_GPIO_COM_UART_RX, g_AM_BSP_GPIO_COM_UART_RX);
 #endif // #if defined (AM_PART_APOLLO3)
 /*}}}*/
-
-#if defined (AM_PART_APOLLO2)
-    am_hal_uart_pwrctrl_enable(ui32Module);     // Power on the selected UART
-    am_hal_uart_clock_enable(ui32Module);       // start UART interface and enable the FIFOs.
-    am_hal_uart_disable(ui32Module);            // Disable the UART before configuring it.
-
-    if (ui32Module == 0)
-    {
-        am_hal_uart_config(ui32Module, &g_sUart0Config);
-        am_hal_uart_init_buffered(ui32Module, g_pui8UartRxBuffer0, UART0_BUFFER_SIZE,
-                                    g_pui8UartTxBuffer0, UART0_BUFFER_SIZE);
-    }
-
-    //
-    // Configure the UART FIFO.
-    //
-    am_hal_uart_fifo_config(ui32Module, AM_HAL_UART_TX_FIFO_1_2 | AM_HAL_UART_RX_FIFO_1_2);
-
-#endif  //#if defined (AM_PART_APOLLO2)
 
 #if defined (AM_PART_APOLLO3)
     //
@@ -151,21 +113,6 @@ static am_hal_uart_config_t g_sUart0Config =
 //*****************************************************************************
 void uart_enable(uint32_t ui32Module)
 {
-#if defined (AM_PART_APOLLO2)
-    am_hal_uart_clock_enable(ui32Module);
-
-    am_hal_uart_enable(ui32Module);
-    am_hal_uart_int_enable(ui32Module, AM_HAL_UART_INT_RX_TMOUT |
-                                       AM_HAL_UART_INT_RX |
-                                       AM_HAL_UART_INT_TXCMP);
-
-        am_hal_gpio_pin_config(22, AM_HAL_PIN_22_UART0TX);
-        am_hal_gpio_pin_config(17, AM_HAL_PIN_17_UART0RX);
-        am_hal_interrupt_priority_set(AM_HAL_INTERRUPT_UART0, AM_HAL_INTERRUPT_PRIORITY(6));
-
-    am_hal_interrupt_enable(AM_HAL_INTERRUPT_UART + ui32Module);
-#endif //#if defined (AM_PART_APOLLO2)
-
 #if defined (AM_PART_APOLLO3)
     //
     // Enable interrupts.
@@ -181,13 +128,31 @@ void uart_enable(uint32_t ui32Module)
 //*****************************************************************************
 // PDM initialization.
 //*****************************************************************************
+am_hal_pdm_config_t g_sPdmConfig =
+{
+    .eClkDivider = AM_HAL_PDM_MCLKDIV_1,
+    .eLeftGain = AM_HAL_PDM_GAIN_P105DB,
+    .eRightGain = AM_HAL_PDM_GAIN_P105DB,
+    .ui32DecimationRate = 48,//24,//
+    .bHighPassEnable = 0,//1, //
+    .ui32HighPassCutoff = 0xB,
+    .ePDMClkSpeed = AM_HAL_PDM_CLK_1_5MHZ,//AM_HAL_PDM_CLK_750KHZ,//
+    .bInvertI2SBCLK = 0,
+    .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
+    .bPDMSampleDelay = 0,
+    .bDataPacking = 1,
+    .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,
+    .bLRSwap = 0,
+    .bSoftMute = 0,
+};
+
 void pdm_trigger_dma(void)
 {
     //
     // Configure DMA and target address.
     //
     am_hal_pdm_transfer_t sTransfer;
-    sTransfer.ui32TargetAddr = (uint32_t ) g_pi32PCMDataBuff;
+    sTransfer.ui32TargetAddr = (uint32_t )g_pi32PCMDataBuff;
     sTransfer.ui32TotalCount = (AWE_FRAME_SIZE * 4);
 
     //
@@ -199,64 +164,36 @@ void pdm_trigger_dma(void)
 
 void ap3_pdm_init(void) 
 {
-  //
-  // Configure the necessary pins.
-  //
-  am_hal_gpio_pincfg_t sPinCfg = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-  // ARPIT 181019
-  // sPinCfg.uFuncSel = AM_HAL_PIN_10_PDMCLK;
-  // am_hal_gpio_pinconfig(10, sPinCfg);
-  sPinCfg.uFuncSel = AM_HAL_PIN_12_PDMCLK;
-  am_hal_gpio_pinconfig(12, sPinCfg);
-
-  sPinCfg.uFuncSel = AM_HAL_PIN_11_PDMDATA;
-  am_hal_gpio_pinconfig(11, sPinCfg);
-
-
-    am_hal_pdm_config_t g_sPdmConfig = {
-        .eClkDivider = AM_HAL_PDM_MCLKDIV_1,
-        .eLeftGain = AM_HAL_PDM_GAIN_P105DB,
-        .eRightGain = AM_HAL_PDM_GAIN_P105DB,
-        .ui32DecimationRate =
-            24,  // OSR = 1500/16 = 96 = 2*SINCRATE --> SINC_RATE = 48
-        .bHighPassEnable = 1,
-        .ui32HighPassCutoff = 0xB,
-        .ePDMClkSpeed = AM_HAL_PDM_CLK_750KHZ,
-        .bInvertI2SBCLK = 0,
-        .ePDMClkSource = AM_HAL_PDM_INTERNAL_CLK,
-        .bPDMSampleDelay = 0,
-        .bDataPacking = 1,
-        .ePCMChannels = AM_HAL_PDM_CHANNEL_STEREO,
-        .bLRSwap = 0,
-    };
-    
-//
-  // Initialize, power-up, and configure the PDM.
-  //
+    //
+    // Initialize, power-up, and configure the PDM.
+    //
     am_hal_pdm_initialize(0, &PDMHandle);
     am_hal_pdm_power_control(PDMHandle, AM_HAL_PDM_POWER_ON, false);
     am_hal_pdm_configure(PDMHandle, &g_sPdmConfig);
+
+    //
+    // Configure the necessary pins.
+    //
+    am_hal_gpio_pincfg_t sPinCfg = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    sPinCfg.uFuncSel = AM_HAL_PIN_12_PDMCLK;
+    am_hal_gpio_pinconfig(12, sPinCfg);
+
+    sPinCfg.uFuncSel = AM_HAL_PIN_11_PDMDATA;
+    am_hal_gpio_pinconfig(11, sPinCfg);
+
     am_hal_pdm_fifo_flush(PDMHandle);
 
-
-  am_hal_pdm_enable(PDMHandle);
-
-
-  //
-  // Configure and enable PDM interrupts (set up to trigger on DMA
-  // completion).
-  //
-  am_hal_pdm_interrupt_enable(PDMHandle,
-                              (AM_HAL_PDM_INT_DERR | AM_HAL_PDM_INT_DCMP |
-                               AM_HAL_PDM_INT_UNDFL | AM_HAL_PDM_INT_OVF));
-
-#if AM_CMSIS_REGS
-    NVIC_SetPriority(PDM_IRQn, 4);
+    //
+    // Configure and enable PDM interrupts (set up to trigger on DMA
+    // completion).
+    //
+    am_hal_pdm_interrupt_enable(PDMHandle, (AM_HAL_PDM_INT_DERR
+                                            | AM_HAL_PDM_INT_DCMP
+                                            | AM_HAL_PDM_INT_UNDFL
+                                            | AM_HAL_PDM_INT_OVF));
     NVIC_EnableIRQ(PDM_IRQn);
-#else
-    am_hal_interrupt_enable(AM_HAL_INTERRUPT_PDM);
-#endif
+//    NVIC_SetPriority(PDM_IRQn, 0x4);
 
 
     //
@@ -274,13 +211,29 @@ void ap3_pdm_init(void)
 //*****************************************************************************
 //**************************************
 // Timer configuration.
+// Timer 0: Profiling timer used by AWE
+// Timer 1: System tick of 1mS
 //**************************************
-am_hal_ctimer_config_t g_sTimer0 =
+
+am_hal_ctimer_config_t g_cTimer0 =
+{
+    // link 16 bit timers for one 32 bit timer.
+    1,
+
+    // Set up Timer0A.
+    (AM_HAL_CTIMER_FN_CONTINUOUS |
+     AM_HAL_CTIMER_HFRC_12MHZ),
+
+    // No configuration for Timer0B.
+    0,
+};
+
+am_hal_ctimer_config_t g_cTimer1 =
 {
     // Don't link timers.
     0,
 
-    // Set up Timer0A.
+    // Set up Timer1A.
     (AM_HAL_CTIMER_FN_REPEAT    |
      AM_HAL_CTIMER_INT_ENABLE   |
 //    AM_HAL_CTIMER_XT_32_768KHZ),
@@ -288,34 +241,38 @@ am_hal_ctimer_config_t g_sTimer0 =
     // No configuration for Timer0B.
     0,
 };
-void
-timerA0_init(void)
+
+
+void bsp_timer_init(void)
 {
     uint32_t ui32Period;
 
     //
-    // Enable the LFRC.
+    // Enable the HFRC for timer 0 and timer 1.
     //
     am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_HFADJ_ENABLE, 0);
-    
 
     //
-    // Set up timer A0.
+    // Set up timer A0 and A1
     //
-    am_hal_ctimer_clear(0, AM_HAL_CTIMER_TIMERA);
-    am_hal_ctimer_config(0, &g_sTimer0);
+    am_hal_ctimer_clear(0, AM_HAL_CTIMER_BOTH);
+    am_hal_ctimer_config(0, &g_cTimer0);
+    
+    am_hal_ctimer_clear(1, AM_HAL_CTIMER_TIMERA);
+    am_hal_ctimer_config(1, &g_cTimer1);
+
 
     //
     // Set up timerA0 to 32Hz from LFRC divided to 1 second period.
     //
     ui32Period = 12000;
-    am_hal_ctimer_period_set(0, AM_HAL_CTIMER_TIMERA, ui32Period,
+    am_hal_ctimer_period_set(1, AM_HAL_CTIMER_TIMERA, ui32Period,
                              (ui32Period >> 1));
 
     //
     // Clear the timer Interrupt
     //
-    am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0);
+    am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA1);
 }
 
 //-----------------------------------------------------------------------------
@@ -357,17 +314,17 @@ void BoardInit(void)
     //
     // TimerA0 init.
     //
-    timerA0_init();
+    bsp_timer_init();
 
     //
     // Enable the timer Interrupt.
     //
-    am_hal_ctimer_int_enable(AM_HAL_CTIMER_INT_TIMERA0);
+    am_hal_ctimer_int_enable(AM_HAL_CTIMER_INT_TIMERA1);
 
 #endif  // defined(AM_BSP_NUM_BUTTONS)  &&  defined(AM_BSP_NUM_LEDS)
     
-    uart_init(UART0_MODULE);
-    uart_enable(UART0_MODULE);
+    uart_init(0);
+    uart_enable(0);
     // Turn on PDM
     ap3_pdm_init();
  
@@ -389,19 +346,25 @@ void BoardInit(void)
     //
 //    am_bsp_uart_printf_enable();
 
+    //
+    // MIPS measurement by GPIO toggle
+    //
+    am_hal_gpio_pinconfig(48, g_AM_HAL_GPIO_OUTPUT);
+    am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_SET);
 
-    am_hal_ctimer_start(0, AM_HAL_CTIMER_TIMERA);
+    am_hal_ctimer_start(0, AM_HAL_CTIMER_BOTH);
 
+    am_hal_ctimer_start(1, AM_HAL_CTIMER_TIMERA);
 }
 
 //-----------------------------------------------------------------------------
-// METHOD:  CoreInit
-// PURPOSE: Setup board peripherals
+// METHOD:  targetInit
+// PURPOSE: Setup the target board
 //-----------------------------------------------------------------------------
-void CoreInit(void)
+void targetInit(void)
 {
     // Reset of all peripherals, Initializes the Flash interface and the Systick.
-     //
+    //
     // Set the clock frequency.
     //
     am_hal_clkgen_control(AM_HAL_CLKGEN_CONTROL_SYSCLK_MAX, 0);
@@ -425,12 +388,62 @@ void CoreInit(void)
 //#if configUSE_BURST_ALWAYS_ON
     // Put the MCU into "Burst" mode.
     am_hal_burst_mode_enable(&eBurstMode);
-    configASSERT(eBurstMode == AM_HAL_BURST_MODE);
+//    configASSERT(eBurstMode == AM_HAL_BURST_MODE);
+
+    UARTMsgInit();
+    
+    BoardInit();
 
 //#endif // configUSE_BURST_ALWAYS_ON
 
-}   // End CoreInit
+}   // End targetInit
 
+//
+// ISR of sys
+//
+//*****************************************************************************
+//
+// PDM interrupt handler.
+//
+//*****************************************************************************
+void am_pdm_isr(void) 
+{
+    uint32_t ui32Status;
+    //
+    // Read the interrupt status.
+    //
+    am_hal_pdm_interrupt_status_get(PDMHandle, &ui32Status, true);
+    am_hal_pdm_interrupt_clear(PDMHandle, ui32Status);
+    
+    if ((ui32Status & AM_HAL_PDM_INT_DCMP))
+    {
+        // trigger next traction
+        PDMn(0)->DMATOTCOUNT = AWE_FRAME_SIZE * 4;  // FIFO unit in bytes
+        g_ui32AudioDMAComplete = 1;
+//        AWEProcessing(g_pi32PCMDataBuff);
+//        am_util_debug_printf("PDM DCMP interrupt, pick g_ui32PDMDataBuffer[5] = 0x%8x\n", g_ui32PDMDataBuffer[5]);
+    }
+    else
+    {
+        am_hal_pdm_fifo_flush(PDMHandle);
+    }
+
+}
+
+#if defined (AM_PART_APOLLO3)
+void
+am_uart_isr(void)
+{
+    uint32_t ui32Status, ui32Idle;
+    am_hal_uart_interrupt_status_get(g_sCOMUART, &ui32Status, true);
+    am_hal_uart_interrupt_clear(g_sCOMUART, ui32Status);
+    am_hal_uart_interrupt_service(g_sCOMUART, ui32Status, &ui32Idle);
+    if (ui32Status & (AM_HAL_UART_INT_RX_TMOUT | AM_HAL_UART_INT_RX))
+    {
+        g_bUARTPacketReceived = TRUE;
+    }
+}
+#endif // #if defined (AM_PART_APOLLO3)
 
 //*****************************************************************************
 //
@@ -458,29 +471,8 @@ am_ctimer_isr(void)
     //
     // Clear TimerA0 Interrupt (write to clear).
     //
-    am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA0);
+    am_hal_ctimer_int_clear(AM_HAL_CTIMER_INT_TIMERA1);
 }
 
-
-//*****************************************************************************
-// GPIO ISR
-// Will enable the PDM, set number of frames transferred to 0, and turn on LED
-//*****************************************************************************
-void am_gpio_isr(void) 
-{
-    //
-    // debounce.
-    //
-//    if(g_ui8DebounceFlag == 0)
-//    {
-//        g_ui8DebounceFlag = 1;
-//        g_ui32DebounceTimerCount = 0;
-//    }  
-    //
-    // Clear the GPIO Interrupt (write to clear).
-    //
-    am_hal_gpio_interrupt_clear(AM_HAL_GPIO_BIT(AM_BSP_GPIO_BUTTON0));
-
-}
 
 
