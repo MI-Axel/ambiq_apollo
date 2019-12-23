@@ -39,9 +39,9 @@ void stft_f32(am_app_stft_instance_f32* Sf, float32_t* windowed_sig, float32_t* 
     //
     stft_result[0] = pf_rfftRet[0];
     stft_result[1] = 0;
-    stft_result[fft_bin_num*2-2] = pf_rfftRet[1];
-    stft_result[fft_bin_num*2-1] = 0;
-    memcpy(&stft_result[2], &pf_rfftRet[2], (fft_bin_num*2-4)*sizeof(float32_t));
+    stft_result[fft_bin_num-2] = pf_rfftRet[1];
+    stft_result[fft_bin_num-1] = 0;
+    memcpy(&stft_result[2], &pf_rfftRet[2], (fft_bin_num-4)*sizeof(float32_t));
 
 }
 

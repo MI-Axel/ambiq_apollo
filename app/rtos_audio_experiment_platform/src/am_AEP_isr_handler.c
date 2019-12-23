@@ -57,7 +57,7 @@ void am_pdm0_isr(void)
         // trigger next traction
         PDMn(0)->DMATOTCOUNT = PCM_FRAME_SIZE*PCM_DATA_BYTES;  // FIFO unit in bytes
 
-        am_app_utils_ring_buffer_push(&am_AEP_ring_buffers[AM_AEP_RINGBUFF_PDM], g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES);
+        am_app_utils_ring_buffer_push(&am_AEP_ring_buffers[AM_AEP_RINGBUFF_PDM], g_ui32PCMDataBuff, PCM_FRAME_SIZE*PCM_DATA_BYTES, false);
 
 #if (configUSE_RTT_LOGGER && configUSE_RTT_PCM)
         //

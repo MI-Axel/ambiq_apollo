@@ -51,7 +51,7 @@ extern "C"
 {
 #endif
 //#if defined (AM_PART_APOLLO3)
-#include "am_mcu_cmsis.h"      // Defines AM_CMSIS_REGS
+#include "am_mcu_apollo.h"      // Defines AM_CMSIS_REGS
 //#endif // #if defined (AM_PART_APOLLO3)
 
 #define configUSE_PREEMPTION                    1

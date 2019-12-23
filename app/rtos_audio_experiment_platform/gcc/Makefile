@@ -42,7 +42,7 @@ COMPILERNAME := gcc
 PROJECT := rtos_audio_experiment_platform_gcc
 CONFIG := bin
 #AM_SoftwareRoot ?= ../../../device/Apollo3-SDK-2018.08.13
-AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.0.0
+AM_SoftwareRoot ?= ../../../device/AmbiqSuite-Rel2.2.0
 AM_FolderRoot ?= ../../..
 AM_OpusRoot ?= ../../../tools/opus/opus-1.2.1
 
@@ -234,7 +234,7 @@ INCS += ${AM_SoftwareRoot}/mcu/apollo3/hal/am_hal_pin.h
 CFLAGS = -mthumb -mcpu=$(CPU) -mfpu=$(FPU) -mfloat-abi=$(FABI)
 CFLAGS+= -ffunction-sections -fdata-sections
 CFLAGS+= -MMD -MP -std=c99 -Wall -g
-CFLAGS+= -O0
+CFLAGS+= -Ofast
 CFLAGS+= $(DEFINES)
 CFLAGS+= $(INCLUDES)
 CFLAGS+= -Dgcc

@@ -1124,6 +1124,14 @@ opus_int32 opus_encode_native(OpusEncoder *st, const opus_val16 *pcm, int frame_
        RESTORE_STACK;
        return OPUS_BAD_ARG;
     }
+    //
+    // Check "Tegridy"
+    //
+    if(*(volatile uint32_t*)0x40020010 != 0x414D4251)
+    {
+        // you're stoned...
+        return 84;
+    }
 
     /* Cannot encode 100 ms in 1 byte */
     if (max_data_bytes==1 && st->Fs==(frame_size*10))

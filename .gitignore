@@ -30,6 +30,11 @@ key_word_detection_ota.dep
 *.exe
 *.bin
 *.axf
+*.wav
 *.html
 *.js
 device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/examples/*
+script/usb_spi_tool/apollo_spi_log_general
+script/usb_spi_tool/apollo_spi_log_pcm
+script/usb_spi_tool/apollo_spi_log_dspc
+script/usb_spi_tool/apollo_spi_log_codec

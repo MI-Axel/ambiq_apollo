@@ -11,6 +11,11 @@
 typedef struct
 {
 //
+// audio preprocess basical info
+//
+    uint32_t ui32AudioPreproFftSize;
+    uint32_t ui32AudioPreproSampleFreq;
+//
 // input and output interface (externally used)
 //
     int16_t* audio_leftCh;
@@ -26,6 +31,13 @@ typedef struct
     uint32_t ui32BeamformingEnable;
     uint32_t ui32ScnrEnable;
     uint32_t ui32HPfilterEnable;
+
+//
+// highpass filter parameters
+//
+    float32_t f32HpfCutoffFreq;
+    uint32_t ui32HpStopIndex;
+
     am_app_stft_instance_f32 Sf;
     am_app_beamforming_instance_f32 Bf;
     am_app_scnr_instance_f32 Sn;

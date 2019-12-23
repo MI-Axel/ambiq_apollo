@@ -92,6 +92,13 @@ void audio_frame_rolling_freq(float32_t* rolling_buff, float32_t* input_new, uin
 void am_audio_preprocess_init(am_AudioPrepro_Instance* p_vos)
 {
     memset(p_vos, 0, sizeof(am_AudioPrepro_Instance));
+    
+    //
+    // audio preprocess basical info
+    //
+    p_vos->ui32AudioPreproFftSize = AUDIO_PREPROCESS_FFT_SIZE;
+    p_vos->ui32AudioPreproSampleFreq = AUDIO_SAMPLE_RATE;
+    
     p_vos->audio_leftCh = g_pin16PcmLeftInput;
     p_vos->audio_rightCh = g_pin16PcmRightInput;
     p_vos->mono_out = g_pin16AudioOutput;
@@ -110,6 +117,19 @@ void am_audio_preprocess_init(am_AudioPrepro_Instance* p_vos)
     {
         scnr_init(&(p_vos->Sn), AUDIO_PREPROCESS_FFT_SIZE, AUDIO_SCNR_DB_REDUCT, 
                 AUDIO_PREPROCESS_ROLLING_FRAMES, AUDIO_SCNR_BETA, AUDIO_SCNR_ALPHA);
+    }
+    //
+    // high pass filter init
+    //
+    if(p_vos->ui32HPfilterEnable == 1)
+    {
+        p_vos->f32HpfCutoffFreq = AUDIO_HPF_CUTOFF_FREQ_HZ;
+        p_vos->ui32HpStopIndex = (uint32_t) (p_vos->f32HpfCutoffFreq * p_vos->ui32AudioPreproFftSize / p_vos->ui32AudioPreproSampleFreq)
+    }
+    else
+    {
+        p_vos->f32HpfCutoffFreq = 0;
+        p_vos->ui32HpStopIndex = 0;
     }
    
 }
@@ -152,6 +172,15 @@ void am_audio_preprocess_handler(am_AudioPrepro_Instance* p_vos)
         audio_frame_rolling_freq(pfRolMagSqr, pfMonoMagSqr, (AUDIO_PREPROCESS_CMPLX_SIZE/2), AUDIO_PREPROCESS_ROLLING_FRAMES);
 
         scnr_process(&(p_vos->Sn), pfRolMagSqr, pfRollFreq);
+    }
+
+    //
+    // highpass filter in freq domain
+    //
+    if(p_vos->ui32HPfilterEnable == 1)
+    {
+            
+    
     }
     //
     // transfer freq domain to time domain
