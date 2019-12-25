@@ -9,7 +9,7 @@
 // Platform main objective definitionn
 //
 
-#define AM_AEP_OPUS_TEST                    0
+#define AM_AEP_OPUS_TEST                    1
 
 #define AM_AEP_MEMCPY_TEST                  0
 
@@ -29,7 +29,7 @@
 
 #define AM_AEP_BEAMFORMING_TEST             0
 
-#define AM_AEP_PREPROCESS_EVAL              1
+#define AM_AEP_PREPROCESS_EVAL              0
 //
 // Platform support function configuration
 //

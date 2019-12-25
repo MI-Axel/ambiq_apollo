@@ -71,16 +71,10 @@ bin/main.o: ../src/main.c \
  ../include/audio_driver.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/arm_math.h \
  ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h \
- ../../../app_lib/audio_preprocess/audio_preprocessor.h \
- ../../../app_lib/audio_preprocess/config.h \
- ../../../app_lib/audio_preprocess/beamforming/beamforming.h \
- ../../../app_lib/audio_preprocess/config.h \
- ../../../app_lib/audio_preprocess/stft/stft.h \
- ../../../app_utils/am_app_utils_syscall.h \
- ../../../app_utils/am_app_utils.h \
- ../../../app_lib/audio_preprocess/stft/hanning_window.h \
- ../../../app_lib/audio_preprocess/beamforming/beamforming_weights.h \
- ../../../app_lib/audio_preprocess/scnr/scnr.h
+ ../include/am_opus.h ../include/board_setup.h ../include/audio_driver.h \
+ ../../../tools/opus/opus-1.2.1/include/opus.h \
+ ../../../tools/opus/opus-1.2.1/include/opus_types.h \
+ ../../../tools/opus/opus-1.2.1/include/opus_defines.h
 
 ../../../device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/bsp/am_bsp.h:
 
@@ -228,22 +222,14 @@ bin/main.o: ../src/main.c \
 
 ../../../device/AmbiqSuite-Rel2.2.0/CMSIS/ARM/Include/core_cm4.h:
 
-../../../app_lib/audio_preprocess/audio_preprocessor.h:
+../include/am_opus.h:
 
-../../../app_lib/audio_preprocess/config.h:
+../include/board_setup.h:
 
-../../../app_lib/audio_preprocess/beamforming/beamforming.h:
+../include/audio_driver.h:
 
-../../../app_lib/audio_preprocess/config.h:
+../../../tools/opus/opus-1.2.1/include/opus.h:
 
-../../../app_lib/audio_preprocess/stft/stft.h:
+../../../tools/opus/opus-1.2.1/include/opus_types.h:
 
-../../../app_utils/am_app_utils_syscall.h:
-
-../../../app_utils/am_app_utils.h:
-
-../../../app_lib/audio_preprocess/stft/hanning_window.h:
-
-../../../app_lib/audio_preprocess/beamforming/beamforming_weights.h:
-
-../../../app_lib/audio_preprocess/scnr/scnr.h:
+../../../tools/opus/opus-1.2.1/include/opus_defines.h:

@@ -55,11 +55,13 @@
 // SCNR modules parameters
 //
 #define AUDIO_SCNR_DB_REDUCT                                    10
-#define AUDIO_SCNR_BETA                                         20
+#define AUDIO_SCNR_BETA                                         25
 #define AUDIO_SCNR_ALPHA                                        3
 
-
-
+//
+// high pass filter parameters
+//
+#define AUDIO_HPF_CUTOFF_FREQ_HZ                                200
 
 
 

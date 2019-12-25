@@ -130,8 +130,8 @@ int main(void)
     uint8_t g_ui8EncStartFlag = 0;
     uint32_t g_ui32LocalDataIndex = 0;
     uint32_t g_ui32LocalDataFrameNum = sizeof(mono_16b_USP1602) / sizeof(opus_int16);
-    uint32_t g_ui32FrameSize = 320;                 // encoder frame size
-    uint32_t g_ui32EncOutputBytes = 80;             // FrameSize * 2 bytes / 8 
+    uint32_t g_ui32FrameSize = 640;                 // encoder frame size
+    uint32_t g_ui32EncOutputBytes = g_ui32FrameSize*2/8;             // FrameSize * 2 bytes / 8 
 //    uint32_t g_ui32EncOutputBytes = 40;             // FrameSize * 2 bytes / 16 
     uint32_t g_ui32OutputSumBytes = 0;              // used to summary the output bytes
     
@@ -730,10 +730,10 @@ am_util_stdio_printf("The virtual keyboard address: 0x%08X\n\r", &g_sysKeyValue)
                 
                 g_ui32ProcessedFrames ++;
 
-                if(g_ui32ProcessedFrames >= (NUM_PCM_FRAMES)/2)
-                {
-                    VOS_Instance.ui32ScnrEnable = 0;
-                }
+//                if(g_ui32ProcessedFrames >= (NUM_PCM_FRAMES)/2)
+//                {
+//                    VOS_Instance.ui32ScnrEnable = 0;
+//                }
                 
                 for(uint32_t k=0; k<AUDIO_PREPROCESS_HOP_SIZE; k++)
                 {

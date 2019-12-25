@@ -114,7 +114,7 @@ DEFINES += -DARM_MATH_CM4
 DEFINES += -D__FPU_PRESENT
 
 # opus pre-definition
-#DEFINES += -DHAVE_CONFIG_H
+DEFINES += -DHAVE_CONFIG_H
 #DEFINES += -DCUSTOM_SUPPORT
 
 INCLUDES = -I../src
@@ -135,14 +135,14 @@ INCLUDES += -I${AM_FolderRoot}/math/CMSIS_5/Include
 INCLUDES += ${SEGGER_SYSVIEW_INC}
 
 # OPUS INCLUDES
-#INCLUDES += -I${AM_OpusRoot}/include
-#INCLUDES += -I${AM_OpusRoot}/src
-#INCLUDES += -I${AM_OpusRoot}/celt
-#INCLUDES += -I${AM_OpusRoot}/celt/arm
-#INCLUDES += -I${AM_OpusRoot}/silk
-#INCLUDES += -I${AM_OpusRoot}/silk/arm
-#INCLUDES += -I${AM_OpusRoot}/silk/fixed
-#INCLUDES += -I${AM_OpusRoot}
+INCLUDES += -I${AM_OpusRoot}/include
+INCLUDES += -I${AM_OpusRoot}/src
+INCLUDES += -I${AM_OpusRoot}/celt
+INCLUDES += -I${AM_OpusRoot}/celt/arm
+INCLUDES += -I${AM_OpusRoot}/silk
+INCLUDES += -I${AM_OpusRoot}/silk/arm
+INCLUDES += -I${AM_OpusRoot}/silk/fixed
+INCLUDES += -I${AM_OpusRoot}
 
 # STFT INCLUDES
 #INCLUDES += -I../src/audio_preprocess
@@ -216,9 +216,9 @@ SRC += audio_driver.c
 #SRC += am_alloc_free_test.c
 
 # OPUS code
-#SRC += am_opus.c
-#SRC += am_app_USP1602_mono_array.c
-#SRC += ${OPUS_SRC}
+SRC += am_opus.c
+SRC += am_app_USP1602_mono_array.c
+SRC += ${OPUS_SRC}
 
 # SEGGER sysview tool
 SRC += ${SEGGER_SYSVIEW_SRC}
@@ -236,7 +236,7 @@ SRC += ${SEGGER_SYSVIEW_SRC}
 # Mikro THD calculator
 #SRC += am_mikro_thd.c
 
-SRC += ${AM_AUDIO_PREPROCESS_SRC}
+#SRC += ${AM_AUDIO_PREPROCESS_SRC}
 
 
 CSRC = $(filter %.c,$(SRC))
@@ -270,7 +270,7 @@ LFLAGS+= -Wl,--gc-sections,--entry,Reset_Handler,-Map,$(CONFIG)/$(TARGET).map
 LFLAGS+= -Wl,--start-group -lm -lc -lgcc -Wl,--end-group
 
 # use libnosys.a to realize _sbrk for malloc, free. 
-#LFLAGS+= -specs=nosys.specs
+LFLAGS+= -specs=nosys.specs
 
 # Additional user specified CFLAGS
 CFLAGS+=$(EXTRA_CFLAGS)

@@ -56,8 +56,8 @@ void scnr_process(am_app_scnr_instance_f32* scnr, float32_t* roll_buff_mag_squar
     for(uint32_t idx=0; idx<cmplx_pair_num; idx++)
     {
         reduced_sig = (p_sn_mag[idx] - beta*p_n_mag[idx]) > 0. ? (p_sn_mag[idx]-beta*p_n_mag[idx]) : 0.;
-//        p_gain_filter[idx] = reduced_sig / pow(p_sn_mag[idx], alpha);
-        p_gain_filter[idx] = reduced_sig / p_sn_mag[idx];
+        p_gain_filter[idx] = reduced_sig / pow(p_sn_mag[idx], alpha);
+//        p_gain_filter[idx] = reduced_sig / p_sn_mag[idx];
         p_gain_filter[idx] = p_gain_filter[idx] > gain_min ? p_gain_filter[idx] : gain_min;
 //        AM_APP_LOG_DEBUG("%f, %f, \n\r", p_sn_mag[idx], p_n_mag[idx]);
     }
