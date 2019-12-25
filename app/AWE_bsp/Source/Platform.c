@@ -22,10 +22,13 @@
 #include "am_bsp.h"
 #include "am_util.h"
 
+#include "AWE_bsp_config.h"
+
 #include "BoardSetup.h"
 #include "TargetInfo.h"
 #include "Platform.h"
 #include "TuningDriver.h"
+#include "amu2s.h"
 //
 // AWE include 
 //
@@ -153,39 +156,6 @@ void AWEInstanceInit()
 
 }   // End AWEInstanceInit
 
-//-----------------------------------------------------------------------------
-// METHOD:  AudioWeaver Pump Interrupt Handler
-// PURPOSE: Perform AudioWeaver Processing
-//-----------------------------------------------------------------------------
-void AudioWeaverPump_IRQHandler1(void)
-{
-    g_bAudioPump1Active = TRUE;
-
-//    NVIC_ClearPendingIRQ(AudioWeaverPump_IRQ1);
-
-    g_bDeferredProcessingRequired = awe_audioPump(&g_AWEInstance, 0);
-
-    g_bAudioPump1Active = FALSE;
-
-}   // End AudioWeaverPump_IRQHandler
-
-
-//-----------------------------------------------------------------------------
-// METHOD:  AudioWeaver Pump Interrupt Handler
-// PURPOSE: Perform AudioWeaver Processing
-//-----------------------------------------------------------------------------
-void AudioWeaverPump_IRQHandler2(void)
-{
-    g_bAudioPump2Active = TRUE;
-
-//    NVIC_ClearPendingIRQ(AudioWeaverPump_IRQ2);
-
-    g_bDeferredProcessingRequired = awe_audioPump(&g_AWEInstance, 1);
-
-    g_bAudioPump2Active = FALSE;
-
-}   // End AudioWeaverPump_IRQHandler
-
 //-----------------------------------------------------------------------------awe_audioImportSamples
 // METHOD:  AWEIdleLoop
 // PURPOSE: AWE Idle loop processing
@@ -233,6 +203,9 @@ void AWEIdleLoop(void)
             if(g_ui32AudioDMAComplete == 1)
             {
                 g_ui32AudioDMAComplete = 0;
+#if AWE_BSP_ConfigUSE_AMU2S_PCM
+                amu2s_send(Amu2s_pcm, (void const*)g_pi32DMATempBuff, AWE_FRAME_SIZE*PCM_SAMPLE_BYTES);
+#endif // AWE_BSP_ConfigUSE_AMU2S_PCM
                 //
                 // PCM data to left channel and right channel
                 //
@@ -250,31 +223,27 @@ void AWEIdleLoop(void)
     
                 if (fwInCount > 0)
                 {
-                    //for (nSample = 0; nSample < AWE_FRAME_SIZE; nSample++)
-                    //{
-                        if (fwInCount >= 1)
-                        {
-                            awe_audioImportSamples(&g_AWEInstance, (void*)g_pi16LeftChBuff, 1, 0, Sample16bit);
-                        }
-    
-                        if (fwInCount >= 2)
-                        {
-                            awe_audioImportSamples(&g_AWEInstance, (void*)g_pi16RightChBuff, 1, 1, Sample16bit);
-                        }
-                    //}
-    
+                    if (fwInCount >= 1)
+                    {
+                        awe_audioImportSamples(&g_AWEInstance, (void*)g_pi16LeftChBuff, 1, 0, Sample16bit);
+                    }
+
+                    if (fwInCount >= 2)
+                    {
+                        awe_audioImportSamples(&g_AWEInstance, (void*)g_pi16RightChBuff, 1, 1, Sample16bit);
+                    }
                 }
     
                 if (fwOutCount > 0)
                 {
-                    //for (nSample = 0; nSample < AWE_FRAME_SIZE; nSample++)
-                    //{
-                        if (fwOutCount >= 1)
-                        {
-                            awe_audioExportSamples(&g_AWEInstance, (void*)g_pin16AudioBuffOutCh0, 1, 0, Sample16bit);
-                        }
-                    //}
-            
+                    if (fwOutCount >= 1)
+                    {
+                        awe_audioExportSamples(&g_AWEInstance, (void*)g_pin16AudioBuffOutCh0, 1, 0, Sample16bit);
+                    }
+#if AWE_BSP_ConfigUSE_AMU2S_SPP
+                amu2s_send(Amu2s_spp, g_pin16AudioBuffOutCh0, AWE_FRAME_SIZE*DSPC_SAMPLE_BYTES);
+#endif // AWE_BSP_ConfigUSE_AMU2S_PCM
+
                 }
                 layoutMask = awe_audioGetPumpMask(&g_AWEInstance);
                 if(layoutMask & 1)
@@ -360,7 +329,6 @@ uint32_t aweuser_getCycleCount(void)
 //    nElapsedCycles = nCycles << 2;  // (12Mhz clk source) multiply by 4 at 48MHZ
     nElapsedCycles = nCycles << 3;  // (12Mhz clk source) multiply by 8 at 96MHZ
     return nElapsedCycles;
-    return nCycles;
 #else    // USE_PROFILING
 
     return NULL;

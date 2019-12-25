@@ -29,7 +29,9 @@
 //
 // layout specific include
 //
-#include "vos_alexa_qual_InitAWB.h"
+//#include "vos_alexa_qual_InitAWB.h"
+
+#include "ambiq_2mic_v1_InitAWB.h"
 
 UINT32 nErrorOffset;
 INT32 nResult;

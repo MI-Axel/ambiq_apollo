@@ -1,6 +1,7 @@
 #include "BoardSetup.h"
 #include "TargetInfo.h"
 #include "TuningDriver.h"
+#include "amu2s.h"
 //*****************************************************************************
 // GLOBALS
 //*****************************************************************************
@@ -9,12 +10,9 @@ volatile BOOL g_bPDMDataReady = FALSE;
 volatile BOOL g_bUARTPacketReceived = FALSE;
 volatile BOOL g_bPacketReceived = FALSE;
 volatile int32_t g_pi32PCMDataBuff[AWE_FRAME_SIZE];
+volatile int32_t g_pi32DMATempBuff[AWE_FRAME_SIZE];
 volatile int16_t g_pi16LeftChBuff[AWE_FRAME_SIZE];
 volatile int16_t g_pi16RightChBuff[AWE_FRAME_SIZE];
-//*****************************************************************************
-// PDM configuration information.
-//*****************************************************************************
-void* PDMHandle;
 //*****************************************************************************
 //
 // UART handle.
@@ -125,6 +123,197 @@ void uart_enable(uint32_t ui32Module)
 #endif
 }
 
+//
+// Microphone configuration (Analog/Digital)
+//
+#if AWE_BSP_ConfigUSE_ANALOG_MIC
+//
+// ADC DMA target address
+//
+uint32_t g_ui32ADCSampleBuffer[ADC_SAMPLE_COUNT*ADC_MIC_CHANNELS];
+
+//am_hal_adc_sample_t SampleBuffer[ADC_SAMPLE_COUNT];
+
+//uint32_t g_ui32IsrCounter = 0;
+//uint32_t g_ui32TaskCounter = 0;
+
+//
+// ADC Device Handle.
+//
+void *g_ADCHandle;
+
+//
+// ADC DMA complete flag.
+//
+volatile bool                   g_bADCDMAComplete;
+
+//
+// ADC DMA error flag.
+//
+volatile bool                   g_bADCDMAError;
+
+//
+// Define the ADC SE0 pin to be used.
+//
+const am_hal_gpio_pincfg_t g_AM_PIN_33_ADCSE5 =
+{
+    .uFuncSel       = AM_HAL_PIN_33_ADCSE5,
+};
+
+const am_hal_gpio_pincfg_t g_AM_PIN_32_ADCSE4 =
+{
+    .uFuncSel       = AM_HAL_PIN_32_ADCSE4,
+};
+
+
+void adc_config_dma(void)
+{
+    am_hal_adc_dma_config_t       ADCDMAConfig;
+
+    //
+    // Configure the ADC to use DMA for the sample transfer.
+    //
+    ADCDMAConfig.bDynamicPriority = true;
+    ADCDMAConfig.ePriority = AM_HAL_ADC_PRIOR_SERVICE_IMMED;
+    ADCDMAConfig.bDMAEnable = true;
+    ADCDMAConfig.ui32SampleCount = ADC_SAMPLE_COUNT * ADC_MIC_CHANNELS;
+    ADCDMAConfig.ui32TargetAddress = (uint32_t)g_ui32ADCSampleBuffer;
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_configure_dma(g_ADCHandle, &ADCDMAConfig))
+    {
+        am_util_stdio_printf("Error - configuring ADC DMA failed.\n");
+    }
+
+}
+
+
+void adc_config(void)
+{
+    am_hal_adc_config_t           ADCConfig;
+    am_hal_adc_slot_config_t      ADCSlotConfig;
+
+    //
+    // Initialize the ADC and get the handle.
+    //
+    if ( AM_HAL_STATUS_SUCCESS != am_hal_adc_initialize(0, &g_ADCHandle) )
+    {
+        am_util_stdio_printf("Error - reservation of the ADC instance failed.\n");
+    }
+
+    //
+    // Power on the ADC.
+    //
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_power_control(g_ADCHandle,
+                                                          AM_HAL_SYSCTRL_WAKE,
+                                                          false) )
+    {
+        am_util_stdio_printf("Error - ADC power on failed.\n");
+    }
+
+    //
+    // Set up the ADC configuration parameters. These settings are reasonable
+    // for accurate measurements at a low sample rate.
+    //
+    ADCConfig.eClock             = AM_HAL_ADC_CLKSEL_HFRC;
+    ADCConfig.ePolarity          = AM_HAL_ADC_TRIGPOL_RISING;
+    ADCConfig.eTrigger           = AM_HAL_ADC_TRIGSEL_SOFTWARE;
+    ADCConfig.eReference         = AM_HAL_ADC_REFSEL_INT_1P5;
+    ADCConfig.eClockMode         = AM_HAL_ADC_CLKMODE_LOW_LATENCY;
+    ADCConfig.ePowerMode         = AM_HAL_ADC_LPMODE0;
+    ADCConfig.eRepeat            = AM_HAL_ADC_REPEATING_SCAN;
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_configure(g_ADCHandle, &ADCConfig))
+    {
+        am_util_stdio_printf("Error - configuring ADC failed.\n");
+    }
+
+    //
+    // Set up an ADC slot
+    //
+    ADCSlotConfig.bEnabled       = false;
+    ADCSlotConfig.bWindowCompare = false;
+    ADCSlotConfig.eChannel       = AM_HAL_ADC_SLOT_CHSEL_SE0;    // 0
+    ADCSlotConfig.eMeasToAvg     = AM_HAL_ADC_SLOT_AVG_1;        // 0
+    ADCSlotConfig.ePrecisionMode = AM_HAL_ADC_SLOT_14BIT;        // 0
+
+    am_hal_adc_configure_slot(g_ADCHandle, 2, &ADCSlotConfig);   // Unused slot
+    am_hal_adc_configure_slot(g_ADCHandle, 3, &ADCSlotConfig);   // Unused slot
+    am_hal_adc_configure_slot(g_ADCHandle, 4, &ADCSlotConfig);   // Unused slot
+    am_hal_adc_configure_slot(g_ADCHandle, 5, &ADCSlotConfig);   // Unused slot
+    am_hal_adc_configure_slot(g_ADCHandle, 6, &ADCSlotConfig);   // Unused slot
+    am_hal_adc_configure_slot(g_ADCHandle, 7, &ADCSlotConfig);   // Unused slot
+
+    ADCSlotConfig.bEnabled       = true;
+    ADCSlotConfig.bWindowCompare = false;
+    ADCSlotConfig.eChannel       = AM_HAL_ADC_SLOT_CHSEL_SE5;
+    ADCSlotConfig.eMeasToAvg     = AM_HAL_ADC_SLOT_AVG_1;
+    ADCSlotConfig.ePrecisionMode = AM_HAL_ADC_SLOT_14BIT;
+    am_hal_adc_configure_slot(g_ADCHandle, 0, &ADCSlotConfig);   // micro_shield AN on 33
+
+    ADCSlotConfig.bEnabled       = true;
+    ADCSlotConfig.bWindowCompare = false;
+    ADCSlotConfig.eChannel       = AM_HAL_ADC_SLOT_CHSEL_SE4;
+    ADCSlotConfig.eMeasToAvg     = AM_HAL_ADC_SLOT_AVG_1;
+    ADCSlotConfig.ePrecisionMode = AM_HAL_ADC_SLOT_14BIT;
+    am_hal_adc_configure_slot(g_ADCHandle, 1, &ADCSlotConfig);   // micro_shield AN on 32
+
+//    ADCSlotConfig.eMeasToAvg      = AM_HAL_ADC_SLOT_AVG_1;
+//    ADCSlotConfig.ePrecisionMode  = AM_HAL_ADC_SLOT_14BIT;
+//    ADCSlotConfig.eChannel        = AM_HAL_ADC_SLOT_CHSEL_SE5;
+//    ADCSlotConfig.bWindowCompare  = false;
+//    ADCSlotConfig.bEnabled        = true;
+//    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_configure_slot(g_ADCHandle, 1, &ADCSlotConfig))
+//    {
+//        am_util_stdio_printf("Error - configuring ADC Slot 0 failed.\n");
+//    }
+    //
+    // Configure the ADC to use DMA for the sample transfer.
+    //
+    adc_config_dma();
+
+    //
+    // For this example, the samples will be coming in slowly. This means we
+    // can afford to wake up for every conversion.
+    //
+    am_hal_adc_interrupt_enable(g_ADCHandle, AM_HAL_ADC_INT_DERR | AM_HAL_ADC_INT_DCMP );
+
+    //
+    // Enable the ADC.
+    //
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_enable(g_ADCHandle))
+    {
+        am_util_stdio_printf("Error - enabling ADC failed.\n");
+    }
+}
+
+void init_timerA3_for_ADC(void)
+{
+    //
+    // Start a timer to trigger the ADC periodically (16000HZ sample rate).
+    //
+    am_hal_ctimer_config_single(3, AM_HAL_CTIMER_TIMERA,
+                                AM_HAL_CTIMER_HFRC_12MHZ    |
+                                AM_HAL_CTIMER_FN_REPEAT     );
+
+//    am_hal_ctimer_int_enable(AM_HAL_CTIMER_INT_TIMERA3);
+
+    am_hal_ctimer_period_set(3, AM_HAL_CTIMER_TIMERA, 750, 375);
+
+    //
+    // Enable the timer A3 to trigger the ADC directly
+    //
+    am_hal_ctimer_adc_trigger_enable();
+
+    //
+    // Start the timer.
+    //
+    am_hal_ctimer_start(3, AM_HAL_CTIMER_TIMERA);
+}
+
+#else //  AWE_BSP_ConfigUSE_ANALOG_MIC
+//*****************************************************************************
+// PDM configuration information.
+//*****************************************************************************
+void* PDMHandle;
+
 //*****************************************************************************
 // PDM initialization.
 //*****************************************************************************
@@ -193,7 +382,7 @@ void ap3_pdm_init(void)
                                             | AM_HAL_PDM_INT_UNDFL
                                             | AM_HAL_PDM_INT_OVF));
     NVIC_EnableIRQ(PDM_IRQn);
-//    NVIC_SetPriority(PDM_IRQn, 0x4);
+    NVIC_SetPriority(PDM_IRQn, 0x4);
 
 
     //
@@ -203,7 +392,7 @@ void ap3_pdm_init(void)
     pdm_trigger_dma();
 
 }
-
+#endif // AWE_BSP_ConfigUSE_ANALOG_MIC
 //*****************************************************************************
 //
 // Function to initialize Timer A0¡£
@@ -350,7 +539,10 @@ void BoardInit(void)
     // MIPS measurement by GPIO toggle
     //
     am_hal_gpio_pinconfig(48, g_AM_HAL_GPIO_OUTPUT);
-    am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_SET);
+    am_hal_gpio_state_write(48, AM_HAL_GPIO_OUTPUT_CLEAR);
+        am_hal_gpio_pinconfig(40, g_AM_HAL_GPIO_OUTPUT);
+    am_hal_gpio_state_write(40, AM_HAL_GPIO_OUTPUT_CLEAR);
+    
 
     am_hal_ctimer_start(0, AM_HAL_CTIMER_BOTH);
 
@@ -406,6 +598,71 @@ void targetInit(void)
 // PDM interrupt handler.
 //
 //*****************************************************************************
+#if AM_BSP_ConfigUSE_ANALOG_MIC
+        float pfAmicLeftArray[ADC_SAMPLE_COUNT];
+        float pfAmicRightArray[ADC_SAMPLE_COUNT];
+        float pfAmicLeftFilteredBuff[ADC_SAMPLE_COUNT];
+        float pfAmicRightFilteredBuff[ADC_SAMPLE_COUNT];
+void am_adc_isr(void)
+{
+    uint32_t ui32IntMask;
+    bool bQueueReValue;
+    uint32_t ui32AdcPcmDataBuffer[ADC_SAMPLE_COUNT];
+    int16_t in16PcmCh1Val = 0;
+    int16_t in16PcmCh2Val = 0;
+
+    uint8_t indx= 0;
+    //
+    // Read the interrupt status.
+    //
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_interrupt_status(g_ADCHandle, &ui32IntMask, false))
+    {
+        am_util_stdio_printf("Error reading ADC interrupt status\n");
+    }
+
+    //
+    // Clear the ADC interrupt.
+    //
+    if (AM_HAL_STATUS_SUCCESS != am_hal_adc_interrupt_clear(g_ADCHandle, ui32IntMask))
+    {
+        am_util_stdio_printf("Error clearing ADC interrupt status\n");
+    }
+
+    //
+    // If we got a DMA complete, set the flag.
+    //
+    if (ui32IntMask & AM_HAL_ADC_INT_DCMP)
+    {
+        //
+        // Re-configure the ADC DMA.
+        //
+        adc_config_dma();
+        for(indx=0; indx<ADC_SAMPLE_COUNT; indx++)
+        {
+            ui32AdcPcmDataBuffer[indx] = 0;
+            in16PcmCh1Val = ((g_ui32ADCSampleBuffer[indx * ADC_MIC_CHANNELS] >> 6) & 0x00003FFF)-8192;    //0.75: 8192
+            in16PcmCh2Val = ((g_ui32ADCSampleBuffer[indx * ADC_MIC_CHANNELS+1] >> 6) & 0x00003FFF)-8192;    //0.75: 8192
+            ui32AdcPcmDataBuffer[indx] = (((uint16_t)in16PcmCh1Val) << 16) | ((uint16_t)in16PcmCh2Val);
+//            g_ui32DebugVal = ui32AdcPcmDataBuffer[indx];
+        }
+        am_audio_buffer_push(AM_AUDIO_BUFFER_STEREO, ui32AdcPcmDataBuffer, ADC_SAMPLE_COUNT*ANALOG_MIC_DATA_BYTES);
+        bQueueReValue = am_app_utils_task_send_fromISR(AM_APP_ISR_ADC, AM_APP_TASK_AUD_PROCESSING, AM_APP_MESSAGE_LONG, BYTES_PER_SAMPLE*PCM_FRAME_SIZE, &am_audio_ring_buffers[AM_AUDIO_BUFFER_STEREO]);
+#if (VOS_configUSE_AMU2S_RECORDER && VOS_configUSE_RECORD_RAW_AMIC)
+//        amu2s_send(Amu2s_pcm, i32PDMSampleStereo, AMU2S_PCM_BYTES);
+#endif //(VOS_configUSE_AMU2S_RECORDER&&VOS_configUSE_RECORD_RAW_AMIC)
+    }
+
+    //
+    // If we got a DMA error, set the flag.
+    //
+    if (ui32IntMask & AM_HAL_ADC_INT_DERR)
+    {
+        g_bADCDMAError = true;
+    }
+}
+
+
+#else // AM_BSP_ConfigUSE_ANALOG_MIC
 void am_pdm_isr(void) 
 {
     uint32_t ui32Status;
@@ -414,12 +671,13 @@ void am_pdm_isr(void)
     //
     am_hal_pdm_interrupt_status_get(PDMHandle, &ui32Status, true);
     am_hal_pdm_interrupt_clear(PDMHandle, ui32Status);
-    
+    am_hal_gpio_state_write(40, AM_HAL_GPIO_OUTPUT_SET);
     if ((ui32Status & AM_HAL_PDM_INT_DCMP))
     {
         // trigger next traction
         PDMn(0)->DMATOTCOUNT = AWE_FRAME_SIZE * 4;  // FIFO unit in bytes
         g_ui32AudioDMAComplete = 1;
+        memcpy((void*)g_pi32DMATempBuff, (void*)g_pi32PCMDataBuff, AWE_FRAME_SIZE*PCM_SAMPLE_BYTES);
 //        AWEProcessing(g_pi32PCMDataBuff);
 //        am_util_debug_printf("PDM DCMP interrupt, pick g_ui32PDMDataBuffer[5] = 0x%8x\n", g_ui32PDMDataBuffer[5]);
     }
@@ -427,12 +685,12 @@ void am_pdm_isr(void)
     {
         am_hal_pdm_fifo_flush(PDMHandle);
     }
+    am_hal_gpio_state_write(40, AM_HAL_GPIO_OUTPUT_CLEAR);
 
 }
+#endif // AM_BSP_ConfigUSE_ANALOG_MIC
 
-#if defined (AM_PART_APOLLO3)
-void
-am_uart_isr(void)
+void am_uart_isr(void)
 {
     uint32_t ui32Status, ui32Idle;
     am_hal_uart_interrupt_status_get(g_sCOMUART, &ui32Status, true);
@@ -443,7 +701,6 @@ am_uart_isr(void)
         g_bUARTPacketReceived = TRUE;
     }
 }
-#endif // #if defined (AM_PART_APOLLO3)
 
 //*****************************************************************************
 //

@@ -2372,7 +2372,10 @@
     <group>
         <name>am_bsp</name>
         <file>
-            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\boards\apollo3_evb\bsp\iar\bin\libam_bsp.a</name>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\boards\apollo3_evb\bsp\am_bsp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\device\AmbiqSuite-Rel2.2.0\boards\apollo3_evb\bsp\am_bsp_pins.c</name>
         </file>
     </group>
     <group>
@@ -2423,62 +2426,26 @@
     <group>
         <name>dspc_layout</name>
         <file>
+            <name>$PROJ_DIR$\..\demo_layout\ambiq_2mic_v1_InitAWB.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\demo_layout\vos_alexa_qual_InitAWB.c</name>
         </file>
     </group>
     <group>
         <name>dspc_lib</name>
         <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Advanced.a</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\AWECore-EVAL-CortexM4-cmake-build115\AWECore\Lib\EWARM\AWECore.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\CFramework.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Deprecated.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\dspc_qsd.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\dspc_scnr.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\FlashFileSystem.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\ModuleHelperLib.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Q15_Demo_ASRCLib.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\SensoryTHFCortexM.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\Standard.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\TrulyHandsFreeV5.a</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Lib\AWELibs\EWARM\VectorLib.a</name>
         </file>
     </group>
     <file>
-        <name>$PROJ_DIR$\..\Source\apollo_isr.c</name>
+        <name>$PROJ_DIR$\..\Source\amu2s.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\Source\AWECoreUtils.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\Source\BoardSetup.c</name>
-    </file>
-    <file>
-        <name>$PROJ_DIR$\..\Source\ControlDriver.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\..\Source\GPIO.c</name>

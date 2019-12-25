@@ -20,7 +20,7 @@
 #define IS_SMP                      0
 #define NUM_AUDIO_THREADS           1
 #define AUDIO_SAMPLE_RATE           16000.0f
-#define AUDIO_BLOCK_SIZE            80
+#define AUDIO_BLOCK_SIZE            160
 #define IS_COMPLEX                  0
 #define SAMPLE_SIZE_IN_BYTES        4
 
@@ -31,7 +31,7 @@
 ** ------------------------------------------------------------------- */
 #define MASTER_HEAP_SIZE		    (1024*30)
 #define FASTB_HEAP_SIZE			    (1024*10)
-#define SLOW_HEAP_SIZE			    (1024*30)
+#define SLOW_HEAP_SIZE			    (1024*10)
 
 /* ----------------------------------------------------------------------
 ** Specify communication buffer size
