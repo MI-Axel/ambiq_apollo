@@ -34,7 +34,9 @@ key_word_detection_ota.dep
 *.html
 *.js
 device/AmbiqSuite-Rel2.2.0/boards/apollo3_evb/examples/*
-script/usb_spi_tool/apollo_spi_log_general
-script/usb_spi_tool/apollo_spi_log_pcm
-script/usb_spi_tool/apollo_spi_log_dspc
-script/usb_spi_tool/apollo_spi_log_codec
+script/spi_usb/apollo_spi_log_general
+script/spi_usb/apollo_spi_log_pcm
+script/spi_usb/apollo_spi_log_dspc
+script/spi_usb/apollo_spi_log_codec
+app/micro_speech/*
+app/tf_micro_ap3/*

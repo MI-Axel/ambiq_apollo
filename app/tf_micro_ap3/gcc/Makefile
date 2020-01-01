@@ -87,8 +87,8 @@ VPATH +=:${AM_SoftwareRoot}/devices
 VPATH +=:${AM_SoftwareRoot}/mcu/apollo3/hal
 VPATH +=:${AM_FolderRoot}/app_utils
 VPATH +=:../src
-VPATH +=:../src/tensorflow/lite/experimental/micro
-VPATH +=:../src/tensorflow/lite/experimental/micro/kernels
+VPATH +=:../src/tensorflow/lite/micro
+VPATH +=:../src/tensorflow/lite/micro/kernels
 VPATH +=:../src/tensorflow/lite/c
 VPATH +=:../src/tensorflow/lite/kernels
 VPATH +=:../src/tensorflow/lite/core/api
@@ -99,12 +99,12 @@ VPATH +=:${SEGGER_SYSVIEW_VPATH}
 SRCS := \
 micro_error_reporter.cc \
 micro_mutable_op_resolver.cc \
-simple_tensor_allocator.cc \
+simple_memory_allocator.cc \
 debug_log.cc \
 debug_log_numbers.cc \
 micro_interpreter.cc \
 all_ops_resolver.cc \
-c_api_internal.c \
+c_api_experimental.c \
 error_reporter.cc \
 flatbuffer_conversions.cc\
 op_resolver.cc \

@@ -21,6 +21,9 @@ import pandas as pd
 import subprocess
 import time
 import os
+import sys
+from bin2wav import bin2wav
+from audacity_run import AudacityPipe
 
 args = docopt(__doc__)
 #print(args)
@@ -216,7 +219,28 @@ if args['decoder'] == True:
     print("Get {} bytes spp/merged data".format(u2s_decoder.data_count_tp2))
     print("Get {} bytes opus data".format(u2s_decoder.data_count_tp3))
 
+    pcm_output_set = []
+    spp_output_set = []
+    # automatically switch bins to wav files
+    if u2s_decoder.data_count_tp1 > 0:
+        pcm_output_set = bin2wav(output_file_name+'_pcm', 'pcm')
+        print('Generate 4 wav files of pcm data...')
+    if u2s_decoder.data_count_tp2 > 0:
+        spp_output_set = bin2wav(output_file_name+'_spp', 'spp')
+        print('Generate 2 wav files of spp data...')
+    
+    # open audacity and load the generated audio data
+    audacity = AudacityPipe()
+    if len(pcm_output_set) > 0:
+        for fp in pcm_output_set:
+            audacity.import_audio(fp)
+    if len(spp_output_set) > 0:
+        for fp in spp_output_set:
+            audacity.import_audio(fp)
+    
+
     del u2s_decoder
+    
 
 if args['logger'] == True:
     try:

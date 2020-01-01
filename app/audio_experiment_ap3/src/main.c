@@ -106,6 +106,9 @@ uint32_t g_ui32ProcessedFrames = 0;
 
 #endif // AM_AEP_PREPROCESS_EVAL
 
+#if AM_AEP_GOOGLE_NOISE_REDUCTION
+#include "noise_reduction.h"
+#endif // AM_AEP_GOOGLE_NOISE_REDUCTION
 int main(void)
 {
     am_app_AEP_sys_init();
